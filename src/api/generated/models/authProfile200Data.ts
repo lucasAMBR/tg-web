@@ -6,9 +6,7 @@
  */
 import type { UserModel } from './userModel';
 
-export type AuthLogin200Data = {
+export type AuthProfile200Data = {
   user: UserModel;
   permissions: string[];
-  token: string;
-  refresh_expires_in: number;
 };

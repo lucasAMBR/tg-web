@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -56,7 +61,7 @@ export const getIndexSoftSkillQueryKey = () => {
     }
 
     
-export const getIndexSoftSkillQueryOptions = <TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>, }
+export const getIndexSoftSkillQueryOptions = <TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -71,25 +76,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexSoftSkillQueryResult = NonNullable<Awaited<ReturnType<typeof indexSoftSkill>>>
 export type IndexSoftSkillQueryError = unknown
 
 
+export function useIndexSoftSkill<TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexSoftSkill>>,
+          TError,
+          Awaited<ReturnType<typeof indexSoftSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexSoftSkill<TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexSoftSkill>>,
+          TError,
+          Awaited<ReturnType<typeof indexSoftSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexSoftSkill<TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /soft-skill
  */
 
 export function useIndexSoftSkill<TData = Awaited<ReturnType<typeof indexSoftSkill>>, TError = unknown>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexSoftSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexSoftSkillQueryOptions(options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -152,7 +181,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreDevSoftSkill = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeDevSoftSkill>>, TError,{data: StoreDevSoftSkillBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeDevSoftSkill>>,
         TError,
         {data: StoreDevSoftSkillBody},
@@ -161,7 +190,7 @@ export const useStoreDevSoftSkill = <TError = unknown,
 
       const mutationOptions = getStoreDevSoftSkillMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /soft-skill/dev
@@ -215,7 +244,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateDevSoftSkill = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDevSoftSkill>>, TError,{data: UpdateDevSoftSkillBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDevSoftSkill>>,
         TError,
         {data: UpdateDevSoftSkillBody},
@@ -224,6 +253,6 @@ export const useUpdateDevSoftSkill = <TError = unknown,
 
       const mutationOptions = getUpdateDevSoftSkillMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

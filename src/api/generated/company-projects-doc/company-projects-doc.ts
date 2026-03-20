@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -86,7 +91,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreCompanyProject = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanyProject>>, TError,{data: StoreCompanyProjectBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeCompanyProject>>,
         TError,
         {data: StoreCompanyProjectBody},
@@ -95,7 +100,7 @@ export const useStoreCompanyProject = <TError = unknown,
 
       const mutationOptions = getStoreCompanyProjectMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /company-project/{companyProject}
@@ -147,7 +152,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteCompanyProject = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCompanyProject>>, TError,{companyProject: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteCompanyProject>>,
         TError,
         {companyProject: string},
@@ -156,7 +161,7 @@ export const useDeleteCompanyProject = <TError = unknown,
 
       const mutationOptions = getDeleteCompanyProjectMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /company-project/{companyProject}
@@ -211,7 +216,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateCompanyProject = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCompanyProject>>, TError,{companyProject: string;data: UpdateCompanyProjectBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateCompanyProject>>,
         TError,
         {companyProject: string;data: UpdateCompanyProjectBody},
@@ -220,7 +225,7 @@ export const useUpdateCompanyProject = <TError = unknown,
 
       const mutationOptions = getUpdateCompanyProjectMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /company-project
@@ -248,7 +253,7 @@ export const getIndexCompanyProjectQueryKey = (params?: IndexCompanyProjectParam
     }
 
     
-export const getIndexCompanyProjectQueryOptions = <TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(params?: IndexCompanyProjectParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>, }
+export const getIndexCompanyProjectQueryOptions = <TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(params?: IndexCompanyProjectParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -263,25 +268,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexCompanyProjectQueryResult = NonNullable<Awaited<ReturnType<typeof indexCompanyProject>>>
 export type IndexCompanyProjectQueryError = unknown
 
 
+export function useIndexCompanyProject<TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(
+ params: undefined |  IndexCompanyProjectParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanyProject>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanyProject>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanyProject<TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(
+ params?: IndexCompanyProjectParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanyProject>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanyProject>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanyProject<TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(
+ params?: IndexCompanyProjectParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /company-project
  */
 
 export function useIndexCompanyProject<TData = Awaited<ReturnType<typeof indexCompanyProject>>, TError = unknown>(
- params?: IndexCompanyProjectParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexCompanyProjectParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProject>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexCompanyProjectQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 

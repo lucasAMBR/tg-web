@@ -4,5 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { AuthProfile200Data } from './authProfile200Data';
 
-export type AuthProfile200 = { [key: string]: unknown };
+export type AuthProfile200 = {
+  error: boolean;
+  message: string;
+  data: AuthProfile200Data;
+};

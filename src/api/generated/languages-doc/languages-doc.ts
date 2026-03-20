@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -85,7 +90,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreLanguage = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeLanguage>>, TError,{data: StoreLanguageBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeLanguage>>,
         TError,
         {data: StoreLanguageBody},
@@ -94,7 +99,7 @@ export const useStoreLanguage = <TError = unknown,
 
       const mutationOptions = getStoreLanguageMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /language
@@ -122,7 +127,7 @@ export const getIndexLanguageQueryKey = (params?: IndexLanguageParams,) => {
     }
 
     
-export const getIndexLanguageQueryOptions = <TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(params?: IndexLanguageParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>, }
+export const getIndexLanguageQueryOptions = <TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(params?: IndexLanguageParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -137,25 +142,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexLanguageQueryResult = NonNullable<Awaited<ReturnType<typeof indexLanguage>>>
 export type IndexLanguageQueryError = unknown
 
 
+export function useIndexLanguage<TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(
+ params: undefined |  IndexLanguageParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexLanguage>>,
+          TError,
+          Awaited<ReturnType<typeof indexLanguage>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexLanguage<TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(
+ params?: IndexLanguageParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexLanguage>>,
+          TError,
+          Awaited<ReturnType<typeof indexLanguage>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexLanguage<TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(
+ params?: IndexLanguageParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /language
  */
 
 export function useIndexLanguage<TData = Awaited<ReturnType<typeof indexLanguage>>, TError = unknown>(
- params?: IndexLanguageParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexLanguageParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexLanguage>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexLanguageQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -218,7 +247,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateLanguage = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLanguage>>, TError,{id: string;data: UpdateLanguageBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateLanguage>>,
         TError,
         {id: string;data: UpdateLanguageBody},
@@ -227,6 +256,6 @@ export const useUpdateLanguage = <TError = unknown,
 
       const mutationOptions = getUpdateLanguageMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -96,7 +101,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreAdditionalCourse = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeAdditionalCourse>>, TError,{data: StoreAdditionalCourseBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeAdditionalCourse>>,
         TError,
         {data: StoreAdditionalCourseBody},
@@ -105,7 +110,7 @@ export const useStoreAdditionalCourse = <TError = unknown,
 
       const mutationOptions = getStoreAdditionalCourseMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /additional-course
@@ -133,7 +138,7 @@ export const getIndexAdditionalCoursesQueryKey = (params?: IndexAdditionalCourse
     }
 
     
-export const getIndexAdditionalCoursesQueryOptions = <TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(params?: IndexAdditionalCoursesParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>, }
+export const getIndexAdditionalCoursesQueryOptions = <TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(params?: IndexAdditionalCoursesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -148,25 +153,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexAdditionalCoursesQueryResult = NonNullable<Awaited<ReturnType<typeof indexAdditionalCourses>>>
 export type IndexAdditionalCoursesQueryError = unknown
 
 
+export function useIndexAdditionalCourses<TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(
+ params: undefined |  IndexAdditionalCoursesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexAdditionalCourses>>,
+          TError,
+          Awaited<ReturnType<typeof indexAdditionalCourses>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexAdditionalCourses<TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(
+ params?: IndexAdditionalCoursesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexAdditionalCourses>>,
+          TError,
+          Awaited<ReturnType<typeof indexAdditionalCourses>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexAdditionalCourses<TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(
+ params?: IndexAdditionalCoursesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /additional-course
  */
 
 export function useIndexAdditionalCourses<TData = Awaited<ReturnType<typeof indexAdditionalCourses>>, TError = unknown>(
- params?: IndexAdditionalCoursesParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexAdditionalCoursesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAdditionalCourses>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexAdditionalCoursesQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -240,7 +269,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateAdditionalCourse = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateAdditionalCourse>>, TError,{id: string;data: UpdateAdditionalCourseBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateAdditionalCourse>>,
         TError,
         {id: string;data: UpdateAdditionalCourseBody},
@@ -249,7 +278,7 @@ export const useUpdateAdditionalCourse = <TError = unknown,
 
       const mutationOptions = getUpdateAdditionalCourseMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /additional-course/{id}
@@ -301,7 +330,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteAdditionalCourse = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAdditionalCourse>>, TError,{id: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteAdditionalCourse>>,
         TError,
         {id: string},
@@ -310,6 +339,6 @@ export const useDeleteAdditionalCourse = <TError = unknown,
 
       const mutationOptions = getDeleteAdditionalCourseMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

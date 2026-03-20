@@ -4,12 +4,17 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { DevProfileModel } from './devProfileModel';
+import type { CompanyProfileModel } from './companyProfileModel';
+import type { ClientProfileModel } from './clientProfileModel';
 
 export interface UserModel {
   id: string;
   profile_pic: null;
   email: string;
-  dev_profile: null;
+  dev_profile?: DevProfileModel;
+  company_profile?: CompanyProfileModel;
+  client_profile?: ClientProfileModel;
   role: string[];
   created_at: string;
   updated_at: string;

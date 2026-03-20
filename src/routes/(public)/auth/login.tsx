@@ -2,12 +2,16 @@ import ThemeToggle from '@/components/global/theme-toggle-button';
 import { SingInForm } from '@/components/login/sing-in-form';
 import RegisterSteps from '@/components/register/register-steps';
 import { Button } from '@/components/ui/button';
+import { redirectIfAuthenticated } from '@/utils/route-guards';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { ChevronLeft } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 export const Route = createFileRoute('/(public)/auth/login')({
 	component: Login,
+    beforeLoad: async() => {
+        await redirectIfAuthenticated();
+    }
 });
 
 function Login() {

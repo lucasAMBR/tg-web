@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -86,7 +91,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreHardSkill = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeHardSkill>>, TError,{data: StoreHardSkillBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeHardSkill>>,
         TError,
         {data: StoreHardSkillBody},
@@ -95,7 +100,7 @@ export const useStoreHardSkill = <TError = unknown,
 
       const mutationOptions = getStoreHardSkillMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /hard-skill
@@ -123,7 +128,7 @@ export const getIndexHardSkillQueryKey = (params?: IndexHardSkillParams,) => {
     }
 
     
-export const getIndexHardSkillQueryOptions = <TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(params?: IndexHardSkillParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>, }
+export const getIndexHardSkillQueryOptions = <TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(params?: IndexHardSkillParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -138,25 +143,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexHardSkillQueryResult = NonNullable<Awaited<ReturnType<typeof indexHardSkill>>>
 export type IndexHardSkillQueryError = unknown
 
 
+export function useIndexHardSkill<TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(
+ params: undefined |  IndexHardSkillParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexHardSkill>>,
+          TError,
+          Awaited<ReturnType<typeof indexHardSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexHardSkill<TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(
+ params?: IndexHardSkillParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexHardSkill>>,
+          TError,
+          Awaited<ReturnType<typeof indexHardSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexHardSkill<TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(
+ params?: IndexHardSkillParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /hard-skill
  */
 
 export function useIndexHardSkill<TData = Awaited<ReturnType<typeof indexHardSkill>>, TError = unknown>(
- params?: IndexHardSkillParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexHardSkillParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexHardSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexHardSkillQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -219,7 +248,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateHardSkill = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateHardSkill>>, TError,{id: string;data: UpdateHardSkillBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateHardSkill>>,
         TError,
         {id: string;data: UpdateHardSkillBody},
@@ -228,7 +257,7 @@ export const useUpdateHardSkill = <TError = unknown,
 
       const mutationOptions = getUpdateHardSkillMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /hard-skill/{id}
@@ -280,7 +309,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteHardSkill = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteHardSkill>>, TError,{id: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteHardSkill>>,
         TError,
         {id: string},
@@ -289,6 +318,6 @@ export const useDeleteHardSkill = <TError = unknown,
 
       const mutationOptions = getDeleteHardSkillMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

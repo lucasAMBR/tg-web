@@ -13,6 +13,10 @@ import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
+import { Route as privateHomeDevRouteImport } from './routes/(private)/home/dev'
+import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
+import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
+import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -33,39 +37,95 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => publicLayoutRoute,
 } as any)
+const privateHomeDevRoute = privateHomeDevRouteImport.update({
+  id: '/(private)/home/dev',
+  path: '/home/dev',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const privateCreateProfileDevRoute = privateCreateProfileDevRouteImport.update({
+  id: '/(private)/create/profile/dev',
+  path: '/create/profile/dev',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const privateCreateProfileCompanyRoute =
+  privateCreateProfileCompanyRouteImport.update({
+    id: '/(private)/create/profile/company',
+    path: '/create/profile/company',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const privateCreateProfileClientRoute =
+  privateCreateProfileClientRouteImport.update({
+    id: '/(private)/create/profile/client',
+    path: '/create/profile/client',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
+  '/home/dev': typeof privateHomeDevRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
+  '/create/profile/client': typeof privateCreateProfileClientRoute
+  '/create/profile/company': typeof privateCreateProfileCompanyRoute
+  '/create/profile/dev': typeof privateCreateProfileDevRoute
 }
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
+  '/home/dev': typeof privateHomeDevRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
+  '/create/profile/client': typeof privateCreateProfileClientRoute
+  '/create/profile/company': typeof privateCreateProfileCompanyRoute
+  '/create/profile/dev': typeof privateCreateProfileDevRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
+  '/(private)/home/dev': typeof privateHomeDevRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
+  '/(private)/create/profile/client': typeof privateCreateProfileClientRoute
+  '/(private)/create/profile/company': typeof privateCreateProfileCompanyRoute
+  '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/login' | '/auth/register'
+  fullPaths:
+    | '/'
+    | '/home/dev'
+    | '/auth/login'
+    | '/auth/register'
+    | '/create/profile/client'
+    | '/create/profile/company'
+    | '/create/profile/dev'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/login' | '/auth/register'
+  to:
+    | '/'
+    | '/home/dev'
+    | '/auth/login'
+    | '/auth/register'
+    | '/create/profile/client'
+    | '/create/profile/company'
+    | '/create/profile/dev'
   id:
     | '__root__'
     | '/(public)'
     | '/(public)/'
+    | '/(private)/home/dev'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
+    | '/(private)/create/profile/client'
+    | '/(private)/create/profile/company'
+    | '/(private)/create/profile/dev'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   publicLayoutRoute: typeof publicLayoutRouteWithChildren
+  privateHomeDevRoute: typeof privateHomeDevRoute
+  privateCreateProfileClientRoute: typeof privateCreateProfileClientRoute
+  privateCreateProfileCompanyRoute: typeof privateCreateProfileCompanyRoute
+  privateCreateProfileDevRoute: typeof privateCreateProfileDevRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -98,6 +158,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicAuthLoginRouteImport
       parentRoute: typeof publicLayoutRoute
     }
+    '/(private)/home/dev': {
+      id: '/(private)/home/dev'
+      path: '/home/dev'
+      fullPath: '/home/dev'
+      preLoaderRoute: typeof privateHomeDevRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/create/profile/dev': {
+      id: '/(private)/create/profile/dev'
+      path: '/create/profile/dev'
+      fullPath: '/create/profile/dev'
+      preLoaderRoute: typeof privateCreateProfileDevRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/create/profile/company': {
+      id: '/(private)/create/profile/company'
+      path: '/create/profile/company'
+      fullPath: '/create/profile/company'
+      preLoaderRoute: typeof privateCreateProfileCompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/create/profile/client': {
+      id: '/(private)/create/profile/client'
+      path: '/create/profile/client'
+      fullPath: '/create/profile/client'
+      preLoaderRoute: typeof privateCreateProfileClientRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -119,6 +207,10 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   publicLayoutRoute: publicLayoutRouteWithChildren,
+  privateHomeDevRoute: privateHomeDevRoute,
+  privateCreateProfileClientRoute: privateCreateProfileClientRoute,
+  privateCreateProfileCompanyRoute: privateCreateProfileCompanyRoute,
+  privateCreateProfileDevRoute: privateCreateProfileDevRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

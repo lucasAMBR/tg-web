@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -34,6 +39,68 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
+ * @summary /auth/refresh-token
+ */
+export const authRefreshToken = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<AuthRefreshToken200>(
+      {url: `/auth/refresh-token`, method: 'POST', signal
+    },
+      );
+    }
+  
+
+
+export const getAuthRefreshTokenMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext> => {
+
+const mutationKey = ['authRefreshToken'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof authRefreshToken>>, void> = () => {
+          
+
+          return  authRefreshToken()
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AuthRefreshTokenMutationResult = NonNullable<Awaited<ReturnType<typeof authRefreshToken>>>
+    
+    export type AuthRefreshTokenMutationError = unknown
+
+    /**
+ * @summary /auth/refresh-token
+ */
+export const useAuthRefreshToken = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof authRefreshToken>>,
+        TError,
+        void,
+        TContext
+      > => {
+
+      const mutationOptions = getAuthRefreshTokenMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
  * Registro de usuário
  * @summary /auth/register
  */
@@ -87,7 +154,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useAuthRegister = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRegister>>, TError,{data: AuthRegisterBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof authRegister>>,
         TError,
         {data: AuthRegisterBody},
@@ -96,7 +163,7 @@ export const useAuthRegister = <TError = unknown,
 
       const mutationOptions = getAuthRegisterMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * Autenticação do usuario no sistema
@@ -152,7 +219,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useAuthLogin = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authLogin>>, TError,{data: AuthLoginBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof authLogin>>,
         TError,
         {data: AuthLoginBody},
@@ -161,7 +228,7 @@ export const useAuthLogin = <TError = unknown,
 
       const mutationOptions = getAuthLoginMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /auth/profile
@@ -188,7 +255,7 @@ export const getAuthProfileQueryKey = () => {
     }
 
     
-export const getAuthProfileQueryOptions = <TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>, }
+export const getAuthProfileQueryOptions = <TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -203,25 +270,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type AuthProfileQueryResult = NonNullable<Awaited<ReturnType<typeof authProfile>>>
 export type AuthProfileQueryError = unknown
 
 
+export function useAuthProfile<TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof authProfile>>,
+          TError,
+          Awaited<ReturnType<typeof authProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAuthProfile<TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof authProfile>>,
+          TError,
+          Awaited<ReturnType<typeof authProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAuthProfile<TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /auth/profile
  */
 
 export function useAuthProfile<TData = Awaited<ReturnType<typeof authProfile>>, TError = unknown>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getAuthProfileQueryOptions(options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -282,7 +373,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useAuthLogout = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authLogout>>, TError,void, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof authLogout>>,
         TError,
         void,
@@ -291,68 +382,6 @@ export const useAuthLogout = <TError = unknown,
 
       const mutationOptions = getAuthLogoutMutationOptions(options);
 
-      return useMutation(mutationOptions);
-    }
-    /**
- * @summary /auth/refresh-token
- */
-export const authRefreshToken = (
-    
- signal?: AbortSignal
-) => {
-      
-      
-      return apiClient<AuthRefreshToken200>(
-      {url: `/auth/refresh-token`, method: 'POST', signal
-    },
-      );
-    }
-  
-
-
-export const getAuthRefreshTokenMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext> => {
-
-const mutationKey = ['authRefreshToken'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof authRefreshToken>>, void> = () => {
-          
-
-          return  authRefreshToken()
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type AuthRefreshTokenMutationResult = NonNullable<Awaited<ReturnType<typeof authRefreshToken>>>
-    
-    export type AuthRefreshTokenMutationError = unknown
-
-    /**
- * @summary /auth/refresh-token
- */
-export const useAuthRefreshToken = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, }
- ): UseMutationResult<
-        Awaited<ReturnType<typeof authRefreshToken>>,
-        TError,
-        void,
-        TContext
-      > => {
-
-      const mutationOptions = getAuthRefreshTokenMutationOptions(options);
-
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

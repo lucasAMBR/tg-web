@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -61,7 +66,7 @@ export const getIndexProjectHistoryQueryKey = (params?: IndexProjectHistoryParam
     }
 
     
-export const getIndexProjectHistoryQueryOptions = <TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(params?: IndexProjectHistoryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>, }
+export const getIndexProjectHistoryQueryOptions = <TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(params?: IndexProjectHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -76,25 +81,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexProjectHistoryQueryResult = NonNullable<Awaited<ReturnType<typeof indexProjectHistory>>>
 export type IndexProjectHistoryQueryError = unknown
 
 
+export function useIndexProjectHistory<TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(
+ params: undefined |  IndexProjectHistoryParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexProjectHistory>>,
+          TError,
+          Awaited<ReturnType<typeof indexProjectHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexProjectHistory<TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(
+ params?: IndexProjectHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexProjectHistory>>,
+          TError,
+          Awaited<ReturnType<typeof indexProjectHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexProjectHistory<TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(
+ params?: IndexProjectHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /project-history
  */
 
 export function useIndexProjectHistory<TData = Awaited<ReturnType<typeof indexProjectHistory>>, TError = unknown>(
- params?: IndexProjectHistoryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexProjectHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexProjectHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexProjectHistoryQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -157,7 +186,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreProjectHistory = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeProjectHistory>>, TError,{data: StoreProjectHistoryBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeProjectHistory>>,
         TError,
         {data: StoreProjectHistoryBody},
@@ -166,7 +195,7 @@ export const useStoreProjectHistory = <TError = unknown,
 
       const mutationOptions = getStoreProjectHistoryMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /project-history/{id}
@@ -221,7 +250,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateProjectHistory = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateProjectHistory>>, TError,{id: string;data: UpdateProjectHistoryBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateProjectHistory>>,
         TError,
         {id: string;data: UpdateProjectHistoryBody},
@@ -230,7 +259,7 @@ export const useUpdateProjectHistory = <TError = unknown,
 
       const mutationOptions = getUpdateProjectHistoryMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /project-history/{id}/gallery
@@ -293,7 +322,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreProjectHistoryImages = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeProjectHistoryImages>>, TError,{id: string;data: StoreProjectHistoryImagesBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeProjectHistoryImages>>,
         TError,
         {id: string;data: StoreProjectHistoryImagesBody},
@@ -302,7 +331,7 @@ export const useStoreProjectHistoryImages = <TError = unknown,
 
       const mutationOptions = getStoreProjectHistoryImagesMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /project-history/{id}/gallery/remove/{imageId}
@@ -355,7 +384,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteProjectHistoryImage = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProjectHistoryImage>>, TError,{id: string;imageId: number}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteProjectHistoryImage>>,
         TError,
         {id: string;imageId: number},
@@ -364,6 +393,6 @@ export const useDeleteProjectHistoryImage = <TError = unknown,
 
       const mutationOptions = getDeleteProjectHistoryImageMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

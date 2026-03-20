@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { UserModel1 } from './userModel1';
+import type { UserModel } from './userModel';
 
 export type AuthRegister201Data = {
-  user: UserModel1;
+  user: UserModel;
   permissions: string[];
   token: string;
   refresh_expires_in: number;

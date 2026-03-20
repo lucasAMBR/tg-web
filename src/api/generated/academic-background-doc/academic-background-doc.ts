@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -99,7 +104,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreAcademicBackground = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeAcademicBackground>>, TError,{data: StoreAcademicBackgroundBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeAcademicBackground>>,
         TError,
         {data: StoreAcademicBackgroundBody},
@@ -108,7 +113,7 @@ export const useStoreAcademicBackground = <TError = unknown,
 
       const mutationOptions = getStoreAcademicBackgroundMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /academic-background
@@ -136,7 +141,7 @@ export const getIndexAcademicBackgroundQueryKey = (params?: IndexAcademicBackgro
     }
 
     
-export const getIndexAcademicBackgroundQueryOptions = <TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(params?: IndexAcademicBackgroundParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>, }
+export const getIndexAcademicBackgroundQueryOptions = <TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(params?: IndexAcademicBackgroundParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -151,25 +156,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexAcademicBackgroundQueryResult = NonNullable<Awaited<ReturnType<typeof indexAcademicBackground>>>
 export type IndexAcademicBackgroundQueryError = unknown
 
 
+export function useIndexAcademicBackground<TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(
+ params: undefined |  IndexAcademicBackgroundParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexAcademicBackground>>,
+          TError,
+          Awaited<ReturnType<typeof indexAcademicBackground>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexAcademicBackground<TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(
+ params?: IndexAcademicBackgroundParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexAcademicBackground>>,
+          TError,
+          Awaited<ReturnType<typeof indexAcademicBackground>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexAcademicBackground<TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(
+ params?: IndexAcademicBackgroundParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /academic-background
  */
 
 export function useIndexAcademicBackground<TData = Awaited<ReturnType<typeof indexAcademicBackground>>, TError = unknown>(
- params?: IndexAcademicBackgroundParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexAcademicBackgroundParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexAcademicBackground>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexAcademicBackgroundQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -229,7 +258,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteAcademicBackground = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAcademicBackground>>, TError,{id: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteAcademicBackground>>,
         TError,
         {id: string},
@@ -238,7 +267,7 @@ export const useDeleteAcademicBackground = <TError = unknown,
 
       const mutationOptions = getDeleteAcademicBackgroundMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /academic-background/{id}
@@ -307,7 +336,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateAcademicBackground = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateAcademicBackground>>, TError,{id: string;data: UpdateAcademicBackgroundBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateAcademicBackground>>,
         TError,
         {id: string;data: UpdateAcademicBackgroundBody},
@@ -316,6 +345,6 @@ export const useUpdateAcademicBackground = <TError = unknown,
 
       const mutationOptions = getUpdateAcademicBackgroundMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

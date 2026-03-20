@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query';
 import type {
   MutationFunction,
+  QueryClient,
   UseMutationOptions,
   UseMutationResult
 } from '@tanstack/react-query';
@@ -86,7 +87,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteDevProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteDevProfile>>, TError,{dev: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteDevProfile>>,
         TError,
         {dev: string},
@@ -95,7 +96,7 @@ export const useDeleteDevProfile = <TError = unknown,
 
       const mutationOptions = getDeleteDevProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/dev/{dev}
@@ -150,7 +151,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateDevProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateDevProfile>>, TError,{dev: string;data: UpdateDevProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateDevProfile>>,
         TError,
         {dev: string;data: UpdateDevProfileBody},
@@ -159,7 +160,7 @@ export const useUpdateDevProfile = <TError = unknown,
 
       const mutationOptions = getUpdateDevProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/client/{client}
@@ -211,7 +212,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteClientProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteClientProfile>>, TError,{client: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteClientProfile>>,
         TError,
         {client: string},
@@ -220,7 +221,7 @@ export const useDeleteClientProfile = <TError = unknown,
 
       const mutationOptions = getDeleteClientProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/client/{client}
@@ -275,7 +276,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateClientProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateClientProfile>>, TError,{client: string;data: UpdateClientProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateClientProfile>>,
         TError,
         {client: string;data: UpdateClientProfileBody},
@@ -284,7 +285,7 @@ export const useUpdateClientProfile = <TError = unknown,
 
       const mutationOptions = getUpdateClientProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/company/{company}
@@ -336,7 +337,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteCompanyProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteCompanyProfile>>, TError,{company: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteCompanyProfile>>,
         TError,
         {company: string},
@@ -345,7 +346,7 @@ export const useDeleteCompanyProfile = <TError = unknown,
 
       const mutationOptions = getDeleteCompanyProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/company/{company}
@@ -400,7 +401,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateCompanyProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCompanyProfile>>, TError,{company: string;data: UpdateCompanyProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateCompanyProfile>>,
         TError,
         {company: string;data: UpdateCompanyProfileBody},
@@ -409,7 +410,7 @@ export const useUpdateCompanyProfile = <TError = unknown,
 
       const mutationOptions = getUpdateCompanyProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/dev
@@ -464,7 +465,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreDevProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeDevProfile>>, TError,{data: StoreDevProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeDevProfile>>,
         TError,
         {data: StoreDevProfileBody},
@@ -473,7 +474,7 @@ export const useStoreDevProfile = <TError = unknown,
 
       const mutationOptions = getStoreDevProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/company
@@ -528,7 +529,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreCompanyProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanyProfile>>, TError,{data: StoreCompanyProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeCompanyProfile>>,
         TError,
         {data: StoreCompanyProfileBody},
@@ -537,7 +538,7 @@ export const useStoreCompanyProfile = <TError = unknown,
 
       const mutationOptions = getStoreCompanyProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /profile/client
@@ -592,7 +593,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreClientProfile = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeClientProfile>>, TError,{data: StoreClientProfileBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeClientProfile>>,
         TError,
         {data: StoreClientProfileBody},
@@ -601,6 +602,6 @@ export const useStoreClientProfile = <TError = unknown,
 
       const mutationOptions = getStoreClientProfileMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

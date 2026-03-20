@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query';
 import type {
   MutationFunction,
+  QueryClient,
   UseMutationOptions,
   UseMutationResult
 } from '@tanstack/react-query';
@@ -79,7 +80,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreAddress = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeAddress>>, TError,{data: StoreAddressBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeAddress>>,
         TError,
         {data: StoreAddressBody},
@@ -88,7 +89,7 @@ export const useStoreAddress = <TError = unknown,
 
       const mutationOptions = getStoreAddressMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /address/{id}
@@ -143,7 +144,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateAddress = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateAddress>>, TError,{addressId: string;data: UpdateAddressBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateAddress>>,
         TError,
         {addressId: string;data: UpdateAddressBody},
@@ -152,7 +153,7 @@ export const useUpdateAddress = <TError = unknown,
 
       const mutationOptions = getUpdateAddressMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /address/{id}
@@ -204,7 +205,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteAddress = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteAddress>>, TError,{addressId: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteAddress>>,
         TError,
         {addressId: string},
@@ -213,6 +214,6 @@ export const useDeleteAddress = <TError = unknown,
 
       const mutationOptions = getDeleteAddressMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     

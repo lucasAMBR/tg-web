@@ -7,23 +7,17 @@ import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { LoginSchema, type ILoginSchema } from "@/schemas/login/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuthLogin } from "@/api/generated/auth/auth";
-import type { AxiosError } from "axios";
-import type { ApiError } from "@/utils/api-error";
-import { CustomToaster } from "@/utils/custom-toaster";
+import { useAuthStore } from "@/stores/auth-store";
 
 export function SingInForm(){
 
     const navigate = useNavigate();
 
+    const { signIn } = useAuthStore();
+
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => setIsVisible(prevState => !prevState)
-
-    const {
-        mutate,
-        isPending
-    } = useAuthLogin();
 
     const form = useForm<ILoginSchema>({
         resolver: zodResolver(LoginSchema),
@@ -33,17 +27,39 @@ export function SingInForm(){
         }
     });
 
-    const login = (data: ILoginSchema) => {
-        mutate({ data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
-            },
-            onError: (error) => {
-                const apiError = error as AxiosError<ApiError>;
+    const login = async (data: ILoginSchema) => {
+        try{
+            await signIn(data);
 
-                CustomToaster.errorToast(apiError.response?.data.message ?? "Error while tryng to sing in!")
+            const { user } = useAuthStore.getState();
+
+            console.log(user);
+
+            if (!user) return;
+
+            const role = user.role[0];
+
+            const hasProfile = 
+                (role === 'dev' && user.dev_profile) || 
+                (role === 'company' && user.company_profile) ||
+                (role === 'client' && user.client_profile);
+
+            if (!hasProfile) {
+                navigate({ to: `/create/profile/${role}` });
+                return;
             }
-        })
+
+            const homeRoutes = {
+                dev: "/home/developer",
+                company: "/home/company",
+                client: "/home/client",
+            };
+
+            navigate({ to: homeRoutes[role] || "/dashboard" });
+           
+        }catch(error){
+
+        }
     }
 
     return(

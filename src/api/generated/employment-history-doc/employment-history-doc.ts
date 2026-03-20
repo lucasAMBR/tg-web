@@ -9,9 +9,14 @@ import {
   useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
+  QueryClient,
   QueryFunction,
   QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
@@ -86,7 +91,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useStoreEmploymentHistory = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeEmploymentHistory>>, TError,{data: StoreEmploymentHistoryBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeEmploymentHistory>>,
         TError,
         {data: StoreEmploymentHistoryBody},
@@ -95,7 +100,7 @@ export const useStoreEmploymentHistory = <TError = unknown,
 
       const mutationOptions = getStoreEmploymentHistoryMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /employment-history
@@ -123,7 +128,7 @@ export const getIndexEmploymentHistoryQueryKey = (params?: IndexEmploymentHistor
     }
 
     
-export const getIndexEmploymentHistoryQueryOptions = <TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(params?: IndexEmploymentHistoryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>, }
+export const getIndexEmploymentHistoryQueryOptions = <TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(params?: IndexEmploymentHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -138,25 +143,49 @@ const {query: queryOptions} = options ?? {};
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
 export type IndexEmploymentHistoryQueryResult = NonNullable<Awaited<ReturnType<typeof indexEmploymentHistory>>>
 export type IndexEmploymentHistoryQueryError = unknown
 
 
+export function useIndexEmploymentHistory<TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(
+ params: undefined |  IndexEmploymentHistoryParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexEmploymentHistory>>,
+          TError,
+          Awaited<ReturnType<typeof indexEmploymentHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexEmploymentHistory<TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(
+ params?: IndexEmploymentHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexEmploymentHistory>>,
+          TError,
+          Awaited<ReturnType<typeof indexEmploymentHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexEmploymentHistory<TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(
+ params?: IndexEmploymentHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary /employment-history
  */
 
 export function useIndexEmploymentHistory<TData = Awaited<ReturnType<typeof indexEmploymentHistory>>, TError = unknown>(
- params?: IndexEmploymentHistoryParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>, }
-  
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+ params?: IndexEmploymentHistoryParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexEmploymentHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getIndexEmploymentHistoryQueryOptions(params,options)
 
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -219,7 +248,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useUpdateEmploymentHistory = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateEmploymentHistory>>, TError,{id: string;data: UpdateEmploymentHistoryBody}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateEmploymentHistory>>,
         TError,
         {id: string;data: UpdateEmploymentHistoryBody},
@@ -228,7 +257,7 @@ export const useUpdateEmploymentHistory = <TError = unknown,
 
       const mutationOptions = getUpdateEmploymentHistoryMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     /**
  * @summary /employment-history/{id}
@@ -280,7 +309,7 @@ const {mutation: mutationOptions} = options ?
  */
 export const useDeleteEmploymentHistory = <TError = unknown,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteEmploymentHistory>>, TError,{id: string}, TContext>, }
- ): UseMutationResult<
+ , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof deleteEmploymentHistory>>,
         TError,
         {id: string},
@@ -289,6 +318,6 @@ export const useDeleteEmploymentHistory = <TError = unknown,
 
       const mutationOptions = getDeleteEmploymentHistoryMutationOptions(options);
 
-      return useMutation(mutationOptions);
+      return useMutation(mutationOptions, queryClient);
     }
     
