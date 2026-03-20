@@ -1,17 +1,28 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'sonner';
 
 const RootLayout = () => {
 
+	const queryClient = new QueryClient();
+
 	return (
-		<div className="bg-primary-foreground w-screen h-screen flex flex-col">
+		<div className="bg-background w-screen h-screen flex flex-col">
 			<ThemeProvider
 				attribute="class"
 				defaultTheme="system"
 				enableSystem
 				storageKey="theme"
 			>
-				<Outlet />
+				<QueryClientProvider
+					client={queryClient}
+				>
+					<Outlet />
+					<Toaster 
+						position='top-center'
+					/>
+				</QueryClientProvider>
 			</ThemeProvider>
 		</div>
 	);

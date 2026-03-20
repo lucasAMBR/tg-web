@@ -16,7 +16,7 @@ const ThemeToggle = () => {
 	};
 
 	return (
-		<Button onClick={handleThemeToggle} className='w-10 h-10'>
+		<Button className='fixed bottom-0 right-0 m-5 z-100' variant={"outline"} onClick={handleThemeToggle}>
 			{theme === 'light' ? <Moon /> : <Sun />}
 		</Button>
 	);

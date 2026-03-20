@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
+import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
@@ -22,6 +23,11 @@ const publicIndexRoute = publicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => publicLayoutRoute,
 } as any)
+const publicAuthRegisterRoute = publicAuthRegisterRouteImport.update({
+  id: '/auth/register',
+  path: '/auth/register',
+  getParentRoute: () => publicLayoutRoute,
+} as any)
 const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
@@ -31,23 +37,31 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
   '/auth/login': typeof publicAuthLoginRoute
+  '/auth/register': typeof publicAuthRegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
   '/auth/login': typeof publicAuthLoginRoute
+  '/auth/register': typeof publicAuthRegisterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
+  '/(public)/auth/register': typeof publicAuthRegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/login'
+  fullPaths: '/' | '/auth/login' | '/auth/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/login'
-  id: '__root__' | '/(public)' | '/(public)/' | '/(public)/auth/login'
+  to: '/' | '/auth/login' | '/auth/register'
+  id:
+    | '__root__'
+    | '/(public)'
+    | '/(public)/'
+    | '/(public)/auth/login'
+    | '/(public)/auth/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -70,6 +84,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicIndexRouteImport
       parentRoute: typeof publicLayoutRoute
     }
+    '/(public)/auth/register': {
+      id: '/(public)/auth/register'
+      path: '/auth/register'
+      fullPath: '/auth/register'
+      preLoaderRoute: typeof publicAuthRegisterRouteImport
+      parentRoute: typeof publicLayoutRoute
+    }
     '/(public)/auth/login': {
       id: '/(public)/auth/login'
       path: '/auth/login'
@@ -83,11 +104,13 @@ declare module '@tanstack/react-router' {
 interface publicLayoutRouteChildren {
   publicIndexRoute: typeof publicIndexRoute
   publicAuthLoginRoute: typeof publicAuthLoginRoute
+  publicAuthRegisterRoute: typeof publicAuthRegisterRoute
 }
 
 const publicLayoutRouteChildren: publicLayoutRouteChildren = {
   publicIndexRoute: publicIndexRoute,
   publicAuthLoginRoute: publicAuthLoginRoute,
+  publicAuthRegisterRoute: publicAuthRegisterRoute,
 }
 
 const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
