@@ -1,3 +1,4 @@
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { ThemeProvider } from 'next-themes';
@@ -18,7 +19,9 @@ const RootLayout = () => {
 				<QueryClientProvider
 					client={queryClient}
 				>
-					<Outlet />
+					<TooltipProvider>
+						<Outlet />
+					</TooltipProvider>
 					<Toaster 
 						position='top-center'
 					/>

@@ -14,6 +14,7 @@ import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
 import { Route as privateHomeDevRouteImport } from './routes/(private)/home/dev'
+import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
 import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
@@ -42,6 +43,11 @@ const privateHomeDevRoute = privateHomeDevRouteImport.update({
   path: '/home/dev',
   getParentRoute: () => rootRouteImport,
 } as any)
+const privateCreateAddressRoute = privateCreateAddressRouteImport.update({
+  id: '/(private)/create/address',
+  path: '/create/address',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const privateCreateProfileDevRoute = privateCreateProfileDevRouteImport.update({
   id: '/(private)/create/profile/dev',
   path: '/create/profile/dev',
@@ -62,6 +68,7 @@ const privateCreateProfileClientRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof publicIndexRoute
+  '/create/address': typeof privateCreateAddressRoute
   '/home/dev': typeof privateHomeDevRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof publicIndexRoute
+  '/create/address': typeof privateCreateAddressRoute
   '/home/dev': typeof privateHomeDevRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
@@ -82,6 +90,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
+  '/(private)/create/address': typeof privateCreateAddressRoute
   '/(private)/home/dev': typeof privateHomeDevRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/create/address'
     | '/home/dev'
     | '/auth/login'
     | '/auth/register'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/create/address'
     | '/home/dev'
     | '/auth/login'
     | '/auth/register'
@@ -112,6 +123,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/(public)'
     | '/(public)/'
+    | '/(private)/create/address'
     | '/(private)/home/dev'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
@@ -122,6 +134,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   publicLayoutRoute: typeof publicLayoutRouteWithChildren
+  privateCreateAddressRoute: typeof privateCreateAddressRoute
   privateHomeDevRoute: typeof privateHomeDevRoute
   privateCreateProfileClientRoute: typeof privateCreateProfileClientRoute
   privateCreateProfileCompanyRoute: typeof privateCreateProfileCompanyRoute
@@ -163,6 +176,13 @@ declare module '@tanstack/react-router' {
       path: '/home/dev'
       fullPath: '/home/dev'
       preLoaderRoute: typeof privateHomeDevRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/create/address': {
+      id: '/(private)/create/address'
+      path: '/create/address'
+      fullPath: '/create/address'
+      preLoaderRoute: typeof privateCreateAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(private)/create/profile/dev': {
@@ -207,6 +227,7 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   publicLayoutRoute: publicLayoutRouteWithChildren,
+  privateCreateAddressRoute: privateCreateAddressRoute,
   privateHomeDevRoute: privateHomeDevRoute,
   privateCreateProfileClientRoute: privateCreateProfileClientRoute,
   privateCreateProfileCompanyRoute: privateCreateProfileCompanyRoute,

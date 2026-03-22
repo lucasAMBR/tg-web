@@ -50,7 +50,7 @@ export function SingInForm(){
             }
 
             const homeRoutes = {
-                dev: "/home/developer",
+                dev: "/home/dev",
                 company: "/home/company",
                 client: "/home/client",
             };
@@ -64,7 +64,7 @@ export function SingInForm(){
 
     return(
         <form className="flex flex-col items-center justify-center w-[500px]" onSubmit={form.handleSubmit(login)}>
-            <h1 className="text-4xl font-[Agbalumo] text-primary">Welcome back!</h1>
+            <h1 className="text-4xl font-[Anta] text-primary">Welcome back!</h1>
                 <p className="max-w-120 font-[Anta] text-center text-sm text-accent-foreground/70 mt-2">We missed you</p>
                 <div className="flex flex-col gap-8 mt-6 w-full">
                     <Controller

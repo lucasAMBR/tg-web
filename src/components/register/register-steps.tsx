@@ -114,7 +114,7 @@ export default function RegisterSteps() {
             <form id="login-form" onSubmit={form.handleSubmit(register)} className="flex flex-col items-center justify-center w-[500px]">
             {step === "role" ? (
                 <>
-                    <h1 className="text-4xl font-[Agbalumo] text-primary">Tell us about yourself</h1>
+                    <h1 className="text-3xl font-[Anta] text-primary">Tell us about yourself</h1>
                     <p className="max-w-120 text-center text-sm mt-2">Select your role to help us customize your experience and match you with the right opportunities.</p>
                     <Controller
                         control={form.control}
@@ -159,7 +159,7 @@ export default function RegisterSteps() {
                 </>
             ): (
                 <>
-                    <h1 className="text-4xl font-[Agbalumo] text-primary">Set up your account</h1>
+                    <h1 className="text-3xl font-[Anta] text-primary">Set up your account</h1>
                     <p className="max-w-120 text-center text-sm mt-2">Create your credentials to get full access to the platform and start your journey.</p>
                     <div className="flex flex-col gap-4 mt-6 w-full">
                         <Controller

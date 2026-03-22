@@ -26,8 +26,8 @@ export default function Banner() {
                 className="relative z-10 flex flex-col items-center justify-center gap-2"
             >
                 <img src={theme === 'dark' ? `/images/dark_mode_logo.png` : `/images/light_mode_logo.png`} className='w-24' alt="Logo" />
-                <h1 className="text-9xl font-[Agbalumo] tracking-tight text-primary sm:text-6xl text-center">
-                    Welcome to Brew!
+                <h1 className="text-9xl font-[Anta] tracking-tight text-primary sm:text-6xl text-center">
+                    Welcome to <span className="font-[Agbalumo]">Brew!</span>
                 </h1>
                 <h2 className="mb-6 text-xl font-[Anta] font-medium text-accent-foreground/70">
                     Built by devs, for devs

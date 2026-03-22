@@ -38,6 +38,8 @@ export * from './devProfileModel';
 export * from './devProfileModelAddress';
 export * from './devSoftSkillModel';
 export * from './employmentHistoryModel';
+export * from './enumSeniority200';
+export * from './enumSeniority200DataItem';
 export * from './hardSkillModel';
 export * from './indexAcademicBackground200';
 export * from './indexAcademicBackground200Data';
