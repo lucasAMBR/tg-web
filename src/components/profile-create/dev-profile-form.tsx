@@ -27,11 +27,13 @@ import type { ApiError } from "@/utils/api-error"
 import { useNavigate } from "@tanstack/react-router"
 import { PhoneInput } from "../global/inputs/phone-input"
 import { CpfInput } from "../global/inputs/cpf-input"
-import { sanitizePhone } from "@/utils/formatter"
+import { useAuthStore } from "@/stores/auth-store"
 
 export default function DevProfileForm(){
 
     const navigate = useNavigate();
+
+    const { hydrateUser } = useAuthStore()
 
     const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false); 
 
@@ -65,6 +67,8 @@ export default function DevProfileForm(){
         await createProfile({ data }, {
             onSuccess: (success) => {
                 CustomToaster.successToast(success.message);
+
+                hydrateUser();
 
                 setAddressAlertModal(true)
             },

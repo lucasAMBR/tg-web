@@ -27,6 +27,7 @@ import type {
   DeleteHardSkill200,
   IndexHardSkill200,
   IndexHardSkillParams,
+  ShowHardSkill200,
   StoreHardSkill201,
   StoreHardSkillBody,
   UpdateHardSkill200,
@@ -320,4 +321,95 @@ export const useDeleteHardSkill = <TError = unknown,
 
       return useMutation(mutationOptions, queryClient);
     }
+    /**
+ * @summary /hard-skill/{id}
+ */
+export const showHardSkill = (
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ShowHardSkill200>(
+      {url: `/hard-skill/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getShowHardSkillQueryKey = (id?: string,) => {
+    return [
+    `/hard-skill/${id}`
+    ] as const;
+    }
+
     
+export const getShowHardSkillQueryOptions = <TData = Awaited<ReturnType<typeof showHardSkill>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getShowHardSkillQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof showHardSkill>>> = ({ signal }) => showHardSkill(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ShowHardSkillQueryResult = NonNullable<Awaited<ReturnType<typeof showHardSkill>>>
+export type ShowHardSkillQueryError = unknown
+
+
+export function useShowHardSkill<TData = Awaited<ReturnType<typeof showHardSkill>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showHardSkill>>,
+          TError,
+          Awaited<ReturnType<typeof showHardSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowHardSkill<TData = Awaited<ReturnType<typeof showHardSkill>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showHardSkill>>,
+          TError,
+          Awaited<ReturnType<typeof showHardSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowHardSkill<TData = Awaited<ReturnType<typeof showHardSkill>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /hard-skill/{id}
+ */
+
+export function useShowHardSkill<TData = Awaited<ReturnType<typeof showHardSkill>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showHardSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getShowHardSkillQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+

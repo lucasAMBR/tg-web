@@ -20,6 +20,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  EnumHardSkillLevel200,
   EnumSeniority200
 } from '.././models';
 
@@ -109,6 +110,98 @@ export function useEnumSeniority<TData = Awaited<ReturnType<typeof enumSeniority
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumSeniorityQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/hard-skill-level
+ */
+export const enumHardSkillLevel = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumHardSkillLevel200>(
+      {url: `/enum/hard-skill-level`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumHardSkillLevelQueryKey = () => {
+    return [
+    `/enum/hard-skill-level`
+    ] as const;
+    }
+
+    
+export const getEnumHardSkillLevelQueryOptions = <TData = Awaited<ReturnType<typeof enumHardSkillLevel>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumHardSkillLevelQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumHardSkillLevel>>> = ({ signal }) => enumHardSkillLevel(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumHardSkillLevelQueryResult = NonNullable<Awaited<ReturnType<typeof enumHardSkillLevel>>>
+export type EnumHardSkillLevelQueryError = unknown
+
+
+export function useEnumHardSkillLevel<TData = Awaited<ReturnType<typeof enumHardSkillLevel>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumHardSkillLevel>>,
+          TError,
+          Awaited<ReturnType<typeof enumHardSkillLevel>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumHardSkillLevel<TData = Awaited<ReturnType<typeof enumHardSkillLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumHardSkillLevel>>,
+          TError,
+          Awaited<ReturnType<typeof enumHardSkillLevel>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumHardSkillLevel<TData = Awaited<ReturnType<typeof enumHardSkillLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/hard-skill-level
+ */
+
+export function useEnumHardSkillLevel<TData = Awaited<ReturnType<typeof enumHardSkillLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumHardSkillLevel>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumHardSkillLevelQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

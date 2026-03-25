@@ -25,6 +25,8 @@ import type {
 
 import type {
   IndexSoftSkill200,
+  StoreCompanySoftSkill200,
+  StoreCompanySoftSkillBody,
   StoreDevSoftSkill200,
   StoreDevSoftSkillBody,
   UpdateDevSoftSkill200,
@@ -252,6 +254,70 @@ export const useUpdateDevSoftSkill = <TError = unknown,
       > => {
 
       const mutationOptions = getUpdateDevSoftSkillMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary /soft-skill/company (não completo)
+ */
+export const storeCompanySoftSkill = (
+    storeCompanySoftSkillBody: StoreCompanySoftSkillBody,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<StoreCompanySoftSkill200>(
+      {url: `/soft-skill/company`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: storeCompanySoftSkillBody, signal
+    },
+      );
+    }
+  
+
+
+export const getStoreCompanySoftSkillMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext> => {
+
+const mutationKey = ['storeCompanySoftSkill'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof storeCompanySoftSkill>>, {data: StoreCompanySoftSkillBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  storeCompanySoftSkill(data,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type StoreCompanySoftSkillMutationResult = NonNullable<Awaited<ReturnType<typeof storeCompanySoftSkill>>>
+    export type StoreCompanySoftSkillMutationBody = StoreCompanySoftSkillBody
+    export type StoreCompanySoftSkillMutationError = unknown
+
+    /**
+ * @summary /soft-skill/company (não completo)
+ */
+export const useStoreCompanySoftSkill = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof storeCompanySoftSkill>>,
+        TError,
+        {data: StoreCompanySoftSkillBody},
+        TContext
+      > => {
+
+      const mutationOptions = getStoreCompanySoftSkillMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

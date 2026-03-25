@@ -10,6 +10,7 @@ export interface HardSkillModel {
   id: string;
   dev_profile_id: string;
   skill_level: string;
+  skill_level_label: string;
   language: LanguageModel;
   created_at: string;
   updated_at: string;
