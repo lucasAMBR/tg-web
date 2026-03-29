@@ -25,6 +25,7 @@ import type {
 
 import type {
   IndexSoftSkill200,
+  ListDevSoftSkill200,
   StoreCompanySoftSkill200,
   StoreCompanySoftSkillBody,
   StoreDevSoftSkill200,
@@ -321,4 +322,95 @@ export const useStoreCompanySoftSkill = <TError = unknown,
 
       return useMutation(mutationOptions, queryClient);
     }
+    /**
+ * @summary /soft-skill/dev/{id}
+ */
+export const listDevSoftSkill = (
+    profileId: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ListDevSoftSkill200>(
+      {url: `/soft-skill/dev/${profileId}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getListDevSoftSkillQueryKey = (profileId?: string,) => {
+    return [
+    `/soft-skill/dev/${profileId}`
+    ] as const;
+    }
+
     
+export const getListDevSoftSkillQueryOptions = <TData = Awaited<ReturnType<typeof listDevSoftSkill>>, TError = unknown>(profileId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListDevSoftSkillQueryKey(profileId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listDevSoftSkill>>> = ({ signal }) => listDevSoftSkill(profileId, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(profileId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ListDevSoftSkillQueryResult = NonNullable<Awaited<ReturnType<typeof listDevSoftSkill>>>
+export type ListDevSoftSkillQueryError = unknown
+
+
+export function useListDevSoftSkill<TData = Awaited<ReturnType<typeof listDevSoftSkill>>, TError = unknown>(
+ profileId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof listDevSoftSkill>>,
+          TError,
+          Awaited<ReturnType<typeof listDevSoftSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useListDevSoftSkill<TData = Awaited<ReturnType<typeof listDevSoftSkill>>, TError = unknown>(
+ profileId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof listDevSoftSkill>>,
+          TError,
+          Awaited<ReturnType<typeof listDevSoftSkill>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useListDevSoftSkill<TData = Awaited<ReturnType<typeof listDevSoftSkill>>, TError = unknown>(
+ profileId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /soft-skill/dev/{id}
+ */
+
+export function useListDevSoftSkill<TData = Awaited<ReturnType<typeof listDevSoftSkill>>, TError = unknown>(
+ profileId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listDevSoftSkill>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getListDevSoftSkillQueryOptions(profileId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+

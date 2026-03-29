@@ -73,6 +73,7 @@ export * from './indexProjectHistory200DataPagination';
 export * from './indexProjectHistoryParams';
 export * from './indexSoftSkill200';
 export * from './languageModel';
+export * from './listDevSoftSkill200';
 export * from './projectHistoryModel';
 export * from './projectHistoryModelGalleryItem';
 export * from './projectHistoryModelLanguagesItem';

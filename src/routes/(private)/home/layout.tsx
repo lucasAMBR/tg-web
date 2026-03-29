@@ -26,7 +26,9 @@ function RouteComponent() {
             </div>
             <Button variant={"default"} size={"icon"}><Bell /></Button>
           </div>
-          <Outlet />
+          <div className='flex flex-col flex-1 overflow-y-auto'>
+            <Outlet />
+          </div>
         </div>
     </div>
   );

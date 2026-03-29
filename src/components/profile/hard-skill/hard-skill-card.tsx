@@ -1,8 +1,8 @@
 import type { HardSkillModel } from "@/api/generated/models";
-import { Card, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { Card, CardHeader, CardTitle } from "../../ui/card";
+import { Badge } from "../../ui/badge";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../../ui/dropdown-menu";
+import { Button } from "../../ui/button";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 
 interface HardSkillCardProps{
@@ -14,7 +14,7 @@ interface HardSkillCardProps{
 export default function HardSkillCard({ hardSkill, openDelete, openUpdate }: HardSkillCardProps){
 
     return (
-        <Card className="flex flex-row justify-between items-center p-3 gap-4">
+        <Card className="flex flex-row justify-between items-center p-3 gap-2">
             <span className="font-bold">
                 {hardSkill.language.name}
             </span>

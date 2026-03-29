@@ -6,6 +6,7 @@ import type { UserRole } from "@/types/AuthenticatedUser";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { useNavigate } from "@tanstack/react-router";
+import LogoutButton from "./logout-button";
 
 export default function Sidebar(){
 
@@ -13,7 +14,7 @@ export default function Sidebar(){
 
     const { theme } = useTheme();
 
-    const { user } = useAuthStore();
+    const { user  } = useAuthStore();
 
      const role = user?.role[0] as UserRole;
 
@@ -35,6 +36,9 @@ export default function Sidebar(){
                     <p className="text-xs text-muted-foreground mb-2">Options</p>
                     <div onClick={() => navigate({to: "/home/profile"})} className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><User className="size-4"/> My profile</div>
                     <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><Cog className="size-4"/> Configuration</div>
+                    <LogoutButton text="teste">
+                        <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><LogOut className="size-4"/> Logout</div>
+                    </LogoutButton>
                 </div>
             </div>
             <div className="flex items-center border-t border-border p-5 justify-between">
@@ -58,7 +62,7 @@ export default function Sidebar(){
                             <DropdownMenuSeparator />
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem><Edit /> Update account info</DropdownMenuItem>
-                            <DropdownMenuItem variant="destructive"><LogOut /> Logout</DropdownMenuItem>
+                            <DropdownMenuItem variant="destructive"><LogOut /> Logout</DropdownMenuItem>                            
                         </DropdownMenuGroup>
                     </DropdownMenuContent>
                 </DropdownMenu>

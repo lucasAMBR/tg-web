@@ -22,7 +22,7 @@ export default function LogoutButton({
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger>
+            <AlertDialogTrigger asChild>
                 {children}
             </AlertDialogTrigger>
             <AlertDialogContent>

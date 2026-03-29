@@ -1,41 +1,41 @@
-import { useEnumHardSkillLevel } from "@/api/generated/enums/enums";
-import { getIndexHardSkillQueryKey, useUpdateHardSkill } from "@/api/generated/hard-skill-doc/hard-skill-doc";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
-import type { HardSkillModel } from "@/api/generated/models";
-import useDebounce from "@/hooks/use-debounce";
-import { RegisterHardSkillSchema, type IRegisterHardSkillSchema } from "@/schemas/hard-skill/RegisterHardSkillSchema";
-import type { ApiError } from "@/utils/api-error";
-import { CustomToaster } from "@/utils/custom-toaster";
-import { onError } from "@/utils/on-error";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
-import type { AxiosError } from "axios";
-import { useEffect, useMemo, useState, type PropsWithChildren } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { Card } from "../ui/card";
-import { Field, FieldLabel } from "../ui/field";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Button } from "../ui/button";
-import { ChevronsUpDownIcon, CircleCheckIcon } from "lucide-react";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command";
-import { Spinner } from "../ui/spinner";
-import { cn } from "@/lib/utils";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import type { PropsWithChildren } from "react";
 
-interface UpdateHardSkillModalProps{
-    hardSkill: HardSkillModel,
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog";
+import { useMemo, useState } from "react";
+import { useEnumHardSkillLevel } from "@/api/generated/enums/enums";
+import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import useDebounce from "@/hooks/use-debounce";
+import { Controller, useForm } from "react-hook-form";
+import { RegisterHardSkillSchema, type IRegisterHardSkillSchema } from "@/schemas/hard-skill/RegisterHardSkillSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Field, FieldLabel } from "../../ui/field";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../ui/command";
+import { cn } from "@/lib/utils";
+import { Button } from "../../ui/button";
+import { Card } from "../../ui/card";
+import { ChevronsUpDownIcon, CircleCheckIcon } from "lucide-react";
+import { Spinner } from "../../ui/spinner";
+import { getIndexHardSkillQueryKey, useStoreHardSkill } from "@/api/generated/hard-skill-doc/hard-skill-doc";
+import { CustomToaster } from "@/utils/custom-toaster";
+import { useQueryClient } from "@tanstack/react-query";
+import { onError } from "@/utils/on-error";
+import type { AxiosError } from "axios";
+import type { ApiError } from "@/utils/api-error";
+import type { HardSkillModel } from "@/api/generated/models";
+
+interface RegisterHardSkillModalProps{
     profileId: string,
-    existingHardSkills: HardSkillModel[],
-    dialogIsOpen: boolean,
-    setDialogOpen: (open: boolean) => void
+    existingHardSkills: HardSkillModel[]
 }
 
-export default function UpdateHardskillModal({ hardSkill, profileId, dialogIsOpen, setDialogOpen, existingHardSkills }: UpdateHardSkillModalProps){
-
+export default function CreateHardSkillModal({ profileId, existingHardSkills, children }: PropsWithChildren<RegisterHardSkillModalProps>)
+{
     const queryClient = useQueryClient();
 
     const [open, setOpen] = useState(false)
+    const [ dialogOpen, setDialogOpen ] = useState(false);
 
     const [ languageSearchTerm, setLanguageSearchTerm ] = useState<string>("");
     const debounceSearchTerm = useDebounce(languageSearchTerm, 500);
@@ -55,17 +55,15 @@ export default function UpdateHardskillModal({ hardSkill, profileId, dialogIsOpe
     const form = useForm<IRegisterHardSkillSchema>({
         resolver: zodResolver(RegisterHardSkillSchema),
         defaultValues: {
-            language_id: hardSkill.language.id,
-            skill_level: hardSkill.skill_level
+            language_id: "",
+            skill_level: ""
         }
     })
 
     const filteredLanguageList = useMemo(() => {
         if (!language?.data.data) return [];
 
-        const usedIds = new Set(existingHardSkills
-            .filter(s => s.id !== hardSkill.id)    
-            .map(s => s.language.id));
+        const usedIds = new Set(existingHardSkills.map(s => s.language.id));
 
         return language.data.data.filter(lang => !usedIds.has(lang.id));
     }, [language, existingHardSkills]);
@@ -73,19 +71,10 @@ export default function UpdateHardskillModal({ hardSkill, profileId, dialogIsOpe
     const {
         mutate: registerHardSkill,
         isPending
-    } = useUpdateHardSkill();
-
-    useEffect(() => {
-        if (!dialogIsOpen) {
-            form.reset({
-                language_id: hardSkill.language.id,
-                skill_level: hardSkill.skill_level
-            });
-        }
-    }, [dialogIsOpen]);
+    } = useStoreHardSkill();
 
     const register = (data: IRegisterHardSkillSchema) => {
-        registerHardSkill({ id: hardSkill.id, data }, {
+        registerHardSkill({ data }, {
             onSuccess: (success) => {
                 CustomToaster.successToast(success.message);
 
@@ -100,7 +89,10 @@ export default function UpdateHardskillModal({ hardSkill, profileId, dialogIsOpe
     }
 
     return(
-        <Dialog open={dialogIsOpen} onOpenChange={setDialogOpen}>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+                {children}
+            </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Register new Hard Skill</DialogTitle>
@@ -122,18 +114,17 @@ export default function UpdateHardskillModal({ hardSkill, profileId, dialogIsOpe
                                             aria-expanded={open}
                                             className='w-full justify-between'
                                         >
-                                        {field.value ? (
-                                            filteredLanguageList.find(f => f.id === field.value)?.name 
-                                            ?? hardSkill.language.name 
-                                        ) : (
+                                            {field.value ? (
+                                                filteredLanguageList.find(framework => framework.id === field.value)?.name
+                                            ) : (
                                             <span className='text-muted-foreground'>Select industry category</span>
-                                        )}
+                                            )}
                                             <ChevronsUpDownIcon className='opacity-50' />
                                         </Button>
                                         </PopoverTrigger>
                                         <PopoverContent className='p-0 w-[var(--radix-popover-trigger-width)]'>
                                         <Command shouldFilter={false}>
-                                            <CommandInput
+                                            <CommandInput 
                                                 placeholder='Search framework...' 
                                                 value={languageSearchTerm}
                                                 onValueChange={setLanguageSearchTerm}    
