@@ -20,6 +20,9 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  EnumContractType200,
+  EnumDegreeLevel200,
+  EnumEmploymentType200,
   EnumHardSkillLevel200,
   EnumSeniority200
 } from '.././models';
@@ -202,6 +205,282 @@ export function useEnumHardSkillLevel<TData = Awaited<ReturnType<typeof enumHard
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumHardSkillLevelQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/contract-type
+ */
+export const enumContractType = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumContractType200>(
+      {url: `/enum/contract-type`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumContractTypeQueryKey = () => {
+    return [
+    `/enum/contract-type`
+    ] as const;
+    }
+
+    
+export const getEnumContractTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumContractType>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumContractTypeQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumContractType>>> = ({ signal }) => enumContractType(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumContractTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumContractType>>>
+export type EnumContractTypeQueryError = unknown
+
+
+export function useEnumContractType<TData = Awaited<ReturnType<typeof enumContractType>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumContractType>>,
+          TError,
+          Awaited<ReturnType<typeof enumContractType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumContractType<TData = Awaited<ReturnType<typeof enumContractType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumContractType>>,
+          TError,
+          Awaited<ReturnType<typeof enumContractType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumContractType<TData = Awaited<ReturnType<typeof enumContractType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/contract-type
+ */
+
+export function useEnumContractType<TData = Awaited<ReturnType<typeof enumContractType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumContractType>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumContractTypeQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/employment-type
+ */
+export const enumEmploymentType = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumEmploymentType200>(
+      {url: `/enum/employment-type`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumEmploymentTypeQueryKey = () => {
+    return [
+    `/enum/employment-type`
+    ] as const;
+    }
+
+    
+export const getEnumEmploymentTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumEmploymentType>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumEmploymentTypeQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumEmploymentType>>> = ({ signal }) => enumEmploymentType(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumEmploymentTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumEmploymentType>>>
+export type EnumEmploymentTypeQueryError = unknown
+
+
+export function useEnumEmploymentType<TData = Awaited<ReturnType<typeof enumEmploymentType>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumEmploymentType>>,
+          TError,
+          Awaited<ReturnType<typeof enumEmploymentType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumEmploymentType<TData = Awaited<ReturnType<typeof enumEmploymentType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumEmploymentType>>,
+          TError,
+          Awaited<ReturnType<typeof enumEmploymentType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumEmploymentType<TData = Awaited<ReturnType<typeof enumEmploymentType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/employment-type
+ */
+
+export function useEnumEmploymentType<TData = Awaited<ReturnType<typeof enumEmploymentType>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumEmploymentType>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumEmploymentTypeQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/degree-level
+ */
+export const enumDegreeLevel = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumDegreeLevel200>(
+      {url: `/enum/degree-level`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumDegreeLevelQueryKey = () => {
+    return [
+    `/enum/degree-level`
+    ] as const;
+    }
+
+    
+export const getEnumDegreeLevelQueryOptions = <TData = Awaited<ReturnType<typeof enumDegreeLevel>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumDegreeLevelQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumDegreeLevel>>> = ({ signal }) => enumDegreeLevel(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumDegreeLevelQueryResult = NonNullable<Awaited<ReturnType<typeof enumDegreeLevel>>>
+export type EnumDegreeLevelQueryError = unknown
+
+
+export function useEnumDegreeLevel<TData = Awaited<ReturnType<typeof enumDegreeLevel>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumDegreeLevel>>,
+          TError,
+          Awaited<ReturnType<typeof enumDegreeLevel>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumDegreeLevel<TData = Awaited<ReturnType<typeof enumDegreeLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumDegreeLevel>>,
+          TError,
+          Awaited<ReturnType<typeof enumDegreeLevel>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumDegreeLevel<TData = Awaited<ReturnType<typeof enumDegreeLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/degree-level
+ */
+
+export function useEnumDegreeLevel<TData = Awaited<ReturnType<typeof enumDegreeLevel>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDegreeLevel>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumDegreeLevelQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

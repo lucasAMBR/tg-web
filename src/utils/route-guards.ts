@@ -20,30 +20,30 @@ export async function ensureAuthenticated(): Promise<void> {
 }
 
 export async function ensureProfileCreated(): Promise<void> {
-    await useAuthStore.getState().initialize();
-    
-    const { user, isAuthenticated } = useAuthStore.getState();
+	await useAuthStore.getState().initialize();
 
-    if (!isAuthenticated || !user) return;
+	const { user, isAuthenticated } = useAuthStore.getState();
 
-    const role = user.role[0];
-    
-    const hasProfile = 
-        (role === 'dev' && user.dev_profile) || 
-        (role === 'company' && user.company_profile) ||
-        (role === 'client' && user.client_profile);
+	if (!isAuthenticated || !user) return;
 
-    if (!hasProfile) {
-        if(role === 'dev'){
-            throw redirect({ to: `/create/profile/dev` });
-        }
-        if(role === 'company'){
-            throw redirect({ to: `/create/profile/company` });
-        }
-        if(role === 'client'){
-            throw redirect({ to: `/create/profile/client` });
-        }
-    }
+	const role = user.role[0];
+
+	const hasProfile =
+		(role === "dev" && user.dev_profile) ||
+		(role === "company" && user.company_profile) ||
+		(role === "client" && user.client_profile);
+
+	if (!hasProfile) {
+		if (role === "dev") {
+			throw redirect({ to: "/create/profile/dev" });
+		}
+		if (role === "company") {
+			throw redirect({ to: "/create/profile/company" });
+		}
+		if (role === "client") {
+			throw redirect({ to: "/create/profile/client" });
+		}
+	}
 }
 
 export async function redirectIfAuthenticated(): Promise<void> {
@@ -52,27 +52,27 @@ export async function redirectIfAuthenticated(): Promise<void> {
 
 	await useAuthStore.getState().initialize();
 
-    const { user, isAuthenticated } = useAuthStore.getState();
+	const { user, isAuthenticated } = useAuthStore.getState();
 
 	if (isAuthenticated && user) {
-       const role = user.role[0] as UserRole;
-    
-        const hasProfile = 
-            (role === 'dev' && user.dev_profile) || 
-            (role === 'company' && user.company_profile) ||
-            (role === 'client' && user.client_profile);
+		const role = user.role[0] as UserRole;
 
-        if (!hasProfile) {
-            throw redirect({ to: `/create/profile/${role}` });
-        }
+		const hasProfile =
+			(role === "dev" && user.dev_profile) ||
+			(role === "company" && user.company_profile) ||
+			(role === "client" && user.client_profile);
 
-        const homeRoutes: Record<UserRole, string> = {
-            dev: "/home/dev",
-            company: "/home/company",
-            client: "/home/client",
-        };
+		if (!hasProfile) {
+			throw redirect({ to: `/create/profile/${role}` });
+		}
 
-        throw redirect({ to: homeRoutes[role] || "/dashboard" });
+		const homeRoutes: Record<UserRole, string> = {
+			dev: "/home/dev",
+			company: "/home/company",
+			client: "/home/client",
+		};
+
+		throw redirect({ to: homeRoutes[role] || "/dashboard" });
 	}
 }
 

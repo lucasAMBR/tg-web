@@ -11,6 +11,7 @@ export interface AcademicBackgroundModel {
   dev_profile_id: string;
   degree: string;
   degree_level: string;
+  degree_level_label: string;
   institution: string;
   is_verified: boolean;
   /** @nullable */

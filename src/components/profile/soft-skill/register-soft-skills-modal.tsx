@@ -1,9 +1,27 @@
-import { getListDevSoftSkillQueryKey, useIndexSoftSkill, useStoreDevSoftSkill } from "@/api/generated/soft-skill-doc/soft-skill-doc";
+import {
+	getListDevSoftSkillQueryKey,
+	useIndexSoftSkill,
+	useStoreDevSoftSkill,
+} from "@/api/generated/soft-skill-doc/soft-skill-doc";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "@/components/ui/field";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+	Field,
+	FieldContent,
+	FieldDescription,
+	FieldLabel,
+	FieldTitle,
+} from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { useAuthStore } from "@/stores/auth-store";
@@ -18,180 +36,200 @@ import { useEffect, useState, type PropsWithChildren } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 type FormValues = {
-    soft_skills: Record<string, string>;
+	soft_skills: Record<string, string>;
 };
 
-interface RegisterSoftSkillModalProps{
-    profileId: string
+interface RegisterSoftSkillModalProps {
+	profileId: string;
 }
 
-export default function RegisterSoftSkillModal({ profileId, children }: PropsWithChildren<RegisterSoftSkillModalProps>) {
+export default function RegisterSoftSkillModal({
+	profileId,
+	children,
+}: PropsWithChildren<RegisterSoftSkillModalProps>) {
+	const queryClient = useQueryClient();
 
-    const queryClient = useQueryClient();
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const [ modalIsOpen, setModalIsOpen ] = useState(false);
+	const { user } = useAuthStore();
 
-    const { user } = useAuthStore();
+	const form = useForm<FormValues>({
+		defaultValues: {
+			soft_skills: {},
+		},
+	});
 
-    const form = useForm<FormValues>({
-        defaultValues: {
-            soft_skills: {}
-        }
-    });
+	const { data: baseSoftSkills, isLoading } = useIndexSoftSkill();
 
-    const {
-        data: baseSoftSkills,
-        isLoading
-    } = useIndexSoftSkill();
+	const { mutate, isPending } = useStoreDevSoftSkill();
 
-    const {
-        mutate,
-        isPending
-    } = useStoreDevSoftSkill();
+	const softSkillList = baseSoftSkills?.data ?? [];
 
-    const softSkillList = baseSoftSkills?.data ?? [];
+	const userPointLimits = getSenioritySoftSkillLimit(user) ?? 0;
 
+	const watchedValues = form.watch("soft_skills");
 
-    const userPointLimits = getSenioritySoftSkillLimit( user ) ?? 0;
+	const calculateScore = (values: FormValues["soft_skills"]) => {
+		let total = 0;
 
-    const watchedValues = form.watch("soft_skills");
+		for (const skill of softSkillList) {
+			const selectedResponseId = values?.[skill.id];
 
-    const calculateScore = (values: FormValues["soft_skills"]) => {
-        let total = 0;
+			if (!selectedResponseId) continue;
 
-        for (const skill of softSkillList) {
-            const selectedResponseId = values?.[skill.id];
+			const response = skill.responses?.find(
+				(r) => r.id === selectedResponseId,
+			);
 
-            if (!selectedResponseId) continue;
+			if (response) {
+				total += response.evaluation_weight;
+			}
+		}
 
-            const response = skill.responses?.find(
-            (r) => r.id === selectedResponseId
-            );
+		return total;
+	};
 
-            if (response) {
-            total += response.evaluation_weight;
-            }
-        }
+	const allAnswered =
+		Object.keys(watchedValues || {}).length === softSkillList.length;
 
-        return total;
-    };
+	const currentScore = calculateScore(watchedValues);
 
-    const allAnswered =
-        Object.keys(watchedValues || {}).length === softSkillList.length;
+	const isScoreValid = currentScore <= userPointLimits;
 
-    const currentScore = calculateScore(watchedValues);
+	const canSubmit = allAnswered && isScoreValid;
 
-    const isScoreValid = currentScore <= userPointLimits;
+	const formatSoftSkillsPayload = (data: FormValues) => {
+		return {
+			soft_skills: Object.entries(data.soft_skills).map(
+				([soft_skill_id, soft_skill_level_response_id]) => ({
+					soft_skill_id,
+					soft_skill_level_response_id,
+				}),
+			),
+		};
+	};
 
-    const canSubmit = allAnswered && isScoreValid;
+	const register = (data: FormValues) => {
+		const formatted = formatSoftSkillsPayload(data);
 
-    const formatSoftSkillsPayload = (data: FormValues) => {
-        return {
-            soft_skills: Object.entries(data.soft_skills).map(
-            ([soft_skill_id, soft_skill_level_response_id]) => ({
-                soft_skill_id,
-                soft_skill_level_response_id,
-            })
-            ),
-        };
-    };
+		mutate(
+			{ data: formatted },
+			{
+				onSuccess: (success) => {
+					CustomToaster.successToast(success.message);
+					queryClient.invalidateQueries({
+						queryKey: getListDevSoftSkillQueryKey(profileId),
+					});
 
-    const register = (data: FormValues) => {
-        const formatted = formatSoftSkillsPayload(data);
+					setModalIsOpen(false);
+				},
+				onError: (error) => {
+					onError(error as AxiosError<ApiError>);
+				},
+			},
+		);
+	};
 
-        mutate({ data: formatted }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
-                queryClient.invalidateQueries({queryKey: getListDevSoftSkillQueryKey(profileId)});
+	useEffect(() => {
+		if (currentScore > userPointLimits) {
+			CustomToaster.warningToast(
+				"Your actual score passed the limit of seniority, please redistribute your pontuation between others soft skill",
+			);
+		}
+	}, [currentScore]);
 
-                setModalIsOpen(false);
-            },
-            onError: (error) => {
-                onError(error as AxiosError<ApiError>);
-            }
-        })
-    }
+	return (
+		<Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
+			<DialogTrigger asChild>
+				<Button>
+					<Plus /> Create
+				</Button>
+			</DialogTrigger>
+			<DialogContent className="max-h-5/6 min-w-2/5 overflow-y-auto">
+				<DialogHeader>
+					<DialogTitle>Register Soft Skills</DialogTitle>
+					<DialogDescription>
+						Here you can do a self evaluation about your Soft Skills
+					</DialogDescription>
+				</DialogHeader>
+				<div className="flex w-full gap-2">
+					<Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">
+						Pontuation limit based on your seniority:{" "}
+						<span className="text-2xl font-black text-primary">
+							{userPointLimits}
+						</span>
+					</Card>
+					<Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">
+						Actual pontuation:{" "}
+						<span className="text-2xl font-black text-primary">
+							{currentScore}
+						</span>
+					</Card>
+				</div>
+				<form
+					className="flex flex-col gap-2"
+					onSubmit={form.handleSubmit(register)}
+				>
+					{softSkillList.map((softSkill) => (
+						<>
+							<Card className="p-3">
+								<div key={softSkill.id}>
+									<h3 className="font-bold text-primary">{softSkill.name}</h3>
+									<p>{softSkill.description}</p>
+								</div>
 
-    useEffect(() => {
-        if(currentScore > userPointLimits){
-            CustomToaster.warningToast("Your actual score passed the limit of seniority, please redistribute your pontuation between others soft skill")
-        }
-    }, [currentScore])
+								<Controller
+									control={form.control}
+									name={`soft_skills.${softSkill.id}`}
+									render={({ field }) => (
+										<RadioGroup
+											onValueChange={field.onChange}
+											value={field.value}
+											className="gap-2 my-2 w-full p-0"
+										>
+											{softSkill.responses != null &&
+												softSkill.responses.map((response) => (
+													<FieldLabel
+														key={response.id}
+														htmlFor={response.id}
+														className="m-0 p-0"
+													>
+														<Field
+															className="cursor-pointer hover:bg-primary/5"
+															orientation="horizontal"
+														>
+															<FieldContent>
+																<FieldTitle className="">
+																	<Badge>{response.evaluation_weight}</Badge>{" "}
+																	{response.title}
+																</FieldTitle>
+																<FieldDescription>
+																	{response.description}
+																</FieldDescription>
+															</FieldContent>
 
-    return(
-        <Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
-            <DialogTrigger asChild>
-                <Button>
-                    <Plus /> Create
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-5/6 min-w-2/5 overflow-y-auto">
-                <DialogHeader>
-                    <DialogTitle>Register Soft Skills</DialogTitle>
-                    <DialogDescription>Here you can do a self evaluation about your Soft Skills</DialogDescription>
-                </DialogHeader>
-                <div className="flex w-full gap-2">
-                    <Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">Pontuation limit based on your seniority: <span className="text-2xl font-black text-primary">{userPointLimits}</span></Card>
-                    <Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">Actual pontuation: <span className="text-2xl font-black text-primary">{currentScore}</span></Card>
-                </div>
-                <form
-                    className="flex flex-col gap-2"
-                    onSubmit={form.handleSubmit(register)}
-                >
-                    {softSkillList.map((softSkill) => (
-                        <>
-                        <Card className="p-3">
-                            <div key={softSkill.id}>
-                                <h3 className="font-bold text-primary">{softSkill.name}</h3>
-                                <p>{softSkill.description}</p>
-                            </div>
-
-                            <Controller
-                                control={form.control}
-                                name={`soft_skills.${softSkill.id}`}
-                                render={({ field }) => (
-                                    <RadioGroup
-                                        onValueChange={field.onChange}
-                                        value={field.value}
-                                        className="gap-2 my-2 w-full p-0"
-                                    >
-                                        {softSkill.responses != null && softSkill.responses.map((response) => (
-                                        <FieldLabel
-                                            key={response.id}
-                                            htmlFor={response.id}
-                                            className="m-0 p-0"
-                                        >
-                                            <Field
-                                            className="cursor-pointer hover:bg-primary/5"
-                                            orientation="horizontal"
-                                            >
-                                            <FieldContent>
-                                                <FieldTitle className=""><Badge>{response.evaluation_weight}</Badge> {response.title}</FieldTitle>
-                                                <FieldDescription>
-                                                {response.description}
-                                                </FieldDescription>
-                                            </FieldContent>
-
-                                            <RadioGroupItem
-                                                value={response.id}
-                                                id={response.id}
-                                            />
-                                            </Field>
-                                        </FieldLabel>
-                                        ))}
-                                    </RadioGroup>
-                                )}
-                            />
-                        </Card>
-                        <Separator className="my-2"/>
-                        </>
-                    ))}
-                    <DialogFooter className="mt-4">
-                        <Button variant={"outline"}>Cancel</Button>
-                        <Button disabled={!canSubmit}><Save /> Save</Button>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-    )
+															<RadioGroupItem
+																value={response.id}
+																id={response.id}
+															/>
+														</Field>
+													</FieldLabel>
+												))}
+										</RadioGroup>
+									)}
+								/>
+							</Card>
+							<Separator className="my-2" />
+						</>
+					))}
+					<DialogFooter className="mt-4">
+						<Button variant={"outline"}>Cancel</Button>
+						<Button disabled={!canSubmit}>
+							<Save /> Save
+						</Button>
+					</DialogFooter>
+				</form>
+			</DialogContent>
+		</Dialog>
+	);
 }

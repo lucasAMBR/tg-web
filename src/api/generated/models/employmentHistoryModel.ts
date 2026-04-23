@@ -11,8 +11,11 @@ export interface EmploymentHistoryModel {
   company_location: string;
   position_name: string;
   employment_type: string;
+  employment_type_label: string;
   contract_type: string;
+  contract_type_label: string;
   seniority_level: string;
+  seniority_level_label: string;
   actuation_details: string;
   start_date: string;
   /** @nullable */

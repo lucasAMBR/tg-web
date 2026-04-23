@@ -1,72 +1,198 @@
-import { Building, Calendar, Cog, Edit, EllipsisVertical, Folder, List, LogOut, User } from "lucide-react";
+import {
+	Building,
+	Calendar,
+	Cog,
+	Edit,
+	EllipsisVertical,
+	Folder,
+	List,
+	LogOut,
+	User,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { useAuthStore } from "@/stores/auth-store";
 import type { UserRole } from "@/types/AuthenticatedUser";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { useNavigate } from "@tanstack/react-router";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import LogoutButton from "./logout-button";
+import type { LucideIcon } from "lucide-react";
 
-export default function Sidebar(){
+type SidebarItem = {
+	title: string;
+	icon: LucideIcon;
+	url?: string;
+	onClick?: () => void;
+};
 
-    const navigate = useNavigate();
+export const sidebarConfig: Record<
+	UserRole,
+	{
+		sections: SidebarItem[];
+		options: SidebarItem[];
+	}
+> = {
+	dev: {
+		sections: [
+			{ title: "Feed", icon: List, url: "/dev" },
+			{ title: "Companies", icon: Building, url: "/companies" },
+			{ title: "Job Vacancies", icon: Folder, url: "/jobs" },
+			{ title: "Freelances", icon: Calendar, url: "/freelances" },
+		],
+		options: [
+			{ title: "My profile", icon: User, url: "/home/profile" },
+			{ title: "Configuration", icon: Cog, url: "/home/settings" },
+		],
+	},
 
-    const { theme } = useTheme();
+	company: {
+		sections: [
+			{ title: "Dashboard", icon: List, url: "/dashboard" },
+			{ title: "My Jobs", icon: Folder, url: "/my-jobs" },
+		],
+		options: [
+			{ title: "Company Profile", icon: Building, url: "/company/profile" },
+			{ title: "Settings", icon: Cog, url: "/settings" },
+		],
+	},
 
-    const { user  } = useAuthStore();
+	client: {
+		sections: [
+			{ title: "Feed", icon: List, url: "/home" },
+			{ title: "Freelancers", icon: User, url: "/freelancers" },
+		],
+		options: [
+			{ title: "My profile", icon: User, url: "/profile" },
+			{ title: "Settings", icon: Cog, url: "/settings" },
+		],
+	},
+};
 
-     const role = user?.role[0] as UserRole;
+function isActive(url?: string) {
+	if (!url) return false;
+	return location.pathname.startsWith(url);
+}
 
-    return(
-        <div className="w-[350px] flex flex-col h-screen border-r border-border">
-            <div className='flex flex-row gap-1.5 items-end justify-center p-4 border-b border-border h-18'>
-                <img src={theme === 'dark' ? `/images/dark_mode_logo.png` : `/images/light_mode_logo.png`} className='w-11'/>
-                <p className="text-primary text-3xl font-bold font-['Agbalumo']">{import.meta.env.VITE_APP_NAME}</p>
-            </div>
-            <div className="flex flex-col gap-4 flex-1 p-4">
-                <div className="w-full">
-                    <p className="text-xs text-muted-foreground mb-2">Sections</p>
-                    <div className="bg-primary text-primary-foreground w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><List className="size-4"/> Feed</div>
-                    <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><Building className="size-4"/> Companies</div>
-                    <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><Folder className="size-4" /> Job Vacancies</div>
-                    <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2"><Calendar className="size-4" /> Freelances</div>
-                </div>
-                <div className="w-full">
-                    <p className="text-xs text-muted-foreground mb-2">Options</p>
-                    <div onClick={() => navigate({to: "/home/profile"})} className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><User className="size-4"/> My profile</div>
-                    <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><Cog className="size-4"/> Configuration</div>
-                    <LogoutButton text="teste">
-                        <div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1"><LogOut className="size-4"/> Logout</div>
-                    </LogoutButton>
-                </div>
-            </div>
-            <div className="flex items-center border-t border-border p-5 justify-between">
-                <div className="flex gap-4 items-center">
-                    <Avatar className="size-10">
-                        <AvatarFallback className="bg-primary text-primary-foreground">U</AvatarFallback>
-                    </Avatar>
-                    <div>
-                        <p className="font-medium">{role === "dev" && user?.dev_profile?.name}</p>
-                        <p className="text-xs">{user?.email}</p>
-                    </div>
-                </div>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant={"ghost"} size={"icon"}><EllipsisVertical /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="top">
-                        <DropdownMenuGroup>
-                            <DropdownMenuLabel>Me</DropdownMenuLabel>
-                            <DropdownMenuItem><User /> Profile</DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem><Edit /> Update account info</DropdownMenuItem>
-                            <DropdownMenuItem variant="destructive"><LogOut /> Logout</DropdownMenuItem>                            
-                        </DropdownMenuGroup>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
-        </div>
-    );
+export default function Sidebar() {
+	const navigate = useNavigate();
+	const { resolvedTheme: theme} = useTheme();
+	const { user } = useAuthStore();
+
+	const role = user?.role[0] as UserRole;
+	const config = sidebarConfig[role];
+
+	function renderItem(item: SidebarItem) {
+		const Icon = item.icon;
+
+		const active = isActive(item.url);
+
+		return (
+			<div
+				key={item.title}
+				onClick={() => {
+					if (item.onClick) return item.onClick();
+					if (item.url) navigate({ to: item.url });
+				}}
+				className={`
+        w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer transition-colors
+            ${active ? "bg-primary text-primary-foreground" : "hover:bg-muted"}
+        `}
+			>
+				<Icon className="size-4" />
+				{item.title}
+			</div>
+		);
+	}
+
+	return (
+		<div className="w-[350px] flex flex-col h-screen border-r border-border">
+			{/* HEADER */}
+			<div className="flex flex-row gap-1.5 items-end justify-center p-4 border-b border-border h-18">
+				<img
+					src={
+						theme === "dark"
+							? "/images/dark_mode_logo.png"
+							: "/images/light_mode_logo.png"
+					}
+					className="w-11"
+				/>
+				<p className="text-primary text-3xl font-bold font-['Agbalumo']">
+					{import.meta.env.VITE_APP_NAME}
+				</p>
+			</div>
+
+			{/* CONTENT */}
+			<div className="flex flex-col gap-4 flex-1 p-4">
+				{/* SECTIONS */}
+				<div className="w-full">
+					<p className="text-xs text-muted-foreground mb-2">Sections</p>
+					{config.sections.map(renderItem)}
+				</div>
+
+				{/* OPTIONS */}
+				<div className="w-full">
+					<p className="text-xs text-muted-foreground mb-2">Options</p>
+
+					{config.options.map(renderItem)}
+
+					<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
+						<div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer hover:bg-muted">
+							<LogOut className="size-4" />
+							Logout
+						</div>
+					</LogoutButton>
+				</div>
+			</div>
+
+			{/* FOOTER */}
+			<div className="flex items-center border-t border-border p-5 justify-between">
+				<div className="flex gap-4 items-center">
+					<Avatar className="size-10">
+						<AvatarFallback className="bg-primary text-primary-foreground">
+							U
+						</AvatarFallback>
+					</Avatar>
+					<div>
+						<p className="font-medium">
+							{role === "dev" && user?.dev_profile?.name}
+						</p>
+						<p className="text-xs">{user?.email}</p>
+					</div>
+				</div>
+
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button variant={"ghost"} size={"icon"}>
+							<EllipsisVertical />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent side="top">
+						<DropdownMenuGroup>
+							<DropdownMenuLabel>Me</DropdownMenuLabel>
+							<DropdownMenuItem>
+								<User /> Profile
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<DropdownMenuLabel>Actions</DropdownMenuLabel>
+							<DropdownMenuItem>
+								<Edit /> Update account info
+							</DropdownMenuItem>
+							<DropdownMenuItem variant="destructive">
+								<LogOut /> Logout
+							</DropdownMenuItem>
+						</DropdownMenuGroup>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			</div>
+		</div>
+	);
 }

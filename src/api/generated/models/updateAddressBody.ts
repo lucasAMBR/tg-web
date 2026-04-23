@@ -8,5 +8,6 @@
 export type UpdateAddressBody = {
   cep: string;
   number: string;
-  complement: string;
+  /** @nullable */
+  complement?: string | null;
 };

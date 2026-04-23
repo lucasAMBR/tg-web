@@ -1,17 +1,28 @@
-import { authLogin, authProfile, authRefreshToken } from "@/api/generated/auth/auth";
-import { getStoredToken, isTokenExpired, removeStoredRefreshToken, removeStoredToken, setStoredToken, updateStoredToken } from "@/lib/auth";
+import {
+	authLogin,
+	authProfile,
+	authRefreshToken,
+} from "@/api/generated/auth/auth";
+import {
+	getStoredToken,
+	isTokenExpired,
+	removeStoredRefreshToken,
+	removeStoredToken,
+	setStoredToken,
+	updateStoredToken,
+} from "@/lib/auth";
 import type { ILoginSchema } from "@/schemas/login/LoginSchema";
 import type { AuthenticatedUser, AuthState } from "@/types/AuthenticatedUser";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
-import { create, type StateCreator } from 'zustand';
+import { create, type StateCreator } from "zustand";
 import { usePermissionStore } from "./permission-store";
 import { CustomToaster } from "@/utils/custom-toaster";
 
 interface AuthActions {
-    signIn: (data: ILoginSchema) => Promise<void>;
-    signOut: () => void,
-    refreshAccessToken: () => Promise<void>;
+	signIn: (data: ILoginSchema) => Promise<void>;
+	signOut: () => void;
+	refreshAccessToken: () => Promise<void>;
 	hydrateUser: () => Promise<AuthenticatedUser>;
 	setUser: (user: AuthenticatedUser | null) => void;
 	setToken: (token: string) => void;
@@ -23,43 +34,43 @@ interface AuthActions {
 type AuthStore = AuthState & AuthActions;
 
 const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
-    ...(() => {
-        const initialToken = getStoredToken();
-        return {
-            token: initialToken,
-            isAuthenticated: Boolean(initialToken),
-            isLoading: Boolean(initialToken)
-        };
-    })(),
-    user: null,
-    refreshToken: null,
-    error: null,
-    _isInitializing: false,
+	...(() => {
+		const initialToken = getStoredToken();
+		return {
+			token: initialToken,
+			isAuthenticated: Boolean(initialToken),
+			isLoading: Boolean(initialToken),
+		};
+	})(),
+	user: null,
+	refreshToken: null,
+	error: null,
+	_isInitializing: false,
 
-    hydrateUser: async () => {
-        const response = await authProfile();
+	hydrateUser: async () => {
+		const response = await authProfile();
 
-        if (response.error || !response.data) {
-            throw new Error(response.message || "Erro ao buscar usuário logado");
-        }
+		if (response.error || !response.data) {
+			throw new Error(response.message || "Erro ao buscar usuário logado");
+		}
 
-        const apiUser = response.data.user;
-        const permissions = response.data.permissions || [];
-        const roles = apiUser.role || [];
+		const apiUser = response.data.user;
+		const permissions = response.data.permissions || [];
+		const roles = apiUser.role || [];
 
-        const authenticatedUser = {
-            ...apiUser,
-            profile_pic: apiUser.profile_pic ?? null, 
-        } as AuthenticatedUser;
-        
-        usePermissionStore.getState().setPermissions(permissions, roles);
+		const authenticatedUser = {
+			...apiUser,
+			profile_pic: apiUser.profile_pic ?? null,
+		} as AuthenticatedUser;
 
-        set({ user: authenticatedUser });
+		usePermissionStore.getState().setPermissions(permissions, roles);
 
-        return authenticatedUser;
-    },
+		set({ user: authenticatedUser });
 
-    initialize: async () => {
+		return authenticatedUser;
+	},
+
+	initialize: async () => {
 		// Evitar múltiplas chamadas simultâneas
 		if (get()._isInitializing) {
 			return;
@@ -80,11 +91,17 @@ const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
 
 		// Se já tem usuário e token válido, não precisa inicializar novamente
 		if (get().user && !isTokenExpired(token)) {
-			set({ isLoading: false});
-            return;
+			set({ isLoading: false });
+			return;
 		}
 
-		set({ isAuthenticated: true, token, refreshToken: null, isLoading: true, _isInitializing: true });
+		set({
+			isAuthenticated: true,
+			token,
+			refreshToken: null,
+			isLoading: true,
+			_isInitializing: true,
+		});
 
 		if (!isTokenExpired(token)) {
 			try {
@@ -106,28 +123,28 @@ const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
 
 	signIn: async (data: ILoginSchema) => {
 		set({ isLoading: true, error: null });
-        try {
-            const response = await authLogin(data);
+		try {
+			const response = await authLogin(data);
 
-            if (response.error || !response.data) {
-                throw new Error(response.message || "Erro ao fazer login");
-            }
+			if (response.error || !response.data) {
+				throw new Error(response.message || "Erro ao fazer login");
+			}
 
-            const { token } = response.data;
-            
-            setStoredToken(token);
+			const { token } = response.data;
 
-            const user = await get().hydrateUser();
+			setStoredToken(token);
 
-            set({
-                user,
-                token,
-                isAuthenticated: true,
-                isLoading: false,
-                error: null,
-            });
+			const user = await get().hydrateUser();
 
-            CustomToaster.successToast(response.message);
+			set({
+				user,
+				token,
+				isAuthenticated: true,
+				isLoading: false,
+				error: null,
+			});
+
+			CustomToaster.successToast(response.message);
 		} catch (error) {
 			onError(error as AxiosError<{ message: string }>);
 			const errorMessage =

@@ -14,6 +14,7 @@ import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as privateHomeLayoutRouteImport } from './routes/(private)/home/layout'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
+import { Route as privateHomeSettingsRouteImport } from './routes/(private)/home/settings'
 import { Route as privateHomeProfileRouteImport } from './routes/(private)/home/profile'
 import { Route as privateHomeDevRouteImport } from './routes/(private)/home/dev'
 import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
@@ -44,6 +45,11 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
   getParentRoute: () => publicLayoutRoute,
+} as any)
+const privateHomeSettingsRoute = privateHomeSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => privateHomeLayoutRoute,
 } as any)
 const privateHomeProfileRoute = privateHomeProfileRouteImport.update({
   id: '/profile',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/create/address': typeof privateCreateAddressRoute
   '/home/dev': typeof privateHomeDevRoute
   '/home/profile': typeof privateHomeProfileRoute
+  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/create/address': typeof privateCreateAddressRoute
   '/home/dev': typeof privateHomeDevRoute
   '/home/profile': typeof privateHomeProfileRoute
+  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/(private)/create/address': typeof privateCreateAddressRoute
   '/(private)/home/dev': typeof privateHomeDevRoute
   '/(private)/home/profile': typeof privateHomeProfileRoute
+  '/(private)/home/settings': typeof privateHomeSettingsRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
   '/(private)/create/profile/client': typeof privateCreateProfileClientRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/create/address'
     | '/home/dev'
     | '/home/profile'
+    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
     | '/create/profile/client'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/create/address'
     | '/home/dev'
     | '/home/profile'
+    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
     | '/create/profile/client'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/(private)/create/address'
     | '/(private)/home/dev'
     | '/(private)/home/profile'
+    | '/(private)/home/settings'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
     | '/(private)/create/profile/client'
@@ -201,6 +213,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/login'
       preLoaderRoute: typeof publicAuthLoginRouteImport
       parentRoute: typeof publicLayoutRoute
+    }
+    '/(private)/home/settings': {
+      id: '/(private)/home/settings'
+      path: '/settings'
+      fullPath: '/home/settings'
+      preLoaderRoute: typeof privateHomeSettingsRouteImport
+      parentRoute: typeof privateHomeLayoutRoute
     }
     '/(private)/home/profile': {
       id: '/(private)/home/profile'
@@ -266,11 +285,13 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 interface privateHomeLayoutRouteChildren {
   privateHomeDevRoute: typeof privateHomeDevRoute
   privateHomeProfileRoute: typeof privateHomeProfileRoute
+  privateHomeSettingsRoute: typeof privateHomeSettingsRoute
 }
 
 const privateHomeLayoutRouteChildren: privateHomeLayoutRouteChildren = {
   privateHomeDevRoute: privateHomeDevRoute,
   privateHomeProfileRoute: privateHomeProfileRoute,
+  privateHomeSettingsRoute: privateHomeSettingsRoute,
 }
 
 const privateHomeLayoutRouteWithChildren =

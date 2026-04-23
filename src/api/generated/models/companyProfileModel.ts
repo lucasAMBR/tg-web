@@ -13,6 +13,7 @@ export interface CompanyProfileModel {
   phone: string;
   fouding_date: string;
   operational_segment: string;
+  operational_segment_label: string;
   score: number;
   created_at: string;
   updated_at: string;

@@ -15,11 +15,15 @@ export interface DevProfileModel {
   id: string;
   user_id: string;
   name: string;
+  cpf: string;
   bio: string;
   phone: string;
   seniority_level: string;
+  seniority_level_label: string;
   birthdate: string;
   score: number;
+  open_to_work: boolean;
+  open_to_relocation: boolean;
   created_at: string;
   updated_at: string;
   /** @nullable */

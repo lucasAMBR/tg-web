@@ -3,13 +3,13 @@ import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 
 export const PhoneInput = (props: PatternFormatProps) => {
-    return (
-    <PatternFormat
-      {...props}
-      placeholder="Phone"
-      customInput={Input}
-      format="+## (##) #####-####"
-      mask="_"
-    />
-  );
-}
+	return (
+		<PatternFormat
+			{...props}
+			placeholder="Phone"
+			customInput={Input}
+			format="+## (##) #####-####"
+			mask="_"
+		/>
+	);
+};

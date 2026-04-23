@@ -5,7 +5,8 @@ const requiredEnvVars = [
 	"VITE_TOKEN_STORAGE_KEY",
 	"VITE_REFRESH_TOKEN_STORAGE_KEY",
 	"VITE_AWESOME_API_URL",
-	"VITE_AWESOME_API_KEY"
+	"VITE_AWESOME_API_KEY",
+	"VITE_STORAGE_URL",
 ] as const;
 
 const optionalEnvVars = [
@@ -28,7 +29,9 @@ function getEnvVar(key: EnvVar): string {
 	return value;
 }
 
-function getOptionalEnvVar(key: (typeof optionalEnvVars)[number]): string | undefined {
+function getOptionalEnvVar(
+	key: (typeof optionalEnvVars)[number],
+): string | undefined {
 	return import.meta.env[key];
 }
 
@@ -40,6 +43,7 @@ export const env = {
 	REFRESH_TOKEN_STORAGE_KEY: getEnvVar("VITE_REFRESH_TOKEN_STORAGE_KEY"),
 	VITE_AWESOME_API_URL: getEnvVar("VITE_AWESOME_API_URL"),
 	VITE_AWESOME_API_KEY: getEnvVar("VITE_AWESOME_API_KEY"),
+	VITE_STORAGE_URL: getEnvVar("VITE_STORAGE_URL"),
 	// WebSocket configuration
 	WS_KEY: getOptionalEnvVar("VITE_WS_KEY"),
 	WS_HOST: getOptionalEnvVar("VITE_WS_HOST"),

@@ -5,16 +5,26 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  useMutation
+  useMutation,
+  useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
-  UseMutationResult
+  UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
+  AuthUserAddress200,
   DeleteAddress200,
   StoreAddress201,
   StoreAddressBody,
@@ -23,6 +33,98 @@ import type {
 } from '.././models';
 
 import apiClient from '../../../lib/api-client';
+
+
+
+
+/**
+ * @summary /address
+ */
+export const authUserAddress = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<AuthUserAddress200>(
+      {url: `/address`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getAuthUserAddressQueryKey = () => {
+    return [
+    `/address`
+    ] as const;
+    }
+
+    
+export const getAuthUserAddressQueryOptions = <TData = Awaited<ReturnType<typeof authUserAddress>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getAuthUserAddressQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof authUserAddress>>> = ({ signal }) => authUserAddress(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type AuthUserAddressQueryResult = NonNullable<Awaited<ReturnType<typeof authUserAddress>>>
+export type AuthUserAddressQueryError = unknown
+
+
+export function useAuthUserAddress<TData = Awaited<ReturnType<typeof authUserAddress>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof authUserAddress>>,
+          TError,
+          Awaited<ReturnType<typeof authUserAddress>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAuthUserAddress<TData = Awaited<ReturnType<typeof authUserAddress>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof authUserAddress>>,
+          TError,
+          Awaited<ReturnType<typeof authUserAddress>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAuthUserAddress<TData = Awaited<ReturnType<typeof authUserAddress>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /address
+ */
+
+export function useAuthUserAddress<TData = Awaited<ReturnType<typeof authUserAddress>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof authUserAddress>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getAuthUserAddressQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
 
 
 

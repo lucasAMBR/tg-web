@@ -4,5 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { StoreCompanySoftSkill200DataItem } from './storeCompanySoftSkill200DataItem';
 
-export type StoreCompanySoftSkill200 = { [key: string]: unknown };
+export type StoreCompanySoftSkill200 = {
+  error: boolean;
+  message: string;
+  data: StoreCompanySoftSkill200DataItem[];
+};

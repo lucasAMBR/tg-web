@@ -3,9 +3,7 @@ import axios, {
 	type AxiosRequestConfig,
 	type InternalAxiosRequestConfig,
 } from "axios";
-import type { 
-    AuthRefreshToken200 
-} from "@/api/generated/models";
+import type { AuthRefreshToken200 } from "@/api/generated/models";
 import {
 	getStoredToken,
 	removeStoredRefreshToken,

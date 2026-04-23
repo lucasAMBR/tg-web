@@ -24,9 +24,11 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  DeleteProjectHistory200,
   DeleteProjectHistoryImage200,
   IndexProjectHistory200,
   IndexProjectHistoryParams,
+  ShowProjectHistory200,
   StoreProjectHistory201,
   StoreProjectHistoryBody,
   StoreProjectHistoryImages200,
@@ -262,6 +264,159 @@ export const useUpdateProjectHistory = <TError = unknown,
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * @summary /project-history/{id}
+ */
+export const deleteProjectHistory = (
+    id: string,
+ ) => {
+      
+      
+      return apiClient<DeleteProjectHistory200>(
+      {url: `/project-history/${id}`, method: 'DELETE'
+    },
+      );
+    }
+  
+
+
+export const getDeleteProjectHistoryMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProjectHistory>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteProjectHistory>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['deleteProjectHistory'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteProjectHistory>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteProjectHistory(id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteProjectHistoryMutationResult = NonNullable<Awaited<ReturnType<typeof deleteProjectHistory>>>
+    
+    export type DeleteProjectHistoryMutationError = unknown
+
+    /**
+ * @summary /project-history/{id}
+ */
+export const useDeleteProjectHistory = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProjectHistory>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteProjectHistory>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteProjectHistoryMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary /project-history/{id}
+ */
+export const showProjectHistory = (
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ShowProjectHistory200>(
+      {url: `/project-history/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getShowProjectHistoryQueryKey = (id?: string,) => {
+    return [
+    `/project-history/${id}`
+    ] as const;
+    }
+
+    
+export const getShowProjectHistoryQueryOptions = <TData = Awaited<ReturnType<typeof showProjectHistory>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getShowProjectHistoryQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof showProjectHistory>>> = ({ signal }) => showProjectHistory(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ShowProjectHistoryQueryResult = NonNullable<Awaited<ReturnType<typeof showProjectHistory>>>
+export type ShowProjectHistoryQueryError = unknown
+
+
+export function useShowProjectHistory<TData = Awaited<ReturnType<typeof showProjectHistory>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showProjectHistory>>,
+          TError,
+          Awaited<ReturnType<typeof showProjectHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowProjectHistory<TData = Awaited<ReturnType<typeof showProjectHistory>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showProjectHistory>>,
+          TError,
+          Awaited<ReturnType<typeof showProjectHistory>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowProjectHistory<TData = Awaited<ReturnType<typeof showProjectHistory>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /project-history/{id}
+ */
+
+export function useShowProjectHistory<TData = Awaited<ReturnType<typeof showProjectHistory>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showProjectHistory>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getShowProjectHistoryQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary /project-history/{id}/gallery
  */
 export const storeProjectHistoryImages = (

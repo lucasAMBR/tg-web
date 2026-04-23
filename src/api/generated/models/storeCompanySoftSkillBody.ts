@@ -4,5 +4,8 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { StoreCompanySoftSkillBodySoftSkillsItem } from './storeCompanySoftSkillBodySoftSkillsItem';
 
-export type StoreCompanySoftSkillBody = { [key: string]: unknown };
+export type StoreCompanySoftSkillBody = {
+  soft_skills: StoreCompanySoftSkillBodySoftSkillsItem[];
+};

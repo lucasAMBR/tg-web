@@ -1,10 +1,17 @@
-import { checkPermission, getModulePermissions, hasAllPermissions, hasAnyPermission, type Permission, type Role } from "@/lib/permission";
+import {
+	checkPermission,
+	getModulePermissions,
+	hasAllPermissions,
+	hasAnyPermission,
+	type Permission,
+	type Role,
+} from "@/lib/permission";
 import { create, type StateCreator } from "zustand";
 
 interface PermissionState {
-    roles: Role[],
-    permissions: Set<Permission>,
-    permissionMap: Map<String, Set<Permission>>
+	roles: Role[];
+	permissions: Set<Permission>;
+	permissionMap: Map<string, Set<Permission>>;
 }
 
 interface PermissionActions {
@@ -71,4 +78,6 @@ const permissionStoreCreator: StateCreator<PermissionStore> = (set, get) => ({
 	},
 });
 
-export const usePermissionStore = create<PermissionStore>(permissionStoreCreator);
+export const usePermissionStore = create<PermissionStore>(
+	permissionStoreCreator,
+);
