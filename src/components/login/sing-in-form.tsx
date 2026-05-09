@@ -49,9 +49,9 @@ export function SingInForm() {
 			}
 
 			const homeRoutes = {
-				dev: "/home/dev",
-				company: "/home/company",
-				client: "/home/client",
+				dev: "/home",
+				company: "/home",
+				client: "/home",
 			};
 
 			navigate({ to: homeRoutes[role] || "/dashboard" });

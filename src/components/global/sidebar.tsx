@@ -26,6 +26,7 @@ import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
+import { getNameFromProfile, getUserMainRole } from "@/utils/role-helper";
 
 type SidebarItem = {
 	title: string;
@@ -50,7 +51,7 @@ export const sidebarConfig: Record<
 		],
 		options: [
 			{ title: "My profile", icon: User, url: "/home/profile" },
-			{ title: "Configuration", icon: Cog, url: "/home/settings" },
+			{ title: "Settings", icon: Cog, url: "/home/settings" },
 		],
 	},
 
@@ -60,8 +61,8 @@ export const sidebarConfig: Record<
 			{ title: "My Jobs", icon: Folder, url: "/my-jobs" },
 		],
 		options: [
-			{ title: "Company Profile", icon: Building, url: "/company/profile" },
-			{ title: "Settings", icon: Cog, url: "/settings" },
+			{ title: "Company Profile", icon: Building, url: "/home/profile" },
+			{ title: "Settings", icon: Cog, url: "/home/settings" },
 		],
 	},
 
@@ -87,8 +88,9 @@ export default function Sidebar() {
 	const { resolvedTheme: theme} = useTheme();
 	const { user } = useAuthStore();
 
-	const role = user?.role[0] as UserRole;
-	const config = sidebarConfig[role];
+	const role = getUserMainRole(user);
+	console.log(role)
+	const config = sidebarConfig[role as UserRole];
 
 	function renderItem(item: SidebarItem) {
 		const Icon = item.icon;
@@ -163,7 +165,7 @@ export default function Sidebar() {
 					</Avatar>
 					<div>
 						<p className="font-medium">
-							{role === "dev" && user?.dev_profile?.name}
+							{getNameFromProfile(user)}
 						</p>
 						<p className="text-xs">{user?.email}</p>
 					</div>
@@ -186,9 +188,11 @@ export default function Sidebar() {
 							<DropdownMenuItem>
 								<Edit /> Update account info
 							</DropdownMenuItem>
-							<DropdownMenuItem variant="destructive">
-								<LogOut /> Logout
-							</DropdownMenuItem>
+							<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
+								<DropdownMenuItem variant="destructive">
+									<LogOut /> Logout
+								</DropdownMenuItem>
+							</LogoutButton>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>

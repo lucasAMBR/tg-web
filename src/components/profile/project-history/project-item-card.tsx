@@ -40,7 +40,7 @@ export default function ProjectItemCard({
 	const { user } = useAuthStore();
 
 	return (
-		<Card onClick={() => console.log(project)} className="p-4">
+		<Card className="p-4">
 			<CardHeader className="p-0">
 				<div className="flex justify-between">
 					<CardTitle className="text-xl">{project.title}</CardTitle>

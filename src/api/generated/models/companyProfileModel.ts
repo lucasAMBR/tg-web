@@ -17,4 +17,5 @@ export interface CompanyProfileModel {
   score: number;
   created_at: string;
   updated_at: string;
+  cnpj: string;
 }

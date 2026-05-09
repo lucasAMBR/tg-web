@@ -19,7 +19,10 @@ export function ToggleTheme() {
 
 	return (
         <Card className="p-4 flex flex-row justify-between gap-12">
-        <h3 className='text-xl font-medium'>Choose you color theme</h3>
+			<div className='flex-1'>
+				<h3 className='text-xl font-medium'>Choose color theme</h3>
+				<p className='text-sm text-muted-foreground'>Change the platform color scheme between light, dark or matching with your operational system default configuration</p>
+			</div>
 		<fieldset className="space-y-4">
 			<RadioGroup
 				className="flex gap-3"

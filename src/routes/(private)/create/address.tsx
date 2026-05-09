@@ -12,6 +12,8 @@ import {
 import { LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import AddressForm from "@/components/address/address-form";
+import { useAuthStore } from "@/stores/auth-store";
+import { getUserMainRole } from "@/utils/role-helper";
 
 const staticData = {
 	requiredPermissions: ["address.create"],
@@ -28,11 +30,27 @@ export const Route = createFileRoute("/(private)/create/address")({
 function RouteComponent() {
 	const { theme } = useTheme();
 
+	const { user } = useAuthStore();
+
+	const userRole = getUserMainRole(user);
+
 	return (
 		<div className="w-screen h-screen flex">
-			<div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50">
-				<div className="w-full h-full"></div>
-			</div>
+			{userRole === "dev" && (
+				<div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50">
+					<div className="w-full h-full"></div>
+				</div>
+			)}
+			{userRole === "company" && (
+				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
+					<div className="w-full h-full"></div>
+				</div>
+			)}
+			{userRole === "client" && (
+				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
+					<div className="w-full h-full"></div>
+				</div>
+			)}
 			<div className="flex-1 relative m-4 flex flex-col items-center justify-center">
 				<LogoutButton text="You will be leaving without finishing your profile creation, you will not be able to be reached by our algorithm!">
 					<Button variant={"ghost"} className="absolute top-0 left-0">

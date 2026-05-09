@@ -24,6 +24,7 @@ import type {
   EnumDegreeLevel200,
   EnumEmploymentType200,
   EnumHardSkillLevel200,
+  EnumOperationalSegments200,
   EnumSeniority200
 } from '.././models';
 
@@ -481,6 +482,98 @@ export function useEnumDegreeLevel<TData = Awaited<ReturnType<typeof enumDegreeL
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumDegreeLevelQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/operational-segment
+ */
+export const enumOperationalSegments = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumOperationalSegments200>(
+      {url: `/enum/operational-segment`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumOperationalSegmentsQueryKey = () => {
+    return [
+    `/enum/operational-segment`
+    ] as const;
+    }
+
+    
+export const getEnumOperationalSegmentsQueryOptions = <TData = Awaited<ReturnType<typeof enumOperationalSegments>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumOperationalSegmentsQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumOperationalSegments>>> = ({ signal }) => enumOperationalSegments(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumOperationalSegmentsQueryResult = NonNullable<Awaited<ReturnType<typeof enumOperationalSegments>>>
+export type EnumOperationalSegmentsQueryError = unknown
+
+
+export function useEnumOperationalSegments<TData = Awaited<ReturnType<typeof enumOperationalSegments>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumOperationalSegments>>,
+          TError,
+          Awaited<ReturnType<typeof enumOperationalSegments>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumOperationalSegments<TData = Awaited<ReturnType<typeof enumOperationalSegments>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumOperationalSegments>>,
+          TError,
+          Awaited<ReturnType<typeof enumOperationalSegments>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumOperationalSegments<TData = Awaited<ReturnType<typeof enumOperationalSegments>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/operational-segment
+ */
+
+export function useEnumOperationalSegments<TData = Awaited<ReturnType<typeof enumOperationalSegments>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumOperationalSegments>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumOperationalSegmentsQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

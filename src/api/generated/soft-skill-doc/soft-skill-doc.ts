@@ -26,10 +26,9 @@ import type {
 import type {
   DeleteCompanySoftSkill200,
   IndexCompanySoftSkills200,
+  IndexCompanySoftSkillsParams,
   IndexSoftSkill200,
   ListDevSoftSkill200,
-  PatchSoftSkillCompanyCompanySoft200,
-  PatchSoftSkillCompanyCompanySoftBody,
   StoreCompanySoftSkill200,
   StoreCompanySoftSkillBody,
   StoreDevSoftSkill200,
@@ -266,13 +265,14 @@ export const useUpdateDevSoftSkill = <TError = unknown,
  * @summary /soft-skill/company
  */
 export const storeCompanySoftSkill = (
+    company: string,
     storeCompanySoftSkillBody: StoreCompanySoftSkillBody,
  signal?: AbortSignal
 ) => {
       
       
       return apiClient<StoreCompanySoftSkill200>(
-      {url: `/soft-skill/company`, method: 'POST',
+      {url: `/soft-skill/company/sync/${company}`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: storeCompanySoftSkillBody, signal
     },
@@ -282,8 +282,8 @@ export const storeCompanySoftSkill = (
 
 
 export const getStoreCompanySoftSkillMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{company: string;data: StoreCompanySoftSkillBody}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{company: string;data: StoreCompanySoftSkillBody}, TContext> => {
 
 const mutationKey = ['storeCompanySoftSkill'];
 const {mutation: mutationOptions} = options ?
@@ -295,10 +295,10 @@ const {mutation: mutationOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof storeCompanySoftSkill>>, {data: StoreCompanySoftSkillBody}> = (props) => {
-          const {data} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof storeCompanySoftSkill>>, {company: string;data: StoreCompanySoftSkillBody}> = (props) => {
+          const {company,data} = props ?? {};
 
-          return  storeCompanySoftSkill(data,)
+          return  storeCompanySoftSkill(company,data,)
         }
 
         
@@ -314,11 +314,11 @@ const {mutation: mutationOptions} = options ?
  * @summary /soft-skill/company
  */
 export const useStoreCompanySoftSkill = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{data: StoreCompanySoftSkillBody}, TContext>, }
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof storeCompanySoftSkill>>, TError,{company: string;data: StoreCompanySoftSkillBody}, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof storeCompanySoftSkill>>,
         TError,
-        {data: StoreCompanySoftSkillBody},
+        {company: string;data: StoreCompanySoftSkillBody},
         TContext
       > => {
 
@@ -327,98 +327,6 @@ export const useStoreCompanySoftSkill = <TError = unknown,
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * @summary /soft-skill/company
- */
-export const indexCompanySoftSkills = (
-    
- signal?: AbortSignal
-) => {
-      
-      
-      return apiClient<IndexCompanySoftSkills200>(
-      {url: `/soft-skill/company`, method: 'GET', signal
-    },
-      );
-    }
-  
-
-
-
-export const getIndexCompanySoftSkillsQueryKey = () => {
-    return [
-    `/soft-skill/company`
-    ] as const;
-    }
-
-    
-export const getIndexCompanySoftSkillsQueryOptions = <TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
-) => {
-
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getIndexCompanySoftSkillsQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexCompanySoftSkills>>> = ({ signal }) => indexCompanySoftSkills(signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type IndexCompanySoftSkillsQueryResult = NonNullable<Awaited<ReturnType<typeof indexCompanySoftSkills>>>
-export type IndexCompanySoftSkillsQueryError = unknown
-
-
-export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof indexCompanySoftSkills>>,
-          TError,
-          Awaited<ReturnType<typeof indexCompanySoftSkills>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof indexCompanySoftSkills>>,
-          TError,
-          Awaited<ReturnType<typeof indexCompanySoftSkills>>
-        > , 'initialData'
-      >, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary /soft-skill/company
- */
-
-export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getIndexCompanySoftSkillsQueryOptions(options)
-
-  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
-
-
-
-/**
  * @summary /soft-skill/dev/{id}
  */
 export const listDevSoftSkill = (
@@ -511,70 +419,106 @@ export function useListDevSoftSkill<TData = Awaited<ReturnType<typeof listDevSof
 
 
 /**
- * @summary /soft-skill/company/{companySoft}
+ * @summary /soft-skill/company
  */
-export const patchSoftSkillCompanyCompanySoft = (
-    companySoft: string,
-    patchSoftSkillCompanyCompanySoftBody: PatchSoftSkillCompanyCompanySoftBody,
- ) => {
+export const indexCompanySoftSkills = (
+    company: string,
+    params?: IndexCompanySoftSkillsParams,
+ signal?: AbortSignal
+) => {
       
       
-      return apiClient<PatchSoftSkillCompanyCompanySoft200>(
-      {url: `/soft-skill/company/${companySoft}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: patchSoftSkillCompanyCompanySoftBody
+      return apiClient<IndexCompanySoftSkills200>(
+      {url: `/soft-skill/company/${company}`, method: 'GET',
+        params, signal
     },
       );
     }
   
 
 
-export const getPatchSoftSkillCompanyCompanySoftMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>, TError,{companySoft: string;data: PatchSoftSkillCompanyCompanySoftBody}, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>, TError,{companySoft: string;data: PatchSoftSkillCompanyCompanySoftBody}, TContext> => {
 
-const mutationKey = ['patchSoftSkillCompanyCompanySoft'];
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
+export const getIndexCompanySoftSkillsQueryKey = (company?: string,
+    params?: IndexCompanySoftSkillsParams,) => {
+    return [
+    `/soft-skill/company/${company}`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexCompanySoftSkillsQueryOptions = <TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(company: string,
+    params?: IndexCompanySoftSkillsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexCompanySoftSkillsQueryKey(company,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexCompanySoftSkills>>> = ({ signal }) => indexCompanySoftSkills(company,params, signal);
 
       
 
+      
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>, {companySoft: string;data: PatchSoftSkillCompanyCompanySoftBody}> = (props) => {
-          const {companySoft,data} = props ?? {};
+   return  { queryKey, queryFn, enabled: !!(company), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
 
-          return  patchSoftSkillCompanyCompanySoft(companySoft,data,)
-        }
-
-        
+export type IndexCompanySoftSkillsQueryResult = NonNullable<Awaited<ReturnType<typeof indexCompanySoftSkills>>>
+export type IndexCompanySoftSkillsQueryError = unknown
 
 
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PatchSoftSkillCompanyCompanySoftMutationResult = NonNullable<Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>>
-    export type PatchSoftSkillCompanyCompanySoftMutationBody = PatchSoftSkillCompanyCompanySoftBody
-    export type PatchSoftSkillCompanyCompanySoftMutationError = unknown
-
-    /**
- * @summary /soft-skill/company/{companySoft}
+export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
+ company: string,
+    params: undefined |  IndexCompanySoftSkillsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanySoftSkills>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanySoftSkills>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
+ company: string,
+    params?: IndexCompanySoftSkillsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanySoftSkills>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanySoftSkills>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
+ company: string,
+    params?: IndexCompanySoftSkillsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /soft-skill/company
  */
-export const usePatchSoftSkillCompanyCompanySoft = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>, TError,{companySoft: string;data: PatchSoftSkillCompanyCompanySoftBody}, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof patchSoftSkillCompanyCompanySoft>>,
-        TError,
-        {companySoft: string;data: PatchSoftSkillCompanyCompanySoftBody},
-        TContext
-      > => {
 
-      const mutationOptions = getPatchSoftSkillCompanyCompanySoftMutationOptions(options);
+export function useIndexCompanySoftSkills<TData = Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError = unknown>(
+ company: string,
+    params?: IndexCompanySoftSkillsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanySoftSkills>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
+  const queryOptions = getIndexCompanySoftSkillsQueryOptions(company,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary /soft-skill/company/{companySoft}
  */
 export const deleteCompanySoftSkill = (

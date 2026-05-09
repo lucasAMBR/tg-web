@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { IndexCompanyProject200DataDataItem } from './indexCompanyProject200DataDataItem';
-import type { IndexCompanyProject200DataPaginate } from './indexCompanyProject200DataPaginate';
+import type { CompanyProjectModel } from './companyProjectModel';
+import type { IndexCompanyProject200DataPagination } from './indexCompanyProject200DataPagination';
 
 export type IndexCompanyProject200Data = {
-  data: IndexCompanyProject200DataDataItem[];
-  paginate: IndexCompanyProject200DataPaginate;
+  data: CompanyProjectModel[];
+  pagination: IndexCompanyProject200DataPagination;
 };

@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateCompanyProject200Data } from './updateCompanyProject200Data';
+import type { CompanyProjectModel } from './companyProjectModel';
 
 export type UpdateCompanyProject200 = {
   error: boolean;
   message: string;
-  data: UpdateCompanyProject200Data;
+  data: CompanyProjectModel;
 };

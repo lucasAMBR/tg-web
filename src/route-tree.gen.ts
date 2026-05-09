@@ -12,11 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as privateHomeLayoutRouteImport } from './routes/(private)/home/layout'
+import { Route as privateHomeIndexRouteImport } from './routes/(private)/home/index'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
 import { Route as privateHomeSettingsRouteImport } from './routes/(private)/home/settings'
 import { Route as privateHomeProfileRouteImport } from './routes/(private)/home/profile'
-import { Route as privateHomeDevRouteImport } from './routes/(private)/home/dev'
 import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
@@ -36,6 +36,11 @@ const privateHomeLayoutRoute = privateHomeLayoutRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const privateHomeIndexRoute = privateHomeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => privateHomeLayoutRoute,
+} as any)
 const publicAuthRegisterRoute = publicAuthRegisterRouteImport.update({
   id: '/auth/register',
   path: '/auth/register',
@@ -54,11 +59,6 @@ const privateHomeSettingsRoute = privateHomeSettingsRouteImport.update({
 const privateHomeProfileRoute = privateHomeProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
-  getParentRoute: () => privateHomeLayoutRoute,
-} as any)
-const privateHomeDevRoute = privateHomeDevRouteImport.update({
-  id: '/dev',
-  path: '/dev',
   getParentRoute: () => privateHomeLayoutRoute,
 } as any)
 const privateCreateAddressRoute = privateCreateAddressRouteImport.update({
@@ -88,24 +88,23 @@ export interface FileRoutesByFullPath {
   '/home': typeof privateHomeLayoutRouteWithChildren
   '/': typeof publicIndexRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/dev': typeof privateHomeDevRoute
   '/home/profile': typeof privateHomeProfileRoute
   '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
+  '/home/': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
 }
 export interface FileRoutesByTo {
-  '/home': typeof privateHomeLayoutRouteWithChildren
   '/': typeof publicIndexRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/dev': typeof privateHomeDevRoute
   '/home/profile': typeof privateHomeProfileRoute
   '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
+  '/home': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
@@ -116,11 +115,11 @@ export interface FileRoutesById {
   '/(private)/home': typeof privateHomeLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
   '/(private)/create/address': typeof privateCreateAddressRoute
-  '/(private)/home/dev': typeof privateHomeDevRoute
   '/(private)/home/profile': typeof privateHomeProfileRoute
   '/(private)/home/settings': typeof privateHomeSettingsRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
+  '/(private)/home/': typeof privateHomeIndexRoute
   '/(private)/create/profile/client': typeof privateCreateProfileClientRoute
   '/(private)/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
@@ -131,24 +130,23 @@ export interface FileRouteTypes {
     | '/home'
     | '/'
     | '/create/address'
-    | '/home/dev'
     | '/home/profile'
     | '/home/settings'
     | '/auth/login'
     | '/auth/register'
+    | '/home/'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/home'
     | '/'
     | '/create/address'
-    | '/home/dev'
     | '/home/profile'
     | '/home/settings'
     | '/auth/login'
     | '/auth/register'
+    | '/home'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
@@ -158,11 +156,11 @@ export interface FileRouteTypes {
     | '/(private)/home'
     | '/(public)/'
     | '/(private)/create/address'
-    | '/(private)/home/dev'
     | '/(private)/home/profile'
     | '/(private)/home/settings'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
+    | '/(private)/home/'
     | '/(private)/create/profile/client'
     | '/(private)/create/profile/company'
     | '/(private)/create/profile/dev'
@@ -200,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privateHomeLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(private)/home/': {
+      id: '/(private)/home/'
+      path: '/'
+      fullPath: '/home/'
+      preLoaderRoute: typeof privateHomeIndexRouteImport
+      parentRoute: typeof privateHomeLayoutRoute
+    }
     '/(public)/auth/register': {
       id: '/(public)/auth/register'
       path: '/auth/register'
@@ -226,13 +231,6 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/home/profile'
       preLoaderRoute: typeof privateHomeProfileRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
-    }
-    '/(private)/home/dev': {
-      id: '/(private)/home/dev'
-      path: '/dev'
-      fullPath: '/home/dev'
-      preLoaderRoute: typeof privateHomeDevRouteImport
       parentRoute: typeof privateHomeLayoutRoute
     }
     '/(private)/create/address': {
@@ -283,15 +281,15 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 )
 
 interface privateHomeLayoutRouteChildren {
-  privateHomeDevRoute: typeof privateHomeDevRoute
   privateHomeProfileRoute: typeof privateHomeProfileRoute
   privateHomeSettingsRoute: typeof privateHomeSettingsRoute
+  privateHomeIndexRoute: typeof privateHomeIndexRoute
 }
 
 const privateHomeLayoutRouteChildren: privateHomeLayoutRouteChildren = {
-  privateHomeDevRoute: privateHomeDevRoute,
   privateHomeProfileRoute: privateHomeProfileRoute,
   privateHomeSettingsRoute: privateHomeSettingsRoute,
+  privateHomeIndexRoute: privateHomeIndexRoute,
 }
 
 const privateHomeLayoutRouteWithChildren =

@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { IndexCompanySoftSkills200DataItem } from './indexCompanySoftSkills200DataItem';
+import type { CompanySoftSkillModel } from './companySoftSkillModel';
 
 export type IndexCompanySoftSkills200 = {
   error: boolean;
   message: string;
-  data: IndexCompanySoftSkills200DataItem[];
+  data: CompanySoftSkillModel[];
 };
