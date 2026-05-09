@@ -23,7 +23,7 @@ export const getRoleLabel = (user: AuthenticatedUser | null) => {
 
 	if (role === "dev") return "Developer";
 	if (role === "company") return "Company";
-	if (role === "client") return "Company";
+	if (role === "client") return "Client";
 };
 
 export const getProfileBio = (user: AuthenticatedUser | null) => {

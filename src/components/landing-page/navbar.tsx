@@ -12,6 +12,7 @@ import {
 import { Link, useNavigate } from "@tanstack/react-router";
 import ListItem from "../ui/list-item";
 import ThemeToggle from "../global/theme-toggle-button";
+import { Logo } from "../global/Logo";
 
 function Navbar() {
 	const { theme } = useTheme();
@@ -41,13 +42,8 @@ function Navbar() {
 		<div className="flex bg-background fixed top-0 left-0 justify-center items-center w-full z-150 border-b border-muted-foreground/20">
 			<div className="flex justify-between items-center p-4 w-full md:max-w-5/6">
 				<div className="flex flex-row gap-1.5 items-end">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-9"
+					<Logo 
+						className="w-9 fill-primary"
 					/>
 					<p className="text-primary text-2xl font-bold font-['Agbalumo']">
 						{import.meta.env.VITE_APP_NAME}

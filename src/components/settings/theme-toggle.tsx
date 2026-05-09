@@ -5,6 +5,8 @@ import { CheckIcon, MinusIcon } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
 import { Card } from "../ui/card";
+import { Separator } from "../ui/separator";
+import { ColorPicker } from "./color-picker";
 
 const items  = [
 	{ value: "light", label: "Light", image: "/ui-light.png" },
@@ -18,7 +20,8 @@ export function ToggleTheme() {
 	const { theme, setTheme } = useTheme();
 
 	return (
-        <Card className="p-4 flex flex-row justify-between gap-12">
+        <Card className="p-4 flex flex-col justify-between gap-12">
+			<div className="flex flex-row justify-between gap-12">
 			<div className='flex-1'>
 				<h3 className='text-xl font-medium'>Choose color theme</h3>
 				<p className='text-sm text-muted-foreground'>Change the platform color scheme between light, dark or matching with your operational system default configuration</p>
@@ -62,6 +65,17 @@ export function ToggleTheme() {
 				))}
 			</RadioGroup>
 		</fieldset>
+		</div>
+		<Separator />
+		<div className="flex flex-row justify-between gap-12">
+			<div className="flex-1">
+				<h3 className='text-xl font-medium'>Choose color theme</h3>
+				<p className='text-sm text-muted-foreground'>Change the platform color scheme between light, dark or matching with your operational system default configuration</p>
+			</div>
+			<div className="flex-2 min-w-0">
+				<ColorPicker />
+			</div>
+		</div>
         </Card>
 	);
 }

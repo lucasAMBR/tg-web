@@ -15,4 +15,5 @@ export interface ClientProfileModel {
   score: number;
   created_at: string;
   updated_at: string;
+  cpf: string;
 }

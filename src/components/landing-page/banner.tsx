@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { ChevronRight, ChevronDown } from "lucide-react"; // Importe o ChevronDown
 
 import { motion } from "framer-motion";
+import { Logo } from "../global/Logo";
 
 export default function Banner() {
 	const { theme } = useTheme();
@@ -25,19 +26,13 @@ export default function Banner() {
 				transition={{ duration: 1 }}
 				className="relative z-10 flex flex-col items-center justify-center gap-2"
 			>
-				<img
-					src={
-						theme === "dark"
-							? "/images/dark_mode_logo.png"
-							: "/images/light_mode_logo.png"
-					}
-					className="w-24"
-					alt="Logo"
+				<Logo 
+					className="w-24 fill-primary"
 				/>
 				<h1 className="text-9xl font-[Anta] tracking-tight text-primary sm:text-6xl text-center">
 					Welcome to <span className="font-[Agbalumo]">Brew!</span>
 				</h1>
-				<h2 className="mb-6 text-xl font-[Anta] font-medium text-accent-foreground/70">
+				<h2 className="mb-6 text-xl font-[Anta] font-medium text-foreground">
 					Built by devs, for devs
 				</h2>
 				<p className="max-w-prose dark:text-foreground/70 text-foreground/90 text-center text-lg font-medium">

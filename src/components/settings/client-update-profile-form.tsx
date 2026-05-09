@@ -1,0 +1,273 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { Field, FieldError, FieldLabel } from "../ui/field";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import { ChevronDownIcon } from "lucide-react";
+import { Calendar } from "../ui/calendar";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Textarea } from "../ui/textarea";
+import Required from "../global/required-field";
+import { Spinner } from "../ui/spinner";
+import { useUpdateClientProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import type { UpdateClientProfileBody } from "@/api/generated/models/updateClientProfileBody";
+import { CustomToaster } from "@/utils/custom-toaster";
+import { useEffect } from "react";
+import { onError } from "@/utils/on-error";
+import type { AxiosError } from "axios";
+import type { ApiError } from "@/utils/api-error";
+import { PhoneInput } from "../global/inputs/phone-input";
+import { CpfInput } from "../global/inputs/cpf-input";
+import { useAuthStore } from "@/stores/auth-store";
+import z from "zod/v3";
+
+function digitsOnlyCpf(cpf: string | undefined): string {
+	return (cpf ?? "").replace(/\D/g, "");
+}
+
+const UpdateClientProfileSchema = z.object({
+	cpf: z.string().length(11, "CPF must have 11 characters!"),
+	name: z
+		.string()
+		.min(3, "The name must have at least 3 characters")
+		.max(255, "Name have a maximum lenght of 255 characters!"),
+	bio: z
+		.string()
+		.min(10, "Bio must have at least 10 characters")
+		.max(510, "Name have a maximum lenght of 510 characters!"),
+	phone: z
+		.string()
+		.regex(
+			/^\+55[1-9]{2}9[0-9]{8}$/,
+			"The phone must have the following format: +5535999999999",
+		),
+	birthdate: z
+		.string()
+		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
+		.refine(
+			(dateStr) => {
+				const date = new Date(dateStr);
+				return !isNaN(date.getTime());
+			},
+			{
+				message: "Data inválida",
+			},
+		)
+		.refine(
+			(dateStr) => {
+				const date = new Date(dateStr);
+				return date <= new Date();
+			},
+			{
+				message: "A data de nascimento não pode ser no futuro!",
+			},
+		),
+});
+
+type IUpdateClientProfileSchema = z.infer<typeof UpdateClientProfileSchema>;
+
+function toUpdateBody(data: IUpdateClientProfileSchema): UpdateClientProfileBody {
+	const cpfDigits = digitsOnlyCpf(data.cpf);
+	return {
+		name: data.name,
+		bio: data.bio,
+		phone: data.phone,
+		birthdate: data.birthdate,
+		cpf: cpfDigits,
+	};
+}
+
+export default function ClientUpdateProfileForm() {
+	const { user, hydrateUser } = useAuthStore();
+	const { mutate: updateProfile, isPending } = useUpdateClientProfile();
+
+	const form = useForm<IUpdateClientProfileSchema>({
+		resolver: zodResolver(UpdateClientProfileSchema),
+		defaultValues: {
+			name: user?.client_profile?.name ?? "",
+			cpf: digitsOnlyCpf(user?.client_profile?.cpf),
+			phone: user?.client_profile?.phone ?? "",
+			birthdate: user?.client_profile?.birthdate ?? "",
+			bio: user?.client_profile?.bio ?? "",
+		},
+	});
+
+	useEffect(() => {
+		if (user?.client_profile && !form.formState.isDirty) {
+			form.reset({
+				name: user.client_profile.name ?? "",
+				cpf: digitsOnlyCpf(user.client_profile.cpf),
+				phone: user.client_profile.phone ?? "",
+				birthdate: user.client_profile.birthdate ?? "",
+				bio: user.client_profile.bio ?? "",
+			});
+		}
+	}, [user, form]);
+
+	const submit = (data: IUpdateClientProfileSchema) => {
+		const id = user?.client_profile?.id;
+		if (!id) return;
+
+		updateProfile(
+			{ client: id, data: toUpdateBody(data) },
+			{
+				onSuccess: (success) => {
+					CustomToaster.successToast(success.message);
+					hydrateUser();
+				},
+				onError: (error) => {
+					onError(error as AxiosError<ApiError>);
+				},
+			},
+		);
+	};
+
+	if (!user?.client_profile) return null;
+
+	return (
+		<form
+			onSubmit={form.handleSubmit(submit)}
+			className="w-full flex flex-col gap-4 max-w-[700px]"
+		>
+			<div className="flex gap-2">
+				<Controller
+					control={form.control}
+					name="name"
+					render={({ field, fieldState }) => (
+						<Field className="flex-2">
+							<FieldLabel htmlFor="name">
+								Name <Required />
+							</FieldLabel>
+							<Input
+								{...field}
+								name="name"
+								placeholder="Your name"
+								aria-invalid={fieldState.invalid}
+							/>
+							<FieldError errors={[fieldState.error]} />
+						</Field>
+					)}
+				/>
+				<Controller
+					control={form.control}
+					name="cpf"
+					render={({
+						field: { onChange, value, ref, ...fieldProps },
+						fieldState,
+					}) => (
+						<Field className="flex-1">
+							<FieldLabel htmlFor="cpf">
+								CPF <Required />
+							</FieldLabel>
+							<CpfInput
+								{...fieldProps}
+								getInputRef={ref}
+								value={value}
+								format="###.###.###-##"
+								onValueChange={(values) => {
+									onChange(values.value ?? "");
+								}}
+							/>
+							<FieldError errors={[fieldState.error]} />
+						</Field>
+					)}
+				/>
+			</div>
+			<div className="flex gap-2">
+				<Controller
+					control={form.control}
+					name="phone"
+					render={({
+						field: { onChange, value, ref, ...fieldProps },
+						fieldState,
+					}) => (
+						<Field className="flex-1">
+							<FieldLabel htmlFor="phone">
+								Phone <Required />
+							</FieldLabel>
+							<PhoneInput
+								{...fieldProps}
+								getInputRef={ref}
+								value={value}
+								format="+## (##) #####-####"
+								onValueChange={(values) => {
+									onChange(values.value ? `+${values.value}` : "");
+								}}
+							/>
+							<FieldError errors={[fieldState.error]} />
+						</Field>
+					)}
+				/>
+				<Controller
+					control={form.control}
+					name="birthdate"
+					render={({ field, fieldState }) => (
+						<Field className="flex-1">
+							<FieldLabel htmlFor="birthdate">
+								Birthdate <Required />
+							</FieldLabel>
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										variant="outline"
+										className={cn(
+											"w-[212px] justify-between text-left font-normal",
+											!field.value && "text-muted-foreground",
+										)}
+									>
+										{field.value ? (
+											format(field.value, "yyyy-MM-dd")
+										) : (
+											<span>Selecione uma data</span>
+										)}
+										<ChevronDownIcon className="h-4 w-4 opacity-50" />
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent className="w-auto p-0" align="start">
+									<Calendar
+										mode="single"
+										selected={
+											field.value ? new Date(field.value) : undefined
+										}
+										onSelect={(date) =>
+											field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+										}
+										captionLayout="dropdown"
+										disabled={(date) => date < new Date("1900-01-01")}
+									/>
+								</PopoverContent>
+							</Popover>
+							<FieldError errors={[fieldState.error]} />
+						</Field>
+					)}
+				/>
+			</div>
+			<Controller
+				control={form.control}
+				name="bio"
+				render={({ field, fieldState }) => (
+					<Field className="flex-1">
+						<FieldLabel htmlFor="bio">
+							Bio <Required />
+						</FieldLabel>
+						<Textarea
+							{...field}
+							name="bio"
+							placeholder="Bio"
+							aria-invalid={fieldState.invalid}
+						/>
+						<FieldError errors={[fieldState.error]} />
+					</Field>
+				)}
+			/>
+			<Button
+				type="submit"
+				disabled={!form.formState.isDirty || isPending}
+			>
+				{isPending ? <Spinner /> : "Update"}
+			</Button>
+		</form>
+	);
+}

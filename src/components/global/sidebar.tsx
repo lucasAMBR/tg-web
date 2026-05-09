@@ -27,6 +27,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router";
 import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
 import { getNameFromProfile, getUserMainRole } from "@/utils/role-helper";
+import { Logo } from "./Logo";
 
 type SidebarItem = {
 	title: string;
@@ -44,24 +45,24 @@ export const sidebarConfig: Record<
 > = {
 	dev: {
 		sections: [
-			{ title: "Feed", icon: List, url: "/dev" },
+			{ title: "Feed", icon: List, url: "/home" },
 			{ title: "Companies", icon: Building, url: "/companies" },
 			{ title: "Job Vacancies", icon: Folder, url: "/jobs" },
 			{ title: "Freelances", icon: Calendar, url: "/freelances" },
 		],
 		options: [
-			{ title: "My profile", icon: User, url: "/home/profile" },
+			{ title: "Profile", icon: User, url: "/home/profile" },
 			{ title: "Settings", icon: Cog, url: "/home/settings" },
 		],
 	},
 
 	company: {
 		sections: [
-			{ title: "Dashboard", icon: List, url: "/dashboard" },
+			{ title: "Feed", icon: List, url: "/home" },
 			{ title: "My Jobs", icon: Folder, url: "/my-jobs" },
 		],
 		options: [
-			{ title: "Company Profile", icon: Building, url: "/home/profile" },
+			{ title: "Profile", icon: Building, url: "/home/profile" },
 			{ title: "Settings", icon: Cog, url: "/home/settings" },
 		],
 	},
@@ -72,20 +73,19 @@ export const sidebarConfig: Record<
 			{ title: "Freelancers", icon: User, url: "/freelancers" },
 		],
 		options: [
-			{ title: "My profile", icon: User, url: "/profile" },
-			{ title: "Settings", icon: Cog, url: "/settings" },
+			{ title: "Profile", icon: User, url: "/home/profile" },
+			{ title: "Settings", icon: Cog, url: "/home/settings" },
 		],
 	},
 };
 
 function isActive(url?: string) {
 	if (!url) return false;
-	return location.pathname.startsWith(url);
+	return location.pathname === url;
 }
 
 export default function Sidebar() {
 	const navigate = useNavigate();
-	const { resolvedTheme: theme} = useTheme();
 	const { user } = useAuthStore();
 
 	const role = getUserMainRole(user);
@@ -119,14 +119,7 @@ export default function Sidebar() {
 		<div className="w-[350px] flex flex-col h-screen border-r border-border">
 			{/* HEADER */}
 			<div className="flex flex-row gap-1.5 items-end justify-center p-4 border-b border-border h-18">
-				<img
-					src={
-						theme === "dark"
-							? "/images/dark_mode_logo.png"
-							: "/images/light_mode_logo.png"
-					}
-					className="w-11"
-				/>
+					<Logo className="w-11 fill-primary" />
 				<p className="text-primary text-3xl font-bold font-['Agbalumo']">
 					{import.meta.env.VITE_APP_NAME}
 				</p>

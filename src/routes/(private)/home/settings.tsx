@@ -1,11 +1,13 @@
 import type { RecommendationPreferencesModel } from '@/api/generated/models';
 import { useGetDevRecommendationPreference } from '@/api/generated/recommendation-preferences/recommendation-preferences';
 import ThemeToggle from '@/components/global/theme-toggle-button';
+import { ColorPicker } from '@/components/settings/color-picker';
 import CompanyUpdateProfileForm from '@/components/settings/company-update-profile-form';
 import CustomRecommendationDistances from '@/components/settings/custom-recommendation-distances';
 import CustomRecommendationJobModality from '@/components/settings/custom-recommendation-job-modality';
 import CustomRecommendationJobType from '@/components/settings/custom-recommendation-job-type';
 import CustomStackRecommendation from '@/components/settings/custom-stack-recommendation';
+import ClientUpdateProfileForm from '@/components/settings/client-update-profile-form';
 import DevUpdateProfileForm from '@/components/settings/dev-update-profile-form';
 import PasswordChange from '@/components/settings/password-change';
 import { ToggleTheme } from '@/components/settings/theme-toggle';
@@ -172,6 +174,7 @@ function RouteComponent() {
                       <div className='flex-2 min-w-0'>
                         {getUserMainRole(user) === "dev" && (<DevUpdateProfileForm />)}
                         {getUserMainRole(user) === "company" && (<CompanyUpdateProfileForm />)}
+                        {getUserMainRole(user) === "client" && (<ClientUpdateProfileForm />)}
                       </div>
                     </div>
                     <Separator className='my-6'/> 

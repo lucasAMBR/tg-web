@@ -121,7 +121,7 @@ export default function UpdateAddressForm() {
                             value={address.street}
                             readOnly
                             placeholder="Street"
-                            className="cursor-not-allowed"
+                            className="cursor-not-allowed disabled:bg-muted"
                             disabled
                         />
                     </Field>
@@ -133,7 +133,7 @@ export default function UpdateAddressForm() {
                             value={address.district}
                             readOnly
                             placeholder="District"
-                            className="cursor-not-allowed"
+                            className="cursor-not-allowed disabled:bg-muted"
                             disabled
                         />
                     </Field>
@@ -143,7 +143,7 @@ export default function UpdateAddressForm() {
                             value={address.city}
                             readOnly
                             placeholder="City"
-                            className="cursor-not-allowed"
+                            className="cursor-not-allowed disabled:bg-muted"
                             disabled
                         />
                     </Field>
@@ -153,7 +153,7 @@ export default function UpdateAddressForm() {
                             value={address.state}
                             readOnly
                             placeholder="State"
-                            className="cursor-not-allowed"
+                            className="cursor-not-allowed disabled:bg-muted"
                             disabled
                         />
                     </Field>
