@@ -1,0 +1,312 @@
+{   
+    "general": {
+        "back": "Voltar",
+        "sing_out": "Sair",
+        "create": "Criar",
+        "register": "Registrar",
+        "skip": "Pular",
+        "logout": "Sair",
+        "clear": "Limpar",
+        "reset": "Resetar",
+        "search": "Buscar",
+        "update": "Atualizar",
+        "delete": "Deletar",
+        "cancel": "Cancelar",
+        "actions": "Ações",
+        "change": "Alterar",
+        "remove": "Remover",
+        "add": "Adicionar"
+    },
+    "role": {
+        "dev": "Desenvolvedor",
+        "company": "Empresa",
+        "client": "Cliente"
+    },
+    "landing_page": {
+        "app_name": "Brew!",
+        "title": "Bem-vindo ao ",
+        "description": "Construído por devs, para devs",
+        "subdescription": "Pare com as intermináveis trocas de mensagens. Nosso mecanismo de recomendações com IA analisa stacks tecnológicas para conectar talentos de alto nível a projetos de grande impacto.",
+        "rule_button": "Regras",
+        "know_more_button": "Saiba mais sobre o algoritmo"
+    },
+    "navbar": {
+        "home": "Início",
+        "about_the_project": {
+            "title": "Sobre o projeto",
+            "about_the_code_title": "Sobre o código",
+            "about_the_code_description": "saiba como o Brew foi desenvolvido, das escolhas às tecnologias utilizadas",
+            "about_the_match_algorithm_title": "Sobre o algoritmo de match",
+            "about_the_match_algorithm_description": "entenda como conectamos seu perfil à vaga ideal",
+            "about_us_title": "Sobre nós",
+            "about_us_description": "aqui você pode conhecer a trajetória dos desenvolvedores do Brew no aprendizado da programação"
+        },
+        "jobs": "Vagas",
+        "lgpd": "LGPD",
+        "button": {
+            "sign_in": "Entrar",
+            "sign_up": "Registrar-se"
+        }
+    },
+    "auth": {
+        "login": {
+            "title": "Bem-vindo de volta!",
+            "description": "Nós sentimos sua falta",
+            "button": "Entrar",
+            "no_account": "Não tem uma conta? ",
+            "register_here": "Registre-se aqui"
+        },
+        "register": {
+            "title": "Diga-nos sobre você",
+            "description": "Selecione seu papel para nos ajudar a personalizar sua experiência e te conectar com as oportunidades certas.",
+            "second_step_title": "Configure suas credenciais",
+            "second_step_description": "Crie suas credenciais para ter acesso completo à plataforma e começar sua jornada.",
+            "already_have_account": "Já tem uma conta? ",
+            "sing_in_here": "Entre aqui",
+            "terms_text": "Eu concordo com os ",
+            "and_text": "e ",
+            "privacy_policy_text": "política de privacidade",
+            "usage_terms_text": "termos de uso",
+            "role": {
+                "dev": {
+                    "title": "Desenvolvedor",
+                    "description": "Eu sou um desenvolvedor em busca de novas oportunidades de carreira."
+                },
+                "company": {
+                    "title": "Empresa",
+                    "description": "Eu sou um recrutador ou gerente em busca de talentos técnicos."
+                },
+                "client": {
+                    "title": "Cliente",
+                    "description": "Eu sou um indivíduo em busca de desenvolvedores para projetos freelancer."
+                }
+            },
+            "button": {
+                "next": "Próximo",
+                "register": "Registrar",
+                "back_to_roles": "Voltar para os papéis"
+            },
+            "password": {
+                "strength": {
+                    "empty": "Digite uma senha",
+                    "weak": "Senha fraca",
+                    "medium": "Senha média",
+                    "strong": "Senha forte",
+                    "very_strong": "Senha muito forte"
+                },
+                "requirements_title": "Deve conter:",
+                "requirements": {
+                    "min_length": "Pelo menos 8 caracteres",
+                    "lowercase": "Pelo menos 1 letra minúscula",
+                    "uppercase": "Pelo menos 1 letra maiúscula",
+                    "number": "Pelo menos 1 número",
+                    "special": "Pelo menos 1 caractere especial"
+                },
+                "a11y": {
+                    "requirement_met": " — Requisito atendido",
+                    "requirement_not_met": " — Requisito não atendido"
+                }
+            }
+        }
+    },
+    "profile_create": {
+        "dev": {
+            "title": "Crie seu perfil",
+            "description": "Preencha suas informações básicas para que nosso algoritmo possa entender seu perfil e te conectar com as oportunidades mais relevantes."
+        },
+        "company": {
+            "title": "Crie seu perfil",
+            "description": "Preencha suas informações básicas para que nosso algoritmo possa entender seu perfil e te conectar com os melhores desenvolvedores."
+        },
+        "client": {
+            "title": "Crie seu perfil",
+            "description": "Preencha suas informações básicas para que nosso algoritmo possa entender seu perfil e te conectar com os melhores desenvolvedores freelancers"
+        },
+        "address_modal": {
+            "title": "Criação de endereço",
+            "description": "Você pode pular este passo, mas para vagas presenciais ou híbridas você precisa ter um endereço registrado na plataforma para que nosso algoritmo recomende vagas próximas a você"
+        }
+    },
+    "address_create": {
+        "title": "Registre seu endereço",
+        "description_dev": "Preencha suas informações de endereço para que possamos melhorar a recomendação de oportunidades baseadas em localização e garantir uma correspondência precisa.",
+        "description_company": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores para sua empresa e garantir uma correspondência precisa.",
+        "description_client": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores freelancers para seus projetos freelancer e garantir uma correspondência precisa."
+    },
+    "under_construction": {
+        "title": "Esta funcionalidade está atualmente em construção!",
+        "description": "Por favor, volte mais tarde"
+    },
+   "sidebar": {
+        "sections": {
+            "feed": "Feed",
+            "companies": "Empresas",
+            "job_vacancies": "Vagas de Emprego",
+            "freelances": "Freelances"
+        },
+        "options": {
+            "profile": "Perfil",
+            "settings": "Configurações"
+        }
+    },
+    "dev_profile": {
+        "tabs": {
+            "posts": "Posts",
+            "projects": "Projetos",
+            "job_history": "Histórico de emprego",
+            "certifications": "Certificações"
+        },
+        "projects": {
+            "create_project": "Criar novo projeto",
+            "cancel_project_gallery": "Fechar galeria do projeto",
+            "create_project_gallery": "Criar galeria do projeto",
+            "no_projects": "Nenhum projeto ainda",
+            "update_project": "Atualizar projeto",
+            "update_project_description": "Aqui você pode atualizar os dados do seu projeto",
+            "delete_project": "Deletar projeto",
+            "delete_project_description": "Esta ação não pode ser desfeita. Isso deletará permanentemente o seguinte projeto: "
+        },
+        "job_history": {
+            "create_job_history": "Adicionar novo emprego ao histórico",
+            "no_jobs": "Nenhum emprego ainda",
+            "update_job_history": "Atualizar item do histórico de emprego",
+            "update_job_history_description": "Alterar os detalhes de um emprego",
+            "actual": "Atual",
+            "at": "Em",
+            "delete_job_history": "Tem certeza?",
+            "delete_job_history_subtitle": "Esta ação é não pode ser desfeita!",
+            "delete_job_history_description": "Quando você deletar um item do seu histórico de emprego ele não será mais usado pelo nosso algoritmo de recomendação"
+        },
+        "certifications": {
+            "create_certification": "Adicionar nova certificação",
+            "no_certifications": "Nenhuma certificação",
+            "update_certification": "Atualizar certificação",
+            "update_certification_description": "Alterar os detalhes de uma certificação",
+            "delete_certification": "Tem certeza?",
+            "delete_certification_subtitle": "Esta ação é não pode ser desfeita!",
+            "delete_certification_description": "Se você remover uma certificação, este registro não será mais usado pelo nosso algoritmo de recomendação"
+        },
+        "hard_skills": {
+            "title": "Habilidades Técnicas",
+            "no_hard_skills": "Nenhuma habilidade",
+            "create_hard_skill": "Adicionar nova habilidade técnica",
+            "create_hard_skill_description": "Registre uma nova habilidade técnica para ajudar nosso algoritmo de recomendação a encontrar o trabalho perfeito para você!",
+            "update_hard_skill": "Atualizar habilidade técnica",
+            "update_hard_skill_description": "Alterar os detalhes de uma habilidade técnica",
+            "delete_hard_skill": "Tem certeza?",
+            "delete_hard_skill_subtitle": "Esta ação é não pode ser desfeita!",
+            "delete_hard_skill_description": "Se você remover uma habilidade técnica, este registro não será mais usado pelo nosso algoritmo de recomendação"
+        },
+        "soft_skills": {
+            "title": "Habilidades Pessoais"
+        }
+    },
+    "input": {
+        "email": "E-mail",
+        "password": "Senha",
+        "name": "Nome",
+        "phone": "Telefone",
+        "birthdate": "Data de nascimento",
+        "seniority_level": "Nível de senioridade",
+        "open_to_work": "Aberto a oportunidades",
+        "open_to_relocation": "Disponível para mudar de cidade",
+        "cep": "CEP",
+        "number": "Número",
+        "complement": "Complemento",
+        "street": "Rua",
+        "district": "Bairro",
+        "city": "Cidade",
+        "state": "Estado",
+        "title": "Titulo",
+        "language_framework": "Linguagens / Frameworks",
+        "description": "Descrição",
+        "project_gallery": "Galeria do projejeto",
+        "position_name": "Cargo",
+        "company_name": "Nome da empresa",
+        "company_location": "Localização da empresa",
+        "employment_type": "Modalidade",
+        "contract_modality": "Tipo de contrato",
+        "actuation_details": "Detalhes da atuação",
+        "start_date": "Data de início",
+        "end_date": "Data de término",
+        "is_current": "Emprego atual",
+        "certification_name": "Nome da certificação",
+        "certification_provider": "Fornecedor da certificação",
+        "certificate": "Certificado",
+        "skill_level": "Nivel da Habilidade"
+    },
+    "tooltip": {
+        "open_to_work": "Diga ao nosso algoritmo que você está disponível para oportunidades de emprego; sem esta informação, nosso algoritmo inteligente não recomendará você para posições.",
+        "open_to_relocation": "Diga ao nosso algoritmo que você está disponível para mudar de cidade, estado ou país para uma oportunidade de emprego."
+    },
+    "placeholder": {
+        "name": "Seu nome",
+        "cpf": "Seu CPF",
+        "phone": "Seu telefone",
+        "birthdate": "Sua data de nascimento",
+        "seniority_level": "Escolha seu nível de senioridade",
+        "cep": "Digite seu CEP",
+        "number": "Número",
+        "complement": "Complemento",
+        "street": "Rua",
+        "district": "Bairro",
+        "city": "Cidade",
+        "state": "Estado",
+        "project_search": "Busque por um projeto específico, linguagem, framework ou descrição",
+        "project_title": "Título do projeto",
+        "project_description": "Descreva as funcionalidades, arquitetura e principais escolhas do seu projeto",
+        "project_language_framework": "Selecione as linguagens / frameworks do projeto",
+        "project_language_search": "Busque por uma linguagem...",
+        "employment_search": "Busque por uma empresa, nível de senioridade e modalidade de trabalho",
+        "position_name": "Desenvolvedor Frontend, Engenheiro de Devops",
+        "company_name": "Empresa Exemplo Ltda",
+        "company_location": "São Paulo, SP",
+        "employment_type": "Emprego presencial, Remoto, Híbrido",
+        "contract_modality": "Contrato CLT, PJ, Freelance",
+        "actuation_details": "Descreva suas atuações, projetos, stacks, influência na equipe",
+        "start_date": "Data de início",
+        "end_date": "Data de término",
+        "certification_search": "Busque por uma empresa, nível de senioridade e modalidade de trabalho",
+        "certification_name": "AWS Cloud Certification",
+        "certification_provider": "Amazon",
+        "certificate": "Selecione um arquivo PDF",
+        "skill_level": "Selecione o nivel da habilidade",
+        "language_framework": "Selecione uma linguagem / framework"
+    },
+    "enum": {
+        "seniority_level": {
+            "intern": "Estagiário",
+            "junior": "Júnior",
+            "mid_level": "Pleno",
+            "senior": "Sênior",
+            "staff": "Staff"
+        },
+        "employment_type": {
+            "on_site": "Presencial",
+            "remote": "Remoto",
+            "hybrid": "Híbrido"
+        },
+        "contract_type": {
+            "clt": "Contrato CLT",
+            "contractor": "Contrato PJ",
+            "internship": "Estágio"
+        },
+        "hard_skill_levels": {
+            "fundamentals": "Fundamentos",
+            "basic": "Básico",
+            "intermediate": "Intermediário",
+            "advanced": "Avançado",
+            "expert": "Expert",
+            "authority": "Autoridade"
+        }
+    },
+    "pagination": {
+        "lines_per_page": "Linhas por página",
+        "displaying": "Exibindo",
+        "of": "de",
+        "page": "Página"
+    },
+    "no_data": {
+        "no_languages": "Nenhuma linguagem encontrada"
+    }
+}

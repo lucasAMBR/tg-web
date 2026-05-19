@@ -14,6 +14,8 @@ import { useTheme } from "next-themes";
 import AddressForm from "@/components/address/address-form";
 import { useAuthStore } from "@/stores/auth-store";
 import { getUserMainRole } from "@/utils/role-helper";
+import { useTranslation } from "react-i18next";
+import { Logo } from "@/components/global/Logo";
 
 const staticData = {
 	requiredPermissions: ["address.create"],
@@ -28,6 +30,8 @@ export const Route = createFileRoute("/(private)/create/address")({
 });
 
 function RouteComponent() {
+	const { t } = useTranslation();
+
 	const { theme } = useTheme();
 
 	const { user } = useAuthStore();
@@ -58,25 +62,18 @@ function RouteComponent() {
 					</Button>
 				</LogoutButton>
 				<div className="flex flex-col justify-center items-center mb-6">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-12"
-						alt="Logo"
-					/>
+					<Logo className="w-12 fill-primary" />
 					<p className="font-[Agbalumo] text-primary text-5xl">
 						{env.APP_NAME}
 					</p>
 				</div>
 				<h2 className="font-[Anta] text-primary text-3xl mb-6">
-					Register your address
+					{t("address_create.title")}
 				</h2>
 				<p className="max-w-[700px] text-center mb-6">
-					Provide your address details so we can better tailor location-based
-					opportunities and ensure accurate matching.
+					{userRole === "dev" && t("address_create.description_dev")}
+					{userRole === "company" && t("address_create.description_company")}
+					{userRole === "client" && t("address_create.description_client")}
 				</p>
 				<AddressForm />
 			</div>

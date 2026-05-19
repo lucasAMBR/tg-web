@@ -34,12 +34,14 @@ import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import UpdateHardskillModal from "./update_hard_skill_dialog";
+import { useTranslation } from "react-i18next";
 
 interface HardSkillListPorps {
 	profileId: string;
 }
 
 export default function HardSkillList({ profileId }: HardSkillListPorps) {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
 	const [selectedHardSkill, setSelectedhardSkill] =
@@ -101,13 +103,13 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
-				<span className="font-[Anta]">Hard skills</span>
+				<span className="font-[Anta]">{t("dev_profile.hard_skills.title")}</span>
 				<CreateHardSkillModal
 					existingHardSkills={hardSkillList}
 					profileId={profileId}
 				>
-					<Button>
-						<Plus /> Create
+					<Button variant="accent">
+						<Plus /> {t("general.add")}
 					</Button>
 				</CreateHardSkillModal>
 			</h2>
@@ -124,17 +126,8 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 								<EmptyMedia variant={"icon"}>
 									<Brackets />
 								</EmptyMedia>
-								<EmptyTitle>No hard skill yet</EmptyTitle>
-								<EmptyContent></EmptyContent>
-								<EmptyDescription>
-									You haven&apos;t registered any skills yet. Get started by
-									creating your first skill, they are used by our recommendation
-									algorithm
-								</EmptyDescription>
+								<EmptyTitle>{t("dev_profile.hard_skills.no_hard_skills")}</EmptyTitle>
 							</EmptyHeader>
-							<EmptyContent>
-								<Button>Register</Button>
-							</EmptyContent>
 						</Empty>
 					</Card>
 				)}

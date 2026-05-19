@@ -11,12 +11,15 @@ import { useEffect, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
 import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history-doc/project-history-doc"
 import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history-doc/employment-history-doc"
+import { useTranslation } from "react-i18next"
 
 interface DevProfileContentProps{
     profileId: string
 }
 
 export default function DevProfileContent({ profileId }: DevProfileContentProps){
+
+    const { t } = useTranslation();
 
     const queryClient = useQueryClient();
 
@@ -41,22 +44,22 @@ export default function DevProfileContent({ profileId }: DevProfileContentProps)
                 <Tabs defaultValue={tab} onValueChange={setTab}>
                     <TabsList variant={"line"}>
                         <TabsTrigger className="text-xl cursor-pointer" value="posts">
-                            Posts
+                            {t("dev_profile.tabs.posts")}
                         </TabsTrigger>
                         <TabsTrigger className="text-xl cursor-pointer" value="projects">
-                            Projects
+                            {t("dev_profile.tabs.projects")}
                         </TabsTrigger>
                         <TabsTrigger
                             className="text-xl cursor-pointer"
                             value="job_history"
                         >
-                            Employment History
+                            {t("dev_profile.tabs.job_history")}
                         </TabsTrigger>
                         <TabsTrigger
                             className="text-xl cursor-pointer"
                             value="certifications"
                         >
-                            Certifications
+                            {t("dev_profile.tabs.certifications")}
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">

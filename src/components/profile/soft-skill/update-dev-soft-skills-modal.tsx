@@ -35,6 +35,7 @@ import type { AxiosError } from "axios";
 import { Pencil, Save } from "lucide-react";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type FormValues = {
 	soft_skills: Record<string, string>;
@@ -54,6 +55,7 @@ export default function UpdateSoftSkillModal({
 	initialData,
 	children,
 }: PropsWithChildren<UpdateSoftSkillModalProps>) {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const { user } = useAuthStore();
@@ -151,7 +153,7 @@ export default function UpdateSoftSkillModal({
 			<DialogTrigger asChild>
 				{children || (
 					<Button variant="outline">
-						<Pencil /> Edit
+						<Pencil /> {t("general.update")}
 					</Button>
 				)}
 			</DialogTrigger>

@@ -11,6 +11,7 @@ import {
 } from "../../ui/dropdown-menu";
 import { Button } from "../../ui/button";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface HardSkillCardProps {
 	hardSkill: HardSkillModel;
@@ -23,11 +24,13 @@ export default function HardSkillCard({
 	openDelete,
 	openUpdate,
 }: HardSkillCardProps) {
+	const { t } = useTranslation();
+
 	return (
 		<Card className="flex flex-row justify-between items-center p-3 gap-2">
 			<span className="font-bold">{hardSkill.language.name}</span>
 			<div className="flex items-center gap-2">
-				<Badge className="font-bold">{hardSkill.skill_level_label}</Badge>
+				<Badge className="font-bold">{t(`enum.hard_skill_levels.${hardSkill.skill_level}`)}</Badge>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button size={"icon"} variant={"ghost"}>
@@ -35,16 +38,16 @@ export default function HardSkillCard({
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent side="bottom">
-						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 						<DropdownMenuGroup>
 							<DropdownMenuItem onClick={() => openUpdate(hardSkill)}>
-								<Edit /> Update
+								<Edit /> {t("general.update")}
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								onClick={() => openDelete(hardSkill)}
 								variant="destructive"
 							>
-								<Trash /> Delete
+								<Trash /> {t("general.delete")}
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>

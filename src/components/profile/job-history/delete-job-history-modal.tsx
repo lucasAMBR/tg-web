@@ -19,6 +19,7 @@ import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 interface DeletejobHistoryModalProps {
 	open: boolean;
@@ -36,6 +37,8 @@ export default function DeletejobHistoryModal({
 	job,
 }: DeletejobHistoryModalProps) {
 	if (!job) return null;
+
+	const { t } = useTranslation();
 
 	const { page, perPage, search } = useJobHistoryParams();
 
@@ -74,25 +77,22 @@ export default function DeletejobHistoryModal({
 		<AlertDialog open={open} onOpenChange={openChange}>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+					<AlertDialogTitle>{t("dev_profile.job_history.delete_job_history")}</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action is permanent!
+						{t("dev_profile.job_history.delete_job_history_subtitle")}
 					</AlertDialogDescription>
 				</AlertDialogHeader>
-				<p>
-					When you delete an item from your job history he doesn't will be more
-					used by our recommendation algorithm
-				</p>
+				<p>{t("dev_profile.job_history.delete_job_history_description")}</p>
 				<AlertDialogFooter>
 					<Button variant={"outline"} onClick={closeModal}>
-						Cancel
+						{t("general.cancel")}
 					</Button>
 					<Button
 						variant={"destructive"}
 						onClick={handleDeleteItem}
 						disabled={deleteIsPending}
 					>
-						{deleteIsPending ? <Spinner /> : "Delete"}
+						{deleteIsPending ? <Spinner /> : t("general.delete")}
 					</Button>
 				</AlertDialogFooter>
 			</AlertDialogContent>

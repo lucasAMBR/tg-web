@@ -1,3 +1,4 @@
+import { Logo } from "@/components/global/Logo";
 import LogoutButton from "@/components/global/logout-button";
 import ThemeToggle from "@/components/global/theme-toggle-button";
 import DevProfileForm from "@/components/profile-create/dev-profile-form";
@@ -11,6 +12,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 const staticData = {
 	requiredPermissions: ["dev_profile.create"],
@@ -27,6 +29,8 @@ export const Route = createFileRoute("/(private)/create/profile/dev")({
 function RouteComponent() {
 	const { theme } = useTheme();
 
+	const { t } = useTranslation();
+
 	return (
 		<div className="w-screen h-screen flex">
 			<div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50">
@@ -39,25 +43,16 @@ function RouteComponent() {
 					</Button>
 				</LogoutButton>
 				<div className="flex flex-col justify-center items-center mb-6">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-12"
-						alt="Logo"
-					/>
+					<Logo className="w-12 fill-primary" />
 					<p className="font-[Agbalumo] text-primary text-5xl">
 						{env.APP_NAME}
 					</p>
 				</div>
 				<h2 className="font-[Anta] text-primary text-3xl mb-6">
-					Create your profile
+					{t("profile_create.dev.title")}
 				</h2>
 				<p className="max-w-[700px] text-center mb-6">
-					Fill in your basic information so our algorithm can understand your
-					profile and match you with the most relevant opportunities.
+					{t("profile_create.dev.description")}
 				</p>
 				<DevProfileForm />
 			</div>

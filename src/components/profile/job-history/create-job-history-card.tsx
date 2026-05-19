@@ -43,8 +43,11 @@ import { format } from "date-fns";
 import { ChevronDownIcon, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export default function CreateJobHistoryCard() {
+	const { t } = useTranslation(); 
+
 	const queryClient = useQueryClient();
 
 	const { data: seniorityLevels, isLoading: seniorityIsloading } =
@@ -113,7 +116,7 @@ export default function CreateJobHistoryCard() {
 	return (
 		<Card className="p-4">
 			<div className="flex flex-row justify-between items-center">
-				<h2 className="font-bold text-lg">Add new job to history</h2>
+				<h2 className="font-bold text-lg">{t("dev_profile.job_history.create_job_history")}</h2>
 				<Button
 					size={"icon"}
 					onClick={() => setCreationIsOpen(!creationIsOpen)}
@@ -138,9 +141,9 @@ export default function CreateJobHistoryCard() {
 							name="position_name"
 							render={({ field, fieldState }) => (
 								<Field className="flex-3">
-									<FieldLabel>Position name</FieldLabel>
+									<FieldLabel>{t("input.position_name")}</FieldLabel>
 									<Input
-										placeholder="Frontend developer, Devops engineer"
+										placeholder={t("placeholder.position_name")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -154,11 +157,11 @@ export default function CreateJobHistoryCard() {
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
 									<FieldLabel htmlFor="seniority_level">
-										Seniority Level <Required />
+										{t("input.seniority_level")} <Required />
 									</FieldLabel>
 									<Select value={field.value} onValueChange={field.onChange}>
 										<SelectTrigger>
-											<SelectValue placeholder="Pick your seniority level" />
+											<SelectValue placeholder={t("placeholder.seniority_level")} />
 										</SelectTrigger>
 										<SelectContent>
 											{seniorityIsloading && <Spinner />}
@@ -182,9 +185,9 @@ export default function CreateJobHistoryCard() {
 							name="company_name"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>Company name</FieldLabel>
+									<FieldLabel>{t("input.company_name")}</FieldLabel>
 									<Input
-										placeholder="Example Company Ltda"
+										placeholder={t("placeholder.company_name")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -197,9 +200,9 @@ export default function CreateJobHistoryCard() {
 							name="company_location"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>Company location</FieldLabel>
+									<FieldLabel>{t("input.company_location")}</FieldLabel>
 									<Input
-										placeholder="São Paulo, SP"
+										placeholder={t("placeholder.company_location")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -215,12 +218,12 @@ export default function CreateJobHistoryCard() {
 							render={({ field, fieldState }) => (
 								<Field className="flex-3">
 									<FieldLabel htmlFor="seniority_level">
-										Employment type
+										{t("input.employment_type")}
 										<Required />
 									</FieldLabel>
 									<Select value={field.value} onValueChange={field.onChange}>
 										<SelectTrigger>
-											<SelectValue placeholder="Pick your seniority level" />
+											<SelectValue placeholder={t("placeholder.employment_type")} />
 										</SelectTrigger>
 										<SelectContent>
 											{employmentTypesIsLoading && <Spinner />}
@@ -228,7 +231,7 @@ export default function CreateJobHistoryCard() {
 												employmentTypeList.length > 0 &&
 												employmentTypeList.map((item) => (
 													<SelectItem value={item.value}>
-														{item.label}
+														{t(item.i18nKey)}
 													</SelectItem>
 												))}
 										</SelectContent>
@@ -243,11 +246,11 @@ export default function CreateJobHistoryCard() {
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
 									<FieldLabel htmlFor="seniority_level">
-										Contract Modality <Required />
+										{t("input.contract_modality")} <Required />
 									</FieldLabel>
 									<Select value={field.value} onValueChange={field.onChange}>
 										<SelectTrigger>
-											<SelectValue placeholder="Pick your seniority level" />
+											<SelectValue placeholder={t("placeholder.contract_modality")} />
 										</SelectTrigger>
 										<SelectContent>
 											{contractTypesIsLoading && <Spinner />}
@@ -255,7 +258,7 @@ export default function CreateJobHistoryCard() {
 												contractTypeList.length > 0 &&
 												contractTypeList.map((item) => (
 													<SelectItem value={item.value}>
-														{item.label}
+														{t(item.i18nKey)}
 													</SelectItem>
 												))}
 										</SelectContent>
@@ -272,7 +275,7 @@ export default function CreateJobHistoryCard() {
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
 									<FieldLabel htmlFor="birthdate">
-										Start date <Required />
+										{t("input.start_date")} <Required />
 									</FieldLabel>
 									<Popover>
 										<PopoverTrigger asChild>
@@ -286,7 +289,7 @@ export default function CreateJobHistoryCard() {
 												{field.value ? (
 													field.value
 												) : (
-													<span>Selecione uma data</span>
+													<span>{t("placeholder.start_date")}</span>
 												)}
 												<ChevronDownIcon className="h-4 w-4 opacity-50" />
 											</Button>
@@ -322,7 +325,7 @@ export default function CreateJobHistoryCard() {
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
 									<FieldLabel htmlFor="birthdate">
-										End date <Required />
+										{t("input.end_date")} <Required />
 									</FieldLabel>
 									<Popover>
 										<PopoverTrigger asChild>
@@ -337,7 +340,7 @@ export default function CreateJobHistoryCard() {
 												{field.value ? (
 													field.value
 												) : (
-													<span>Selecione uma data</span>
+													<span>{t("placeholder.end_date")}</span>
 												)}
 												<ChevronDownIcon className="h-4 w-4 opacity-50" />
 											</Button>
@@ -375,10 +378,10 @@ export default function CreateJobHistoryCard() {
 						name="actuation_details"
 						render={({ field, fieldState }) => (
 							<Field>
-								<FieldLabel>Actuation Details</FieldLabel>
+								<FieldLabel>{t("input.actuation_details")}</FieldLabel>
 								<div className="flex flex-col items-end gap-1">
 									<Textarea
-										placeholder="Describe your actuation, projects, stacks, influence on the team"
+										placeholder={t("placeholder.actuation_details")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -400,12 +403,12 @@ export default function CreateJobHistoryCard() {
 										checked={field.value}
 										onCheckedChange={(checked) => field.onChange(!!checked)}
 									/>
-									<span>Is Current</span>
+									<span>{t("input.is_current")}</span>
 								</div>
 							)}
 						/>
 					</div>
-					<Button type="submit">Register</Button>
+					<Button type="submit">{t("general.register")}</Button>
 				</form>
 			)}
 		</Card>

@@ -20,12 +20,15 @@ import type {
 import { Card } from "@/components/ui/card";
 import RegisterSoftSkillModal from "./register-soft-skills-modal";
 import UpdateSoftSkillModal from "./update-dev-soft-skills-modal";
+import { useTranslation } from "react-i18next";
 
 interface SoftSkillListProps {
 	profileId: string;
 }
 
 export default function SoftSkillList({ profileId }: SoftSkillListProps) {
+	const { t } = useTranslation();
+
 	const [selectedSoftSkill, setSelectedSoftSkill] =
 		useState<DevSoftSkillModel | null>(null);
 
@@ -49,7 +52,7 @@ export default function SoftSkillList({ profileId }: SoftSkillListProps) {
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
-				<span className="font-[Anta]">Soft skills</span>
+				<span className="font-[Anta]">{t("dev_profile.soft_skills.title")}</span>
 				{softSkillList.length < 1 && (
 					<RegisterSoftSkillModal profileId={profileId} />
 				)}

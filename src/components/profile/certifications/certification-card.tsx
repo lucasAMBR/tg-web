@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Edit, EllipsisVertical, School, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CertificationCardProps {
     profileId: string,
@@ -17,6 +18,8 @@ export default function CertificationCard({
     openDelete, 
     openUpdate
 }: CertificationCardProps){
+
+	const { t } = useTranslation()	;
 
     return(
     <Card className="p-4">
@@ -40,16 +43,16 @@ export default function CertificationCard({
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent>
-							<DropdownMenuLabel>Actions</DropdownMenuLabel>
+							<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 							<DropdownMenuGroup>
 								<DropdownMenuItem onClick={() => openUpdate(certificate)}>
-									<Edit /> Edit
+									<Edit /> {t("general.update")}
 								</DropdownMenuItem>
 								<DropdownMenuItem
 									variant="destructive"
 									onClick={() => openDelete(certificate)}
 								>
-									<Trash /> Delete
+									<Trash /> {t("general.delete")}
 								</DropdownMenuItem>
 							</DropdownMenuGroup>
 						</DropdownMenuContent>

@@ -71,7 +71,7 @@ export default function ProjectItemCard({
 				<CardDescription>{project.description}</CardDescription>
 				<div className="flex gap-1">
 					{project.languages.map((lang) => (
-						<Badge>{lang.name}</Badge>
+						<Badge className="bg-accent text-accent-foreground">{lang.name}</Badge>
 					))}
 				</div>
 			</CardHeader>

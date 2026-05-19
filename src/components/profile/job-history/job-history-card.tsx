@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { format } from "date-fns";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface JobHistoryCardProps {
 	profileId: string;
@@ -32,6 +33,7 @@ export default function JobHistoryCard({
 	openDelete,
 	openUpdate,
 }: JobHistoryCardProps) {
+	const { t } = useTranslation();
 	const actual = job.is_current && !job.end_date;
 
 	return (
@@ -42,7 +44,7 @@ export default function JobHistoryCard({
 						{job.position_name}{" "}
 						{actual && (
 							<Badge className="h-fit bg-green-700 dark:text-white font-bold">
-								Actual
+								{t("dev_profile.job_history.actual")}
 							</Badge>
 						)}
 					</h2>
@@ -54,16 +56,16 @@ export default function JobHistoryCard({
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent>
-								<DropdownMenuLabel>Actions</DropdownMenuLabel>
+								<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 								<DropdownMenuGroup>
 									<DropdownMenuItem onClick={() => openUpdate(job)}>
-										<Edit /> Edit
+										<Edit /> {t("general.update")}
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										variant="destructive"
 										onClick={() => openDelete(job)}
 									>
-										<Trash /> Delete
+										<Trash /> {t("general.delete")}
 									</DropdownMenuItem>
 								</DropdownMenuGroup>
 							</DropdownMenuContent>
@@ -71,22 +73,22 @@ export default function JobHistoryCard({
 					)}
 				</CardTitle>
 				<CardDescription>
-					{`At ${job.company_name}, ${job.company_location}`} <br />
+					{`${t("dev_profile.job_history.at")} ${job.company_name}, ${job.company_location}`} <br />
 				</CardDescription>
 				<div className="flex gap-6">
 					<p className="text-muted-foreground text-sm font-normal">
-						{`Start date: ${format(job.start_date, "dd/MM/yyyy")}`}
+						{`${t("input.start_date")}: ${format(job.start_date, "dd/MM/yyyy")}`}
 					</p>
 					{!actual && (
 						<p className="text-muted-foreground text-sm font-normal">
-							{`End date: ${format(job.end_date as string, "dd/MM/yyyy")}`}
+							{`${t("input.end_date")}: ${format(job.end_date as string, "dd/MM/yyyy")}`}
 						</p>
 					)}
 				</div>
 				<div className="flex gap-2">
-					<Badge variant={"destructive"}>{job.seniority_level_label}</Badge>
-					<Badge variant={"secondary"}>{job.contract_type_label}</Badge>
-					<Badge>{job.employment_type_label}</Badge>
+					<Badge variant={"destructive"}>{t(`enum.seniority_level.${job.seniority_level}`)}</Badge>
+					<Badge variant={"secondary"}>{t(`enum.contract_type.${job.contract_type}`)}</Badge>
+					<Badge>{t(`enum.employment_type.${job.employment_type}`)}</Badge>
 				</div>
 			</CardHeader>
 			<p>{job.actuation_details}</p>

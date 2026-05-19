@@ -223,7 +223,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                     ))}
                 </div>
             )}
-            <Card className="p-4 bg-accent/40">
+            <Card className="p-4 bg-muted">
                 <DefaultPagination
                     data={projects?.data.pagination as GenericPagination}
                     setPage={(p) => setFilterParams({ page: p })}

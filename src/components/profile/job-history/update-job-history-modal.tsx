@@ -53,6 +53,7 @@ import { format } from "date-fns";
 import { ChevronDownIcon } from "lucide-react";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface UpdateJobHistoryModalProps {
 	open: boolean;
@@ -70,6 +71,8 @@ export default function UpdateJobHistoryModal({
 	job,
 }: UpdateJobHistoryModalProps) {
 	if (!job) return null;
+
+	const { t } = useTranslation();	
 
 	const queryClient = useQueryClient();
 
@@ -152,9 +155,9 @@ export default function UpdateJobHistoryModal({
 		<Dialog open={open} onOpenChange={openChange}>
 			<DialogContent className="min-w-2/4">
 				<DialogHeader>
-					<DialogTitle>Update job history item</DialogTitle>
+					<DialogTitle>{t("dev_profile.job_history.update_job_history")}</DialogTitle>
 					<DialogDescription>
-						Change the details from an employment
+						{t("dev_profile.job_history.update_job_history_description")}
 					</DialogDescription>
 				</DialogHeader>
 				<form
@@ -168,9 +171,9 @@ export default function UpdateJobHistoryModal({
 								name="position_name"
 								render={({ field, fieldState }) => (
 									<Field className="flex-3">
-										<FieldLabel>Position name</FieldLabel>
+										<FieldLabel>{t("input.position_name")}</FieldLabel>
 										<Input
-											placeholder="Frontend developer, Devops engineer"
+											placeholder={t("placeholder.position_name")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -184,11 +187,11 @@ export default function UpdateJobHistoryModal({
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
 										<FieldLabel htmlFor="seniority_level">
-											Seniority Level <Required />
+											{t("input.seniority_level")} <Required />
 										</FieldLabel>
 										<Select value={field.value} onValueChange={field.onChange}>
 											<SelectTrigger>
-												<SelectValue placeholder="Pick your seniority level" />
+												<SelectValue placeholder={t("placeholder.seniority_level")} />
 											</SelectTrigger>
 											<SelectContent>
 												{seniorityIsloading && <Spinner />}
@@ -196,7 +199,7 @@ export default function UpdateJobHistoryModal({
 													seniorityList.length > 0 &&
 													seniorityList.map((item) => (
 														<SelectItem value={item.value}>
-															{item.label}
+															{t(item.i18nKey)}
 														</SelectItem>
 													))}
 											</SelectContent>
@@ -212,9 +215,9 @@ export default function UpdateJobHistoryModal({
 								name="company_name"
 								render={({ field, fieldState }) => (
 									<Field>
-										<FieldLabel>Company name</FieldLabel>
+										<FieldLabel>{t("input.company_name")}</FieldLabel>
 										<Input
-											placeholder="Example Company Ltda"
+											placeholder={t("placeholder.company_name")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -227,9 +230,9 @@ export default function UpdateJobHistoryModal({
 								name="company_location"
 								render={({ field, fieldState }) => (
 									<Field>
-										<FieldLabel>Company location</FieldLabel>
+										<FieldLabel>{t("input.company_location")}</FieldLabel>
 										<Input
-											placeholder="São Paulo, SP"
+											placeholder={t("placeholder.company_location")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -245,12 +248,12 @@ export default function UpdateJobHistoryModal({
 								render={({ field, fieldState }) => (
 									<Field className="flex-3">
 										<FieldLabel htmlFor="seniority_level">
-											Employment type
+											{t("input.employment_type")}
 											<Required />
 										</FieldLabel>
 										<Select value={field.value} onValueChange={field.onChange}>
 											<SelectTrigger>
-												<SelectValue placeholder="Pick your seniority level" />
+												<SelectValue placeholder={t("placeholder.employment_type")} />
 											</SelectTrigger>
 											<SelectContent>
 												{employmentTypesIsLoading && <Spinner />}
@@ -258,7 +261,7 @@ export default function UpdateJobHistoryModal({
 													employmentTypeList.length > 0 &&
 													employmentTypeList.map((item) => (
 														<SelectItem value={item.value}>
-															{item.label}
+															{t(item.i18nKey)}
 														</SelectItem>
 													))}
 											</SelectContent>
@@ -273,11 +276,11 @@ export default function UpdateJobHistoryModal({
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
 										<FieldLabel htmlFor="seniority_level">
-											Contract Modality <Required />
+											{t("input.contract_modality")} <Required />
 										</FieldLabel>
 										<Select value={field.value} onValueChange={field.onChange}>
 											<SelectTrigger>
-												<SelectValue placeholder="Pick your seniority level" />
+												<SelectValue placeholder={t("placeholder.contract_modality")} />
 											</SelectTrigger>
 											<SelectContent>
 												{contractTypesIsLoading && <Spinner />}
@@ -285,7 +288,7 @@ export default function UpdateJobHistoryModal({
 													contractTypeList.length > 0 &&
 													contractTypeList.map((item) => (
 														<SelectItem value={item.value}>
-															{item.label}
+															{t(item.i18nKey)}
 														</SelectItem>
 													))}
 											</SelectContent>
@@ -302,7 +305,7 @@ export default function UpdateJobHistoryModal({
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
 										<FieldLabel htmlFor="birthdate">
-											Start date <Required />
+											{t("input.start_date")} <Required />
 										</FieldLabel>
 										<Popover>
 											<PopoverTrigger asChild>
@@ -316,7 +319,7 @@ export default function UpdateJobHistoryModal({
 													{field.value ? (
 														field.value
 													) : (
-														<span>Selecione uma data</span>
+														<span>{t("placeholder.start_date")}</span>
 													)}
 													<ChevronDownIcon className="h-4 w-4 opacity-50" />
 												</Button>
@@ -354,7 +357,7 @@ export default function UpdateJobHistoryModal({
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
 										<FieldLabel htmlFor="birthdate">
-											End date <Required />
+											{t("input.end_date")} <Required />
 										</FieldLabel>
 										<Popover>
 											<PopoverTrigger asChild>
@@ -369,7 +372,7 @@ export default function UpdateJobHistoryModal({
 													{field.value ? (
 														field.value
 													) : (
-														<span>Selecione uma data</span>
+														<span>{t("placeholder.end_date")}</span>
 													)}
 													<ChevronDownIcon className="h-4 w-4 opacity-50" />
 												</Button>
@@ -407,10 +410,10 @@ export default function UpdateJobHistoryModal({
 							name="actuation_details"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>Actuation Details</FieldLabel>
+									<FieldLabel>{t("input.actuation_details")}</FieldLabel>
 									<div className="flex flex-col items-end gap-1">
 										<Textarea
-											placeholder="Describe your actuation, projects, stacks, influence on the team"
+											placeholder={t("placeholder.actuation_details")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -432,7 +435,7 @@ export default function UpdateJobHistoryModal({
 											checked={field.value}
 											onCheckedChange={(checked) => field.onChange(!!checked)}
 										/>
-										<span>Is Current</span>
+										<span>{t("input.is_current")}</span>
 									</div>
 								)}
 							/>
@@ -440,10 +443,10 @@ export default function UpdateJobHistoryModal({
 					</Card>
 					<DialogFooter>
 						<Button variant={"outline"} onClick={closeModal}>
-							Cancel
+							{t("general.cancel")}
 						</Button>
 						<Button type="submit" disabled={isPending}>
-							{isPending ? <Spinner /> : "Update"}
+							{isPending ? <Spinner /> : t("general.update")}
 						</Button>
 					</DialogFooter>
 				</form>

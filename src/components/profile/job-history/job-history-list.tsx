@@ -20,12 +20,15 @@ import { useState } from "react";
 import type { EmploymentHistoryModel } from "@/api/generated/models";
 import DeletejobHistoryModal from "./delete-job-history-modal";
 import UpdateJobHistoryModal from "./update-job-history-modal";
+import { useTranslation } from "react-i18next";
 
 interface JobHistoryListProps {
 	profileId: string;
 }
 
 export default function JobHistoryList({ profileId }: JobHistoryListProps) {
+	const { t } = useTranslation();
+		
 	const { page, perPage, search, setFilterParams } = useJobHistoryParams();
 
 	const debounceSearch = useDebounce(search, 500);
@@ -83,12 +86,12 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 						value={search}
 						onChange={(e) => setFilterParams({ search: e.target.value })}
 						type="text"
-						placeholder="Search for an especific company, seniority and work modality"
+						placeholder={t("placeholder.employment_search")}
 						className="peer pl-9"
 					/>
 				</div>
 				<Button variant={"secondary"} onClick={clearFilters}>
-					<BrushCleaning className="size-4" /> Clear
+					<BrushCleaning className="size-4" /> {t("general.clear")}
 				</Button>
 			</Card>
 			{employmentList.length === 0 && (
@@ -98,7 +101,7 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 							<EmptyMedia variant={"icon"}>
 								<Briefcase />
 							</EmptyMedia>
-							<EmptyTitle>No Employments</EmptyTitle>
+							<EmptyTitle>{t("dev_profile.job_history.no_jobs")}</EmptyTitle>
 						</EmptyHeader>
 					</Empty>
 				</Card>
@@ -115,7 +118,7 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 					))}
 				</div>
 			)}
-			<Card className="p-4 bg-accent/40">
+			<Card className="p-4 bg-muted">
 				<DefaultPagination
 					data={employmentHistory?.data.pagination as GenericPagination}
 					setPage={(p) => setFilterParams({ page: p })}

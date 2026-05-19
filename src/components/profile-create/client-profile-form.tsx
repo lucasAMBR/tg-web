@@ -32,6 +32,7 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import z from "zod/v3";
+import { useTranslation } from "react-i18next";
 
 const CreateClientProfileSchema = z.object({
 	cpf: z.string().length(11, "CPF must have 11 characters!"),
@@ -75,6 +76,8 @@ const CreateClientProfileSchema = z.object({
 type ICreateClientProfileSchema = z.infer<typeof CreateClientProfileSchema>;
 
 export default function ClientProfileForm() {
+	const { t } = useTranslation();
+
 	const navigate = useNavigate();
 	const { hydrateUser } = useAuthStore();
 	const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
@@ -120,7 +123,7 @@ export default function ClientProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-2">
 							<FieldLabel htmlFor="name">
-								Name <Required />
+								{t("input.name")} <Required />
 							</FieldLabel>
 							<Input
 								{...field}
@@ -167,7 +170,7 @@ export default function ClientProfileForm() {
 					}) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="phone">
-								Phone <Required />
+								{t("input.phone")} <Required />
 							</FieldLabel>
 							<PhoneInput
 								{...fieldProps}
@@ -188,7 +191,7 @@ export default function ClientProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="birthdate">
-								Birthdate <Required />
+								{t("input.birthdate")} <Required />
 							</FieldLabel>
 							<Popover>
 								<PopoverTrigger asChild>

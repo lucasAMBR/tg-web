@@ -51,6 +51,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface CreateProjectCardProps {
 	profileId: string;
@@ -59,6 +60,8 @@ interface CreateProjectCardProps {
 export default function CreateProjectCard({
 	profileId,
 }: CreateProjectCardProps) {
+	const { t } = useTranslation();
+
 	const queryClient = useQueryClient();
 
 	const form = useForm<ICreateProjectSchema>({
@@ -127,7 +130,7 @@ export default function CreateProjectCard({
 			CustomToaster.successToast(projectItem.message);
 
 			queryClient.invalidateQueries({
-				queryKey: getIndexProjectHistoryQueryKey({ profile_id: profileId }),
+				queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),
 			});
 
 			form.reset();
@@ -139,7 +142,7 @@ export default function CreateProjectCard({
 	return (
 		<Card className="p-4">
 			<div className="flex flex-row justify-between items-center">
-				<h2 className="font-bold text-lg">Create new project</h2>
+				<h2 className="font-bold text-lg">{t("dev_profile.projects.create_project")}</h2>
 				<Button
 					size={"icon"}
 					onClick={() => setCreationIsOpen(!creationIsOpen)}
@@ -164,10 +167,10 @@ export default function CreateProjectCard({
 							name="title"
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
-									<FieldLabel>Title</FieldLabel>
+									<FieldLabel>{t("input.title")}</FieldLabel>
 									<Input
 										{...field}
-										placeholder="Project title"
+										placeholder={t("placeholder.project_title")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -203,7 +206,7 @@ export default function CreateProjectCard({
 
 								return (
 									<Field className="flex-1">
-										<FieldLabel>Languages / Frameworks</FieldLabel>
+										<FieldLabel>{t("input.language_framework")}</FieldLabel>
 										<Popover open={open} onOpenChange={setOpen}>
 											<PopoverTrigger asChild>
 												<Button
@@ -241,7 +244,7 @@ export default function CreateProjectCard({
 															})
 														) : (
 															<span className="text-muted-foreground">
-																Select languages...
+																{t("placeholder.project_language_framework")}
 															</span>
 														)}
 													</div>
@@ -252,7 +255,7 @@ export default function CreateProjectCard({
 											<PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
 												<Command shouldFilter={false}>
 													<CommandInput
-														placeholder="Search language..."
+														placeholder={t("placeholder.project_language_search")}
 														value={languageSearchTerm}
 														onValueChange={setLanguageSearchTerm}
 													/>
@@ -262,7 +265,7 @@ export default function CreateProjectCard({
 																<Loader2 className="animate-spin size-4 mr-2" />
 															</div>
 														)}
-														<CommandEmpty>No language found.</CommandEmpty>
+														<CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
 														<CommandGroup>
 															{languagesList?.map((lang) => (
 																<CommandItem
@@ -298,12 +301,12 @@ export default function CreateProjectCard({
 						name="description"
 						render={({ field, fieldState }) => (
 							<Field>
-								<FieldLabel>Description</FieldLabel>
+								<FieldLabel>{t("input.description")}</FieldLabel>
 								<Textarea
 									{...field}
 									value={field.value}
 									onChange={field.onChange}
-									placeholder="Describe your project features, archtecture ans choices"
+									placeholder={t("placeholder.project_description")}
 								/>
 							</Field>
 						)}
@@ -312,7 +315,7 @@ export default function CreateProjectCard({
 						<ImageUploadField
 							control={form.control}
 							name="images"
-							label="Project Gallery"
+							label={t("input.project_gallery")}
 							maxFiles={3}
 						/>
 					)}
@@ -323,10 +326,10 @@ export default function CreateProjectCard({
 							variant={"outline"}
 						>
 							{galleryIsOpen
-								? "Cancel project gallery"
-								: "Create project gallery"}
+								? t("dev_profile.projects.cancel_project_gallery")
+								: t("dev_profile.projects.create_project_gallery")}
 						</Button>
-						<Button>Create</Button>
+						<Button>{t("general.create")}</Button>
 					</div>
 				</form>
 			)}

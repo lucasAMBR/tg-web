@@ -6,6 +6,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useCertificationParams } from "@/hooks/filters/use-certification-params";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 interface DeleteCertificationModalProps{
     certificate: AdditionalCourseModel | null
@@ -18,6 +19,8 @@ interface DeleteCertificationModalProps{
 export default function DeleteCertificationModal({ certificate, profileId, open, openChange, closeModal }: DeleteCertificationModalProps) {
 
     if (!certificate) return null;
+
+    const { t } = useTranslation();
 
     const queryClient = useQueryClient();
 
@@ -57,25 +60,24 @@ export default function DeleteCertificationModal({ certificate, profileId, open,
         <AlertDialog open={open} onOpenChange={openChange}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-					<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+					<AlertDialogTitle>{t("dev_profile.certifications.delete_certification")}</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action is permanent!
+						{t("dev_profile.certifications.delete_certification_subtitle")}
 					</AlertDialogDescription>
                 </AlertDialogHeader>
                 <p className="text-sm">
-					If you remove an academic background, this register will not be used
-					by out recommendation algorithm
+                	{t("dev_profile.certifications.delete_certification_description")}
 				</p>
                 <AlertDialogFooter>
 					<Button variant={"outline"} onClick={closeModal}>
-						Cancel
+						{t("general.cancel")}
 					</Button>
 					<Button
 						variant={"destructive"}
 						onClick={handleDelete}
 						disabled={isPending}
 					>
-						{isPending ? <Spinner /> : "Delete"}
+						{isPending ? <Spinner /> : t("general.delete")}
 					</Button>
 				</AlertDialogFooter>
             </AlertDialogContent>

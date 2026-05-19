@@ -34,6 +34,7 @@ import type { AxiosError } from "axios";
 import { Plus, Save } from "lucide-react";
 import { useEffect, useState, type PropsWithChildren } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 type FormValues = {
 	soft_skills: Record<string, string>;
@@ -47,6 +48,7 @@ export default function RegisterSoftSkillModal({
 	profileId,
 	children,
 }: PropsWithChildren<RegisterSoftSkillModalProps>) {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -142,7 +144,7 @@ export default function RegisterSoftSkillModal({
 		<Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
 			<DialogTrigger asChild>
 				<Button>
-					<Plus /> Create
+					<Plus /> {t("general.create")}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="max-h-5/6 min-w-2/5 overflow-y-auto">

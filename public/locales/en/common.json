@@ -1,0 +1,312 @@
+{
+    "general": {
+        "back": "Back",
+        "sing_out": "Sing out",
+        "create": "Criar",
+        "register": "Registrar",
+        "skip": "Pular",
+        "logout": "Logout",
+        "clear": "Clear",
+        "reset": "Reset",
+        "search": "Search",
+        "update": "Update",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "actions": "Actions",
+        "change": "Change",
+        "remove": "Remove",
+        "add": "Add"
+    },
+    "role": {
+        "dev": "Developer",
+        "company": "Company",
+        "client": "Client"
+    },
+    "landing_page": {
+        "app_name": "Brew!",
+        "title": "Welcome to ",
+        "description": "Built by devs, for devs",
+        "subdescription": "Stop the endless back-and-forth. Our AI-powered recommendation engine analyzes technical stacks to bridge the gap between top talent and high-impact projects.",
+        "rule_button": "Our rules",
+        "know_more_button": "Know more about the algorithm"
+    },
+    "navbar": {
+        "home": "Home",
+        "about_the_project": {
+            "title": "About the project",
+            "about_the_code_title": "About the code",
+            "about_the_code_description": "learn about how brew was made, from choices to frameworks",
+            "about_the_match_algorithm_title": "About the match algorithm",
+            "about_the_match_algorithm_description": "learn about we match your profile with the perfect job",
+            "about_us_title": "About us",
+            "about_us_description": "here your can read about the journey of brew devs through the programming learning"
+        },
+        "jobs": "Jobs",
+        "lgpd": "LGPD",
+        "button": {
+            "sign_in": "Sign in",
+            "sign_up": "Sign up"
+        }
+    },
+    "auth": {
+        "login": {
+            "title": "Welcome back!",
+            "description": "We missed you",
+            "button": "Sign in",
+            "no_account": "Doesn't have an account? ",
+            "register_here": "Register here"
+        },
+        "register": {
+            "title": "Tell us about yourself",
+            "description": "Select your role to help us customize your experience and match you with the right opportunities.",
+            "second_step_title": "Set up your account",
+            "second_step_description": "Create your credentials to get full access to the platform and start your journey.",
+            "already_have_account": "Already have an account? ",
+            "sing_in_here": "Sing in here",
+            "terms_text": "I agree with the platform ",
+            "and_text": "and ",
+            "privacy_policy_text": "privacy policy",
+            "usage_terms_text": "usage terms",
+            "role": {
+                "dev": {
+                    "title": "Developer",
+                    "description": "I'm a developer looking for new career opportunities."
+                },
+                "company": {
+                    "title": "Company",
+                    "description": "I'm a recruiter or manager looking for technical talent."
+                },
+                "client": {
+                    "title": "Client",
+                    "description": "I'm an individual looking to hire developers for freelance projects."
+                }
+            },
+            "button": {
+                "next": "Next",
+                "register": "Register",
+                "back_to_roles": "Back to roles"
+            },
+            "password": {
+                "strength": {
+                    "empty": "Enter a password",
+                    "weak": "Weak password",
+                    "medium": "Medium password",
+                    "strong": "Strong password",
+                    "very_strong": "Very strong password"
+                },
+                "requirements_title": "Must contain:",
+                "requirements": {
+                    "min_length": "At least 8 characters",
+                    "lowercase": "At least 1 lowercase letter",
+                    "uppercase": "At least 1 uppercase letter",
+                    "number": "At least 1 number",
+                    "special": "At least 1 special character"
+                },
+                "a11y": {
+                    "requirement_met": " — Requirement met",
+                    "requirement_not_met": " — Requirement not met"
+                }
+            }
+        }
+    },
+    "profile_create": {
+        "dev": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "company": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "client": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "address_modal": {
+            "title": "Address Creation",
+            "description": "You can skip this step, but for On-site or Hybrid jobs you need to have an registered address on the platform for our algorithm recommend jobs near to you"
+        }
+    },
+    "address_create": {
+        "title": "Register your address",
+        "description_dev": "Provide your address details so we can better tailor location-based opportunities and ensure accurate matching.",
+        "description_company": "Provide your address details so we can better recommend devs for your company and ensure accurate matching.",
+        "description_client": "Provide your address details so we can better recommend devs for your freelance projects and ensure accurate matching."
+    },
+    "dev_profile": {
+        "tabs": {
+            "posts": "Posts",
+            "projects": "Projects",
+            "job_history": "Job History",
+            "certifications": "Certifications"
+        },
+        "projects": {
+            "create_project": "Create Project",
+            "cancel_project_gallery": "Cancel project gallery",
+            "create_project_gallery": "Create project gallery",
+            "no_projects": "No projects yet",
+            "update_project": "Update project",
+            "update_project_description": "Here you can update your project data",
+            "delete_project": "Delete project",
+            "delete_project_description": "This action cannot be undone. This will delete permanently the following project: "
+        },
+        "job_history": {
+            "create_job_history": "Add new job to history",
+            "no_jobs": "No Employments yet",
+            "update_job_history": "Update job history item",
+            "update_job_history_description": "Change the details from an employment",
+            "actual": "Actual",
+            "at": "At",
+            "delete_job_history": "Are you sure?",
+            "delete_job_history_subtitle": "This action cannot be undone.",
+            "delete_job_history_description": "When you delete an item from your job history he doesn't will be more used by our recommendation algorithm"
+        },
+        "certifications": {
+            "create_certification": "Add new certification",
+            "no_certifications": "No certifications",
+            "update_certification": "Update certification",
+            "update_certification_description": "Change the details from a certification",
+            "delete_certification": "Are you sure?",
+            "delete_certification_subtitle": "This action is permanent!",
+            "delete_certification_description": "If you remove an academic background, this register will not be used by out recommendation algorithm"
+        },
+        "hard_skills": {
+            "title": "Hard skills",
+            "no_hard_skills": "No hard skills",
+            "create_hard_skill": "Add new hard skill",
+            "create_hard_skill_description": "Register a new hard skill to help our recommendation system find the perfect job for you!",
+            "update_hard_skill": "Update hard skill",
+            "update_hard_skill_description": "Change the details from a hard skill",
+            "delete_hard_skill": "Are you sure?",
+            "delete_hard_skill_subtitle": "This action is permanent!",
+            "delete_hard_skill_description": "If you remove a hard skill, this register will not be used by out recommendation algorithm"
+        },
+        "soft_skills": {
+            "title": "Soft Skills"
+        }
+    },
+    "under_construction": {
+        "title": "This feature is actually under construction!",
+        "description": "Please comeback later"
+    },
+    "sidebar": {
+        "sections": {
+            "feed": "Feed",
+            "companies": "Companies",
+            "job_vacancies": "Job Vacancies",
+            "freelances": "Freelances"
+        },
+        "options": {
+            "profile": "Profile",
+            "settings": "Settings"
+        }
+    },
+    "input": {
+        "email": "E-mail",
+        "password": "Password",
+        "name": "Name",
+        "phone": "Phone",
+        "birthdate": "Birthdate",
+        "seniority_level": "Seniority Level",
+        "open_to_work": "Open to work",
+        "open_to_relocation": "Open to relocation",
+        "cep": "Zipcode",
+        "number": "Number",
+        "complement": "Complement",
+        "street": "Street",
+        "district": "District",
+        "city": "City",
+        "state": "State",
+        "title": "Title",
+        "language_framework": "Languages / Frameworks",
+        "description": "Description",
+        "project_gallery": "Project gallery",
+        "position_name": "Position name",
+        "company_name": "Company name",
+        "company_location": "Company location",
+        "employment_type": "Employment type",
+        "contract_modality": "Contract modality",
+        "actuation_details": "Actuation details",
+        "start_date": "Start date",
+        "end_date": "End date",
+        "is_current": "Is current",
+        "certification_name": "Certification name",
+        "certification_provider": "Certification provider",
+        "certificate": "Certificate",
+        "skill_level": "Skill level"
+    },
+    "tooltip": {
+        "open_to_work": "Tell our algorithm that you are available for job openings; without this information, our intelligent algorithm will not recommend you for positions.",
+        "open_to_relocation": "Tell our algorithm that you are available to relocate to another city, state, or country for a job opening."
+    },
+    "placeholder": {
+        "name": "Your name",
+        "cpf": "Your CPF",
+        "phone": "Your phone",
+        "birthdate": "Your birthdate",
+        "seniority_level": "Pick your seniority level",
+        "cep": "Insert your zipcode",
+        "number": "Number",
+        "complement": "Complement",
+        "street": "Street",
+        "district": "District",
+        "city": "City",
+        "state": "State",
+        "project_search": "Search for an especific project, language, framework or description",
+        "project_title": "Project title",
+        "project_language_framework": "Select project languages / frameworks",
+        "project_description": "Describe your project features, archtecture and choices",
+        "project_language_search": "Search language...",
+        "employment_search": "Search for an especific company, seniority and work modality",
+        "position_name": "Frontend developer, Devops engineer",
+        "company_name": "Example Company Ltda",
+        "company_location": "São Paulo, SP",
+        "employment_type": "Pick your employment type",
+        "contract_modality": "Pick your contract modality",
+        "actuation_details": "Describe your actuation details, what you did, what you learned, what you achieved",
+        "start_date": "Start date",
+        "end_date": "End date",
+        "certification_search": "Search for an especific company, seniority and work modality",
+        "certification_name": "AWS Cloud Certification",
+        "certification_provider": "Amazon",
+        "certificate": "Select a PDF file",
+        "skill_level": "Select your skill level",
+        "language_framework": "Select a language / framework"
+    },
+    "enum": {
+        "seniority_level": {
+            "intern": "Intern",
+            "junior": "Junior",
+            "mid_level": "Mid Level",
+            "senior": "Senior",
+            "staff": "Staff"
+        },
+        "employment_type": {
+            "on_site": "On-site",
+            "remote": "Remote",
+            "hybrid": "Hybrid"
+        },
+        "contract_type": {
+            "clt": "CLT",
+            "contractor": "Contractor",
+            "internship": "Internship"
+        },
+        "hard_skill_levels": {
+            "fundamentals": "Fundamentals",
+            "basic": "Basic",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert",
+            "authority": "Authority"
+        }
+    },
+    "pagination": {
+        "lines_per_page": "Lines per page",
+        "displaying": "Displaying",
+        "of": "of",
+        "page": "Page"
+    },
+    "no_data": {
+        "no_languages": "No languages found"
+    }
+}

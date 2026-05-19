@@ -1,3 +1,4 @@
+import { LanguagePicker } from "@/components/global/language-change-button";
 import Sidebar from "@/components/global/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,9 +29,12 @@ function RouteComponent() {
 						</div>
 						<Button variant={"secondary"}>Search</Button>
 					</div>
-					<Button  variant={"default"} size={"icon"}>
-						<Bell />
-					</Button>
+					<div className="flex gap-2">
+						<LanguagePicker />
+						<Button  variant={"default"} size={"icon"}>
+							<Bell />
+						</Button>
+					</div>
 				</div>
 				<div className="flex flex-col flex-1 min-h-0 overflow-auto [scrollbar-gutter:stable]">
 					<Outlet />

@@ -15,12 +15,14 @@ import type { AdditionalCourseModel } from "@/api/generated/models"
 import CertificationCard from "./certification-card"
 import DeleteCertificationModal from "./delete-certification-modal"
 import UpdateCertificationModal from "./update-certification-modal"
+import { useTranslation } from "react-i18next"
 
 interface CertificationListProps{
     profileId: string
 }
 
 export default function CertificationList({ profileId }: CertificationListProps) {
+    const { t } = useTranslation();
 
     const {
         page,
@@ -81,12 +83,12 @@ export default function CertificationList({ profileId }: CertificationListProps)
 						value={search}
 						onChange={(e) => setFilterParams({ search: e.target.value })}
 						type="text"
-						placeholder="Search for an especific company, seniority and work modality"
+						placeholder={t("placeholder.certification_search")}
 						className="peer pl-9"
 					/>
 				</div>
 				<Button variant={"secondary"} onClick={clearFilters}>
-					<BrushCleaning className="size-4" /> Clear
+					<BrushCleaning className="size-4" /> {t("general.clear")}
 				</Button>
 			</Card>
 			{certificationList.length === 0 && (
@@ -96,7 +98,7 @@ export default function CertificationList({ profileId }: CertificationListProps)
 							<EmptyMedia variant={"icon"}>
 								<Captions />
 							</EmptyMedia>
-							<EmptyTitle>No Certifications</EmptyTitle>
+							<EmptyTitle>{t("dev_profile.certifications.no_certifications")}</EmptyTitle>
 						</EmptyHeader>
 					</Empty>
 				</Card>
@@ -113,7 +115,7 @@ export default function CertificationList({ profileId }: CertificationListProps)
 					))}
 				</div>
 			)}
-			<Card className="p-4 bg-accent/40">
+			<Card className="p-4 bg-muted">
 				<DefaultPagination
 					data={certifications?.data.pagination as GenericPagination}
 					setPage={(p) => setFilterParams({ page: p })}
