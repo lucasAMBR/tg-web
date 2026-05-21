@@ -14,6 +14,7 @@ import type { ApiError } from "@/utils/api-error";
 import { Button } from "../ui/button";
 import { RotateCcw, Save } from "lucide-react";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationDistancesProps{
     profileId: string,
@@ -21,6 +22,8 @@ interface CustomRecommendationDistancesProps{
 }
 
 export default function CustomRecommendationDistances({ profileId, initialData }: CustomRecommendationDistancesProps) {
+
+    const { t } = useTranslation();
 
     const queryClient = useQueryClient();
 
@@ -46,8 +49,8 @@ export default function CustomRecommendationDistances({ profileId, initialData }
     
     const sendPreferences = (data: IUpdateMaxJobRadiusPreferences) => {
         updatePreferences({ profileId: profileId, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
             },
@@ -66,7 +69,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
             } 
         }, {
             onSuccess: () => {
-                CustomToaster.successToast("Default configuration restored!");
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_restored"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
 
@@ -89,7 +92,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
                 name="on_site_job_radius"
                 render={({ field: { value, onChange } }) => (
                     <Field>
-                        <FieldLabel>On Site jobs: {value + " Km"}</FieldLabel>
+                        <FieldLabel>{t("enum.employment_type.on_site")}: {value + " Km"}</FieldLabel>
                         <Slider
                             value={[value]}           
                             onValueChange={(vals) => {
@@ -110,7 +113,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
                 name="hybrid_jobs_radius"
                 render={({ field: { value, onChange } }) => (
                     <Field>
-                        <FieldLabel>Hybrid jobs: {value + " Km"}</FieldLabel>
+                        <FieldLabel>{t("enum.employment_type.hybrid")}: {value + " Km"}</FieldLabel>
                         <Slider
                             value={[value]}           
                             onValueChange={(vals) => {
@@ -127,8 +130,8 @@ export default function CustomRecommendationDistances({ profileId, initialData }
                 )}
             />
             <CardFooter className="gap-2 justify-end p-0">
-                <Button type="button" onClick={reset} variant={"outline"} disabled={valueIsEqualDefault} ><RotateCcw /> Reset</Button>
-                <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <> <Save /> Save </> }</Button>
+                <Button type="button" onClick={reset} variant={"outline"} disabled={valueIsEqualDefault} ><RotateCcw /> {t("general.reset")}</Button>
+                <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <> <Save /> {t("general.save")} </> }</Button>
             </CardFooter>
         </form>
         </Card>

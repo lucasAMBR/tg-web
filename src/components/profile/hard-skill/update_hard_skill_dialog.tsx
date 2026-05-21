@@ -119,8 +119,8 @@ export default function UpdateHardskillModal({
 		registerHardSkill(
 			{ id: hardSkill.id, data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.hard_skill_updated"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexHardSkillQueryKey({ dev_profile_id: profileId }),

@@ -152,8 +152,8 @@ export default function ProjectHistoryList({
 		deleteProject(
 			{ id: selectedProject.id },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.project_deleted"));
 					queryClient.invalidateQueries({
 						queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),
 					});
@@ -208,8 +208,8 @@ export default function ProjectHistoryList({
 		updateProject(
 			{ id: selectedProject.id, data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.project_updated"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),

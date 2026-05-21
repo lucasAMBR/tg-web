@@ -23,6 +23,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 import { Loader2, Plus, Save, XIcon } from "lucide-react";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ManageProjectModalProps {
 	projectId: string;
@@ -37,6 +38,7 @@ export default function ManageProjectGallery({
 	open,
 	onOpenChange,
 }: ManageProjectModalProps) {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,7 +78,7 @@ export default function ManageProjectGallery({
 				data: imagesPayload as any,
 			});
 
-			CustomToaster.successToast("Imagem(ns) adicionada(s) com sucesso!");
+			CustomToaster.successToast(t("toast.success.project_gallery_images_added"));
 
 			queryClient.invalidateQueries({
 				queryKey: getShowProjectHistoryQueryKey(projectId),
@@ -95,8 +97,8 @@ export default function ManageProjectGallery({
 		deleteImage(
 			{ id: projectId, imageId: imageId },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.project_gallery_image_deleted"));
 
 					queryClient.invalidateQueries({
 						queryKey: getShowProjectHistoryQueryKey(projectId),

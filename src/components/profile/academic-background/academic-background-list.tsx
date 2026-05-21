@@ -16,6 +16,7 @@ import { useState } from "react";
 import type { AcademicBackgroundModel } from "@/api/generated/models";
 import DeleteAcademicBackgroundModal from "./academic-background-delete-modal";
 import UpdateAcademicBackgroundModal from "./academic-background-update-modal";
+import { useTranslation } from "react-i18next";
 
 interface AcademicBackgroundListProps {
 	profileId: string;
@@ -24,6 +25,8 @@ interface AcademicBackgroundListProps {
 export default function AcademicBackgroundList({
 	profileId,
 }: AcademicBackgroundListProps) {
+	const { t } = useTranslation();
+
 	const { page, perPage, search, setFilterParams } =
 		useAcademicBackgroundParams();
 
@@ -68,7 +71,7 @@ export default function AcademicBackgroundList({
 	return (
 		<div className="flex flex-col gap-3">
 			<h2 className="text-3xl flex justify-between">
-				<span className="font-[Anta]">Academic Background</span>
+				<span className="font-[Anta]">{t("dev_profile.academic_background.title")}</span>
 				<CreateAcademicBackgroundCard profileId={profileId} />
 			</h2>
 			{academicBackgroundList.length === 0 && (
@@ -78,7 +81,7 @@ export default function AcademicBackgroundList({
 							<EmptyMedia variant={"icon"}>
 								<GraduationCap />
 							</EmptyMedia>
-							<EmptyTitle>No Academic background</EmptyTitle>
+							<EmptyTitle>{t("dev_profile.academic_background.no_academic_background")}</EmptyTitle>
 						</EmptyHeader>
 					</Empty>
 				</Card>

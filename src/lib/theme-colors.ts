@@ -146,7 +146,7 @@ const DEFAULT_FONT_PROPERTIES = {
 
 export const PRESET_THEMES: CompleteTheme[] = [
 	{
-		name: "Padrão",
+		name: "Brew (Default)",
 		light: {
 			background: "oklch(0.9821 0 0)",
 			foreground: "oklch(0.2435 0 0)",

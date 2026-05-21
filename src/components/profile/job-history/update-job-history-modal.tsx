@@ -49,7 +49,7 @@ import { onError } from "@/utils/on-error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { format } from "date-fns";
+import { formatDateOnly, parseLocalDateFromIso, toIsoDateOnly } from "@/utils/date-only";
 import { ChevronDownIcon } from "lucide-react";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -104,12 +104,10 @@ export default function UpdateJobHistoryModal({
 			seniority_level: job.seniority_level ?? "",
 			actuation_details: job.actuation_details ?? "",
 			is_current: job.is_current ?? true,
-			start_date:
-				format(job.start_date, "yyyy-MM-dd") ??
-				format(new Date(), "yyyy-MM-dd"),
+			start_date: toIsoDateOnly(job.start_date) || formatDateOnly(new Date()),
 			end_date:
 				!job.is_current && job.end_date !== null
-					? format(job.end_date, "yyyy-MM-dd")
+					? toIsoDateOnly(job.end_date)
 					: undefined,
 		},
 	});
@@ -130,8 +128,8 @@ export default function UpdateJobHistoryModal({
 		update(
 			{ id: job.id, data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.job_history_updated"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexEmploymentHistoryQueryKey({
@@ -327,19 +325,10 @@ export default function UpdateJobHistoryModal({
 											<PopoverContent className="w-auto p-0" align="start">
 												<Calendar
 													mode="single"
-													selected={
-														field.value
-															? (() => {
-																	const [y, m, d] = field.value
-																		.split("-")
-																		.map(Number);
-																	return new Date(y, m - 1, d);
-																})()
-															: undefined
-													}
+													selected={parseLocalDateFromIso(field.value)}
 													onSelect={(date) =>
 														field.onChange(
-															date ? format(date, "yyyy-MM-dd") : "",
+															date ? formatDateOnly(date) : "",
 														)
 													}
 													captionLayout="dropdown"
@@ -382,18 +371,13 @@ export default function UpdateJobHistoryModal({
 													mode="single"
 													selected={
 														field.value
-															? (() => {
-																	const [y, m, d] = field.value
-																		.split("-")
-																		.map(Number);
-																	return new Date(y, m - 1, d);
-																})()
+															? parseLocalDateFromIso(field.value)
 															: undefined
 													}
 													captionLayout="dropdown"
 													onSelect={(date) => {
 														field.onChange(
-															date ? format(date, "yyyy-MM-dd") : undefined,
+															date ? formatDateOnly(date) : undefined,
 														);
 													}}
 													disabled={(date) => date < new Date("1900-01-01")}

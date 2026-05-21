@@ -1,7 +1,8 @@
+import { LanguagePicker } from "@/components/global/language-change-button";
+import { Logo } from "@/components/global/Logo";
 import LogoutButton from "@/components/global/logout-button";
 import ThemeToggle from "@/components/global/theme-toggle-button";
 import CompanyProfileForm from "@/components/profile-create/company-profile-form";
-import DevProfileForm from "@/components/profile-create/dev-profile-form";
 import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
 import {
@@ -10,7 +11,7 @@ import {
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 const staticData = {
 	requiredPermissions: ["company_profile.create"],
@@ -24,39 +25,31 @@ export const Route = createFileRoute("/(private)/create/profile/company")({
 	},
 });
 function RouteComponent() {
-	const { theme } = useTheme();
+	const { t } = useTranslation();
 
 	return (
 		<div className="w-screen h-screen flex">
 			<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
 				<div className="w-full h-full"></div>
 			</div>
+			<LanguagePicker />
 			<div className="flex-1 relative m-4 flex flex-col items-center justify-center">
-				<LogoutButton text="You will be leaving without finishing your profile creation, you will not be able to be reached by our algorithm!">
+				<LogoutButton text={t("profile_create.logout_dialog.description")}>
 					<Button variant={"ghost"} className="absolute top-0 left-0">
-						<LogOut /> Logout
+						<LogOut /> {t("general.logout")}
 					</Button>
 				</LogoutButton>
 				<div className="flex flex-col justify-center items-center mb-6">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-12"
-						alt="Logo"
-					/>
+					<Logo className="w-12 fill-primary" />
 					<p className="font-[Agbalumo] text-primary text-5xl">
 						{env.APP_NAME}
 					</p>
 				</div>
 				<h2 className="font-[Anta] text-primary text-3xl mb-6">
-					Create your profile
+					{t("profile_create.company.title")}
 				</h2>
 				<p className="max-w-[700px] text-center mb-6">
-					Fill in your basic information so our algorithm can understand your
-					profile and match you with the most relevant opportunities.
+					{t("profile_create.company.description")}
 				</p>
 				<CompanyProfileForm />
 			</div>

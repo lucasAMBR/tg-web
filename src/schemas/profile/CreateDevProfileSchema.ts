@@ -1,3 +1,4 @@
+import { isoDateOnlyField } from "@/schemas/helpers/iso-date-only-field";
 import z from "zod/v3";
 
 export const CreateDevProfileSchema = z.object({
@@ -21,27 +22,7 @@ export const CreateDevProfileSchema = z.object({
 		),
 	open_to_relocation: z.boolean(),
 	open_to_work: z.boolean(),
-	birthdate: z
-		.string()
-		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return !isNaN(date.getTime());
-			},
-			{
-				message: "Data inválida",
-			},
-		)
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return date <= new Date();
-			},
-			{
-				message: "A data de nascimento não pode ser no futuro!",
-			},
-		),
+	birthdate: isoDateOnlyField(),
 
 	seniority_level: z.string(),
 });

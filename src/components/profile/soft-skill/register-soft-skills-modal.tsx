@@ -117,8 +117,8 @@ export default function RegisterSoftSkillModal({
 		mutate(
 			{ data: formatted },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.dev_soft_skill_registered"));
 					queryClient.invalidateQueries({
 						queryKey: getListDevSoftSkillQueryKey(profileId),
 					});
@@ -143,26 +143,26 @@ export default function RegisterSoftSkillModal({
 	return (
 		<Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
 			<DialogTrigger asChild>
-				<Button>
+				<Button variant={"accent"}>
 					<Plus /> {t("general.create")}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="max-h-5/6 min-w-2/5 overflow-y-auto">
 				<DialogHeader>
-					<DialogTitle>Register Soft Skills</DialogTitle>
+						<DialogTitle>{t("dev_profile.soft_skills.register_soft_skills")}</DialogTitle>
 					<DialogDescription>
-						Here you can do a self evaluation about your Soft Skills
+						{t("dev_profile.soft_skills.register_soft_skills_description")}
 					</DialogDescription>
 				</DialogHeader>
 				<div className="flex w-full gap-2">
 					<Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">
-						Pontuation limit based on your seniority:{" "}
+						{t("dev_profile.soft_skills.pontuation_limit_based_on_seniority")}:{" "}
 						<span className="text-2xl font-black text-primary">
 							{userPointLimits}
 						</span>
 					</Card>
 					<Card className="p-2 flex justify-center items-center flex-1 gap-2 text-sm">
-						Actual pontuation:{" "}
+						{t("dev_profile.soft_skills.actual_pontuation")}:{" "}
 						<span className="text-2xl font-black text-primary">
 							{currentScore}
 						</span>
@@ -176,8 +176,8 @@ export default function RegisterSoftSkillModal({
 						<>
 							<Card className="p-3">
 								<div key={softSkill.id}>
-									<h3 className="font-bold text-primary">{softSkill.name}</h3>
-									<p>{softSkill.description}</p>
+									<h3 className="font-bold text-primary">{t(softSkill.i18n_name_key)}</h3>
+									<p>{t(softSkill.i18n_description_key)}</p>
 								</div>
 
 								<Controller
@@ -203,10 +203,10 @@ export default function RegisterSoftSkillModal({
 															<FieldContent>
 																<FieldTitle className="">
 																	<Badge>{response.evaluation_weight}</Badge>{" "}
-																	{response.title}
+																	{t(response.i18n_title_key)}
 																</FieldTitle>
 																<FieldDescription>
-																	{response.description}
+																	{t(response.i18n_description_key)}
 																</FieldDescription>
 															</FieldContent>
 
@@ -225,9 +225,9 @@ export default function RegisterSoftSkillModal({
 						</>
 					))}
 					<DialogFooter className="mt-4">
-						<Button variant={"outline"}>Cancel</Button>
+						<Button variant={"outline"} onClick={() => setModalIsOpen(false)}>{t("general.cancel")}</Button>
 						<Button disabled={!canSubmit}>
-							<Save /> Save
+							<Save /> {t("general.save")}
 						</Button>
 					</DialogFooter>
 				</form>

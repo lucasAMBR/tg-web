@@ -76,17 +76,8 @@ export default function SoftSkillList({ profileId }: SoftSkillListProps) {
 								<EmptyMedia variant={"icon"}>
 									<UserCircle />
 								</EmptyMedia>
-								<EmptyTitle>No soft skill yet</EmptyTitle>
-								<EmptyContent></EmptyContent>
-								<EmptyDescription>
-									You haven&apos;t registered any soft yet. Get started by
-									creating your first skill, they are used by our recommendation
-									algorithm
-								</EmptyDescription>
+								<EmptyTitle>{t("dev_profile.soft_skills.no_soft_skills")}</EmptyTitle>
 							</EmptyHeader>
-							<EmptyContent>
-								<Button>Register</Button>
-							</EmptyContent>
 						</Empty>
 					</Card>
 				)}

@@ -2,9 +2,10 @@ import type { CompanyProjectModel } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useAuthStore } from "@/stores/auth-store";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CompanyProjectCardProps{
     project: CompanyProjectModel,
@@ -14,6 +15,8 @@ interface CompanyProjectCardProps{
 export default function CompanyProjectCard({ project, openDelete, openUpdate }: CompanyProjectCardProps) {
 
     const { user } = useAuthStore();
+
+    const { t } = useTranslation();
 
     return (
         <Card className="p-4">
@@ -28,16 +31,17 @@ export default function CompanyProjectCard({ project, openDelete, openUpdate }: 
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
+                                <DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
                                 <DropdownMenuItem
                                     onClick={() => openUpdate(project)}
                                 >
-                                    <Edit /> Edit
+                                    <Edit /> {t("general.update")}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                     onClick={() => openDelete(project)}
                                     variant="destructive"
                                 >
-                                    <Trash /> Delete
+                                    <Trash /> {t("general.delete")}
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>

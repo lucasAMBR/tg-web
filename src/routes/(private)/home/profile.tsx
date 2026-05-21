@@ -77,7 +77,7 @@ function RouteComponent() {
 							{getNameFromProfile(user)}
 						</h2>
 						<div className="flex gap-2">
-							<Badge variant={"secondary"}>{getRoleLabel(user)}</Badge>
+							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>
@@ -104,7 +104,7 @@ function RouteComponent() {
 							{getNameFromProfile(user)}
 						</h2>
 						<div className="flex gap-2">
-							<Badge variant={"secondary"}>{getRoleLabel(user)}</Badge>
+							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>

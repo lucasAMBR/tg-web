@@ -20,6 +20,7 @@ import type { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { CheckIcon, ChevronsUpDownIcon, Loader2, XIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CreateCompanyStackDialogProps {
     profileId: string
@@ -29,6 +30,7 @@ interface CreateCompanyStackDialogProps {
 }
 
 export default function CreateCompanyStackDialog({ profileId, initialData, open, openChange }: CreateCompanyStackDialogProps) {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
 
     const [popoverOpen, setPopoverOpen] = useState(false);
@@ -71,7 +73,7 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
     const handleSync = (data: ISyncCompanyStack) => {
         syncStack({ company: profileId, data }, {
             onSuccess: () => {
-                CustomToaster.successToast("Stack updated with Success!");
+                CustomToaster.successToast(t("toast.success.company_stack_updated"));
                 queryClient.invalidateQueries({ queryKey: getGetCompanyStackQueryKey(profileId) });
                 openChange(false);
             },
@@ -85,8 +87,8 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
         <Dialog open={open} onOpenChange={openChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Register your company stack</DialogTitle>
-                    <DialogDescription>Show interested developers the technologies used by your company.</DialogDescription>
+                    <DialogTitle>{t("company_profile.stack.register_title")}</DialogTitle>
+                    <DialogDescription>{t("company_profile.stack.register_description")}</DialogDescription>
                 </DialogHeader>
                 <Card className="p-4">
                     <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(handleSync)}>
@@ -109,7 +111,7 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
                                 };
                                 return (
                                     <Field>
-                                        <FieldLabel>Languages / Frameworks</FieldLabel>
+                                        <FieldLabel>{t("input.language_framework")}</FieldLabel>
                                         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                                             <PopoverTrigger asChild>
                                                 <Button variant="outline" role="combobox" className="h-auto w-full justify-between hover:bg-transparent">
@@ -127,7 +129,9 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
                                                                 );
                                                             })
                                                         ) : (
-                                                            <span className="text-muted-foreground">Select languages...</span>
+                                                            <span className="text-muted-foreground">
+                                                                {t("placeholder.project_language_framework")}
+                                                            </span>
                                                         )}
                                                     </div>
                                                     <ChevronsUpDownIcon className="opacity-50 shrink-0" />
@@ -135,10 +139,14 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
                                             </PopoverTrigger>
                                             <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                                                 <Command shouldFilter={false}>
-                                                    <CommandInput placeholder="Search language..." value={languageSearchTerm} onValueChange={setLanguageSearchTerm} />
+                                                    <CommandInput
+                                                        placeholder={t("placeholder.project_language_search")}
+                                                        value={languageSearchTerm}
+                                                        onValueChange={setLanguageSearchTerm}
+                                                    />
                                                     <CommandList>
                                                         {languageIsLoading && <div className="flex items-center justify-center p-4"><Loader2 className="animate-spin size-4" /></div>}
-                                                        <CommandEmpty>No language found.</CommandEmpty>
+                                                        <CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
                                                         <CommandGroup>
                                                             {languagesList?.map((lang) => (
                                                                 <CommandItem key={lang.id} value={lang.id} onSelect={() => toggleSelection(lang.id, lang.name)}>
@@ -156,7 +164,7 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
                             }}
                         />
                         <Button type="submit" disabled={isPending} className="w-full">
-                            {isPending ? <Spinner /> : "Save Stack"}
+                            {isPending ? <Spinner /> : t("general.save")}
                         </Button>
                     </form>
                 </Card>

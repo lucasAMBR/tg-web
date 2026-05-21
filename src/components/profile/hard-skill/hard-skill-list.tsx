@@ -79,8 +79,8 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 		deleteHardSkill(
 			{ id: selectedHardSkill.id },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.hard_skill_deleted"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexHardSkillQueryKey({ dev_profile_id: profileId }),

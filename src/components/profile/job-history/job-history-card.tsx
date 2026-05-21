@@ -16,7 +16,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { format } from "date-fns";
+import { formatIsoDateOnlyBr } from "@/utils/date-only";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -77,11 +77,11 @@ export default function JobHistoryCard({
 				</CardDescription>
 				<div className="flex gap-6">
 					<p className="text-muted-foreground text-sm font-normal">
-						{`${t("input.start_date")}: ${format(job.start_date, "dd/MM/yyyy")}`}
+						{`${t("input.start_date")}: ${formatIsoDateOnlyBr(job.start_date)}`}
 					</p>
 					{!actual && (
 						<p className="text-muted-foreground text-sm font-normal">
-							{`${t("input.end_date")}: ${format(job.end_date as string, "dd/MM/yyyy")}`}
+							{`${t("input.end_date")}: ${formatIsoDateOnlyBr(job.end_date as string)}`}
 						</p>
 					)}
 				</div>

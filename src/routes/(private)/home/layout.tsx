@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Bell, Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(private)/home")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const { t } = useTranslation();
+	
 	return (
 		<div className="flex w-full h-full">
 			<Sidebar />
@@ -23,11 +26,11 @@ function RouteComponent() {
 							</div>
 							<Input
 								type="text"
-								placeholder="Search"
+								placeholder={t("general.search")}
 								className="peer pl-9 min-w-112"
 							/>
 						</div>
-						<Button variant={"secondary"}>Search</Button>
+						<Button variant={"secondary"}>{t("general.search")}</Button>
 					</div>
 					<div className="flex gap-2">
 						<LanguagePicker />

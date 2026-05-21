@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 import { BadgeQuestionMark, ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 
-import { format, parse } from "date-fns";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import { Switch } from "../ui/switch";
@@ -48,12 +48,6 @@ import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import { useTranslation } from "react-i18next";
 
-/** ISO date-only strings parse as UTC in `Date`, shifting the calendar day in non-UTC zones. */
-function parseLocalDateFromIso(dateStr: string): Date | undefined {
-	if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return undefined;
-	return parse(dateStr, "yyyy-MM-dd", new Date());
-}
-
 export default function DevProfileForm() {
 	const { t } = useTranslation();
 
@@ -87,8 +81,8 @@ export default function DevProfileForm() {
 		await createProfile(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.profile_dev_created"));
 
 					hydrateUser();
 
@@ -193,11 +187,7 @@ export default function DevProfileForm() {
 										)}
 									>
 										{field.value ? (
-											/^\d{4}-\d{2}-\d{2}$/.test(field.value) ? (
-												field.value
-											) : (
-												format(new Date(field.value), "yyyy-MM-dd")
-											)
+											field.value
 										) : (
 											<span>{t("placeholder.birthdate")}</span>
 										)}
@@ -207,12 +197,9 @@ export default function DevProfileForm() {
 								<PopoverContent className="w-auto p-0" align="start">
 									<Calendar
 										mode="single"
-										selected={
-											parseLocalDateFromIso(field.value) ??
-											(field.value ? new Date(field.value) : undefined)
-										}
+										selected={parseLocalDateFromIso(field.value)}
 										onSelect={(date) =>
-											field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+											field.onChange(date ? formatDateOnly(date) : "")
 										}
 										captionLayout="dropdown"
 										disabled={(date) => date < new Date("1900-01-01")}

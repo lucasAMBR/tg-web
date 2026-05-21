@@ -49,8 +49,8 @@ export default function CreateCertificationCard({ profileId }: CreateCertificati
 
     const create = (data: ICreateCertificationSchema) => {
         createCertification({ data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.certification_created"));
                 form.reset();
                 queryClient.invalidateQueries({
                     queryKey: getIndexAdditionalCoursesQueryKey({

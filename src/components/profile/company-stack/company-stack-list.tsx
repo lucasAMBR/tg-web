@@ -5,6 +5,7 @@ import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTi
 import { Spinner } from "@/components/ui/spinner";
 import { Brackets, Edit, Plus } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import CreateCompanyStackDialog from "./create-company-stack-dialog";
 
 interface CompanyStackListProps{
@@ -12,6 +13,7 @@ interface CompanyStackListProps{
 }
 
 export default function CompanyStackList({ profileId }: CompanyStackListProps){
+    const { t } = useTranslation();
 
     const {
         data: hardSkill,
@@ -25,21 +27,21 @@ export default function CompanyStackList({ profileId }: CompanyStackListProps){
     return(
         <div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
-				<span className="font-[Anta]">Our Stack</span>
+				<span className="font-[Anta]">{t("company_profile.stack.title")}</span>
                 {hardSkillList.length > 0 ? (
-                    <Button onClick={() => setStackModalIsOpen(true)} variant={"outline"}>
-                        <Edit  /> Edit
+                    <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
+                        <Edit /> {t("general.change")}
                     </Button>
                 ) : (
-                    <Button onClick={() => setStackModalIsOpen(true)}>
-                        <Plus /> Create
+                    <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
+                        <Plus /> {t("general.create")}
                     </Button>
                 )}
 			</h2>
 			<div className="flex flex-col gap-2">
 				{isLoading && (
 					<div className="flex items-center justify-center">
-						<Spinner /> loading...
+						<Spinner />
 					</div>
 				)}
 				{!isLoading && hardSkillList.length < 1 && (
@@ -49,17 +51,9 @@ export default function CompanyStackList({ profileId }: CompanyStackListProps){
 								<EmptyMedia variant={"icon"}>
 									<Brackets />
 								</EmptyMedia>
-								<EmptyTitle>No stack yet</EmptyTitle>
-								<EmptyContent></EmptyContent>
-								<EmptyDescription>
-									You haven&apos;t registered any tech stack yet. Get started by
-									creating your first stack, they are used by our recommendation
-									algorithm
-								</EmptyDescription>
+								<EmptyTitle>{t("company_profile.stack.no_stack")}</EmptyTitle>
 							</EmptyHeader>
-							<EmptyContent>
-								<Button>Register</Button>
-							</EmptyContent>
+
 						</Empty>
 					</Card>
 				)}

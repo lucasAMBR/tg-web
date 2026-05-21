@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	Building,
 	Calendar,
@@ -5,6 +6,7 @@ import {
 	Edit,
 	EllipsisVertical,
 	Folder,
+	LayoutDashboard,
 	List,
 	LogOut,
 	User,
@@ -33,8 +35,10 @@ export default function Sidebar() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { user } = useAuthStore();
+	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
 	const role = getUserMainRole(user);
+	const logoutDialogText = t("sidebar.logout_dialog.description");
 
 	function SidebarItem({
 		title,
@@ -94,7 +98,8 @@ export default function Sidebar() {
 					{role === "company" && (
 						<>
 							<SidebarItem title="Feed" icon={List} url="/home" />
-							<SidebarItem title="My Jobs" icon={Folder} url="/my-jobs" />
+							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-jobs" />
 						</>
 					)}
 
@@ -117,7 +122,7 @@ export default function Sidebar() {
 					)}
 					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/home/settings" />
 
-					<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
+					<LogoutButton text={logoutDialogText}>
 						<div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer hover:bg-muted">
 							<LogOut className="size-4" />
 							{t("general.logout")}
@@ -159,14 +164,24 @@ export default function Sidebar() {
 							<DropdownMenuItem>
 								<Edit /> Update account info
 							</DropdownMenuItem>
-							<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
-								<DropdownMenuItem variant="destructive">
-									<LogOut /> Logout
-								</DropdownMenuItem>
-							</LogoutButton>
+							<DropdownMenuItem
+								variant="destructive"
+								onSelect={(event) => {
+									event.preventDefault();
+									setLogoutDialogOpen(true);
+								}}
+							>
+								<LogOut /> {t("general.logout")}
+							</DropdownMenuItem>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>
+
+				<LogoutButton
+					text={logoutDialogText}
+					open={logoutDialogOpen}
+					onOpenChange={setLogoutDialogOpen}
+				/>
 			</div>
 		</div>
 	);

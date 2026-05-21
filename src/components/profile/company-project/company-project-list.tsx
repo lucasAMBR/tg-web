@@ -30,6 +30,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { useTranslation } from "react-i18next";
 
 interface CompanyProjectsListProps{
     profileId: string;
@@ -37,6 +38,8 @@ interface CompanyProjectsListProps{
 
 export default function CompanyProjectList({ profileId }: CompanyProjectsListProps){
 
+    const { t } = useTranslation();
+    
     const queryClient = useQueryClient();
 
     const {
@@ -98,8 +101,8 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
         if (!selectedProject) return;
 
         deleteProject( {companyProject: selectedProject.id} ,{
-                onSuccess: (success) => {
-                    CustomToaster.successToast(success.message);
+                onSuccess: () => {
+                    CustomToaster.successToast(t("toast.success.company_project_deleted"));
                     queryClient.invalidateQueries({
                         queryKey: getIndexCompanyProjectQueryKey(),
                     });
@@ -127,7 +130,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
         { id: string; name: string }[]
     >([]);
 
-    const { mutate: updateProject } = useUpdateCompanyProject();
+    const { mutate: updateProject, isPending: updateIsPending } = useUpdateCompanyProject();
 
     const form = useForm<IUpdateCompanyProjectSchema>({
         resolver: zodResolver(UpdateCompanyProjectSchema),
@@ -167,8 +170,8 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
         updateProject(
             { companyProject: selectedProject.id, data },
             {
-                onSuccess: (success) => {
-                    CustomToaster.successToast(success.message);
+                onSuccess: () => {
+                    CustomToaster.successToast(t("toast.success.company_project_updated"));
 
                     queryClient.invalidateQueries({
                         queryKey: getIndexCompanyProjectQueryKey(),
@@ -192,12 +195,12 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
 						value={search}
 						onChange={(e) => setFilterParams({ search: e.target.value })}
 						type="text"
-						placeholder="Search for an especific project, language, framework or description"
+						placeholder={t("placeholder.project_search")}
 						className="peer pl-9"
 					/>
 				</div>
 				<Button variant={"secondary"} onClick={clearFilters}>
-					<BrushCleaning className="size-4" /> Clear
+					<BrushCleaning className="size-4" /> {t("general.clear")}
 				</Button>
 			</Card>
             {projectList.length === 0 && (
@@ -207,7 +210,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                             <EmptyMedia variant={"icon"}>
                                 <Folder />
                             </EmptyMedia>
-                            <EmptyTitle>No projects yet</EmptyTitle>
+                            <EmptyTitle>{t("company_profile.projects.no_projects")}</EmptyTitle>
                         </EmptyHeader>
                     </Empty>
                 </Card>
@@ -233,16 +236,15 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
             <AlertDialog open={deleteModalIsOpen} onOpenChange={setDeleteIsOpen}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogTitle>{t("dev_profile.projects.delete_project")}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will delete permanently the
-                            following project:
+                            {t("dev_profile.projects.delete_project_description")}
                             <span className="font-bold"> {selectedProject?.title}</span>.
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel onClick={closeDelete}>
-                            Cancelar
+                            {t("general.cancel")}
                         </AlertDialogCancel>
                         <AlertDialogAction
                             variant={"destructive"}
@@ -250,7 +252,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                             disabled={deleteIsPending}
                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                         >
-                            {deleteIsPending ? <Spinner /> : "Delete"}
+                            {deleteIsPending ? <Spinner /> : t("general.delete")}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
@@ -258,9 +260,9 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
             <Dialog open={updateModalIsOpen} onOpenChange={setUpdateModalIsOpen}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Update Project</DialogTitle>
+                        <DialogTitle>{t("dev_profile.projects.update_project")}</DialogTitle>
                         <DialogDescription>
-                            Here you can update your project data
+                            {t("dev_profile.projects.update_project_description")}
                         </DialogDescription>
                     </DialogHeader>
                     <form
@@ -272,11 +274,11 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                             name="title"
                             render={({ field, fieldState }) => (
                                 <Field>
-                                    <FieldLabel>Title</FieldLabel>
+                                    <FieldLabel>{t("input.title")}</FieldLabel>
                                     <Input
                                         value={field.value}
                                         onChange={field.onChange}
-                                        placeholder="Project title"
+                                        placeholder={t("placeholder.project_title")}
                                     />
                                     <FieldError errors={[fieldState.error]} />
                                 </Field>
@@ -287,11 +289,11 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                             name="description"
                             render={({ field, fieldState }) => (
                                 <Field>
-                                    <FieldLabel>Description</FieldLabel>
+                                    <FieldLabel>{t("input.description")}</FieldLabel>
                                     <Textarea
                                         value={field.value}
                                         onChange={field.onChange}
-                                        placeholder="Project description"
+                                        placeholder={t("placeholder.project_description")}
                                     />
                                     <FieldError errors={[fieldState.error]} />
                                 </Field>
@@ -326,7 +328,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
 
                                 return (
                                     <Field className="flex-1">
-                                        <FieldLabel>Languages / Frameworks</FieldLabel>
+                                        <FieldLabel>{t("input.language_framework")}</FieldLabel>
                                         <Popover open={open} onOpenChange={setOpen}>
                                             <PopoverTrigger asChild>
                                                 <Button
@@ -365,7 +367,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                                                             })
                                                         ) : (
                                                             <span className="text-muted-foreground">
-                                                                Select languages...
+                                                                {t("placeholder.project_language_framework")}
                                                             </span>
                                                         )}
                                                     </div>
@@ -376,7 +378,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                                             <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                                                 <Command shouldFilter={false}>
                                                     <CommandInput
-                                                        placeholder="Search language..."
+                                                        placeholder={t("placeholder.project_language_search")}
                                                         value={languageSearchTerm}
                                                         onValueChange={setLanguageSearchTerm}
                                                     />
@@ -386,7 +388,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                                                                 <Loader2 className="animate-spin size-4 mr-2" />
                                                             </div>
                                                         )}
-                                                        <CommandEmpty>No language found.</CommandEmpty>
+                                                        <CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
                                                         <CommandGroup>
                                                             {languagesList?.map((lang) => (
                                                                 <CommandItem
@@ -418,11 +420,11 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
                         />
 
                         <div className="flex w-full justify-end mt-4 gap-2">
-                            <Button type="submit" disabled={isPending}>
-                                {isPending ? <Spinner /> : "Update"}
-                            </Button>
                             <Button type="button" variant={"outline"} onClick={closeUpdate}>
-                                Cancel
+                                {t("general.cancel")}
+                            </Button>
+                            <Button type="submit" disabled={updateIsPending}>
+                                {updateIsPending ? <Spinner /> : t("general.update")}
                             </Button>
                         </div>
                     </form>

@@ -53,6 +53,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface CreateCompanyProjectCardProps {
 	profileId: string;
@@ -61,6 +62,9 @@ interface CreateCompanyProjectCardProps {
 export default function CreateCompanyProjectCard({
 	profileId,
 }: CreateCompanyProjectCardProps) {
+
+	const { t } = useTranslation();
+
 	const queryClient = useQueryClient();
 
 	const form = useForm<ICreateCompanyProjectSchema>({
@@ -97,7 +101,7 @@ export default function CreateCompanyProjectCard({
 		try {
 			const projectItem = await createProject({ data });
 
-			CustomToaster.successToast(projectItem.message);
+			CustomToaster.successToast(t("toast.success.company_project_created"));
 
 			queryClient.invalidateQueries({
 				queryKey: getIndexCompanyProjectQueryKey(),
@@ -113,7 +117,7 @@ export default function CreateCompanyProjectCard({
 	return (
 		<Card className="p-4">
 			<div className="flex flex-row justify-between items-center">
-				<h2 className="font-bold text-lg">Create new project</h2>
+				<h2 className="font-bold text-lg">{t("company_profile.projects.create_project")}</h2>
 				<Button
 					size={"icon"}
 					onClick={() => setCreationIsOpen(!creationIsOpen)}
@@ -138,10 +142,10 @@ export default function CreateCompanyProjectCard({
 							name="title"
 							render={({ field, fieldState }) => (
 								<Field className="flex-1">
-									<FieldLabel>Title</FieldLabel>
+									<FieldLabel>{t("input.title")}</FieldLabel>
 									<Input
 										{...field}
-										placeholder="Project title"
+										placeholder={t("placeholder.project_title")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -177,7 +181,7 @@ export default function CreateCompanyProjectCard({
 
 								return (
 									<Field className="flex-1">
-										<FieldLabel>Languages / Frameworks</FieldLabel>
+										<FieldLabel>{t("input.language_framework")}</FieldLabel>
 										<Popover open={open} onOpenChange={setOpen}>
 											<PopoverTrigger asChild>
 												<Button
@@ -215,7 +219,7 @@ export default function CreateCompanyProjectCard({
 															})
 														) : (
 															<span className="text-muted-foreground">
-																Select languages...
+																{t("placeholder.project_language_framework")}
 															</span>
 														)}
 													</div>
@@ -226,7 +230,7 @@ export default function CreateCompanyProjectCard({
 											<PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
 												<Command shouldFilter={false}>
 													<CommandInput
-														placeholder="Search language..."
+														placeholder={t("placeholder.project_language_search")}
 														value={languageSearchTerm}
 														onValueChange={setLanguageSearchTerm}
 													/>
@@ -236,7 +240,7 @@ export default function CreateCompanyProjectCard({
 																<Loader2 className="animate-spin size-4 mr-2" />
 															</div>
 														)}
-														<CommandEmpty>No language found.</CommandEmpty>
+														<CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
 														<CommandGroup>
 															{languagesList?.map((lang) => (
 																<CommandItem
@@ -272,18 +276,18 @@ export default function CreateCompanyProjectCard({
 						name="description"
 						render={({ field, fieldState }) => (
 							<Field>
-								<FieldLabel>Description</FieldLabel>
+								<FieldLabel>{t("input.description")}</FieldLabel>
 								<Textarea
 									{...field}
 									value={field.value}
 									onChange={field.onChange}
-									placeholder="Describe your project features, archtecture ans choices"
+									placeholder={t("placeholder.project_description")}
 								/>
 							</Field>
 						)}
 					/>
 					<div className="flex w-full justify-end mt-4 gap-2">
-						<Button disabled={projectIsPending || !form.formState.isDirty}>Create</Button>
+						<Button disabled={projectIsPending || !form.formState.isDirty}>{t("general.create")}</Button>
 					</div>
 				</form>
 			)}

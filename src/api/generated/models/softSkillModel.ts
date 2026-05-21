@@ -9,7 +9,9 @@ import type { SoftSkillResponseModel } from './softSkillResponseModel';
 export interface SoftSkillModel {
   id: string;
   name: string;
+  i18n_name_key: string;
   description: string;
+  i18n_description_key: string;
   /** @nullable */
   responses?: SoftSkillResponseModel[] | null;
   created_at: string;

@@ -118,8 +118,8 @@ export default function RegisterSteps() {
 		await mutateAsync(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.register"));
 				},
 				onError: (error) => {
 					const apiError = error as AxiosError<ApiError>;

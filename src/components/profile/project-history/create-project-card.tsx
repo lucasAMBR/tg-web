@@ -127,7 +127,7 @@ export default function CreateProjectCard({
 				});
 			}
 
-			CustomToaster.successToast(projectItem.message);
+			CustomToaster.successToast(t("toast.success.project_created"));
 
 			queryClient.invalidateQueries({
 				queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),

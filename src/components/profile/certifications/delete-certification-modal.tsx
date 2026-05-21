@@ -38,8 +38,8 @@ export default function DeleteCertificationModal({ certificate, profileId, open,
 
     const handleDelete = () => {
         deleteCertificate({id: certificate.id }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.certification_deleted"));
                 queryClient.invalidateQueries({
                     queryKey: getIndexAdditionalCoursesQueryKey({
                         dev_profile_id: profileId, 

@@ -23,6 +23,7 @@ import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 interface CustomStackRecommendationProps{
     profileId: string,
@@ -31,6 +32,8 @@ interface CustomStackRecommendationProps{
 
 export default function CustomStackRecommendation({ profileId, initialData }: CustomStackRecommendationProps) {
     
+    const { t } = useTranslation();
+
     const queryClient = useQueryClient();
 
     const {
@@ -72,8 +75,8 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
 
     const sendPreferences = (data: IUpdateFlexibilityPreferences) => {
         updatePreferences({ profileId: profileId, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
 
@@ -91,7 +94,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
             languages_blacklist: []
         } }, {
             onSuccess: () => {
-                CustomToaster.successToast("Default configuration restored!");
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_restored"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
 
@@ -121,9 +124,9 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
                                 onCheckedChange={field.onChange}
                             />
                             <div className="flex flex-col">
-                                <FieldLabel>Recommendation flexibility</FieldLabel>
+                                <FieldLabel>{t("settings.recommendation.algorithm_flexibility.recommendation_flexibility_title")}</FieldLabel>
                                 <p className="text-sm text-muted-foreground">
-                                    Enable this to discover roles beyond your exact tech stack. The algorithm will broaden your recommendations to include jobs where your core skills are transferable, even if the specific languages or frameworks differ.
+                                    {t("settings.recommendation.algorithm_flexibility.recommendation_flexibility_description")}
                                 </p>
                             </div>
                             <FieldError errors={[fieldState.error]} />
@@ -158,7 +161,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
 
                         return (
                             <Field className="flex-1">
-                                <FieldLabel>Stack blacklist</FieldLabel>
+                                <FieldLabel>{t("input.stack_blacklist")}</FieldLabel>
                                 <Popover open={open} onOpenChange={setOpen}>
                                     <PopoverTrigger asChild>
                                         <Button
@@ -196,7 +199,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
                                                     })
                                                 ) : (
                                                     <span className="text-muted-foreground font-normal">
-                                                        Select languages to avoid...
+                                                        {t("placeholder.stack_blacklist")}
                                                     </span>
                                                 )}
                                             </div>
@@ -207,7 +210,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
                                     <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
                                         <Command shouldFilter={false}>
                                             <CommandInput
-                                                placeholder="Search language..."
+                                                placeholder={t("placeholder.project_language_search")}
                                                 value={languageSearchTerm}
                                                 onValueChange={setLanguageSearchTerm}
                                             />
@@ -217,7 +220,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
                                                         <Loader2 className="animate-spin size-4 mr-2" />
                                                     </div>
                                                 )}
-                                                {!isLoading && <CommandEmpty>No language found.</CommandEmpty>}
+                                                {!isLoading && <CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>}
                                                 <CommandGroup>
                                                     {languagesList?.map((lang) => (
                                                         <CommandItem
@@ -242,8 +245,8 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
                     }}
                 />
                 <CardFooter className="gap-2 justify-end p-0">
-                    <Button type="button" onClick={reset} variant={"outline"} disabled={valuesAreEqualToDefault}><RotateCcw /> Reset</Button>
-                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> Save</> }</Button>
+                    <Button type="button" onClick={reset} variant={"outline"} disabled={valuesAreEqualToDefault}><RotateCcw /> {t("general.reset")}</Button>
+                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> {t("general.save")}</> }</Button>
                 </CardFooter>
             </form>
         </Card>

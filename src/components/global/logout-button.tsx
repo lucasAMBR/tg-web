@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -12,17 +12,28 @@ import {
 } from "../ui/alert-dialog";
 import { useAuthStore } from "@/stores/auth-store";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 interface LogoutButtonProps {
 	text: string;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
 }
+
 export default function LogoutButton({
 	text,
 	children,
+	open: openProp,
+	onOpenChange,
 }: PropsWithChildren<LogoutButtonProps>) {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
-
 	const { signOut } = useAuthStore();
+	const [openInternal, setOpenInternal] = useState(false);
+
+	const isControlled = openProp !== undefined;
+	const open = isControlled ? openProp : openInternal;
+	const setOpen = onOpenChange ?? setOpenInternal;
 
 	const logout = () => {
 		signOut();
@@ -30,19 +41,19 @@ export default function LogoutButton({
 	};
 
 	return (
-		<AlertDialog>
-			<AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+		<AlertDialog open={open} onOpenChange={setOpen}>
+			{children ? (
+				<AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
+			) : null}
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+					<AlertDialogTitle>{t("general.are_you_sure")}</AlertDialogTitle>
+					<AlertDialogDescription>{text}</AlertDialogDescription>
 				</AlertDialogHeader>
-				<AlertDialogDescription>
-					<p>{text}</p>
-				</AlertDialogDescription>
 				<AlertDialogFooter>
-					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction onClick={logout} variant={"destructive"}>
-						Logout
+					<AlertDialogCancel>{t("general.cancel")}</AlertDialogCancel>
+					<AlertDialogAction onClick={logout} variant="destructive">
+						{t("general.logout")}
 					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>

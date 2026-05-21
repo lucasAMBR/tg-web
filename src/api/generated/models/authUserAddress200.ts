@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { AddressModel } from './addressModel';
+import type { AuthUserAddress200Data } from './authUserAddress200Data';
 
 export type AuthUserAddress200 = {
   error: boolean;
   message: string;
-  data: AddressModel;
+  data: AuthUserAddress200Data;
 };

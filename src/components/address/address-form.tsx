@@ -69,8 +69,8 @@ export default function AddressForm() {
 		registerAddress(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.address_created"));
 
 					const { user, isAuthenticated } = useAuthStore.getState();
 

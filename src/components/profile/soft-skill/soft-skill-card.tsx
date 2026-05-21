@@ -11,6 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface SoftSkillCardProps {
 	devSoftSkill: DevSoftSkillModel;
@@ -25,18 +26,19 @@ export default function SoftSkillCard({
 	openDelete,
 	openUpdate,
 }: SoftSkillCardProps) {
+	const { t } = useTranslation();
 	return (
 		<Card className="flex flex-col p-3 gap-3">
 			<div className="flex flex-row justify-between items-center w-full">
-				<span className="font-bold">{devSoftSkill.soft_skill.name}</span>
+				<span className="font-bold">{t(devSoftSkill.soft_skill.i18n_name_key)}</span>
 				<div className="flex items-center gap-2">
 					<Badge className="font-bold">
-						{devSoftSkill.soft_skill_level_response.title}
+						{t(devSoftSkill.soft_skill_level_response.i18n_title_key)}
 					</Badge>
 				</div>
 			</div>
 			<p className="text-foreground/80">
-				{devSoftSkill.soft_skill_level_response.description}
+				{t(devSoftSkill.soft_skill_level_response.i18n_description_key)}
 			</p>
 		</Card>
 	);

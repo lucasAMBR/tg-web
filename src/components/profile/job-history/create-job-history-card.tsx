@@ -39,7 +39,7 @@ import { onError } from "@/utils/on-error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { format } from "date-fns";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { ChevronDownIcon, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -78,7 +78,7 @@ export default function CreateJobHistoryCard() {
 			seniority_level: "",
 			actuation_details: "",
 			is_current: true,
-			start_date: format(new Date(), "yyyy-MM-dd"),
+			start_date: formatDateOnly(new Date()),
 		},
 	});
 
@@ -98,8 +98,8 @@ export default function CreateJobHistoryCard() {
 		mutate(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.job_history_created"));
 					queryClient.invalidateQueries({
 						queryKey: getIndexEmploymentHistoryQueryKey(),
 					});
@@ -169,7 +169,7 @@ export default function CreateJobHistoryCard() {
 												seniorityList.length > 0 &&
 												seniorityList.map((item) => (
 													<SelectItem value={item.value}>
-														{item.label}
+														{t(item.i18nKey)}
 													</SelectItem>
 												))}
 										</SelectContent>
@@ -297,18 +297,9 @@ export default function CreateJobHistoryCard() {
 										<PopoverContent className="w-auto p-0" align="start">
 											<Calendar
 												mode="single"
-												selected={
-													field.value
-														? (() => {
-																const [y, m, d] = field.value
-																	.split("-")
-																	.map(Number);
-																return new Date(y, m - 1, d);
-															})()
-														: undefined
-												}
+												selected={parseLocalDateFromIso(field.value)}
 												onSelect={(date) =>
-													field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+													field.onChange(date ? formatDateOnly(date) : "")
 												}
 												captionLayout="dropdown"
 												disabled={(date) => date < new Date("1900-01-01")}
@@ -350,18 +341,13 @@ export default function CreateJobHistoryCard() {
 												mode="single"
 												selected={
 													field.value
-														? (() => {
-																const [y, m, d] = field.value
-																	.split("-")
-																	.map(Number);
-																return new Date(y, m - 1, d);
-															})()
+														? parseLocalDateFromIso(field.value)
 														: undefined
 												}
 												captionLayout="dropdown"
 												onSelect={(date) => {
 													field.onChange(
-														date ? format(date, "yyyy-MM-dd") : undefined,
+														date ? formatDateOnly(date) : undefined,
 													);
 												}}
 												disabled={(date) => date < new Date("1900-01-01")}

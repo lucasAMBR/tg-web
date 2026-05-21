@@ -52,8 +52,8 @@ export default function DeletejobHistoryModal({
 		deleteItem(
 			{ id: job.id },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.job_history_deleted"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexEmploymentHistoryQueryKey({

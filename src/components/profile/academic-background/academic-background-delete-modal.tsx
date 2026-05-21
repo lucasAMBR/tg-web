@@ -19,6 +19,7 @@ import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 interface DeleteAcademicBackgroundModalProps {
 	profileId: string;
@@ -34,6 +35,8 @@ export default function DeleteAcademicBackgroundModal({
 	bg,
 	profileId,
 }: DeleteAcademicBackgroundModalProps) {
+	const { t } = useTranslation();
+
 	if (!bg) return null;
 
 	const { page, perPage, search } = useAcademicBackgroundParams();
@@ -46,8 +49,8 @@ export default function DeleteAcademicBackgroundModal({
 		deleteBackground(
 			{ id: bg.id },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.academic_background_deleted"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexAcademicBackgroundQueryKey({

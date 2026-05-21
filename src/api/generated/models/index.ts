@@ -182,6 +182,7 @@ export * from "./updateProjectHistory200";
 export * from "./updateProjectHistoryBody";
 export * from "./userModel";
 export * from './authUserAddress200';
+export * from './authUserAddress200Data';
 export * from './companyProjectModel';
 export * from './companySoftSkillModel';
 export * from './deleteUser200';

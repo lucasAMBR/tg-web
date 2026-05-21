@@ -59,8 +59,8 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
 
     const handleUpdate = (data: ICreateCertificationSchema) => {
         updateCertification({ id: certificate.id, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.certification_updated"));
                 queryClient.invalidateQueries({
                     queryKey: getIndexAdditionalCoursesQueryKey({
                         dev_profile_id: profileId, 

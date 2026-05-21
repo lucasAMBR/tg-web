@@ -13,6 +13,7 @@ import { onError } from "@/utils/on-error";
 import type { ApiError } from "@/utils/api-error";
 import type { AxiosError } from "axios";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 const EmailChangeSchema = z.object({
     email: z.string().email()
@@ -21,7 +22,7 @@ const EmailChangeSchema = z.object({
 type IEmailChangeSchema = z.infer<typeof EmailChangeSchema>
 
 export default function UpdateEmailForm(){
-
+    const { t } = useTranslation();
     const {
         user,
         hydrateUser
@@ -48,8 +49,8 @@ export default function UpdateEmailForm(){
 
     const handleUpdate = (data: IEmailChangeSchema) => {
         mutate({user: user?.id as string, data}, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.email_updated"));
                 hydrateUser()
 
                 handleClose();
@@ -80,7 +81,7 @@ export default function UpdateEmailForm(){
                             <Input 
                                 value={field.value}
                                 onChange={field.onChange}
-                                placeholder="Your email here" 
+                                placeholder={t("placeholder.email")} 
                             />
                             <FieldError errors={[fieldState.error]} />
                         </Field>
@@ -88,16 +89,16 @@ export default function UpdateEmailForm(){
                 />
                 <AlertDialog open={open} onOpenChange={setOpen}>
                     <AlertDialogTrigger asChild>
-                        <Button type="button" disabled={!form.formState.isDirty}>Change</Button>
+                        <Button type="button" disabled={!form.formState.isDirty}>{t("general.change")}</Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogTitle>{t("general.are_you_sure")}</AlertDialogTitle>
                         </AlertDialogHeader>
-                        <p className="text-sm text-muted-foreground">This action is permanent! Changing this you will update your access credentials and will be necessary reverify your email</p>
+                        <p className="text-sm text-muted-foreground">{t("settings.account.change_associated_email.change_email_confirmation")}</p>
                         <AlertDialogFooter>
-                            <Button type="button" variant={"outline"} onClick={handleClose}>Cancel</Button>
-                            <Button type="submit" form={FORM_ID} variant={"destructive"} disabled={isPending}>{isPending ? <Spinner /> : "Yes, change my e-mail" }</Button>
+                            <Button type="button" variant={"outline"} onClick={handleClose}>{t("general.cancel")}</Button>
+                            <Button type="submit" form={FORM_ID} variant={"destructive"} disabled={isPending}>{isPending ? <Spinner /> : t("settings.account.change_associated_email.yes_change_my_email") }</Button>
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>

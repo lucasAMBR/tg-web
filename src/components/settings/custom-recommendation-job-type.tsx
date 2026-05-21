@@ -14,6 +14,7 @@ import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationJobTypeProps{
     profileId: string,
@@ -21,6 +22,8 @@ interface CustomRecommendationJobTypeProps{
 }
 
 export default function CustomRecommendationJobType({ profileId, initialData }: CustomRecommendationJobTypeProps) {
+
+    const { t } = useTranslation();
 
     const queryClient = useQueryClient();
 
@@ -51,8 +54,8 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
 
     const sendPreferences = (data: IUpdateJobTypePreferences) => {
         updatePreferences({ profileId: profileId, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
             },
@@ -68,8 +71,8 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
             allow_contractor: true,
             allow_internship: false
         } }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast("Default configuration restored!");
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_restored"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
             },
@@ -92,9 +95,9 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>CLT</FieldTitle>
+                                <FieldTitle>{t("enum.contract_type.clt")}</FieldTitle>
                                 <FieldDescription>
-                                    Include traditional employment opportunities with standard labor rights and full corporate benefits.
+                                    {t("settings.recommendation.contract_type.clt_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
@@ -111,9 +114,9 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>Contractor</FieldTitle>
+                                <FieldTitle>{t("enum.contract_type.contractor")}</FieldTitle>
                                 <FieldDescription>
-                                    Receive recommendations for contractor or B2B positions, providing services through your own legal entity.
+                                    {t("settings.recommendation.contract_type.contractor_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
@@ -130,17 +133,17 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>Internship</FieldTitle>
+                                <FieldTitle>{t("enum.contract_type.internship")}</FieldTitle>
                                 <FieldDescription>
-                                    Discover entry-level opportunities and training programs designed for students and junior professionals.
+                                    {t("settings.recommendation.contract_type.internship_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
                     )}
                 />
                 <CardFooter className="gap-2 justify-end p-0">
-                    <Button type="button" variant={"outline"} disabled={valuesAreEqualToDefault} onClick={reset}><RotateCcw /> Reset</Button>
-                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> Save</> }</Button>
+                    <Button type="button" variant={"outline"} disabled={valuesAreEqualToDefault} onClick={reset}><RotateCcw /> {t("general.reset")}</Button>
+                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> {t("general.save")}</> }</Button>
                 </CardFooter>
             </form>
         </Card>

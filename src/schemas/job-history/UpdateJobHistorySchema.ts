@@ -1,3 +1,4 @@
+import { isoDateOnlyField, optionalIsoDateOnlyField } from "@/schemas/helpers/iso-date-only-field";
 import z from "zod/v3";
 
 export const UpdateJobHistorySchema = z.object({
@@ -30,50 +31,8 @@ export const UpdateJobHistorySchema = z.object({
 		.min(2, "The actuation details must have at least 2 chracters")
 		.max(600, "The actuation details have a maximum lenght of 600 chracters"),
 	is_current: z.boolean(),
-	start_date: z
-		.string()
-		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return !isNaN(date.getTime());
-			},
-			{
-				message: "Data inválida",
-			},
-		)
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return date <= new Date();
-			},
-			{
-				message: "A data de nascimento não pode ser no futuro!",
-			},
-		),
-
-	end_date: z
-		.string()
-		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return !isNaN(date.getTime());
-			},
-			{
-				message: "Data inválida",
-			},
-		)
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return date <= new Date();
-			},
-			{
-				message: "A data de nascimento não pode ser no futuro!",
-			},
-		)
-		.optional(),
+	start_date: isoDateOnlyField(),
+	end_date: optionalIsoDateOnlyField(),
 });
 
 export type IUpdateJobHistorySchema = z.infer<typeof UpdateJobHistorySchema>;

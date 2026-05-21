@@ -27,6 +27,7 @@ import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards'
 import { createFileRoute } from '@tanstack/react-router'
 import { AlertOctagon, AlertTriangle, Check, Trash, X } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/(private)/home/settings')({
   component: RouteComponent,
@@ -37,6 +38,7 @@ export const Route = createFileRoute('/(private)/home/settings')({
 })
 
 function RouteComponent() {
+    const { t } = useTranslation();
 
     const [ verification, setVerification ] = useState<boolean>(false)
 
@@ -54,8 +56,8 @@ function RouteComponent() {
     return (
       <div className='flex flex-col p-8'>
         <div className='flex flex-col gap-1'>
-          <h2 className='text-3xl font-bold'>Settings</h2>
-          <p className='text-sm text-muted-foreground'>Configure your experience as you want</p>
+          <h2 className='text-3xl font-bold'>{t("settings.title")}</h2>
+          <p className='text-sm text-muted-foreground'>{t("settings.description")}</p>
         </div>
         <div className='mt-5 flex-1 w-full'>
               <Tabs defaultValue='account' orientation='vertical' className='flex flex-col md:flex-row gap-6 w-full'>
@@ -65,7 +67,7 @@ function RouteComponent() {
                     value="account"
                     className="w-full text-md dark:data-[state=active]:bg-primary dark:data-[state=active]:text-primary-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
-                    Account
+                    {t("settings.tabs.account")}
                   </TabsTrigger>
 
                   <TabsTrigger
@@ -73,7 +75,7 @@ function RouteComponent() {
                     value="profile"
                     className="w-full text-md dark:data-[state=active]:bg-primary dark:data-[state=active]:text-primary-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
-                    Profile
+                    {t("settings.tabs.profile")}
                   </TabsTrigger>
 
                   <TabsTrigger
@@ -81,7 +83,7 @@ function RouteComponent() {
                     value="theme"
                     className="w-full text-md dark:data-[state=active]:bg-primary dark:data-[state=active]:text-primary-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                   >
-                    Theme
+                    {t("settings.tabs.theme")}
                   </TabsTrigger>
 
                   {getUserMainRole(user) === "dev" && (
@@ -90,7 +92,7 @@ function RouteComponent() {
                       value="recommendation"
                       className="w-full text-md dark:data-[state=active]:bg-primary dark:data-[state=active]:text-primary-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                     >
-                      Recommendation
+                      {t("settings.tabs.recommendation")}
                     </TabsTrigger>
                   )}
                 </TabsList>
@@ -98,29 +100,29 @@ function RouteComponent() {
                   <Card className='p-6 w-full flex flex-col'>
                      <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>E-mail verification</h3>
-                        <p className='text-sm text-muted-foreground'>This will help us to send you the best oportunities, even out of our platform, and help to let your account more secure with access report and access code sending!</p>
+                        <h3 className='text-xl font-medium'>{t("settings.account.email_verification.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.account.email_verification.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
                         <Card className='p-4 flex flex-row items-center justify-between'>
                           {verification ? (
                               <div className='flex items-center gap-2'>
-                                <Check className='size-5'/> <p>Your e-email is already verified yet</p>
+                                <Check className='size-5'/> <p>{t("settings.account.email_verification.your_email_is_already_verified")}</p>
                               </div>
                             ) : (
                               <div className='flex items-center gap-2'>
-                                <X className='size-5' /> <p>Your e-email is not verified yet</p>
+                                <X className='size-5' /> <p>{t("settings.account.email_verification.your_email_is_not_verified")}</p>
                               </div>
                             )}
-                            <Button variant={"outline"} disabled={verification}>Send verification</Button>
+                            <Button variant={"outline"} disabled={verification}>{t("settings.account.email_verification.send_verification")}</Button>
                         </Card>
                       </div>
                     </div>
                     <Separator className='my-6'/>
                     <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Change associated e-mail</h3>
-                        <p className='text-sm text-muted-foreground'>Warning: If your update this, your credentials do sing in will be changed, so remember the new email to this account</p>
+                        <h3 className='text-xl font-medium'>{t("settings.account.change_associated_email.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.account.change_associated_email.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
                           <UpdateEmailForm />
@@ -129,8 +131,8 @@ function RouteComponent() {
                     <Separator className='my-6' />
                      <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Password change</h3>
-                        <p className='text-sm text-muted-foreground'>Warning: If your update this, your credentials do sing in will be changed, so remember the new password to this account</p>
+                        <h3 className='text-xl font-medium'>{t("settings.account.password_change.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.account.password_change.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
                         <PasswordChange />
@@ -139,24 +141,24 @@ function RouteComponent() {
                     <Separator className='my-6'/>
                      <Card className='flex-1 flex flex-row gap-12 p-4 bg-red-900/2 items-center'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium text-red-800'>Delete account</h3>
-                        <p className='text-sm text-muted-foreground'>Warning: By click in this button and confirm your actual password your account will be DELETED, your posts inaccessible by other users e etc</p>
+                        <h3 className='text-xl font-medium text-red-800'>{t("settings.account.delete_account.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.account.delete_account.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0 flex justify-end'>
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button variant={"destructive"}><Trash /> Delete</Button>
+                            <Button variant={"destructive"}><Trash /> {t("general.delete")}</Button>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
                               <AlertDialogTitle className='text-red-600'>
-                                Are you sure?
+                                {t("general.are_you_sure")}
                               </AlertDialogTitle>
                             </AlertDialogHeader>
-                            <p className='text-sm text-red-600'>The action you're about to done is HIGHLY DESTRUCTIVE and will delete every single data about you in this platform in a permanent and irreversible way!</p>
+                            <p className='text-sm text-red-600'>{t("settings.account.delete_account.delete_account_confirmation")}</p>
                             <AlertDialogFooter>
-                              <AlertDialogCancel variant="outline">Cancel</AlertDialogCancel>
-                              <Button variant={"destructive"}> Delete</Button>
+                              <AlertDialogCancel variant="outline">{t("general.cancel")}</AlertDialogCancel>
+                              <Button variant={"destructive"}>{t("general.delete")}</Button>
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
@@ -168,8 +170,8 @@ function RouteComponent() {
                   <Card className='p-6 w-full flex flex-col'>
                      <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Update your profile</h3>
-                        <p className='text-sm text-muted-foreground'>Update your profile information, this will help us to know you better and recommend you the best</p>
+                        <h3 className='text-xl font-medium'>{t("settings.profile.update_profile.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.profile.update_profile.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
                         {getUserMainRole(user) === "dev" && (<DevUpdateProfileForm />)}
@@ -180,8 +182,8 @@ function RouteComponent() {
                     <Separator className='my-6'/> 
                      <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Location Informations</h3>
-                        <p className='text-sm text-muted-foreground'>Manage the informations about your location, address, country, this will help us to know where you live to recommend to you the perfect job vacancies</p>
+                        <h3 className='text-xl font-medium'>{t("settings.profile.location_informations.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.profile.location_informations.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
                         <UpdateAddressForm />
@@ -195,16 +197,16 @@ function RouteComponent() {
                 <TabsContent value='recommendation'>
                   <Card className='p-4'>
                     <Alert className='dark:bg-amber-400/10 bg-yellow-400/60'>
-                      <AlertTitle className='text-xl flex flex-row gap-2 items-center'><AlertTriangle className='size-5'/> Warning</AlertTitle>
+                      <AlertTitle className='text-xl flex flex-row gap-2 items-center'><AlertTriangle className='size-5'/> {t("settings.recommendation.warning.title")}</AlertTitle>
                       <AlertDescription className='text-black dark:text-white'>
-                        Change this configuration directly affects how you are recommended by our algorithm to companies. If your custom parameters are unrealistic, you may be ignored for some positions where you would otherwise be highly recommended.
+                        {t("settings.recommendation.warning.description")}
                       </AlertDescription>
                     </Alert>
                     <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Contract Type</h3>
+                        <h3 className='text-xl font-medium'>{t("settings.recommendation.contract_type.title")}</h3>
                         <p className='text-sm text-muted-foreground'>
-                          Select the employment arrangements that fit your career goals. The algorithm will filter out opportunities that do not match your preferred contract types.
+                          {t("settings.recommendation.contract_type.description")}
                         </p>
                       </div>
                       <CustomRecommendationJobType 
@@ -217,9 +219,9 @@ function RouteComponent() {
 
                     <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Job Modality</h3>
+                        <h3 className='text-xl font-medium'>{t("settings.recommendation.job_modality.title")}</h3>
                         <p className='text-sm text-muted-foreground'>
-                          Define your preferred work environment. The recommendation engine will prioritize roles that align with your flexibility and location preferences.
+                          {t("settings.recommendation.job_modality.description")}
                         </p>
                       </div>
                       <CustomRecommendationJobModality 
@@ -230,10 +232,10 @@ function RouteComponent() {
                     <Separator className='my-6'/>
                     <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Recommendation Radius</h3>
-                        <p className='text-sm text-muted-foreground'>Custom the maximum distance between you and the job that we recommend to you, this configuration is split between the job modalities</p>
+                        <h3 className='text-xl font-medium'>{t("settings.recommendation.recommendation_radius.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.recommendation.recommendation_radius.description")}</p>
                         <br />
-                        <p className='text-sm text-muted-foreground font-bold'>This custom configuration will only be applied if profile doesn't have the "Open to relocation" activated who will remove completly any distance limitation!</p>
+                        <p className='text-sm text-muted-foreground font-bold'>{t("settings.recommendation.recommendation_radius.description_2")}</p>
                       </div>
                       <CustomRecommendationDistances 
                         profileId={user?.dev_profile?.id as string} 
@@ -243,8 +245,8 @@ function RouteComponent() {
                     <Separator className='my-6'/>
                     <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
-                        <h3 className='text-xl font-medium'>Algorithm flexibility</h3>
-                        <p className='text-sm text-muted-foreground'>Custom the languages and frameworks the flexibility on our recommendation system, your will to learn a new technology, techologies that  you don't wanna be related</p>
+                          <h3 className='text-xl font-medium'>{t("settings.recommendation.algorithm_flexibility.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.recommendation.algorithm_flexibility.description")}</p>
                       </div>
                       <CustomStackRecommendation 
                         profileId={user?.dev_profile?.id as string} 

@@ -37,6 +37,7 @@ import type { AxiosError } from "axios";
 import { File, Plus } from "lucide-react";
 import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface CreateAcademicBackgroundCardProps {
 	profileId: string;
@@ -45,6 +46,10 @@ interface CreateAcademicBackgroundCardProps {
 export default function CreateAcademicBackgroundCard({
 	profileId,
 }: CreateAcademicBackgroundCardProps) {
+	const [open, setOpen] = useState(false);
+	
+	const { t } = useTranslation();
+
 	const queryClient = useQueryClient();
 
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -75,8 +80,8 @@ export default function CreateAcademicBackgroundCard({
 		create(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.academic_background_created"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexAcademicBackgroundQueryKey({
@@ -90,6 +95,7 @@ export default function CreateAcademicBackgroundCard({
 					form.reset();
 
 					cleanFilters();
+					setOpen(false);
 				},
 				onError: (error) => {
 					onError(error as AxiosError<ApiError>);
@@ -99,15 +105,15 @@ export default function CreateAcademicBackgroundCard({
 	};
 
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger>
-				<Button>
-					<Plus /> Register
+				<Button variant={"accent"}>
+					<Plus /> {t("general.register")}
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="min-w-fit">
 				<DialogHeader>
-					<DialogTitle>Add new academic background</DialogTitle>
+					<DialogTitle>{t("dev_profile.academic_background.new_academic_background")}</DialogTitle>
 				</DialogHeader>
 				<Card className="p-4">
 					<form
@@ -120,10 +126,10 @@ export default function CreateAcademicBackgroundCard({
 								name="degree"
 								render={({ field, fieldState }) => (
 									<Field className="flex-2">
-										<FieldLabel htmlFor="degree">Degree</FieldLabel>
+										<FieldLabel htmlFor="degree">{t("input.degree")}</FieldLabel>
 										<Input
 											name="degree"
-											placeholder="Software Engineer"
+											placeholder={t("placeholder.degree")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -136,14 +142,14 @@ export default function CreateAcademicBackgroundCard({
 								name="degree_level"
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
-										<FieldLabel htmlFor="degree_level">Degree Level</FieldLabel>
+										<FieldLabel htmlFor="degree_level">{t("input.degree_level")}</FieldLabel>
 										<Select
 											name="degree_level"
 											value={field.value}
 											onValueChange={field.onChange}
 										>
 											<SelectTrigger>
-												<SelectValue placeholder="Degree Level" />
+												<SelectValue placeholder={t("placeholder.degree_level")} />
 											</SelectTrigger>
 											<SelectContent>
 												{isLoading && <Spinner />}
@@ -151,7 +157,7 @@ export default function CreateAcademicBackgroundCard({
 													degreeLevelList.length > 0 &&
 													degreeLevelList.map((item) => (
 														<SelectItem value={item.value}>
-															{item.label}
+															{t(item.i18nKey)}
 														</SelectItem>
 													))}
 											</SelectContent>
@@ -166,10 +172,10 @@ export default function CreateAcademicBackgroundCard({
 							name="institution"
 							render={({ field, fieldState }) => (
 								<Field className="flex-2">
-									<FieldLabel htmlFor="institution">Institution</FieldLabel>
+									<FieldLabel htmlFor="institution">{t("input.institution")}</FieldLabel>
 									<Input
 										name="institution"
-										placeholder="Universidade de São paulo"
+										placeholder={t("placeholder.institution")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -182,7 +188,7 @@ export default function CreateAcademicBackgroundCard({
 							name="certificate"
 							render={({ field }) => (
 								<div className="flex flex-col gap-2">
-									<Label>Certificate</Label>
+									<Label>{t("input.certificate")}</Label>
 
 									<input
 										ref={fileInputRef}
@@ -203,7 +209,7 @@ export default function CreateAcademicBackgroundCard({
 											className="w-full h-24 rounded-lg border-2 border-dashed border-primary/60 text-primary flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted"
 										>
 											<File />
-											<p className="text-sm">Select a PDF file</p>
+											<p className="text-sm">{t("placeholder.certificate")}</p>
 										</label>
 									)}
 
@@ -222,7 +228,7 @@ export default function CreateAcademicBackgroundCard({
 														size="sm"
 														onClick={() => fileInputRef.current?.click()}
 													>
-														Change
+														{t("general.change")}
 													</Button>
 												</label>
 
@@ -239,7 +245,7 @@ export default function CreateAcademicBackgroundCard({
 														}
 													}}
 												>
-													Remove
+													{t("general.remove")}
 												</Button>
 											</div>
 										</div>
@@ -248,7 +254,7 @@ export default function CreateAcademicBackgroundCard({
 							)}
 						/>
 						<Button disabled={isPending}>
-							{isPending ? <Spinner /> : "Register"}
+							{isPending ? <Spinner /> : t("general.register")}
 						</Button>
 					</form>
 				</Card>

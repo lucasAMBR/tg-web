@@ -117,7 +117,7 @@ axiosInstance.interceptors.response.use(
 				removeStoredToken();
 				removeStoredRefreshToken();
 				if (typeof window !== "undefined") {
-					window.location.href = "/entrar";
+					window.location.href = "/auth/login";
 				}
 				return Promise.reject(refreshError);
 			} finally {
