@@ -35,27 +35,34 @@ import { Spinner } from "../ui/spinner";
 import { useNavigate } from "@tanstack/react-router";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
+import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/stores/auth-store";
 
 export default function RegisterSteps() {
 	const navigate = useNavigate();
 
+	const { signIn } = useAuthStore();
+
+	const { t } = useTranslation();
+
 	const [step, setStep] = useState<"role" | "data">("role");
 
 	const requirements = useMemo(
-		() => [
-			{ regex: /.{8,}/, text: "At least 8 characters" },
-			{ regex: /[a-z]/, text: "At least 1 lowercase letter" },
-			{ regex: /[A-Z]/, text: "At least 1 uppercase letter" },
-			{ regex: /[0-9]/, text: "At least 1 number" },
-			{
-				regex: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]/,
-				text: "At least 1 special character",
-			},
-		],
+		() =>
+			[
+				{ regex: /.{8,}/, key: "auth.register.password.requirements.min_length" },
+				{ regex: /[a-z]/, key: "auth.register.password.requirements.lowercase" },
+				{ regex: /[A-Z]/, key: "auth.register.password.requirements.uppercase" },
+				{ regex: /[0-9]/, key: "auth.register.password.requirements.number" },
+				{
+					regex: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]/,
+					key: "auth.register.password.requirements.special",
+				},
+			] as const,
 		[],
 	);
 
-	const { mutate, isPending } = useAuthRegister();
+	const { mutateAsync, isPending } = useAuthRegister();
 
 	const form = useForm<IRegisterSchema>({
 		resolver: zodResolver(RegisterSchema),
@@ -81,7 +88,7 @@ export default function RegisterSteps() {
 
 	const strength = requirements.map((req) => ({
 		met: req.regex.test(passwordValue),
-		text: req.text,
+		key: req.key,
 	}));
 
 	const strengthScore = useMemo(() => {
@@ -98,21 +105,21 @@ export default function RegisterSteps() {
 		return "bg-green-500";
 	};
 
-	const getText = (score: number) => {
-		if (score === 0) return "Enter a password";
-		if (score <= 2) return "Weak password";
-		if (score <= 3) return "Medium password";
-		if (score === 4) return "Strong password";
-
-		return "Very strong password";
+	const strengthLabelKey = (score: number) => {
+		if (score === 0) return "auth.register.password.strength.empty";
+		if (score <= 2) return "auth.register.password.strength.weak";
+		if (score <= 3) return "auth.register.password.strength.medium";
+		if (score === 4) return "auth.register.password.strength.strong";
+		return "auth.register.password.strength.very_strong";
 	};
 
-	const register = (data: IRegisterSchema) => {
-		mutate(
+
+	const register = async (data: IRegisterSchema) => {
+		await mutateAsync(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.register"));
 				},
 				onError: (error) => {
 					const apiError = error as AxiosError<ApiError>;
@@ -123,6 +130,33 @@ export default function RegisterSteps() {
 				},
 			},
 		);
+		try {
+			await signIn({ email: data.email, password: data.password });
+
+			const { user } = useAuthStore.getState();
+
+			if (!user) return;
+
+			const role = user.role[0];
+
+			const hasProfile =
+				(role === "dev" && user.dev_profile) ||
+				(role === "company" && user.company_profile) ||
+				(role === "client" && user.client_profile);
+
+			if (!hasProfile) {
+				navigate({ to: `/create/profile/${role}` });
+				return;
+			}
+
+			const homeRoutes = {
+				dev: "/home",
+				company: "/home",
+				client: "/home",
+			};
+
+			navigate({ to: homeRoutes[role] || "/dashboard" });
+		} catch (error) {}
 	};
 
 	const redirectToLogin = () => {
@@ -139,11 +173,10 @@ export default function RegisterSteps() {
 				{step === "role" ? (
 					<>
 						<h1 className="text-3xl font-[Anta] text-primary">
-							Tell us about yourself
+							{t("auth.register.title")}
 						</h1>
 						<p className="max-w-120 text-center text-sm mt-2">
-							Select your role to help us customize your experience and match
-							you with the right opportunities.
+							{t("auth.register.description")}
 						</p>
 						<Controller
 							control={form.control}
@@ -160,9 +193,9 @@ export default function RegisterSteps() {
 											orientation={"horizontal"}
 										>
 											<FieldContent>
-												<FieldTitle>Developer</FieldTitle>
+												<FieldTitle>{t("auth.register.role.dev.title")}</FieldTitle>
 												<FieldDescription>
-													I'm a developer looking for new career opportunities.
+													{t("auth.register.role.dev.description")}
 												</FieldDescription>
 											</FieldContent>
 											<RadioGroupItem value="dev" id="dev" />
@@ -174,10 +207,9 @@ export default function RegisterSteps() {
 											orientation={"horizontal"}
 										>
 											<FieldContent>
-												<FieldTitle>Company</FieldTitle>
+												<FieldTitle>{t("auth.register.role.company.title")}</FieldTitle>
 												<FieldDescription>
-													I'm a recruiter or manager looking for technical
-													talent.
+													{t("auth.register.role.company.description")}
 												</FieldDescription>
 											</FieldContent>
 											<RadioGroupItem value="company" id="company" />
@@ -189,10 +221,9 @@ export default function RegisterSteps() {
 											orientation={"horizontal"}
 										>
 											<FieldContent>
-												<FieldTitle>Client</FieldTitle>
+												<FieldTitle>{t("auth.register.role.client.title")}</FieldTitle>
 												<FieldDescription>
-													I'm an individual looking to hire developers for
-													freelance projects.
+													{t("auth.register.role.client.description")}
 												</FieldDescription>
 											</FieldContent>
 											<RadioGroupItem value="client" id="client" />
@@ -206,26 +237,25 @@ export default function RegisterSteps() {
 							className="w-full"
 							onClick={() => setStep("data")}
 						>
-							Next <ChevronRight />
+							{t("auth.register.button.next")} <ChevronRight />
 						</Button>
 						<p className="text-sm flex gap-1 mt-1">
-							Already have an account?{" "}
+							{t("auth.register.already_have_account")}
 							<span
 								onClick={redirectToLogin}
 								className="underline text-primary cursor-pointer"
 							>
-								Sing In
+								{t("auth.register.sing_in_here")}
 							</span>
 						</p>
 					</>
 				) : (
 					<>
 						<h1 className="text-3xl font-[Anta] text-primary">
-							Set up your account
+							{t("auth.register.second_step_title")}
 						</h1>
 						<p className="max-w-120 text-center text-sm mt-2">
-							Create your credentials to get full access to the platform and
-							start your journey.
+							{t("auth.register.second_step_description")}
 						</p>
 						<div className="flex flex-col gap-4 mt-6 w-full">
 							<Controller
@@ -234,7 +264,7 @@ export default function RegisterSteps() {
 								render={({ field, fieldState }) => (
 									<Field>
 										<FieldLabel className="w-full" htmlFor="email">
-											E-mail
+											{t("input.email")}
 										</FieldLabel>
 										<Input
 											{...field}
@@ -254,7 +284,7 @@ export default function RegisterSteps() {
 								name="password"
 								render={({ field, fieldState }) => (
 									<Field className="w-full">
-										<FieldLabel htmlFor={"password"}>Password</FieldLabel>
+										<FieldLabel htmlFor={"password"}>{t("input.password")}</FieldLabel>
 										<div className="relative">
 											<Input
 												{...field}
@@ -294,7 +324,8 @@ export default function RegisterSteps() {
 										</div>
 
 										<p className="text-foreground text-sm font-medium">
-											{getText(strengthScore)}. Must contain:
+											{t(strengthLabelKey(strengthScore))}.{" "}
+											{t("auth.register.password.requirements_title")}
 										</p>
 
 										<ul className="mb-4 space-y-1.5">
@@ -313,11 +344,13 @@ export default function RegisterSteps() {
 																: "text-muted-foreground",
 														)}
 													>
-														{req.text}
+														{t(req.key)}
 														<span className="sr-only">
 															{req.met
-																? " - Requirement met"
-																: " - Requirement not met"}
+																? t("auth.register.password.a11y.requirement_met")
+																: t(
+																		"auth.register.password.a11y.requirement_not_met",
+																	)}
 														</span>
 													</span>
 												</li>
@@ -329,13 +362,13 @@ export default function RegisterSteps() {
 							<div className="flex gap-3 items-center mb-8">
 								<Checkbox />{" "}
 								<Label>
-									I agree with the platform{" "}
+									{t("auth.register.terms_text")}
 									<span className="underline text-primary cursor-pointer">
-										usage terms
+										{t("auth.register.usage_terms_text")}
 									</span>{" "}
-									and{" "}
+									{t("auth.register.and_text")}
 									<span className="underline text-primary cursor-pointer">
-										privacy policy
+										{t("auth.register.privacy_policy_text")}
 									</span>
 								</Label>
 							</div>
@@ -347,22 +380,22 @@ export default function RegisterSteps() {
 									onClick={() => setStep("role")}
 								>
 									{" "}
-									<ChevronLeft /> Back to roles
+									<ChevronLeft /> {t("auth.register.button.back_to_roles")}
 								</Button>
 								<Button
 									type="submit"
 									className="w-full"
 									disabled={isPending || passwordTooShort}
 								>
-									{isPending ? <Spinner /> : "Register"}
+									{isPending ? <Spinner /> : t("auth.register.button.register")}
 								</Button>
 								<p className="text-sm flex gap-1">
-									Already have an account?{" "}
+									{t("auth.register.already_have_account")}
 									<span
 										onClick={redirectToLogin}
 										className="underline text-primary cursor-pointer"
 									>
-										Sing In
+										{t("auth.register.sing_in_here")}
 									</span>
 								</p>
 							</div>

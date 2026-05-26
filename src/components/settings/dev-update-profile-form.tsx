@@ -7,7 +7,7 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { BadgeQuestionMark, ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Textarea } from "../ui/textarea";
@@ -25,9 +25,12 @@ import { useEffect } from "react";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
+import { useTranslation } from "react-i18next";
 
 export default function DevUpdateProfileForm(){
 
+    const { t } = useTranslation();
+    
     const { user, hydrateUser } = useAuthStore();
 
     const { data: seniorityLevels, isLoading } = useEnumSeniority();
@@ -72,8 +75,8 @@ export default function DevUpdateProfileForm(){
 
     const create = (data: ICreateDevProfileSchema) => {
         updateProfile({ dev: user?.dev_profile?.id as string, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.profile_dev_updated"));
                 
                 hydrateUser();
             },
@@ -97,12 +100,12 @@ export default function DevUpdateProfileForm(){
                         render={({ field, fieldState }) => (
                             <Field className="flex-2">
                                 <FieldLabel htmlFor="name">
-                                    Name <Required />
+                                    {t("input.name")} <Required />
                                 </FieldLabel>
                                 <Input
                                     {...field}
                                     name="name"
-                                    placeholder="Your name"
+                                    placeholder={t("placeholder.name")}
                                     aria-invalid={fieldState.invalid}
                                 />
                                 <FieldError errors={[fieldState.error]} />
@@ -144,7 +147,7 @@ export default function DevUpdateProfileForm(){
                         }) => (
                             <Field className="flex-1">
                                 <FieldLabel htmlFor="phone">
-                                    Phone <Required />
+                                    {t("input.phone")} <Required />
                                 </FieldLabel>
                                 <PhoneInput
                                     {...fieldProps}
@@ -165,7 +168,7 @@ export default function DevUpdateProfileForm(){
                         render={({ field, fieldState }) => (
                             <Field className="flex-1">
                                 <FieldLabel htmlFor="birthdate">
-                                    Birthdate <Required />
+                                    {t("input.birthdate")} <Required />
                                 </FieldLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
@@ -177,9 +180,9 @@ export default function DevUpdateProfileForm(){
                                             )}
                                         >
                                             {field.value ? (
-                                                format(field.value, "yyyy-MM-dd")
+                                                field.value
                                             ) : (
-                                                <span>Selecione uma data</span>
+                                                <span>{t("placeholder.birthdate")}</span>
                                             )}
                                             <ChevronDownIcon className="h-4 w-4 opacity-50" />
                                         </Button>
@@ -187,9 +190,9 @@ export default function DevUpdateProfileForm(){
                                     <PopoverContent className="w-auto p-0" align="start">
                                         <Calendar
                                             mode="single"
-                                            selected={new Date(field.value)}
+                                            selected={parseLocalDateFromIso(field.value)}
                                             onSelect={(date) =>
-                                                field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+                                                field.onChange(date ? formatDateOnly(date) : "")
                                             }
                                             captionLayout="dropdown"
                                             disabled={(date) => date < new Date("1900-01-01")}
@@ -225,18 +228,18 @@ export default function DevUpdateProfileForm(){
                     render={({ field, fieldState }) => (
                         <Field className="flex-1">
                             <FieldLabel htmlFor="seniority_level">
-                                Seniority Level <Required />
+                                {t("input.seniority_level")} <Required />
                             </FieldLabel>
                             <Select value={field.value} onValueChange={field.onChange}>
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Pick your seniority level" />
+                                    <SelectValue placeholder={t("placeholder.seniority_level")} />
                                 </SelectTrigger>
                                 <SelectContent position="popper">
                                     {isLoading && <Spinner />}
                                     {!isLoading &&
                                         seniorityList.length > 0 &&
                                         seniorityList.map((item) => (
-                                            <SelectItem value={item.value}>{item.label}</SelectItem>
+                                            <SelectItem value={item.value}>{t(item.i18nKey)}</SelectItem>
                                         ))}
                                 </SelectContent>
                             </Select>
@@ -256,16 +259,14 @@ export default function DevUpdateProfileForm(){
                                     onCheckedChange={field.onChange}
                                 />
                                 <FieldLabel htmlFor="open_to_work">
-                                    Open to work
+                                    {t("input.open_to_work")}
                                     <Tooltip>
                                         <TooltipTrigger>
                                             <BadgeQuestionMark className="w-4" />
                                         </TooltipTrigger>
                                         <TooltipContent>
                                             <p>
-                                                Tell our algorithm that you are available for job
-                                                openings; without this information, our intelligent
-                                                algorithm will not recommend you for positions.
+                                                {t("tooltip.open_to_work")}
                                             </p>
                                         </TooltipContent>
                                     </Tooltip>
@@ -285,15 +286,14 @@ export default function DevUpdateProfileForm(){
                                     onCheckedChange={field.onChange}
                                 />
                                 <FieldLabel htmlFor="open_to_relocation">
-                                    Open to relocation
+                                    {t("input.open_to_relocation")}
                                     <Tooltip>
                                         <TooltipTrigger>
                                             <BadgeQuestionMark className="w-4" />
                                         </TooltipTrigger>
                                         <TooltipContent>
                                             <p>
-                                                Tell our algorithm that you are available to relocate to
-                                                another city, state, or country for a job opening.
+                                                {t("tooltip.open_to_relocation")}
                                             </p>
                                         </TooltipContent>
                                     </Tooltip>
@@ -303,7 +303,7 @@ export default function DevUpdateProfileForm(){
                         )}
                     />
                 </div>
-                <Button disabled={!form.formState.isDirty || isPending}>{ isPending ? <Spinner /> : "Update" }</Button>
+                <Button disabled={!form.formState.isDirty || isPending}>{ isPending ? <Spinner /> : t("general.update") }</Button>
             </form>
     );
 }

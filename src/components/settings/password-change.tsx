@@ -11,6 +11,7 @@ import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 const PasswordChangeSchema = z
   .object({
@@ -43,6 +44,8 @@ type IPasswordChangeSchema = z.infer<typeof PasswordChangeSchema>;
 
 export default function PasswordChange(){
 
+    const { t } = useTranslation();
+
     const { user } = useAuthStore();
 
     const form = useForm<IPasswordChangeSchema>({
@@ -62,7 +65,7 @@ export default function PasswordChange(){
     const handleChange = (data: IPasswordChangeSchema) => {
         mutate({ user: user?.id as string, data }, {
             onSuccess: () => {
-                CustomToaster.successToast("Password changed with success");
+                CustomToaster.successToast(t("toast.success.password_updated"));
                 form.reset();
             },
             onError: (error) => {
@@ -78,11 +81,12 @@ export default function PasswordChange(){
                 name="old_password"
                 render={({ field, fieldState }) => (
                     <Field>
-                        <FieldLabel>Actual password</FieldLabel>
+                        <FieldLabel>{t("input.old_password")}</FieldLabel>
                         <Input
                             value={field.value}
+                            type="password"
                             onChange={field.onChange} 
-                            placeholder="Old password" 
+                            placeholder={t("placeholder.old_password")} 
                         />
                     </Field>
                 )}
@@ -92,11 +96,12 @@ export default function PasswordChange(){
                 name="new_password"
                 render={({ field, fieldState }) => (
                     <Field>
-                        <FieldLabel>New password</FieldLabel>
+                        <FieldLabel>{t("input.new_password")}</FieldLabel>
                         <Input
                             value={field.value}
+                            type="password"
                             onChange={field.onChange} 
-                            placeholder="New password" 
+                            placeholder={t("placeholder.new_password")} 
                         />
                     </Field>
                 )}
@@ -106,11 +111,12 @@ export default function PasswordChange(){
                 name="new_password_confirmation"
                 render={({ field, fieldState }) => (
                     <Field>
-                        <FieldLabel>New password confirmation</FieldLabel>
+                        <FieldLabel>{t("input.new_password_confirmation")}</FieldLabel>
                         <Input
                             value={field.value}
+                            type="password"
                             onChange={field.onChange} 
-                            placeholder="New password confirmation" 
+                            placeholder={t("placeholder.new_password_confirmation")} 
                         />
                     </Field>
                 )}

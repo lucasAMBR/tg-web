@@ -1,3 +1,4 @@
+import { Logo } from "@/components/global/Logo";
 import ThemeToggle from "@/components/global/theme-toggle-button";
 import { SingInForm } from "@/components/login/sing-in-form";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { redirectIfAuthenticated } from "@/utils/route-guards";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(public)/auth/login")({
 	component: Login,
@@ -15,7 +17,7 @@ export const Route = createFileRoute("/(public)/auth/login")({
 });
 
 function Login() {
-	const { theme } = useTheme();
+	const { t } = useTranslation();
 
 	const navigate = useNavigate();
 
@@ -27,17 +29,11 @@ function Login() {
 					className="absolute rounded-full top-0 left-0"
 					onClick={() => navigate({ to: "/" })}
 				>
-					<ChevronLeft /> Back
+					<ChevronLeft /> {t("general.back")}
 				</Button>
 				<div className="flex flex-col justify-center items-center mb-6">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-12"
-						alt="Logo"
+					<Logo
+						className="w-12 fill-primary"
 					/>
 					<p className="font-[Agbalumo] text-primary text-4xl">
 						{env.APP_NAME}

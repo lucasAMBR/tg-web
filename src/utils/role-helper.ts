@@ -21,9 +21,9 @@ export const getRoleLabel = (user: AuthenticatedUser | null) => {
 
 	const role = user.role[0] as UserRole;
 
-	if (role === "dev") return "Developer";
-	if (role === "company") return "Company";
-	if (role === "client") return "Client";
+	if (role === "dev") return "role.dev";
+	if (role === "company") return "role.company";
+	if (role === "client") return "role.client";
 };
 
 export const getProfileBio = (user: AuthenticatedUser | null) => {

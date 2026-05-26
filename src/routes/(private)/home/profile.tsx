@@ -20,6 +20,7 @@ import {
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
 import { User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(private)/home/profile")({
 	component: RouteComponent,
@@ -31,6 +32,8 @@ export const Route = createFileRoute("/(private)/home/profile")({
 
 function RouteComponent() {
 	const { user } = useAuthStore();
+
+	const { t } = useTranslation();
 
 	if (getRole(user) === "dev") {
 		return (
@@ -46,7 +49,7 @@ function RouteComponent() {
 							{getNameFromProfile(user)}
 						</h2>
 						<div className="flex gap-2">
-							<Badge variant={"secondary"}>{getRoleLabel(user)}</Badge>
+							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>
@@ -74,7 +77,7 @@ function RouteComponent() {
 							{getNameFromProfile(user)}
 						</h2>
 						<div className="flex gap-2">
-							<Badge variant={"secondary"}>{getRoleLabel(user)}</Badge>
+							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>
@@ -101,7 +104,7 @@ function RouteComponent() {
 							{getNameFromProfile(user)}
 						</h2>
 						<div className="flex gap-2">
-							<Badge variant={"secondary"}>{getRoleLabel(user)}</Badge>
+							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>

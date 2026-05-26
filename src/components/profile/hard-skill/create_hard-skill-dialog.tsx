@@ -52,7 +52,7 @@ import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import type { HardSkillModel } from "@/api/generated/models";
-
+import { useTranslation } from "react-i18next";
 interface RegisterHardSkillModalProps {
 	profileId: string;
 	existingHardSkills: HardSkillModel[];
@@ -63,6 +63,7 @@ export default function CreateHardSkillModal({
 	existingHardSkills,
 	children,
 }: PropsWithChildren<RegisterHardSkillModalProps>) {
+	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
 	const [open, setOpen] = useState(false);
@@ -102,8 +103,8 @@ export default function CreateHardSkillModal({
 		registerHardSkill(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.hard_skill_created"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexHardSkillQueryKey({ dev_profile_id: profileId }),
@@ -123,11 +124,8 @@ export default function CreateHardSkillModal({
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Register new Hard Skill</DialogTitle>
-					<DialogDescription>
-						Register a new hard skill to help our recommendation system find the
-						perfect job for you!
-					</DialogDescription>
+					<DialogTitle>{t("dev_profile.hard_skills.create_hard_skill")}</DialogTitle>
+					<DialogDescription>{t("dev_profile.hard_skills.create_hard_skill_description")}</DialogDescription>
 				</DialogHeader>
 				<form
 					onSubmit={form.handleSubmit(register)}
@@ -139,7 +137,7 @@ export default function CreateHardSkillModal({
 							name="language_id"
 							render={({ field }) => (
 								<Field>
-									<FieldLabel>Language / Framework</FieldLabel>
+									<FieldLabel>{t("input.language_framework")}</FieldLabel>
 									<Popover open={open} onOpenChange={setOpen}>
 										<PopoverTrigger asChild>
 											<Button
@@ -154,7 +152,7 @@ export default function CreateHardSkillModal({
 													)?.name
 												) : (
 													<span className="text-muted-foreground">
-														Select industry category
+														{t("placeholder.language_framework")}
 													</span>
 												)}
 												<ChevronsUpDownIcon className="opacity-50" />
@@ -163,7 +161,7 @@ export default function CreateHardSkillModal({
 										<PopoverContent className="p-0 w-[var(--radix-popover-trigger-width)]">
 											<Command shouldFilter={false}>
 												<CommandInput
-													placeholder="Search framework..."
+													placeholder={t("placeholder.project_language_search")}
 													value={languageSearchTerm}
 													onValueChange={setLanguageSearchTerm}
 													className="h-9"
@@ -177,7 +175,7 @@ export default function CreateHardSkillModal({
 														)}
 													{!languageIsLoading &&
 														filteredLanguageList.length === 0 && (
-															<CommandEmpty>No languages found</CommandEmpty>
+															<CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
 														)}
 													<CommandGroup>
 														{filteredLanguageList.map((framework) => (
@@ -217,10 +215,10 @@ export default function CreateHardSkillModal({
 							name="skill_level"
 							render={({ field }) => (
 								<Field>
-									<FieldLabel>Skill Level</FieldLabel>
+									<FieldLabel>{t("input.skill_level")}</FieldLabel>
 									<Select value={field.value} onValueChange={field.onChange}>
 										<SelectTrigger>
-											<SelectValue placeholder="Select your skill level" />
+											<SelectValue placeholder={t("placeholder.skill_level")} />
 										</SelectTrigger>
 										<SelectContent position="popper">
 											{levelIsLoading && levelList.length === 0 && (
@@ -230,7 +228,7 @@ export default function CreateHardSkillModal({
 											)}
 											{levelList.map((level) => (
 												<SelectItem value={level.value}>
-													{level.label}
+													{t(level.i18nKey)}
 												</SelectItem>
 											))}
 										</SelectContent>
@@ -246,10 +244,10 @@ export default function CreateHardSkillModal({
 							variant={"outline"}
 							className="cursor-pointer"
 						>
-							Cancel
+							{t("general.cancel")}
 						</Button>
 						<Button disabled={isPending}>
-							{isPending ? <Spinner /> : "Create"}
+							{isPending ? <Spinner /> : t("general.add")}
 						</Button>
 					</DialogFooter>
 				</form>

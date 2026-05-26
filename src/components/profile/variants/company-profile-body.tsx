@@ -6,6 +6,7 @@ import { useState } from "react";
 import CompanyProjectTab from "../company-project/company-project-tab";
 import CompanyStackList from "../company-stack/company-stack-list";
 import CompanySoftSkillList from "../company-soft-skills/company-soft-skill-list";
+import { useTranslation } from "react-i18next";
 
 interface CompanyProfileBodyProps{
     profileId: string
@@ -13,7 +14,7 @@ interface CompanyProfileBodyProps{
 
 export default function CompanyProfileBody({profileId}: CompanyProfileBodyProps) {
     
-    const queryClient = useQueryClient();
+    const { t } = useTranslation();
 
     const [tab, setTab] = useState("posts");
 
@@ -23,13 +24,13 @@ export default function CompanyProfileBody({profileId}: CompanyProfileBodyProps)
                 <Tabs defaultValue={tab} onValueChange={setTab}>
                     <TabsList variant={"line"}>
                         <TabsTrigger className="text-xl cursor-pointer" value="posts">
-                            Posts
+                            {t("company_profile.tabs.posts")}
                         </TabsTrigger>
                         <TabsTrigger className="text-xl cursor-pointer" value="projects">
-                            Projects
+                            {t("company_profile.tabs.projects")}
                         </TabsTrigger>
                         <TabsTrigger className="text-xl cursor-pointer" value="open_jobs">
-                            Vacancies
+                            {t("company_profile.tabs.open_jobs")}
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">

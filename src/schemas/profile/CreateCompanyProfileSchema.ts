@@ -1,3 +1,4 @@
+import { isoDateOnlyField } from "@/schemas/helpers/iso-date-only-field";
 import z from "zod/v3";
 
 export const CreateCompanyProfileSchema = z.object({
@@ -19,27 +20,7 @@ export const CreateCompanyProfileSchema = z.object({
         .string()
         .min(14, "CNPJ must have at least 14 characters!")
         .max(18, "CNPJ must have a maximum length of 18 characters!"),
-    founding_date: z
-            .string()
-            .regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-            .refine(
-                (dateStr) => {
-                    const date = new Date(dateStr);
-                    return !isNaN(date.getTime());
-                },
-                {
-                    message: "Data inválida",
-                },
-            )
-            .refine(
-                (dateStr) => {
-                    const date = new Date(dateStr);
-                    return date <= new Date();
-                },
-                {
-                    message: "A data de nascimento não pode ser no futuro!",
-                },
-            ),
+    founding_date: isoDateOnlyField(),
     operational_segment: z
             .string()
 })

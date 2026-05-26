@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	Building,
 	Calendar,
@@ -5,14 +6,13 @@ import {
 	Edit,
 	EllipsisVertical,
 	Folder,
+	LayoutDashboard,
 	List,
 	LogOut,
 	User,
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { useAuthStore } from "@/stores/auth-store";
-import type { UserRole } from "@/types/AuthenticatedUser";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -28,81 +28,36 @@ import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
 import { getNameFromProfile, getUserMainRole } from "@/utils/role-helper";
 import { Logo } from "./Logo";
-
-type SidebarItem = {
-	title: string;
-	icon: LucideIcon;
-	url?: string;
-	onClick?: () => void;
-};
-
-export const sidebarConfig: Record<
-	UserRole,
-	{
-		sections: SidebarItem[];
-		options: SidebarItem[];
-	}
-> = {
-	dev: {
-		sections: [
-			{ title: "Feed", icon: List, url: "/home" },
-			{ title: "Companies", icon: Building, url: "/companies" },
-			{ title: "Job Vacancies", icon: Folder, url: "/jobs" },
-			{ title: "Freelances", icon: Calendar, url: "/freelances" },
-		],
-		options: [
-			{ title: "Profile", icon: User, url: "/home/profile" },
-			{ title: "Settings", icon: Cog, url: "/home/settings" },
-		],
-	},
-
-	company: {
-		sections: [
-			{ title: "Feed", icon: List, url: "/home" },
-			{ title: "My Jobs", icon: Folder, url: "/my-jobs" },
-		],
-		options: [
-			{ title: "Profile", icon: Building, url: "/home/profile" },
-			{ title: "Settings", icon: Cog, url: "/home/settings" },
-		],
-	},
-
-	client: {
-		sections: [
-			{ title: "Feed", icon: List, url: "/home" },
-			{ title: "Freelancers", icon: User, url: "/freelancers" },
-		],
-		options: [
-			{ title: "Profile", icon: User, url: "/home/profile" },
-			{ title: "Settings", icon: Cog, url: "/home/settings" },
-		],
-	},
-};
-
-function isActive(url?: string) {
-	if (!url) return false;
-	return location.pathname === url;
-}
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { user } = useAuthStore();
+	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
 	const role = getUserMainRole(user);
-	console.log(role)
-	const config = sidebarConfig[role as UserRole];
+	const logoutDialogText = t("sidebar.logout_dialog.description");
 
-	function renderItem(item: SidebarItem) {
-		const Icon = item.icon;
-
-		const active = isActive(item.url);
+	function SidebarItem({
+		title,
+		icon: Icon,
+		url,
+		onClick,
+	}: {
+		title: string;
+		icon: LucideIcon;
+		url?: string;
+		onClick?: () => void;
+	}) {
+		const active = url ? location.pathname === url : false;
 
 		return (
 			<div
-				key={item.title}
 				onClick={() => {
-					if (item.onClick) return item.onClick();
-					if (item.url) navigate({ to: item.url });
+					if (onClick) return onClick();
+					if (url) navigate({ to: url });
 				}}
 				className={`
         w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer transition-colors
@@ -110,7 +65,7 @@ export default function Sidebar() {
         `}
 			>
 				<Icon className="size-4" />
-				{item.title}
+				{title}
 			</div>
 		);
 	}
@@ -130,19 +85,47 @@ export default function Sidebar() {
 				{/* SECTIONS */}
 				<div className="w-full">
 					<p className="text-xs text-muted-foreground mb-2">Sections</p>
-					{config.sections.map(renderItem)}
+
+					{role === "dev" && (
+						<>
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/home" />
+							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/companies" />
+							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
+							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
+						</>
+					)}
+
+					{role === "company" && (
+						<>
+							<SidebarItem title="Feed" icon={List} url="/home" />
+							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-jobs" />
+						</>
+					)}
+
+					{role === "client" && (
+						<>
+							<SidebarItem title="Feed" icon={List} url="/home" />
+							<SidebarItem title="Freelancers" icon={User} url="/freelancers" />
+						</>
+					)}
 				</div>
 
 				{/* OPTIONS */}
 				<div className="w-full">
 					<p className="text-xs text-muted-foreground mb-2">Options</p>
 
-					{config.options.map(renderItem)}
+					{role === "company" ? (
+						<SidebarItem title={t("sidebar.options.profile")} icon={Building} url="/home/profile" />
+					) : (
+						<SidebarItem title={t("sidebar.options.profile")} icon={User} url="/home/profile" />
+					)}
+					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/home/settings" />
 
-					<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
+					<LogoutButton text={logoutDialogText}>
 						<div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer hover:bg-muted">
 							<LogOut className="size-4" />
-							Logout
+							{t("general.logout")}
 						</div>
 					</LogoutButton>
 				</div>
@@ -181,14 +164,24 @@ export default function Sidebar() {
 							<DropdownMenuItem>
 								<Edit /> Update account info
 							</DropdownMenuItem>
-							<LogoutButton text="You’re about to log out of your account. You’ll need to sign in again to access your data and continue using the platform.">
-								<DropdownMenuItem variant="destructive">
-									<LogOut /> Logout
-								</DropdownMenuItem>
-							</LogoutButton>
+							<DropdownMenuItem
+								variant="destructive"
+								onSelect={(event) => {
+									event.preventDefault();
+									setLogoutDialogOpen(true);
+								}}
+							>
+								<LogOut /> {t("general.logout")}
+							</DropdownMenuItem>
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>
+
+				<LogoutButton
+					text={logoutDialogText}
+					open={logoutDialogOpen}
+					onOpenChange={setLogoutDialogOpen}
+				/>
 			</div>
 		</div>
 	);

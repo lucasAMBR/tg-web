@@ -23,6 +23,7 @@ import {
 	School,
 	Trash,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface AcademicBackgroundCardProps {
 	profileId: string;
@@ -31,11 +32,12 @@ interface AcademicBackgroundCardProps {
 	openUpdate: (bg: AcademicBackgroundModel) => void;
 }
 export default function AcademicBackgroundCard({
-	profileId,
 	background,
 	openDelete,
 	openUpdate,
 }: AcademicBackgroundCardProps) {
+	const { t } = useTranslation();
+
 	return (
 		<Card className="p-4">
 			<CardHeader className="p-0 m-0">
@@ -45,7 +47,7 @@ export default function AcademicBackgroundCard({
 							{background.degree}{" "}
 							{background.is_verified && (
 								<Badge className="bg-blue-700 text-white">
-									<BadgeCheck /> Verified
+									<BadgeCheck /> {t("general.verified")}
 								</Badge>
 							)}
 						</CardTitle>
@@ -56,7 +58,7 @@ export default function AcademicBackgroundCard({
 							</span>
 							<span className="text-md font-normal text-muted-foreground flex items-start center gap-1">
 								<GraduationCap className="size-5" />
-								{background.degree_level_label}
+								{t(`enum.degree_level.${background.degree_level}`)}
 							</span>
 						</CardDescription>
 					</div>
@@ -67,16 +69,16 @@ export default function AcademicBackgroundCard({
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent>
-							<DropdownMenuLabel>Actions</DropdownMenuLabel>
+							<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 							<DropdownMenuGroup>
 								<DropdownMenuItem onClick={() => openUpdate(background)}>
-									<Edit /> Edit
+									<Edit /> {t("general.update")}
 								</DropdownMenuItem>
 								<DropdownMenuItem
 									variant="destructive"
 									onClick={() => openDelete(background)}
 								>
-									<Trash /> Delete
+									<Trash /> {t("general.delete")}
 								</DropdownMenuItem>
 							</DropdownMenuGroup>
 						</DropdownMenuContent>

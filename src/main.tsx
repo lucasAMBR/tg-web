@@ -1,9 +1,11 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import { routeTree } from "./route-tree.gen.ts";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+
+import "./i18n";
 
 const router = createRouter({ routeTree });
 
@@ -18,7 +20,9 @@ if (!rootElement.innerHTML) {
 	const root = ReactDOM.createRoot(rootElement);
 	root.render(
 		<StrictMode>
-			<RouterProvider router={router} />
+			<React.Suspense fallback={<div>Loading...</div>}>
+				<RouterProvider router={router} />
+			</React.Suspense>
 		</StrictMode>,
 	);
 }

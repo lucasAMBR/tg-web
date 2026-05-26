@@ -18,6 +18,7 @@ import type { AxiosError } from "axios";
 import { create, type StateCreator } from "zustand";
 import { usePermissionStore } from "./permission-store";
 import { CustomToaster } from "@/utils/custom-toaster";
+import i18n from "@/i18n";
 
 interface AuthActions {
 	signIn: (data: ILoginSchema) => Promise<void>;
@@ -144,7 +145,7 @@ const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
 				error: null,
 			});
 
-			CustomToaster.successToast(response.message);
+			CustomToaster.successToast(i18n.t("toast.success.login"));
 		} catch (error) {
 			onError(error as AxiosError<{ message: string }>);
 			const errorMessage =

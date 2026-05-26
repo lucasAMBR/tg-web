@@ -9,7 +9,9 @@ export interface SoftSkillResponseModel {
   id: string;
   soft_skill_id: string;
   title: string;
+  i18n_title_key: string;
   description: string;
+  i18n_description_key: string;
   evaluation_weight: number;
   created_at: string;
   updated_at: string;

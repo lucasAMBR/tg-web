@@ -1,3 +1,4 @@
+import { Logo } from "@/components/global/Logo";
 import ThemeToggle from "@/components/global/theme-toggle-button";
 import RegisterSteps from "@/components/register/register-steps";
 import { Button } from "@/components/ui/button";
@@ -5,13 +6,14 @@ import { env } from "@/utils/env";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(public)/auth/register")({
 	component: Register,
 });
 
 function Register() {
-	const { theme } = useTheme();
+	const { t } = useTranslation();
 
 	const navigate = useNavigate();
 
@@ -23,17 +25,11 @@ function Register() {
 					className="absolute rounded-full top-0 left-0"
 					onClick={() => navigate({ to: "/" })}
 				>
-					<ChevronLeft /> Back
+					<ChevronLeft /> {t("general.back")}
 				</Button>
 				<div className="flex flex-col justify-center items-center mb-6">
-					<img
-						src={
-							theme === "dark"
-								? "/images/dark_mode_logo.png"
-								: "/images/light_mode_logo.png"
-						}
-						className="w-12"
-						alt="Logo"
+					<Logo
+						className="w-12 fill-primary"
 					/>
 					<p className="font-[Agbalumo] text-primary text-4xl">
 						{env.APP_NAME}

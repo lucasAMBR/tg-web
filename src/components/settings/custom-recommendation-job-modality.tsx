@@ -14,6 +14,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import { RotateCcw, Save } from "lucide-react";
 import { Spinner } from "../ui/spinner";
+import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationJobModality {
     profileId: string,
@@ -22,6 +23,8 @@ interface CustomRecommendationJobModality {
 
 export default function CustomRecommendationJobModality({ profileId, initialData }: CustomRecommendationJobModality) {
     
+    const { t } = useTranslation();
+
     const queryClient = useQueryClient();
 
     const {
@@ -51,8 +54,8 @@ export default function CustomRecommendationJobModality({ profileId, initialData
 
     const sendPreferences = (data: IUpdateJobModalityPreferences) => {
         updatePreferences({ profileId: profileId, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
             },
@@ -69,7 +72,7 @@ export default function CustomRecommendationJobModality({ profileId, initialData
             allow_remote: true,
         } }, {
             onSuccess: () => {
-                CustomToaster.successToast("Default configuration restored!");
+                CustomToaster.successToast(t("toast.success.recommendation_preferences_restored"));
 
                 queryClient.invalidateQueries({ queryKey: getGetDevRecommendationPreferenceQueryKey(profileId) });
             },
@@ -92,9 +95,9 @@ export default function CustomRecommendationJobModality({ profileId, initialData
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>On Site</FieldTitle>
+                                <FieldTitle>{t("enum.employment_type.on_site")}</FieldTitle>
                                 <FieldDescription>
-                                    Receive recommendations for positions that require full-time presence at the company's office.
+                                    {t("settings.recommendation.job_modality.on_site_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
@@ -111,9 +114,9 @@ export default function CustomRecommendationJobModality({ profileId, initialData
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>Hybrid</FieldTitle>
+                                <FieldTitle>{t("enum.employment_type.hybrid")}</FieldTitle>
                                 <FieldDescription>
-                                    Discover roles that offer a balance between remote work and in-office days.
+                                    {t("settings.recommendation.job_modality.hybrid_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
@@ -130,17 +133,17 @@ export default function CustomRecommendationJobModality({ profileId, initialData
                                 onCheckedChange={field.onChange}
                             />
                             <FieldContent>
-                                <FieldTitle>Remote</FieldTitle>
+                                <FieldTitle>{t("enum.employment_type.remote")}</FieldTitle>
                                 <FieldDescription>
-                                    Get matched with fully remote positions, allowing you to work from anywhere.
+                                    {t("settings.recommendation.job_modality.remote_description")}
                                 </FieldDescription>
                             </FieldContent>
                         </Field>
                     )} 
                 />
                 <CardFooter className="gap-2 justify-end p-0">
-                    <Button type="button" variant={"outline"} onClick={reset} disabled={valuesAreEqualToDefault}><RotateCcw /> Reset</Button>
-                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> Save</> }</Button>
+                    <Button type="button" variant={"outline"} onClick={reset} disabled={valuesAreEqualToDefault}><RotateCcw /> {t("general.reset")}</Button>
+                    <Button type="submit" disabled={ isPending || !form.formState.isDirty }>{ isPending ? <Spinner /> : <><Save /> {t("general.save")}</> }</Button>
                 </CardFooter>
             </form>
         </Card>

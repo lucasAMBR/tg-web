@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { IndexProjectHistory200DataPagination } from "@/api/generated/models";
+import { useTranslation } from "react-i18next";
 
 export type GenericPagination = {
 	total: number;
@@ -44,6 +45,7 @@ const DataTablePagination = ({
 	setPage,
 	setPerPage,
 }: DataTablePaginationProps) => {
+	const { t } = useTranslation();
 	const id = useId();
 	const {
 		total = 0,
@@ -69,7 +71,7 @@ const DataTablePagination = ({
 					htmlFor={id}
 					className="text-xs font-medium text-muted-foreground"
 				>
-					Linhas por página
+					{t("pagination.lines_per_page")}
 				</Label>
 				<Select
 					value={String(per_page)}
@@ -93,8 +95,8 @@ const DataTablePagination = ({
 
 			{/* Info de exibição */}
 			<div className="text-sm text-muted-foreground">
-				Exibindo <span className="font-medium text-foreground">{from}</span>-
-				<span className="font-medium text-foreground">{to}</span> de{" "}
+				{t("pagination.displaying")} <span className="font-medium text-foreground">{from}</span>-
+				<span className="font-medium text-foreground">{to}</span> {t("pagination.of")} {" "}
 				<span className="font-medium text-foreground">{total}</span>
 			</div>
 
@@ -130,7 +132,7 @@ const DataTablePagination = ({
 						{/* Página Atual Simplificada */}
 						<PaginationItem>
 							<div className="text-sm font-medium px-2">
-								Página {current_page} de {total_pages}
+								{t("pagination.page")} {current_page} {t("pagination.of")} {total_pages}
 							</div>
 						</PaginationItem>
 

@@ -8,9 +8,12 @@ import { useNavigate } from "@tanstack/react-router";
 import { LoginSchema, type ILoginSchema } from "@/schemas/login/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/stores/auth-store";
+import { useTranslation } from "react-i18next";
 
 export function SingInForm() {
 	const navigate = useNavigate();
+
+	const { t } = useTranslation();
 
 	const { signIn } = useAuthStore();
 
@@ -31,8 +34,6 @@ export function SingInForm() {
 			await signIn(data);
 
 			const { user } = useAuthStore.getState();
-
-			console.log(user);
 
 			if (!user) return;
 
@@ -63,9 +64,9 @@ export function SingInForm() {
 			className="flex flex-col items-center justify-center w-[500px]"
 			onSubmit={form.handleSubmit(login)}
 		>
-			<h1 className="text-4xl font-[Anta] text-primary">Welcome back!</h1>
+			<h1 className="text-4xl font-[Anta] text-primary">{t("auth.login.title")}</h1>
 			<p className="max-w-120 font-[Anta] text-center text-sm text-accent-foreground/70 mt-2">
-				We missed you
+				{t("auth.login.description")}
 			</p>
 			<div className="flex flex-col gap-8 mt-6 w-full">
 				<Controller
@@ -74,7 +75,7 @@ export function SingInForm() {
 					render={({ field, fieldState }) => (
 						<Field>
 							<FieldLabel className="w-full" htmlFor="email">
-								E-mail
+								{t("input.email")}
 							</FieldLabel>
 							<Input
 								{...field}
@@ -92,7 +93,7 @@ export function SingInForm() {
 					name="password"
 					render={({ field, fieldState }) => (
 						<Field className="w-full">
-							<FieldLabel htmlFor={"password"}>Password</FieldLabel>
+							<FieldLabel htmlFor={"password"}>{t("input.password")}</FieldLabel>
 							<div className="relative">
 								<Input
 									{...field}
@@ -118,15 +119,15 @@ export function SingInForm() {
 						</Field>
 					)}
 				/>
-				<Button type="submit">Sing In</Button>
+				<Button type="submit">{t("auth.login.button")}</Button>
 			</div>
 			<p className="text-sm flex gap-1 mt-1">
-				Doesn't have an account?{" "}
+				{t("auth.login.no_account")}
 				<span
 					onClick={() => navigate({ to: "/auth/register" })}
 					className="underline text-primary cursor-pointer"
 				>
-					Register here
+					{t("auth.login.register_here")}
 				</span>
 			</p>
 		</form>

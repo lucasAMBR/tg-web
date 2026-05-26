@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { ColorPicker } from "./color-picker";
+import { useTranslation } from "react-i18next";
 
 const items  = [
 	{ value: "light", label: "Light", image: "/ui-light.png" },
@@ -15,6 +16,8 @@ const items  = [
 ];
 
 export function ToggleTheme() {
+	const { t } = useTranslation();
+
 	const id = React.useId();
 
 	const { theme, setTheme } = useTheme();
@@ -23,8 +26,8 @@ export function ToggleTheme() {
         <Card className="p-4 flex flex-col justify-between gap-12">
 			<div className="flex flex-row justify-between gap-12">
 			<div className='flex-1'>
-				<h3 className='text-xl font-medium'>Choose color theme</h3>
-				<p className='text-sm text-muted-foreground'>Change the platform color scheme between light, dark or matching with your operational system default configuration</p>
+				<h3 className='text-xl font-medium'>{t("settings.theme.change_theme.title")}</h3>
+				<p className='text-sm text-muted-foreground'>{t("settings.theme.change_theme.description")}</p>
 			</div>
 		<fieldset className="space-y-4">
 			<RadioGroup
@@ -59,7 +62,7 @@ export function ToggleTheme() {
 								className="group-peer-data-[state=checked]:hidden"
 								aria-hidden="true"
 							/>
-							<span className="text-sm font-medium">{item.label}</span>
+							<span className="text-sm font-medium">{t(`general.${item.value}`)}</span>
 						</span>
 					</label>
 				))}
@@ -69,8 +72,8 @@ export function ToggleTheme() {
 		<Separator />
 		<div className="flex flex-row justify-between gap-12">
 			<div className="flex-1">
-				<h3 className='text-xl font-medium'>Choose color theme</h3>
-				<p className='text-sm text-muted-foreground'>Change the platform color scheme between light, dark or matching with your operational system default configuration</p>
+				<h3 className='text-xl font-medium'>{t("settings.theme.theme.title")}</h3>
+				<p className='text-sm text-muted-foreground'>{t("settings.theme.theme.description")}</p>
 			</div>
 			<div className="flex-2 min-w-0">
 				<ColorPicker />

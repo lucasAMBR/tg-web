@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 
-import { format } from "date-fns";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import {
@@ -41,8 +41,11 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { useAuthStore } from "@/stores/auth-store";
 import { CreateCompanyProfileSchema, type ICreateCompanyProfileSchema } from "@/schemas/profile/CreateCompanyProfileSchema";
 import { CnpjInput } from "../global/inputs/cnpj-inputs";
+import { useTranslation } from "react-i18next";
 
 export default function CompanyProfileForm() {
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
 
     const { hydrateUser } = useAuthStore();
@@ -71,8 +74,8 @@ export default function CompanyProfileForm() {
         createProfile(
             { data },
             {
-                onSuccess: (success) => {
-                    CustomToaster.successToast(success.message);
+                onSuccess: () => {
+                    CustomToaster.successToast(t("toast.success.profile_company_created"));
 
                     hydrateUser();
 
@@ -97,12 +100,12 @@ export default function CompanyProfileForm() {
                     render={({ field, fieldState }) => (
                         <Field className="flex-2">
                             <FieldLabel htmlFor="name">
-                                Name <Required />
+                                {t("input.company_name")} <Required />
                             </FieldLabel>
                             <Input
                                 {...field}
                                 name="name"
-                                placeholder="Your name"
+                                placeholder={t("placeholder.company_name")}
                                 aria-invalid={fieldState.invalid}
                             />
                             <FieldError errors={[fieldState.error]} />
@@ -117,8 +120,8 @@ export default function CompanyProfileForm() {
                         fieldState,
                     }) => (
                         <Field className="flex-1">
-                            <FieldLabel htmlFor="cpf">
-                                CNPJ <Required />
+                            <FieldLabel htmlFor="cnpj">
+                                {t("input.cnpj")} <Required />
                             </FieldLabel>
                             <CnpjInput
                                 {...fieldProps}
@@ -144,7 +147,7 @@ export default function CompanyProfileForm() {
                     }) => (
                         <Field className="flex-1">
                             <FieldLabel htmlFor="phone">
-                                Phone <Required />
+                                {t("input.phone")} <Required />
                             </FieldLabel>
                             <PhoneInput
                                 {...fieldProps}
@@ -164,8 +167,8 @@ export default function CompanyProfileForm() {
                     name="founding_date"
                     render={({ field, fieldState }) => (
                         <Field className="flex-1">
-                            <FieldLabel htmlFor="birthdate">
-                                Founding date <Required />
+                            <FieldLabel htmlFor="founding_date">
+                                {t("input.founding_date")} <Required />
                             </FieldLabel>
                             <Popover>
                                 <PopoverTrigger asChild>
@@ -177,9 +180,9 @@ export default function CompanyProfileForm() {
                                         )}
                                     >
                                         {field.value ? (
-                                            format(field.value, "yyyy-MM-dd")
+                                            field.value
                                         ) : (
-                                            <span>Selecione uma data</span>
+                                            <span>{t("placeholder.founding_date")}</span>
                                         )}
                                         <ChevronDownIcon className="h-4 w-4 opacity-50" />
                                     </Button>
@@ -187,9 +190,9 @@ export default function CompanyProfileForm() {
                                 <PopoverContent className="w-auto p-0" align="start">
                                     <Calendar
                                         mode="single"
-                                        selected={new Date(field.value)}
+                                        selected={parseLocalDateFromIso(field.value)}
                                         onSelect={(date) =>
-                                            field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+                                            field.onChange(date ? formatDateOnly(date) : "")
                                         }
                                         captionLayout="dropdown"
                                         disabled={(date) => date < new Date("1900-01-01")}
@@ -206,13 +209,13 @@ export default function CompanyProfileForm() {
                 name="bio"
                 render={({ field, fieldState }) => (
                     <Field className="flex-1">
-                        <FieldLabel htmlFor="cpf">
-                            Bio <Required />
+                        <FieldLabel htmlFor="bio">
+                            {t("input.bio")} <Required />
                         </FieldLabel>
                         <Textarea
                             {...field}
                             name="bio"
-                            placeholder="Bio"
+                            placeholder={t("placeholder.bio")}
                             aria-invalid={fieldState.invalid}
                         />
                         <FieldError errors={[fieldState.error]} />
@@ -224,19 +227,21 @@ export default function CompanyProfileForm() {
                 name="operational_segment"
                 render={({ field, fieldState }) => (
                     <Field className="flex-1">
-                        <FieldLabel htmlFor="seniority_level">
-                            Operational Segment <Required />
+                        <FieldLabel htmlFor="operational_segment">
+                            {t("input.operational_segment")} <Required />
                         </FieldLabel>
                         <Select value={field.value} onValueChange={field.onChange}>
                             <SelectTrigger>
-                                <SelectValue placeholder="Pick your company segment" />
+                                <SelectValue placeholder={t("placeholder.operational_segment")} />
                             </SelectTrigger>
                             <SelectContent>
                                 {isLoading && <Spinner />}
                                 {!isLoading &&
                                     segmentsList.length > 0 &&
                                     segmentsList.map((item) => (
-                                        <SelectItem value={item.value}>{item.label}</SelectItem>
+                                        <SelectItem key={item.value} value={item.value}>
+                                            {t(item.i18nKey)}
+                                        </SelectItem>
                                     ))}
                             </SelectContent>
                         </Select>
@@ -244,27 +249,27 @@ export default function CompanyProfileForm() {
                     </Field>
                 )}
             />
-            <Button disabled={isPending}>{isPending ? <Spinner /> : "Create"}</Button>
+            <Button disabled={isPending}>
+                {isPending ? <Spinner /> : t("general.create")}
+            </Button>
             <AlertDialog open={addresAlertModal} onOpenChange={setAddressAlertModal}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Address Creation</AlertDialogTitle>
+                        <AlertDialogTitle>
+                            {t("profile_create.address_modal.title")}
+                        </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogDescription>
-                        <p>
-                            You can skip this step, but for On-site or Hybrid jobs you need to
-                            have an registered address on the platform for our algorithm
-                            recommend jobs near to you
-                        </p>
+                        <p>{t("profile_create.address_modal.description")}</p>
                     </AlertDialogDescription>
                     <AlertDialogFooter>
                         <AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
-                            Skip
+                            {t("general.skip")}
                         </AlertDialogCancel>
                         <AlertDialogAction
                             onClick={() => navigate({ to: "/create/address" })}
                         >
-                            Create address
+                            {t("general.create")}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

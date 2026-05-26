@@ -8,4 +8,5 @@
 export type EnumOperationalSegments200DataItem = {
   value: string;
   label: string;
+  i18nKey: string;
 };

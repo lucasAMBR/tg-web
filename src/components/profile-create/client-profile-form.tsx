@@ -6,7 +6,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
-import { format } from "date-fns";
+import { isoDateOnlyField } from "@/schemas/helpers/iso-date-only-field";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import Required from "../global/required-field";
@@ -32,6 +33,7 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import z from "zod/v3";
+import { useTranslation } from "react-i18next";
 
 const CreateClientProfileSchema = z.object({
 	cpf: z.string().length(11, "CPF must have 11 characters!"),
@@ -49,32 +51,14 @@ const CreateClientProfileSchema = z.object({
 			/^\+55[1-9]{2}9[0-9]{8}$/,
 			"The phone must have the following format: +5535999999999",
 		),
-	birthdate: z
-		.string()
-		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return !isNaN(date.getTime());
-			},
-			{
-				message: "Data inválida",
-			},
-		)
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return date <= new Date();
-			},
-			{
-				message: "A data de nascimento não pode ser no futuro!",
-			},
-		),
+	birthdate: isoDateOnlyField(),
 });
 
 type ICreateClientProfileSchema = z.infer<typeof CreateClientProfileSchema>;
 
 export default function ClientProfileForm() {
+	const { t } = useTranslation();
+
 	const navigate = useNavigate();
 	const { hydrateUser } = useAuthStore();
 	const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
@@ -96,8 +80,8 @@ export default function ClientProfileForm() {
 		await createProfile(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.profile_client_created"));
 					hydrateUser();
 					setAddressAlertModal(true);
 				},
@@ -120,12 +104,12 @@ export default function ClientProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-2">
 							<FieldLabel htmlFor="name">
-								Name <Required />
+								{t("input.name")} <Required />
 							</FieldLabel>
 							<Input
 								{...field}
 								name="name"
-								placeholder="Your name"
+								placeholder={t("placeholder.name")}
 								aria-invalid={fieldState.invalid}
 							/>
 							<FieldError errors={[fieldState.error]} />
@@ -167,7 +151,7 @@ export default function ClientProfileForm() {
 					}) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="phone">
-								Phone <Required />
+								{t("input.phone")} <Required />
 							</FieldLabel>
 							<PhoneInput
 								{...fieldProps}
@@ -188,7 +172,7 @@ export default function ClientProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="birthdate">
-								Birthdate <Required />
+								{t("input.birthdate")} <Required />
 							</FieldLabel>
 							<Popover>
 								<PopoverTrigger asChild>
@@ -200,9 +184,9 @@ export default function ClientProfileForm() {
 										)}
 									>
 										{field.value ? (
-											format(field.value, "yyyy-MM-dd")
+											field.value
 										) : (
-											<span>Selecione uma data</span>
+											<span>{t("placeholder.birthdate")}</span>
 										)}
 										<ChevronDownIcon className="h-4 w-4 opacity-50" />
 									</Button>
@@ -210,9 +194,9 @@ export default function ClientProfileForm() {
 								<PopoverContent className="w-auto p-0" align="start">
 									<Calendar
 										mode="single"
-										selected={new Date(field.value)}
+										selected={parseLocalDateFromIso(field.value)}
 										onSelect={(date) =>
-											field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+											field.onChange(date ? formatDateOnly(date) : "")
 										}
 										captionLayout="dropdown"
 										disabled={(date) => date < new Date("1900-01-01")}
@@ -230,39 +214,35 @@ export default function ClientProfileForm() {
 				render={({ field, fieldState }) => (
 					<Field className="flex-1">
 						<FieldLabel htmlFor="bio">
-							Bio <Required />
+							{t("input.bio")} <Required />
 						</FieldLabel>
 						<Textarea
 							{...field}
 							name="bio"
-							placeholder="Bio"
+							placeholder={t("placeholder.bio")}
 							aria-invalid={fieldState.invalid}
 						/>
 						<FieldError errors={[fieldState.error]} />
 					</Field>
 				)}
 			/>
-			<Button disabled={isPending}>{isPending ? <Spinner /> : "Create"}</Button>
+			<Button disabled={isPending}>
+				{isPending ? <Spinner /> : t("general.create")}
+			</Button>
 			<AlertDialog open={addresAlertModal} onOpenChange={setAddressAlertModal}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>Address Creation</AlertDialogTitle>
+						<AlertDialogTitle>{t("profile_create.address_modal.title")}</AlertDialogTitle>
 					</AlertDialogHeader>
 					<AlertDialogDescription>
-						<p>
-							You can skip this step, but for On-site or Hybrid jobs you need to
-							have an registered address on the platform for our algorithm
-							recommend jobs near to you
-						</p>
+						<p>{t("profile_create.address_modal.description")}</p>
 					</AlertDialogDescription>
 					<AlertDialogFooter>
 						<AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
-							Skip
+							{t("general.skip")}
 						</AlertDialogCancel>
-						<AlertDialogAction
-							onClick={() => navigate({ to: "/create/address" })}
-						>
-							Create address
+						<AlertDialogAction onClick={() => navigate({ to: "/create/address" })}>
+							{t("general.create")}
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

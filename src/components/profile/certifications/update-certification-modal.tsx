@@ -17,6 +17,7 @@ import type { AxiosError } from "axios";
 import { File } from "lucide-react";
 import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface UpdateCertificationModalModal{
     profileId: string,
@@ -28,6 +29,8 @@ interface UpdateCertificationModalModal{
 export default function UpdateCertificationModal({profileId, certificate, open, openChange, closeModal}: UpdateCertificationModalModal){
 
     if (!certificate) return null;
+
+    const { t } = useTranslation();
 
     const queryClient = useQueryClient();
 
@@ -56,8 +59,8 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
 
     const handleUpdate = (data: ICreateCertificationSchema) => {
         updateCertification({ id: certificate.id, data }, {
-            onSuccess: (success) => {
-                CustomToaster.successToast(success.message);
+            onSuccess: () => {
+                CustomToaster.successToast(t("toast.success.certification_updated"));
                 queryClient.invalidateQueries({
                     queryKey: getIndexAdditionalCoursesQueryKey({
                         dev_profile_id: profileId, 
@@ -81,7 +84,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
         <Dialog open={open} onOpenChange={openChange}>
             <DialogContent className="min-w-2/5">
                 <DialogHeader>
-                    <DialogTitle>Update certification data</DialogTitle>
+                    <DialogTitle>{t("dev_profile.certifications.update_certification")}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={form.handleSubmit(handleUpdate)} className="flex flex-col gap-3">
                     <Card className="p-4">
@@ -91,9 +94,9 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                             name="name"
                             render={({field, fieldState}) => (
                                 <Field className="flex-2">
-                                    <FieldLabel>Certification name</FieldLabel>
+                                    <FieldLabel>{t("input.certification_name")}</FieldLabel>
                                     <Input
-                                        placeholder="AWS certification"
+                                        placeholder={t("placeholder.certification_name")}
                                         value={field.value}
                                         onChange={field.onChange}
                                     />
@@ -106,9 +109,9 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                             name="provider"
                             render={({field, fieldState}) => (
                                 <Field className="flex-1">
-                                    <FieldLabel>Certification provider</FieldLabel>
+                                    <FieldLabel>{t("input.certification_provider")}</FieldLabel>
                                     <Input
-                                        placeholder="Amazon"
+                                        placeholder={t("placeholder.certification_provider")}
                                         value={field.value}
                                         onChange={field.onChange}
                                     />
@@ -122,7 +125,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                             name="certificate"
                             render={({ field }) => (
                                 <div className="flex flex-col gap-2">
-                                    <Label>Certificate</Label>
+                                    <Label>{t("input.certificate")}</Label>
     
                                     <input
                                         ref={fileInputRef}
@@ -143,7 +146,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                                             className="w-full h-24 rounded-lg border-2 border-dashed border-primary/60 text-primary flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted"
                                         >
                                             <File />
-                                            <p className="text-sm">Select a PDF file</p>
+                                            <p className="text-sm">{t("placeholder.certificate")}</p>
                                         </label>
                                     )}
     
@@ -162,7 +165,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                                                         size="sm"
                                                         onClick={() => fileInputRef.current?.click()}
                                                     >
-                                                        Change
+                                                        {t("general.change")}
                                                     </Button>
                                                 </label>
     
@@ -179,7 +182,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                                                         }
                                                     }}
                                                 >
-                                                    Remove
+                                                    {t("general.remove")}
                                                 </Button>
                                             </div>
                                         </div>
@@ -189,8 +192,8 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                         />
                         </Card>
                 <DialogFooter>
-                    <Button type="button" variant={"outline"}>Cancel</Button>
-                    <Button type="submit" disabled={isPending || !form.formState.isDirty}>Update</Button>
+                    <Button type="button" variant={"outline"}>{t("general.cancel")}</Button>
+                    <Button type="submit" disabled={isPending || !form.formState.isDirty}>{t("general.update")}</Button>
                 </DialogFooter>
                 </form>
             </DialogContent>

@@ -6,7 +6,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
-import { format } from "date-fns";
+import { isoDateOnlyField } from "@/schemas/helpers/iso-date-only-field";
+import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
 import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import Required from "../global/required-field";
@@ -22,6 +23,7 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import z from "zod/v3";
+import { useTranslation } from "react-i18next";
 
 function digitsOnlyCpf(cpf: string | undefined): string {
 	return (cpf ?? "").replace(/\D/g, "");
@@ -43,27 +45,7 @@ const UpdateClientProfileSchema = z.object({
 			/^\+55[1-9]{2}9[0-9]{8}$/,
 			"The phone must have the following format: +5535999999999",
 		),
-	birthdate: z
-		.string()
-		.regex(/^\d{4}-\d{2}-\d{2}$/, "Formato inválido (esperado: YYYY-MM-DD)")
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return !isNaN(date.getTime());
-			},
-			{
-				message: "Data inválida",
-			},
-		)
-		.refine(
-			(dateStr) => {
-				const date = new Date(dateStr);
-				return date <= new Date();
-			},
-			{
-				message: "A data de nascimento não pode ser no futuro!",
-			},
-		),
+	birthdate: isoDateOnlyField(),
 });
 
 type IUpdateClientProfileSchema = z.infer<typeof UpdateClientProfileSchema>;
@@ -80,6 +62,7 @@ function toUpdateBody(data: IUpdateClientProfileSchema): UpdateClientProfileBody
 }
 
 export default function ClientUpdateProfileForm() {
+	const { t } = useTranslation();
 	const { user, hydrateUser } = useAuthStore();
 	const { mutate: updateProfile, isPending } = useUpdateClientProfile();
 
@@ -113,8 +96,8 @@ export default function ClientUpdateProfileForm() {
 		updateProfile(
 			{ client: id, data: toUpdateBody(data) },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.profile_client_updated"));
 					hydrateUser();
 				},
 				onError: (error) => {
@@ -138,12 +121,12 @@ export default function ClientUpdateProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-2">
 							<FieldLabel htmlFor="name">
-								Name <Required />
+								{t("input.name")} <Required />
 							</FieldLabel>
 							<Input
 								{...field}
 								name="name"
-								placeholder="Your name"
+								placeholder={t("placeholder.name")}
 								aria-invalid={fieldState.invalid}
 							/>
 							<FieldError errors={[fieldState.error]} />
@@ -185,7 +168,7 @@ export default function ClientUpdateProfileForm() {
 					}) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="phone">
-								Phone <Required />
+								{t("input.phone")} <Required />
 							</FieldLabel>
 							<PhoneInput
 								{...fieldProps}
@@ -206,7 +189,7 @@ export default function ClientUpdateProfileForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-1">
 							<FieldLabel htmlFor="birthdate">
-								Birthdate <Required />
+								{t("input.birthdate")} <Required />
 							</FieldLabel>
 							<Popover>
 								<PopoverTrigger asChild>
@@ -218,9 +201,9 @@ export default function ClientUpdateProfileForm() {
 										)}
 									>
 										{field.value ? (
-											format(field.value, "yyyy-MM-dd")
+											field.value
 										) : (
-											<span>Selecione uma data</span>
+											<span>{t("placeholder.birthdate")}</span>
 										)}
 										<ChevronDownIcon className="h-4 w-4 opacity-50" />
 									</Button>
@@ -228,11 +211,9 @@ export default function ClientUpdateProfileForm() {
 								<PopoverContent className="w-auto p-0" align="start">
 									<Calendar
 										mode="single"
-										selected={
-											field.value ? new Date(field.value) : undefined
-										}
+										selected={parseLocalDateFromIso(field.value)}
 										onSelect={(date) =>
-											field.onChange(date ? format(date, "yyyy-MM-dd") : "")
+											field.onChange(date ? formatDateOnly(date) : "")
 										}
 										captionLayout="dropdown"
 										disabled={(date) => date < new Date("1900-01-01")}
@@ -250,12 +231,12 @@ export default function ClientUpdateProfileForm() {
 				render={({ field, fieldState }) => (
 					<Field className="flex-1">
 						<FieldLabel htmlFor="bio">
-							Bio <Required />
+							{t("input.bio")} <Required />
 						</FieldLabel>
 						<Textarea
 							{...field}
 							name="bio"
-							placeholder="Bio"
+							placeholder={t("placeholder.bio")}
 							aria-invalid={fieldState.invalid}
 						/>
 						<FieldError errors={[fieldState.error]} />
@@ -266,7 +247,7 @@ export default function ClientUpdateProfileForm() {
 				type="submit"
 				disabled={!form.formState.isDirty || isPending}
 			>
-				{isPending ? <Spinner /> : "Update"}
+				{isPending ? <Spinner /> : t("general.update")}
 			</Button>
 		</form>
 	);

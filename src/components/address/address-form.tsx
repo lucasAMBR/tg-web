@@ -17,8 +17,10 @@ import type { UserRole } from "@/types/AuthenticatedUser";
 import { useAuthStore } from "@/stores/auth-store";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
+import { useTranslation } from "react-i18next";
 
 export default function AddressForm() {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 
 	const { hydrateUser } = useAuthStore();
@@ -67,8 +69,8 @@ export default function AddressForm() {
 		registerAddress(
 			{ data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.address_created"));
 
 					const { user, isAuthenticated } = useAuthStore.getState();
 
@@ -109,24 +111,24 @@ export default function AddressForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-1">
 							<FieldLabel>
-								CEP <Required />
+								{t("input.cep")} <Required />
 							</FieldLabel>
 							<Input
 								{...field}
 								aria-invalid={fieldState.invalid}
 								id="cep"
-								placeholder="Insert your zipcode"
+								placeholder={t("placeholder.cep")}
 							/>
 							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 						</Field>
 					)}
 				/>
 				<Field className="flex-3">
-					<FieldLabel>Street</FieldLabel>
+					<FieldLabel>{t("input.street")}</FieldLabel>
 					<Input
 						value={address.street}
 						readOnly
-						placeholder="Street"
+						placeholder={t("placeholder.street")}
 						className="cursor-not-allowed"
 						disabled
 					/>
@@ -134,31 +136,31 @@ export default function AddressForm() {
 			</div>
 			<div className="flex gap-2">
 				<Field className="flex-4">
-					<FieldLabel>District</FieldLabel>
+					<FieldLabel>{t("input.district")}</FieldLabel>
 					<Input
 						value={address.district}
 						readOnly
-						placeholder="District"
+						placeholder={t("placeholder.district")}
 						className="cursor-not-allowed"
 						disabled
 					/>
 				</Field>
 				<Field className="flex-1">
-					<FieldLabel>City</FieldLabel>
+					<FieldLabel>{t("input.city")}</FieldLabel>
 					<Input
 						value={address.city}
 						readOnly
-						placeholder="City"
+						placeholder={t("placeholder.city")}
 						className="cursor-not-allowed"
 						disabled
 					/>
 				</Field>
 				<Field className="flex-1">
-					<FieldLabel>State</FieldLabel>
+					<FieldLabel>{t("input.state")}</FieldLabel>
 					<Input
 						value={address.state}
 						readOnly
-						placeholder="State"
+						placeholder={t("placeholder.state")}
 						className="cursor-not-allowed"
 						disabled
 					/>
@@ -171,13 +173,13 @@ export default function AddressForm() {
 					render={({ field, fieldState }) => (
 						<Field className="flex-1">
 							<FieldLabel>
-								Number <Required />
+								{t("input.number")} <Required />
 							</FieldLabel>
 							<Input
 								{...field}
 								aria-invalid={fieldState.invalid}
 								id="number"
-								placeholder="Number"
+								placeholder={t("placeholder.number")}
 							/>
 							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 						</Field>
@@ -188,12 +190,12 @@ export default function AddressForm() {
 					name="complement"
 					render={({ field, fieldState }) => (
 						<Field className="flex-4">
-							<FieldLabel>Complement</FieldLabel>
+							<FieldLabel>{t("input.complement")}</FieldLabel>
 							<Input
 								{...field}
 								aria-invalid={fieldState.invalid}
 								id="complement"
-								placeholder="Complement"
+								placeholder={t("placeholder.complement")}
 							/>
 							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 						</Field>
@@ -201,10 +203,10 @@ export default function AddressForm() {
 				/>
 			</div>
 			<Button type="submit" className="mt-6">
-				Register
+				{t("general.register")}
 			</Button>
 			<Button type="button" variant={"outline"}>
-				Skip
+				{t("general.skip")}
 			</Button>
 		</form>
 	);

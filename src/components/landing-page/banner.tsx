@@ -1,16 +1,15 @@
-import { useTheme } from "next-themes";
 import { Button } from "../ui/button";
 import { ChevronRight, ChevronDown } from "lucide-react"; // Importe o ChevronDown
 
 import { motion } from "framer-motion";
 import { Logo } from "../global/Logo";
+import { useTranslation } from "react-i18next";
 
 export default function Banner() {
-	const { theme } = useTheme();
+	const { t } = useTranslation();
 
 	return (
-		<div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
-			{/* Background Layer */}
+		<div className="relative flex w-full h-full flex-1 items-center justify-center overflow-hidden">
 			<div
 				className="absolute inset-0 z-0 
                            bg-[url('/images/Circuit_Board_(3).svg')] dark:bg-[url('/images/Circuit_Board_(2).svg')] 
@@ -19,7 +18,11 @@ export default function Banner() {
 				aria-hidden="true"
 			/>
 
-			{/* Conteúdo Central */}
+			<div
+				className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-1/2 min-h-40 max-h-[min(70vh,32rem)] bg-[linear-gradient(to_top,var(--background)_0%,transparent_100%)]"
+				aria-hidden="true"
+			/>
+
 			<motion.div
 				initial={{ opacity: 0, y: 100 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -30,15 +33,13 @@ export default function Banner() {
 					className="w-24 fill-primary"
 				/>
 				<h1 className="text-9xl font-[Anta] tracking-tight text-primary sm:text-6xl text-center">
-					Welcome to <span className="font-[Agbalumo]">Brew!</span>
+					{t("landing_page.title")} <span className="font-[Agbalumo]">{t("landing_page.app_name")}</span>
 				</h1>
 				<h2 className="mb-6 text-xl font-[Anta] font-medium text-foreground">
-					Built by devs, for devs
+					{t("landing_page.description")}
 				</h2>
 				<p className="max-w-prose dark:text-foreground/70 text-foreground/90 text-center text-lg font-medium">
-					Stop the endless back-and-forth. Our AI-powered recommendation engine
-					analyzes technical stacks to bridge the gap between top talent and
-					high-impact projects.
+					{t("landing_page.subdescription")}
 				</p>
 				<div className="flex gap-3 mt-6">
 					<Button
@@ -46,10 +47,10 @@ export default function Banner() {
 						variant={"secondary"}
 						className="rounded-full text-lg"
 					>
-						Our rules
+						{t("landing_page.rule_button")}
 					</Button>
 					<Button size={"lg"} className="rounded-full text-lg">
-						Know more about the algorithm <ChevronRight />
+						{t("landing_page.know_more_button")} <ChevronRight />
 					</Button>
 				</div>
 			</motion.div>

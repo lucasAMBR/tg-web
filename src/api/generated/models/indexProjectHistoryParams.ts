@@ -9,5 +9,5 @@ export type IndexProjectHistoryParams = {
 page?: number;
 per_page?: number;
 search?: string;
-profile_id?: string;
+dev_profile_id?: string;
 };

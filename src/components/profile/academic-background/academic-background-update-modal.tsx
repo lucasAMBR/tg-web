@@ -38,6 +38,7 @@ import type { AxiosError } from "axios";
 import { File } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface UpdateAcademicBackgroundModalProps {
 	profileId: string;
@@ -55,6 +56,8 @@ export default function UpdateAcademicBackgroundModal({
 	closeModal,
 }: UpdateAcademicBackgroundModalProps) {
 	if (!bg) return null;
+
+	const { t } = useTranslation();
 
 	const queryClient = useQueryClient();
 
@@ -95,8 +98,8 @@ export default function UpdateAcademicBackgroundModal({
 		update(
 			{ id: bg.id, data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.academic_background_updated"));
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexAcademicBackgroundQueryKey({
@@ -123,7 +126,7 @@ export default function UpdateAcademicBackgroundModal({
 		<Dialog open={open} onOpenChange={openChange}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Update academic background</DialogTitle>
+					<DialogTitle>{t("dev_profile.academic_background.update_academic_background")}</DialogTitle>
 				</DialogHeader>
 				<Card className="p-4">
 					<form
@@ -136,10 +139,10 @@ export default function UpdateAcademicBackgroundModal({
 								name="degree"
 								render={({ field, fieldState }) => (
 									<Field className="flex-2">
-										<FieldLabel htmlFor="degree">Degree</FieldLabel>
+										<FieldLabel htmlFor="degree">{t("input.degree")}</FieldLabel>
 										<Input
 											name="degree"
-											placeholder="Software Engineer"
+											placeholder={t("placeholder.degree")}
 											value={field.value}
 											onChange={field.onChange}
 										/>
@@ -152,14 +155,14 @@ export default function UpdateAcademicBackgroundModal({
 								name="degree_level"
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
-										<FieldLabel htmlFor="degree_level">Degree Level</FieldLabel>
+										<FieldLabel htmlFor="degree_level">{t("input.degree_level")}</FieldLabel>
 										<Select
 											name="degree_level"
 											value={field.value}
 											onValueChange={field.onChange}
 										>
 											<SelectTrigger>
-												<SelectValue placeholder="Degree Level" />
+												<SelectValue placeholder={t("placeholder.degree_level")} />
 											</SelectTrigger>
 											<SelectContent>
 												{isLoading && <Spinner />}
@@ -167,7 +170,7 @@ export default function UpdateAcademicBackgroundModal({
 													degreeLevelList.length > 0 &&
 													degreeLevelList.map((item) => (
 														<SelectItem value={item.value}>
-															{item.label}
+															{t(item.i18nKey)}
 														</SelectItem>
 													))}
 											</SelectContent>
@@ -182,10 +185,10 @@ export default function UpdateAcademicBackgroundModal({
 							name="institution"
 							render={({ field, fieldState }) => (
 								<Field className="flex-2">
-									<FieldLabel htmlFor="institution">Institution</FieldLabel>
+									<FieldLabel htmlFor="institution">{t("input.institution")}</FieldLabel>
 									<Input
 										name="institution"
-										placeholder="Universidade de São paulo"
+										placeholder={t("placeholder.institution")}
 										value={field.value}
 										onChange={field.onChange}
 									/>
@@ -198,7 +201,7 @@ export default function UpdateAcademicBackgroundModal({
 							name="certificate"
 							render={({ field }) => (
 								<div className="flex flex-col gap-2">
-									<Label>Certificate</Label>
+									<Label>{t("input.certificate")}</Label>
 									<input
 										ref={fileInputRef}
 										type="file"
@@ -218,7 +221,7 @@ export default function UpdateAcademicBackgroundModal({
 											className="w-full h-24 rounded-lg border-2 border-dashed border-primary/60 text-primary flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted"
 										>
 											<File />
-											<p className="text-sm">Select a PDF file</p>
+											<p className="text-sm">{t("placeholder.certificate")}</p>
 										</label>
 									)}
 
@@ -237,7 +240,7 @@ export default function UpdateAcademicBackgroundModal({
 														size="sm"
 														onClick={() => fileInputRef.current?.click()}
 													>
-														Change
+														{t("general.change")}
 													</Button>
 												</label>
 
@@ -254,20 +257,19 @@ export default function UpdateAcademicBackgroundModal({
 														}
 													}}
 												>
-													Remove
+													{t("general.remove")}
 												</Button>
 											</div>
 										</div>
 									)}
 									<p className="text-xs text-muted-foreground">
-										If you don't wanna change the certificate, just ignore this
-										field
+										{t("dev_profile.academic_background.update_warning")}
 									</p>
 								</div>
 							)}
 						/>
 						<Button disabled={isPending}>
-							{isPending ? <Spinner /> : "Register"}
+							{isPending ? <Spinner /> : t("general.update")}
 						</Button>
 					</form>
 				</Card>

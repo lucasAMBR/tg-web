@@ -80,6 +80,7 @@ import {
 } from "@/components/ui/command";
 import ManageProjectGallery from "./manage-project-gallery";
 import { useProjectHistoryParams } from "@/hooks/filters/use-project-history-filters";
+import { useTranslation } from "react-i18next";
 
 interface ProjectHistoryListProps {
 	profileId: string;
@@ -88,6 +89,8 @@ interface ProjectHistoryListProps {
 export default function ProjectHistoryList({
 	profileId,
 }: ProjectHistoryListProps) {
+	const { t } = useTranslation();
+
 	const queryClient = useQueryClient();
 
 	const { page, perPage, search, setFilterParams } = useProjectHistoryParams();
@@ -134,7 +137,7 @@ export default function ProjectHistoryList({
 	};
 
 	const { data: projectHistory, isLoading } = useIndexProjectHistory({
-		profile_id: profileId,
+		dev_profile_id: profileId,
 		page,
 		per_page: perPage,
 		search: debouncedSearch,
@@ -149,10 +152,10 @@ export default function ProjectHistoryList({
 		deleteProject(
 			{ id: selectedProject.id },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.project_deleted"));
 					queryClient.invalidateQueries({
-						queryKey: getIndexProjectHistoryQueryKey({ profile_id: profileId }),
+						queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),
 					});
 					closeDelete();
 				},
@@ -205,11 +208,11 @@ export default function ProjectHistoryList({
 		updateProject(
 			{ id: selectedProject.id, data },
 			{
-				onSuccess: (success) => {
-					CustomToaster.successToast(success.message);
+				onSuccess: () => {
+					CustomToaster.successToast(t("toast.success.project_updated"));
 
 					queryClient.invalidateQueries({
-						queryKey: getIndexProjectHistoryQueryKey({ profile_id: profileId }),
+						queryKey: getIndexProjectHistoryQueryKey({ dev_profile_id: profileId }),
 					});
 
 					closeUpdate();
@@ -245,12 +248,12 @@ export default function ProjectHistoryList({
 						value={search}
 						onChange={(e) => setFilterParams({ search: e.target.value })}
 						type="text"
-						placeholder="Search for an especific project, language, framework or description"
+						placeholder={t("placeholder.project_search")}
 						className="peer pl-9"
 					/>
 				</div>
 				<Button variant={"secondary"} onClick={clearFilters}>
-					<BrushCleaning className="size-4" /> Clear
+					<BrushCleaning className="size-4" /> {t("general.clear")}
 				</Button>
 			</Card>
 			{projectHistoryList.length === 0 && (
@@ -260,7 +263,7 @@ export default function ProjectHistoryList({
 							<EmptyMedia variant={"icon"}>
 								<Folder />
 							</EmptyMedia>
-							<EmptyTitle>No projects yet</EmptyTitle>
+							<EmptyTitle>{t("dev_profile.projects.no_projects")}</EmptyTitle>
 						</EmptyHeader>
 					</Empty>
 				</Card>
@@ -277,7 +280,7 @@ export default function ProjectHistoryList({
 					))}
 				</div>
 			)}
-			<Card className="p-4 bg-accent/40">
+			<Card className="p-4 bg-muted">
 				<DefaultPagination
 					data={projectHistory?.data.pagination as GenericPagination}
 					setPage={(p) => setFilterParams({ page: p })}
@@ -287,23 +290,23 @@ export default function ProjectHistoryList({
 			<AlertDialog open={deleteModalIsOpen} onOpenChange={setDeleteIsOpen}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+						<AlertDialogTitle>{t("dev_profile.projects.delete_project")}</AlertDialogTitle>
 						<AlertDialogDescription>
-							This action cannot be undone. THis will delete permanently the
-							following project:
+							{t("dev_profile.projects.delete_project_description")}
 							<span className="font-bold"> {selectedProject?.title}</span>.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
 						<AlertDialogCancel onClick={closeDelete}>
-							Cancelar
+							{t("general.cancel")}
 						</AlertDialogCancel>
 						<AlertDialogAction
 							onClick={handleDelete}
+							variant={"destructive"}
 							disabled={deleteIsPending}
 							className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
 						>
-							{deleteIsPending ? <Spinner /> : "Delete"}
+							{deleteIsPending ? <Spinner /> : t("general.delete")}
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
@@ -311,9 +314,9 @@ export default function ProjectHistoryList({
 			<Dialog open={updateModalIsOpen} onOpenChange={setUpdateModalIsOpen}>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Update Project</DialogTitle>
+						<DialogTitle>{t("dev_profile.projects.update_project")}</DialogTitle>
 						<DialogDescription>
-							Here you can update your project data
+							{t("dev_profile.projects.update_project_description")}
 						</DialogDescription>
 					</DialogHeader>
 					<form
@@ -325,11 +328,11 @@ export default function ProjectHistoryList({
 							name="title"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>Title</FieldLabel>
+									<FieldLabel>{t("input.title")}</FieldLabel>
 									<Input
 										value={field.value}
 										onChange={field.onChange}
-										placeholder="Project title"
+										placeholder={t("placeholder.project_title")}
 									/>
 									<FieldError errors={[fieldState.error]} />
 								</Field>
@@ -340,11 +343,11 @@ export default function ProjectHistoryList({
 							name="description"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>Description</FieldLabel>
+									<FieldLabel>{t("input.description")}</FieldLabel>
 									<Textarea
 										value={field.value}
 										onChange={field.onChange}
-										placeholder="Project description"
+										placeholder={t("placeholder.project_description")}
 									/>
 									<FieldError errors={[fieldState.error]} />
 								</Field>
@@ -379,7 +382,7 @@ export default function ProjectHistoryList({
 
 								return (
 									<Field className="flex-1">
-										<FieldLabel>Languages / Frameworks</FieldLabel>
+										<FieldLabel>{t("input.language_framework")}</FieldLabel>
 										<Popover open={open} onOpenChange={setOpen}>
 											<PopoverTrigger asChild>
 												<Button
@@ -418,7 +421,7 @@ export default function ProjectHistoryList({
 															})
 														) : (
 															<span className="text-muted-foreground">
-																Select languages...
+																{t("placeholder.project_language_framework")}
 															</span>
 														)}
 													</div>
@@ -429,7 +432,7 @@ export default function ProjectHistoryList({
 											<PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
 												<Command shouldFilter={false}>
 													<CommandInput
-														placeholder="Search language..."
+														placeholder={t("placeholder.project_language_search")}
 														value={languageSearchTerm}
 														onValueChange={setLanguageSearchTerm}
 													/>
@@ -439,7 +442,7 @@ export default function ProjectHistoryList({
 																<Loader2 className="animate-spin size-4 mr-2" />
 															</div>
 														)}
-														<CommandEmpty>No language found.</CommandEmpty>
+														<CommandEmpty>{t("no_data.no_languages")}</CommandEmpty>
 														<CommandGroup>
 															{languagesList?.map((lang) => (
 																<CommandItem
@@ -472,10 +475,10 @@ export default function ProjectHistoryList({
 
 						<div className="flex w-full justify-end mt-4 gap-2">
 							<Button type="submit" disabled={isPending}>
-								{isPending ? <Spinner /> : "Update"}
+								{isPending ? <Spinner /> : t("general.update")}
 							</Button>
 							<Button type="button" variant={"outline"} onClick={closeUpdate}>
-								Cancel
+								{t("general.cancel")}
 							</Button>
 						</div>
 					</form>

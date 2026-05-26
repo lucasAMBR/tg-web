@@ -67,9 +67,9 @@ export async function redirectIfAuthenticated(): Promise<void> {
 		}
 
 		const homeRoutes: Record<UserRole, string> = {
-			dev: "/home/dev",
-			company: "/home/company",
-			client: "/home/client",
+			dev: "/home",
+			company: "/home",
+			client: "/home",
 		};
 
 		throw redirect({ to: homeRoutes[role] || "/dashboard" });

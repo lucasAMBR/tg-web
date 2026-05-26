@@ -1,0 +1,671 @@
+{
+    "general": {
+        "back": "Back",
+        "sing_out": "Sing out",
+        "create": "Criar",
+        "register": "Registrar",
+        "skip": "Pular",
+        "logout": "Logout",
+        "clear": "Clear",
+        "reset": "Reset",
+        "search": "Search",
+        "update": "Update",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "actions": "Actions",
+        "change": "Change",
+        "remove": "Remove",
+        "add": "Add",
+        "save": "Save",
+        "verified": "Verified",
+        "are_you_sure": "Are you sure?",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "toast": {
+        "success": {
+            "login": "Signed in successfully",
+            "register": "Account created successfully",
+            "address_created": "Address saved successfully",
+            "address_updated": "Address updated successfully",
+            "profile_dev_created": "Developer profile created successfully",
+            "profile_dev_updated": "Developer profile updated successfully",
+            "profile_company_created": "Company profile created successfully",
+            "profile_company_updated": "Company profile updated successfully",
+            "profile_client_created": "Client profile created successfully",
+            "profile_client_updated": "Client profile updated successfully",
+            "email_updated": "Email updated successfully",
+            "password_updated": "Password changed successfully",
+            "academic_background_created": "Academic background added successfully",
+            "academic_background_updated": "Academic background updated successfully",
+            "academic_background_deleted": "Academic background removed successfully",
+            "certification_created": "Certification added successfully",
+            "certification_updated": "Certification updated successfully",
+            "certification_deleted": "Certification removed successfully",
+            "job_history_created": "Work experience added successfully",
+            "job_history_updated": "Work experience updated successfully",
+            "job_history_deleted": "Work experience removed successfully",
+            "hard_skill_created": "Hard skill added successfully",
+            "hard_skill_updated": "Hard skill updated successfully",
+            "hard_skill_deleted": "Hard skill removed successfully",
+            "project_created": "Project created successfully",
+            "project_updated": "Project updated successfully",
+            "project_deleted": "Project removed successfully",
+            "project_gallery_images_added": "Image(s) added successfully",
+            "project_gallery_image_deleted": "Image removed successfully",
+            "company_project_created": "Company project created successfully",
+            "company_project_updated": "Company project updated successfully",
+            "company_project_deleted": "Company project removed successfully",
+            "company_soft_skill_added": "Valued skill added successfully",
+            "company_stack_updated": "Stack updated successfully",
+            "dev_soft_skill_registered": "Soft skills registered successfully",
+            "dev_soft_skill_updated": "Soft skills updated successfully",
+            "recommendation_preferences_updated": "Recommendation preferences updated successfully",
+            "recommendation_preferences_restored": "Default configuration restored"
+        }
+    },
+    "role": {
+        "dev": "Developer",
+        "company": "Company",
+        "client": "Client"
+    },
+    "landing_page": {
+        "app_name": "Brew!",
+        "title": "Welcome to ",
+        "description": "Built by devs, for devs",
+        "subdescription": "Stop the endless back-and-forth. Our AI-powered recommendation engine analyzes technical stacks to bridge the gap between top talent and high-impact projects.",
+        "rule_button": "Our rules",
+        "know_more_button": "Know more about the algorithm"
+    },
+    "navbar": {
+        "home": "Home",
+        "about_the_project": {
+            "title": "About the project",
+            "about_the_code_title": "About the code",
+            "about_the_code_description": "learn about how brew was made, from choices to frameworks",
+            "about_the_match_algorithm_title": "About the match algorithm",
+            "about_the_match_algorithm_description": "learn about we match your profile with the perfect job",
+            "about_us_title": "About us",
+            "about_us_description": "here your can read about the journey of brew devs through the programming learning"
+        },
+        "jobs": "Jobs",
+        "lgpd": "LGPD",
+        "button": {
+            "sign_in": "Sign in",
+            "sign_up": "Sign up"
+        }
+    },
+    "auth": {
+        "login": {
+            "title": "Welcome back!",
+            "description": "We missed you",
+            "button": "Sign in",
+            "no_account": "Doesn't have an account? ",
+            "register_here": "Register here"
+        },
+        "register": {
+            "title": "Tell us about yourself",
+            "description": "Select your role to help us customize your experience and match you with the right opportunities.",
+            "second_step_title": "Set up your account",
+            "second_step_description": "Create your credentials to get full access to the platform and start your journey.",
+            "already_have_account": "Already have an account? ",
+            "sing_in_here": "Sing in here",
+            "terms_text": "I agree with the platform ",
+            "and_text": "and ",
+            "privacy_policy_text": "privacy policy",
+            "usage_terms_text": "usage terms",
+            "role": {
+                "dev": {
+                    "title": "Developer",
+                    "description": "I'm a developer looking for new career opportunities."
+                },
+                "company": {
+                    "title": "Company",
+                    "description": "I'm a recruiter or manager looking for technical talent."
+                },
+                "client": {
+                    "title": "Client",
+                    "description": "I'm an individual looking to hire developers for freelance projects."
+                }
+            },
+            "button": {
+                "next": "Next",
+                "register": "Register",
+                "back_to_roles": "Back to roles"
+            },
+            "password": {
+                "strength": {
+                    "empty": "Enter a password",
+                    "weak": "Weak password",
+                    "medium": "Medium password",
+                    "strong": "Strong password",
+                    "very_strong": "Very strong password"
+                },
+                "requirements_title": "Must contain:",
+                "requirements": {
+                    "min_length": "At least 8 characters",
+                    "lowercase": "At least 1 lowercase letter",
+                    "uppercase": "At least 1 uppercase letter",
+                    "number": "At least 1 number",
+                    "special": "At least 1 special character"
+                },
+                "a11y": {
+                    "requirement_met": " — Requirement met",
+                    "requirement_not_met": " — Requirement not met"
+                }
+            }
+        }
+    },
+    "profile_create": {
+        "dev": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "company": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "client": {
+            "title": "Create your profile",
+            "description": "Fill in your basic information so our algorithm can understand your profile and match you with the most relevant opportunities."
+        },
+        "address_modal": {
+            "title": "Address Creation",
+            "description": "You can skip this step, but for On-site or Hybrid jobs you need to have an registered address on the platform for our algorithm recommend jobs near to you"
+        },
+        "logout_dialog": {
+            "description": "You will be leaving without finishing your profile creation, you will not be able to be reached by our algorithm!"
+        }
+    },
+    "address_create": {
+        "title": "Register your address",
+        "description_dev": "Provide your address details so we can better tailor location-based opportunities and ensure accurate matching.",
+        "description_company": "Provide your address details so we can better recommend devs for your company and ensure accurate matching.",
+        "description_client": "Provide your address details so we can better recommend devs for your freelance projects and ensure accurate matching."
+    },
+    "dev_profile": {
+        "tabs": {
+            "posts": "Posts",
+            "projects": "Projects",
+            "job_history": "Job History",
+            "certifications": "Certifications"
+        },
+        "projects": {
+            "create_project": "Create Project",
+            "cancel_project_gallery": "Cancel project gallery",
+            "create_project_gallery": "Create project gallery",
+            "no_projects": "No projects yet",
+            "update_project": "Update project",
+            "update_project_description": "Here you can update your project data",
+            "delete_project": "Delete project",
+            "delete_project_description": "This action cannot be undone. This will delete permanently the following project: "
+        },
+        "job_history": {
+            "create_job_history": "Add new job to history",
+            "no_jobs": "No Employments yet",
+            "update_job_history": "Update job history item",
+            "update_job_history_description": "Change the details from an employment",
+            "actual": "Actual",
+            "at": "At",
+            "delete_job_history": "Are you sure?",
+            "delete_job_history_subtitle": "This action cannot be undone.",
+            "delete_job_history_description": "When you delete an item from your job history he doesn't will be more used by our recommendation algorithm"
+        },
+        "certifications": {
+            "create_certification": "Add new certification",
+            "no_certifications": "No certifications",
+            "update_certification": "Update certification",
+            "update_certification_description": "Change the details from a certification",
+            "delete_certification": "Are you sure?",
+            "delete_certification_subtitle": "This action is permanent!",
+            "delete_certification_description": "If you remove an academic background, this register will not be used by out recommendation algorithm"
+        },
+        "hard_skills": {
+            "title": "Hard skills",
+            "no_hard_skills": "No hard skills",
+            "create_hard_skill": "Add new hard skill",
+            "create_hard_skill_description": "Register a new hard skill to help our recommendation system find the perfect job for you!",
+            "update_hard_skill": "Update hard skill",
+            "update_hard_skill_description": "Change the details from a hard skill",
+            "delete_hard_skill": "Are you sure?",
+            "delete_hard_skill_subtitle": "This action is permanent!",
+            "delete_hard_skill_description": "If you remove a hard skill, this register will not be used by out recommendation algorithm"
+        },
+        "soft_skills": {
+            "title": "Soft Skills",
+            "no_soft_skills": "No soft skills yet",
+            "register_soft_skills": "Register soft skills",
+            "register_soft_skills_description": "Here you can do a self evaluation about your Soft Skills",
+            "update_soft_skills": "Update soft skills",
+            "update_soft_skills_description": "Update your self evaluation about your Soft Skills",
+            "pontuation_limit_based_on_seniority": "Pontuation limit based on your seniority",
+            "actual_pontuation": "Actual pontuation"
+        },
+        "academic_background": {
+            "title": "Academic Background",
+            "no_academic_background": "No academic background yet",
+            "new_academic_background": "Add new academic background",
+            "update_academic_background": "Update academic background",
+            "update_warning": "If you don't wanna change the certificate, just ignore this field"
+        }
+    },
+    "company_profile": {
+        "tabs": {
+            "posts": "Posts",
+            "projects": "Projects",
+            "open_jobs": "Vacancies"
+        },
+        "projects": {
+            "create_project": "Create new project",
+            "no_projects": "No projects yet"
+        },
+        "stack": {
+            "title": "Our Stack",
+            "no_stack": "No stack yet",
+            "no_stack_description": "You haven't registered any tech stack yet. Get started by creating your first stack, they are used by our recommendation algorithm",
+            "register_title": "Register your company stack",
+            "register_description": "Show interested developers the technologies used by your company.",
+            "update_success": "Stack updated successfully!"
+        },
+        "soft_skills": {
+            "title": "Valued skills",
+            "no_soft_skills": "No valued skills yet",
+            "no_soft_skills_description": "You haven't registered any valued skills yet. They let developers know which soft skills your company values, and our recommendation algorithm uses them to find the right match.",
+            "add_title": "Add valued skills",
+            "update_title": "Update valued skills",
+            "select_placeholder": "Select soft skills...",
+            "search_placeholder": "Search soft skill...",
+            "no_soft_skill_found": "No soft skill found."
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "description": "Configure your experience as you want",
+        "tabs": {
+            "account": "Account",
+            "profile": "Profile",
+            "theme": "Theme",
+            "recommendation": "Recommendation"
+        },
+        "account": {
+            "email_verification": { 
+                "title": "E-mail verification",
+                "description": "This will help us to send you the best oportunities, even out of our platform, and help to let your account more secure with access report and access code sending!",
+                "your_email_is_already_verified": "Your e-email is already verified yet",
+                "your_email_is_not_verified": "Your e-email is not verified yet",
+                "send_verification": "Send verification"
+            },
+            "change_associated_email": {
+                "title": "Change associated e-mail",
+                "description": "Warning: If you update this, your credentials to sing in will be changed, so remember the new email to this account",
+                "change_email_confirmation": "This action is permanent! Changing this you will update your access credentials and will be necessary reverify your email",
+                "yes_change_my_email": "Yes, change my e-mail"
+            },
+            "password_change": {
+                "title": "Password change",
+                "description": "Warning: If you update this, your credentials to sing in will be changed, so remember the new password to this account"
+            },
+            "delete_account": {
+                "title": "Delete account",
+                "description": "Warning: If you delete your account, all your data will be deleted permanently and will not be possible to recover",
+                "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",    
+                "yes_delete_my_account": "Yes, delete my account"
+            }
+        },
+        "profile": {
+            "update_profile": {
+                "title": "Update your profile",
+                "description": "Update your profile information, this will help us to know you better and recommend you the best"
+            }
+        },
+        "theme": {
+            "change_theme": {   
+                "title": "Change theme",
+                "description": "Change the platform color scheme between light, dark or matching with your operational system default configuration"
+            },
+            "theme": {
+                "title": "Color scheme",
+                "description": "Change the platform color scheme between predefined themes to adapt to your taste"
+            }
+        },
+        "recommendation": {
+            "warning": {
+                "title": "Warning",
+                "description": "Changing this configuration directly affects how you are recommended by our algorithm to companies. If your custom parameters are unrealistic, you may be ignored for some positions where you would otherwise be highly recommended."
+            },
+            "contract_type": {
+                "title": "Contract Type",
+                "description": "Select the employment arrangements that fit your career goals. The algorithm will filter out opportunities that do not match your preferred contract types.",
+                "clt_description": "Include traditional employment opportunities with standard labor rights and full corporate benefits.",
+                "contractor_description": "Receive recommendations for contractor or B2B positions, providing services through your own legal entity.",
+                "internship_description": "Discover entry-level opportunities and training programs designed for students and junior professionals."
+            },
+            "job_modality": {
+                "title": "Job Modality",
+                "description": "Define your preferred work environment. The recommendation engine will prioritize roles that align with your flexibility and location preferences.",
+                "on_site_description": "Receive recommendations for positions that require full-time presence at the company's office.",
+                "hybrid_description": "Discover roles that offer a balance between remote work and in-office days.",
+                "remote_description": "Get matched with fully remote positions, allowing you to work from anywhere."
+            },
+            "recommendation_radius": {
+                "title": "Recommendation Radius",
+                "description": "Custom the maximum distance between you and the job that we recommend to you, this configuration is split between the job modalities",
+                "description_2": "This custom configuration will only be applied if profile doesn't have the \"Open to relocation\" activated who will remove completely any distance limitation!"
+            },
+            "algorithm_flexibility": {
+                "title": "Algorithm Flexibility",
+                "description": "Custom the languages and frameworks the flexibility on our recommendation system, your will to learn a new technology, techologies that  you don't wanna be related",
+                "recommendation_flexibility_title": "Recommendation Flexibility",
+                "recommendation_flexibility_description": "Enable this to discover roles beyond your exact tech stack. The algorithm will broaden your recommendations to include jobs where your core skills are transferable, even if the specific languages or frameworks differ."
+            }
+        }
+    },
+    "under_construction": {
+        "title": "This feature is actually under construction!",
+        "description": "Please comeback later"
+    },
+    "sidebar": {
+        "sections": {
+            "feed": "Feed",
+            "companies": "Companies",
+            "job_vacancies": "Job Vacancies",
+            "freelances": "Freelances",
+            "my_jobs": "My Vacancies",
+            "dashboard": "Dashboard"
+        },
+        "options": {
+            "profile": "Profile",
+            "settings": "Settings"
+        },
+        "logout_dialog": {
+            "description": "You're about to log out of your account. You'll need to sign in again to access your data and continue using the platform."
+        },
+        "location_informations": {
+            "title": "Location Informations",
+            "description": "Manage the informations about your location, address, country, this will help us to know where you live to recommend to you the perfect job vacancies"
+        },
+        "theme": {
+            "title": "Theme",
+            "description": "Change the platform color scheme between light, dark or matching with your operational system default configuration"
+        }
+    },
+    "input": {
+        "email": "E-mail",
+        "password": "Password",
+        "name": "Name",
+        "phone": "Phone",
+        "birthdate": "Birthdate",
+        "seniority_level": "Seniority Level",
+        "open_to_work": "Open to work",
+        "open_to_relocation": "Open to relocation",
+        "cep": "Zipcode",
+        "number": "Number",
+        "complement": "Complement",
+        "street": "Street",
+        "district": "District",
+        "city": "City",
+        "state": "State",
+        "title": "Title",
+        "language_framework": "Languages / Frameworks",
+        "description": "Description",
+        "project_gallery": "Project gallery",
+        "position_name": "Position name",
+        "company_name": "Company name",
+        "cnpj": "CNPJ",
+        "founding_date": "Founding date",
+        "bio": "Bio",
+        "operational_segment": "Operational segment",
+        "company_location": "Company location",
+        "employment_type": "Employment type",
+        "contract_modality": "Contract modality",
+        "actuation_details": "Actuation details",
+        "start_date": "Start date",
+        "end_date": "End date",
+        "is_current": "Is current",
+        "certification_name": "Certification name",
+        "certification_provider": "Certification provider",
+        "skill_level": "Skill level",
+        "degree": "Degree",
+        "degree_level": "Degree level",
+        "institution": "Institution",
+        "certificate": "Certificate",
+        "old_password": "Actual password",
+        "new_password": "New password",
+        "new_password_confirmation": "New password confirmation",
+        "stack_blacklist": "Stack blacklist"
+    },
+    "tooltip": {
+        "open_to_work": "Tell our algorithm that you are available for job openings; without this information, our intelligent algorithm will not recommend you for positions.",
+        "open_to_relocation": "Tell our algorithm that you are available to relocate to another city, state, or country for a job opening."
+    },
+    "placeholder": {
+        "name": "Your name",
+        "cpf": "Your CPF",
+        "phone": "Your phone",
+        "birthdate": "Your birthdate",
+        "seniority_level": "Pick your seniority level",
+        "cep": "Insert your zipcode",
+        "number": "Number",
+        "complement": "Complement",
+        "street": "Street",
+        "district": "District",
+        "city": "City",
+        "state": "State",
+        "project_search": "Search for an especific project, language, framework or description",
+        "project_title": "Project title",
+        "project_language_framework": "Select project languages / frameworks",
+        "project_description": "Describe your project features, archtecture and choices",
+        "project_language_search": "Search language...",
+        "employment_search": "Search for an especific company, seniority and work modality",
+        "position_name": "Frontend developer, Devops engineer",
+        "company_name": "Example Company Ltda",
+        "cnpj": "00.000.000/0000-00",
+        "founding_date": "Select a date",
+        "bio": "Tell us about your company",
+        "operational_segment": "Pick your company segment",
+        "company_location": "São Paulo, SP",
+        "employment_type": "Pick your employment type",
+        "contract_modality": "Pick your contract modality",
+        "actuation_details": "Describe your actuation details, what you did, what you learned, what you achieved",
+        "start_date": "Start date",
+        "end_date": "End date",
+        "certification_search": "Search for an especific company, seniority and work modality",
+        "certification_name": "AWS Cloud Certification",
+        "certification_provider": "Amazon",
+        "certificate": "Select a PDF file",
+        "skill_level": "Select your skill level",
+        "language_framework": "Select a language / framework",
+        "degree": "Software Engineer",
+        "degree_level": "Degree level",
+        "institution": "Universidade de São paulo",
+        "old_password": "Actual password",
+        "new_password": "New password",
+        "new_password_confirmation": "New password confirmation",
+        "stack_blacklist": "Select a language / framework to avoid"
+    },
+    "enum": {
+        "seniority_level": {
+            "intern": "Intern",
+            "junior": "Junior",
+            "mid_level": "Mid Level",
+            "senior": "Senior",
+            "staff": "Staff"
+        },
+        "employment_type": {
+            "on_site": "On-site",
+            "remote": "Remote",
+            "hybrid": "Hybrid"
+        },
+        "contract_type": {
+            "clt": "CLT",
+            "contractor": "Contractor",
+            "internship": "Internship"
+        },
+        "hard_skill_levels": {
+            "fundamentals": "Fundamentals",
+            "basic": "Basic",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert",
+            "authority": "Authority"
+        },
+        "degree_level": {
+            "high_school": "High School",
+            "technical": "Technical",
+            "associate": "Associate",
+            "bachelors": "Bachelors",
+            "post_graduate": "Post Graduate",
+            "masters": "Masters",
+            "doctorate": "Doctorate",
+            "post_doctorate": "Post Doctorate"
+        },
+        "operational_segment": {
+            "e_commerce": "E-commerce",
+            "fintech": "Fintech",
+            "healthcare": "Healthcare",
+            "edtech": "Edtech",
+            "logistics": "Logistics",
+            "cybersecurity": "Cybersecurity",
+            "game_dev": "Game Dev",
+            "cloud_computing": "Cloud Computing",
+            "artificial_intelligence": "Artificial Intelligence",
+            "software_house": "Software House",
+            "retail": "Retail",
+            "banking": "Banking"
+        }
+    },
+    "pagination": {
+        "lines_per_page": "Lines per page",
+        "displaying": "Displaying",
+        "of": "of",
+        "page": "Page"
+    },
+    "no_data": {
+        "no_languages": "No languages found"
+    },
+    "soft_skills": {
+        "communication": "Communication",
+        "communication_description": "Ability to clearly express ideas and understand others in verbal and written communication.",
+        "teamwork": "Teamwork",
+        "teamwork_description": "Ability to collaborate effectively with others to achieve shared goals.",
+        "problem_solving": "Problem Solving",
+        "problem_solving_description": "Ability to analyze situations and develop effective solutions.",
+        "adaptability": "Adaptability",
+        "adaptability_description": "Ability to adjust to new situations, challenges, and changing environments.",
+        "time_management": "Time Management",
+        "time_management_description": "Ability to prioritize tasks and manage time efficiently to meet deadlines.",
+        "critical_thinking": "Critical Thinking",
+        "critical_thinking_description": "Ability to evaluate information objectively and make reasoned decisions.",
+        "leadership": "Leadership",
+        "leadership_description": "Ability to guide, motivate, and support a team towards achieving goals.",
+        "conflict_resolution": "Conflict Resolution",
+        "conflict_resolution_description": "Ability to manage and resolve disagreements in a constructive way.",
+        "emotional_intelligence": "Emotional Intelligence",
+        "emotional_intelligence_description": "Ability to recognize, understand, and manage your own emotions and those of others.",
+        "accountability": "Accountability",
+        "accountability_description": "Ability to take responsibility for actions, decisions, and their outcomes."
+    },
+    "soft_skill_level_responses": {
+        "communication_very_poor": "Very Poor",
+        "communication_very_poor_description": "Struggles to express ideas clearly and often causes misunderstandings within the team.",
+        "communication_basic": "Basic",
+        "communication_basic_description": "Communicates simple ideas but lacks clarity in more complex discussions.",
+        "communication_intermediate": "Intermediate",
+        "communication_intermediate_description": "Communicates clearly in most situations and participates in team discussions.",
+        "communication_advanced": "Advanced",
+        "communication_advanced_description": "Expresses ideas clearly and ensures team alignment during discussions.",
+        "communication_expert": "Expert",
+        "communication_expert_description": "Communicates complex ideas effectively and facilitates productive discussions.",
+        "teamwork_very_poor": "Very Poor",
+        "teamwork_very_poor_description": "Rarely collaborates and often works in isolation from the team.",
+        "teamwork_basic": "Basic",
+        "teamwork_basic_description": "Occasionally collaborates but has difficulty aligning with the team.",
+        "teamwork_intermediate": "Intermediate",
+        "teamwork_intermediate_description": "Works well with teammates and contributes to shared goals.",
+        "teamwork_advanced": "Advanced",
+        "teamwork_advanced_description": "Actively collaborates and helps improve team productivity.",
+        "teamwork_expert": "Expert",
+        "teamwork_expert_description": "Promotes strong collaboration and strengthens team dynamics.",
+        "problem_solving_very_poor": "Very Poor",
+        "problem_solving_very_poor_description": "Has difficulty identifying problems or proposing solutions.",
+        "problem_solving_basic": "Basic",
+        "problem_solving_basic_description": "Can solve simple problems but struggles with complex situations.",
+        "problem_solving_intermediate": "Intermediate",
+        "problem_solving_intermediate_description": "Analyzes problems and proposes reasonable solutions.",
+        "problem_solving_advanced": "Advanced",
+        "problem_solving_advanced_description": "Breaks down complex problems and consistently finds effective solutions.",
+        "problem_solving_expert": "Expert",
+        "problem_solving_expert_description": "Anticipates problems and designs strategic solutions for complex challenges.",
+        "adaptability_very_poor": "Very Poor",
+        "adaptability_very_poor_description": "Has significant difficulty adapting to changes in processes, technologies, or team dynamics.",
+        "adaptability_basic": "Basic",
+        "adaptability_basic_description": "Shows some resistance to change but can adapt with guidance and additional time.",
+        "adaptability_intermediate": "Intermediate",
+        "adaptability_intermediate_description": "Adapts to new tools, environments, and processes with moderate support.",
+        "adaptability_advanced": "Advanced",
+        "adaptability_advanced_description": "Quickly adapts to new situations, technologies, and project requirements.",
+        "adaptability_expert": "Expert",
+        "adaptability_expert_description": "Proactively embraces change and helps the team adapt effectively to new challenges.",
+        "time_management_very_poor": "Very Poor",
+        "time_management_very_poor_description": "Struggles to organize tasks and frequently misses deadlines.",
+        "time_management_basic": "Basic",
+        "time_management_basic_description": "Completes tasks but has difficulty prioritizing work and managing deadlines.",
+        "time_management_intermediate": "Intermediate",
+        "time_management_intermediate_description": "Manages time reasonably well and usually delivers tasks within expected deadlines.",
+        "time_management_advanced": "Advanced",
+        "time_management_advanced_description": "Effectively prioritizes work and consistently meets deadlines even under pressure.",
+        "time_management_expert": "Expert",
+        "time_management_expert_description": "Demonstrates exceptional organization and helps the team optimize time and productivity.",
+        "critical_thinking_very_poor": "Very Poor",
+        "critical_thinking_very_poor_description": "Has difficulty analyzing information and often relies on assumptions.",
+        "critical_thinking_basic": "Basic",
+        "critical_thinking_basic_description": "Can analyze simple situations but struggles with complex reasoning.",
+        "critical_thinking_intermediate": "Intermediate",
+        "critical_thinking_intermediate_description": "Evaluates information logically and contributes to problem discussions.",
+        "critical_thinking_advanced": "Advanced",
+        "critical_thinking_advanced_description": "Consistently analyzes situations critically and proposes well-reasoned solutions.",
+        "critical_thinking_expert": "Expert",
+        "critical_thinking_expert_description": "Demonstrates exceptional analytical thinking and guides others in making sound decisions.",
+        "leadership_very_poor": "Very Poor",
+        "leadership_very_poor_description": "Avoids responsibility for guiding others and struggles to provide direction or support to the team.",
+        "leadership_basic": "Basic",
+        "leadership_basic_description": "Occasionally provides guidance but lacks consistency in motivating or supporting the team.",
+        "leadership_intermediate": "Intermediate",
+        "leadership_intermediate_description": "Supports teammates and helps coordinate efforts to achieve team objectives.",
+        "leadership_advanced": "Advanced",
+        "leadership_advanced_description": "Actively motivates and guides the team while helping resolve challenges and maintain alignment.",
+        "leadership_expert": "Expert",
+        "leadership_expert_description": "Demonstrates strong leadership by inspiring others, guiding decisions, and fostering team growth.",
+        "conflict_resolution_very_poor": "Very Poor",
+        "conflict_resolution_very_poor_description": "Avoids or escalates conflicts and struggles to contribute to constructive resolutions.",
+        "conflict_resolution_basic": "Basic",
+        "conflict_resolution_basic_description": "Recognizes conflicts but has difficulty facilitating productive discussions to resolve them.",
+        "conflict_resolution_intermediate": "Intermediate",
+        "conflict_resolution_intermediate_description": "Participates in resolving disagreements and helps maintain respectful communication.",
+        "conflict_resolution_advanced": "Advanced",
+        "conflict_resolution_advanced_description": "Effectively mediates conflicts and helps guide discussions toward constructive outcomes.",
+        "conflict_resolution_expert": "Expert",
+        "conflict_resolution_expert_description": "Proactively identifies potential conflicts and facilitates collaborative and sustainable solutions.",
+        "emotional_intelligence_very_poor": "Very Poor",
+        "emotional_intelligence_very_poor_description": "Struggles to recognize emotions in self or others and may react impulsively in challenging situations.",
+        "emotional_intelligence_basic": "Basic",
+        "emotional_intelligence_basic_description": "Shows some awareness of emotions but has difficulty managing reactions consistently.",
+        "emotional_intelligence_intermediate": "Intermediate",
+        "emotional_intelligence_intermediate_description": "Recognizes emotional dynamics and generally responds in a respectful and balanced manner.",
+        "emotional_intelligence_advanced": "Advanced",
+        "emotional_intelligence_advanced_description": "Demonstrates strong emotional awareness and maintains constructive interactions even in stressful situations.",
+        "emotional_intelligence_expert": "Expert",
+        "emotional_intelligence_expert_description": "Exhibits exceptional emotional intelligence and positively influences the emotional dynamics of the team.",
+        "accountability_very_poor": "Very Poor",
+        "accountability_very_poor_description": "Avoids responsibility for outcomes and frequently shifts blame to others.",
+        "accountability_basic": "Basic",
+        "accountability_basic_description": "Accepts responsibility when prompted but may struggle to consistently follow through on commitments.",
+        "accountability_intermediate": "Intermediate",
+        "accountability_intermediate_description": "Takes ownership of tasks and acknowledges responsibility for results.",
+        "accountability_advanced": "Advanced",
+        "accountability_advanced_description": "Consistently demonstrates ownership, reliability, and responsibility for outcomes.",
+        "accountability_expert": "Expert",
+        "accountability_expert_description": "Leads by example in accountability and encourages a culture of ownership within the team."
+    }
+}
