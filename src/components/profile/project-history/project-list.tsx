@@ -177,6 +177,8 @@ export default function ProjectHistoryList({
 			description: selectedProject?.description ?? "",
 			languages:
 				selectedProject?.languages.map((language) => language.id) ?? [],
+			prod_url: selectedProject?.prod_url ?? "",
+			github_url: selectedProject?.github_url ?? "",
 		},
 	});
 
@@ -187,6 +189,8 @@ export default function ProjectHistoryList({
 				title: selectedProject.title,
 				description: selectedProject.description,
 				languages: selectedProject.languages.map((l) => l.id),
+				prod_url: selectedProject.prod_url ?? "",
+				github_url: selectedProject.github_url ?? "",
 			});
 
 			// 2. Sincronizar o cache de nomes para que o ID bruto não apareça
@@ -272,6 +276,7 @@ export default function ProjectHistoryList({
 				<div className="flex flex-col gap-3">
 					{projectHistoryList.map((project) => (
 						<ProjectItemCard
+							key={project.id}
 							project={project}
 							openDeleteModal={openDelete}
 							openUpdateModal={openUpdate}
@@ -471,6 +476,42 @@ export default function ProjectHistoryList({
 									</Field>
 								);
 							}}
+						/>
+						<Controller
+							control={form.control}
+							name="prod_url"
+							render={({ field, fieldState }) => (
+								<Field>
+									<FieldLabel>{t("input.prod_url")}</FieldLabel>
+									<Input
+										value={field.value}
+										onChange={field.onChange}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_prod_url")}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+						<Controller
+							control={form.control}
+							name="github_url"
+							render={({ field, fieldState }) => (
+								<Field>
+									<FieldLabel>{t("input.github_url")}</FieldLabel>
+									<Input
+										value={field.value}
+										onChange={field.onChange}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_github_url")}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
 						/>
 
 						<div className="flex w-full justify-end mt-4 gap-2">

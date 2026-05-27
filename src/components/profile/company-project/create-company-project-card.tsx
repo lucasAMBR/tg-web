@@ -1,21 +1,8 @@
 import { getIndexCompanyProjectQueryKey, useStoreCompanyProject } from "@/api/generated/company-projects-doc/company-projects-doc";
 import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
-import type { StoreProjectHistoryImagesBody } from "@/api/generated/models";
-import {
-	getIndexProjectHistoryQueryKey,
-	useStoreProjectHistory,
-	useStoreProjectHistoryImages,
-} from "@/api/generated/project-history-doc/project-history-doc";
-import { ImageUploadField } from "@/components/global/inputs/image-w-preview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardAction,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
 	Command,
 	CommandEmpty,
@@ -34,10 +21,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import useDebounce from "@/hooks/use-debounce";
 import { CreateCompanyProjectSchema, type ICreateCompanyProjectSchema } from "@/schemas/company-project/CreateCompanyProjectSchema";
-import {
-	CreateProjectSchema,
-	type ICreateProjectSchema,
-} from "@/schemas/project-history/CreateProjectSchema";
 import type { ApiError } from "@/utils/api-error";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
@@ -60,7 +43,7 @@ interface CreateCompanyProjectCardProps {
 }
 
 export default function CreateCompanyProjectCard({
-	profileId,
+	profileId: _profileId,
 }: CreateCompanyProjectCardProps) {
 
 	const { t } = useTranslation();
@@ -72,7 +55,9 @@ export default function CreateCompanyProjectCard({
 		defaultValues: {
 			title: "",
 			description: "",
-			languages: []
+			languages: [],
+			prod_url: "",
+			github_url: "",
 		},
 	});
 
@@ -99,7 +84,7 @@ export default function CreateCompanyProjectCard({
 	const create = async (data: ICreateCompanyProjectSchema) => {
 
 		try {
-			const projectItem = await createProject({ data });
+			await createProject({ data });
 
 			CustomToaster.successToast(t("toast.success.company_project_created"));
 
@@ -140,7 +125,7 @@ export default function CreateCompanyProjectCard({
 						<Controller
 							control={form.control}
 							name="title"
-							render={({ field, fieldState }) => (
+							render={({ field }) => (
 								<Field className="flex-1">
 									<FieldLabel>{t("input.title")}</FieldLabel>
 									<Input
@@ -274,7 +259,7 @@ export default function CreateCompanyProjectCard({
 					<Controller
 						control={form.control}
 						name="description"
-						render={({ field, fieldState }) => (
+						render={({ field }) => (
 							<Field>
 								<FieldLabel>{t("input.description")}</FieldLabel>
 								<Textarea
@@ -286,6 +271,50 @@ export default function CreateCompanyProjectCard({
 							</Field>
 						)}
 					/>
+					<div className="flex flex-col gap-3 sm:flex-row">
+						<Controller
+							control={form.control}
+							name="prod_url"
+							render={({ field, fieldState }) => (
+								<Field className="flex-1">
+									<FieldLabel>{t("input.prod_url")}</FieldLabel>
+									<Input
+										{...field}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_prod_url")}
+									/>
+									{fieldState.error && (
+										<span className="text-destructive text-sm">
+											{fieldState.error.message}
+										</span>
+									)}
+								</Field>
+							)}
+						/>
+						<Controller
+							control={form.control}
+							name="github_url"
+							render={({ field, fieldState }) => (
+								<Field className="flex-1">
+									<FieldLabel>{t("input.github_url")}</FieldLabel>
+									<Input
+										{...field}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_github_url")}
+									/>
+									{fieldState.error && (
+										<span className="text-destructive text-sm">
+											{fieldState.error.message}
+										</span>
+									)}
+								</Field>
+							)}
+						/>
+					</div>
 					<div className="flex w-full justify-end mt-4 gap-2">
 						<Button disabled={projectIsPending || !form.formState.isDirty}>{t("general.create")}</Button>
 					</div>

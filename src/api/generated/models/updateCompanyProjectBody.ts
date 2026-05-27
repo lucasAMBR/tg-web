@@ -9,4 +9,6 @@ export type UpdateCompanyProjectBody = {
   title?: string;
   description?: string;
   languages?: string[];
+  prod_url?: string;
+  github_url?: string;
 };

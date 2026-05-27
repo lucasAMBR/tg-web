@@ -21,8 +21,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuthStore } from "@/stores/auth-store";
 import { env } from "@/utils/env";
+import { externalHref } from "@/utils/external-href";
 import Autoplay from "embla-carousel-autoplay";
-import { Edit, EllipsisVertical, Image, Trash } from "lucide-react";
+import { Edit, EllipsisVertical, Image, Link, Trash } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ProjectItemCardProps {
 	project: ProjectHistoryModel;
@@ -38,13 +40,48 @@ export default function ProjectItemCard({
 	openManageGallery,
 }: ProjectItemCardProps) {
 	const { user } = useAuthStore();
+	const { t } = useTranslation();
+
+	const prod = project.prod_url?.trim();
+	const gh = project.github_url?.trim();
 
 	return (
 		<Card className="p-4">
 			<CardHeader className="p-0">
-				<div className="flex justify-between">
-					<CardTitle className="text-xl">{project.title}</CardTitle>
-					{user?.dev_profile?.id === project.dev_profile_id && (
+				<div className="flex justify-between gap-2 mb-2 items-start">
+					<div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+						<CardTitle className="text-xl">{project.title}</CardTitle>
+					</div>
+					{user?.dev_profile?.id === project.dev_profile_id && 
+					<div className="flex justify-end gap-1">
+						<div className="flex shrink-0 items-center gap-1">
+                            {prod && (
+                                <Button variant="outline" size="sm" className="h-8 px-2" asChild>
+                                    <a
+                                        href={externalHref(prod)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={t("general.open_link")}
+                                    >
+                                        <Link className="size-3.5" />
+                                        <span className="ml-1 text-xs">App</span>
+                                    </a>
+                                </Button>
+                            )}
+                            {gh && (
+                                <Button variant="outline" size="sm" className="h-8 px-2" asChild>
+                                    <a
+                                        href={externalHref(gh)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={t("general.open_link")}
+                                    >
+										<Link className="size-3.5" />
+										<span className="ml-1 text-xs">GitHub</span>
+                                    </a>
+                                </Button>
+                            )}
+                        </div>
 						<DropdownMenu>
 							<DropdownMenuTrigger asChild>
 								<Button size={"sm"} variant={"outline"}>
@@ -66,7 +103,8 @@ export default function ProjectItemCard({
 								</DropdownMenuItem>
 							</DropdownMenuContent>
 						</DropdownMenu>
-					)}
+					</div>
+				}
 				</div>
 				<CardDescription>{project.description}</CardDescription>
 				<div className="flex gap-1">

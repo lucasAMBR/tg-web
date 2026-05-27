@@ -21,7 +21,8 @@
         "are_you_sure": "Are you sure?",
         "light": "Light",
         "dark": "Dark",
-        "system": "System"
+        "system": "System",
+        "open_link": "Open link"
     },
     "toast": {
         "success": {
@@ -410,6 +411,8 @@
         "title": "Title",
         "language_framework": "Languages / Frameworks",
         "description": "Description",
+        "prod_url": "Production URL",
+        "github_url": "GitHub URL",
         "project_gallery": "Project gallery",
         "position_name": "Position name",
         "company_name": "Company name",
@@ -458,6 +461,8 @@
         "project_title": "Project title",
         "project_language_framework": "Select project languages / frameworks",
         "project_description": "Describe your project features, archtecture and choices",
+        "project_prod_url": "https://myapp.com",
+        "project_github_url": "https://github.com/user/repo",
         "project_language_search": "Search language...",
         "employment_search": "Search for an especific company, seniority and work modality",
         "position_name": "Frontend developer, Devops engineer",

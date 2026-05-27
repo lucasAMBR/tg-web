@@ -70,6 +70,8 @@ export default function CreateProjectCard({
 			title: "",
 			description: "",
 			languages: [],
+			prod_url: "",
+			github_url: "",
 			images: [],
 		},
 	});
@@ -311,6 +313,50 @@ export default function CreateProjectCard({
 							</Field>
 						)}
 					/>
+					<div className="flex flex-col gap-3 sm:flex-row">
+						<Controller
+							control={form.control}
+							name="prod_url"
+							render={({ field, fieldState }) => (
+								<Field className="flex-1">
+									<FieldLabel>{t("input.prod_url")}</FieldLabel>
+									<Input
+										{...field}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_prod_url")}
+									/>
+									{fieldState.error && (
+										<span className="text-destructive text-sm">
+											{fieldState.error.message}
+										</span>
+									)}
+								</Field>
+							)}
+						/>
+						<Controller
+							control={form.control}
+							name="github_url"
+							render={({ field, fieldState }) => (
+								<Field className="flex-1">
+									<FieldLabel>{t("input.github_url")}</FieldLabel>
+									<Input
+										{...field}
+										type="url"
+										inputMode="url"
+										autoComplete="off"
+										placeholder={t("placeholder.project_github_url")}
+									/>
+									{fieldState.error && (
+										<span className="text-destructive text-sm">
+											{fieldState.error.message}
+										</span>
+									)}
+								</Field>
+							)}
+						/>
+					</div>
 					{galleryIsOpen && (
 						<ImageUploadField
 							control={form.control}

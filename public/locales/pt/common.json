@@ -21,7 +21,8 @@
         "are_you_sure": "Tem certeza?",
         "light": "Claro",
         "dark": "Escuro",
-        "system": "Sistema"
+        "system": "Sistema",
+        "open_link": "Abrir link"
     },
     "toast": {
         "success": {
@@ -407,6 +408,8 @@
         "title": "Titulo",
         "language_framework": "Linguagens / Frameworks",
         "description": "Descrição",
+        "prod_url": "URL de produção",
+        "github_url": "URL do GitHub",
         "project_gallery": "Galeria do projejeto",
         "position_name": "Cargo",
         "company_name": "Nome da empresa",
@@ -454,6 +457,8 @@
         "project_search": "Busque por um projeto específico, linguagem, framework ou descrição",
         "project_title": "Título do projeto",
         "project_description": "Descreva as funcionalidades, arquitetura e principais escolhas do seu projeto",
+        "project_prod_url": "https://meuapp.com",
+        "project_github_url": "https://github.com/usuario/repositorio",
         "project_language_framework": "Selecione as linguagens / frameworks do projeto",
         "project_language_search": "Busque por uma linguagem...",
         "employment_search": "Busque por uma empresa, nível de senioridade e modalidade de trabalho",

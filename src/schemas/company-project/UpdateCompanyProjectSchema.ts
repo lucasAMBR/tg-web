@@ -1,5 +1,20 @@
 import z from "zod/v3";
 
+const optionalProjectUrlNullable = (field: string) =>
+	z
+		.string()
+		.default("")
+		.transform((s) => {
+			const t = s.trim();
+			return t === "" ? null : t;
+		})
+		.pipe(
+			z.union([
+				z.null(),
+				z.string().url({ message: `${field} must be a valid URL` }),
+			]),
+		);
+
 export const UpdateCompanyProjectSchema = z.object({
     title: z
         .string()
@@ -7,6 +22,8 @@ export const UpdateCompanyProjectSchema = z.object({
         .max(255, "The maximum title size is 255 characters"),
     description: z.string(),
     languages: z.string().array(),
+    prod_url: optionalProjectUrlNullable("Production URL"),
+    github_url: optionalProjectUrlNullable("GitHub URL"),
 });
 
 export type IUpdateCompanyProjectSchema = z.infer<typeof UpdateCompanyProjectSchema>

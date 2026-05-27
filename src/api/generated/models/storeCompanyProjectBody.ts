@@ -9,4 +9,8 @@ export type StoreCompanyProjectBody = {
   title: string;
   description: string;
   languages: string[];
+  /** @nullable */
+  prod_url?: string | null;
+  /** @nullable */
+  github_url?: string | null;
 };

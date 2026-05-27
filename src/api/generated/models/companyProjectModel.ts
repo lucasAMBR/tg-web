@@ -11,6 +11,10 @@ export interface CompanyProjectModel {
   description: string;
   company_profile_id: string;
   languages: LanguageModel[];
+  /** @nullable */
+  prod_url?: string | null;
+  /** @nullable */
+  github_url?: string | null;
   created_at: string;
   updated_at: string;
   id: string;

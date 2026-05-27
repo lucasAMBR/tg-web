@@ -12,6 +12,10 @@ export interface ProjectHistoryModel {
   title: string;
   description: string;
   dev_profile_id: string;
+  /** @nullable */
+  prod_url?: string | null;
+  /** @nullable */
+  github_url?: string | null;
   languages: ProjectHistoryModelLanguagesItem[];
   gallery: ProjectHistoryModelGalleryItem[];
   created_at: string;

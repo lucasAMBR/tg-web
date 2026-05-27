@@ -12,4 +12,8 @@ export type UpdateProjectHistoryBody = {
   description?: string | null;
   /** @nullable */
   languages?: string[] | null;
+  /** @nullable */
+  prod_url?: string | null;
+  /** @nullable */
+  github_url?: string | null;
 };
