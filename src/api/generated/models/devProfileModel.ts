@@ -24,6 +24,8 @@ export interface DevProfileModel {
   score: number;
   open_to_work: boolean;
   open_to_relocation: boolean;
+  specialty: string;
+  specialty_label: string;
   created_at: string;
   updated_at: string;
   /** @nullable */

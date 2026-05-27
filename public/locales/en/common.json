@@ -397,6 +397,7 @@
         "phone": "Phone",
         "birthdate": "Birthdate",
         "seniority_level": "Seniority Level",
+        "specialty": "Specialty",
         "open_to_work": "Open to work",
         "open_to_relocation": "Open to relocation",
         "cep": "Zipcode",
@@ -445,6 +446,7 @@
         "phone": "Your phone",
         "birthdate": "Your birthdate",
         "seniority_level": "Pick your seniority level",
+        "specialty": "Pick your specialty",
         "cep": "Insert your zipcode",
         "number": "Number",
         "complement": "Complement",
@@ -491,6 +493,13 @@
             "mid_level": "Mid Level",
             "senior": "Senior",
             "staff": "Staff"
+        },
+        "dev_specialty": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "fullstack": "Fullstack",
+            "mobile": "Mobile",
+            "devops": "DevOps"
         },
         "employment_type": {
             "on_site": "On-site",

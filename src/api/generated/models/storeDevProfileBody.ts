@@ -12,4 +12,5 @@ export type StoreDevProfileBody = {
   phone: string;
   birthdate: string;
   seniority_level: string;
+  specialty: string;
 };

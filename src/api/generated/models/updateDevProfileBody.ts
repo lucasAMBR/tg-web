@@ -12,4 +12,5 @@ export type UpdateDevProfileBody = {
   birthdate: string;
   seniority_level: string;
   cpf: string;
+  specialty: string;
 };

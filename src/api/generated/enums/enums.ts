@@ -22,6 +22,7 @@ import type {
 import type {
   EnumContractType200,
   EnumDegreeLevel200,
+  EnumDevSpecialty200,
   EnumEmploymentType200,
   EnumHardSkillLevel200,
   EnumOperationalSegments200,
@@ -574,6 +575,98 @@ export function useEnumOperationalSegments<TData = Awaited<ReturnType<typeof enu
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumOperationalSegmentsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/dev-specialty
+ */
+export const enumDevSpecialty = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumDevSpecialty200>(
+      {url: `/enum/dev-specialty`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumDevSpecialtyQueryKey = () => {
+    return [
+    `/enum/dev-specialty`
+    ] as const;
+    }
+
+    
+export const getEnumDevSpecialtyQueryOptions = <TData = Awaited<ReturnType<typeof enumDevSpecialty>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumDevSpecialtyQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumDevSpecialty>>> = ({ signal }) => enumDevSpecialty(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumDevSpecialtyQueryResult = NonNullable<Awaited<ReturnType<typeof enumDevSpecialty>>>
+export type EnumDevSpecialtyQueryError = unknown
+
+
+export function useEnumDevSpecialty<TData = Awaited<ReturnType<typeof enumDevSpecialty>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumDevSpecialty>>,
+          TError,
+          Awaited<ReturnType<typeof enumDevSpecialty>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumDevSpecialty<TData = Awaited<ReturnType<typeof enumDevSpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumDevSpecialty>>,
+          TError,
+          Awaited<ReturnType<typeof enumDevSpecialty>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumDevSpecialty<TData = Awaited<ReturnType<typeof enumDevSpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/dev-specialty
+ */
+
+export function useEnumDevSpecialty<TData = Awaited<ReturnType<typeof enumDevSpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumDevSpecialty>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumDevSpecialtyQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

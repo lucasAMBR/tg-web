@@ -227,5 +227,5 @@ export default function UpdateAddressForm() {
                 {isPending ? <Spinner /> : hasAddress ? t("general.update") : t("general.save")}
             </Button>
         </form>
-    );
+   );
 }

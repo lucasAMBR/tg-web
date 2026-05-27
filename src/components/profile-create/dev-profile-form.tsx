@@ -22,7 +22,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
-import { useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enums/enums";
 import Required from "../global/required-field";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Spinner } from "../ui/spinner";
@@ -57,9 +57,11 @@ export default function DevProfileForm() {
 
 	const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
 
-	const { data: seniorityLevels, isLoading } = useEnumSeniority();
+	const { data: seniorityLevels, isLoading: isSeniorityLoading } = useEnumSeniority();
+	const { data: devSpecialties, isLoading: isSpecialtyLoading } = useEnumDevSpecialty();
 
 	const seniorityList = seniorityLevels?.data ?? [];
+	const specialtyList = devSpecialties?.data ?? [];
 
 	const form = useForm<ICreateDevProfileSchema>({
 		resolver: zodResolver(CreateDevProfileSchema),
@@ -72,6 +74,7 @@ export default function DevProfileForm() {
 			open_to_work: true,
 			birthdate: new Date().toString(),
 			seniority_level: "",
+			specialty: "",
 		},
 	});
 
@@ -242,11 +245,40 @@ export default function DevProfileForm() {
 								<SelectValue placeholder={t("placeholder.seniority_level")} />
 							</SelectTrigger>
 							<SelectContent>
-								{isLoading && <Spinner />}
-								{!isLoading &&
+								{isSeniorityLoading && <Spinner />}
+								{!isSeniorityLoading &&
 									seniorityList.length > 0 &&
 									seniorityList.map((item) => (
-										<SelectItem value={item.value}>{t(item.i18nKey)}</SelectItem>
+										<SelectItem key={item.value} value={item.value}>
+											{t(item.i18nKey)}
+										</SelectItem>
+									))}
+							</SelectContent>
+						</Select>
+						<FieldError errors={[fieldState.error]} />
+					</Field>
+				)}
+			/>
+			<Controller
+				control={form.control}
+				name="specialty"
+				render={({ field, fieldState }) => (
+					<Field className="flex-1">
+						<FieldLabel htmlFor="specialty">
+							{t("input.specialty")} <Required />
+						</FieldLabel>
+						<Select value={field.value} onValueChange={field.onChange}>
+							<SelectTrigger>
+								<SelectValue placeholder={t("placeholder.specialty")} />
+							</SelectTrigger>
+							<SelectContent>
+								{isSpecialtyLoading && <Spinner />}
+								{!isSpecialtyLoading &&
+									specialtyList.length > 0 &&
+									specialtyList.map((item) => (
+										<SelectItem key={item.value} value={item.value}>
+											{t(item.i18nKey)}
+										</SelectItem>
 									))}
 							</SelectContent>
 						</Select>

@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Spinner } from "../ui/spinner";
 import { Switch } from "../ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enums/enums";
 import { CreateDevProfileSchema, type ICreateDevProfileSchema } from "@/schemas/profile/CreateDevProfileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/stores/auth-store";
@@ -33,9 +33,11 @@ export default function DevUpdateProfileForm(){
     
     const { user, hydrateUser } = useAuthStore();
 
-    const { data: seniorityLevels, isLoading } = useEnumSeniority();
+    const { data: seniorityLevels, isLoading: isSeniorityLoading } = useEnumSeniority();
+    const { data: devSpecialties, isLoading: isSpecialtyLoading } = useEnumDevSpecialty();
 
     const seniorityList = seniorityLevels?.data ?? [];
+    const specialtyList = devSpecialties?.data ?? [];
 
     const {
         mutate: updateProfile,
@@ -51,6 +53,7 @@ export default function DevUpdateProfileForm(){
             birthdate: user?.dev_profile?.birthdate ?? "",
             bio: user?.dev_profile?.bio ?? "",
             seniority_level: user?.dev_profile?.seniority_level ?? "",
+            specialty: user?.dev_profile?.specialty ?? "",
             open_to_work: user?.dev_profile?.open_to_work ?? false,
             open_to_relocation: user?.dev_profile?.open_to_relocation ?? false
         }
@@ -67,6 +70,7 @@ export default function DevUpdateProfileForm(){
                 birthdate: user.dev_profile.birthdate ?? "",
                 bio: user.dev_profile.bio ?? "",
                 seniority_level: user.dev_profile.seniority_level ?? "",
+                specialty: user.dev_profile.specialty ?? "",
                 open_to_work: user.dev_profile.open_to_work ?? false,
                 open_to_relocation: user.dev_profile.open_to_relocation ?? false
             });
@@ -235,11 +239,40 @@ export default function DevUpdateProfileForm(){
                                     <SelectValue placeholder={t("placeholder.seniority_level")} />
                                 </SelectTrigger>
                                 <SelectContent position="popper">
-                                    {isLoading && <Spinner />}
-                                    {!isLoading &&
+                                    {isSeniorityLoading && <Spinner />}
+                                    {!isSeniorityLoading &&
                                         seniorityList.length > 0 &&
                                         seniorityList.map((item) => (
-                                            <SelectItem value={item.value}>{t(item.i18nKey)}</SelectItem>
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {t(item.i18nKey)}
+                                            </SelectItem>
+                                        ))}
+                                </SelectContent>
+                            </Select>
+                            <FieldError errors={[fieldState.error]} />
+                        </Field>
+                    )}
+                />
+                <Controller
+                    control={form.control}
+                    name="specialty"
+                    render={({ field, fieldState }) => (
+                        <Field className="flex-1">
+                            <FieldLabel htmlFor="specialty">
+                                {t("input.specialty")} <Required />
+                            </FieldLabel>
+                            <Select value={field.value} onValueChange={field.onChange}>
+                                <SelectTrigger>
+                                    <SelectValue placeholder={t("placeholder.specialty")} />
+                                </SelectTrigger>
+                                <SelectContent position="popper">
+                                    {isSpecialtyLoading && <Spinner />}
+                                    {!isSpecialtyLoading &&
+                                        specialtyList.length > 0 &&
+                                        specialtyList.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {t(item.i18nKey)}
+                                            </SelectItem>
                                         ))}
                                 </SelectContent>
                             </Select>

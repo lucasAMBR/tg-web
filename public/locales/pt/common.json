@@ -394,6 +394,7 @@
         "phone": "Telefone",
         "birthdate": "Data de nascimento",
         "seniority_level": "Nível de senioridade",
+        "specialty": "Especialidade",
         "open_to_work": "Aberto a oportunidades",
         "open_to_relocation": "Disponível para mudar de cidade",
         "cep": "CEP",
@@ -442,6 +443,7 @@
         "phone": "Seu telefone",
         "birthdate": "Sua data de nascimento",
         "seniority_level": "Escolha seu nível de senioridade",
+        "specialty": "Escolha sua especialidade",
         "cep": "Digite seu CEP",
         "number": "Número",
         "complement": "Complemento",
@@ -488,6 +490,13 @@
             "mid_level": "Pleno",
             "senior": "Sênior",
             "staff": "Staff"
+        },
+        "dev_specialty": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "fullstack": "Fullstack",
+            "mobile": "Mobile",
+            "devops": "DevOps"
         },
         "employment_type": {
             "on_site": "Presencial",
