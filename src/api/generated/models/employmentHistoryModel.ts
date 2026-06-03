@@ -10,6 +10,8 @@ export interface EmploymentHistoryModel {
   company_name: string;
   company_location: string;
   position_name: string;
+  position_name_pt: string;
+  position_name_en: string;
   employment_type: string;
   employment_type_label: string;
   contract_type: string;
@@ -17,6 +19,8 @@ export interface EmploymentHistoryModel {
   seniority_level: string;
   seniority_level_label: string;
   actuation_details: string;
+  actuation_details_pt: string;
+  actuation_details_en: string;
   start_date: string;
   /** @nullable */
   end_date: string | null;

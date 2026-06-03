@@ -10,6 +10,8 @@ export interface CompanyProfileModel {
   user_id: string;
   name: string;
   bio: string;
+  bio_pt: string;
+  bio_en: string;
   phone: string;
   fouding_date: string;
   operational_segment: string;

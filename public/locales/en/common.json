@@ -2,9 +2,9 @@
     "general": {
         "back": "Back",
         "sing_out": "Sing out",
-        "create": "Criar",
-        "register": "Registrar",
-        "skip": "Pular",
+        "create": "Create",
+        "register": "Register",
+        "skip": "Skip",
         "logout": "Logout",
         "clear": "Clear",
         "reset": "Reset",
@@ -22,7 +22,11 @@
         "light": "Light",
         "dark": "Dark",
         "system": "System",
-        "open_link": "Open link"
+        "open_link": "Open link",
+        "display_original_content": "Display original content",
+        "display_translated_content": "Display translated content",
+        "showing_original_content": "Showing original content",
+        "showing_translated_content": "Showing translated content"
     },
     "toast": {
         "success": {

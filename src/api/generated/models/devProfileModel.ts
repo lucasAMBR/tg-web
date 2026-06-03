@@ -17,6 +17,8 @@ export interface DevProfileModel {
   name: string;
   cpf: string;
   bio: string;
+  bio_pt: string;
+  bio_en: string;
   phone: string;
   seniority_level: string;
   seniority_level_label: string;

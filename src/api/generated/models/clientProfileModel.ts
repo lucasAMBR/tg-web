@@ -10,6 +10,8 @@ export interface ClientProfileModel {
   user_id: string;
   name: string;
   bio: string;
+  bio_pt: string;
+  bio_en: string;
   phone: string;
   birthdate: string;
   score: number;

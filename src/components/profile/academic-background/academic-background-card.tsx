@@ -19,10 +19,12 @@ import {
 	BadgeCheck,
 	Edit,
 	EllipsisVertical,
+	Eye,
 	GraduationCap,
 	School,
 	Trash,
 } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface AcademicBackgroundCardProps {
@@ -36,15 +38,26 @@ export default function AcademicBackgroundCard({
 	openDelete,
 	openUpdate,
 }: AcademicBackgroundCardProps) {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+
+	const [showOriginalContent, setShowOriginalContent] = useState<boolean>(false);
 
 	return (
-		<Card className="p-4">
-			<CardHeader className="p-0 m-0">
+		<Card className="p-0 bg-accent border-accent overflow-hidden gap-0">
+		<div onClick={() => setShowOriginalContent(!showOriginalContent)} className="p-2 ml-2 text-accent-foreground cursor-pointer text-sm flex items-center gap-1">
+				<Eye className="size-3.5" />
+				{showOriginalContent ? t("general.showing_original_content") : t("general.showing_translated_content")}
+			</div>
+			<div className="p-4 bg-card rounded-xl">
+			<CardHeader className="p-0">
 				<div className="flex justify-between">
 					<div className="flex flex-col gap-2">
 						<CardTitle className="flex items-center gap-2">
-							{background.degree}{" "}
+							{showOriginalContent
+							? background.degree
+							: i18n.language === "pt"
+								? (background.degree_pt as string)
+								: (background.degree_en as string)}{" "}
 							{background.is_verified && (
 								<Badge className="bg-blue-700 text-white">
 									<BadgeCheck /> {t("general.verified")}
@@ -85,6 +98,7 @@ export default function AcademicBackgroundCard({
 					</DropdownMenu>
 				</div>
 			</CardHeader>
+			</div>
 		</Card>
 	);
 }

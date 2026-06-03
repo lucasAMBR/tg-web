@@ -1,6 +1,5 @@
 import {
 	getIndexAcademicBackgroundQueryKey,
-	useStoreAcademicBackground,
 	useUpdateAcademicBackground,
 } from "@/api/generated/academic-background-doc/academic-background-doc";
 import { useEnumDegreeLevel } from "@/api/generated/enums/enums";
@@ -55,8 +54,6 @@ export default function UpdateAcademicBackgroundModal({
 	openChange,
 	closeModal,
 }: UpdateAcademicBackgroundModalProps) {
-	if (!bg) return null;
-
 	const { t } = useTranslation();
 
 	const queryClient = useQueryClient();
@@ -72,21 +69,23 @@ export default function UpdateAcademicBackgroundModal({
 	const form = useForm<ICreateAcademicBackgroundSchema>({
 		resolver: zodResolver(CreateAcademicBackgroundSchema),
 		defaultValues: {
-			degree: bg.degree ?? "",
-			degree_level: bg.degree_level ?? "",
-			institution: bg.institution ?? "",
+			degree: bg?.degree ?? "",
+			degree_level: bg?.degree_level ?? "",
+			institution: bg?.institution ?? "",
 			certificate: undefined,
 		},
 	});
 
 	useEffect(() => {
+		if (!bg) return;
+
 		form.reset({
 			degree: bg.degree ?? "",
 			degree_level: bg.degree_level ?? "",
 			institution: bg.institution ?? "",
 			certificate: undefined,
 		});
-	}, [open]);
+	}, [open, bg]);
 
 	const { data: degreeLevel, isLoading } = useEnumDegreeLevel();
 
@@ -95,6 +94,8 @@ export default function UpdateAcademicBackgroundModal({
 	const { mutate: update, isPending } = useUpdateAcademicBackground();
 
 	const submit = (data: ICreateAcademicBackgroundSchema) => {
+		if (!bg) return;
+
 		update(
 			{ id: bg.id, data },
 			{
@@ -123,7 +124,7 @@ export default function UpdateAcademicBackgroundModal({
 	};
 
 	return (
-		<Dialog open={open} onOpenChange={openChange}>
+		<Dialog open={open && !!bg} onOpenChange={openChange}>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>{t("dev_profile.academic_background.update_academic_background")}</DialogTitle>

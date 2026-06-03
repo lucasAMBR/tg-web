@@ -22,7 +22,11 @@
         "light": "Claro",
         "dark": "Escuro",
         "system": "Sistema",
-        "open_link": "Abrir link"
+        "open_link": "Abrir link",
+        "display_original_content": "Exibir conteúdo original",
+        "display_translated_content": "Exibir conteúdo traduzido",
+        "showing_original_content": "Exibindo conteúdo original",
+        "showing_translated_content": "Exibindo conteúdo traduzido" 
     },
     "toast": {
         "success": {

@@ -36,6 +36,26 @@ export const getProfileBio = (user: AuthenticatedUser | null) => {
 	if (role === "client") return user.client_profile?.bio;
 };
 
+export const getProfilePortugueseBio = (user: AuthenticatedUser | null) => {
+	if (user === null) return;
+
+	const role = user.role[0] as UserRole;
+
+	if (role === "dev") return user.dev_profile?.bio_pt;
+	if (role === "company") return user.company_profile?.bio_pt;
+	if (role === "client") return user.client_profile?.bio_pt;
+};
+
+export const getProfileEnglishBio = (user: AuthenticatedUser | null) => {
+	if (user === null) return;
+
+	const role = user.role[0] as UserRole;
+
+	if (role === "dev") return user.dev_profile?.bio_en;
+	if (role === "company") return user.company_profile?.bio_en;
+	if (role === "client") return user.client_profile?.bio_en;
+};
+
 export const getProfileScore = (user: AuthenticatedUser | null) => {
 	if (user === null) return;
 

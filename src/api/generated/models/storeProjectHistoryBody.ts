@@ -10,7 +10,7 @@ export type StoreProjectHistoryBody = {
   description: string;
   languages: string[];
   /** @nullable */
-  ' prod_url'?: string | null;
+  prod_url?: string | null;
   /** @nullable */
   github_url?: string | null;
 };

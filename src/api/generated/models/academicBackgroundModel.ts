@@ -10,6 +10,8 @@ export interface AcademicBackgroundModel {
   id: string;
   dev_profile_id: string;
   degree: string;
+  degree_pt: string;
+  degree_en: string;
   degree_level: string;
   degree_level_label: string;
   institution: string;

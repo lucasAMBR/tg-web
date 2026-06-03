@@ -10,6 +10,8 @@ import { useAuthStore } from "@/stores/auth-store";
 import {
 	getNameFromProfile,
 	getProfileBio,
+	getProfileEnglishBio,
+	getProfilePortugueseBio,
 	getProfileScore,
 	getRole,
 	getRoleLabel,
@@ -19,7 +21,8 @@ import {
 	ensureProfileCreated,
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
-import { User } from "lucide-react";
+import { Eye, User } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(private)/home/profile")({
@@ -33,7 +36,9 @@ export const Route = createFileRoute("/(private)/home/profile")({
 function RouteComponent() {
 	const { user } = useAuthStore();
 
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+
+	const [ displayOriginalBioContent, setDisplayOriginalBioContent ] = useState<boolean>(false);
 
 	if (getRole(user) === "dev") {
 		return (
@@ -56,11 +61,17 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p>{getProfileBio(user)}</p>
+						<p className="text-xs text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						<p>
+							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
+								? (getProfilePortugueseBio(user) as string) 
+								: (getProfileEnglishBio(user) as string)
+							}
+						</p>
 					</div>
 				</Card>	
 				<DevProfileContent profileId={user?.dev_profile?.id as string}/>
-				<ThemeToggle />
+				<ThemeToggle />	
 			</div>
 		)
 	}
@@ -84,7 +95,13 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p>{getProfileBio(user)}</p>
+						<p className="text-xs text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						<p>
+							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
+								? (getProfilePortugueseBio(user) as string) 
+								: (getProfileEnglishBio(user) as string)
+							}
+						</p>
 					</div>
 				</Card>
 				<CompanyProfileBody profileId={user?.company_profile?.id as string}/>
@@ -111,7 +128,13 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p>{getProfileBio(user)}</p>
+						<p className="text-xs text-primary cursor-pointer" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						<p>
+							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
+								? (getProfilePortugueseBio(user) as string) 
+								: (getProfileEnglishBio(user) as string)
+							}
+						</p>
 					</div>
 				</Card>
 				<ClientProfileBody profileId={user?.client_profile?.id as string}/>

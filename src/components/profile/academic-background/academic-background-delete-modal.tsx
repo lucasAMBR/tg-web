@@ -37,8 +37,6 @@ export default function DeleteAcademicBackgroundModal({
 }: DeleteAcademicBackgroundModalProps) {
 	const { t } = useTranslation();
 
-	if (!bg) return null;
-
 	const { page, perPage, search } = useAcademicBackgroundParams();
 
 	const queryClient = useQueryClient();
@@ -46,6 +44,8 @@ export default function DeleteAcademicBackgroundModal({
 	const { mutate: deleteBackground, isPending } = useDeleteAcademicBackground();
 
 	const handleDelete = () => {
+		if (!bg) return;
+
 		deleteBackground(
 			{ id: bg.id },
 			{
@@ -69,6 +69,8 @@ export default function DeleteAcademicBackgroundModal({
 			},
 		);
 	};
+
+	if (!bg) return null;
 
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>

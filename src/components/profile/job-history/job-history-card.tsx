@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardDescription,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
@@ -17,7 +16,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { formatIsoDateOnlyBr } from "@/utils/date-only";
-import { Edit, EllipsisVertical, Trash } from "lucide-react";
+import { Edit, EllipsisVertical, Eye, Trash } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface JobHistoryCardProps {
@@ -33,15 +33,25 @@ export default function JobHistoryCard({
 	openDelete,
 	openUpdate,
 }: JobHistoryCardProps) {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const actual = job.is_current && !job.end_date;
+	const [showOriginalContent, setShowOriginalContent] = useState<boolean>(false);
 
 	return (
-		<Card className="p-4">
+		<Card className="p-0 bg-accent border-accent overflow-hidden gap-0">
+			<div onClick={() => setShowOriginalContent(!showOriginalContent)} className="p-2 ml-2 text-accent-foreground cursor-pointer text-sm flex items-center gap-1">
+				<Eye className="size-3.5" />
+				{showOriginalContent ? t("general.showing_original_content") : t("general.showing_translated_content")}
+			</div>
+			<div className="p-4 bg-card rounded-xl">
 			<CardHeader className="p-0">
 				<CardTitle className="flex justify-between items-center">
 					<h2 className="text-lg font-bold flex gap-4 items-center">
-						{job.position_name}{" "}
+						{showOriginalContent
+							? job.position_name
+							: i18n.language === "pt"
+								? (job.position_name_pt as string)
+								: (job.position_name_en as string)}{" "}
 						{actual && (
 							<Badge className="h-fit bg-green-700 dark:text-white font-bold">
 								{t("dev_profile.job_history.actual")}
@@ -91,7 +101,14 @@ export default function JobHistoryCard({
 					<Badge>{t(`enum.employment_type.${job.employment_type}`)}</Badge>
 				</div>
 			</CardHeader>
-			<p>{job.actuation_details}</p>
+			<p className="mt-4">
+				{showOriginalContent
+					? job.actuation_details
+					: i18n.language === "pt"
+						? (job.actuation_details_pt as string)
+						: (job.actuation_details_en as string)}
+			</p>
+			</div>
 		</Card>
 	);
 }

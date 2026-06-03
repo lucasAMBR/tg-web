@@ -99,14 +99,14 @@ export default function AcademicBackgroundList({
 				</div>
 			)}
 			<DeleteAcademicBackgroundModal
-				bg={selectedBackground}
+				bg={openDeleteModal ? selectedBackground : null}
 				open={openDeleteModal}
 				onOpenChange={setOpenDeleteModal}
 				closeModal={closeDelete}
 				profileId={profileId}
 			/>
 			<UpdateAcademicBackgroundModal
-				bg={selectedBackground}
+				bg={openUpdateModal ? selectedBackground : null}
 				open={openUpdateModal}
 				openChange={setOpenUpdateModal}
 				closeModal={closeUpdate}

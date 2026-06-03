@@ -10,7 +10,11 @@ import type { ProjectHistoryModelGalleryItem } from './projectHistoryModelGaller
 export interface ProjectHistoryModel {
   id: string;
   title: string;
+  title_en: string;
+  title_pt: string;
   description: string;
+  description_en: string;
+  description_pt: string;
   dev_profile_id: string;
   /** @nullable */
   prod_url?: string | null;
