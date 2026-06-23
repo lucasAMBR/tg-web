@@ -4,10 +4,10 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
-import type { StoreJobVacancyBodyData } from './storeJobVacancyBodyData';
+import type { IndexApplies200Data } from './indexApplies200Data';
 
-export type StoreJobVacancyBody = {
+export type IndexApplies200 = {
   error: boolean;
   message: string;
-  data: StoreJobVacancyBodyData;
+  data: IndexApplies200Data;
 };

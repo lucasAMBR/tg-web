@@ -39,6 +39,11 @@ export function SingInForm() {
 
 			const role = user.role[0];
 
+			if (role === "admin") {
+				navigate({ to: "/admin-land/dashboard" });
+				return;
+			}
+
 			const hasProfile =
 				(role === "dev" && user.dev_profile) ||
 				(role === "company" && user.company_profile) ||
@@ -53,6 +58,7 @@ export function SingInForm() {
 				dev: "/home",
 				company: "/home",
 				client: "/home",
+				admin: "/admin-land/dashboard",
 			};
 
 			navigate({ to: homeRoutes[role] || "/dashboard" });

@@ -47,13 +47,26 @@ interface UpdateAcademicBackgroundModalProps {
 	bg: AcademicBackgroundModel | null;
 }
 
-export default function UpdateAcademicBackgroundModal({
+interface UpdateAcademicBackgroundModalContentProps
+	extends Omit<UpdateAcademicBackgroundModalProps, "bg"> {
+	bg: AcademicBackgroundModel;
+}
+
+export default function UpdateAcademicBackgroundModal(
+	props: UpdateAcademicBackgroundModalProps,
+) {
+	if (!props.open || !props.bg) return null;
+
+	return <UpdateAcademicBackgroundModalContent {...props} bg={props.bg} />;
+}
+
+function UpdateAcademicBackgroundModalContent({
 	profileId,
 	bg,
 	open,
 	openChange,
 	closeModal,
-}: UpdateAcademicBackgroundModalProps) {
+}: UpdateAcademicBackgroundModalContentProps) {
 	const { t } = useTranslation();
 
 	const queryClient = useQueryClient();
@@ -85,7 +98,7 @@ export default function UpdateAcademicBackgroundModal({
 			institution: bg.institution ?? "",
 			certificate: undefined,
 		});
-	}, [open, bg]);
+	}, [open, bg, form]);
 
 	const { data: degreeLevel, isLoading } = useEnumDegreeLevel();
 
@@ -100,7 +113,9 @@ export default function UpdateAcademicBackgroundModal({
 			{ id: bg.id, data },
 			{
 				onSuccess: () => {
-					CustomToaster.successToast(t("toast.success.academic_background_updated"));
+					CustomToaster.successToast(
+						t("toast.success.academic_background_updated"),
+					);
 
 					queryClient.invalidateQueries({
 						queryKey: getIndexAcademicBackgroundQueryKey({
@@ -127,7 +142,9 @@ export default function UpdateAcademicBackgroundModal({
 		<Dialog open={open && !!bg} onOpenChange={openChange}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>{t("dev_profile.academic_background.update_academic_background")}</DialogTitle>
+					<DialogTitle>
+						{t("dev_profile.academic_background.update_academic_background")}
+					</DialogTitle>
 				</DialogHeader>
 				<Card className="p-4">
 					<form
@@ -156,21 +173,25 @@ export default function UpdateAcademicBackgroundModal({
 								name="degree_level"
 								render={({ field, fieldState }) => (
 									<Field className="flex-1">
-										<FieldLabel htmlFor="degree_level">{t("input.degree_level")}</FieldLabel>
+										<FieldLabel htmlFor="degree_level">
+											{t("input.degree_level")}
+										</FieldLabel>
 										<Select
 											name="degree_level"
 											value={field.value}
 											onValueChange={field.onChange}
 										>
 											<SelectTrigger>
-												<SelectValue placeholder={t("placeholder.degree_level")} />
+												<SelectValue
+													placeholder={t("placeholder.degree_level")}
+												/>
 											</SelectTrigger>
 											<SelectContent>
 												{isLoading && <Spinner />}
 												{!isLoading &&
 													degreeLevelList.length > 0 &&
 													degreeLevelList.map((item) => (
-														<SelectItem value={item.value}>
+														<SelectItem key={item.value} value={item.value}>
 															{t(item.i18nKey)}
 														</SelectItem>
 													))}
@@ -186,7 +207,9 @@ export default function UpdateAcademicBackgroundModal({
 							name="institution"
 							render={({ field, fieldState }) => (
 								<Field className="flex-2">
-									<FieldLabel htmlFor="institution">{t("input.institution")}</FieldLabel>
+									<FieldLabel htmlFor="institution">
+										{t("input.institution")}
+									</FieldLabel>
 									<Input
 										name="institution"
 										placeholder={t("placeholder.institution")}
@@ -233,7 +256,6 @@ export default function UpdateAcademicBackgroundModal({
 											</span>
 
 											<div className="flex gap-2">
-												{/* alterar */}
 												<label htmlFor="certificate-input">
 													<Button
 														type="button"
@@ -245,7 +267,6 @@ export default function UpdateAcademicBackgroundModal({
 													</Button>
 												</label>
 
-												{/* remover */}
 												<Button
 													type="button"
 													variant="destructive"

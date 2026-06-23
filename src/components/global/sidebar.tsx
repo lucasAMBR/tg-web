@@ -109,6 +109,15 @@ export default function Sidebar() {
 							<SidebarItem title="Freelancers" icon={User} url="/freelancers" />
 						</>
 					)}
+
+					{role === "admin" && (
+						<>
+							<SidebarItem title="Dashboard" icon={LayoutDashboard} url="/admin-land/dashboard" />
+							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
+							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/companies" />
+							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />
+						</>
+					)}
 				</div>
 
 				{/* OPTIONS */}

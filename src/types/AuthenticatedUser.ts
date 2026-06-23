@@ -5,7 +5,7 @@ import type {
 	UserModel,
 } from "@/api/generated/models";
 
-export type UserRole = "dev" | "company" | "client";
+export type UserRole = "dev" | "company" | "client" | "admin";
 
 export type AuthenticatedUser =
 	| (UserModel & { role: ["dev"]; dev_profile: DevProfileModel | null })
@@ -16,6 +16,13 @@ export type AuthenticatedUser =
 	| (UserModel & {
 			role: ["client"];
 			client_profile: ClientProfileModel | null;
+	  })
+	| (UserModel & {
+			role: ["admin"];
+			dev_profile: DevProfileModel | null;
+			company_profile: CompanyProfileModel | null;
+			client_profile: ClientProfileModel | null;
+			admin_active_profile: UserRole | null;
 	  });
 
 export interface AuthState {

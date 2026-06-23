@@ -377,7 +377,9 @@
             "job_vacancies": "Job Vacancies",
             "freelances": "Freelances",
             "my_jobs": "My Vacancies",
-            "dashboard": "Dashboard"
+            "dashboard": "Dashboard",
+            "devs": "Devs",
+            "clients": "Clients"
         },
         "options": {
             "profile": "Profile",

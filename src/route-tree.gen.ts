@@ -12,12 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
 import { Route as privateHomeLayoutRouteImport } from './routes/(private)/home/layout'
+import { Route as privateAdminLandLayoutRouteImport } from './routes/(private)/admin-land/layout'
 import { Route as privateHomeIndexRouteImport } from './routes/(private)/home/index'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
 import { Route as privateHomeSettingsRouteImport } from './routes/(private)/home/settings'
 import { Route as privateHomeProfileRouteImport } from './routes/(private)/home/profile'
 import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
+import { Route as privateAdminLandDashboardRouteImport } from './routes/(private)/admin-land/dashboard'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
 import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
@@ -34,6 +36,11 @@ const publicIndexRoute = publicIndexRouteImport.update({
 const privateHomeLayoutRoute = privateHomeLayoutRouteImport.update({
   id: '/(private)/home',
   path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const privateAdminLandLayoutRoute = privateAdminLandLayoutRouteImport.update({
+  id: '/(private)/admin-land',
+  path: '/admin-land',
   getParentRoute: () => rootRouteImport,
 } as any)
 const privateHomeIndexRoute = privateHomeIndexRouteImport.update({
@@ -66,6 +73,12 @@ const privateCreateAddressRoute = privateCreateAddressRouteImport.update({
   path: '/create/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const privateAdminLandDashboardRoute =
+  privateAdminLandDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
 const privateCreateProfileDevRoute = privateCreateProfileDevRouteImport.update({
   id: '/(private)/create/profile/dev',
   path: '/create/profile/dev',
@@ -85,8 +98,10 @@ const privateCreateProfileClientRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/home': typeof privateHomeLayoutRouteWithChildren
   '/': typeof publicIndexRoute
+  '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
   '/home/profile': typeof privateHomeProfileRoute
   '/home/settings': typeof privateHomeSettingsRoute
@@ -98,7 +113,9 @@ export interface FileRoutesByFullPath {
   '/create/profile/dev': typeof privateCreateProfileDevRoute
 }
 export interface FileRoutesByTo {
+  '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/': typeof publicIndexRoute
+  '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
   '/home/profile': typeof privateHomeProfileRoute
   '/home/settings': typeof privateHomeSettingsRoute
@@ -112,8 +129,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
+  '/(private)/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/(private)/home': typeof privateHomeLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
+  '/(private)/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/(private)/create/address': typeof privateCreateAddressRoute
   '/(private)/home/profile': typeof privateHomeProfileRoute
   '/(private)/home/settings': typeof privateHomeSettingsRoute
@@ -127,8 +146,10 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/admin-land'
     | '/home'
     | '/'
+    | '/admin-land/dashboard'
     | '/create/address'
     | '/home/profile'
     | '/home/settings'
@@ -140,7 +161,9 @@ export interface FileRouteTypes {
     | '/create/profile/dev'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/admin-land'
     | '/'
+    | '/admin-land/dashboard'
     | '/create/address'
     | '/home/profile'
     | '/home/settings'
@@ -153,8 +176,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/(public)'
+    | '/(private)/admin-land'
     | '/(private)/home'
     | '/(public)/'
+    | '/(private)/admin-land/dashboard'
     | '/(private)/create/address'
     | '/(private)/home/profile'
     | '/(private)/home/settings'
@@ -168,6 +193,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   publicLayoutRoute: typeof publicLayoutRouteWithChildren
+  privateAdminLandLayoutRoute: typeof privateAdminLandLayoutRouteWithChildren
   privateHomeLayoutRoute: typeof privateHomeLayoutRouteWithChildren
   privateCreateAddressRoute: typeof privateCreateAddressRoute
   privateCreateProfileClientRoute: typeof privateCreateProfileClientRoute
@@ -196,6 +222,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof privateHomeLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/admin-land': {
+      id: '/(private)/admin-land'
+      path: '/admin-land'
+      fullPath: '/admin-land'
+      preLoaderRoute: typeof privateAdminLandLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(private)/home/': {
@@ -240,6 +273,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privateCreateAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(private)/admin-land/dashboard': {
+      id: '/(private)/admin-land/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin-land/dashboard'
+      preLoaderRoute: typeof privateAdminLandDashboardRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
     '/(private)/create/profile/dev': {
       id: '/(private)/create/profile/dev'
       path: '/create/profile/dev'
@@ -280,6 +320,20 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
   publicLayoutRouteChildren,
 )
 
+interface privateAdminLandLayoutRouteChildren {
+  privateAdminLandDashboardRoute: typeof privateAdminLandDashboardRoute
+}
+
+const privateAdminLandLayoutRouteChildren: privateAdminLandLayoutRouteChildren =
+  {
+    privateAdminLandDashboardRoute: privateAdminLandDashboardRoute,
+  }
+
+const privateAdminLandLayoutRouteWithChildren =
+  privateAdminLandLayoutRoute._addFileChildren(
+    privateAdminLandLayoutRouteChildren,
+  )
+
 interface privateHomeLayoutRouteChildren {
   privateHomeProfileRoute: typeof privateHomeProfileRoute
   privateHomeSettingsRoute: typeof privateHomeSettingsRoute
@@ -297,6 +351,7 @@ const privateHomeLayoutRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   publicLayoutRoute: publicLayoutRouteWithChildren,
+  privateAdminLandLayoutRoute: privateAdminLandLayoutRouteWithChildren,
   privateHomeLayoutRoute: privateHomeLayoutRouteWithChildren,
   privateCreateAddressRoute: privateCreateAddressRoute,
   privateCreateProfileClientRoute: privateCreateProfileClientRoute,

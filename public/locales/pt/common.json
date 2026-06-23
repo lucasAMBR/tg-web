@@ -200,7 +200,9 @@
             "job_vacancies": "Vagas de Emprego",
             "freelances": "Freelances",
             "my_jobs": "Minhas Vagas",
-            "dashboard": "Dashboard"
+            "dashboard": "Dashboard",
+            "devs": "Desenvolvedores",
+            "clients": "Clientes"
         },
         "options": {
             "profile": "Perfil",

@@ -6,6 +6,7 @@
  */
 import type { StoreJobVacancy200DataLanguagesItem } from './storeJobVacancy200DataLanguagesItem';
 import type { StoreJobVacancy200DataSoftSkillsItem } from './storeJobVacancy200DataSoftSkillsItem';
+import type { StoreJobVacancy200DataLanguageDesirableItem } from './storeJobVacancy200DataLanguageDesirableItem';
 
 export type StoreJobVacancy200Data = {
   title: string;
@@ -15,6 +16,8 @@ export type StoreJobVacancy200Data = {
   estimated_salary: number;
   contract_type: string;
   seniority_level: string;
+  specialties: string[];
   languages: StoreJobVacancy200DataLanguagesItem[];
   soft_skills: StoreJobVacancy200DataSoftSkillsItem[];
+  language_desirable: StoreJobVacancy200DataLanguageDesirableItem[];
 };

@@ -7,6 +7,7 @@
 import type { DevProfileModel } from './devProfileModel';
 import type { CompanyProfileModel } from './companyProfileModel';
 import type { ClientProfileModel } from './clientProfileModel';
+import type { AdminProfileModel } from './adminProfileModel';
 
 export interface UserModel {
   id: string;
@@ -15,7 +16,10 @@ export interface UserModel {
   dev_profile?: DevProfileModel;
   company_profile?: CompanyProfileModel;
   client_profile?: ClientProfileModel;
+  admin_profile?: AdminProfileModel;
   role: string[];
   created_at: string;
+  /** @nullable */
+  admin_active_profile: string | null;
   updated_at: string;
 }

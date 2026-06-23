@@ -5,12 +5,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type StoreJobVacancy200DataSoftSkillsItem = {
+export type StoreJobVacancyBodyDataLanguagesItem = {
   id?: string;
   name?: string;
-  i18n_name_key?: string;
-  description?: string;
-  i18n_description_key?: string;
   created_at?: string;
   updated_at?: string;
 };

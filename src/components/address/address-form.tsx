@@ -81,6 +81,7 @@ export default function AddressForm() {
 							dev: "/home/dev",
 							company: "/home/company",
 							client: "/home/client",
+							admin: "/admin-land/dashboard",
 						};
 
 						hydrateUser();

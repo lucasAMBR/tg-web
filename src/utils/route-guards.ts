@@ -57,6 +57,10 @@ export async function redirectIfAuthenticated(): Promise<void> {
 	if (isAuthenticated && user) {
 		const role = user.role[0] as UserRole;
 
+		if (role === "admin") {
+			throw redirect({ to: "/admin-land/dashboard" });
+		}
+
 		const hasProfile =
 			(role === "dev" && user.dev_profile) ||
 			(role === "company" && user.company_profile) ||
@@ -70,6 +74,7 @@ export async function redirectIfAuthenticated(): Promise<void> {
 			dev: "/home",
 			company: "/home",
 			client: "/home",
+			admin: "/admin-land/dashboard",
 		};
 
 		throw redirect({ to: homeRoutes[role] || "/dashboard" });
