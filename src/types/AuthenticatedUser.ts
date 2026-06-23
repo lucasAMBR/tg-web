@@ -1,4 +1,5 @@
 import type {
+	AdminProfileModel,
 	ClientProfileModel,
 	CompanyProfileModel,
 	DevProfileModel,
@@ -19,6 +20,7 @@ export type AuthenticatedUser =
 	  })
 	| (UserModel & {
 			role: ["admin"];
+			admin_profile: AdminProfileModel | null;
 			dev_profile: DevProfileModel | null;
 			company_profile: CompanyProfileModel | null;
 			client_profile: ClientProfileModel | null;

@@ -6,11 +6,11 @@ const optionalProjectUrlNullable = (field: string) =>
 		.default("")
 		.transform((s) => {
 			const t = s.trim();
-			return t === "" ? null : t;
+			return t === "" ? undefined : t;
 		})
 		.pipe(
 			z.union([
-				z.null(),
+				z.undefined(),
 				z.string().url({ message: `${field} must be a valid URL` }),
 			]),
 		);

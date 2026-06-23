@@ -379,7 +379,8 @@
             "my_jobs": "My Vacancies",
             "dashboard": "Dashboard",
             "devs": "Devs",
-            "clients": "Clients"
+            "clients": "Clients",
+            "questions": "Questions"
         },
         "options": {
             "profile": "Profile",

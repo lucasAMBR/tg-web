@@ -9,6 +9,7 @@ import {
 	LayoutDashboard,
 	List,
 	LogOut,
+	MessageCircle,
 	User,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
@@ -39,6 +40,10 @@ export default function Sidebar() {
 
 	const role = getUserMainRole(user);
 	const logoutDialogText = t("sidebar.logout_dialog.description");
+
+	// #region agent log
+	fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H4-H5',location:'sidebar.tsx:render',message:'sidebar user state',data:{hasUser:!!user,role:user?.role??null,hasAdminProfile:!!user?.admin_profile,resolvedName:getNameFromProfile(user)??null},timestamp:Date.now()})}).catch(()=>{});
+	// #endregion
 
 	function SidebarItem({
 		title,
@@ -116,6 +121,8 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
 							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/companies" />
 							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />
+							<SidebarItem title={t("sidebar.sections.admins")} icon={Folder} url="/admin-land/admins" />
+							<SidebarItem title={t("sidebar.sections.questions")} icon={MessageCircle} url="/admin-land/questions" />
 						</>
 					)}
 				</div>

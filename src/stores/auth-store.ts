@@ -59,6 +59,10 @@ const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
 		const permissions = response.data.permissions || [];
 		const roles = apiUser.role || [];
 
+		// #region agent log
+		fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H1-H2',location:'auth-store.ts:hydrateUser',message:'API user profile data',data:{role:apiUser.role,hasAdminProfile:!!apiUser.admin_profile,adminProfileName:apiUser.admin_profile?.name??null,adminProfileKeys:apiUser.admin_profile?Object.keys(apiUser.admin_profile):[]},timestamp:Date.now()})}).catch(()=>{});
+		// #endregion
+
 		const authenticatedUser = {
 			...apiUser,
 			profile_pic: apiUser.profile_pic ?? null,
@@ -92,6 +96,9 @@ const authStoreCreator: StateCreator<AuthStore> = (set, get) => ({
 
 		// Se já tem usuário e token válido, não precisa inicializar novamente
 		if (get().user && !isTokenExpired(token)) {
+			// #region agent log
+			fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H4',location:'auth-store.ts:initialize',message:'skipped hydrate - using cached user',data:{role:get().user?.role??null,hasAdminProfile:!!get().user?.admin_profile,adminProfileName:(get().user as {admin_profile?:{name?:string}}|null)?.admin_profile?.name??null},timestamp:Date.now()})}).catch(()=>{});
+			// #endregion
 			set({ isLoading: false });
 			return;
 		}
