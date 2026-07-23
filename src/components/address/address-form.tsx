@@ -78,9 +78,9 @@ export default function AddressForm() {
 						const role = user.role[0] as UserRole;
 
 						const homeRoutes: Record<UserRole, string> = {
-							dev: "/home/dev",
-							company: "/home/company",
-							client: "/home/client",
+							dev: "/feed",
+							company: "/feed",
+							client: "/feed",
 							admin: "/admin-land/dashboard",
 						};
 

@@ -1,7 +1,7 @@
 import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/(private)/home/')({
+export const Route = createFileRoute('/(private)/(home)/feed/')({
     component: RouteComponent,
     beforeLoad: async () => {
         await ensureAuthenticated();
@@ -10,5 +10,5 @@ export const Route = createFileRoute('/(private)/home/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/(private)/home/"!</div>
+  return <div>Hello "/feed"!</div>
 }

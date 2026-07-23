@@ -26,4 +26,5 @@ export const UpdateProjectSchema = z.object({
 	github_url: optionalProjectUrlNullable("GitHub URL"),
 });
 
-export type IUpdateProjectSchema = z.infer<typeof UpdateProjectSchema>;
+export type UpdateProjectFormInput = z.input<typeof UpdateProjectSchema>;
+export type IUpdateProjectSchema = z.output<typeof UpdateProjectSchema>;

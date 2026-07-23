@@ -15,6 +15,8 @@ export interface ClientProfileModel {
   phone: string;
   birthdate: string;
   score: number;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
   cpf: string;

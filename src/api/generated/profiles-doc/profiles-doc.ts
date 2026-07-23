@@ -5,19 +5,37 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  useMutation
+  useMutation,
+  useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
-  UseMutationResult
+  UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
   DeleteClientProfile200,
   DeleteCompanyProfile200,
   DeleteDevProfile200,
+  GetProfileClient200,
+  GetProfileClientParams,
+  IndexCompanyProfile200,
+  IndexCompanyProfileParams,
+  IndexDevProfile200,
+  IndexDevProfileParams,
+  ShowClient200,
+  ShowCompany200,
+  ShowDevProfile200,
   StoreClientProfile201,
   StoreClientProfileBody,
   StoreCompanyProfile201,
@@ -477,6 +495,99 @@ export const useStoreDevProfile = <TError = unknown,
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * @summary /profile/dev
+ */
+export const indexDevProfile = (
+    params?: IndexDevProfileParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexDevProfile200>(
+      {url: `/profile/dev`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexDevProfileQueryKey = (params?: IndexDevProfileParams,) => {
+    return [
+    `/profile/dev`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexDevProfileQueryOptions = <TData = Awaited<ReturnType<typeof indexDevProfile>>, TError = unknown>(params?: IndexDevProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexDevProfileQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexDevProfile>>> = ({ signal }) => indexDevProfile(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexDevProfileQueryResult = NonNullable<Awaited<ReturnType<typeof indexDevProfile>>>
+export type IndexDevProfileQueryError = unknown
+
+
+export function useIndexDevProfile<TData = Awaited<ReturnType<typeof indexDevProfile>>, TError = unknown>(
+ params: undefined |  IndexDevProfileParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexDevProfile>>,
+          TError,
+          Awaited<ReturnType<typeof indexDevProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexDevProfile<TData = Awaited<ReturnType<typeof indexDevProfile>>, TError = unknown>(
+ params?: IndexDevProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexDevProfile>>,
+          TError,
+          Awaited<ReturnType<typeof indexDevProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexDevProfile<TData = Awaited<ReturnType<typeof indexDevProfile>>, TError = unknown>(
+ params?: IndexDevProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profile/dev
+ */
+
+export function useIndexDevProfile<TData = Awaited<ReturnType<typeof indexDevProfile>>, TError = unknown>(
+ params?: IndexDevProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexDevProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexDevProfileQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary /profile/company
  */
 export const storeCompanyProfile = (
@@ -541,6 +652,99 @@ export const useStoreCompanyProfile = <TError = unknown,
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * @summary /profile/company
+ */
+export const indexCompanyProfile = (
+    params?: IndexCompanyProfileParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexCompanyProfile200>(
+      {url: `/profile/company`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexCompanyProfileQueryKey = (params?: IndexCompanyProfileParams,) => {
+    return [
+    `/profile/company`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexCompanyProfileQueryOptions = <TData = Awaited<ReturnType<typeof indexCompanyProfile>>, TError = unknown>(params?: IndexCompanyProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexCompanyProfileQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexCompanyProfile>>> = ({ signal }) => indexCompanyProfile(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexCompanyProfileQueryResult = NonNullable<Awaited<ReturnType<typeof indexCompanyProfile>>>
+export type IndexCompanyProfileQueryError = unknown
+
+
+export function useIndexCompanyProfile<TData = Awaited<ReturnType<typeof indexCompanyProfile>>, TError = unknown>(
+ params: undefined |  IndexCompanyProfileParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanyProfile>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanyProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanyProfile<TData = Awaited<ReturnType<typeof indexCompanyProfile>>, TError = unknown>(
+ params?: IndexCompanyProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexCompanyProfile>>,
+          TError,
+          Awaited<ReturnType<typeof indexCompanyProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexCompanyProfile<TData = Awaited<ReturnType<typeof indexCompanyProfile>>, TError = unknown>(
+ params?: IndexCompanyProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profile/company
+ */
+
+export function useIndexCompanyProfile<TData = Awaited<ReturnType<typeof indexCompanyProfile>>, TError = unknown>(
+ params?: IndexCompanyProfileParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexCompanyProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexCompanyProfileQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary /profile/client
  */
 export const storeClientProfile = (
@@ -604,4 +808,372 @@ export const useStoreClientProfile = <TError = unknown,
 
       return useMutation(mutationOptions, queryClient);
     }
+    /**
+ * @summary /profile/client
+ */
+export const getProfileClient = (
+    params?: GetProfileClientParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<GetProfileClient200>(
+      {url: `/profile/client`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getGetProfileClientQueryKey = (params?: GetProfileClientParams,) => {
+    return [
+    `/profile/client`, ...(params ? [params]: [])
+    ] as const;
+    }
+
     
+export const getGetProfileClientQueryOptions = <TData = Awaited<ReturnType<typeof getProfileClient>>, TError = unknown>(params?: GetProfileClientParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetProfileClientQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfileClient>>> = ({ signal }) => getProfileClient(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProfileClientQueryResult = NonNullable<Awaited<ReturnType<typeof getProfileClient>>>
+export type GetProfileClientQueryError = unknown
+
+
+export function useGetProfileClient<TData = Awaited<ReturnType<typeof getProfileClient>>, TError = unknown>(
+ params: undefined |  GetProfileClientParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileClient>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileClient>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileClient<TData = Awaited<ReturnType<typeof getProfileClient>>, TError = unknown>(
+ params?: GetProfileClientParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileClient>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileClient>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileClient<TData = Awaited<ReturnType<typeof getProfileClient>>, TError = unknown>(
+ params?: GetProfileClientParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profile/client
+ */
+
+export function useGetProfileClient<TData = Awaited<ReturnType<typeof getProfileClient>>, TError = unknown>(
+ params?: GetProfileClientParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileClient>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetProfileClientQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /profiles/dev/{id}
+ */
+export const showDevProfile = (
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ShowDevProfile200>(
+      {url: `/profile/dev/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getShowDevProfileQueryKey = (id?: string,) => {
+    return [
+    `/profile/dev/${id}`
+    ] as const;
+    }
+
+    
+export const getShowDevProfileQueryOptions = <TData = Awaited<ReturnType<typeof showDevProfile>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getShowDevProfileQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof showDevProfile>>> = ({ signal }) => showDevProfile(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ShowDevProfileQueryResult = NonNullable<Awaited<ReturnType<typeof showDevProfile>>>
+export type ShowDevProfileQueryError = unknown
+
+
+export function useShowDevProfile<TData = Awaited<ReturnType<typeof showDevProfile>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showDevProfile>>,
+          TError,
+          Awaited<ReturnType<typeof showDevProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowDevProfile<TData = Awaited<ReturnType<typeof showDevProfile>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showDevProfile>>,
+          TError,
+          Awaited<ReturnType<typeof showDevProfile>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowDevProfile<TData = Awaited<ReturnType<typeof showDevProfile>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profiles/dev/{id}
+ */
+
+export function useShowDevProfile<TData = Awaited<ReturnType<typeof showDevProfile>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showDevProfile>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getShowDevProfileQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /profile/company/{id}
+ */
+export const showCompany = (
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ShowCompany200>(
+      {url: `/profile/company/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getShowCompanyQueryKey = (id?: string,) => {
+    return [
+    `/profile/company/${id}`
+    ] as const;
+    }
+
+    
+export const getShowCompanyQueryOptions = <TData = Awaited<ReturnType<typeof showCompany>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getShowCompanyQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof showCompany>>> = ({ signal }) => showCompany(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ShowCompanyQueryResult = NonNullable<Awaited<ReturnType<typeof showCompany>>>
+export type ShowCompanyQueryError = unknown
+
+
+export function useShowCompany<TData = Awaited<ReturnType<typeof showCompany>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showCompany>>,
+          TError,
+          Awaited<ReturnType<typeof showCompany>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowCompany<TData = Awaited<ReturnType<typeof showCompany>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showCompany>>,
+          TError,
+          Awaited<ReturnType<typeof showCompany>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowCompany<TData = Awaited<ReturnType<typeof showCompany>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profile/company/{id}
+ */
+
+export function useShowCompany<TData = Awaited<ReturnType<typeof showCompany>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showCompany>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getShowCompanyQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /profile/client/{id}
+ */
+export const showClient = (
+    id: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<ShowClient200>(
+      {url: `/profile/client/${id}`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getShowClientQueryKey = (id?: string,) => {
+    return [
+    `/profile/client/${id}`
+    ] as const;
+    }
+
+    
+export const getShowClientQueryOptions = <TData = Awaited<ReturnType<typeof showClient>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getShowClientQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof showClient>>> = ({ signal }) => showClient(id, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ShowClientQueryResult = NonNullable<Awaited<ReturnType<typeof showClient>>>
+export type ShowClientQueryError = unknown
+
+
+export function useShowClient<TData = Awaited<ReturnType<typeof showClient>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showClient>>,
+          TError,
+          Awaited<ReturnType<typeof showClient>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowClient<TData = Awaited<ReturnType<typeof showClient>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof showClient>>,
+          TError,
+          Awaited<ReturnType<typeof showClient>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useShowClient<TData = Awaited<ReturnType<typeof showClient>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /profile/client/{id}
+ */
+
+export function useShowClient<TData = Awaited<ReturnType<typeof showClient>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof showClient>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getShowClientQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+

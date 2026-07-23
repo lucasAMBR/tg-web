@@ -7,26 +7,14 @@ export const getRole = (user: AuthenticatedUser | null) => {
 }
 
 export const getNameFromProfile = (user: AuthenticatedUser | null) => {
-	if (user === null) {
-		// #region agent log
-		fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H3',location:'role-helper.ts:getNameFromProfile',message:'user is null',data:{},timestamp:Date.now()})}).catch(()=>{});
-		// #endregion
-		return;
-	}
+	if (user === null) return;
 
 	const role = user.role[0] as UserRole;
 
-	let result: string | undefined;
-	if (role === "dev") result = user.dev_profile?.name;
-	else if (role === "company") result = user.company_profile?.name;
-	else if (role === "client") result = user.client_profile?.name;
-	else if (role === "admin") result = user.admin_profile?.name;
-
-	// #region agent log
-	fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H2-H3',location:'role-helper.ts:getNameFromProfile',message:'name resolution',data:{role,hasAdminProfile:!!user.admin_profile,adminProfileName:user.admin_profile?.name??null,result:result??null},timestamp:Date.now()})}).catch(()=>{});
-	// #endregion
-
-	return result;
+	if (role === "dev") return user.dev_profile?.name;
+	if (role === "company") return user.company_profile?.name;
+	if (role === "client") return user.client_profile?.name;
+	if (role === "admin") return user.admin_profile?.name;
 };
 
 export const getRoleLabel = (user: AuthenticatedUser | null) => {
@@ -70,6 +58,16 @@ export const getProfileEnglishBio = (user: AuthenticatedUser | null) => {
 	if (role === "client") return user.client_profile?.bio_en;
 };
 
+export const getProfileTranslationStatus = (user: AuthenticatedUser | null) => {
+	if (user === null) return;
+
+	const role = user.role[0] as UserRole;
+
+	if (role === "dev") return user.dev_profile?.translation_status;
+	if (role === "company") return user.company_profile?.translation_status;
+	if (role === "client") return user.client_profile?.translation_status;
+};
+
 export const getProfileScore = (user: AuthenticatedUser | null) => {
 	if (user === null) return;
 
@@ -78,6 +76,34 @@ export const getProfileScore = (user: AuthenticatedUser | null) => {
 	if (role === "dev") return user.dev_profile?.score;
 	if (role === "company") return user.company_profile?.score;
 	if (role === "client") return user.client_profile?.score;
+};
+
+export const getProfileId = (user: AuthenticatedUser | null) => {
+	if (user === null) return;
+
+	const role = user.role[0] as UserRole;
+
+	if (role === "dev") return user.dev_profile?.id;
+	if (role === "company") return user.company_profile?.id;
+	if (role === "client") return user.client_profile?.id;
+	if (role === "admin") return user.admin_profile?.id;
+};
+
+export type BroadcastProfileType = "developer" | "company" | "client" | "admin";
+
+export const getBroadcastProfileType = (
+	role: UserRole,
+): BroadcastProfileType => {
+	switch (role) {
+		case "dev":
+			return "developer";
+		case "company":
+			return "company";
+		case "client":
+			return "client";
+		case "admin":
+			return "admin";
+	}
 };
 
 export const getUserMainRole = (user: AuthenticatedUser | null) => {

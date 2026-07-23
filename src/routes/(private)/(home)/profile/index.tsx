@@ -1,5 +1,4 @@
 import ThemeToggle from "@/components/global/theme-toggle-button";
-import UnderConstruction from "@/components/global/under-construction";
 import ClientProfileBody from "@/components/profile/variants/client-profile-body";
 import CompanyProfileBody from "@/components/profile/variants/company-profile-body";
 import DevProfileContent from "@/components/profile/variants/dev-profile-body";
@@ -13,6 +12,7 @@ import {
 	getProfileEnglishBio,
 	getProfilePortugueseBio,
 	getProfileScore,
+	getProfileTranslationStatus,
 	getRole,
 	getRoleLabel,
 } from "@/utils/role-helper";
@@ -21,11 +21,11 @@ import {
 	ensureProfileCreated,
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
-import { Eye, User } from "lucide-react";
+import { AlertCircle, BadgeCheck, Eye, Hourglass, User } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export const Route = createFileRoute("/(private)/home/profile")({
+export const Route = createFileRoute("/(private)/(home)/profile/")({
 	component: RouteComponent,
 	beforeLoad: async () => {
 		await ensureAuthenticated();
@@ -38,7 +38,42 @@ function RouteComponent() {
 
 	const { t, i18n } = useTranslation();
 
-	const [ displayOriginalBioContent, setDisplayOriginalBioContent ] = useState<boolean>(false);
+	const translationStatus = getProfileTranslationStatus(user);
+	const hasTranslation = translationStatus === 'translated';
+	const translationIsPending = translationStatus === 'pending';
+	const translationIsError = translationStatus === 'error';
+	const translationInProgress = translationStatus === 'translating';
+
+	const [displayOriginalBioContent, setDisplayOriginalBioContent] = useState<boolean>(hasTranslation ? false : true);
+
+	const translationBar = (
+		<>
+			{hasTranslation && (
+				<p className="text-sm text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}>
+					<Eye className="size-3.5" />
+					{displayOriginalBioContent ? t("general.display_translated_content") : t("general.display_original_content")}
+				</p>
+			)}
+			{translationIsPending && (
+				<p className="text-sm text-muted-foreground flex items-center gap-1">
+					<Hourglass className="size-3.5" />
+					{t("general.translation_pending")}
+				</p>
+			)}
+			{translationIsError && (
+				<p className="text-sm text-muted-foreground flex items-center gap-1">
+					<AlertCircle className="size-3.5" />
+					{t("general.translation_error")}
+				</p>
+			)}
+			{translationInProgress && (
+				<p className="text-sm text-muted-foreground flex items-center gap-1">
+					<Hourglass className="size-3.5" />
+					{t("general.translation_in_progress")}
+				</p>
+			)}
+		</>
+	);
 
 	if (getRole(user) === "dev") {
 		return (
@@ -56,12 +91,12 @@ function RouteComponent() {
 						<div className="flex gap-2">
 							<Badge variant={"default"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"secondary"}>{t(user?.dev_profile?.specialty_label as string)}</Badge>
-							<Badge className="bg-accent text-accent-foreground">{t(`enum.seniority_level.${user?.dev_profile?.seniority_level}`)}</Badge>
+							<Badge className="bg-accent text-accent-foreground">{t(`enum.seniority_level.${user?.dev_profile?.seniority_level}`)} {user?.dev_profile?.seniority_tested ? <BadgeCheck /> : null}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p className="text-xs text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
 								? (getProfilePortugueseBio(user) as string) 
@@ -95,7 +130,7 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p className="text-xs text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
 								? (getProfilePortugueseBio(user) as string) 
@@ -128,7 +163,7 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
-						<p className="text-xs text-primary cursor-pointer" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}><Eye className="size-3.5" /> {displayOriginalBioContent ? t("general.showing_original_content") : t("general.showing_translated_content")}</p>
+						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
 								? (getProfilePortugueseBio(user) as string) 

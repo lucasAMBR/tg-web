@@ -4,6 +4,7 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { UserModel } from './userModel';
 import type { EmploymentHistoryModel } from './employmentHistoryModel';
 import type { ProjectHistoryModel } from './projectHistoryModel';
 import type { AcademicBackgroundModel } from './academicBackgroundModel';
@@ -22,14 +23,19 @@ export interface DevProfileModel {
   phone: string;
   seniority_level: string;
   seniority_level_label: string;
+  seniority_tested: boolean;
   birthdate: string;
   score: number;
   open_to_work: boolean;
   open_to_relocation: boolean;
   specialty: string;
   specialty_label: string;
+  is_blocked: boolean;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
+  user?: UserModel;
   /** @nullable */
   employment_histories: EmploymentHistoryModel[] | null;
   /** @nullable */

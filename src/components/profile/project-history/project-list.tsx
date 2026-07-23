@@ -25,10 +25,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import ProjectItemCard from "./project-item-card";
-import type {
-	IndexProjectHistory200DataPagination,
-	ProjectHistoryModel,
-} from "@/api/generated/models";
+import type { ProjectHistoryModel } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -56,6 +53,7 @@ import { Controller, useForm } from "react-hook-form";
 import {
 	UpdateProjectSchema,
 	type IUpdateProjectSchema,
+	type UpdateProjectFormInput,
 } from "@/schemas/project-history/UpdateProjectSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
@@ -136,7 +134,7 @@ export default function ProjectHistoryList({
 		setSelectedProject(null);
 	};
 
-	const { data: projectHistory, isLoading } = useIndexProjectHistory({
+	const { data: projectHistory } = useIndexProjectHistory({
 		dev_profile_id: profileId,
 		page,
 		per_page: perPage,
@@ -170,7 +168,11 @@ export default function ProjectHistoryList({
 
 	const { mutate: updateProject, isPending } = useUpdateProjectHistory();
 
-	const form = useForm<IUpdateProjectSchema>({
+	const form = useForm<
+		UpdateProjectFormInput,
+		unknown,
+		IUpdateProjectSchema
+	>({
 		resolver: zodResolver(UpdateProjectSchema),
 		defaultValues: {
 			title: selectedProject?.title ?? "",
@@ -484,7 +486,7 @@ export default function ProjectHistoryList({
 								<Field>
 									<FieldLabel>{t("input.prod_url")}</FieldLabel>
 									<Input
-										value={field.value}
+										value={field.value ?? ""}
 										onChange={field.onChange}
 										type="url"
 										inputMode="url"
@@ -502,7 +504,7 @@ export default function ProjectHistoryList({
 								<Field>
 									<FieldLabel>{t("input.github_url")}</FieldLabel>
 									<Input
-										value={field.value}
+										value={field.value ?? ""}
 										onChange={field.onChange}
 										type="url"
 										inputMode="url"

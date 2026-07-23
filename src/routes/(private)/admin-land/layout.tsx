@@ -4,9 +4,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LanguagePicker } from '@/components/global/language-change-button'
 import Sidebar from '@/components/global/sidebar'
+import { ensureAuthenticated } from '@/utils/route-guards'
 import { useTranslation } from 'react-i18next'
 
 export const Route = createFileRoute('/(private)/admin-land')({
+  beforeLoad: async () => {
+    await ensureAuthenticated();
+  },
   component: RouteComponent,
 })
 

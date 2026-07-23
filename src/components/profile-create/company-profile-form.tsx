@@ -129,7 +129,7 @@ export default function CompanyProfileForm() {
                                 value={value}
                                 format="##.###.###/####-##"
                                 onValueChange={(values) => {
-                                    onChange(values.value ? `+${values.value}` : "");
+                                    onChange(values.value ?? "");
                                 }}
                             />
                             <FieldError errors={[fieldState.error]} />
@@ -263,7 +263,7 @@ export default function CompanyProfileForm() {
                         <p>{t("profile_create.address_modal.description")}</p>
                     </AlertDialogDescription>
                     <AlertDialogFooter>
-                        <AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
+                        <AlertDialogCancel onClick={() => navigate({ to: "/feed" })}>
                             {t("general.skip")}
                         </AlertDialogCancel>
                         <AlertDialogAction

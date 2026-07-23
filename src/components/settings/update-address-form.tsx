@@ -20,19 +20,31 @@ import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { Spinner } from "../ui/spinner";
 import { useTranslation } from "react-i18next";
+import type { AddressModel } from "@/api/generated/models";
 
-export default function UpdateAddressForm() {
+type UpdateAddressFormProps = {
+    initialAddress?: AddressModel | null;
+    onSuccess?: () => void;
+};
+
+export default function UpdateAddressForm({
+    initialAddress,
+    onSuccess,
+}: UpdateAddressFormProps = {}) {
     const { t } = useTranslation();
 
     const queryClient = useQueryClient();
+    const isAdminMode = initialAddress !== undefined;
 
-    const { data: response, isLoading } = useAuthUserAddress();
+    const { data: response, isLoading } = useAuthUserAddress({
+        query: { enabled: !isAdminMode },
+    });
 
     const { mutate: store, isPending: isStoring } = useStoreAddress();
     const { mutate: update, isPending: isUpdating } = useUpdateAddress();
 
-    const hasAddress = response?.data?.has_address ?? false;
-    const savedAddress = hasAddress ? response?.data?.address : undefined;
+    const hasAddress = isAdminMode ? !!initialAddress : (response?.data?.has_address ?? false);
+    const savedAddress = isAdminMode ? (initialAddress ?? undefined) : (hasAddress ? response?.data?.address : undefined);
     const isPending = isStoring || isUpdating;
 
     const [address, setAddress] = useState({
@@ -96,7 +108,10 @@ export default function UpdateAddressForm() {
             CustomToaster.successToast(
                 t(isUpdate ? "toast.success.address_updated" : "toast.success.address_created"),
             );
-            queryClient.invalidateQueries({ queryKey: getAuthUserAddressQueryKey() });
+            if (!isAdminMode) {
+                queryClient.invalidateQueries({ queryKey: getAuthUserAddressQueryKey() });
+            }
+            onSuccess?.();
         },
         onError: (error: unknown) => {
             onError(error as AxiosError<ApiError>);
@@ -112,8 +127,12 @@ export default function UpdateAddressForm() {
         store({ data: formData }, mutationOptions(false));
     };
 
-    if (isLoading) {
+    if (!isAdminMode && isLoading) {
         return <Spinner />;
+    }
+
+    if (isAdminMode && !savedAddress) {
+        return null;
     }
 
     return (

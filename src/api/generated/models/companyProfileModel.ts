@@ -4,6 +4,7 @@
  * Tg-Api 
  * OpenAPI spec version: 1.0.0
  */
+import type { AddressModel } from './addressModel';
 
 export interface CompanyProfileModel {
   id: string;
@@ -12,11 +13,15 @@ export interface CompanyProfileModel {
   bio: string;
   bio_pt: string;
   bio_en: string;
+  address?: AddressModel;
   phone: string;
   fouding_date: string;
   operational_segment: string;
   operational_segment_label: string;
   score: number;
+  is_blocked: boolean;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
   cnpj: string;

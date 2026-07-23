@@ -17,7 +17,9 @@ import type {
 import type {
   DeleteUser200,
   UpdateUser200,
-  UpdateUserBody
+  UpdateUserBody,
+  UserBlockAccess200,
+  UserUnblockAccess200
 } from '.././models';
 
 import apiClient from '../../../lib/api-client';
@@ -147,6 +149,128 @@ export const useDeleteUser = <TError = unknown,
       > => {
 
       const mutationOptions = getDeleteUserMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary /user/{id}/block
+ */
+export const userBlockAccess = (
+    id: string,
+ ) => {
+      
+      
+      return apiClient<UserBlockAccess200>(
+      {url: `/user/${id}/block`, method: 'PATCH'
+    },
+      );
+    }
+  
+
+
+export const getUserBlockAccessMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof userBlockAccess>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof userBlockAccess>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['userBlockAccess'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof userBlockAccess>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  userBlockAccess(id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UserBlockAccessMutationResult = NonNullable<Awaited<ReturnType<typeof userBlockAccess>>>
+    
+    export type UserBlockAccessMutationError = unknown
+
+    /**
+ * @summary /user/{id}/block
+ */
+export const useUserBlockAccess = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof userBlockAccess>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof userBlockAccess>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getUserBlockAccessMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * @summary /user/{id}/unblock
+ */
+export const userUnblockAccess = (
+    id: string,
+ ) => {
+      
+      
+      return apiClient<UserUnblockAccess200>(
+      {url: `/user/${id}/unblock`, method: 'PATCH'
+    },
+      );
+    }
+  
+
+
+export const getUserUnblockAccessMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof userUnblockAccess>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof userUnblockAccess>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['userUnblockAccess'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof userUnblockAccess>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  userUnblockAccess(id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UserUnblockAccessMutationResult = NonNullable<Awaited<ReturnType<typeof userUnblockAccess>>>
+    
+    export type UserUnblockAccessMutationError = unknown
+
+    /**
+ * @summary /user/{id}/unblock
+ */
+export const useUserUnblockAccess = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof userUnblockAccess>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof userUnblockAccess>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getUserUnblockAccessMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

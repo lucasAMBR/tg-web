@@ -150,9 +150,9 @@ export default function RegisterSteps() {
 			}
 
 			const homeRoutes = {
-				dev: "/home",
-				company: "/home",
-				client: "/home",
+				dev: "/feed",
+				company: "/feed",
+				client: "/feed",
 			};
 
 			navigate({ to: homeRoutes[role] || "/dashboard" });

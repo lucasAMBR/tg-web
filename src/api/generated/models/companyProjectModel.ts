@@ -8,13 +8,19 @@ import type { LanguageModel } from './languageModel';
 
 export interface CompanyProjectModel {
   title: string;
+  title_pt: string;
+  title_en: string;
   description: string;
+  description_pt: string;
+  description_en: string;
   company_profile_id: string;
   languages: LanguageModel[];
   /** @nullable */
   prod_url?: string | null;
   /** @nullable */
   github_url?: string | null;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
   id: string;

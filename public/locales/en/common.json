@@ -16,6 +16,7 @@
         "change": "Change",
         "remove": "Remove",
         "add": "Add",
+        "request": "Request",
         "save": "Save",
         "verified": "Verified",
         "are_you_sure": "Are you sure?",
@@ -26,12 +27,27 @@
         "display_original_content": "Display original content",
         "display_translated_content": "Display translated content",
         "showing_original_content": "Showing original content",
-        "showing_translated_content": "Showing translated content"
+        "showing_translated_content": "Showing translated content" ,
+        "filters": "Filters",
+        "view_profile": "View profile",
+        "edit_profile": "Edit profile",
+        "profile": "Profile",
+        "block_access": "Block access",
+        "unblock_access": "Unblock access",
+        "address": "Address",
+        "location": "Location",
+        "blocked": "Blocked",
+        "active": "Active",
+        "status": "Status",
+        "translation_pending": "Translation pending.",
+        "translation_error": "Translation unavailable.",
+        "translation_in_progress": "Translation pending."
     },
     "toast": {
         "success": {
             "login": "Signed in successfully",
             "register": "Account created successfully",
+            "proficiency_test_requested": "Proficiency test requested successfully",
             "address_created": "Address saved successfully",
             "address_updated": "Address updated successfully",
             "profile_dev_created": "Developer profile created successfully",
@@ -67,7 +83,9 @@
             "dev_soft_skill_registered": "Soft skills registered successfully",
             "dev_soft_skill_updated": "Soft skills updated successfully",
             "recommendation_preferences_updated": "Recommendation preferences updated successfully",
-            "recommendation_preferences_restored": "Default configuration restored"
+            "recommendation_preferences_restored": "Default configuration restored",
+            "access_blocked": "Access blocked successfully",
+            "access_unblocked": "Access unblocked successfully"
         }
     },
     "role": {
@@ -194,7 +212,8 @@
             "posts": "Posts",
             "projects": "Projects",
             "job_history": "Job History",
-            "certifications": "Certifications"
+            "certifications": "Certifications",
+            "proficiency_test": "Proficiency tests"
         },
         "projects": {
             "create_project": "Create Project",
@@ -253,6 +272,38 @@
             "new_academic_background": "Add new academic background",
             "update_academic_background": "Update academic background",
             "update_warning": "If you don't wanna change the certificate, just ignore this field"
+        },
+        "proficiency_test": {
+            "solicitation_title": "Request new proficiency test",
+            "solicitation_description": "Take a proficiency test to validate your skills and improve your recommendations.",
+            "solicitation_dialog_title": "Request proficiency test",
+            "solicitation_dialog_description": "Choose the categories that will compose your test.",
+            "frontend_category": "Frontend category",
+            "backend_category": "Backend category",
+            "category_placeholder": "Select a category",
+            "score": "Test score: ",
+            "start_test": "Start test",
+            "await_responses": "Await for responses",
+            "view_results": "View Results",
+            "previous_page": "Previous",
+            "next_page": "Next",
+            "finish": "Finish test",
+            "all_questions_required": "Answer all questions before finishing",
+            "submit_success": "Test submitted successfully",
+            "page_indicator": "Page {{current}} of {{total}}",
+            "no_questions": "No questions available for this test",
+            "start": {
+                "error": "Error",
+                "not_your_test": "This is not your test",
+                "greeting": "Hello {{name}}!",
+                "welcome": "Welcome to your proficiency test!",
+                "rules": "Rules:",
+                "rule_time": "The time spent on each question is tracked: answering too fast may look suspicious, and too slow may indicate technical difficulty.",
+                "rule_focus": "Every time the window loses focus is counted. There is an acceptable limit, but frequent exits may signal external help.",
+                "rule_open_close": "Every time the test is opened and closed is logged, to prevent questions from being reviewed in advance and creating an unfair advantage.",
+                "rule_consistency": "Answer consistency is evaluated: getting hard questions right while missing easy ones is not advantageous.",
+                "score_warning": "Be aware that all of these factors can affect your final score!"
+            }
         }
     },
     "company_profile": {
@@ -366,6 +417,28 @@
             }
         }
     },
+    "admin_land": {
+        "devs": {
+            "title": "Developers",
+            "description": "View all developers in the system",
+            "table": {
+                "name": "Name",
+                "specialty": "Specialty",
+                "seniority_level": "Seniority Level",
+                "created_at": "Created at"
+            }
+        },
+        "companies": {
+            "title": "Companies",
+            "description": "View all companies in the system",
+            "table": {
+                "name": "Name",
+                "operational_segment": "Operational segment",
+                "cnpj": "CNPJ",
+                "created_at": "Created at"
+            }
+        }
+    },
     "under_construction": {
         "title": "This feature is actually under construction!",
         "description": "Please comeback later"
@@ -380,7 +453,8 @@
             "dashboard": "Dashboard",
             "devs": "Devs",
             "clients": "Clients",
-            "questions": "Questions"
+            "questions": "Questions",
+            "admins": "Admins"
         },
         "options": {
             "profile": "Profile",
@@ -456,7 +530,9 @@
         "phone": "Your phone",
         "birthdate": "Your birthdate",
         "seniority_level": "Pick your seniority level",
+        "filter_seniority_level": "Select a seniority level",
         "specialty": "Pick your specialty",
+        "filter_specialty": "Select a specialty",
         "cep": "Insert your zipcode",
         "number": "Number",
         "complement": "Complement",
@@ -496,9 +572,40 @@
         "old_password": "Actual password",
         "new_password": "New password",
         "new_password_confirmation": "New password confirmation",
-        "stack_blacklist": "Select a language / framework to avoid"
+        "stack_blacklist": "Select a language / framework to avoid",
+        "dev_search": "Search for a developer, seniority, specialty and open to work and relocation",
+        "company_search": "Search for a company or operational segment",
+        "filter_operational_segment": "Select an operational segment"
+    },
+    "filters": {
+        "all": "All",
+        "yes": "Yes",
+        "no": "No"
     },
     "enum": {
+        "question_category": {
+            "backend_c_sharp_asp": "Backend C# ASP.NET",
+            "backend_data_handling": "Backend Data Handling",
+            "backend_java_spring": "Backend Java Spring",
+            "backend_php_laravel": "Backend PHP Laravel",
+            "backend_python_fast_api": "Backend Python FastAPI",
+            "backend_typescript": "Backend TypeScript",
+            "clean_code": "Clean Code",
+            "devops": "DevOps",
+            "frontend_angular": "Frontend Angular",
+            "frontend_fundamentals": "Frontend Fundamentals",
+            "frontend_react": "Frontend React",
+            "programming_logic": "Programming Logic",
+            "security_backend": "Security Backend",
+            "security_frontend": "Security Frontend"
+        },
+        "proficiency_test_status": {
+            "pending": "Pending",
+            "generated": "Generated",
+            "awaiting_score": "Awaiting score",
+            "completed": "Completed",
+            "generation_failed": "Test generation failed"
+        },
         "seniority_level": {
             "intern": "Intern",
             "junior": "Junior",
@@ -561,6 +668,15 @@
         "displaying": "Displaying",
         "of": "of",
         "page": "Page"
+    },
+    "notification": {
+        "title": "Notifications",
+        "all": "All",
+        "unread": "Unread",
+        "read": "Read",
+        "empty": "No notifications here.",
+        "open_link": "Click here",
+        "mark_all_as_read": "Mark all as read"
     },
     "no_data": {
         "no_languages": "No languages found"

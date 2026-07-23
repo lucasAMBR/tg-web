@@ -352,7 +352,7 @@ export default function DevProfileForm() {
 						<p>{t("profile_create.address_modal.description")}</p>
 					</AlertDialogDescription>
 					<AlertDialogFooter>
-						<AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
+						<AlertDialogCancel onClick={() => navigate({ to: "/feed" })}>
 							{t("general.skip")}
 						</AlertDialogCancel>
 						<AlertDialogAction

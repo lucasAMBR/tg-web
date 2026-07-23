@@ -17,6 +17,7 @@ import type { AcademicBackgroundModel } from "@/api/generated/models";
 import DeleteAcademicBackgroundModal from "./academic-background-delete-modal";
 import UpdateAcademicBackgroundModal from "./academic-background-update-modal";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface AcademicBackgroundListProps {
 	profileId: string;
@@ -27,12 +28,14 @@ export default function AcademicBackgroundList({
 }: AcademicBackgroundListProps) {
 	const { t } = useTranslation();
 
-	const { page, perPage, search, setFilterParams } =
+	const { user } = useAuthStore();
+
+	const { page, perPage, search } =
 		useAcademicBackgroundParams();
 
 	const debouncedSearch = useDebounce(search, 500);
 
-	const { data: academicBackgrounds, isLoading } = useIndexAcademicBackground({
+	const { data: academicBackgrounds } = useIndexAcademicBackground({
 		dev_profile_id: profileId,
 		page,
 		per_page: perPage,
@@ -72,7 +75,9 @@ export default function AcademicBackgroundList({
 		<div className="flex flex-col gap-3">
 			<h2 className="text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("dev_profile.academic_background.title")}</span>
-				<CreateAcademicBackgroundCard profileId={profileId} />
+				{user?.dev_profile?.id === profileId && (
+					<CreateAcademicBackgroundCard profileId={profileId} />
+				)}
 			</h2>
 			{academicBackgroundList.length === 0 && (
 				<Card>

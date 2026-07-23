@@ -24,11 +24,24 @@ import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import type { CompanyProfileModel } from "@/api/generated/models";
 
-export default function CompanyUpdateProfileForm() {
+type CompanyUpdateProfileFormProps = {
+	profile?: Pick<
+		CompanyProfileModel,
+		"id" | "name" | "bio" | "phone" | "cnpj" | "fouding_date" | "operational_segment"
+	>;
+	onSuccess?: () => void;
+};
+
+export default function CompanyUpdateProfileForm({
+	profile: profileProp,
+	onSuccess,
+}: CompanyUpdateProfileFormProps = {}) {
 	const { t } = useTranslation();
 
 	const { user, hydrateUser } = useAuthStore();
+	const profile = profileProp ?? user?.company_profile;
 
 	const { data: operationalSegments, isLoading } = useEnumOperationalSegments();
 
@@ -37,37 +50,38 @@ export default function CompanyUpdateProfileForm() {
 	const form = useForm<ICreateCompanyProfileSchema>({
 		resolver: zodResolver(CreateCompanyProfileSchema),
 		defaultValues: {
-			name: user?.company_profile?.name ?? "",
-			bio: user?.company_profile?.bio ?? "",
-			phone: user?.company_profile?.phone ?? "",
-			cnpj: user?.company_profile?.cnpj ?? "",
-			founding_date: user?.company_profile?.fouding_date ?? "",
-			operational_segment: user?.company_profile?.operational_segment ?? "",
+			name: profile?.name ?? "",
+			bio: profile?.bio ?? "",
+			phone: profile?.phone ?? "",
+			cnpj: profile?.cnpj ?? "",
+			founding_date: profile?.fouding_date ?? "",
+			operational_segment: profile?.operational_segment ?? "",
 		},
 	});
 
 	useEffect(() => {
-		if (user?.company_profile && !form.formState.isDirty) {
+		if (profile && !form.formState.isDirty) {
 			form.reset({
-				name: user.company_profile.name ?? "",
-				bio: user.company_profile.bio ?? "",
-				phone: user.company_profile.phone ?? "",
-				cnpj: user.company_profile.cnpj ?? "",
-				founding_date: user.company_profile.fouding_date ?? "",
-				operational_segment: user.company_profile.operational_segment ?? "",
+				name: profile.name ?? "",
+				bio: profile.bio ?? "",
+				phone: profile.phone ?? "",
+				cnpj: profile.cnpj ?? "",
+				founding_date: profile.fouding_date ?? "",
+				operational_segment: profile.operational_segment ?? "",
 			});
 		}
-	}, [user, form]);
+	}, [profile, form]);
 
 	const { mutate: updateProfile, isPending } = useUpdateCompanyProfile();
 
 	const update = (data: ICreateCompanyProfileSchema) => {
 		updateProfile(
-			{ company: user?.company_profile?.id as string, data },
+			{ company: profile?.id as string, data },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.profile_company_updated"));
-					hydrateUser();
+					onSuccess?.();
+					if (!profileProp) hydrateUser();
 				},
 				onError: (error) => {
 					onError(error as AxiosError<ApiError>);
@@ -76,7 +90,7 @@ export default function CompanyUpdateProfileForm() {
 		);
 	};
 
-	if (!user || !user.company_profile) return null;
+	if (!profile) return null;
 
 	return (
 		<form onSubmit={form.handleSubmit(update)} className="w-full max-w-[700px] flex flex-col gap-4">

@@ -22,6 +22,8 @@ export interface ProjectHistoryModel {
   github_url?: string | null;
   languages: ProjectHistoryModelLanguagesItem[];
   gallery: ProjectHistoryModelGalleryItem[];
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
 }

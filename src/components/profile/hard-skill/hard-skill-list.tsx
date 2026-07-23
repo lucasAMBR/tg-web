@@ -7,8 +7,6 @@ import { Spinner } from "../../ui/spinner";
 import HardSkillCard from "./hard-skill-card";
 import {
 	Empty,
-	EmptyContent,
-	EmptyDescription,
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
@@ -35,12 +33,14 @@ import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import UpdateHardskillModal from "./update_hard_skill_dialog";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface HardSkillListPorps {
 	profileId: string;
 }
 
 export default function HardSkillList({ profileId }: HardSkillListPorps) {
+	const { user } = useAuthStore();
 	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
@@ -63,11 +63,6 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 	const openUpdateModal = (hardSkill: HardSkillModel) => {
 		setSelectedhardSkill(hardSkill);
 		setUpdateModalIsOpen(true);
-	};
-
-	const closeUpdateModal = () => {
-		setSelectedhardSkill(null);
-		setUpdateModalIsOpen(false);
 	};
 
 	const { mutate: deleteHardSkill, isPending: deleteIsPending } =
@@ -104,7 +99,8 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 		<div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("dev_profile.hard_skills.title")}</span>
-				<CreateHardSkillModal
+				{user?.dev_profile?.id === profileId && (
+					<CreateHardSkillModal
 					existingHardSkills={hardSkillList}
 					profileId={profileId}
 				>
@@ -112,6 +108,7 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 						<Plus /> {t("general.add")}
 					</Button>
 				</CreateHardSkillModal>
+				)}
 			</h2>
 			<div className="flex flex-col gap-2">
 				{isLoading && (

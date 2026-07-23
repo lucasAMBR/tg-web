@@ -1,7 +1,6 @@
 import type { RecommendationPreferencesModel } from '@/api/generated/models';
 import { useGetDevRecommendationPreference } from '@/api/generated/recommendation-preferences/recommendation-preferences';
 import ThemeToggle from '@/components/global/theme-toggle-button';
-import { ColorPicker } from '@/components/settings/color-picker';
 import CompanyUpdateProfileForm from '@/components/settings/company-update-profile-form';
 import CustomRecommendationDistances from '@/components/settings/custom-recommendation-distances';
 import CustomRecommendationJobModality from '@/components/settings/custom-recommendation-job-modality';
@@ -17,19 +16,17 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card'
-import { DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuthStore } from '@/stores/auth-store';
 import { getUserMainRole } from '@/utils/role-helper';
 import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 import { createFileRoute } from '@tanstack/react-router'
-import { AlertOctagon, AlertTriangle, Check, Trash, X } from 'lucide-react';
+import { AlertTriangle, Check, Trash, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const Route = createFileRoute('/(private)/home/settings')({
+export const Route = createFileRoute('/(private)/(home)/settings/')({
   component: RouteComponent,
     beforeLoad: async () => {
       await ensureAuthenticated();
@@ -40,13 +37,12 @@ export const Route = createFileRoute('/(private)/home/settings')({
 function RouteComponent() {
     const { t } = useTranslation();
 
-    const [ verification, setVerification ] = useState<boolean>(false)
+    const [ verification ] = useState<boolean>(false)
 
     const { user } = useAuthStore();
 
     const {
       data: preferences,
-      isLoading
     } = useGetDevRecommendationPreference(
       user?.dev_profile?.id as string
     );

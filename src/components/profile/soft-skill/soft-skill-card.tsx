@@ -1,30 +1,15 @@
 import type { DevSoftSkillModel } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Edit, EllipsisVertical, Trash } from "lucide-react";
+		
 import { useTranslation } from "react-i18next";
 
 interface SoftSkillCardProps {
 	devSoftSkill: DevSoftSkillModel;
-	profileId: string;
-	openDelete: (devSoftSkill: DevSoftSkillModel) => void;
-	openUpdate: (devSoftSkill: DevSoftSkillModel) => void;
 }
 
 export default function SoftSkillCard({
-	devSoftSkill,
-	profileId,
-	openDelete,
-	openUpdate,
+	devSoftSkill
 }: SoftSkillCardProps) {
 	const { t } = useTranslation();
 	return (

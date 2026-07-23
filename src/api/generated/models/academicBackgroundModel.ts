@@ -18,6 +18,8 @@ export interface AcademicBackgroundModel {
   is_verified: boolean;
   /** @nullable */
   certificate: AcademicBackgroundModelCertificate;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
 }

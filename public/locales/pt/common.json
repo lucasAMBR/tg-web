@@ -16,6 +16,7 @@
         "change": "Alterar",
         "remove": "Remover",
         "add": "Adicionar",
+        "request": "Solicitar",
         "save": "Salvar",
         "verified": "Verificado",
         "are_you_sure": "Tem certeza?",
@@ -26,12 +27,27 @@
         "display_original_content": "Exibir conteúdo original",
         "display_translated_content": "Exibir conteúdo traduzido",
         "showing_original_content": "Exibindo conteúdo original",
-        "showing_translated_content": "Exibindo conteúdo traduzido" 
+        "showing_translated_content": "Exibindo conteúdo traduzido" ,
+        "filters": "Filtros",
+        "view_profile": "Visualizar perfil",
+        "edit_profile": "Editar perfil",
+        "profile": "Perfil",
+        "block_access": "Bloquear acesso",
+        "unblock_access": "Desbloquear acesso",
+        "address": "Endereço",
+        "location": "Localização",
+        "blocked": "Bloqueado",
+        "active": "Ativo",
+        "status": "Status",
+        "translation_pending": "Tradução pendente.",
+        "translation_error": "Tradução indisponivel.",
+        "translation_in_progress": "Tradução pendente."
     },
     "toast": {
         "success": {
             "login": "Login realizado com sucesso",
             "register": "Conta criada com sucesso",
+            "proficiency_test_requested": "Teste de proficiência solicitado com sucesso",
             "address_created": "Endereço salvo com sucesso",
             "address_updated": "Endereço atualizado com sucesso",
             "profile_dev_created": "Perfil de desenvolvedor criado com sucesso",
@@ -67,7 +83,9 @@
             "dev_soft_skill_registered": "Habilidades pessoais registradas com sucesso",
             "dev_soft_skill_updated": "Habilidades pessoais atualizadas com sucesso",
             "recommendation_preferences_updated": "Preferências de recomendação atualizadas com sucesso",
-            "recommendation_preferences_restored": "Configuração padrão restaurada"
+            "recommendation_preferences_restored": "Configuração padrão restaurada",
+            "access_blocked": "Acesso bloqueado com sucesso",
+            "access_unblocked": "Acesso desbloqueado com sucesso"
         }
     },
     "role": {
@@ -189,6 +207,28 @@
         "description_company": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores para sua empresa e garantir uma correspondência precisa.",
         "description_client": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores freelancers para seus projetos freelancer e garantir uma correspondência precisa."
     },
+    "admin_land": {
+        "devs": {
+            "title": "Desenvolvedores",
+            "description": "Visualize todos os desenvolvedores no sistema",
+            "table": {
+                "name": "Nome",
+                "specialty": "Especialidade",
+                "seniority_level": "Nível de senioridade",
+                "created_at": "Criado em"
+            }
+        },
+        "companies": {
+            "title": "Empresas",
+            "description": "Visualize todas as empresas no sistema",
+            "table": {
+                "name": "Nome",
+                "operational_segment": "Segmento de atuação",
+                "cnpj": "CNPJ",
+                "created_at": "Criado em"
+            }
+        }
+    },
     "under_construction": {
         "title": "Esta funcionalidade está atualmente em construção!",
         "description": "Por favor, volte mais tarde"
@@ -203,7 +243,8 @@
             "dashboard": "Dashboard",
             "devs": "Desenvolvedores",
             "clients": "Clientes",
-            "questions": "Questões"
+            "questions": "Questões",
+            "admins": "Adminstradores"
         },
         "options": {
             "profile": "Perfil",
@@ -218,7 +259,8 @@
             "posts": "Posts",
             "projects": "Projetos",
             "job_history": "Histórico de emprego",
-            "certifications": "Certificações"
+            "certifications": "Certificações",
+            "proficiency_test": "Testes de Proficiência"
         },
         "projects": {
             "create_project": "Criar novo projeto",
@@ -278,6 +320,38 @@
             "new_academic_background": "Adicionar nova formação acadêmica",
             "update_academic_background": "Atualizar formação acadêmica",
             "update_warning": "Se você não quer alterar o certificado, basta ignorar este campo"
+        },
+        "proficiency_test": {
+            "solicitation_title": "Solicitar novo teste de proficiência",
+            "solicitation_description": "Faça um teste de proficiência para validar suas habilidades e melhorar suas recomendações.",
+            "solicitation_dialog_title": "Solicitar teste de proficiência",
+            "solicitation_dialog_description": "Escolha as categorias que vão compor o seu teste.",
+            "frontend_category": "Categoria de frontend",
+            "backend_category": "Categoria de backend",
+            "category_placeholder": "Selecione uma categoria",
+            "score": "Pontuação: ",
+            "start_test": "Iniciar teste",
+            "await_responses": "Aguardar respostas",
+            "view_results": "Ver resultados",
+            "previous_page": "Voltar",
+            "next_page": "Avançar",
+            "finish": "Finalizar teste",
+            "all_questions_required": "Responda todas as questões antes de finalizar",
+            "submit_success": "Teste enviado com sucesso",
+            "page_indicator": "Página {{current}} de {{total}}",
+            "no_questions": "Nenhuma questão disponível para este teste",
+            "start": {
+                "error": "Erro",
+                "not_your_test": "Este teste não é seu",
+                "greeting": "Olá {{name}}!",
+                "welcome": "Bem-vindo ao seu teste de proficiência!",
+                "rules": "Regras:",
+                "rule_time": "O tempo gasto em cada questão é registrado: respostas rápidas demais podem ser suspeitas, e lentas demais podem indicar dificuldade técnica.",
+                "rule_focus": "Cada perda de foco da janela é contabilizada. Existe um limite aceitável, mas saídas frequentes podem sinalizar auxílio externo.",
+                "rule_open_close": "Toda abertura e fechamento do teste é registrado, para impedir que as questões sejam consultadas previamente e gerem vantagem injusta.",
+                "rule_consistency": "A consistência das respostas é avaliada: acertar questões difíceis e errar questões fáceis não é vantajoso.",
+                "score_warning": "Esteja ciente de que todos esses fatores podem afetar a sua pontuação final!"
+            }
         }
     },
     "company_profile": {
@@ -453,7 +527,9 @@
         "phone": "Seu telefone",
         "birthdate": "Sua data de nascimento",
         "seniority_level": "Escolha seu nível de senioridade",
+        "filter_seniority_level": "Selecione um nível de senioridade",
         "specialty": "Escolha sua especialidade",
+        "filter_specialty": "Selecione uma especialidade",
         "cep": "Digite seu CEP",
         "number": "Número",
         "complement": "Complemento",
@@ -493,9 +569,40 @@
         "old_password": "Senha atual",
         "new_password": "Nova senha",
         "new_password_confirmation": "Confirmação da nova senha",
-        "stack_blacklist": "Selecione uma linguagem / framework para evitar"
+        "stack_blacklist": "Selecione uma linguagem / framework para evitar",
+        "dev_search": "Busque por um desenvolvedor, nível de senioridade, especialidade e disponível para trabalhar e mudar de cidade",
+        "company_search": "Busque por uma empresa ou segmento de atuação",
+        "filter_operational_segment": "Selecione um segmento de atuação"
+    },
+    "filters": {
+        "all": "Todos",
+        "yes": "Sim",
+        "no": "Não"
     },
     "enum": {
+        "question_category": {
+            "backend_c_sharp_asp": "Backend C# ASP.NET",
+            "backend_data_handling": "Backend Manipulação de Dados",
+            "backend_java_spring": "Backend Java Spring",
+            "backend_php_laravel": "Backend PHP Laravel",
+            "backend_python_fast_api": "Backend Python FastAPI",
+            "backend_typescript": "Backend TypeScript",
+            "clean_code": "Clean Code",
+            "devops": "DevOps",
+            "frontend_angular": "Frontend Angular",
+            "frontend_fundamentals": "Fundamentos de Frontend",
+            "frontend_react": "Frontend React",
+            "programming_logic": "Lógica de Programação",
+            "security_backend": "Segurança Backend",
+            "security_frontend": "Segurança Frontend"
+        },
+        "proficiency_test_status": {
+            "pending": "Pendente",
+            "generated": "Gerado",
+            "awaiting_score": "Aguardando pontuação",
+            "completed": "Concluído",
+            "generation_failed": "Falha na geração do teste"
+        },
         "seniority_level": {
             "intern": "Estagiário",
             "junior": "Júnior",
@@ -558,6 +665,15 @@
         "displaying": "Exibindo",
         "of": "de",
         "page": "Página"
+    },
+    "notification": {
+        "title": "Notificações",
+        "all": "Todas",
+        "unread": "Não lidas",
+        "read": "Lidas",
+        "empty": "Nenhuma notificação por aqui.",
+        "open_link": "Clique aqui",
+        "mark_all_as_read": "Marcar todas como lidas"
     },
     "no_data": {
         "no_languages": "Nenhuma linguagem encontrada"

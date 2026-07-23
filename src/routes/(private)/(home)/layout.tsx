@@ -1,4 +1,5 @@
 import { LanguagePicker } from "@/components/global/language-change-button";
+import { Notification } from "@/components/global/notification";
 import Sidebar from "@/components/global/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,7 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { Bell, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export const Route = createFileRoute("/(private)/home")({
+export const Route = createFileRoute("/(private)/(home)")({
 	component: RouteComponent,
 });
 
@@ -34,9 +35,7 @@ function RouteComponent() {
 					</div>
 					<div className="flex gap-2">
 						<LanguagePicker />
-						<Button  variant={"default"} size={"icon"}>
-							<Bell />
-						</Button>
+						<Notification />	
 					</div>
 				</div>
 				<div className="flex flex-col flex-1 min-h-0 overflow-auto [scrollbar-gutter:stable]">

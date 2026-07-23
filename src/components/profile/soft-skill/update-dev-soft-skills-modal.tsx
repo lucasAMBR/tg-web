@@ -1,7 +1,6 @@
 import {
 	getListDevSoftSkillQueryKey,
 	useIndexSoftSkill,
-	useStoreDevSoftSkill,
 	useUpdateDevSoftSkill,
 } from "@/api/generated/soft-skill-doc/soft-skill-doc";
 import { Badge } from "@/components/ui/badge";
@@ -82,9 +81,9 @@ export default function UpdateSoftSkillModal({
 		}
 	}, [initialData]);
 
-	const { data: baseSoftSkills, isLoading } = useIndexSoftSkill();
+	const { data: baseSoftSkills } = useIndexSoftSkill();
 
-	const { mutate, isPending } = useUpdateDevSoftSkill();
+	const { mutate } = useUpdateDevSoftSkill();
 
 	const softSkillList = baseSoftSkills?.data ?? [];
 	const userPointLimits = getSenioritySoftSkillLimit(user) ?? 0;

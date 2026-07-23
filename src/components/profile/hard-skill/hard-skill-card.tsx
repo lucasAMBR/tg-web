@@ -1,5 +1,5 @@
 import type { HardSkillModel } from "@/api/generated/models";
-import { Card, CardHeader, CardTitle } from "../../ui/card";
+import { Card } from "../../ui/card";
 import { Badge } from "../../ui/badge";
 import {
 	DropdownMenu,
@@ -12,6 +12,7 @@ import {
 import { Button } from "../../ui/button";
 import { Edit, EllipsisVertical, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface HardSkillCardProps {
 	hardSkill: HardSkillModel;
@@ -25,12 +26,14 @@ export default function HardSkillCard({
 	openUpdate,
 }: HardSkillCardProps) {
 	const { t } = useTranslation();
+	const { user } = useAuthStore();
 
 	return (
 		<Card className="flex flex-row justify-between items-center p-3 gap-2">
 			<span className="font-bold">{hardSkill.language.name}</span>
 			<div className="flex items-center gap-2">
 				<Badge className="font-bold">{t(`enum.hard_skill_levels.${hardSkill.skill_level}`)}</Badge>
+				{user?.dev_profile?.id === hardSkill.dev_profile_id || user?.role.includes("admin") && (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button size={"icon"} variant={"ghost"}>
@@ -52,6 +55,7 @@ export default function HardSkillCard({
 						</DropdownMenuGroup>
 					</DropdownMenuContent>
 				</DropdownMenu>
+				)}
 			</div>
 		</Card>
 	);

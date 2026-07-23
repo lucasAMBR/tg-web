@@ -41,10 +41,6 @@ export default function Sidebar() {
 	const role = getUserMainRole(user);
 	const logoutDialogText = t("sidebar.logout_dialog.description");
 
-	// #region agent log
-	fetch('http://127.0.0.1:7709/ingest/6f6f8fe5-a806-45bf-83a1-1de251fbb200',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'351e2d'},body:JSON.stringify({sessionId:'351e2d',runId:'pre-fix',hypothesisId:'H4-H5',location:'sidebar.tsx:render',message:'sidebar user state',data:{hasUser:!!user,role:user?.role??null,hasAdminProfile:!!user?.admin_profile,resolvedName:getNameFromProfile(user)??null},timestamp:Date.now()})}).catch(()=>{});
-	// #endregion
-
 	function SidebarItem({
 		title,
 		icon: Icon,
@@ -56,7 +52,7 @@ export default function Sidebar() {
 		url?: string;
 		onClick?: () => void;
 	}) {
-		const active = url ? location.pathname === url : false;
+		const active = url ? location.pathname.startsWith(url) : false;
 
 		return (
 			<div
@@ -93,7 +89,7 @@ export default function Sidebar() {
 
 					{role === "dev" && (
 						<>
-							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/home" />
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/companies" />
 							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
@@ -102,7 +98,7 @@ export default function Sidebar() {
 
 					{role === "company" && (
 						<>
-							<SidebarItem title="Feed" icon={List} url="/home" />
+							<SidebarItem title="Feed" icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
 							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-jobs" />
 						</>
@@ -110,7 +106,7 @@ export default function Sidebar() {
 
 					{role === "client" && (
 						<>
-							<SidebarItem title="Feed" icon={List} url="/home" />
+							<SidebarItem title="Feed" icon={List} url="/feed" />
 							<SidebarItem title="Freelancers" icon={User} url="/freelancers" />
 						</>
 					)}
@@ -119,7 +115,7 @@ export default function Sidebar() {
 						<>
 							<SidebarItem title="Dashboard" icon={LayoutDashboard} url="/admin-land/dashboard" />
 							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
-							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/companies" />
+							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/company" />
 							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />
 							<SidebarItem title={t("sidebar.sections.admins")} icon={Folder} url="/admin-land/admins" />
 							<SidebarItem title={t("sidebar.sections.questions")} icon={MessageCircle} url="/admin-land/questions" />
@@ -132,11 +128,11 @@ export default function Sidebar() {
 					<p className="text-xs text-muted-foreground mb-2">Options</p>
 
 					{role === "company" ? (
-						<SidebarItem title={t("sidebar.options.profile")} icon={Building} url="/home/profile" />
+						<SidebarItem title={t("sidebar.options.profile")} icon={Building} url="/profile" />
 					) : (
-						<SidebarItem title={t("sidebar.options.profile")} icon={User} url="/home/profile" />
+						<SidebarItem title={t("sidebar.options.profile")} icon={User} url="/profile" />
 					)}
-					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/home/settings" />
+					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/settings" />
 
 					<LogoutButton text={logoutDialogText}>
 						<div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer hover:bg-muted">

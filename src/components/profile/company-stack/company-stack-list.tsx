@@ -1,12 +1,13 @@
 import { useGetCompanyStack } from "@/api/generated/company-stack/company-stack"
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Spinner } from "@/components/ui/spinner";
 import { Brackets, Edit, Plus } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CreateCompanyStackDialog from "./create-company-stack-dialog";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface CompanyStackListProps{
     profileId: string
@@ -14,6 +15,8 @@ interface CompanyStackListProps{
 
 export default function CompanyStackList({ profileId }: CompanyStackListProps){
     const { t } = useTranslation();
+
+    const { user } = useAuthStore();
 
     const {
         data: hardSkill,
@@ -28,15 +31,19 @@ export default function CompanyStackList({ profileId }: CompanyStackListProps){
         <div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("company_profile.stack.title")}</span>
+                {user?.company_profile?.id === profileId || user?.role.includes("admin") &&
+                <>
                 {hardSkillList.length > 0 ? (
-                    <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
-                        <Edit /> {t("general.change")}
-                    </Button>
-                ) : (
-                    <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
-                        <Plus /> {t("general.create")}
-                    </Button>
-                )}
+                        <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
+                            <Edit /> {t("general.change")}
+                        </Button>
+                    ) : (
+                        <Button onClick={() => setStackModalIsOpen(true)} variant={"accent"}>
+                            <Plus /> {t("general.create")}
+                        </Button>
+                    )}
+                </>
+                }
 			</h2>
 			<div className="flex flex-col gap-2">
 				{isLoading && (

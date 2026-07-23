@@ -26,6 +26,7 @@ import type {
   EnumEmploymentType200,
   EnumHardSkillLevel200,
   EnumOperationalSegments200,
+  EnumQuestionStackBySpecialty200,
   EnumSeniority200
 } from '.././models';
 
@@ -667,6 +668,98 @@ export function useEnumDevSpecialty<TData = Awaited<ReturnType<typeof enumDevSpe
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumDevSpecialtyQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary /enum/question-category-stacks
+ */
+export const enumQuestionStackBySpecialty = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumQuestionStackBySpecialty200>(
+      {url: `/enum/question-category-stacks`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumQuestionStackBySpecialtyQueryKey = () => {
+    return [
+    `/enum/question-category-stacks`
+    ] as const;
+    }
+
+    
+export const getEnumQuestionStackBySpecialtyQueryOptions = <TData = Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumQuestionStackBySpecialtyQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>> = ({ signal }) => enumQuestionStackBySpecialty(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumQuestionStackBySpecialtyQueryResult = NonNullable<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>>
+export type EnumQuestionStackBySpecialtyQueryError = unknown
+
+
+export function useEnumQuestionStackBySpecialty<TData = Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>,
+          TError,
+          Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumQuestionStackBySpecialty<TData = Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>,
+          TError,
+          Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumQuestionStackBySpecialty<TData = Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /enum/question-category-stacks
+ */
+
+export function useEnumQuestionStackBySpecialty<TData = Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumQuestionStackBySpecialty>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumQuestionStackBySpecialtyQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

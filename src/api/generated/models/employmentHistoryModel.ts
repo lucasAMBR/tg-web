@@ -26,6 +26,8 @@ export interface EmploymentHistoryModel {
   end_date: string | null;
   is_current: boolean;
   dev_profile_id: string;
+  translation_status: string;
+  translation_status_label: string;
   created_at: string;
   updated_at: string;
 }

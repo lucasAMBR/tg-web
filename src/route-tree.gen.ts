@@ -11,18 +11,24 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
-import { Route as privateHomeLayoutRouteImport } from './routes/(private)/home/layout'
 import { Route as privateAdminLandLayoutRouteImport } from './routes/(private)/admin-land/layout'
-import { Route as privateHomeIndexRouteImport } from './routes/(private)/home/index'
+import { Route as privatehomeLayoutRouteImport } from './routes/(private)/(home)/layout'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
-import { Route as privateHomeSettingsRouteImport } from './routes/(private)/home/settings'
-import { Route as privateHomeProfileRouteImport } from './routes/(private)/home/profile'
 import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
 import { Route as privateAdminLandDashboardRouteImport } from './routes/(private)/admin-land/dashboard'
+import { Route as privateAdminLandDevsIndexRouteImport } from './routes/(private)/admin-land/devs/index'
+import { Route as privateAdminLandCompanyIndexRouteImport } from './routes/(private)/admin-land/company/index'
+import { Route as privatehomeSettingsIndexRouteImport } from './routes/(private)/(home)/settings/index'
+import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/(home)/profile/index'
+import { Route as privatehomeFeedIndexRouteImport } from './routes/(private)/(home)/feed/index'
+import { Route as privateProficiencyTestIdTestRouteImport } from './routes/(private)/proficiency-test/$id/test'
+import { Route as privateProficiencyTestIdStartRouteImport } from './routes/(private)/proficiency-test/$id/start'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
 import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
+import { Route as privateAdminLandDevsIdIndexRouteImport } from './routes/(private)/admin-land/devs/$id/index'
+import { Route as privateAdminLandCompanyIdIndexRouteImport } from './routes/(private)/admin-land/company/$id/index'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -33,20 +39,14 @@ const publicIndexRoute = publicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => publicLayoutRoute,
 } as any)
-const privateHomeLayoutRoute = privateHomeLayoutRouteImport.update({
-  id: '/(private)/home',
-  path: '/home',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const privateAdminLandLayoutRoute = privateAdminLandLayoutRouteImport.update({
   id: '/(private)/admin-land',
   path: '/admin-land',
   getParentRoute: () => rootRouteImport,
 } as any)
-const privateHomeIndexRoute = privateHomeIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => privateHomeLayoutRoute,
+const privatehomeLayoutRoute = privatehomeLayoutRouteImport.update({
+  id: '/(private)/(home)',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const publicAuthRegisterRoute = publicAuthRegisterRouteImport.update({
   id: '/auth/register',
@@ -58,16 +58,6 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => publicLayoutRoute,
 } as any)
-const privateHomeSettingsRoute = privateHomeSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => privateHomeLayoutRoute,
-} as any)
-const privateHomeProfileRoute = privateHomeProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => privateHomeLayoutRoute,
-} as any)
 const privateCreateAddressRoute = privateCreateAddressRouteImport.update({
   id: '/(private)/create/address',
   path: '/create/address',
@@ -78,6 +68,46 @@ const privateAdminLandDashboardRoute =
     id: '/dashboard',
     path: '/dashboard',
     getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privateAdminLandDevsIndexRoute =
+  privateAdminLandDevsIndexRouteImport.update({
+    id: '/devs/',
+    path: '/devs/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privateAdminLandCompanyIndexRoute =
+  privateAdminLandCompanyIndexRouteImport.update({
+    id: '/company/',
+    path: '/company/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privatehomeSettingsIndexRoute =
+  privatehomeSettingsIndexRouteImport.update({
+    id: '/settings/',
+    path: '/settings/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeProfileIndexRoute = privatehomeProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeFeedIndexRoute = privatehomeFeedIndexRouteImport.update({
+  id: '/feed/',
+  path: '/feed/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privateProficiencyTestIdTestRoute =
+  privateProficiencyTestIdTestRouteImport.update({
+    id: '/(private)/proficiency-test/$id/test',
+    path: '/proficiency-test/$id/test',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const privateProficiencyTestIdStartRoute =
+  privateProficiencyTestIdStartRouteImport.update({
+    id: '/(private)/proficiency-test/$id/start',
+    path: '/proficiency-test/$id/start',
+    getParentRoute: () => rootRouteImport,
   } as any)
 const privateCreateProfileDevRoute = privateCreateProfileDevRouteImport.update({
   id: '/(private)/create/profile/dev',
@@ -96,109 +126,157 @@ const privateCreateProfileClientRoute =
     path: '/create/profile/client',
     getParentRoute: () => rootRouteImport,
   } as any)
+const privateAdminLandDevsIdIndexRoute =
+  privateAdminLandDevsIdIndexRouteImport.update({
+    id: '/devs/$id/',
+    path: '/devs/$id/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privateAdminLandCompanyIdIndexRoute =
+  privateAdminLandCompanyIdIndexRouteImport.update({
+    id: '/company/$id/',
+    path: '/company/$id/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
-  '/home': typeof privateHomeLayoutRouteWithChildren
   '/': typeof publicIndexRoute
   '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/profile': typeof privateHomeProfileRoute
-  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/home/': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/feed/': typeof privatehomeFeedIndexRoute
+  '/profile/': typeof privatehomeProfileIndexRoute
+  '/settings/': typeof privatehomeSettingsIndexRoute
+  '/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
+  '/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/admin-land/company/$id/': typeof privateAdminLandCompanyIdIndexRoute
+  '/admin-land/devs/$id/': typeof privateAdminLandDevsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/': typeof publicIndexRoute
   '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/profile': typeof privateHomeProfileRoute
-  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/home': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/feed': typeof privatehomeFeedIndexRoute
+  '/profile': typeof privatehomeProfileIndexRoute
+  '/settings': typeof privatehomeSettingsIndexRoute
+  '/admin-land/company': typeof privateAdminLandCompanyIndexRoute
+  '/admin-land/devs': typeof privateAdminLandDevsIndexRoute
+  '/admin-land/company/$id': typeof privateAdminLandCompanyIdIndexRoute
+  '/admin-land/devs/$id': typeof privateAdminLandDevsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
+  '/(private)/(home)': typeof privatehomeLayoutRouteWithChildren
   '/(private)/admin-land': typeof privateAdminLandLayoutRouteWithChildren
-  '/(private)/home': typeof privateHomeLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
   '/(private)/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/(private)/create/address': typeof privateCreateAddressRoute
-  '/(private)/home/profile': typeof privateHomeProfileRoute
-  '/(private)/home/settings': typeof privateHomeSettingsRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
-  '/(private)/home/': typeof privateHomeIndexRoute
   '/(private)/create/profile/client': typeof privateCreateProfileClientRoute
   '/(private)/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/(private)/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/(private)/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/(private)/(home)/feed/': typeof privatehomeFeedIndexRoute
+  '/(private)/(home)/profile/': typeof privatehomeProfileIndexRoute
+  '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
+  '/(private)/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
+  '/(private)/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/(private)/admin-land/company/$id/': typeof privateAdminLandCompanyIdIndexRoute
+  '/(private)/admin-land/devs/$id/': typeof privateAdminLandDevsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/admin-land'
-    | '/home'
     | '/'
     | '/admin-land/dashboard'
     | '/create/address'
-    | '/home/profile'
-    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
-    | '/home/'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
+    | '/proficiency-test/$id/start'
+    | '/proficiency-test/$id/test'
+    | '/feed/'
+    | '/profile/'
+    | '/settings/'
+    | '/admin-land/company/'
+    | '/admin-land/devs/'
+    | '/admin-land/company/$id/'
+    | '/admin-land/devs/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin-land'
     | '/'
     | '/admin-land/dashboard'
     | '/create/address'
-    | '/home/profile'
-    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
-    | '/home'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
+    | '/proficiency-test/$id/start'
+    | '/proficiency-test/$id/test'
+    | '/feed'
+    | '/profile'
+    | '/settings'
+    | '/admin-land/company'
+    | '/admin-land/devs'
+    | '/admin-land/company/$id'
+    | '/admin-land/devs/$id'
   id:
     | '__root__'
     | '/(public)'
+    | '/(private)/(home)'
     | '/(private)/admin-land'
-    | '/(private)/home'
     | '/(public)/'
     | '/(private)/admin-land/dashboard'
     | '/(private)/create/address'
-    | '/(private)/home/profile'
-    | '/(private)/home/settings'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
-    | '/(private)/home/'
     | '/(private)/create/profile/client'
     | '/(private)/create/profile/company'
     | '/(private)/create/profile/dev'
+    | '/(private)/proficiency-test/$id/start'
+    | '/(private)/proficiency-test/$id/test'
+    | '/(private)/(home)/feed/'
+    | '/(private)/(home)/profile/'
+    | '/(private)/(home)/settings/'
+    | '/(private)/admin-land/company/'
+    | '/(private)/admin-land/devs/'
+    | '/(private)/admin-land/company/$id/'
+    | '/(private)/admin-land/devs/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   publicLayoutRoute: typeof publicLayoutRouteWithChildren
+  privatehomeLayoutRoute: typeof privatehomeLayoutRouteWithChildren
   privateAdminLandLayoutRoute: typeof privateAdminLandLayoutRouteWithChildren
-  privateHomeLayoutRoute: typeof privateHomeLayoutRouteWithChildren
   privateCreateAddressRoute: typeof privateCreateAddressRoute
   privateCreateProfileClientRoute: typeof privateCreateProfileClientRoute
   privateCreateProfileCompanyRoute: typeof privateCreateProfileCompanyRoute
   privateCreateProfileDevRoute: typeof privateCreateProfileDevRoute
+  privateProficiencyTestIdStartRoute: typeof privateProficiencyTestIdStartRoute
+  privateProficiencyTestIdTestRoute: typeof privateProficiencyTestIdTestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -217,13 +295,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicIndexRouteImport
       parentRoute: typeof publicLayoutRoute
     }
-    '/(private)/home': {
-      id: '/(private)/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof privateHomeLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(private)/admin-land': {
       id: '/(private)/admin-land'
       path: '/admin-land'
@@ -231,12 +302,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privateAdminLandLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(private)/home/': {
-      id: '/(private)/home/'
-      path: '/'
-      fullPath: '/home/'
-      preLoaderRoute: typeof privateHomeIndexRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
+    '/(private)/(home)': {
+      id: '/(private)/(home)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof privatehomeLayoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(public)/auth/register': {
       id: '/(public)/auth/register'
@@ -252,20 +323,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicAuthLoginRouteImport
       parentRoute: typeof publicLayoutRoute
     }
-    '/(private)/home/settings': {
-      id: '/(private)/home/settings'
-      path: '/settings'
-      fullPath: '/home/settings'
-      preLoaderRoute: typeof privateHomeSettingsRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
-    }
-    '/(private)/home/profile': {
-      id: '/(private)/home/profile'
-      path: '/profile'
-      fullPath: '/home/profile'
-      preLoaderRoute: typeof privateHomeProfileRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
-    }
     '/(private)/create/address': {
       id: '/(private)/create/address'
       path: '/create/address'
@@ -279,6 +336,55 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin-land/dashboard'
       preLoaderRoute: typeof privateAdminLandDashboardRouteImport
       parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/admin-land/devs/': {
+      id: '/(private)/admin-land/devs/'
+      path: '/devs'
+      fullPath: '/admin-land/devs/'
+      preLoaderRoute: typeof privateAdminLandDevsIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/admin-land/company/': {
+      id: '/(private)/admin-land/company/'
+      path: '/company'
+      fullPath: '/admin-land/company/'
+      preLoaderRoute: typeof privateAdminLandCompanyIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/(home)/settings/': {
+      id: '/(private)/(home)/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof privatehomeSettingsIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/profile/': {
+      id: '/(private)/(home)/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof privatehomeProfileIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/feed/': {
+      id: '/(private)/(home)/feed/'
+      path: '/feed'
+      fullPath: '/feed/'
+      preLoaderRoute: typeof privatehomeFeedIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/proficiency-test/$id/test': {
+      id: '/(private)/proficiency-test/$id/test'
+      path: '/proficiency-test/$id/test'
+      fullPath: '/proficiency-test/$id/test'
+      preLoaderRoute: typeof privateProficiencyTestIdTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/proficiency-test/$id/start': {
+      id: '/(private)/proficiency-test/$id/start'
+      path: '/proficiency-test/$id/start'
+      fullPath: '/proficiency-test/$id/start'
+      preLoaderRoute: typeof privateProficiencyTestIdStartRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(private)/create/profile/dev': {
       id: '/(private)/create/profile/dev'
@@ -301,6 +407,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privateCreateProfileClientRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(private)/admin-land/devs/$id/': {
+      id: '/(private)/admin-land/devs/$id/'
+      path: '/devs/$id'
+      fullPath: '/admin-land/devs/$id/'
+      preLoaderRoute: typeof privateAdminLandDevsIdIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/admin-land/company/$id/': {
+      id: '/(private)/admin-land/company/$id/'
+      path: '/company/$id'
+      fullPath: '/admin-land/company/$id/'
+      preLoaderRoute: typeof privateAdminLandCompanyIdIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
   }
 }
 
@@ -320,13 +440,36 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
   publicLayoutRouteChildren,
 )
 
+interface privatehomeLayoutRouteChildren {
+  privatehomeFeedIndexRoute: typeof privatehomeFeedIndexRoute
+  privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
+  privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
+}
+
+const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
+  privatehomeFeedIndexRoute: privatehomeFeedIndexRoute,
+  privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
+  privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,
+}
+
+const privatehomeLayoutRouteWithChildren =
+  privatehomeLayoutRoute._addFileChildren(privatehomeLayoutRouteChildren)
+
 interface privateAdminLandLayoutRouteChildren {
   privateAdminLandDashboardRoute: typeof privateAdminLandDashboardRoute
+  privateAdminLandCompanyIndexRoute: typeof privateAdminLandCompanyIndexRoute
+  privateAdminLandDevsIndexRoute: typeof privateAdminLandDevsIndexRoute
+  privateAdminLandCompanyIdIndexRoute: typeof privateAdminLandCompanyIdIndexRoute
+  privateAdminLandDevsIdIndexRoute: typeof privateAdminLandDevsIdIndexRoute
 }
 
 const privateAdminLandLayoutRouteChildren: privateAdminLandLayoutRouteChildren =
   {
     privateAdminLandDashboardRoute: privateAdminLandDashboardRoute,
+    privateAdminLandCompanyIndexRoute: privateAdminLandCompanyIndexRoute,
+    privateAdminLandDevsIndexRoute: privateAdminLandDevsIndexRoute,
+    privateAdminLandCompanyIdIndexRoute: privateAdminLandCompanyIdIndexRoute,
+    privateAdminLandDevsIdIndexRoute: privateAdminLandDevsIdIndexRoute,
   }
 
 const privateAdminLandLayoutRouteWithChildren =
@@ -334,29 +477,16 @@ const privateAdminLandLayoutRouteWithChildren =
     privateAdminLandLayoutRouteChildren,
   )
 
-interface privateHomeLayoutRouteChildren {
-  privateHomeProfileRoute: typeof privateHomeProfileRoute
-  privateHomeSettingsRoute: typeof privateHomeSettingsRoute
-  privateHomeIndexRoute: typeof privateHomeIndexRoute
-}
-
-const privateHomeLayoutRouteChildren: privateHomeLayoutRouteChildren = {
-  privateHomeProfileRoute: privateHomeProfileRoute,
-  privateHomeSettingsRoute: privateHomeSettingsRoute,
-  privateHomeIndexRoute: privateHomeIndexRoute,
-}
-
-const privateHomeLayoutRouteWithChildren =
-  privateHomeLayoutRoute._addFileChildren(privateHomeLayoutRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   publicLayoutRoute: publicLayoutRouteWithChildren,
+  privatehomeLayoutRoute: privatehomeLayoutRouteWithChildren,
   privateAdminLandLayoutRoute: privateAdminLandLayoutRouteWithChildren,
-  privateHomeLayoutRoute: privateHomeLayoutRouteWithChildren,
   privateCreateAddressRoute: privateCreateAddressRoute,
   privateCreateProfileClientRoute: privateCreateProfileClientRoute,
   privateCreateProfileCompanyRoute: privateCreateProfileCompanyRoute,
   privateCreateProfileDevRoute: privateCreateProfileDevRoute,
+  privateProficiencyTestIdStartRoute: privateProficiencyTestIdStartRoute,
+  privateProficiencyTestIdTestRoute: privateProficiencyTestIdTestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
