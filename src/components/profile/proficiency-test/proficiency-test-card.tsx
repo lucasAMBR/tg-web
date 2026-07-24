@@ -8,10 +8,11 @@ import { Eye, Hand, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface ProficiencyTestCardProps {
-    test: ProficencyTestModel
+    test: ProficencyTestModel;
+    selectTest: (test: ProficencyTestModel) => void; 
 }
 
-export default function ProficiencyTestCard({ test }: ProficiencyTestCardProps) {
+export default function ProficiencyTestCard({ test, selectTest }: ProficiencyTestCardProps) {
 
     const { user } = useAuthStore();
 
@@ -27,7 +28,7 @@ export default function ProficiencyTestCard({ test }: ProficiencyTestCardProps) 
             </div>
             {(test.status == "generated" && test.dev_profile_id === user?.dev_profile?.id) && <Button variant={"default"} onClick={() => navigate({ to: `/proficiency-test/${test.id}/start` })}><Play /> {t("dev_profile.proficiency_test.start_test")}</Button>}
             {(test.status == "generated" && test.dev_profile_id !== user?.dev_profile?.id) && <Button variant={"outline"} disabled><Hand /> {t("dev_profile.proficiency_test.await_responses")}</Button>}
-            {test.status == "completed" && <Button variant={"outline"}><Eye /> {t("dev_profile.proficiency_test.view_results")}</Button>}
+            {test.status == "completed" && <Button variant={"outline"} onClick={() => selectTest(test)}><Eye /> {t("dev_profile.proficiency_test.view_results")}</Button>}
         </Card>
     );
 }

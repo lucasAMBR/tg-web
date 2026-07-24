@@ -32,6 +32,7 @@ import type {
   SolicitateProficiencyTestBody,
   SubmitProficiencyTest200,
   SubmitProficiencyTestBody,
+  TestReview200,
   VisualizeTest200,
   VisualizeTestBody
 } from '.././models';
@@ -513,4 +514,95 @@ export const useVisualizeTest = <TError = unknown,
 
       return useMutation(mutationOptions, queryClient);
     }
+    /**
+ * @summary /proficiency-test/{id}/review
+ */
+export const testReview = (
+    proficiencyTest: string,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<TestReview200>(
+      {url: `/proficiency-test/${proficiencyTest}/review`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getTestReviewQueryKey = (proficiencyTest?: string,) => {
+    return [
+    `/proficiency-test/${proficiencyTest}/review`
+    ] as const;
+    }
+
     
+export const getTestReviewQueryOptions = <TData = Awaited<ReturnType<typeof testReview>>, TError = unknown>(proficiencyTest: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getTestReviewQueryKey(proficiencyTest);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof testReview>>> = ({ signal }) => testReview(proficiencyTest, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(proficiencyTest), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type TestReviewQueryResult = NonNullable<Awaited<ReturnType<typeof testReview>>>
+export type TestReviewQueryError = unknown
+
+
+export function useTestReview<TData = Awaited<ReturnType<typeof testReview>>, TError = unknown>(
+ proficiencyTest: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof testReview>>,
+          TError,
+          Awaited<ReturnType<typeof testReview>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useTestReview<TData = Awaited<ReturnType<typeof testReview>>, TError = unknown>(
+ proficiencyTest: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof testReview>>,
+          TError,
+          Awaited<ReturnType<typeof testReview>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useTestReview<TData = Awaited<ReturnType<typeof testReview>>, TError = unknown>(
+ proficiencyTest: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary /proficiency-test/{id}/review
+ */
+
+export function useTestReview<TData = Awaited<ReturnType<typeof testReview>>, TError = unknown>(
+ proficiencyTest: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof testReview>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getTestReviewQueryOptions(proficiencyTest,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+

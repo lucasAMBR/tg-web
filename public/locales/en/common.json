@@ -292,6 +292,10 @@
             "submit_success": "Test submitted successfully",
             "page_indicator": "Page {{current}} of {{total}}",
             "no_questions": "No questions available for this test",
+            "review": {
+                "correct_response": "Correct answer",
+                "dev_response": "Developer's answer"
+            },
             "start": {
                 "error": "Error",
                 "not_your_test": "This is not your test",

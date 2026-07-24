@@ -340,6 +340,10 @@
             "submit_success": "Teste enviado com sucesso",
             "page_indicator": "Página {{current}} de {{total}}",
             "no_questions": "Nenhuma questão disponível para este teste",
+            "review": {
+                "correct_response": "Resposta correta",
+                "dev_response": "Resposta do desenvolvedor"
+            },
             "start": {
                 "error": "Erro",
                 "not_your_test": "Este teste não é seu",
