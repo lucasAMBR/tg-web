@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check, ChevronLeft, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Card } from "@/components/ui/card";
+import { CodeBlock, CodeBlockCopyButton } from "@/components/ai/code-block";
+import type { BundledLanguage } from "shiki";
 
 interface ProficiencyTestViewProps {
     test: ProficencyTestModel | null;
@@ -48,13 +51,13 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
     };
 
     return (
-        <div className="flex flex-col gap-3">
-            <div className="my-2">
-                <Button variant={"outline"} size={"sm"} onClick={clearSelected}>
+        <div className="flex flex-col gap-4">
+            <Card className="p-4 flex">
+                <Button variant={"outline"} size={"sm"} className="max-w-20" onClick={clearSelected}>
                     <ChevronLeft />
                     <p>{t("general.back")}</p>
                 </Button>
-            </div>
+            </Card>
 
             {isLoading && <p>{t("general.search")}...</p>}
 
@@ -67,11 +70,12 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
             {review?.data.map((item, index) => {
                 const devResponse = item.dev_response;
                 const correctResponse = item.correct_response;
-                const showCorrectResponse = !!correctResponse;
                 const isDevResponseCorrect = item.is_dev_response_correct;
+                // Só mostra a resposta correta quando o dev errou.
+                const showCorrectResponse = !!correctResponse && !isDevResponseCorrect;
 
                 return (
-                    <div key={item.question.id} className="flex flex-col gap-4 my-4">
+                    <Card key={item.question.id} className="flex flex-col gap-4 bg-card p-4">
                         <div className="flex gap-3 items-center">
                             <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full border border-primary text-primary font-bold">
                                 {index + 1}
@@ -79,7 +83,38 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
                             <p className="text-lg">{questionText(item.question)}</p>
                         </div>
 
+                        {item.question.code_snippet && (
+                            <CodeBlock
+                                language={item.question.code_snippet.language as BundledLanguage}
+                                code={item.question.code_snippet.code}
+                                showLineNumbers
+                                showHeader
+                                filename="Pseudocode.tsx"
+                            >
+                                <CodeBlockCopyButton />
+                            </CodeBlock>
+                        )}
+
                         <div className="flex flex-col gap-2">
+                            {devResponse && (
+                                <div className="flex flex-col gap-1">
+                                    <div
+                                        className={cn(
+                                            "flex items-center justify-between gap-3 rounded-md border p-3",
+                                            isDevResponseCorrect
+                                                ? "border-green-500 bg-green-500/10"
+                                                : "border-red-500 bg-red-500/10",
+                                        )}
+                                    >
+                                        <p>{responseText(devResponse)}</p>
+                                        {isDevResponseCorrect ? (
+                                            <Check className="shrink-0 text-green-500" />
+                                        ) : (
+                                            <X className="shrink-0 text-red-600" />
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                             {showCorrectResponse && (
                                 <div className="flex flex-col gap-1">
                                     <p className="text-sm text-muted-foreground">
@@ -90,35 +125,8 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
                                     </div>
                                 </div>
                             )}
-
-                            {devResponse && (
-                                <div className="flex flex-col gap-1">
-                                    <p className="text-sm text-muted-foreground">
-                                        {t("dev_profile.proficiency_test.review.dev_response")}
-                                    </p>
-                                    <div
-                                        className={cn(
-                                            "flex items-center justify-between gap-3 rounded-md border p-3",
-                                            !showCorrectResponse &&
-                                                isDevResponseCorrect &&
-                                                "border-green-500 bg-green-500/10",
-                                            !showCorrectResponse &&
-                                                !isDevResponseCorrect &&
-                                                "border-destructive bg-destructive/10",
-                                        )}
-                                    >
-                                        <p>{responseText(devResponse)}</p>
-                                        {!showCorrectResponse &&
-                                            (isDevResponseCorrect ? (
-                                                <Check className="shrink-0 text-green-500" />
-                                            ) : (
-                                                <X className="shrink-0 text-destructive" />
-                                            ))}
-                                    </div>
-                                </div>
-                            )}
                         </div>
-                    </div>
+                    </Card>
                 );
             })}
         </div>
