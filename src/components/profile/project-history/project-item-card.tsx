@@ -1,4 +1,4 @@
-import type { ProjectHistoryModel } from "@/api/generated/models";
+import type { ProjectHistoryResource } from "@/api/generated/models";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,15 +23,15 @@ import { useAuthStore } from "@/stores/auth-store";
 import { env } from "@/utils/env";
 import { externalHref } from "@/utils/external-href";
 import Autoplay from "embla-carousel-autoplay";
-import { AlertCircle, Edit, EllipsisVertical, Eye, Hourglass, Image, Link, Loader2, Trash } from "lucide-react";
+import { AlertCircle, Edit, EllipsisVertical, Eye, Hourglass, Image, Link, Trash } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface ProjectItemCardProps {
-	project: ProjectHistoryModel;
-	openDeleteModal: (project: ProjectHistoryModel) => void;
-	openUpdateModal: (project: ProjectHistoryModel) => void;
-	openManageGallery: (project: ProjectHistoryModel) => void;
+	project: ProjectHistoryResource;
+	openDeleteModal: (project: ProjectHistoryResource) => void;
+	openUpdateModal: (project: ProjectHistoryResource) => void;
+	openManageGallery: (project: ProjectHistoryResource) => void;
 }
 
 export default function ProjectItemCard({
@@ -149,7 +149,7 @@ export default function ProjectItemCard({
 						: (project.description_en as string)}
 				</CardDescription>
 				<div className="flex gap-1">
-					{project.languages.map((lang) => (
+					{project.languages?.map((lang) => (
 						<Badge className="bg-accent text-accent-foreground">{lang.name}</Badge>
 					))}
 				</div>

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import Required from "../global/required-field";
 import { Spinner } from "../ui/spinner";
-import { useStoreClientProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useStoreClientProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useState } from "react";
 import {

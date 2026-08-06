@@ -1,5 +1,5 @@
-import type { AddressModel, CompanyProfileModel } from "@/api/generated/models";
-import { getIndexCompanyProfileQueryKey } from "@/api/generated/profiles-doc/profiles-doc";
+import type { AddressResource, CompanyProfileResource } from "@/api/generated/models";
+import { getIndexCompanyProfileQueryKey } from "@/api/generated/profile/profile";
 import CompanyUpdateProfileForm from "@/components/settings/company-update-profile-form";
 import UpdateAddressForm from "@/components/settings/update-address-form";
 import {
@@ -13,9 +13,9 @@ import { Separator } from "@/components/ui/separator";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-type AdminCompanyProfile = CompanyProfileModel & {
+type AdminCompanyProfile = CompanyProfileResource & {
 	is_blocked?: boolean;
-	address?: AddressModel | null;
+	address?: AddressResource | null;
 };
 
 interface AdminUpdateCompanyProfileDialogProps {

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(public)/auth/register")({

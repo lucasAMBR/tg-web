@@ -1,13 +1,14 @@
+import type { UpdateEmploymentHistoryRequest } from "@/api/generated/models";
 import {
 	getIndexEmploymentHistoryQueryKey,
 	useUpdateEmploymentHistory,
-} from "@/api/generated/employment-history-doc/employment-history-doc";
+} from "@/api/generated/employment-history/employment-history";
 import {
 	useEnumContractType,
 	useEnumEmploymentType,
 	useEnumSeniority,
-} from "@/api/generated/enums/enums";
-import type { EmploymentHistoryModel } from "@/api/generated/models";
+} from "@/api/generated/enum/enum";
+import type { EmploymentHistoryResource } from "@/api/generated/models";
 import Required from "@/components/global/required-field";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -60,7 +61,7 @@ interface UpdateJobHistoryModalProps {
 	openChange: (open: boolean) => void;
 	closeModal: () => void;
 	profileId: string;
-	job: EmploymentHistoryModel | null;
+	job: EmploymentHistoryResource | null;
 }
 
 export default function UpdateJobHistoryModal({
@@ -126,7 +127,7 @@ export default function UpdateJobHistoryModal({
 
 	const submit = (data: IUpdateJobHistorySchema) => {
 		update(
-			{ id: job.id, data },
+			{ id: job.id, data: data as UpdateEmploymentHistoryRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.job_history_updated"));

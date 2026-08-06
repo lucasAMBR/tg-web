@@ -63,7 +63,7 @@ export default function PasswordChange(){
     } = useUpdateUser();
 
     const handleChange = (data: IPasswordChangeSchema) => {
-        mutate({ user: user?.id as string, data }, {
+        mutate({ id: user?.id as string, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.password_updated"));
                 form.reset();
@@ -79,7 +79,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="old_password"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.old_password")}</FieldLabel>
                         <Input
@@ -94,7 +94,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="new_password"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.new_password")}</FieldLabel>
                         <Input
@@ -109,7 +109,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="new_password_confirmation"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.new_password_confirmation")}</FieldLabel>
                         <Input

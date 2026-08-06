@@ -3,7 +3,6 @@ import LogoutButton from "@/components/global/logout-button";
 import ThemeToggle from "@/components/global/theme-toggle-button";
 import DevProfileForm from "@/components/profile-create/dev-profile-form";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { env } from "@/utils/env";
 import {
 	ensureAuthenticated,
@@ -11,7 +10,6 @@ import {
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
 
 const staticData = {
@@ -27,7 +25,6 @@ export const Route = createFileRoute("/(private)/create/profile/dev")({
 });
 
 function RouteComponent() {
-	const { theme } = useTheme();
 
 	const { t } = useTranslation();
 

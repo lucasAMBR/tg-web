@@ -1,8 +1,8 @@
 import {
 	getIndexEmploymentHistoryQueryKey,
 	useDeleteEmploymentHistory,
-} from "@/api/generated/employment-history-doc/employment-history-doc";
-import type { EmploymentHistoryModel } from "@/api/generated/models";
+} from "@/api/generated/employment-history/employment-history";
+import type { EmploymentHistoryResource } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -26,7 +26,7 @@ interface DeletejobHistoryModalProps {
 	openChange: (open: boolean) => void;
 	closeModal: () => void;
 	profileId: string;
-	job: EmploymentHistoryModel | null;
+	job: EmploymentHistoryResource | null;
 }
 
 export default function DeletejobHistoryModal({

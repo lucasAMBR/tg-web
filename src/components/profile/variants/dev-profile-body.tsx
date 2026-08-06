@@ -9,10 +9,9 @@ import HardSkillList from "../hard-skill/hard-skill-list"
 import SoftSkillList from "../soft-skill/soft-skill-list"
 import { useEffect, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
-import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history-doc/project-history-doc"
-import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history-doc/employment-history-doc"
+import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history/project-history"
+import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history/employment-history"
 import { useTranslation } from "react-i18next"
-import ProficiencyTestSolicitationCard from "../proficiency-test/proficiency-test-solicitation-card"
 import ProficiencyTestTab from "../proficiency-test/proficiency-test-tab"
 
 interface DevProfileContentProps{

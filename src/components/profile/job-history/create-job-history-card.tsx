@@ -1,12 +1,13 @@
+import type { StoreEmploymentHistoryRequest } from "@/api/generated/models";
 import {
 	getIndexEmploymentHistoryQueryKey,
 	useStoreEmploymentHistory,
-} from "@/api/generated/employment-history-doc/employment-history-doc";
+} from "@/api/generated/employment-history/employment-history";
 import {
 	useEnumContractType,
 	useEnumEmploymentType,
 	useEnumSeniority,
-} from "@/api/generated/enums/enums";
+} from "@/api/generated/enum/enum";
 import Required from "@/components/global/required-field";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -92,11 +93,11 @@ export default function CreateJobHistoryCard() {
 		}
 	}, [isCurrentJob, form]);
 
-	const { mutate, isPending } = useStoreEmploymentHistory();
+	const { mutate } = useStoreEmploymentHistory();
 
 	const submit = (data: ICreateJobHistorySchema) => {
 		mutate(
-			{ data },
+			{ data: data as StoreEmploymentHistoryRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.job_history_created"));

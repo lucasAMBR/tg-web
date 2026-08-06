@@ -1,4 +1,4 @@
-import type { ProficencyTestModel } from "@/api/generated/models";
+import type { ProficiencyTestResource } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,8 +8,8 @@ import { Eye, Hand, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface ProficiencyTestCardProps {
-    test: ProficencyTestModel;
-    selectTest: (test: ProficencyTestModel) => void; 
+    test: ProficiencyTestResource;
+    selectTest: (test: ProficiencyTestResource) => void; 
 }
 
 export default function ProficiencyTestCard({ test, selectTest }: ProficiencyTestCardProps) {

@@ -1,4 +1,4 @@
-import type { AdditionalCourseModel } from "@/api/generated/models";
+import type { AdditionalCourseResource } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -8,9 +8,9 @@ import { useTranslation } from "react-i18next";
 
 interface CertificationCardProps {
     profileId: string,
-    certificate: AdditionalCourseModel,
-    openUpdate: (cert: AdditionalCourseModel) => void,
-    openDelete: (cert: AdditionalCourseModel) => void
+    certificate: AdditionalCourseResource,
+    openUpdate: (cert: AdditionalCourseResource) => void,
+    openDelete: (cert: AdditionalCourseResource) => void
 }
 
 export default function CertificationCard({

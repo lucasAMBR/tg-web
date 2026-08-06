@@ -4,9 +4,9 @@ import { Field, FieldLabel } from "../ui/field";
 import { Card, CardFooter } from "../ui/card";
 import { UpdateMaxJobRadiusPreferences, type IUpdateMaxJobRadiusPreferences } from "@/schemas/settings/UpdateMaxJobRadiusPreference";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { RecommendationPreferencesModel } from "@/api/generated/models";
+import type { RecommendationPreferenceResource } from "@/api/generated/models";
 import { useQueryClient } from "@tanstack/react-query";
-import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommedationPreferences } from "@/api/generated/recommendation-preferences/recommendation-preferences";
+import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommendationPreferences } from "@/api/generated/recommendation-preference/recommendation-preference";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationDistancesProps{
     profileId: string,
-    initialData: RecommendationPreferencesModel
+    initialData: RecommendationPreferenceResource
 }
 
 export default function CustomRecommendationDistances({ profileId, initialData }: CustomRecommendationDistancesProps) {
@@ -30,7 +30,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
     const {
         mutate: updatePreferences,
         isPending
-    } = useUpdateRecommedationPreferences();
+    } = useUpdateRecommendationPreferences();
 
     const form = useForm<IUpdateMaxJobRadiusPreferences>({
         resolver: zodResolver(UpdateMaxJobRadiusPreferences),
@@ -48,7 +48,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
     const hybridRadius = form.watch('hybrid_jobs_radius');
     
     const sendPreferences = (data: IUpdateMaxJobRadiusPreferences) => {
-        updatePreferences({ profileId: profileId, data }, {
+        updatePreferences({ devProfileId: profileId, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
@@ -63,7 +63,7 @@ export default function CustomRecommendationDistances({ profileId, initialData }
     const valueIsEqualDefault = onSiteRadius === 20 && hybridRadius === 40;
 
     const reset = () => {
-        updatePreferences({ profileId: profileId, data: { 
+        updatePreferences({ devProfileId: profileId, data: { 
             on_site_job_radius: 20, 
             hybrid_jobs_radius: 40
             } 

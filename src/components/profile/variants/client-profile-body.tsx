@@ -1,14 +1,13 @@
 import UnderConstruction from "@/components/global/under-construction";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus } from "lucide-react";
 import { useState } from "react";
 
 interface ClientProfileBodyProps{
     profileId: string
 }
 
-export default function ClientProfileBody({profileId}: ClientProfileBodyProps) {
+export default function ClientProfileBody(_props: ClientProfileBodyProps) {
 
     const [tab, setTab] = useState("posts");
 

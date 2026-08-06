@@ -1,4 +1,4 @@
-import type { AcademicBackgroundModel } from "@/api/generated/models";
+import type { AcademicBackgroundResource } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,9 +31,9 @@ import { useTranslation } from "react-i18next";
 
 interface AcademicBackgroundCardProps {
 	profileId: string;
-	background: AcademicBackgroundModel;
-	openDelete: (bg: AcademicBackgroundModel) => void;
-	openUpdate: (bg: AcademicBackgroundModel) => void;
+	background: AcademicBackgroundResource;
+	openDelete: (bg: AcademicBackgroundResource) => void;
+	openUpdate: (bg: AcademicBackgroundResource) => void;
 }
 export default function AcademicBackgroundCard({
 	background,

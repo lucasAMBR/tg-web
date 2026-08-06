@@ -1,6 +1,6 @@
-import { getIndexAdditionalCoursesQueryKey, useStoreAdditionalCourse } from "@/api/generated/additional-courses-doc/additional-courses-doc";
+import { getIndexAdditionalCoursesQueryKey, useStoreAdditionalCourse } from "@/api/generated/additional-course/additional-course";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card, } from "@/components/ui/card";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

@@ -1,4 +1,4 @@
-import { useEnumOperationalSegments } from "@/api/generated/enums/enums";
+import { useEnumOperationalSegments } from "@/api/generated/enum/enum";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,6 @@ export function Filters() {
 
     const {
         search,
-        operational_segment,
         setFilterParams,
     } = useIndexCompanyParams();
 

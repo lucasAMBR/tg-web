@@ -1,4 +1,4 @@
-import { useShowDevProfile } from '@/api/generated/profiles-doc/profiles-doc';
+import { useShowDevProfile } from '@/api/generated/profile/profile';
 import DevProfileContent from '@/components/profile/variants/dev-profile-body';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';

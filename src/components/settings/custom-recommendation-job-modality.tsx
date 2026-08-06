@@ -1,9 +1,9 @@
-import type { RecommendationPreferencesModel } from "@/api/generated/models";
+import type { RecommendationPreferenceResource } from "@/api/generated/models";
 import { Card, CardFooter } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldContent, FieldDescription, FieldTitle } from "../ui/field";
 import { UpdateJobModalityPreferences, type IUpdateJobModalityPreferences } from "@/schemas/settings/UpdateJobModalityPreferences";
-import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommedationPreferences } from "@/api/generated/recommendation-preferences/recommendation-preferences";
+import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommendationPreferences } from "@/api/generated/recommendation-preference/recommendation-preference";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CustomToaster } from "@/utils/custom-toaster";
@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationJobModality {
     profileId: string,
-    initialData: RecommendationPreferencesModel
+    initialData: RecommendationPreferenceResource
 }
 
 export default function CustomRecommendationJobModality({ profileId, initialData }: CustomRecommendationJobModality) {
@@ -30,7 +30,7 @@ export default function CustomRecommendationJobModality({ profileId, initialData
     const {
         mutate: updatePreferences,
         isPending
-    } = useUpdateRecommedationPreferences();
+    } = useUpdateRecommendationPreferences();
 
     const form = useForm<IUpdateJobModalityPreferences>({
         resolver: zodResolver(UpdateJobModalityPreferences),
@@ -53,7 +53,7 @@ export default function CustomRecommendationJobModality({ profileId, initialData
     const valuesAreEqualToDefault = onSite === true && hybrid === true && remote === true; 
 
     const sendPreferences = (data: IUpdateJobModalityPreferences) => {
-        updatePreferences({ profileId: profileId, data }, {
+        updatePreferences({ devProfileId: profileId, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
@@ -66,7 +66,7 @@ export default function CustomRecommendationJobModality({ profileId, initialData
     }
 
     const reset = () => {
-        updatePreferences({ profileId: profileId, data: {
+        updatePreferences({ devProfileId: profileId, data: {
             allow_on_site: true,
             allow_hybrid: true,
             allow_remote: true,

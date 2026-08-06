@@ -1,5 +1,5 @@
-import { getIndexAdditionalCoursesQueryKey, useDeleteAdditionalCourse } from "@/api/generated/additional-courses-doc/additional-courses-doc";
-import type { AdditionalCourseModel } from "@/api/generated/models";
+import { getIndexAdditionalCoursesQueryKey, useDeleteAdditionalCourse } from "@/api/generated/additional-course/additional-course";
+import type { AdditionalCourseResource } from "@/api/generated/models";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -9,7 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 interface DeleteCertificationModalProps{
-    certificate: AdditionalCourseModel | null
+    certificate: AdditionalCourseResource | null
     profileId: string,
     closeModal: () => void,
     open: boolean,

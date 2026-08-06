@@ -1,4 +1,4 @@
-import type { HardSkillModel } from "@/api/generated/models";
+import type { HardSkillResource } from "@/api/generated/models";
 import { Card } from "../../ui/card";
 import { Badge } from "../../ui/badge";
 import {
@@ -15,9 +15,9 @@ import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/stores/auth-store";
 
 interface HardSkillCardProps {
-	hardSkill: HardSkillModel;
-	openDelete: (hardSkill: HardSkillModel) => void;
-	openUpdate: (hardSkill: HardSkillModel) => void;
+	hardSkill: HardSkillResource;
+	openDelete: (hardSkill: HardSkillResource) => void;
+	openUpdate: (hardSkill: HardSkillResource) => void;
 }
 
 export default function HardSkillCard({

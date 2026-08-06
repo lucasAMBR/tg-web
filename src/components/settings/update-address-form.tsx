@@ -12,7 +12,7 @@ import {
     useAuthUserAddress,
     useStoreAddress,
     useUpdateAddress,
-} from "@/api/generated/addresses-doc/addresses-doc";
+} from "@/api/generated/address/address";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useQueryClient } from "@tanstack/react-query";
 import { onError } from "@/utils/on-error";
@@ -20,10 +20,10 @@ import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { Spinner } from "../ui/spinner";
 import { useTranslation } from "react-i18next";
-import type { AddressModel } from "@/api/generated/models";
+import type { AddressResource } from "@/api/generated/models";
 
 type UpdateAddressFormProps = {
-    initialAddress?: AddressModel | null;
+    initialAddress?: AddressResource | null;
     onSuccess?: () => void;
 };
 
@@ -120,7 +120,7 @@ export default function UpdateAddressForm({
 
     const onSubmit = (formData: IRegisterAddressSchema) => {
         if (hasAddress && savedAddress) {
-            update({ addressId: savedAddress.id, data: formData }, mutationOptions(true));
+            update({ id: savedAddress.id, data: formData }, mutationOptions(true));
             return;
         }
 

@@ -1,4 +1,4 @@
-import { useShowCompany } from '@/api/generated/profiles-doc/profiles-doc';
+import { useShowCompany } from '@/api/generated/profile/profile';
 import CompanyProfileBody from '@/components/profile/variants/company-profile-body';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';

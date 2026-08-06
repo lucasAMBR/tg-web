@@ -2,7 +2,7 @@ import {
 	getListDevSoftSkillQueryKey,
 	useIndexSoftSkill,
 	useStoreDevSoftSkill,
-} from "@/api/generated/soft-skill-doc/soft-skill-doc";
+} from "@/api/generated/soft-skill/soft-skill";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -46,7 +46,6 @@ interface RegisterSoftSkillModalProps {
 
 export default function RegisterSoftSkillModal({
 	profileId,
-	children,
 }: PropsWithChildren<RegisterSoftSkillModalProps>) {
 	const { t } = useTranslation();
 	const queryClient = useQueryClient();
@@ -61,9 +60,9 @@ export default function RegisterSoftSkillModal({
 		},
 	});
 
-	const { data: baseSoftSkills, isLoading } = useIndexSoftSkill();
+	const { data: baseSoftSkills } = useIndexSoftSkill();
 
-	const { mutate, isPending } = useStoreDevSoftSkill();
+	const { mutate } = useStoreDevSoftSkill();
 
 	const softSkillList = baseSoftSkills?.data ?? [];
 
@@ -176,8 +175,8 @@ export default function RegisterSoftSkillModal({
 						<>
 							<Card className="p-3">
 								<div key={softSkill.id}>
-									<h3 className="font-bold text-primary">{t(softSkill.i18n_name_key)}</h3>
-									<p>{t(softSkill.i18n_description_key)}</p>
+									<h3 className="font-bold text-primary">{t(softSkill.i18n_name_key ?? "")}</h3>
+									<p>{t(softSkill.i18n_description_key ?? "")}</p>
 								</div>
 
 								<Controller
@@ -203,10 +202,10 @@ export default function RegisterSoftSkillModal({
 															<FieldContent>
 																<FieldTitle className="">
 																	<Badge>{response.evaluation_weight}</Badge>{" "}
-																	{t(response.i18n_title_key)}
+																	{t(response.i18n_title_key ?? "")}
 																</FieldTitle>
 																<FieldDescription>
-																	{t(response.i18n_description_key)}
+																	{t(response.i18n_description_key ?? "")}
 																</FieldDescription>
 															</FieldContent>
 

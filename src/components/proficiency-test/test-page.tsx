@@ -2,7 +2,7 @@ import {
 	useListTestQuestions,
 	useSubmitProficiencyTest,
 } from "@/api/generated/proficiency-test/proficiency-test";
-import type { ListTestQuestions200DataItemItem } from "@/api/generated/models";
+import type { QuestionResource } from "@/api/generated/models";
 import { SubmitProficiencyTestSchema } from "@/schemas/proficiency-test/SubmitProficiencyTestSchema";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
@@ -90,7 +90,7 @@ export default function TestPage({ testId }: TestPageProps) {
 		.slice(0, pageIndex)
 		.reduce((total, page) => total + page.length, 0);
 
-	const questionText = (question: ListTestQuestions200DataItemItem) => {
+	const questionText = (question: QuestionResource) => {
 		if (question.translation_status !== "translated") return question.question;
 
 		return (
@@ -100,7 +100,7 @@ export default function TestPage({ testId }: TestPageProps) {
 	};
 
 	const responseText = (
-		response: ListTestQuestions200DataItemItem["responses"][number],
+		response: QuestionResource["responses"][number],
 	) => {
 		if (response.translation_status !== "translated") return response.response;
 

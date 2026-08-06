@@ -4,7 +4,7 @@ import Sidebar from "@/components/global/sidebar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const Route = createFileRoute("/(private)/(home)")({

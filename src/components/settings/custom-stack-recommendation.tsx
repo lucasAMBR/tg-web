@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
 import useDebounce from "@/hooks/use-debounce";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import { useIndexLanguage } from "@/api/generated/language/language";
 
 // UI Components
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
@@ -15,9 +14,9 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Card, CardFooter } from "@/components/ui/card";
 import { CheckIcon, ChevronsUpDownIcon, Loader2, RotateCcw, Save, XIcon } from "lucide-react";
 import { UpdateFlexibilityPreferences, type IUpdateFlexibilityPreferences } from "@/schemas/settings/UpdateStackFlexibilityPreference";
-import type { RecommendationPreferencesModel } from "@/api/generated/models";
+import type { RecommendationPreferenceResource } from "@/api/generated/models";
 import { useQueryClient } from "@tanstack/react-query";
-import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommedationPreferences } from "@/api/generated/recommendation-preferences/recommendation-preferences";
+import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommendationPreferences } from "@/api/generated/recommendation-preference/recommendation-preference";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
@@ -27,7 +26,7 @@ import { useTranslation } from "react-i18next";
 
 interface CustomStackRecommendationProps{
     profileId: string,
-    initialData: RecommendationPreferencesModel
+    initialData: RecommendationPreferenceResource
 }
 
 export default function CustomStackRecommendation({ profileId, initialData }: CustomStackRecommendationProps) {
@@ -39,7 +38,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
     const {
         mutate: updatePreferences,
         isPending
-    } = useUpdateRecommedationPreferences();
+    } = useUpdateRecommendationPreferences();
     
     const [open, setOpen] = useState<boolean>(false);
     const [languageSearchTerm, setLanguageSearchTerm] = useState<string>("");
@@ -74,7 +73,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
     const languagesList = languages?.data.data ?? [];
 
     const sendPreferences = (data: IUpdateFlexibilityPreferences) => {
-        updatePreferences({ profileId: profileId, data }, {
+        updatePreferences({ devProfileId: profileId, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
@@ -89,7 +88,7 @@ export default function CustomStackRecommendation({ profileId, initialData }: Cu
     }
 
     const reset = () => {
-        updatePreferences({ profileId: profileId, data: {
+        updatePreferences({ devProfileId: profileId, data: {
             allow_stack_flexibility: true,
             languages_blacklist: []
         } }, {

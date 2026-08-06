@@ -9,7 +9,6 @@ import {
 } from "@/utils/route-guards";
 import { createFileRoute } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
 import { Logo } from "@/components/global/Logo";
 
@@ -27,7 +26,6 @@ export const Route = createFileRoute("/(private)/create/profile/client")({
 
 function RouteComponent() {
 	const { t } = useTranslation();
-	const { theme } = useTheme();
 
 	return (
 		<div className="w-screen h-screen flex">

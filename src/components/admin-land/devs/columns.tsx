@@ -1,5 +1,5 @@
-import type { DevProfileModel } from "@/api/generated/models";
-import { getIndexDevProfileQueryKey } from "@/api/generated/profiles-doc/profiles-doc";
+import type { DevProfileResource } from "@/api/generated/models";
+import { getIndexDevProfileQueryKey } from "@/api/generated/profile/profile";
 import { useUserBlockAccess, useUserUnblockAccess } from "@/api/generated/user/user";
 import AdminUpdateDevProfileDialog from "@/components/admin-land/devs/admin-update-dev-profile-dialog";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { AxiosError } from "axios";
-import { CheckIcon, Circle, CircleDot, CircleEllipsis, CircleSmall, EditIcon, EllipsisVertical, EyeIcon, LockIcon, LockOpenIcon } from "lucide-react";
+import { CircleSmall, EditIcon, EllipsisVertical, EyeIcon, LockIcon, LockOpenIcon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +40,7 @@ const TranslatedStatusCell = ({ status }: { status: boolean }) => {
     </div>
 }
 
-const DevActionsCell = ({ dev }: { dev: DevProfileModel }) => {
+const DevActionsCell = ({ dev }: { dev: DevProfileResource }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [editOpen, setEditOpen] = useState(false);
@@ -118,7 +118,7 @@ const DevActionsCell = ({ dev }: { dev: DevProfileModel }) => {
     );
 };
 
-export const columns: ColumnDef<DevProfileModel>[] = [
+export const columns: ColumnDef<DevProfileResource>[] = [
     {
         header: "admin_land.devs.table.name",
         accessorKey: "name",

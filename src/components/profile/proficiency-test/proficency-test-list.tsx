@@ -1,8 +1,8 @@
-import { useIndexProficencyTest } from "@/api/generated/proficiency-test/proficiency-test";
+import { useIndexProficiencyTest } from "@/api/generated/proficiency-test/proficiency-test";
 import { useProficiencyTestParams } from "@/hooks/filters/use-proficiency-test-params";
 import ProficiencyTestCard from "./proficiency-test-card";
 import { useState } from "react";
-import type { ProficencyTestModel } from "@/api/generated/models";
+import type { ProficiencyTestResource } from "@/api/generated/models";
 import ProficiencyTestView from "./proficiency-test-view";
 
 interface ProficiencyTestListProps {
@@ -15,13 +15,11 @@ export default function ProficiencyTestList({ profileId }: ProficiencyTestListPr
         page,
         perPage,
         search,
-        setFilterParams
     } = useProficiencyTestParams();
 
     const { 
         data,
-        isLoading 
-    } = useIndexProficencyTest({
+    } = useIndexProficiencyTest({
         page: page,
         per_page: perPage,
         search: search,
@@ -30,7 +28,7 @@ export default function ProficiencyTestList({ profileId }: ProficiencyTestListPr
 
     const proficiencyTestList = data?.data.data ?? [];
 
-    const [ selectedTest, setSelectedTest ] = useState<ProficencyTestModel | null>(null)
+    const [ selectedTest, setSelectedTest ] = useState<ProficiencyTestResource | null>(null)
 
     const clearSelection = () => {
         setSelectedTest(null)

@@ -5,7 +5,8 @@ import { columns } from "./columns";
 import DefaultPagination, { type GenericPagination } from "@/components/global/pagination";
 import { useIndexDevParams } from "@/hooks/filters/use-index-dev-params";
 import useDebounce from "@/hooks/use-debounce";
-import { useIndexDevProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useIndexDevProfile } from "@/api/generated/profile/profile";
+import type { DevSpecialtyEnum, SeniorityLevelEnum } from "@/api/generated/models";
 
 export function DevTable() {
 
@@ -28,8 +29,8 @@ export function DevTable() {
         page: page,
         per_page: perPage,
         search: debouncedSearch,
-        seniority_level: seniority_level, 
-        specialty: specialty, 
+        seniority_level: (seniority_level || null) as SeniorityLevelEnum | null,
+        specialty: (specialty || null) as DevSpecialtyEnum | null,
         open_to_relocation: open_to_relocation === null ? undefined : open_to_relocation, 
         open_to_work: open_to_work === null ? undefined : open_to_work,
     });

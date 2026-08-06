@@ -1,7 +1,6 @@
 import UnderConstruction from "@/components/global/under-construction";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CompanyProjectTab from "../company-project/company-project-tab";
 import CompanyStackList from "../company-stack/company-stack-list";

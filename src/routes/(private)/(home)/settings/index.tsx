@@ -1,5 +1,5 @@
-import type { RecommendationPreferencesModel } from '@/api/generated/models';
-import { useGetDevRecommendationPreference } from '@/api/generated/recommendation-preferences/recommendation-preferences';
+import type { RecommendationPreferenceResource } from '@/api/generated/models';
+import { useGetDevRecommendationPreference } from '@/api/generated/recommendation-preference/recommendation-preference';
 import ThemeToggle from '@/components/global/theme-toggle-button';
 import CompanyUpdateProfileForm from '@/components/settings/company-update-profile-form';
 import CustomRecommendationDistances from '@/components/settings/custom-recommendation-distances';
@@ -207,7 +207,7 @@ function RouteComponent() {
                       </div>
                       <CustomRecommendationJobType 
                         profileId={user?.dev_profile?.id as string} 
-                        initialData={preferences?.data as RecommendationPreferencesModel}
+                        initialData={preferences?.data as RecommendationPreferenceResource}
                       />
                     </div>
 
@@ -222,7 +222,7 @@ function RouteComponent() {
                       </div>
                       <CustomRecommendationJobModality 
                         profileId={user?.dev_profile?.id as string} 
-                        initialData={preferences?.data as RecommendationPreferencesModel}
+                        initialData={preferences?.data as RecommendationPreferenceResource}
                       />
                     </div>
                     <Separator className='my-6'/>
@@ -235,7 +235,7 @@ function RouteComponent() {
                       </div>
                       <CustomRecommendationDistances 
                         profileId={user?.dev_profile?.id as string} 
-                        initialData={preferences?.data as RecommendationPreferencesModel}
+                        initialData={preferences?.data as RecommendationPreferenceResource}
                       />
                     </div>
                     <Separator className='my-6'/>
@@ -246,7 +246,7 @@ function RouteComponent() {
                       </div>
                       <CustomStackRecommendation 
                         profileId={user?.dev_profile?.id as string} 
-                        initialData={preferences?.data as RecommendationPreferencesModel}
+                        initialData={preferences?.data as RecommendationPreferenceResource}
                       />
                     </div>
                   </Card>

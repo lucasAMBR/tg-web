@@ -1,5 +1,5 @@
-import { getIndexCompanyProjectQueryKey, useStoreCompanyProject } from "@/api/generated/company-projects-doc/company-projects-doc";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import { getIndexCompanyProjectQueryKey, useStoreCompanyProject } from "@/api/generated/company-project/company-project";
+import { useIndexLanguage } from "@/api/generated/language/language";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

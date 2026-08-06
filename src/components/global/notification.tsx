@@ -18,13 +18,13 @@ import {
 import { useAuthStore } from "@/stores/auth-store"
 import { getProfileId, getRole } from "@/utils/role-helper"
 import { useNotifications } from "@/hooks/use-notifications"
-import type { NotificationModel } from "@/api/generated/models"
+import type { NotificationResource } from "@/api/generated/models"
 import { useTranslation } from "react-i18next"
 
 const getToken = () => useAuthStore.getState().token;
 
 interface NotificationListProps {
-    items: NotificationModel[];
+    items: NotificationResource[];
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
     onReachEnd: () => void;
@@ -53,7 +53,7 @@ function NotificationList({ items, hasNextPage, isFetchingNextPage, onReachEnd }
         return () => observer.disconnect();
     }, [hasNextPage, isFetchingNextPage, onReachEnd, items.length]);
 
-    const getContent = (notification: NotificationModel) => {
+    const getContent = (notification: NotificationResource) => {
         const hasTranslation = notification.translation_status === "translated";
 
         if (!hasTranslation) {

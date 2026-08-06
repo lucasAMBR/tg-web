@@ -1,4 +1,4 @@
-import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enum/enum";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,10 +16,6 @@ export function Filters() {
 
     const {
         search,
-        seniority_level,
-        specialty,
-        open_to_relocation,
-        open_to_work,
         setFilterParams
     } = useIndexDevParams();
 

@@ -1,20 +1,20 @@
 import type { UserRole } from "@/types/AuthenticatedUser";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { type GetNotificationParams, type NotificationModel } from "@/api/generated/models";
-import { getNotification } from "@/api/generated/notifications/notifications";
+import { type IndexNotificationParams, type NotificationResource } from "@/api/generated/models";
+import { indexNotification } from "@/api/generated/notification/notification";
 import { getEcho } from "@/lib/echo";
 import { getBroadcastProfileType } from "@/utils/role-helper";
 
 const PER_PAGE = 10;
 
-type NotificationPageParams = GetNotificationParams & {
+type NotificationPageParams = IndexNotificationParams & {
     page?: number;
     per_page?: number;
 };
 
 export function useNotifications(profileType: UserRole | null | undefined, profileId: string | null, getToken: () => string | null) {
-    const [liveNotifications, setLiveNotifications] = useState<NotificationModel[]>([]);
+    const [liveNotifications, setLiveNotifications] = useState<NotificationResource[]>([]);
 
     const {
         data,
@@ -27,7 +27,7 @@ export function useNotifications(profileType: UserRole | null | undefined, profi
         queryFn: ({ pageParam, signal }) => {
             const params: NotificationPageParams = { page: pageParam, per_page: PER_PAGE };
 
-            return getNotification(params, signal);
+            return indexNotification(params, signal);
         },
         initialPageParam: 1,
         getNextPageParam: (lastPage) => {
@@ -60,7 +60,7 @@ export function useNotifications(profileType: UserRole | null | undefined, profi
 
         const channelName = `notifications.${channelType}.${profileId}`;
 
-        echo.private(channelName).listen('NotificationCreated', (payload: { notification: NotificationModel }) => {
+        echo.private(channelName).listen('NotificationCreated', (payload: { notification: NotificationResource }) => {
             setLiveNotifications((prev) => [payload.notification, ...prev]);
         });
 

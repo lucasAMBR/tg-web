@@ -46,7 +46,7 @@ function RouteComponent() {
     if (!canVisualize || hasRegisteredEntry.current) return;
 
     hasRegisteredEntry.current = true;
-    visualizeTest({ testId: id, data: { type: "entry" } });
+    visualizeTest({ id, data: { type: "entry" } });
   }, [canVisualize, id, visualizeTest]);
 
   useEffect(() => {

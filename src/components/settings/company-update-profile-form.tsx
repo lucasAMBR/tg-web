@@ -1,3 +1,4 @@
+import type { UpdateCompanyProfileRequest } from "@/api/generated/models";
 import { CreateCompanyProfileSchema, type ICreateCompanyProfileSchema } from "@/schemas/profile/CreateCompanyProfileSchema";
 import { useAuthStore } from "@/stores/auth-store";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,19 +17,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
 import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
-import { useEnumOperationalSegments } from "@/api/generated/enums/enums";
-import { useUpdateCompanyProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useEnumOperationalSegments } from "@/api/generated/enum/enum";
+import { useUpdateCompanyProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import type { CompanyProfileModel } from "@/api/generated/models";
+import type { CompanyProfileResource } from "@/api/generated/models";
 
 type CompanyUpdateProfileFormProps = {
 	profile?: Pick<
-		CompanyProfileModel,
+		CompanyProfileResource,
 		"id" | "name" | "bio" | "phone" | "cnpj" | "fouding_date" | "operational_segment"
 	>;
 	onSuccess?: () => void;
@@ -76,7 +77,7 @@ export default function CompanyUpdateProfileForm({
 
 	const update = (data: ICreateCompanyProfileSchema) => {
 		updateProfile(
-			{ company: profile?.id as string, data },
+			{ id: profile?.id as string, data: data as UpdateCompanyProfileRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.profile_company_updated"));

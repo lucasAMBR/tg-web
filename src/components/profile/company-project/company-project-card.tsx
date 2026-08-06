@@ -1,4 +1,4 @@
-import type { CompanyProjectModel } from "@/api/generated/models";
+import type { CompanyProjectResource } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,9 +10,9 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CompanyProjectCardProps{
-    project: CompanyProjectModel,
-    openDelete: (project: CompanyProjectModel) => void,
-    openUpdate: (project: CompanyProjectModel) => void
+    project: CompanyProjectResource,
+    openDelete: (project: CompanyProjectResource) => void,
+    openUpdate: (project: CompanyProjectResource) => void
 }
 export default function CompanyProjectCard({ project, openDelete, openUpdate }: CompanyProjectCardProps) {
 
@@ -125,7 +125,7 @@ export default function CompanyProjectCard({ project, openDelete, openUpdate }: 
                         : project.description_en}
                 </CardDescription>
                 <div className="flex gap-1">
-                    {project.languages.map((lang) => (
+                    {project.languages?.map((lang) => (
                         <Badge className="bg-accent text-accent-foreground">{lang.name}</Badge>
                     ))}
                 </div>

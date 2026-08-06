@@ -1,4 +1,4 @@
-import { useIndexEmploymentHistory } from "@/api/generated/employment-history-doc/employment-history-doc";
+import { useIndexEmploymentHistory } from "@/api/generated/employment-history/employment-history";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -17,7 +17,7 @@ import DefaultPagination, {
 	type GenericPagination,
 } from "@/components/global/pagination";
 import { useState } from "react";
-import type { EmploymentHistoryModel } from "@/api/generated/models";
+import type { EmploymentHistoryResource } from "@/api/generated/models";
 import DeletejobHistoryModal from "./delete-job-history-modal";
 import UpdateJobHistoryModal from "./update-job-history-modal";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 		setFilterParams({ page: 1, perPage: 10, search: "" });
 	};
 
-	const { data: employmentHistory, isPending } = useIndexEmploymentHistory({
+	const { data: employmentHistory } = useIndexEmploymentHistory({
 		profile_id: profileId,
 		page,
 		per_page: perPage,
@@ -46,13 +46,13 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 
 	const employmentList = employmentHistory?.data.data ?? [];
 
-	const [selectedJob, setSelectedJob] = useState<EmploymentHistoryModel | null>(
+	const [selectedJob, setSelectedJob] = useState<EmploymentHistoryResource | null>(
 		null,
 	);
 
 	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 
-	const openDeleteModal = (job: EmploymentHistoryModel) => {
+	const openDeleteModal = (job: EmploymentHistoryResource) => {
 		setSelectedJob(job);
 		setDeleteModalIsOpen(true);
 	};
@@ -64,7 +64,7 @@ export default function JobHistoryList({ profileId }: JobHistoryListProps) {
 
 	const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
 
-	const openUpdateModal = (job: EmploymentHistoryModel) => {
+	const openUpdateModal = (job: EmploymentHistoryResource) => {
 		setSelectedJob(job);
 		setUpdateModalIsOpen(true);
 	};

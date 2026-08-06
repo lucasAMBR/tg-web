@@ -1,8 +1,8 @@
 import {
 	getIndexAcademicBackgroundQueryKey,
 	useDeleteAcademicBackground,
-} from "@/api/generated/academic-background-doc/academic-background-doc";
-import type { AcademicBackgroundModel } from "@/api/generated/models";
+} from "@/api/generated/academic-background/academic-background";
+import type { AcademicBackgroundResource } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogContent,
@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 
 interface DeleteAcademicBackgroundModalProps {
 	profileId: string;
-	bg: AcademicBackgroundModel | null;
+	bg: AcademicBackgroundResource | null;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 	closeModal: () => void;

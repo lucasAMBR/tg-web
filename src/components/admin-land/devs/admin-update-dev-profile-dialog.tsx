@@ -1,5 +1,5 @@
-import type { DevProfileModel } from "@/api/generated/models";
-import { getIndexDevProfileQueryKey } from "@/api/generated/profiles-doc/profiles-doc";
+import type { DevProfileResource } from "@/api/generated/models";
+import { getIndexDevProfileQueryKey } from "@/api/generated/profile/profile";
 import DevUpdateProfileForm from "@/components/settings/dev-update-profile-form";
 import UpdateAddressForm from "@/components/settings/update-address-form";
 import {
@@ -14,7 +14,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 interface AdminUpdateDevProfileDialogProps {
-	dev: DevProfileModel | null;
+	dev: DevProfileResource | null;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }

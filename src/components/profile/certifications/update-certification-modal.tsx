@@ -1,5 +1,5 @@
-import { getIndexAdditionalCoursesQueryKey, useUpdateAdditionalCourse } from "@/api/generated/additional-courses-doc/additional-courses-doc";
-import type { AdditionalCourseModel } from "@/api/generated/models";
+import { getIndexAdditionalCoursesQueryKey, useUpdateAdditionalCourse } from "@/api/generated/additional-course/additional-course";
+import type { AdditionalCourseResource } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 
 interface UpdateCertificationModalModal{
     profileId: string,
-    certificate: AdditionalCourseModel | null,
+    certificate: AdditionalCourseResource | null,
     open: boolean,
     openChange: (open: boolean) => void,
     closeModal: () => void

@@ -1,4 +1,4 @@
-import { useListDevSoftSkill } from "@/api/generated/soft-skill-doc/soft-skill-doc";
+import { useListDevSoftSkill } from "@/api/generated/soft-skill/soft-skill";
 
 import {
 	Empty,

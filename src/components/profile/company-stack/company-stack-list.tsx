@@ -1,4 +1,4 @@
-import { useGetCompanyStack } from "@/api/generated/company-stack/company-stack"
+import { useGetCompanyStack } from "@/api/generated/profile/profile"
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";

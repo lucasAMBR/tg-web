@@ -1,9 +1,10 @@
+import type { UpdateAcademicBackgroundRequest } from "@/api/generated/models";
 import {
 	getIndexAcademicBackgroundQueryKey,
 	useUpdateAcademicBackground,
-} from "@/api/generated/academic-background-doc/academic-background-doc";
-import { useEnumDegreeLevel } from "@/api/generated/enums/enums";
-import type { AcademicBackgroundModel } from "@/api/generated/models";
+} from "@/api/generated/academic-background/academic-background";
+import { useEnumDegreeLevel } from "@/api/generated/enum/enum";
+import type { AcademicBackgroundResource } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -44,12 +45,12 @@ interface UpdateAcademicBackgroundModalProps {
 	open: boolean;
 	openChange: (open: boolean) => void;
 	closeModal: () => void;
-	bg: AcademicBackgroundModel | null;
+	bg: AcademicBackgroundResource | null;
 }
 
 interface UpdateAcademicBackgroundModalContentProps
 	extends Omit<UpdateAcademicBackgroundModalProps, "bg"> {
-	bg: AcademicBackgroundModel;
+	bg: AcademicBackgroundResource;
 }
 
 export default function UpdateAcademicBackgroundModal(
@@ -110,7 +111,7 @@ function UpdateAcademicBackgroundModalContent({
 		if (!bg) return;
 
 		update(
-			{ id: bg.id, data },
+			{ id: bg.id, data: data as UpdateAcademicBackgroundRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(

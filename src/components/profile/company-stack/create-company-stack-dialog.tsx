@@ -1,6 +1,6 @@
-import { getGetCompanyStackQueryKey, useSyncCompanyStack } from "@/api/generated/company-stack/company-stack";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
-import type { LanguageModel } from "@/api/generated/models";
+import { getGetCompanyStackQueryKey, useSyncCompanyStack } from "@/api/generated/profile/profile";
+import { useIndexLanguage } from "@/api/generated/language/language";
+import type { LanguageResource } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -25,7 +25,7 @@ import { useTranslation } from "react-i18next";
 interface CreateCompanyStackDialogProps {
     profileId: string
     open: boolean
-    initialData?: LanguageModel[]
+    initialData?: LanguageResource[]
     openChange: (open: boolean) => void
 }
 
@@ -71,7 +71,7 @@ export default function CreateCompanyStackDialog({ profileId, initialData, open,
     }, [open, initialData, form]);
 
     const handleSync = (data: ISyncCompanyStack) => {
-        syncStack({ company: profileId, data }, {
+        syncStack({ id: profileId, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.company_stack_updated"));
                 queryClient.invalidateQueries({ queryKey: getGetCompanyStackQueryKey(profileId) });

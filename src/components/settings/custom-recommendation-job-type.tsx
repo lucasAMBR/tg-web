@@ -1,4 +1,4 @@
-import type { RecommendationPreferencesModel } from "@/api/generated/models";
+import type { RecommendationPreferenceResource } from "@/api/generated/models";
 import { Card, CardFooter } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldContent, FieldDescription, FieldTitle } from "../ui/field";
@@ -7,7 +7,7 @@ import { UpdateJobTypePreferences, type IUpdateJobTypePreferences } from "@/sche
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { RotateCcw, Save } from "lucide-react";
-import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommedationPreferences } from "@/api/generated/recommendation-preferences/recommendation-preferences";
+import { getGetDevRecommendationPreferenceQueryKey, useUpdateRecommendationPreferences } from "@/api/generated/recommendation-preference/recommendation-preference";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useQueryClient } from "@tanstack/react-query";
 import { onError } from "@/utils/on-error";
@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 interface CustomRecommendationJobTypeProps{
     profileId: string,
-    initialData: RecommendationPreferencesModel
+    initialData: RecommendationPreferenceResource
 }
 
 export default function CustomRecommendationJobType({ profileId, initialData }: CustomRecommendationJobTypeProps) {
@@ -30,7 +30,7 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
     const {
         mutate: updatePreferences,
         isPending
-    } = useUpdateRecommedationPreferences();
+    } = useUpdateRecommendationPreferences();
 
     const form = useForm<IUpdateJobTypePreferences>({
         resolver: zodResolver(UpdateJobTypePreferences),
@@ -53,7 +53,7 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
     const valuesAreEqualToDefault = clt === true && contractor === true && internship === false; 
 
     const sendPreferences = (data: IUpdateJobTypePreferences) => {
-        updatePreferences({ profileId: profileId, data }, {
+        updatePreferences({ devProfileId: profileId, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.recommendation_preferences_updated"));
 
@@ -66,7 +66,7 @@ export default function CustomRecommendationJobType({ profileId, initialData }: 
     }
 
     const reset = () => {
-        updatePreferences({ profileId: profileId, data: {
+        updatePreferences({ devProfileId: profileId, data: {
             allow_clt: true,
             allow_contractor: true,
             allow_internship: false

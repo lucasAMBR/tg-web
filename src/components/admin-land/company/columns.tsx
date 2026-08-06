@@ -1,5 +1,5 @@
-import type { AddressModel, CompanyProfileModel } from "@/api/generated/models";
-import { getIndexCompanyProfileQueryKey } from "@/api/generated/profiles-doc/profiles-doc";
+import type { AddressResource, CompanyProfileResource } from "@/api/generated/models";
+import { getIndexCompanyProfileQueryKey } from "@/api/generated/profile/profile";
 import { useUserBlockAccess, useUserUnblockAccess } from "@/api/generated/user/user";
 import AdminUpdateCompanyProfileDialog from "@/components/admin-land/company/admin-update-company-profile-dialog";
 import { Badge } from "@/components/ui/badge";
@@ -17,9 +17,9 @@ import { CircleSmall, EditIcon, EllipsisVertical, EyeIcon, LockIcon, LockOpenIco
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-type AdminCompanyProfile = CompanyProfileModel & {
+export type AdminCompanyProfile = CompanyProfileResource & {
 	is_blocked?: boolean;
-	address?: AddressModel | null;
+	address?: AddressResource | null;
 };
 
 const TranslatedOperationalSegmentCell = ({ segment }: { segment: string }) => {

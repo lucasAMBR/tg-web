@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { AxiosError } from "axios";
 
-import { useEnumQuestionStackBySpecialty } from "@/api/generated/enums/enums";
+import { useEnumQuestionStackBySpecialty } from "@/api/generated/enum/enum";
 import { useSolicitateProficiencyTest } from "@/api/generated/proficiency-test/proficiency-test";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
@@ -67,7 +67,7 @@ export default function ProficiencyTestSolicitationCard({
 
 		requestTest(
 			{
-				dev: profileId,
+				devProfileId: profileId,
 				data: {
 					...(hasFrontend ? { frontend_category: frontendStack } : {}),
 					...(hasBackend ? { backend_category: backendStack } : {}),

@@ -1,4 +1,4 @@
-import type { EmploymentHistoryModel } from "@/api/generated/models";
+import type { EmploymentHistoryResource } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,9 +23,9 @@ import { useAuthStore } from "@/stores/auth-store";
 
 interface JobHistoryCardProps {
 	profileId: string;
-	job: EmploymentHistoryModel;
-	openDelete: (job: EmploymentHistoryModel) => void;
-	openUpdate: (job: EmploymentHistoryModel) => void;
+	job: EmploymentHistoryResource;
+	openDelete: (job: EmploymentHistoryResource) => void;
+	openUpdate: (job: EmploymentHistoryResource) => void;
 }
 
 export default function JobHistoryCard({

@@ -2,7 +2,7 @@ import { useShowProficiencyTest } from '@/api/generated/proficiency-test/profici
 import { Logo } from '@/components/global/Logo';
 import ThemeToggle from '@/components/global/theme-toggle-button';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, } from '@/components/ui/card';
 import { useAuthStore } from '@/stores/auth-store';
 import { env } from '@/utils/env';
 import { ensureAuthenticated, ensureRoutePermissions } from '@/utils/route-guards';

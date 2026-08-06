@@ -48,7 +48,7 @@ export default function UpdateEmailForm(){
     } = useUpdateUser();
 
     const handleUpdate = (data: IEmailChangeSchema) => {
-        mutate({user: user?.id as string, data}, {
+        mutate({id: user?.id as string, data}, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.email_updated"));
                 hydrateUser()

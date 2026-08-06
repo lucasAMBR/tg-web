@@ -2,7 +2,7 @@ import {
 	getIndexHardSkillQueryKey,
 	useDeleteHardSkill,
 	useIndexHardSkill,
-} from "@/api/generated/hard-skill-doc/hard-skill-doc";
+} from "@/api/generated/hard-skill/hard-skill";
 import { Spinner } from "../../ui/spinner";
 import HardSkillCard from "./hard-skill-card";
 import {
@@ -16,7 +16,7 @@ import { Button } from "../../ui/button";
 import { Card } from "../../ui/card";
 import CreateHardSkillModal from "./create_hard-skill-dialog";
 import { useState } from "react";
-import type { HardSkillModel } from "@/api/generated/models";
+import type { HardSkillResource } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -45,12 +45,12 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 	const queryClient = useQueryClient();
 
 	const [selectedHardSkill, setSelectedhardSkill] =
-		useState<HardSkillModel | null>(null);
+		useState<HardSkillResource | null>(null);
 
 	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 	const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
 
-	const openDeleteModal = (hardSkill: HardSkillModel) => {
+	const openDeleteModal = (hardSkill: HardSkillResource) => {
 		setSelectedhardSkill(hardSkill);
 		setDeleteModalIsOpen(true);
 	};
@@ -60,7 +60,7 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 		setDeleteModalIsOpen(false);
 	};
 
-	const openUpdateModal = (hardSkill: HardSkillModel) => {
+	const openUpdateModal = (hardSkill: HardSkillResource) => {
 		setSelectedhardSkill(hardSkill);
 		setUpdateModalIsOpen(true);
 	};

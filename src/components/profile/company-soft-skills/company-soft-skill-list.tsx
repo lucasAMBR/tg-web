@@ -1,4 +1,4 @@
-import { useIndexCompanySoftSkills } from "@/api/generated/soft-skill-doc/soft-skill-doc";
+import { useIndexCompanySoftSkills } from "@/api/generated/soft-skill/soft-skill";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
@@ -66,7 +66,7 @@ export default function CompanySoftSkillList({ profileId }: CompanySoftSkillList
 				{!isLoading &&
 					softSkillList.map((skill) => (
 						<Card key={skill.id} className="p-4">
-							<p className="font-bold">{t(skill.soft_skill.i18n_name_key)}</p>
+							<p className="font-bold">{t(skill.soft_skill.i18n_name_key ?? "")}</p>
 						</Card>
 					))}
 			</div>

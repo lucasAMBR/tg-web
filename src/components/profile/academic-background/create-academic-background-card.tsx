@@ -1,8 +1,9 @@
+import type { StoreAcademicBackgroundRequest } from "@/api/generated/models";
 import {
 	getIndexAcademicBackgroundQueryKey,
 	useStoreAcademicBackground,
-} from "@/api/generated/academic-background-doc/academic-background-doc";
-import { useEnumDegreeLevel } from "@/api/generated/enums/enums";
+} from "@/api/generated/academic-background/academic-background";
+import { useEnumDegreeLevel } from "@/api/generated/enum/enum";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -78,7 +79,7 @@ export default function CreateAcademicBackgroundCard({
 
 	const submit = (data: ICreateAcademicBackgroundSchema) => {
 		create(
-			{ data },
+			{ data: data as StoreAcademicBackgroundRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.academic_background_created"));

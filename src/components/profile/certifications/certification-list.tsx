@@ -1,4 +1,4 @@
-import { useIndexAdditionalCourses } from "@/api/generated/additional-courses-doc/additional-courses-doc"
+import { useIndexAdditionalCourses } from "@/api/generated/additional-course/additional-course"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
@@ -11,7 +11,7 @@ import DefaultPagination, {
 } from "@/components/global/pagination";
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
-import type { AdditionalCourseModel } from "@/api/generated/models"
+import type { AdditionalCourseResource } from "@/api/generated/models"
 import CertificationCard from "./certification-card"
 import DeleteCertificationModal from "./delete-certification-modal"
 import UpdateCertificationModal from "./update-certification-modal"
@@ -35,7 +35,7 @@ export default function CertificationList({ profileId }: CertificationListProps)
 
     const clearFilters = () => setFilterParams({ page: 1, perPage: 10, search: ""}); 
 
-    const { data: certifications, isLoading } = useIndexAdditionalCourses({
+    const { data: certifications } = useIndexAdditionalCourses({
         dev_profile_id: profileId, 
         page, 
         per_page: perPage, 
@@ -45,11 +45,11 @@ export default function CertificationList({ profileId }: CertificationListProps)
     const certificationList = certifications?.data.data ?? [];
 
     const [selectedCertificate, setSelectedCertificate] =
-            useState<AdditionalCourseModel | null>(null);
+            useState<AdditionalCourseResource | null>(null);
     
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
 
-    const openDelete = (cert: AdditionalCourseModel) => {
+    const openDelete = (cert: AdditionalCourseResource) => {
         setSelectedCertificate(cert);
         setOpenDeleteModal(true);
     };
@@ -61,7 +61,7 @@ export default function CertificationList({ profileId }: CertificationListProps)
 
     const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
-    const openUpdate = (cert: AdditionalCourseModel) => {
+    const openUpdate = (cert: AdditionalCourseResource) => {
         setSelectedCertificate(cert);
         setOpenUpdateModal(true);
     };

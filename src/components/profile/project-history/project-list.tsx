@@ -3,7 +3,7 @@ import {
 	useDeleteProjectHistory,
 	useIndexProjectHistory,
 	useUpdateProjectHistory,
-} from "@/api/generated/project-history-doc/project-history-doc";
+} from "@/api/generated/project-history/project-history";
 import DefaultPagination, {
 	type GenericPagination,
 } from "@/components/global/pagination";
@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import ProjectItemCard from "./project-item-card";
-import type { ProjectHistoryModel } from "@/api/generated/models";
+import type { ProjectHistoryResource } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -65,7 +65,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import { useIndexLanguage } from "@/api/generated/language/language";
 import useDebounce from "@/hooks/use-debounce";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -100,11 +100,11 @@ export default function ProjectHistoryList({
 	};
 
 	const [selectedProject, setSelectedProject] =
-		useState<ProjectHistoryModel | null>(null);
+		useState<ProjectHistoryResource | null>(null);
 
 	const [deleteModalIsOpen, setDeleteIsOpen] = useState<boolean>(false);
 
-	const openDelete = (project: ProjectHistoryModel) => {
+	const openDelete = (project: ProjectHistoryResource) => {
 		setDeleteIsOpen(true);
 		setSelectedProject(project);
 	};
@@ -117,14 +117,14 @@ export default function ProjectHistoryList({
 	const [manageGalleryModalIsOpen, setManageGalleryModalIsOpen] =
 		useState<boolean>(false);
 
-	const openManageGallery = (project: ProjectHistoryModel) => {
+	const openManageGallery = (project: ProjectHistoryResource) => {
 		setManageGalleryModalIsOpen(true);
 		setSelectedProject(project);
 	};
 
 	const [updateModalIsOpen, setUpdateModalIsOpen] = useState<boolean>(false);
 
-	const openUpdate = (project: ProjectHistoryModel) => {
+	const openUpdate = (project: ProjectHistoryResource) => {
 		setUpdateModalIsOpen(true);
 		setSelectedProject(project);
 	};
@@ -178,7 +178,7 @@ export default function ProjectHistoryList({
 			title: selectedProject?.title ?? "",
 			description: selectedProject?.description ?? "",
 			languages:
-				selectedProject?.languages.map((language) => language.id) ?? [],
+				selectedProject?.languages?.map((language) => language.id) ?? [],
 			prod_url: selectedProject?.prod_url ?? "",
 			github_url: selectedProject?.github_url ?? "",
 		},
@@ -190,7 +190,7 @@ export default function ProjectHistoryList({
 			form.reset({
 				title: selectedProject.title,
 				description: selectedProject.description,
-				languages: selectedProject.languages.map((l) => l.id),
+				languages: selectedProject.languages?.map((l) => l.id) ?? [],
 				prod_url: selectedProject.prod_url ?? "",
 				github_url: selectedProject.github_url ?? "",
 			});
@@ -198,7 +198,7 @@ export default function ProjectHistoryList({
 			// 2. Sincronizar o cache de nomes para que o ID bruto não apareça
 			setSelectedLanguages((prev) => {
 				const newLangs = [...prev];
-				selectedProject.languages.forEach((lang) => {
+				selectedProject.languages?.forEach((lang) => {
 					if (!newLangs.find((obj) => obj.id === lang.id)) {
 						newLangs.push({ id: lang.id, name: lang.name });
 					}

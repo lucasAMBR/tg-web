@@ -1,3 +1,4 @@
+import type { UpdateDevProfileRequest } from "@/api/generated/models";
 import { Controller, useForm } from "react-hook-form";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import Required from "../global/required-field";
@@ -15,22 +16,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Spinner } from "../ui/spinner";
 import { Switch } from "../ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enum/enum";
 import { CreateDevProfileSchema, type ICreateDevProfileSchema } from "@/schemas/profile/CreateDevProfileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/stores/auth-store";
-import { useUpdateDevProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useUpdateDevProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useEffect } from "react";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { useTranslation } from "react-i18next";
-import type { DevProfileModel } from "@/api/generated/models";
+import type { DevProfileResource } from "@/api/generated/models";
 
 type DevUpdateProfileFormProps = {
     profile?: Pick<
-        DevProfileModel,
+        DevProfileResource,
         | "id"
         | "name"
         | "cpf"
@@ -97,7 +98,7 @@ export default function DevUpdateProfileForm({
     }, [profile, form]);
 
     const create = (data: ICreateDevProfileSchema) => {
-        updateProfile({ dev: profile?.id as string, data }, {
+        updateProfile({ id: profile?.id as string, data: data as UpdateDevProfileRequest }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.profile_dev_updated"));
 

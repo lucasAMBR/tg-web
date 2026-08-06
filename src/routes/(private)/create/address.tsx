@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import LogoutButton from "@/components/global/logout-button";
 import ThemeToggle from "@/components/global/theme-toggle-button";
-import DevProfileForm from "@/components/profile-create/dev-profile-form";
 import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
 import {
@@ -10,7 +9,6 @@ import {
 	ensureRoutePermissions,
 } from "@/utils/route-guards";
 import { LogOut } from "lucide-react";
-import { useTheme } from "next-themes";
 import AddressForm from "@/components/address/address-form";
 import { useAuthStore } from "@/stores/auth-store";
 import { getUserMainRole } from "@/utils/role-helper";
@@ -32,7 +30,6 @@ export const Route = createFileRoute("/(private)/create/address")({
 function RouteComponent() {
 	const { t } = useTranslation();
 
-	const { theme } = useTheme();
 
 	const { user } = useAuthStore();
 

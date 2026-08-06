@@ -1,19 +1,15 @@
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
-import type { StoreProjectHistoryImagesBody } from "@/api/generated/models";
+import { useIndexLanguage } from "@/api/generated/language/language";
+import type { SaveImagesToProjectRequest } from "@/api/generated/models";
 import {
 	getIndexProjectHistoryQueryKey,
 	useStoreProjectHistory,
 	useStoreProjectHistoryImages,
-} from "@/api/generated/project-history-doc/project-history-doc";
+} from "@/api/generated/project-history/project-history";
 import { ImageUploadField } from "@/components/global/inputs/image-w-preview";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
-	CardAction,
-	CardFooter,
-	CardHeader,
-	CardTitle,
 } from "@/components/ui/card";
 import {
 	Command,
@@ -103,11 +99,9 @@ export default function CreateProjectCard({
 		{ id: string; name: string }[]
 	>([]);
 
-	const { mutateAsync: createProject, isPending: projectIsPending } =
-		useStoreProjectHistory();
+	const { mutateAsync: createProject } = useStoreProjectHistory();
 
-	const { mutateAsync: storeImages, isPending: imagesIsPending } =
-		useStoreProjectHistoryImages();
+	const { mutateAsync: storeImages } = useStoreProjectHistoryImages();
 
 	const create = async (data: ICreateProjectSchema) => {
 		const { images, ...projectData } = data;
@@ -116,12 +110,7 @@ export default function CreateProjectCard({
 			const projectItem = await createProject({ data: projectData });
 
 			if (images && images.length > 0) {
-				const imagesPayload: StoreProjectHistoryImagesBody = {};
-
-				images.forEach((file, index) => {
-					const key = `images[${index}]` as keyof StoreProjectHistoryImagesBody;
-					imagesPayload[key] = file;
-				});
+				const imagesPayload: SaveImagesToProjectRequest = { images };
 
 				await storeImages({
 					id: projectItem.data.id,
@@ -167,7 +156,7 @@ export default function CreateProjectCard({
 						<Controller
 							control={form.control}
 							name="title"
-							render={({ field, fieldState }) => (
+							render={({ field }) => (
 								<Field className="flex-1">
 									<FieldLabel>{t("input.title")}</FieldLabel>
 									<Input
@@ -301,7 +290,7 @@ export default function CreateProjectCard({
 					<Controller
 						control={form.control}
 						name="description"
-						render={({ field, fieldState }) => (
+						render={({ field }) => (
 							<Field>
 								<FieldLabel>{t("input.description")}</FieldLabel>
 								<Textarea

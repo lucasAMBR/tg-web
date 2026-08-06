@@ -1,8 +1,8 @@
 import { useTestReview } from "@/api/generated/proficiency-test/proficiency-test";
 import type {
-    ProficencyTestModel,
-    QuestionModel,
-    QuestionResponseModel,
+    ProficiencyTestResource,
+    QuestionResource,
+    QuestionResponseResource,
 } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ import { CodeBlock, CodeBlockCopyButton } from "@/components/ai/code-block";
 import type { BundledLanguage } from "shiki";
 
 interface ProficiencyTestViewProps {
-    test: ProficencyTestModel | null;
+    test: ProficiencyTestResource | null;
     clearSelected: () => void;
 }
 
@@ -32,7 +32,7 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
         return null;
     }
 
-    const questionText = (question: QuestionModel) => {
+    const questionText = (question: QuestionResource) => {
         if (question.translation_status !== "translated") return question.question;
 
         return (
@@ -41,7 +41,7 @@ export default function ProficiencyTestView({ test, clearSelected }: Proficiency
         );
     };
 
-    const responseText = (response: QuestionResponseModel) => {
+    const responseText = (response: QuestionResponseResource) => {
         if (response.translation_status !== "translated") return response.response;
 
         return (

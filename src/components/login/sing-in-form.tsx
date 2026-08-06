@@ -62,7 +62,7 @@ export function SingInForm() {
 			};
 
 			navigate({ to: homeRoutes[role] || "/dashboard" });
-		} catch (error) {}
+		} catch {}
 	};
 
 	return (

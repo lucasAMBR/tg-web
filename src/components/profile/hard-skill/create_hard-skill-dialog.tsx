@@ -1,8 +1,8 @@
+import type { StoreHardSkillRequest } from "@/api/generated/models";
 import type { PropsWithChildren } from "react";
 
 import {
 	Dialog,
-	DialogClose,
 	DialogContent,
 	DialogDescription,
 	DialogFooter,
@@ -11,8 +11,8 @@ import {
 	DialogTrigger,
 } from "../../ui/dialog";
 import { useMemo, useState } from "react";
-import { useEnumHardSkillLevel } from "@/api/generated/enums/enums";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import { useEnumHardSkillLevel } from "@/api/generated/enum/enum";
+import { useIndexLanguage } from "@/api/generated/language/language";
 import useDebounce from "@/hooks/use-debounce";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -45,17 +45,17 @@ import { Spinner } from "../../ui/spinner";
 import {
 	getIndexHardSkillQueryKey,
 	useStoreHardSkill,
-} from "@/api/generated/hard-skill-doc/hard-skill-doc";
+} from "@/api/generated/hard-skill/hard-skill";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useQueryClient } from "@tanstack/react-query";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
-import type { HardSkillModel } from "@/api/generated/models";
+import type { HardSkillResource } from "@/api/generated/models";
 import { useTranslation } from "react-i18next";
 interface RegisterHardSkillModalProps {
 	profileId: string;
-	existingHardSkills: HardSkillModel[];
+	existingHardSkills: HardSkillResource[];
 }
 
 export default function CreateHardSkillModal({
@@ -101,7 +101,7 @@ export default function CreateHardSkillModal({
 
 	const register = (data: IRegisterHardSkillSchema) => {
 		registerHardSkill(
-			{ data },
+			{ data: data as StoreHardSkillRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.hard_skill_created"));

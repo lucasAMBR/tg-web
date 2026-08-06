@@ -1,10 +1,11 @@
-import { useIndexCompanyProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useIndexCompanyProfile } from "@/api/generated/profile/profile";
+import type { OperationalSegmentEnum } from "@/api/generated/models";
 import { DataTable } from "@/components/global/data-table";
 import DefaultPagination, { type GenericPagination } from "@/components/global/pagination";
 import { Card } from "@/components/ui/card";
 import { useIndexCompanyParams } from "@/hooks/filters/use-index-company-params";
 import useDebounce from "@/hooks/use-debounce";
-import { columns } from "./columns";
+import { columns, type AdminCompanyProfile } from "./columns";
 import { Filters } from "./filters";
 
 export function CompanyTable() {
@@ -22,7 +23,7 @@ export function CompanyTable() {
         page: page,
         per_page: perPage,
         search: debouncedSearch,
-        operational_segment: operational_segment,
+        operational_segment: (operational_segment || null) as OperationalSegmentEnum | null,
     });
 
     const companyList = companies?.data.data || [];
@@ -33,7 +34,7 @@ export function CompanyTable() {
 
             <DataTable
                 columns={columns}
-                data={companyList}
+                data={companyList as unknown as AdminCompanyProfile[]}
             />
 
             <Card className="p-4 bg-accent mt-2">

@@ -1,3 +1,4 @@
+import type { StoreCompanyProfileRequest } from "@/api/generated/models";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { Field, FieldError, FieldLabel } from "../ui/field";
@@ -17,10 +18,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
-import { useEnumOperationalSegments } from "@/api/generated/enums/enums";
+import { useEnumOperationalSegments } from "@/api/generated/enum/enum";
 import Required from "../global/required-field";
 import { Spinner } from "../ui/spinner";
-import { useStoreCompanyProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useStoreCompanyProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useState } from "react";
 import {
@@ -72,7 +73,7 @@ export default function CompanyProfileForm() {
 
     const create = async (data: ICreateCompanyProfileSchema) => {
         createProfile(
-            { data },
+            { data: data as StoreCompanyProfileRequest },
             {
                 onSuccess: () => {
                     CustomToaster.successToast(t("toast.success.profile_company_created"));

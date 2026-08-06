@@ -1,4 +1,4 @@
-import { getIndexCompanyProjectQueryKey, useDeleteCompanyProject, useIndexCompanyProject, useUpdateCompanyProject } from "@/api/generated/company-projects-doc/company-projects-doc";
+import { getIndexCompanyProjectQueryKey, useDeleteCompanyProject, useIndexCompanyProject, useUpdateCompanyProject } from "@/api/generated/company-project/company-project";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
@@ -12,7 +12,7 @@ import DefaultPagination, {
 } from "@/components/global/pagination";
 import CompanyProjectCard from "./company-project-card";
 import { useEffect, useState } from "react";
-import type { CompanyProjectModel } from "@/api/generated/models";
+import type { CompanyProjectResource } from "@/api/generated/models";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Spinner } from "@/components/ui/spinner";
 import { CustomToaster } from "@/utils/custom-toaster";
@@ -23,7 +23,7 @@ import type { ApiError } from "@/utils/api-error";
 import { UpdateCompanyProjectSchema, type IUpdateCompanyProjectSchema } from "@/schemas/company-project/UpdateCompanyProjectSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
+import { useIndexLanguage } from "@/api/generated/language/language";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
@@ -57,9 +57,8 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
 
     const {
         data: projects,
-        isPending
     } = useIndexCompanyProject({
-        profile_id: profileId,
+        company_profile_id: profileId,
         page: page,
         per_page: perPage,
         search: debouncedSearch
@@ -68,11 +67,11 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
     const projectList = projects?.data.data ?? [];
 
     const [selectedProject, setSelectedProject] =
-        useState<CompanyProjectModel | null>(null);
+        useState<CompanyProjectResource | null>(null);
 
     const [deleteModalIsOpen, setDeleteIsOpen] = useState<boolean>(false);
     
-    const openDelete = (project: CompanyProjectModel) => {
+    const openDelete = (project: CompanyProjectResource) => {
         setDeleteIsOpen(true);
         setSelectedProject(project);
     };
@@ -84,7 +83,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
 
     const [updateModalIsOpen, setUpdateModalIsOpen] = useState<boolean>(false);
     
-    const openUpdate = (project: CompanyProjectModel) => {
+    const openUpdate = (project: CompanyProjectResource) => {
         setUpdateModalIsOpen(true);
         setSelectedProject(project);
     };
@@ -100,7 +99,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
     const handleDelete = () => {
         if (!selectedProject) return;
 
-        deleteProject( {companyProject: selectedProject.id} ,{
+        deleteProject( {id: selectedProject.id} ,{
                 onSuccess: () => {
                     CustomToaster.successToast(t("toast.success.company_project_deleted"));
                     queryClient.invalidateQueries({
@@ -138,7 +137,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
             title: selectedProject?.title ?? "",
             description: selectedProject?.description ?? "",
             languages:
-                selectedProject?.languages.map((language) => language.id) ?? [],
+                selectedProject?.languages?.map((language) => language.id) ?? [],
             prod_url: selectedProject?.prod_url ?? "",
             github_url: selectedProject?.github_url ?? "",
         },
@@ -150,7 +149,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
             form.reset({
                 title: selectedProject.title,
                 description: selectedProject.description,
-                languages: selectedProject.languages.map((l) => l.id),
+                languages: selectedProject.languages?.map((l) => l.id) ?? [],
                 prod_url: selectedProject.prod_url ?? "",
                 github_url: selectedProject.github_url ?? "",
             });
@@ -158,7 +157,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
             // 2. Sincronizar o cache de nomes para que o ID bruto não apareça
             setSelectedLanguages((prev) => {
                 const newLangs = [...prev];
-                selectedProject.languages.forEach((lang) => {
+                selectedProject.languages?.forEach((lang) => {
                     if (!newLangs.find((obj) => obj.id === lang.id)) {
                         newLangs.push({ id: lang.id, name: lang.name });
                     }
@@ -172,7 +171,7 @@ export default function CompanyProjectList({ profileId }: CompanyProjectsListPro
         if (!selectedProject) return;
 
         updateProject(
-            { companyProject: selectedProject.id, data },
+            { id: selectedProject.id, data },
             {
                 onSuccess: () => {
                     CustomToaster.successToast(t("toast.success.company_project_updated"));

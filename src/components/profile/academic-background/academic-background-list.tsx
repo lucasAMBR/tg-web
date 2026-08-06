@@ -1,4 +1,4 @@
-import { useIndexAcademicBackground } from "@/api/generated/academic-background-doc/academic-background-doc";
+import { useIndexAcademicBackground } from "@/api/generated/academic-background/academic-background";
 import { Card } from "@/components/ui/card";
 import {
 	Empty,
@@ -13,7 +13,7 @@ import { GraduationCap } from "lucide-react";
 import AcademicBackgroundCard from "./academic-background-card";
 import CreateAcademicBackgroundCard from "./create-academic-background-card";
 import { useState } from "react";
-import type { AcademicBackgroundModel } from "@/api/generated/models";
+import type { AcademicBackgroundResource } from "@/api/generated/models";
 import DeleteAcademicBackgroundModal from "./academic-background-delete-modal";
 import UpdateAcademicBackgroundModal from "./academic-background-update-modal";
 import { useTranslation } from "react-i18next";
@@ -45,11 +45,11 @@ export default function AcademicBackgroundList({
 	const academicBackgroundList = academicBackgrounds?.data.data ?? [];
 
 	const [selectedBackground, setSelectedBackground] =
-		useState<AcademicBackgroundModel | null>(null);
+		useState<AcademicBackgroundResource | null>(null);
 
 	const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
 
-	const openDelete = (bg: AcademicBackgroundModel) => {
+	const openDelete = (bg: AcademicBackgroundResource) => {
 		setSelectedBackground(bg);
 		setOpenDeleteModal(true);
 	};
@@ -61,7 +61,7 @@ export default function AcademicBackgroundList({
 
 	const [openUpdateModal, setOpenUpdateModal] = useState<boolean>(false);
 
-	const openUpdate = (bg: AcademicBackgroundModel) => {
+	const openUpdate = (bg: AcademicBackgroundResource) => {
 		setSelectedBackground(bg);
 		setOpenUpdateModal(true);
 	};

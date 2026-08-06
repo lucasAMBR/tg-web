@@ -12,7 +12,7 @@ export default function Banner() {
 		<div className="relative flex w-full h-full flex-1 items-center justify-center overflow-hidden">
 			<div
 				className="absolute inset-0 z-0 
-                           bg-[url('/images/Circuit_Board_(3).svg')] dark:bg-[url('/images/Circuit_Board_(2).svg')] 
+                           bg-[url('/images/Circuit_Board_lig.svg')] dark:bg-[url('/images/Circuit_Board_dar.svg')] 
                            bg-center bg-no-repeat bg-cover
                            opacity-6 dark:opacity-4"
 				aria-hidden="true"

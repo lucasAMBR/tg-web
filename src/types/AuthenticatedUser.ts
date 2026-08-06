@@ -1,29 +1,29 @@
 import type {
-	AdminProfileModel,
-	ClientProfileModel,
-	CompanyProfileModel,
-	DevProfileModel,
-	UserModel,
+	AdminProfileResource,
+	ClientProfileResource,
+	CompanyProfileResource,
+	DevProfileResource,
+	UserResource,
 } from "@/api/generated/models";
 
 export type UserRole = "dev" | "company" | "client" | "admin";
 
 export type AuthenticatedUser =
-	| (UserModel & { role: ["dev"]; dev_profile: DevProfileModel | null })
-	| (UserModel & {
+	| (UserResource & { role: ["dev"]; dev_profile: DevProfileResource | null })
+	| (UserResource & {
 			role: ["company"];
-			company_profile: CompanyProfileModel | null;
+			company_profile: CompanyProfileResource | null;
 	  })
-	| (UserModel & {
+	| (UserResource & {
 			role: ["client"];
-			client_profile: ClientProfileModel | null;
+			client_profile: ClientProfileResource | null;
 	  })
-	| (UserModel & {
+	| (UserResource & {
 			role: ["admin"];
-			admin_profile: AdminProfileModel | null;
-			dev_profile: DevProfileModel | null;
-			company_profile: CompanyProfileModel | null;
-			client_profile: ClientProfileModel | null;
+			admin_profile: AdminProfileResource | null;
+			dev_profile: DevProfileResource | null;
+			company_profile: CompanyProfileResource | null;
+			client_profile: ClientProfileResource | null;
 			admin_active_profile: UserRole | null;
 	  });
 

@@ -1,3 +1,4 @@
+import type { StoreDevProfileRequest } from "@/api/generated/models";
 import {
 	CreateDevProfileSchema,
 	type ICreateDevProfileSchema,
@@ -22,11 +23,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
-import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enum/enum";
 import Required from "../global/required-field";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Spinner } from "../ui/spinner";
-import { useStoreDevProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useStoreDevProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useState } from "react";
 import {
@@ -82,7 +83,7 @@ export default function DevProfileForm() {
 
 	const create = async (data: ICreateDevProfileSchema) => {
 		await createProfile(
-			{ data },
+			{ data: data as StoreDevProfileRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.profile_dev_created"));
