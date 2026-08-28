@@ -1,8 +1,11 @@
 import { CompanyTable } from '@/components/admin-land/company/company-table';
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute('/(private)/admin-land/company/')({
+  head: () => ({ meta: [{ title: pageTitle("companies") }] }),
+  staticData: { breadcrumb: { labelKey: "page_title.companies" } },
   component: RouteComponent,
 })
 

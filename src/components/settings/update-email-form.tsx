@@ -7,7 +7,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { AlertDialog, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 import { useEffect, useState } from "react";
-import { useUpdateUser } from "@/api/generated/user/user";
+import { useUserUserUpdate0 } from "@/api/generated/user/user";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import type { ApiError } from "@/utils/api-error";
@@ -45,7 +45,7 @@ export default function UpdateEmailForm(){
     const {
         mutate,
         isPending
-    } = useUpdateUser();
+    } = useUserUserUpdate0();
 
     const handleUpdate = (data: IEmailChangeSchema) => {
         mutate({id: user?.id as string, data}, {

@@ -4,8 +4,10 @@ import Navbar from "@/components/landing-page/navbar";
 import LogoLoop from "@/components/LogoLoop";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiTypescript, SiReact, SiVite, SiTailwindcss, SiZod, SiReacthookform, SiPhp, SiLaravel, SiPostgresql } from 'react-icons/si'
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute("/(public)/")({
+	head: () => ({ meta: [{ title: pageTitle("home") }] }),
 	component: LandingPage,
 });
 

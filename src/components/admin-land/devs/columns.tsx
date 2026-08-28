@@ -86,7 +86,7 @@ const DevActionsCell = ({ dev }: { dev: DevProfileResource }) => {
                 <DropdownMenuContent side="bottom" align="end">
                     <DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
                     <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => navigate({ to: "/admin-land/devs/$id", params: { id: dev.id } })}>
+                        <DropdownMenuItem onClick={() => navigate({ to: "/devs/$id", params: { id: dev.id } })}>
                             <EyeIcon className="w-4" />
                             {t("general.view_profile")}
                         </DropdownMenuItem>

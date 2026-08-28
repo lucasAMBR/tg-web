@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import z from "zod/v3";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpdateUser } from "@/api/generated/user/user";
+import { useUserUserUpdate0 } from "@/api/generated/user/user";
 import { useAuthStore } from "@/stores/auth-store";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
@@ -60,7 +60,7 @@ export default function PasswordChange(){
     const {
         mutate,
         isPending
-    } = useUpdateUser();
+    } = useUserUserUpdate0();
 
     const handleChange = (data: IPasswordChangeSchema) => {
         mutate({ id: user?.id as string, data }, {

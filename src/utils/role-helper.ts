@@ -17,6 +17,17 @@ export const getNameFromProfile = (user: AuthenticatedUser | null) => {
 	if (role === "admin") return user.admin_profile?.name;
 };
 
+export const getProfilePic = (user: AuthenticatedUser | null) => {
+	if (user === null) return;
+
+	const role = user.role[0] as UserRole;
+
+	if (role === "dev") return user.dev_profile?.profile_pic;
+	if (role === "company") return user.company_profile?.profile_pic;
+	if (role === "client") return user.client_profile?.profile_pic;
+	if (role === "admin") return user.admin_profile?.profile_pic;
+};
+
 export const getRoleLabel = (user: AuthenticatedUser | null) => {
 	if (user === null) return;
 

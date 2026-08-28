@@ -14,12 +14,15 @@ import { useAuthStore } from "@/stores/auth-store";
 import { getUserMainRole } from "@/utils/role-helper";
 import { useTranslation } from "react-i18next";
 import { Logo } from "@/components/global/Logo";
+import { pageTitle } from "@/utils/page-title";
 
 const staticData = {
 	requiredPermissions: ["address.create"],
 };
 
 export const Route = createFileRoute("/(private)/create/address")({
+	head: () => ({ meta: [{ title: pageTitle("address") }] }),
+	staticData: { breadcrumb: { labelKey: "page_title.address" } },
 	component: RouteComponent,
 	beforeLoad: async () => {
 		await ensureAuthenticated();

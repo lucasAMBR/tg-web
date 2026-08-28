@@ -1,4 +1,32 @@
 {
+    "page_title": {
+        "home": "Início",
+        "login": "Entrar",
+        "register": "Cadastro",
+        "address": "Endereço",
+        "create_profile": "Criar Perfil",
+        "feed": "Feed",
+        "search": "Buscar",
+        "profile": "Perfil",
+        "settings": "Configurações",
+        "dashboard": "Painel",
+        "devs": "Devs",
+        "dev_details": "Detalhes do Dev",
+        "companies": "Empresas",
+        "company_details": "Detalhes da Empresa",
+        "clients": "Clientes",
+        "client_details": "Detalhes do Cliente",
+        "proficiency_test": "Teste de Proficiência",
+        "my_vacancies": "Minhas Vagas",
+        "vacancies": "Vagas",
+        "vacancy_details": "Detalhes da Vaga",
+        "selection_process": "Processo Seletivo",
+        "my_applies": "Minhas Vagas"
+    },
+    "breadcrumb": {
+        "admin": "Administração",
+        "test_in_progress": "Realizando teste"
+    },
     "general": {
         "back": "Voltar",
         "sing_out": "Sair",
@@ -27,7 +55,7 @@
         "display_original_content": "Exibir conteúdo original",
         "display_translated_content": "Exibir conteúdo traduzido",
         "showing_original_content": "Exibindo conteúdo original",
-        "showing_translated_content": "Exibindo conteúdo traduzido" ,
+        "showing_translated_content": "Exibindo conteúdo traduzido",
         "filters": "Filtros",
         "view_profile": "Visualizar perfil",
         "edit_profile": "Editar perfil",
@@ -41,7 +69,10 @@
         "status": "Status",
         "translation_pending": "Tradução pendente.",
         "translation_error": "Tradução indisponivel.",
-        "translation_in_progress": "Tradução pendente."
+        "translation_in_progress": "Tradução pendente.",
+        "no_results": "Nenhum resultado encontrado",
+        "visit": "Visitar",
+        "confirm": "Confirmar"
     },
     "toast": {
         "success": {
@@ -85,7 +116,13 @@
             "recommendation_preferences_updated": "Preferências de recomendação atualizadas com sucesso",
             "recommendation_preferences_restored": "Configuração padrão restaurada",
             "access_blocked": "Acesso bloqueado com sucesso",
-            "access_unblocked": "Acesso desbloqueado com sucesso"
+            "access_unblocked": "Acesso desbloqueado com sucesso",
+            "profile_pic_updated": "Foto de perfil atualizada com sucesso",
+            "job_vacancy_created": "Vaga criada com sucesso",
+            "job_vacancy_updated": "Vaga atualizada com sucesso",
+            "job_vacancy_inscriptions_closed": "Inscrições encerradas com sucesso",
+            "vacancy_applied": "Candidatura enviada com sucesso",
+            "step_advanced": "Etapa encerrada e candidaturas avançadas com sucesso"
         }
     },
     "role": {
@@ -234,21 +271,29 @@
         "description": "Por favor, volte mais tarde"
     },
     "sidebar": {
+        "sections_title": "Seções",
+        "options_title": "Opções",
         "sections": {
             "feed": "Feed",
             "companies": "Empresas",
-            "job_vacancies": "Vagas de Emprego",
-            "freelances": "Freelances",
+            "job_vacancies": "Minhas Vagas",
+            "freelances": "Meus Freelances",
+            "freelancers": "Freelancers",
             "my_jobs": "Minhas Vagas",
             "dashboard": "Dashboard",
             "devs": "Desenvolvedores",
             "clients": "Clientes",
             "questions": "Questões",
-            "admins": "Adminstradores"
+            "admins": "Adminstradores",
+            "search": "Buscar"
         },
         "options": {
             "profile": "Perfil",
             "settings": "Configurações"
+        },
+        "account": {
+            "me": "Eu",
+            "update_info": "Atualizar informações da conta"
         },
         "logout_dialog": {
             "description": "Você está prestes a sair da sua conta. Será necessário entrar novamente para acessar seus dados e continuar usando a plataforma."
@@ -429,6 +474,10 @@
             "location_informations": {
                 "title": "Informações de localização",
                 "description": "Gerencie as informações sobre sua localização, endereço, país, isso nos ajudará a saber onde você mora para te recomendar as melhores vagas de emprego"
+            },
+            "profile_pic": {
+                "title": "Foto de perfil",
+                "description": "Atualize a foto exibida no seu perfil e nas recomendações"
             }
         },
         "theme": {
@@ -470,6 +519,12 @@
                 "description": "Personalize as linguagens e frameworks de flexibilidade no nosso sistema de recomendação, sua vontade de aprender uma nova tecnologia, tecnologias que você não quer ser relacionado",
                 "recommendation_flexibility_title": "Flexibilidade de recomendação",
                 "recommendation_flexibility_description": "Habilite isso para descobrir cargos além da sua stack exata. O algoritmo expandirá suas recomendações para incluir vagas onde suas habilidades principais são transferíveis, mesmo se as linguagens ou frameworks específicos diferirem."
+            },
+            "min_remuneration": {
+                "title": "Remuneração mínima",
+                "description": "Defina o valor mínimo que você aceita receber. O algoritmo deixará de recomendar oportunidades abaixo desse valor.",
+                "enable_title": "Definir remuneração mínima",
+                "enable_description": "Ative para filtrar as recomendações pelo valor mínimo desejado"
             }
         }
     },
@@ -519,7 +574,15 @@
         "old_password": "Senha atual",
         "new_password": "Nova senha",
         "new_password_confirmation": "Confirmação da nova senha",
-        "stack_blacklist": "Blacklist de stacks"
+        "stack_blacklist": "Blacklist de stacks",
+        "profile_pic": "Foto de perfil",
+        "min_remuneration": "Remuneração mínima",
+        "benefits": "Benefícios",
+        "estimated_salary": "Salário estimado",
+        "required_languages": "Linguagens / frameworks obrigatórios",
+        "desirable_languages": "Linguagens / frameworks desejáveis",
+        "soft_skills": "Habilidades pessoais",
+        "process_steps": "Etapas do processo seletivo"
     },
     "tooltip": {
         "open_to_work": "Diga ao nosso algoritmo que você está disponível para oportunidades de emprego; sem esta informação, nosso algoritmo inteligente não recomendará você para posições.",
@@ -576,7 +639,16 @@
         "stack_blacklist": "Selecione uma linguagem / framework para evitar",
         "dev_search": "Busque por um desenvolvedor, nível de senioridade, especialidade e disponível para trabalhar e mudar de cidade",
         "company_search": "Busque por uma empresa ou segmento de atuação",
-        "filter_operational_segment": "Selecione um segmento de atuação"
+        "filter_operational_segment": "Selecione um segmento de atuação",
+        "email": "Digite seu e-mail",
+        "min_remuneration": "Informe o valor mínimo",
+        "job_vacancy_title": "Desenvolvedor frontend sênior",
+        "job_vacancy_description": "Descreva a vaga, responsabilidades e expectativas",
+        "benefit": "Plano de saúde, vale refeição...",
+        "estimated_salary": "5000.00",
+        "soft_skills": "Selecione as habilidades valorizadas",
+        "soft_skill_search": "Buscar habilidade...",
+        "process_step": "Selecione uma etapa"
     },
     "filters": {
         "all": "Todos",
@@ -662,6 +734,43 @@
             "software_house": "Software House",
             "retail": "Varejo",
             "banking": "Banco"
+        },
+        "selection_process_stage": {
+            "awaiting_resume_screening": "Aguardando triagem de currículos",
+            "resume_screening": "Triagem de currículo",
+            "awaiting_screening_questions": "Aguardando perguntas de triagem",
+            "screening_questions": "Perguntas de triagem",
+            "awaiting_interview": "Aguardando entrevista",
+            "interview": "Entrevista",
+            "awaiting_technical_challenge": "Aguardando desafio técnico",
+            "technical_challenge": "Desafio técnico",
+            "awaiting_live_coding": "Aguardando live coding",
+            "live_coding": "Live coding",
+            "awaiting_language_assessment": "Aguardando avaliação de idioma",
+            "language_assessment": "Avaliação de idioma",
+            "awaiting_portfolio_review": "Aguardando análise de portfólio",
+            "portfolio_review": "Análise de portfólio"
+        },
+        "job_vacancy_status": {
+            "open_inscriptions": "Inscrições abertas",
+            "closed_inscriptions": "Inscrições encerradas",
+            "canceled": "Cancelada",
+            "concluded": "Concluída"
+        },
+        "dev_job_vacancy_status": {
+            "in_progress": "Em andamento",
+            "approved": "Aprovado",
+            "rejected": "Recusado"
+        },
+        "portfolio_solicitation": {
+            "status": {
+                "pending": "Portfólio pendente",
+                "sent": "Portfólio enviado"
+            },
+            "type": {
+                "repository": "Repositório",
+                "production": "Projeto em produção"
+            }
         }
     },
     "pagination": {
@@ -805,5 +914,125 @@
         "accountability_advanced_description": "Demonstra de forma consistente propriedade, confiabilidade e responsabilidade pelos resultados.",
         "accountability_expert": "Especialista",
         "accountability_expert_description": "Lidera pelo exemplo em responsabilidade e incentiva uma cultura de propriedade na equipe."
+    },
+    "my_vacancies": {
+        "title": "Minhas Vagas",
+        "description": "Gerencie as vagas de emprego publicadas pela sua empresa e acompanhe seus candidatos",
+        "popular_title": "Vagas com mais candidaturas",
+        "candidates": "Candidatos",
+        "estimated_salary": "Salário estimado",
+        "search_placeholder": "Busque por uma das suas vagas",
+        "empty_title": "Nenhuma vaga encontrada",
+        "empty_description": "Publique uma vaga ou altere o termo da busca para ver resultados aqui.",
+        "create_title": "Criar nova vaga",
+        "add_process_step": "Adicionar etapa",
+        "applies": {
+            "title": "Inscrições",
+            "table": {
+                "dev": "Desenvolvedor",
+                "specialty": "Especialidade",
+                "seniority_level": "Nível de senioridade",
+                "status": "Status",
+                "applied_at": "Inscrito em",
+                "process_step": "Etapa atual"
+            }
+        },
+        "current_step": "Etapa atual",
+        "selection_process": {
+            "title": "Processo seletivo",
+            "approve_selected": "Aprovar selecionados",
+            "select_all": "Selecionar todos",
+            "advance_confirm": "Avançar as candidaturas selecionadas?",
+            "advance_confirm_description": "{{approved}} candidatura(s) selecionada(s) avançam para a próxima etapa e {{rejected}} candidatura(s) não selecionada(s) são automaticamente eliminadas deste processo seletivo. Esta ação não pode ser desfeita.",
+            "upcoming_title": "Etapa ainda não alcançada",
+            "upcoming_description": "As candidaturas serão exibidas aqui quando o processo seletivo chegar nesta etapa.",
+            "portfolio_review": {
+                "not_requested": "Nenhum portfólio foi solicitado para este candidato.",
+                "awaiting_link": "O candidato ainda não enviou o link do portfólio."
+            },
+            "empty_applies_title": "Nenhuma candidatura nesta etapa",
+            "empty_applies_description": "Nenhum desenvolvedor está aguardando avaliação nesta etapa do processo seletivo.",
+            "results": {
+                "approved_title": "Aprovados",
+                "rejected_title": "Recusados nesta etapa"
+            },
+            "resume_screening": {
+                "awaiting_title": "Triagem de currículos ainda não liberada",
+                "awaiting_description": "A seleção dos currículos para a próxima etapa só fica disponível após o encerramento do período de inscrições."
+            }
+        },
+        "actions": {
+            "title": "Ações",
+            "update_vacancy": "Atualizar dados da vaga",
+            "view_selection_process": "Visualizar processo seletivo",
+            "update_vacancy_description": "Altere as informações da vaga. Título, descrição e benefícios serão traduzidos novamente após a atualização.",
+            "close_inscriptions": "Encerrar inscrições",
+            "close_inscriptions_description": "A vaga deixará de aceitar novas candidaturas, o processo passa para a triagem de currículos e todos os desenvolvedores inscritos são notificados. Esta ação não pode ser desfeita.",
+            "no_applies_title": "Esta vaga não tem candidaturas",
+            "no_applies_description": "Ninguém se candidatou a esta vaga ainda, então encerrar as inscrições agora significa que não haverá processo seletivo."
+        },
+        "devs_section_title": "Desenvolvedores",
+        "recommended": {
+            "title": "Recomendados",
+            "table": {
+                "similarity": "Compatibilidade"
+            }
+        }
+    },
+    "my_applies": {
+        "title": "Minhas Vagas",
+        "description": "Acompanhe o andamento das suas candidaturas em cada processo seletivo",
+        "search_placeholder": "Busque por uma vaga ou empresa",
+        "empty_title": "Nenhuma candidatura encontrada",
+        "empty_description": "Candidate-se a uma vaga ou altere o termo da busca para ver resultados aqui.",
+        "feedback": "Feedback da empresa",
+        "portfolio": {
+            "due_date": "Prazo de envio",
+            "send": "Enviar portfólio",
+            "send_description": "A empresa solicitou o seu portfólio nesta etapa. Envie o link para seguir no processo seletivo.",
+            "url_placeholder": "https://github.com/seu-usuario/seu-projeto"
+        }
+    },
+    "vacancies": {
+        "apply": "Candidatar-se",
+        "applied": "Candidatura enviada",
+        "apply_confirm": "Participar deste processo seletivo?",
+        "apply_confirm_description": "Sua candidatura será enviada à empresa e o seu perfil ficará visível para ela. Assim que as inscrições forem encerradas, você receberá uma notificação avisando o início da triagem de currículos."
+    },
+    "search": {
+        "title": "Buscar",
+        "description": "Encontre desenvolvedores, empresas e clientes cadastrados na plataforma",
+        "placeholder": "Busque por qualquer desenvolvedor, empresa, cliente ou vaga...",
+        "see_more": "Ver mais",
+        "score": "Pontuação",
+        "group": {
+            "all": "Todos",
+            "developers": "Desenvolvedores",
+            "companies": "Empresas",
+            "clients": "Clientes",
+            "vacancies": "Vagas"
+        },
+        "empty": {
+            "developers_title": "Nenhum desenvolvedor encontrado",
+            "developers_description": "Busque por um termo para ver os desenvolvedores correspondentes aqui.",
+            "companies_title": "Nenhuma empresa encontrada",
+            "companies_description": "Busque por um termo para ver as empresas correspondentes aqui.",
+            "clients_title": "Nenhum cliente encontrado",
+            "clients_description": "Busque por um termo para ver os clientes correspondentes aqui.",
+            "vacancies_title": "Nenhuma vaga encontrada",
+            "vacancies_description": "Busque por um termo para ver as vagas correspondentes aqui."
+        },
+        "popular": {
+            "best_scored_devs": "Desenvolvedores mais bem pontuados",
+            "best_scored_companies": "Empresas mais bem pontuadas",
+            "best_scored_clients": "Clientes mais bem pontuados"
+        }
+    },
+    "profile_pic": {
+        "select": "Selecionar foto",
+        "change": "Alterar foto",
+        "hint": "PNG, JPG ou WEBP de até {{size}}MB",
+        "invalid_type": "Formato de imagem inválido",
+        "too_large": "A imagem deve ter no máximo {{size}}MB"
     }
 }

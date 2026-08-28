@@ -1,16 +1,30 @@
 import { useShowDevProfile } from '@/api/generated/profile/profile';
 import DevProfileContent from '@/components/profile/variants/dev-profile-body';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import i18n from '@/i18n';
+import { useBreadcrumbLabel } from '@/hooks/use-breadcrumbs';
 import { createFileRoute } from '@tanstack/react-router'
 import { AlertCircle, Eye, Hourglass, User } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
+import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 
-export const Route = createFileRoute('/(private)/admin-land/devs/$id/')({
+export const Route = createFileRoute('/(private)/(home)/devs/$id/')({
+  head: () => ({ meta: [{ title: pageTitle("dev_details") }] }),
+  staticData: {
+    breadcrumb: {
+      labelKey: "page_title.dev_details",
+      parents: [{ labelKey: "page_title.devs", clickable: false }],
+    },
+  },
   component: RouteComponent,
+  beforeLoad: async () => {
+    await ensureAuthenticated();
+    await ensureProfileCreated();
+  },
 })
 
 function RouteComponent() {
@@ -21,6 +35,8 @@ function RouteComponent() {
   const { data: dev } = useShowDevProfile(id);
 
   const devData = dev?.data;
+
+  useBreadcrumbLabel(devData?.name);
 
   const hasTranslation = devData?.translation_status === 'translated';
   const translationIsPending = devData?.translation_status === 'pending';
@@ -33,6 +49,13 @@ function RouteComponent() {
     <div className="flex-1 p-8 flex flex-col gap-4">
     <Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
       <Avatar className="size-32">
+        {devData?.profile_pic && (
+          <AvatarImage
+            src={devData.profile_pic}
+            alt={devData.name}
+            className="object-cover"
+          />
+        )}
         <AvatarFallback className="bg-primary text-primary-foreground">
           <User className="size-22" />
         </AvatarFallback>

@@ -1,4 +1,32 @@
 {
+    "page_title": {
+        "home": "Home",
+        "login": "Login",
+        "register": "Register",
+        "address": "Address",
+        "create_profile": "Create Profile",
+        "feed": "Feed",
+        "search": "Search",
+        "profile": "Profile",
+        "settings": "Settings",
+        "dashboard": "Dashboard",
+        "devs": "Devs",
+        "dev_details": "Developer Details",
+        "companies": "Companies",
+        "company_details": "Company Details",
+        "clients": "Clients",
+        "client_details": "Client Details",
+        "proficiency_test": "Proficiency Test",
+        "my_vacancies": "My Vacancies",
+        "vacancies": "Vacancies",
+        "vacancy_details": "Vacancy Details",
+        "selection_process": "Selection Process",
+        "my_applies": "My Vacancies"
+    },
+    "breadcrumb": {
+        "admin": "Administration",
+        "test_in_progress": "Test in progress"
+    },
     "general": {
         "back": "Back",
         "sing_out": "Sing out",
@@ -27,7 +55,7 @@
         "display_original_content": "Display original content",
         "display_translated_content": "Display translated content",
         "showing_original_content": "Showing original content",
-        "showing_translated_content": "Showing translated content" ,
+        "showing_translated_content": "Showing translated content",
         "filters": "Filters",
         "view_profile": "View profile",
         "edit_profile": "Edit profile",
@@ -41,7 +69,10 @@
         "status": "Status",
         "translation_pending": "Translation pending.",
         "translation_error": "Translation unavailable.",
-        "translation_in_progress": "Translation pending."
+        "translation_in_progress": "Translation pending.",
+        "no_results": "No results found",
+        "visit": "Visit",
+        "confirm": "Confirm"
     },
     "toast": {
         "success": {
@@ -85,7 +116,13 @@
             "recommendation_preferences_updated": "Recommendation preferences updated successfully",
             "recommendation_preferences_restored": "Default configuration restored",
             "access_blocked": "Access blocked successfully",
-            "access_unblocked": "Access unblocked successfully"
+            "access_unblocked": "Access unblocked successfully",
+            "profile_pic_updated": "Profile picture updated successfully",
+            "job_vacancy_created": "Job vacancy created successfully",
+            "job_vacancy_updated": "Job vacancy updated successfully",
+            "job_vacancy_inscriptions_closed": "Inscriptions closed successfully",
+            "vacancy_applied": "Application sent successfully",
+            "step_advanced": "Stage closed and applications advanced successfully"
         }
     },
     "role": {
@@ -349,7 +386,7 @@
             "recommendation": "Recommendation"
         },
         "account": {
-            "email_verification": { 
+            "email_verification": {
                 "title": "E-mail verification",
                 "description": "This will help us to send you the best oportunities, even out of our platform, and help to let your account more secure with access report and access code sending!",
                 "your_email_is_already_verified": "Your e-email is already verified yet",
@@ -369,7 +406,7 @@
             "delete_account": {
                 "title": "Delete account",
                 "description": "Warning: If you delete your account, all your data will be deleted permanently and will not be possible to recover",
-                "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",    
+                "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",
                 "yes_delete_my_account": "Yes, delete my account"
             }
         },
@@ -377,10 +414,18 @@
             "update_profile": {
                 "title": "Update your profile",
                 "description": "Update your profile information, this will help us to know you better and recommend you the best"
+            },
+            "location_informations": {
+                "title": "Location information",
+                "description": "Manage your location and address information, this helps us know where you live to recommend the best job opportunities"
+            },
+            "profile_pic": {
+                "title": "Profile picture",
+                "description": "Update the picture shown on your profile and in recommendations"
             }
         },
         "theme": {
-            "change_theme": {   
+            "change_theme": {
                 "title": "Change theme",
                 "description": "Change the platform color scheme between light, dark or matching with your operational system default configuration"
             },
@@ -418,6 +463,12 @@
                 "description": "Custom the languages and frameworks the flexibility on our recommendation system, your will to learn a new technology, techologies that  you don't wanna be related",
                 "recommendation_flexibility_title": "Recommendation Flexibility",
                 "recommendation_flexibility_description": "Enable this to discover roles beyond your exact tech stack. The algorithm will broaden your recommendations to include jobs where your core skills are transferable, even if the specific languages or frameworks differ."
+            },
+            "min_remuneration": {
+                "title": "Minimum remuneration",
+                "description": "Set the minimum amount you are willing to receive. The algorithm will stop recommending opportunities below this value.",
+                "enable_title": "Set a minimum remuneration",
+                "enable_description": "Enable to filter recommendations by your desired minimum amount"
             }
         }
     },
@@ -448,21 +499,29 @@
         "description": "Please comeback later"
     },
     "sidebar": {
+        "sections_title": "Sections",
+        "options_title": "Options",
         "sections": {
             "feed": "Feed",
             "companies": "Companies",
-            "job_vacancies": "Job Vacancies",
-            "freelances": "Freelances",
+            "job_vacancies": "My Vacancies",
+            "freelances": "My Freelances",
+            "freelancers": "Freelancers",
             "my_jobs": "My Vacancies",
             "dashboard": "Dashboard",
             "devs": "Devs",
             "clients": "Clients",
             "questions": "Questions",
-            "admins": "Admins"
+            "admins": "Admins",
+            "search": "Search"
         },
         "options": {
             "profile": "Profile",
             "settings": "Settings"
+        },
+        "account": {
+            "me": "Me",
+            "update_info": "Update account info"
         },
         "logout_dialog": {
             "description": "You're about to log out of your account. You'll need to sign in again to access your data and continue using the platform."
@@ -522,7 +581,15 @@
         "old_password": "Actual password",
         "new_password": "New password",
         "new_password_confirmation": "New password confirmation",
-        "stack_blacklist": "Stack blacklist"
+        "stack_blacklist": "Stack blacklist",
+        "profile_pic": "Profile picture",
+        "min_remuneration": "Minimum remuneration",
+        "benefits": "Benefits",
+        "estimated_salary": "Estimated salary",
+        "required_languages": "Required languages / frameworks",
+        "desirable_languages": "Desirable languages / frameworks",
+        "soft_skills": "Soft skills",
+        "process_steps": "Selection process steps"
     },
     "tooltip": {
         "open_to_work": "Tell our algorithm that you are available for job openings; without this information, our intelligent algorithm will not recommend you for positions.",
@@ -579,7 +646,16 @@
         "stack_blacklist": "Select a language / framework to avoid",
         "dev_search": "Search for a developer, seniority, specialty and open to work and relocation",
         "company_search": "Search for a company or operational segment",
-        "filter_operational_segment": "Select an operational segment"
+        "filter_operational_segment": "Select an operational segment",
+        "email": "Enter your email",
+        "min_remuneration": "Enter the minimum amount",
+        "job_vacancy_title": "Senior frontend developer",
+        "job_vacancy_description": "Describe the role, responsibilities and expectations",
+        "benefit": "Health insurance, meal voucher...",
+        "estimated_salary": "5000.00",
+        "soft_skills": "Select the valued soft skills",
+        "soft_skill_search": "Search soft skill...",
+        "process_step": "Select a step"
     },
     "filters": {
         "all": "All",
@@ -665,6 +741,43 @@
             "software_house": "Software House",
             "retail": "Retail",
             "banking": "Banking"
+        },
+        "selection_process_stage": {
+            "awaiting_resume_screening": "Awaiting resume screening",
+            "resume_screening": "Resume screening",
+            "awaiting_screening_questions": "Awaiting screening questions",
+            "screening_questions": "Screening questions",
+            "awaiting_interview": "Awaiting interview",
+            "interview": "Interview",
+            "awaiting_technical_challenge": "Awaiting technical challenge",
+            "technical_challenge": "Technical challenge",
+            "awaiting_live_coding": "Awaiting live coding",
+            "live_coding": "Live coding",
+            "awaiting_language_assessment": "Awaiting language assessment",
+            "language_assessment": "Language assessment",
+            "awaiting_portfolio_review": "Awaiting portfolio review",
+            "portfolio_review": "Portfolio review"
+        },
+        "job_vacancy_status": {
+            "open_inscriptions": "Open inscriptions",
+            "closed_inscriptions": "Closed inscriptions",
+            "canceled": "Canceled",
+            "concluded": "Concluded"
+        },
+        "dev_job_vacancy_status": {
+            "in_progress": "In progress",
+            "approved": "Approved",
+            "rejected": "Rejected"
+        },
+        "portfolio_solicitation": {
+            "status": {
+                "pending": "Portfolio pending",
+                "sent": "Portfolio sent"
+            },
+            "type": {
+                "repository": "Repository",
+                "production": "Live project"
+            }
         }
     },
     "pagination": {
@@ -808,5 +921,125 @@
         "accountability_advanced_description": "Consistently demonstrates ownership, reliability, and responsibility for outcomes.",
         "accountability_expert": "Expert",
         "accountability_expert_description": "Leads by example in accountability and encourages a culture of ownership within the team."
+    },
+    "my_vacancies": {
+        "title": "My Vacancies",
+        "description": "Manage the job vacancies published by your company and follow their candidates",
+        "popular_title": "Most applied vacancies",
+        "candidates": "Candidates",
+        "estimated_salary": "Estimated salary",
+        "search_placeholder": "Search for one of your job vacancies",
+        "empty_title": "No job vacancies found",
+        "empty_description": "Publish a job vacancy or change the search term to see results here.",
+        "create_title": "Create new job vacancy",
+        "add_process_step": "Add step",
+        "applies": {
+            "title": "Applications",
+            "table": {
+                "dev": "Developer",
+                "specialty": "Specialty",
+                "seniority_level": "Seniority Level",
+                "status": "Status",
+                "applied_at": "Applied at",
+                "process_step": "Current step"
+            }
+        },
+        "current_step": "Current step",
+        "selection_process": {
+            "title": "Selection process",
+            "approve_selected": "Approve selected",
+            "select_all": "Select all",
+            "advance_confirm": "Advance the selected applications?",
+            "advance_confirm_description": "{{approved}} selected application(s) advance to the next stage and {{rejected}} unselected application(s) are automatically eliminated from this selection process. This action cannot be undone.",
+            "upcoming_title": "Stage not reached yet",
+            "upcoming_description": "The applications will be shown here when the selection process reaches this stage.",
+            "portfolio_review": {
+                "not_requested": "No portfolio was requested for this candidate.",
+                "awaiting_link": "The candidate has not sent the portfolio link yet."
+            },
+            "empty_applies_title": "No applications in this stage",
+            "empty_applies_description": "No developer is waiting for evaluation in this stage of the selection process.",
+            "results": {
+                "approved_title": "Approved",
+                "rejected_title": "Rejected in this stage"
+            },
+            "resume_screening": {
+                "awaiting_title": "Resume screening not available yet",
+                "awaiting_description": "Selecting resumes for the next stage only becomes available after the inscription period is closed."
+            }
+        },
+        "actions": {
+            "title": "Actions",
+            "update_vacancy": "Update vacancy data",
+            "view_selection_process": "View selection process",
+            "update_vacancy_description": "Change the vacancy information. Title, description and benefits are translated again after the update.",
+            "close_inscriptions": "Close inscriptions",
+            "close_inscriptions_description": "The vacancy will stop accepting new applications, the process moves to resume screening and every applied developer is notified. This action cannot be undone.",
+            "no_applies_title": "This vacancy has no applications",
+            "no_applies_description": "Nobody has applied to this vacancy yet, so closing the inscriptions now means there will be no selection process."
+        },
+        "devs_section_title": "Developers",
+        "recommended": {
+            "title": "Recommended",
+            "table": {
+                "similarity": "Match"
+            }
+        }
+    },
+    "my_applies": {
+        "title": "My Vacancies",
+        "description": "Follow the progress of your applications in each selection process",
+        "search_placeholder": "Search for a vacancy or company",
+        "empty_title": "No application found",
+        "empty_description": "Apply to a vacancy or change the search term to see results here.",
+        "feedback": "Company feedback",
+        "portfolio": {
+            "due_date": "Submission deadline",
+            "send": "Send portfolio",
+            "send_description": "The company requested your portfolio in this stage. Send the link to move forward in the selection process.",
+            "url_placeholder": "https://github.com/your-user/your-project"
+        }
+    },
+    "vacancies": {
+        "apply": "Apply",
+        "applied": "Application sent",
+        "apply_confirm": "Join this selection process?",
+        "apply_confirm_description": "Your application will be sent to the company and your profile will be visible to it. As soon as the inscriptions are closed, you will receive a notification about the start of the resume screening."
+    },
+    "search": {
+        "title": "Search",
+        "description": "Find developers, companies and clients registered on the platform",
+        "placeholder": "Search for any developer, company, client or vacancy...",
+        "see_more": "See more",
+        "score": "Score",
+        "group": {
+            "all": "All",
+            "developers": "Developers",
+            "companies": "Companies",
+            "clients": "Clients",
+            "vacancies": "Job Vacancies"
+        },
+        "empty": {
+            "developers_title": "No developers found",
+            "developers_description": "Search for a term to see matching developers here.",
+            "companies_title": "No companies found",
+            "companies_description": "Search for a term to see matching companies here.",
+            "clients_title": "No clients found",
+            "clients_description": "Search for a term to see matching clients here.",
+            "vacancies_title": "No job vacancies found",
+            "vacancies_description": "Search for a term to see matching job vacancies here."
+        },
+        "popular": {
+            "best_scored_devs": "Best scored devs",
+            "best_scored_companies": "Best scored companies",
+            "best_scored_clients": "Best scored clients"
+        }
+    },
+    "profile_pic": {
+        "select": "Select picture",
+        "change": "Change picture",
+        "hint": "PNG, JPG or WEBP up to {{size}}MB",
+        "invalid_type": "Invalid image format",
+        "too_large": "The image must be at most {{size}}MB"
     }
 }

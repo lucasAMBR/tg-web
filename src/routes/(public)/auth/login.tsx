@@ -7,8 +7,10 @@ import { redirectIfAuthenticated } from "@/utils/route-guards";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute("/(public)/auth/login")({
+	head: () => ({ meta: [{ title: pageTitle("login") }] }),
 	component: Login,
 	beforeLoad: async () => {
 		await redirectIfAuthenticated();

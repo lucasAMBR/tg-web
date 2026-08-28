@@ -1,8 +1,11 @@
 import { DevTable } from '@/components/admin-land/devs/dev-table';
 import { createFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute('/(private)/admin-land/devs/')({
+  head: () => ({ meta: [{ title: pageTitle("devs") }] }),
+  staticData: { breadcrumb: { labelKey: "page_title.devs" } },
   component: RouteComponent,
 })
 

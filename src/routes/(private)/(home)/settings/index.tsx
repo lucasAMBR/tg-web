@@ -5,6 +5,7 @@ import CompanyUpdateProfileForm from '@/components/settings/company-update-profi
 import CustomRecommendationDistances from '@/components/settings/custom-recommendation-distances';
 import CustomRecommendationJobModality from '@/components/settings/custom-recommendation-job-modality';
 import CustomRecommendationJobType from '@/components/settings/custom-recommendation-job-type';
+import CustomRecommendationMinRemuneration from '@/components/settings/custom-recommendation-min-remuneration';
 import CustomStackRecommendation from '@/components/settings/custom-stack-recommendation';
 import ClientUpdateProfileForm from '@/components/settings/client-update-profile-form';
 import DevUpdateProfileForm from '@/components/settings/dev-update-profile-form';
@@ -12,6 +13,7 @@ import PasswordChange from '@/components/settings/password-change';
 import { ToggleTheme } from '@/components/settings/theme-toggle';
 import UpdateAddressForm from '@/components/settings/update-address-form';
 import UpdateEmailForm from '@/components/settings/update-email-form';
+import UpdateProfilePicForm from '@/components/settings/update-profile-pic-form';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
@@ -25,8 +27,11 @@ import { createFileRoute } from '@tanstack/react-router'
 import { AlertTriangle, Check, Trash, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute('/(private)/(home)/settings/')({
+  head: () => ({ meta: [{ title: pageTitle("settings") }] }),
+  staticData: { breadcrumb: { labelKey: "page_title.settings" } },
   component: RouteComponent,
     beforeLoad: async () => {
       await ensureAuthenticated();
@@ -166,6 +171,16 @@ function RouteComponent() {
                   <Card className='p-6 w-full flex flex-col'>
                      <div className='flex-1 flex flex-row gap-12'>
                       <div className='flex-1'>
+                        <h3 className='text-xl font-medium'>{t("settings.profile.profile_pic.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.profile.profile_pic.description")}</p>
+                      </div>
+                      <div className='flex-2 min-w-0'>
+                        <UpdateProfilePicForm />
+                      </div>
+                    </div>
+                    <Separator className='my-6'/>
+                     <div className='flex-1 flex flex-row gap-12'>
+                      <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.profile.update_profile.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.profile.update_profile.description")}</p>
                       </div>
@@ -235,6 +250,17 @@ function RouteComponent() {
                       </div>
                       <CustomRecommendationDistances 
                         profileId={user?.dev_profile?.id as string} 
+                        initialData={preferences?.data as RecommendationPreferenceResource}
+                      />
+                    </div>
+                    <Separator className='my-6'/>
+                    <div className='flex-1 flex flex-row gap-12'>
+                      <div className='flex-1'>
+                        <h3 className='text-xl font-medium'>{t("settings.recommendation.min_remuneration.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.recommendation.min_remuneration.description")}</p>
+                      </div>
+                      <CustomRecommendationMinRemuneration
+                        profileId={user?.dev_profile?.id as string}
                         initialData={preferences?.data as RecommendationPreferenceResource}
                       />
                     </div>

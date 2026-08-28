@@ -34,6 +34,8 @@ import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import z from "zod/v3";
 import { useTranslation } from "react-i18next";
+import { useUserUserUpdate1 } from "@/api/generated/user/user";
+import { ProfilePicInput } from "../global/inputs/profile-pic-input";
 
 const CreateClientProfileSchema = z.object({
 	cpf: z.string().length(11, "CPF must have 11 characters!"),
@@ -60,8 +62,9 @@ export default function ClientProfileForm() {
 	const { t } = useTranslation();
 
 	const navigate = useNavigate();
-	const { hydrateUser } = useAuthStore();
+	const { user, hydrateUser } = useAuthStore();
 	const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
+	const [profilePic, setProfilePic] = useState<File | null>(null);
 
 	const form = useForm<ICreateClientProfileSchema>({
 		resolver: zodResolver(CreateClientProfileSchema),
@@ -75,14 +78,28 @@ export default function ClientProfileForm() {
 	});
 
 	const { mutateAsync: createProfile, isPending } = useStoreClientProfile();
+	const { mutateAsync: updateUser, isPending: isUploadingProfilePic } =
+		useUserUserUpdate1();
 
 	const create = async (data: ICreateClientProfileSchema) => {
 		await createProfile(
 			{ data },
 			{
-				onSuccess: () => {
+				onSuccess: async () => {
 					CustomToaster.successToast(t("toast.success.profile_client_created"));
-					hydrateUser();
+
+					if (profilePic) {
+						await updateUser(
+							{ id: user?.id as string, data: { profile_pic: profilePic } },
+							{
+								onError: (error) => {
+									onError(error as AxiosError<ApiError>);
+								},
+							},
+						).catch(() => null);
+					}
+
+					await hydrateUser();
 					setAddressAlertModal(true);
 				},
 				onError: (error) => {
@@ -97,6 +114,10 @@ export default function ClientProfileForm() {
 			onSubmit={form.handleSubmit(create)}
 			className="w-full max-w-[700px] flex flex-col gap-4"
 		>
+			<Field className="mb-4">
+				<FieldLabel>{t("input.profile_pic")}</FieldLabel>
+				<ProfilePicInput value={profilePic} onChange={setProfilePic} />
+			</Field>
 			<div className="flex gap-2">
 				<Controller
 					control={form.control}
@@ -226,8 +247,8 @@ export default function ClientProfileForm() {
 					</Field>
 				)}
 			/>
-			<Button disabled={isPending}>
-				{isPending ? <Spinner /> : t("general.create")}
+			<Button disabled={isPending || isUploadingProfilePic}>
+				{isPending || isUploadingProfilePic ? <Spinner /> : t("general.create")}
 			</Button>
 			<AlertDialog open={addresAlertModal} onOpenChange={setAddressAlertModal}>
 				<AlertDialogContent>

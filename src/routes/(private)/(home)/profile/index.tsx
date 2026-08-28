@@ -2,13 +2,14 @@ import ThemeToggle from "@/components/global/theme-toggle-button";
 import ClientProfileBody from "@/components/profile/variants/client-profile-body";
 import CompanyProfileBody from "@/components/profile/variants/company-profile-body";
 import DevProfileContent from "@/components/profile/variants/dev-profile-body";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { useAuthStore } from "@/stores/auth-store";
 import {
 	getNameFromProfile,
 	getProfileBio,
+	getProfilePic,
 	getProfileEnglishBio,
 	getProfilePortugueseBio,
 	getProfileScore,
@@ -24,8 +25,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AlertCircle, BadgeCheck, Eye, Hourglass, User } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { pageTitle } from "@/utils/page-title";
 
 export const Route = createFileRoute("/(private)/(home)/profile/")({
+	head: () => ({ meta: [{ title: pageTitle("profile") }] }),
+	staticData: { breadcrumb: { labelKey: "page_title.profile" } },
 	component: RouteComponent,
 	beforeLoad: async () => {
 		await ensureAuthenticated();
@@ -37,6 +41,8 @@ function RouteComponent() {
 	const { user } = useAuthStore();
 
 	const { t, i18n } = useTranslation();
+
+	const profilePic = getProfilePic(user);
 
 	const translationStatus = getProfileTranslationStatus(user);
 	const hasTranslation = translationStatus === 'translated';
@@ -80,6 +86,13 @@ function RouteComponent() {
 			<div className="flex-1 p-8 flex flex-col gap-4">
 				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
 					<Avatar className="size-32">
+						{profilePic && (
+							<AvatarImage
+								src={profilePic}
+								alt={getNameFromProfile(user) ?? ""}
+								className="object-cover"
+							/>
+						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
 							<User className="size-22" />
 						</AvatarFallback>
@@ -116,6 +129,13 @@ function RouteComponent() {
 			<div className="flex-1 p-8 flex flex-col gap-4">
 				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
 					<Avatar className="size-32">
+						{profilePic && (
+							<AvatarImage
+								src={profilePic}
+								alt={getNameFromProfile(user) ?? ""}
+								className="object-cover"
+							/>
+						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
 							<User className="size-22" />
 						</AvatarFallback>
@@ -149,6 +169,13 @@ function RouteComponent() {
 			<div className="flex-1 p-8 flex flex-col gap-4">
 				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
 					<Avatar className="size-32">
+						{profilePic && (
+							<AvatarImage
+								src={profilePic}
+								alt={getNameFromProfile(user) ?? ""}
+								className="object-cover"
+							/>
+						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
 							<User className="size-22" />
 						</AvatarFallback>

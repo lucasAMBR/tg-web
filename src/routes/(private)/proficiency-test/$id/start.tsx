@@ -9,12 +9,15 @@ import { ensureAuthenticated, ensureRoutePermissions } from '@/utils/route-guard
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
 
 const staticData = {
     requiredPermissions: ["proficiency_test.submit"]
 }
 
 export const Route = createFileRoute('/(private)/proficiency-test/$id/start')({
+    head: () => ({ meta: [{ title: pageTitle("proficiency_test") }] }),
+    staticData: { breadcrumb: { labelKey: "page_title.proficiency_test" } },
     component: RouteComponent,
     beforeLoad: async () => {
         await ensureAuthenticated();

@@ -84,7 +84,7 @@ const CompanyActionsCell = ({ company }: { company: AdminCompanyProfile }) => {
 				<DropdownMenuContent side="bottom" align="end">
 					<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 					<DropdownMenuGroup>
-						<DropdownMenuItem onClick={() => navigate({ to: "/admin-land/company/$id", params: { id: company.id } })}>
+						<DropdownMenuItem onClick={() => navigate({ to: "/companies/$id", params: { id: company.id } })}>
 							<EyeIcon className="w-4" />
 							{t("general.view_profile")}
 						</DropdownMenuItem>

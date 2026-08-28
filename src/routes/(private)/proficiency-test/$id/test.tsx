@@ -9,12 +9,22 @@ import { env } from '@/utils/env';
 import { ensureAuthenticated, ensureRoutePermissions } from '@/utils/route-guards';
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react';
+import { pageTitle } from "@/utils/page-title";
 
 const staticData = {
     requiredPermissions: ["proficiency_test.submit"]
 }
 
 export const Route = createFileRoute('/(private)/proficiency-test/$id/test')({
+    head: () => ({ meta: [{ title: pageTitle("proficiency_test") }] }),
+    staticData: {
+        breadcrumb: {
+            labelKey: "breadcrumb.test_in_progress",
+            parents: [
+                { labelKey: "page_title.proficiency_test", clickable: false },
+            ],
+        },
+    },
     component: RouteComponent,
     beforeLoad: async () => {
       await ensureAuthenticated();

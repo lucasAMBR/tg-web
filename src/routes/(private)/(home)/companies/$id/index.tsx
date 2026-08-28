@@ -1,16 +1,30 @@
 import { useShowCompany } from '@/api/generated/profile/profile';
 import CompanyProfileBody from '@/components/profile/variants/company-profile-body';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import i18n from '@/i18n';
+import { useBreadcrumbLabel } from '@/hooks/use-breadcrumbs';
 import { createFileRoute } from '@tanstack/react-router'
 import { AlertCircle, Building, Eye, Hourglass } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { pageTitle } from "@/utils/page-title";
+import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 
-export const Route = createFileRoute('/(private)/admin-land/company/$id/')({
+export const Route = createFileRoute('/(private)/(home)/companies/$id/')({
+  head: () => ({ meta: [{ title: pageTitle("company_details") }] }),
+  staticData: {
+    breadcrumb: {
+      labelKey: "page_title.company_details",
+      parents: [{ labelKey: "page_title.companies", clickable: false }],
+    },
+  },
   component: RouteComponent,
+  beforeLoad: async () => {
+    await ensureAuthenticated();
+    await ensureProfileCreated();
+  },
 })
 
 function RouteComponent() {
@@ -21,6 +35,8 @@ function RouteComponent() {
   const { data: company } = useShowCompany(id);
 
   const companyData = company?.data;
+
+  useBreadcrumbLabel(companyData?.name);
 
   const hasTranslation = companyData?.translation_status === 'translated';
   const translationIsPending = companyData?.translation_status === 'pending';
@@ -33,6 +49,13 @@ function RouteComponent() {
     <div className="flex-1 p-8 flex flex-col gap-4">
       <Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
         <Avatar className="size-32">
+          {companyData?.profile_pic && (
+            <AvatarImage
+              src={companyData.profile_pic}
+              alt={companyData.name}
+              className="object-cover"
+            />
+          )}
           <AvatarFallback className="bg-primary text-primary-foreground">
             <Building className="size-22" />
           </AvatarFallback>
