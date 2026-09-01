@@ -189,8 +189,8 @@ export const PRESET_THEMES: CompleteTheme[] = [
 			cardForeground: "oklch(0.9491 0 0)",
 			popover: "oklch(0.2134 0 0)",
 			popoverForeground: "oklch(0.9491 0 0)",
-			primary: "oklch(72.037% 0.10143 64.511)",
-			primaryForeground: "oklch(0.2181 0.0041 84.5884)",
+			primary: "oklch(0.4856 0.0641 53.3065)",
+			primaryForeground: "oklch(0.985 0 0)",
 			secondary: "oklch(0.3163 0.0190 63.6992)",
 			secondaryForeground: "oklch(0.9247 0.0524 66.1732)",
 			muted: "oklch(0.2520 0 0)",
@@ -766,7 +766,7 @@ export const PRESET_THEMES: CompleteTheme[] = [
             "oklch(0.1649 0.0352 281.8285)", // Background (Dark Purple)
             "oklch(0.9816 0.0017 247.8390)", // Light Background
         ],
-    }, 
+    },
 	{
         name: "Cipher",
         light: {
