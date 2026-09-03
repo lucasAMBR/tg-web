@@ -1,12 +1,15 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { Briefcase, ExternalLink, Upload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { DevJobVacancyResource } from "@/api/generated/models";
+import InterviewNegotiation from "@/components/interview/interview-negotiation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { getInterview } from "@/types/dev-job-vacancy-interview";
 import {
 	getPortfolioSolicitation,
 	portfolioWasSent,
@@ -88,6 +91,35 @@ function PortfolioSolicitationBlock({ apply }: MyApplyCardProps) {
 	);
 }
 
+/** Negociação de horário e call da entrevista, na etapa correspondente. */
+function InterviewBlock({ apply }: MyApplyCardProps) {
+	const { t } = useTranslation();
+
+	const queryClient = useQueryClient();
+
+	const interview = getInterview(apply);
+
+	if (!interview) {
+		return (
+			<p className="border-t pt-3 text-sm text-muted-foreground">
+				{t("interview.not_created")}
+			</p>
+		);
+	}
+
+	return (
+		<InterviewNegotiation
+			interview={interview}
+			party="dev"
+			counterpartName={apply.vacancy?.profile?.name}
+			// A entrevista vem junto da candidatura, então a listagem inteira é refeita
+			onUpdated={() =>
+				queryClient.invalidateQueries({ queryKey: ["/dev-vacancy/my-applies"] })
+			}
+		/>
+	);
+}
+
 export default function MyApplyCard({ apply }: MyApplyCardProps) {
 	const { t, i18n } = useTranslation();
 
@@ -101,6 +133,8 @@ export default function MyApplyCard({ apply }: MyApplyCardProps) {
 	// A etapa só é relevante enquanto a candidatura continua no processo
 	const showPortfolioSolicitation =
 		isInProgress && apply.process_step === "portfolio_review";
+
+	const showInterview = isInProgress && apply.process_step === "interview";
 
 	const statusVariant =
 		apply.status === "approved"
@@ -175,6 +209,7 @@ export default function MyApplyCard({ apply }: MyApplyCardProps) {
 			{showPortfolioSolicitation && (
 				<PortfolioSolicitationBlock apply={apply} />
 			)}
+			{showInterview && <InterviewBlock apply={apply} />}
 		</Card>
 	);
 }

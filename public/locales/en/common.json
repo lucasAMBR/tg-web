@@ -122,7 +122,11 @@
             "job_vacancy_updated": "Job vacancy updated successfully",
             "job_vacancy_inscriptions_closed": "Inscriptions closed successfully",
             "vacancy_applied": "Application sent successfully",
-            "step_advanced": "Stage closed and applications advanced successfully"
+            "step_advanced": "Stage closed and applications advanced successfully",
+            "interview_schedule_set": "Interview schedule set successfully",
+            "interview_schedule_proposed": "New time proposed successfully",
+            "interview_schedule_accepted": "Interview schedule confirmed successfully",
+            "interview_cancelled": "Interview cancelled successfully"
         }
     },
     "role": {
@@ -778,6 +782,16 @@
                 "repository": "Repository",
                 "production": "Live project"
             }
+        },
+        "dev_job_vacancy_interview": {
+            "status": {
+                "awaiting_schedule": "Awaiting schedule",
+                "awaiting_dev_confirmation": "Awaiting developer confirmation",
+                "awaiting_company_confirmation": "Awaiting company confirmation",
+                "approved": "Schedule confirmed",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
         }
     },
     "pagination": {
@@ -998,6 +1012,54 @@
             "send": "Send portfolio",
             "send_description": "The company requested your portfolio in this stage. Send the link to move forward in the selection process.",
             "url_placeholder": "https://github.com/your-user/your-project"
+        }
+    },
+    "interview": {
+        "not_created": "The interview for this application has not been created yet.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "No schedule has been proposed yet. Set the date, time and duration of the interview with this candidate.",
+        "no_schedule_dev": "The company has not proposed a schedule for your interview yet.",
+        "awaiting_dev": "Schedule proposed. Awaiting the developer's confirmation.",
+        "awaiting_company": "Schedule proposed. Awaiting the company's confirmation.",
+        "proposed_by_company": "The company proposed this schedule. Accept it or propose another one.",
+        "proposed_by_dev": "The developer proposed this schedule. Accept it or propose another one.",
+        "cancelled_description": "This interview was cancelled and can no longer be rescheduled.",
+        "rejected_description": "This interview was rejected.",
+        "call_open": "The room is open. Join the interview whenever you are ready.",
+        "call_too_early": "The room opens {{minutes}} minutes before the scheduled time.",
+        "call_closed": "The window to join this interview has closed.",
+        "call_finished": "Interview held on {{date}}.",
+        "set_schedule": "Set schedule",
+        "propose_schedule": "Propose another time",
+        "accept_schedule": "Accept schedule",
+        "join_call": "Join interview",
+        "cancel_interview": "Cancel interview",
+        "cancel_confirm_title": "Cancel this interview?",
+        "cancel_confirm_description": "The other party will be notified and the interview cannot be rescheduled. This action cannot be undone.",
+        "modal": {
+            "title_set": "Set the interview schedule",
+            "title_propose": "Propose another time",
+            "description": "The other party is notified and can accept it or propose a new time.",
+            "date": "Date",
+            "date_placeholder": "Pick a date",
+            "time": "Time",
+            "duration": "Duration"
+        },
+        "call": {
+            "connecting": "Preparing the room...",
+            "waiting": "Waiting for the other person to join...",
+            "connected": "Connected",
+            "ended": "Call ended",
+            "counterpart": "Participant",
+            "you": "You",
+            "media_error": "We could not access your camera or microphone. Check your browser permissions and try again.",
+            "join_error": "We could not join the room. Check whether the confirmed time has already arrived.",
+            "connection_error": "The connection with the other person failed. Try joining the room again.",
+            "mute": "Mute microphone",
+            "unmute": "Unmute microphone",
+            "camera_off": "Turn camera off",
+            "camera_on": "Turn camera on",
+            "hang_up": "Hang up"
         }
     },
     "vacancies": {

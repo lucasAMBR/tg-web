@@ -122,7 +122,11 @@
             "job_vacancy_updated": "Vaga atualizada com sucesso",
             "job_vacancy_inscriptions_closed": "Inscrições encerradas com sucesso",
             "vacancy_applied": "Candidatura enviada com sucesso",
-            "step_advanced": "Etapa encerrada e candidaturas avançadas com sucesso"
+            "step_advanced": "Etapa encerrada e candidaturas avançadas com sucesso",
+            "interview_schedule_set": "Horário da entrevista definido com sucesso",
+            "interview_schedule_proposed": "Novo horário proposto com sucesso",
+            "interview_schedule_accepted": "Horário da entrevista confirmado com sucesso",
+            "interview_cancelled": "Entrevista cancelada com sucesso"
         }
     },
     "role": {
@@ -771,6 +775,16 @@
                 "repository": "Repositório",
                 "production": "Projeto em produção"
             }
+        },
+        "dev_job_vacancy_interview": {
+            "status": {
+                "awaiting_schedule": "Aguardando horário",
+                "awaiting_dev_confirmation": "Aguardando confirmação do dev",
+                "awaiting_company_confirmation": "Aguardando confirmação da empresa",
+                "approved": "Horário confirmado",
+                "cancelled": "Cancelada",
+                "rejected": "Rejeitada"
+            }
         }
     },
     "pagination": {
@@ -991,6 +1005,54 @@
             "send": "Enviar portfólio",
             "send_description": "A empresa solicitou o seu portfólio nesta etapa. Envie o link para seguir no processo seletivo.",
             "url_placeholder": "https://github.com/seu-usuario/seu-projeto"
+        }
+    },
+    "interview": {
+        "not_created": "A entrevista desta candidatura ainda não foi criada.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "Nenhum horário foi proposto ainda. Defina a data, o horário e a duração da entrevista com este candidato.",
+        "no_schedule_dev": "A empresa ainda não propôs um horário para a sua entrevista.",
+        "awaiting_dev": "Horário proposto. Aguardando a confirmação do desenvolvedor.",
+        "awaiting_company": "Horário proposto. Aguardando a confirmação da empresa.",
+        "proposed_by_company": "A empresa propôs este horário. Aceite ou proponha outro.",
+        "proposed_by_dev": "O desenvolvedor propôs este horário. Aceite ou proponha outro.",
+        "cancelled_description": "Esta entrevista foi cancelada e não pode mais ser reagendada.",
+        "rejected_description": "Esta entrevista foi rejeitada.",
+        "call_open": "A sala está aberta. Entre na entrevista quando estiver pronto.",
+        "call_too_early": "A sala abre {{minutes}} minutos antes do horário marcado.",
+        "call_closed": "A janela para entrar nesta entrevista foi encerrada.",
+        "call_finished": "Entrevista realizada em {{date}}.",
+        "set_schedule": "Definir horário",
+        "propose_schedule": "Propor outro horário",
+        "accept_schedule": "Aceitar horário",
+        "join_call": "Entrar na entrevista",
+        "cancel_interview": "Cancelar entrevista",
+        "cancel_confirm_title": "Cancelar esta entrevista?",
+        "cancel_confirm_description": "A outra parte será notificada e a entrevista não poderá ser reagendada. Esta ação não pode ser desfeita.",
+        "modal": {
+            "title_set": "Definir horário da entrevista",
+            "title_propose": "Propor outro horário",
+            "description": "A outra parte é notificada e pode aceitar ou propor um novo horário.",
+            "date": "Data",
+            "date_placeholder": "Escolha uma data",
+            "time": "Horário",
+            "duration": "Duração"
+        },
+        "call": {
+            "connecting": "Preparando a sala...",
+            "waiting": "Aguardando a outra pessoa entrar...",
+            "connected": "Conectado",
+            "ended": "Chamada encerrada",
+            "counterpart": "Participante",
+            "you": "Você",
+            "media_error": "Não foi possível acessar sua câmera ou microfone. Verifique as permissões do navegador e tente novamente.",
+            "join_error": "Não foi possível entrar na sala. Confira se o horário confirmado já chegou.",
+            "connection_error": "A conexão com a outra pessoa falhou. Tente entrar na sala novamente.",
+            "mute": "Desativar microfone",
+            "unmute": "Ativar microfone",
+            "camera_off": "Desativar câmera",
+            "camera_on": "Ativar câmera",
+            "hang_up": "Encerrar"
         }
     },
     "vacancies": {

@@ -21,6 +21,9 @@ import type {
 
 import type {
   AuthenticationExceptionResponse,
+  RecommendDevsForFreelanceJobVacancy200,
+  RecommendDevsForFreelanceJobVacancy400,
+  RecommendDevsForFreelanceJobVacancyParams,
   RecommendDevsForJobVacancy200,
   RecommendDevsForJobVacancy400,
   RecommendDevsForJobVacancyParams,
@@ -122,6 +125,107 @@ export function useRecommendDevsForJobVacancy<TData = Awaited<ReturnType<typeof 
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getRecommendDevsForJobVacancyQueryOptions(jobVacancyId,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `recommendDevsForFreelanceJobVacancy` — Retorna os desenvolvedores mais aderentes à vaga freelance, comparando o embedding da vaga com o embedding de cada perfil por similaridade de cosseno. Aceita `limit` (padrão 10) e `min_similarity` como filtros. Só retorna devs cujas **preferências de recomendação** são compatíveis com trabalho freelance: `allow_contractor` e `allow_remote` verdadeiros, nenhuma das linguagens exigidas na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Diferente da vaga CLT, `min_remuneration` e distância não são considerados: a vaga freelance não tem modalidade e sua remuneração pode ser por dia, semana ou mês. Exige role `client`, que a vaga pertença ao perfil autenticado e que o embedding da vaga já tenha sido gerado. Em **200**, `data[]` segue o schema **Recommended Dev Resource** (`App\Http\Resources\Recommendation\RecommendedDevResource`), com `similarity` (0 a 1) e `dev_profile` no schema **Dev Profile Resource** (`App\Http\Resources\Profiles\DevProfile\DevProfileResource`).
+ * @summary Recomendar desenvolvedores para uma vaga freelance
+ */
+export const recommendDevsForFreelanceJobVacancy = (
+    freelanceJobVacancyId: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<RecommendDevsForFreelanceJobVacancy200>(
+      {url: `/recommendation/freelance-job-vacancy/${freelanceJobVacancyId}/devs`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getRecommendDevsForFreelanceJobVacancyQueryKey = (freelanceJobVacancyId?: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams,) => {
+    return [
+    `/recommendation/freelance-job-vacancy/${freelanceJobVacancyId}/devs`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getRecommendDevsForFreelanceJobVacancyQueryOptions = <TData = Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(freelanceJobVacancyId: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getRecommendDevsForFreelanceJobVacancyQueryKey(freelanceJobVacancyId,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>> = ({ signal }) => recommendDevsForFreelanceJobVacancy(freelanceJobVacancyId,params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(freelanceJobVacancyId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type RecommendDevsForFreelanceJobVacancyQueryResult = NonNullable<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>>
+export type RecommendDevsForFreelanceJobVacancyQueryError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse
+
+
+export function useRecommendDevsForFreelanceJobVacancy<TData = Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ freelanceJobVacancyId: string,
+    params: undefined |  RecommendDevsForFreelanceJobVacancyParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>,
+          TError,
+          Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useRecommendDevsForFreelanceJobVacancy<TData = Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ freelanceJobVacancyId: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>,
+          TError,
+          Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useRecommendDevsForFreelanceJobVacancy<TData = Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ freelanceJobVacancyId: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Recomendar desenvolvedores para uma vaga freelance
+ */
+
+export function useRecommendDevsForFreelanceJobVacancy<TData = Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError = RecommendDevsForFreelanceJobVacancy400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ freelanceJobVacancyId: string,
+    params?: RecommendDevsForFreelanceJobVacancyParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendDevsForFreelanceJobVacancy>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getRecommendDevsForFreelanceJobVacancyQueryOptions(freelanceJobVacancyId,params,options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
