@@ -21,7 +21,8 @@
         "vacancies": "Vagas",
         "vacancy_details": "Detalhes da Vaga",
         "selection_process": "Processo Seletivo",
-        "my_applies": "Minhas Vagas"
+        "my_applies": "Minhas Vagas",
+        "screening_questionnaire": "Questionário de Triagem"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -126,7 +127,11 @@
             "interview_schedule_set": "Horário da entrevista definido com sucesso",
             "interview_schedule_proposed": "Novo horário proposto com sucesso",
             "interview_schedule_accepted": "Horário da entrevista confirmado com sucesso",
-            "interview_cancelled": "Entrevista cancelada com sucesso"
+            "interview_cancelled": "Entrevista cancelada com sucesso",
+            "screening_questionnaire_created": "Questionário de triagem criado com sucesso",
+            "screening_questionnaire_updated": "Questionário de triagem atualizado com sucesso",
+            "screening_questionnaire_deleted": "Questionário de triagem removido com sucesso",
+            "screening_questionnaire_answered": "Respostas enviadas com sucesso"
         }
     },
     "role": {
@@ -785,6 +790,17 @@
                 "cancelled": "Cancelada",
                 "rejected": "Rejeitada"
             }
+        },
+        "screening_question_type": {
+            "essay": "Dissertativa",
+            "single_choice": "Escolha única",
+            "multiple_choice": "Múltipla escolha"
+        },
+        "screening_questionnaire": {
+            "status": {
+                "pending": "Questionário pendente",
+                "answered": "Questionário respondido"
+            }
         }
     },
     "pagination": {
@@ -973,6 +989,16 @@
             "resume_screening": {
                 "awaiting_title": "Triagem de currículos ainda não liberada",
                 "awaiting_description": "A seleção dos currículos para a próxima etapa só fica disponível após o encerramento do período de inscrições."
+            },
+            "screening_questions": {
+                "missing_title": "Questionário de triagem não cadastrado",
+                "missing_description": "Monte o formulário desta etapa para que ele seja enviado aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem as perguntas depois que o formulário for cadastrado.",
+                "create_questionnaire": "Criar questionário",
+                "manage_questionnaire": "Gerenciar questionário",
+                "not_sent": "Este candidato ainda não recebeu o questionário de triagem.",
+                "awaiting_answers": "O candidato ainda não enviou as respostas.",
+                "view_answers": "Ver respostas"
             }
         },
         "actions": {
@@ -1005,6 +1031,17 @@
             "send": "Enviar portfólio",
             "send_description": "A empresa solicitou o seu portfólio nesta etapa. Envie o link para seguir no processo seletivo.",
             "url_placeholder": "https://github.com/seu-usuario/seu-projeto"
+        },
+        "screening": {
+            "not_received": "A empresa ainda não enviou o questionário de triagem desta etapa.",
+            "due_date": "Prazo de resposta",
+            "pending_description": "A empresa enviou um questionário de triagem. Responda para seguir no processo seletivo.",
+            "answered_description": "Suas respostas foram enviadas. Agora é só aguardar a avaliação da empresa.",
+            "answer": "Responder questionário",
+            "answer_description": "Responda as perguntas abaixo. As marcadas como obrigatórias precisam ser preenchidas.",
+            "response_placeholder": "Escreva a sua resposta",
+            "submit": "Enviar respostas",
+            "view_answers": "Ver minhas respostas"
         }
     },
     "interview": {
@@ -1096,5 +1133,52 @@
         "hint": "PNG, JPG ou WEBP de até {{size}}MB",
         "invalid_type": "Formato de imagem inválido",
         "too_large": "A imagem deve ter no máximo {{size}}MB"
+    },
+    "screening_questionnaire": {
+        "title": "Questionário de triagem",
+        "create_title": "Criar questionário de triagem",
+        "create_description": "Monte o formulário que os candidatos respondem na etapa de perguntas de triagem desta vaga.",
+        "edit_title": "Editar questionário de triagem",
+        "edit_description": "As perguntas e alternativas removidas da lista são apagadas ao salvar.",
+        "edit": "Editar questionário",
+        "sent_count_one": "{{count}} candidato já recebeu este questionário",
+        "sent_count_other": "{{count}} candidatos já receberam este questionário",
+        "locked_title": "Questionário bloqueado para edição",
+        "locked_description": "Ele já foi enviado aos candidatos e não pode mais ser alterado ou removido.",
+        "empty_questions_title": "Nenhuma pergunta cadastrada",
+        "empty_questions_description": "Adicione as perguntas que os candidatos precisam responder nesta etapa.",
+        "delete_confirm_title": "Remover este questionário?",
+        "delete_confirm_description": "As perguntas e as alternativas são removidas junto. Esta ação não pode ser desfeita.",
+        "required": "Obrigatória",
+        "essay_hint": "Pergunta dissertativa, respondida com um texto livre.",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Triagem inicial",
+            "description": "Descrição",
+            "description_placeholder": "Explique para o candidato o objetivo deste questionário",
+            "due_date": "Prazo de resposta",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Usado quando a vaga já está aguardando esta etapa. Sem prazo informado, a API usa 7 dias.",
+            "questions": "Perguntas",
+            "add_question": "Adicionar pergunta",
+            "question": "Pergunta",
+            "question_placeholder": "Escreva a pergunta que o candidato precisa responder",
+            "type": "Tipo",
+            "is_required": "Obrigatória",
+            "options": "Alternativas",
+            "option_placeholder": "Escreva a alternativa",
+            "add_option": "Adicionar alternativa",
+            "move_up": "Mover para cima",
+            "move_down": "Mover para baixo"
+        },
+        "answers": {
+            "title": "Respostas do questionário",
+            "description_company": "Respostas enviadas por {{name}} no questionário de triagem.",
+            "description_dev": "Estas foram as respostas que você enviou nesta etapa.",
+            "submitted_at": "Enviado em",
+            "not_answered": "Não respondida",
+            "empty_title": "Nenhuma resposta disponível",
+            "empty_description": "As respostas aparecem aqui assim que o candidato enviar o questionário."
+        }
     }
 }

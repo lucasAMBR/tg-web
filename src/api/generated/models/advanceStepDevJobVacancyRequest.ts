@@ -9,6 +9,7 @@ import type { AdvanceStepDevJobVacancyRequestDueDate } from './advanceStepDevJob
 export interface AdvanceStepDevJobVacancyRequest {
   /** Lista pode vir vazia, o que significa recusar todas as candidaturas da etapa */
   apply_ids: string[];
-  /** Prazo de entrega do portfólio, usado quando a próxima etapa é a análise de portfólio */
+  /** Prazo de entrega usado quando a próxima etapa pede algo do dev: o envio do
+portfólio ou a resposta do questionário de triagem */
   due_date?: AdvanceStepDevJobVacancyRequestDueDate;
 }

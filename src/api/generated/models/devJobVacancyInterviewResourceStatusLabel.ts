@@ -5,4 +5,15 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type DevJobVacancyInterviewResourceStatusLabel = string | null;
+export type DevJobVacancyInterviewResourceStatusLabel = typeof DevJobVacancyInterviewResourceStatusLabel[keyof typeof DevJobVacancyInterviewResourceStatusLabel];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const DevJobVacancyInterviewResourceStatusLabel = {
+  Aguardando_horário: 'Aguardando horário',
+  Aguardando_confirmação_do_dev: 'Aguardando confirmação do dev',
+  Aguardando_confirmação_da_empresa: 'Aguardando confirmação da empresa',
+  Cancelada: 'Cancelada',
+  Aprovada: 'Aprovada',
+  Rejeitada: 'Rejeitada',
+} as const;

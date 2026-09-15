@@ -13,6 +13,7 @@ import type { DevJobVacancyResourceAppliedAt } from './devJobVacancyResourceAppl
 import type { DevProfileResource } from './devProfileResource';
 import type { JobVacancyResource } from './jobVacancyResource';
 import type { PortfolioSolicitationResource } from './portfolioSolicitationResource';
+import type { DevScreeningQuestionnaireResource } from './devScreeningQuestionnaireResource';
 import type { DevJobVacancyInterviewResource } from './devJobVacancyInterviewResource';
 
 export interface DevJobVacancyResource {
@@ -31,6 +32,9 @@ mantém o passo em que a recusa aconteceu */
   vacancy?: JobVacancyResource;
   /** Solicitação de portfólio da candidatura, carregada na etapa de análise de portfólio */
   portfolio_solicitation?: PortfolioSolicitationResource;
+  /** Preenchimento do questionário de triagem da candidatura, carregado na
+etapa de perguntas de triagem */
+  screening_questionnaire?: DevScreeningQuestionnaireResource;
   /** Entrevista da candidatura, carregada na etapa de entrevista */
   interview?: DevJobVacancyInterviewResource;
 }

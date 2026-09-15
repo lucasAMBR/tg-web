@@ -40,6 +40,8 @@ import type {
   EnumQuestionStackBySpecialty404,
   EnumSalaryType200,
   EnumSalaryType400,
+  EnumScreeningQuestionType200,
+  EnumScreeningQuestionType400,
   EnumSeniority200,
   EnumSeniority400
 } from '.././models';
@@ -875,6 +877,99 @@ export function useEnumSalaryType<TData = Awaited<ReturnType<typeof enumSalaryTy
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getEnumSalaryTypeQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `enumScreeningQuestionType` — Lista os casos do enum `ScreeningQuestionTypeEnum`, os tipos de pergunta aceitos no questionário de triagem da vaga (`essay`, `single_choice` e `multiple_choice`). Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar tipos de pergunta de triagem
+ */
+export const enumScreeningQuestionType = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumScreeningQuestionType200>(
+      {url: `/enum/screening-question-type`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumScreeningQuestionTypeQueryKey = () => {
+    return [
+    `/enum/screening-question-type`
+    ] as const;
+    }
+
+    
+export const getEnumScreeningQuestionTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError = EnumScreeningQuestionType400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumScreeningQuestionTypeQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumScreeningQuestionType>>> = ({ signal }) => enumScreeningQuestionType(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumScreeningQuestionTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumScreeningQuestionType>>>
+export type EnumScreeningQuestionTypeQueryError = EnumScreeningQuestionType400
+
+
+export function useEnumScreeningQuestionType<TData = Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError = EnumScreeningQuestionType400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumScreeningQuestionType>>,
+          TError,
+          Awaited<ReturnType<typeof enumScreeningQuestionType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumScreeningQuestionType<TData = Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError = EnumScreeningQuestionType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumScreeningQuestionType>>,
+          TError,
+          Awaited<ReturnType<typeof enumScreeningQuestionType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumScreeningQuestionType<TData = Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError = EnumScreeningQuestionType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar tipos de pergunta de triagem
+ */
+
+export function useEnumScreeningQuestionType<TData = Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError = EnumScreeningQuestionType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumScreeningQuestionType>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumScreeningQuestionTypeQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

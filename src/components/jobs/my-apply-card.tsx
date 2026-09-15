@@ -1,9 +1,13 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { Briefcase, ExternalLink, Upload } from "lucide-react";
+import { Briefcase, ExternalLink, Eye, PencilLine, Upload } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { DevJobVacancyResource } from "@/api/generated/models";
 import InterviewNegotiation from "@/components/interview/interview-negotiation";
+import AnswerQuestionnaireModal from "@/components/screening-questionnaire/answer-questionnaire-modal";
+import QuestionnaireAnswersModal from "@/components/screening-questionnaire/questionnaire-answers-modal";
+import ScreeningStatusBadge from "@/components/screening-questionnaire/screening-status-badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -14,6 +18,10 @@ import {
 	getPortfolioSolicitation,
 	portfolioWasSent,
 } from "@/types/portfolio-solicitation";
+import {
+	getScreeningQuestionnaire,
+	screeningWasAnswered,
+} from "@/types/screening-questionnaire";
 import { formatDateTime } from "@/utils/formatter";
 
 interface MyApplyCardProps {
@@ -91,6 +99,82 @@ function PortfolioSolicitationBlock({ apply }: MyApplyCardProps) {
 	);
 }
 
+/** Questionário de triagem enviado pela empresa, na etapa correspondente. */
+function ScreeningQuestionnaireBlock({ apply }: MyApplyCardProps) {
+	const { t, i18n } = useTranslation();
+
+	const [answerModalIsOpen, setAnswerModalIsOpen] = useState(false);
+	const [answersModalIsOpen, setAnswersModalIsOpen] = useState(false);
+
+	const dateLocale = i18n.language === "en" ? "en" : "pt";
+
+	const devQuestionnaire = getScreeningQuestionnaire(apply);
+
+	if (!devQuestionnaire) {
+		return (
+			<p className="border-t pt-3 text-sm text-muted-foreground">
+				{t("my_applies.screening.not_received")}
+			</p>
+		);
+	}
+
+	const wasAnswered = screeningWasAnswered(devQuestionnaire);
+
+	return (
+		<div className="flex flex-col gap-2 border-t pt-3">
+			<div className="flex flex-row flex-wrap items-center gap-2">
+				<ScreeningStatusBadge devQuestionnaire={devQuestionnaire} />
+				{!wasAnswered && devQuestionnaire.due_date && (
+					<span className="text-sm text-muted-foreground">
+						{t("my_applies.screening.due_date")}:{" "}
+						{formatDateTime(devQuestionnaire.due_date, {
+							locale: dateLocale,
+							pattern: "dd/MM/yyyy",
+							fallback: "—",
+						})}
+					</span>
+				)}
+			</div>
+			<p className="text-sm text-muted-foreground">
+				{t(
+					wasAnswered
+						? "my_applies.screening.answered_description"
+						: "my_applies.screening.pending_description",
+				)}
+			</p>
+			{wasAnswered ? (
+				<Button
+					variant={"secondary"}
+					className="w-fit"
+					onClick={() => setAnswersModalIsOpen(true)}
+				>
+					<Eye />
+					{t("my_applies.screening.view_answers")}
+				</Button>
+			) : (
+				<Button
+					variant={"accent"}
+					className="w-fit"
+					onClick={() => setAnswerModalIsOpen(true)}
+				>
+					<PencilLine />
+					{t("my_applies.screening.answer")}
+				</Button>
+			)}
+			<AnswerQuestionnaireModal
+				open={answerModalIsOpen}
+				onOpenChange={setAnswerModalIsOpen}
+				devQuestionnaireId={devQuestionnaire.id}
+			/>
+			<QuestionnaireAnswersModal
+				open={answersModalIsOpen}
+				onOpenChange={setAnswersModalIsOpen}
+				devQuestionnaireId={devQuestionnaire.id}
+			/>
+		</div>
+	);
+}
+
 /** Negociação de horário e call da entrevista, na etapa correspondente. */
 function InterviewBlock({ apply }: MyApplyCardProps) {
 	const { t } = useTranslation();
@@ -133,6 +217,9 @@ export default function MyApplyCard({ apply }: MyApplyCardProps) {
 	// A etapa só é relevante enquanto a candidatura continua no processo
 	const showPortfolioSolicitation =
 		isInProgress && apply.process_step === "portfolio_review";
+
+	const showScreeningQuestionnaire =
+		isInProgress && apply.process_step === "screening_questions";
 
 	const showInterview = isInProgress && apply.process_step === "interview";
 
@@ -208,6 +295,9 @@ export default function MyApplyCard({ apply }: MyApplyCardProps) {
 			)}
 			{showPortfolioSolicitation && (
 				<PortfolioSolicitationBlock apply={apply} />
+			)}
+			{showScreeningQuestionnaire && (
+				<ScreeningQuestionnaireBlock apply={apply} />
 			)}
 			{showInterview && <InterviewBlock apply={apply} />}
 		</Card>

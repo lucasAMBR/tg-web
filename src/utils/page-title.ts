@@ -23,7 +23,8 @@ type PageTitleKey =
 	| "my_vacancies"
 	| "my_applies"
 	| "vacancy_details"
-	| "selection_process";
+	| "selection_process"
+	| "screening_questionnaire";
 
 /**
  * Monta o `<title>` traduzido das rotas.

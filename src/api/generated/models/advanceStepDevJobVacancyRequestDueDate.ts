@@ -6,6 +6,7 @@
  */
 
 /**
- * Prazo de entrega do portfólio, usado quando a próxima etapa é a análise de portfólio
+ * Prazo de entrega usado quando a próxima etapa pede algo do dev: o envio do
+portfólio ou a resposta do questionário de triagem
  */
 export type AdvanceStepDevJobVacancyRequestDueDate = string | null;

@@ -36,6 +36,7 @@ import { Route as privatehomeDevsIdIndexRouteImport } from './routes/(private)/(
 import { Route as privatehomeCompaniesIdIndexRouteImport } from './routes/(private)/(home)/companies/$id/index'
 import { Route as privatehomeClientsIdIndexRouteImport } from './routes/(private)/(home)/clients/$id/index'
 import { Route as privatehomeMyVacanciesIdSelectionProcessRouteImport } from './routes/(private)/(home)/my-vacancies/$id/selection-process'
+import { Route as privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport } from './routes/(private)/(home)/my-vacancies/$id/screening-questionnaire'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -184,6 +185,12 @@ const privatehomeMyVacanciesIdSelectionProcessRoute =
     path: '/my-vacancies/$id/selection-process',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomeMyVacanciesIdScreeningQuestionnaireRoute =
+  privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport.update({
+    id: '/my-vacancies/$id/screening-questionnaire',
+    path: '/my-vacancies/$id/screening-questionnaire',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
@@ -205,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof privatehomeSettingsIndexRoute
   '/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
   '/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
@@ -232,6 +240,7 @@ export interface FileRoutesByTo {
   '/settings': typeof privatehomeSettingsIndexRoute
   '/admin-land/company': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs': typeof privateAdminLandDevsIndexRoute
+  '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
   '/clients/$id': typeof privatehomeClientsIdIndexRoute
   '/companies/$id': typeof privatehomeCompaniesIdIndexRoute
@@ -262,6 +271,7 @@ export interface FileRoutesById {
   '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
   '/(private)/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/(private)/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/(private)/(home)/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/(private)/(home)/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
   '/(private)/(home)/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/(private)/(home)/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
@@ -291,6 +301,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/admin-land/company/'
     | '/admin-land/devs/'
+    | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
     | '/clients/$id/'
     | '/companies/$id/'
@@ -318,6 +329,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/admin-land/company'
     | '/admin-land/devs'
+    | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
     | '/clients/$id'
     | '/companies/$id'
@@ -347,6 +359,7 @@ export interface FileRouteTypes {
     | '/(private)/(home)/settings/'
     | '/(private)/admin-land/company/'
     | '/(private)/admin-land/devs/'
+    | '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
     | '/(private)/(home)/my-vacancies/$id/selection-process'
     | '/(private)/(home)/clients/$id/'
     | '/(private)/(home)/companies/$id/'
@@ -558,6 +571,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeMyVacanciesIdSelectionProcessRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/my-vacancies/$id/screening-questionnaire': {
+      id: '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
+      path: '/my-vacancies/$id/screening-questionnaire'
+      fullPath: '/my-vacancies/$id/screening-questionnaire'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
   }
 }
 
@@ -584,6 +604,7 @@ interface privatehomeLayoutRouteChildren {
   privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
   privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
   privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
+  privatehomeMyVacanciesIdScreeningQuestionnaireRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   privatehomeMyVacanciesIdSelectionProcessRoute: typeof privatehomeMyVacanciesIdSelectionProcessRoute
   privatehomeClientsIdIndexRoute: typeof privatehomeClientsIdIndexRoute
   privatehomeCompaniesIdIndexRoute: typeof privatehomeCompaniesIdIndexRoute
@@ -599,6 +620,8 @@ const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
   privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
   privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,
+  privatehomeMyVacanciesIdScreeningQuestionnaireRoute:
+    privatehomeMyVacanciesIdScreeningQuestionnaireRoute,
   privatehomeMyVacanciesIdSelectionProcessRoute:
     privatehomeMyVacanciesIdSelectionProcessRoute,
   privatehomeClientsIdIndexRoute: privatehomeClientsIdIndexRoute,

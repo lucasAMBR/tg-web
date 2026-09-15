@@ -21,7 +21,8 @@
         "vacancies": "Vacancies",
         "vacancy_details": "Vacancy Details",
         "selection_process": "Selection Process",
-        "my_applies": "My Vacancies"
+        "my_applies": "My Vacancies",
+        "screening_questionnaire": "Screening Questionnaire"
     },
     "breadcrumb": {
         "admin": "Administration",
@@ -126,7 +127,11 @@
             "interview_schedule_set": "Interview schedule set successfully",
             "interview_schedule_proposed": "New time proposed successfully",
             "interview_schedule_accepted": "Interview schedule confirmed successfully",
-            "interview_cancelled": "Interview cancelled successfully"
+            "interview_cancelled": "Interview cancelled successfully",
+            "screening_questionnaire_created": "Screening questionnaire created successfully",
+            "screening_questionnaire_updated": "Screening questionnaire updated successfully",
+            "screening_questionnaire_deleted": "Screening questionnaire deleted successfully",
+            "screening_questionnaire_answered": "Answers submitted successfully"
         }
     },
     "role": {
@@ -792,6 +797,17 @@
                 "cancelled": "Cancelled",
                 "rejected": "Rejected"
             }
+        },
+        "screening_question_type": {
+            "essay": "Essay",
+            "single_choice": "Single choice",
+            "multiple_choice": "Multiple choice"
+        },
+        "screening_questionnaire": {
+            "status": {
+                "pending": "Questionnaire pending",
+                "answered": "Questionnaire answered"
+            }
         }
     },
     "pagination": {
@@ -980,6 +996,16 @@
             "resume_screening": {
                 "awaiting_title": "Resume screening not available yet",
                 "awaiting_description": "Selecting resumes for the next stage only becomes available after the inscription period is closed."
+            },
+            "screening_questions": {
+                "missing_title": "Screening questionnaire not created",
+                "missing_description": "Build this stage's form so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the questions after the form is created.",
+                "create_questionnaire": "Create questionnaire",
+                "manage_questionnaire": "Manage questionnaire",
+                "not_sent": "This candidate has not received the screening questionnaire yet.",
+                "awaiting_answers": "The candidate has not submitted the answers yet.",
+                "view_answers": "View answers"
             }
         },
         "actions": {
@@ -1012,6 +1038,17 @@
             "send": "Send portfolio",
             "send_description": "The company requested your portfolio in this stage. Send the link to move forward in the selection process.",
             "url_placeholder": "https://github.com/your-user/your-project"
+        },
+        "screening": {
+            "not_received": "The company has not sent this stage's screening questionnaire yet.",
+            "due_date": "Answer deadline",
+            "pending_description": "The company sent a screening questionnaire. Answer it to move forward in the selection process.",
+            "answered_description": "Your answers were submitted. Now just wait for the company's evaluation.",
+            "answer": "Answer questionnaire",
+            "answer_description": "Answer the questions below. The ones marked as required must be filled in.",
+            "response_placeholder": "Write your answer",
+            "submit": "Submit answers",
+            "view_answers": "View my answers"
         }
     },
     "interview": {
@@ -1103,5 +1140,52 @@
         "hint": "PNG, JPG or WEBP up to {{size}}MB",
         "invalid_type": "Invalid image format",
         "too_large": "The image must be at most {{size}}MB"
+    },
+    "screening_questionnaire": {
+        "title": "Screening questionnaire",
+        "create_title": "Create screening questionnaire",
+        "create_description": "Build the form candidates answer in this vacancy's screening questions stage.",
+        "edit_title": "Edit screening questionnaire",
+        "edit_description": "Questions and options removed from the list are deleted when you save.",
+        "edit": "Edit questionnaire",
+        "sent_count_one": "{{count}} candidate has already received this questionnaire",
+        "sent_count_other": "{{count}} candidates have already received this questionnaire",
+        "locked_title": "Questionnaire locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed.",
+        "empty_questions_title": "No questions created",
+        "empty_questions_description": "Add the questions candidates need to answer in this stage.",
+        "delete_confirm_title": "Remove this questionnaire?",
+        "delete_confirm_description": "The questions and options are removed along with it. This action cannot be undone.",
+        "required": "Required",
+        "essay_hint": "Essay question, answered with free text.",
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: Initial screening",
+            "description": "Description",
+            "description_placeholder": "Explain to the candidate the purpose of this questionnaire",
+            "due_date": "Answer deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Used when the vacancy is already waiting for this stage. With no deadline, the API uses 7 days.",
+            "questions": "Questions",
+            "add_question": "Add question",
+            "question": "Question",
+            "question_placeholder": "Write the question the candidate needs to answer",
+            "type": "Type",
+            "is_required": "Required",
+            "options": "Options",
+            "option_placeholder": "Write the option",
+            "add_option": "Add option",
+            "move_up": "Move up",
+            "move_down": "Move down"
+        },
+        "answers": {
+            "title": "Questionnaire answers",
+            "description_company": "Answers submitted by {{name}} in the screening questionnaire.",
+            "description_dev": "These are the answers you submitted in this stage.",
+            "submitted_at": "Submitted at",
+            "not_answered": "Not answered",
+            "empty_title": "No answers available",
+            "empty_description": "The answers show up here as soon as the candidate submits the questionnaire."
+        }
     }
 }
