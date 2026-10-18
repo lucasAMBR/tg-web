@@ -57,3 +57,12 @@ export function disconnectEcho() {
     echoInstance?.disconnect();
     echoInstance = null;
 }
+
+/**
+ * Id do socket da conexão atual, usado no header `X-Socket-ID` para a aba que fez
+ * a ação não receber o próprio eco. Não cria a conexão: antes de o Echo subir
+ * (ou sem Reverb no ar) não há eco para evitar, e o header simplesmente não vai.
+ */
+export function getSocketId(): string | undefined {
+    return echoInstance?.socketId() ?? undefined;
+}

@@ -53,3 +53,12 @@ export function formatIsoDateOnlyBr(dateStr: string): string {
 	const date = new Date(dateStr);
 	return isValid(date) ? format(date, "dd/MM/yyyy") : dateStr;
 }
+
+/**
+ * yyyy-MM-dd of an API `date` field. It arrives as UTC midnight
+ * (`2026-09-30T00:00:00.000000Z`), which `new Date()` shifts to the previous day
+ * in negative offsets, so only the date part is kept.
+ */
+export function apiDateOnly(value: string | null | undefined): string {
+	return value?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
+}

@@ -5,12 +5,4 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type ScreeningQuestionResourceTypeLabel = typeof ScreeningQuestionResourceTypeLabel[keyof typeof ScreeningQuestionResourceTypeLabel];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ScreeningQuestionResourceTypeLabel = {
-  Dissertativa: 'Dissertativa',
-  Escolha_única: 'Escolha única',
-  Múltipla_escolha: 'Múltipla escolha',
-} as const;
+export type ScreeningQuestionResourceTypeLabel = string | null;

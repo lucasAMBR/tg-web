@@ -15,6 +15,9 @@ import type { JobVacancyResource } from './jobVacancyResource';
 import type { PortfolioSolicitationResource } from './portfolioSolicitationResource';
 import type { DevScreeningQuestionnaireResource } from './devScreeningQuestionnaireResource';
 import type { DevJobVacancyInterviewResource } from './devJobVacancyInterviewResource';
+import type { DevTechnicalChallengeResource } from './devTechnicalChallengeResource';
+import type { DevJobVacancyLiveCodingResource } from './devJobVacancyLiveCodingResource';
+import type { DevLanguageAssessmentResource } from './devLanguageAssessmentResource';
 
 export interface DevJobVacancyResource {
   id: string;
@@ -37,4 +40,10 @@ etapa de perguntas de triagem */
   screening_questionnaire?: DevScreeningQuestionnaireResource;
   /** Entrevista da candidatura, carregada na etapa de entrevista */
   interview?: DevJobVacancyInterviewResource;
+  /** Entrega do desafio técnico da candidatura, carregada na etapa de desafio técnico */
+  technical_challenge?: DevTechnicalChallengeResource;
+  /** Live coding da candidatura, carregado na etapa de live coding */
+  live_coding?: DevJobVacancyLiveCodingResource;
+  /** Prova de idioma da candidatura, carregada na etapa de avaliação de idioma */
+  language_assessment?: DevLanguageAssessmentResource;
 }

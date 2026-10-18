@@ -38,7 +38,7 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
- * **operationId:** `updateUser` — Atualiza os dados do usuário. Requer autorização via `UserPolicy::update`. Quando `new_password` é enviado, o `old_password` precisa conferir com a senha atual, caso contrário a operação é recusada. Quando `profile_pic` é enviado, o arquivo substitui a foto atual na coleção de mídia `profile_pic` (a coleção é `singleFile`); como o PHP não faz parse de `multipart/form-data` em `PATCH`, use `POST /user/{id}` nesse caso. Em **200**, `data` segue o schema **User Resource** (`App\Http\Resources\User\UserResource`).
+ * **operationId:** `updateUser` — Atualiza os dados do usuário. Requer autorização via `UserPolicy::update`. Quando `new_password` é enviado, o `old_password` precisa conferir com a senha atual, caso contrário a operação é recusada. Quando `profile_pic` é enviado, o arquivo substitui a foto atual na coleção de mídia `profile_pic` (a coleção é `singleFile`); como o PHP não faz parse de `multipart/form-data` em `PATCH`, use `POST /user/{id}` nesse caso. É também por aqui que o usuário liga/desliga a confirmação de leitura do chat (`read_receipts_enabled`). Em **200**, `data` segue o schema **User Resource** (`App\Http\Resources\User\UserResource`).
  * @summary Atualizar usuário
  */
 export const userUserUpdate0 = (
@@ -61,6 +61,9 @@ if(updateUserRequest.old_password !== undefined) {
  }
 if(updateUserRequest.profile_pic !== undefined) {
  formData.append(`profile_pic`, updateUserRequest.profile_pic)
+ }
+if(updateUserRequest.read_receipts_enabled !== undefined) {
+ formData.append(`read_receipts_enabled`, updateUserRequest.read_receipts_enabled.toString())
  }
 
       return apiClient<UserUserUpdate0200>(
@@ -119,7 +122,7 @@ export const useUserUserUpdate0 = <TError = UserUserUpdate0400 | AuthenticationE
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * **operationId:** `updateUser` — Atualiza os dados do usuário. Requer autorização via `UserPolicy::update`. Quando `new_password` é enviado, o `old_password` precisa conferir com a senha atual, caso contrário a operação é recusada. Quando `profile_pic` é enviado, o arquivo substitui a foto atual na coleção de mídia `profile_pic` (a coleção é `singleFile`); como o PHP não faz parse de `multipart/form-data` em `PATCH`, use `POST /user/{id}` nesse caso. Em **200**, `data` segue o schema **User Resource** (`App\Http\Resources\User\UserResource`).
+ * **operationId:** `updateUser` — Atualiza os dados do usuário. Requer autorização via `UserPolicy::update`. Quando `new_password` é enviado, o `old_password` precisa conferir com a senha atual, caso contrário a operação é recusada. Quando `profile_pic` é enviado, o arquivo substitui a foto atual na coleção de mídia `profile_pic` (a coleção é `singleFile`); como o PHP não faz parse de `multipart/form-data` em `PATCH`, use `POST /user/{id}` nesse caso. É também por aqui que o usuário liga/desliga a confirmação de leitura do chat (`read_receipts_enabled`). Em **200**, `data` segue o schema **User Resource** (`App\Http\Resources\User\UserResource`).
  * @summary Atualizar usuário
  */
 export const userUserUpdate1 = (
@@ -143,6 +146,9 @@ if(updateUserRequest.old_password !== undefined) {
  }
 if(updateUserRequest.profile_pic !== undefined) {
  formData.append(`profile_pic`, updateUserRequest.profile_pic)
+ }
+if(updateUserRequest.read_receipts_enabled !== undefined) {
+ formData.append(`read_receipts_enabled`, updateUserRequest.read_receipts_enabled.toString())
  }
 
       return apiClient<UserUserUpdate1200>(

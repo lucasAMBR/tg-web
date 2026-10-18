@@ -72,7 +72,10 @@ export default function QuestionnaireAnswersModal({
 		: answers
 				.map((answer) => answer.question)
 				.filter((question): question is ScreeningQuestionResource => !!question)
-				.sort((question, nextQuestion) => question.order - nextQuestion.order);
+				.sort(
+					(question, nextQuestion) =>
+						Number(question.order) - Number(nextQuestion.order),
+				);
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>

@@ -5,14 +5,4 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type FreelanceJobVacancyResourceSeniorityLevelLabel = typeof FreelanceJobVacancyResourceSeniorityLevelLabel[keyof typeof FreelanceJobVacancyResourceSeniorityLevelLabel];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const FreelanceJobVacancyResourceSeniorityLevelLabel = {
-  Intern: 'Intern',
-  Junior: 'Junior',
-  Mid_Level: 'Mid Level',
-  Senior: 'Senior',
-  Staff: 'Staff',
-} as const;
+export type FreelanceJobVacancyResourceSeniorityLevelLabel = string | null;

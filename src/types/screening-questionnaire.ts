@@ -43,12 +43,16 @@ export function questionAcceptsManyOptions(
 	return type === ScreeningQuestionTypeEnum.multiple_choice;
 }
 
-/** Perguntas na ordem definida pela empresa, independente do que a API devolveu. */
+/**
+ * Perguntas na ordem definida pela empresa, independente do que a API devolveu.
+ * O contrato gerado tipa `order` como string, mas a API manda o inteiro do banco.
+ */
 export function getOrderedQuestions(
 	questionnaire?: ScreeningQuestionnaireResource,
 ): ScreeningQuestionResource[] {
 	return [...(questionnaire?.questions ?? [])].sort(
-		(question, nextQuestion) => question.order - nextQuestion.order,
+		(question, nextQuestion) =>
+			Number(question.order) - Number(nextQuestion.order),
 	);
 }
 
@@ -56,7 +60,7 @@ export function getOrderedOptions(
 	question?: ScreeningQuestionResource,
 ): ScreeningQuestionOptionResource[] {
 	return [...(question?.options ?? [])].sort(
-		(option, nextOption) => option.order - nextOption.order,
+		(option, nextOption) => Number(option.order) - Number(nextOption.order),
 	);
 }
 

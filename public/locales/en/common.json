@@ -22,7 +22,9 @@
         "vacancy_details": "Vacancy Details",
         "selection_process": "Selection Process",
         "my_applies": "My Vacancies",
-        "screening_questionnaire": "Screening Questionnaire"
+        "screening_questionnaire": "Screening Questionnaire",
+        "technical_challenge": "Technical Challenge",
+        "language_assessment": "Language Assessment"
     },
     "breadcrumb": {
         "admin": "Administration",
@@ -73,7 +75,8 @@
         "translation_in_progress": "Translation pending.",
         "no_results": "No results found",
         "visit": "Visit",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "close": "Close"
     },
     "toast": {
         "success": {
@@ -131,7 +134,23 @@
             "screening_questionnaire_created": "Screening questionnaire created successfully",
             "screening_questionnaire_updated": "Screening questionnaire updated successfully",
             "screening_questionnaire_deleted": "Screening questionnaire deleted successfully",
-            "screening_questionnaire_answered": "Answers submitted successfully"
+            "screening_questionnaire_answered": "Answers submitted successfully",
+            "technical_challenge_created": "Technical challenge created successfully",
+            "technical_challenge_updated": "Technical challenge updated successfully",
+            "technical_challenge_deleted": "Technical challenge deleted successfully",
+            "technical_challenge_delivered": "Technical challenge delivered successfully",
+            "guide_document_saved": "Guide document saved successfully",
+            "guide_document_removed": "Guide document removed successfully",
+            "live_coding_schedule_set": "Live coding schedule set successfully",
+            "live_coding_schedule_proposed": "New time proposed successfully",
+            "live_coding_schedule_accepted": "Live coding schedule confirmed successfully",
+            "live_coding_cancelled": "Live coding cancelled successfully",
+            "live_coding_exercise_saved": "Live coding exercise saved successfully",
+            "language_assessment_created": "Language assessment created successfully",
+            "language_assessment_updated": "Language assessment updated successfully",
+            "language_assessment_deleted": "Language assessment removed successfully",
+            "language_assessment_answered": "Assessment submitted successfully",
+            "read_receipts_updated": "Read receipts updated successfully!"
         }
     },
     "role": {
@@ -417,6 +436,12 @@
                 "description": "Warning: If you delete your account, all your data will be deleted permanently and will not be possible to recover",
                 "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",
                 "yes_delete_my_account": "Yes, delete my account"
+            },
+            "read_receipts": {
+                "title": "Read receipts",
+                "description": "When enabled, whoever messages you knows when you have read it. When disabled, nobody sees your reads — and you also stop seeing when your own messages are read.",
+                "enabled": "Read receipts on",
+                "disabled": "Read receipts off"
             }
         },
         "profile": {
@@ -798,6 +823,16 @@
                 "rejected": "Rejected"
             }
         },
+        "dev_job_vacancy_live_coding": {
+            "status": {
+                "awaiting_schedule": "Awaiting schedule",
+                "awaiting_dev_confirmation": "Awaiting developer confirmation",
+                "awaiting_company_confirmation": "Awaiting company confirmation",
+                "approved": "Schedule confirmed",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
+        },
         "screening_question_type": {
             "essay": "Essay",
             "single_choice": "Single choice",
@@ -807,6 +842,25 @@
             "status": {
                 "pending": "Questionnaire pending",
                 "answered": "Questionnaire answered"
+            }
+        },
+        "dev_technical_challenge": {
+            "status": {
+                "pending": "Awaiting delivery",
+                "delivered": "Delivered"
+            }
+        },
+        "language_assessment_question": {
+            "type": {
+                "single_choice": "Single choice",
+                "multiple_choice": "Multiple choice",
+                "text": "Written answer"
+            }
+        },
+        "dev_language_assessment": {
+            "status": {
+                "pending": "Awaiting answer",
+                "answered": "Assessment answered"
             }
         }
     },
@@ -1006,6 +1060,39 @@
                 "not_sent": "This candidate has not received the screening questionnaire yet.",
                 "awaiting_answers": "The candidate has not submitted the answers yet.",
                 "view_answers": "View answers"
+            },
+            "technical_challenge": {
+                "missing_title": "Technical challenge not created",
+                "missing_description": "Write this stage's challenge so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the challenge after it is created.",
+                "create_challenge": "Create challenge",
+                "manage_challenge": "Manage challenge",
+                "not_sent": "This candidate has not received the technical challenge yet.",
+                "awaiting_delivery": "The candidate has not delivered the solution yet.",
+                "submitted_at": "Delivered at",
+                "view_submission": "Download submission"
+            },
+            "live_coding": {
+                "awaiting_title": "Process on hold waiting for the exercises",
+                "awaiting_description_one": "The live coding only starts once every candidate has their exercise published. {{count}} exercise is missing for the stage to start.",
+                "awaiting_description_other": "The live coding only starts once every candidate has their exercise published. {{count}} exercises are missing for the stage to start.",
+                "awaiting_ready": "All exercises were published. The stage starts as soon as the page is refreshed.",
+                "not_created": "This candidate's live coding has not been created yet."
+            },
+            "language_assessment": {
+                "missing_title": "Language assessment not created",
+                "missing_description": "Build this stage's assessment so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the assessment after it is created.",
+                "create_assessment": "Create assessment",
+                "manage_assessment": "Manage assessment",
+                "not_sent": "This candidate has not received the language assessment yet.",
+                "awaiting_answers": "The candidate has not submitted the assessment yet.",
+                "submitted_at": "Submitted at",
+                "view_answers": "View grading",
+                "score": "Score",
+                "passed": "Passed",
+                "failed": "Failed",
+                "no_verdict": "No passing score"
             }
         },
         "actions": {
@@ -1049,6 +1136,52 @@
             "response_placeholder": "Write your answer",
             "submit": "Submit answers",
             "view_answers": "View my answers"
+        },
+        "technical_challenge": {
+            "not_received": "The company has not sent this stage's technical challenge yet.",
+            "due_date": "Delivery deadline",
+            "submitted_at": "Delivered at",
+            "pending_description": "The company sent a technical challenge. Deliver your solution to move forward in the selection process.",
+            "delivered_description": "Your submission was sent. Now just wait for the company's evaluation.",
+            "submit": "Deliver challenge",
+            "submit_description": "Inform the repository with the challenge solution. The submission cannot be changed after it is sent.",
+            "repository_url": "Solution repository",
+            "zip_optional": "Zipped project (optional)",
+            "attach_zip": "Attach .zip",
+            "download_guide": "Download guide document",
+            "view_submission": "Download submitted file"
+        },
+        "live_coding": {
+            "awaiting_exercise": "The company is still preparing the live coding exercise. You will be notified as soon as it is published.",
+            "not_received": "This stage's live coding has not been created yet.",
+            "statement": "Exercise",
+            "programming_language": "Expected language",
+            "description": "Read the exercise before the call: you will solve it live, during the call with the company."
+        },
+        "language_assessment": {
+            "not_received": "The company has not sent this stage's language assessment yet.",
+            "awaiting_assessment": "The company is still preparing this stage's language assessment.",
+            "due_date": "Answer deadline",
+            "submitted_at": "Submitted at",
+            "language": "Language",
+            "pending_description": "The company sent a language assessment. Answer it to move forward in the selection process.",
+            "answered_description": "Your assessment was submitted and graded automatically. Now just wait for the company's evaluation.",
+            "answer": "Answer assessment",
+            "answer_description": "Answer the questions below. Blank questions are worth zero.",
+            "response_placeholder": "Write your answer",
+            "submit": "Submit assessment",
+            "single_submit_warning": "The assessment can only be submitted once. Review your answers before sending.",
+            "all_or_nothing_warning": "In multiple choice questions you only score by marking exactly every correct option: there is no partial credit.",
+            "confirm_title": "Submit the assessment?",
+            "confirm_description": "The assessment is graded right away and cannot be answered again.",
+            "blank_questions_one": "You left {{count}} question blank, which is worth zero.",
+            "blank_questions_other": "You left {{count}} questions blank, which are worth zero.",
+            "view_answers": "View grading",
+            "score": "Score",
+            "passing_score": "Passing score",
+            "max_score": "Maximum score",
+            "passed": "Passed",
+            "failed": "Failed"
         }
     },
     "interview": {
@@ -1070,7 +1203,7 @@
         "propose_schedule": "Propose another time",
         "accept_schedule": "Accept schedule",
         "join_call": "Join interview",
-        "cancel_interview": "Cancel interview",
+        "cancel": "Cancel interview",
         "cancel_confirm_title": "Cancel this interview?",
         "cancel_confirm_description": "The other party will be notified and the interview cannot be rescheduled. This action cannot be undone.",
         "modal": {
@@ -1097,6 +1230,75 @@
             "camera_off": "Turn camera off",
             "camera_on": "Turn camera on",
             "hang_up": "Hang up"
+        }
+    },
+    "live_coding": {
+        "not_created": "The live coding for this application has not been created yet.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "No schedule has been proposed yet. Set the date, time and duration of the live coding with this candidate.",
+        "no_schedule_dev": "The company has not proposed a schedule for your live coding yet.",
+        "awaiting_dev": "Schedule proposed. Awaiting the developer's confirmation.",
+        "awaiting_company": "Schedule proposed. Awaiting the company's confirmation.",
+        "proposed_by_company": "The company proposed this schedule. Accept it or propose another one.",
+        "proposed_by_dev": "The developer proposed this schedule. Accept it or propose another one.",
+        "cancelled_description": "This live coding was cancelled and can no longer be rescheduled.",
+        "rejected_description": "This live coding was rejected.",
+        "call_open": "The room is open. Join the live coding whenever you are ready.",
+        "call_too_early": "The room opens {{minutes}} minutes before the scheduled time.",
+        "call_closed": "The window to join this live coding has closed.",
+        "call_finished": "Live coding held on {{date}}.",
+        "set_schedule": "Set schedule",
+        "propose_schedule": "Propose another time",
+        "accept_schedule": "Accept schedule",
+        "join_call": "Join live coding",
+        "cancel": "Cancel live coding",
+        "cancel_confirm_title": "Cancel this live coding?",
+        "cancel_confirm_description": "The other party will be notified and the live coding cannot be rescheduled. This action cannot be undone.",
+        "modal": {
+            "title_set": "Set the live coding schedule",
+            "title_propose": "Propose another time",
+            "description": "The other party is notified and can accept it or propose a new time.",
+            "date": "Date",
+            "date_placeholder": "Pick a date",
+            "time": "Time",
+            "duration": "Duration"
+        },
+        "call": {
+            "connecting": "Preparing the room...",
+            "waiting": "Waiting for the other person to join...",
+            "connected": "Connected",
+            "ended": "Call ended",
+            "counterpart": "Participant",
+            "you": "You",
+            "media_error": "We could not access your camera or microphone. Check your browser permissions and try again.",
+            "join_error": "We could not join the room. Check whether the confirmed time has already arrived.",
+            "connection_error": "The connection with the other person failed. Try joining the room again.",
+            "mute": "Mute microphone",
+            "unmute": "Unmute microphone",
+            "camera_off": "Turn camera off",
+            "camera_on": "Turn camera on",
+            "hang_up": "Hang up"
+        },
+        "exercise": {
+            "statement": "Statement",
+            "programming_language": "Language",
+            "published": "Exercise published",
+            "missing": "Exercise not published",
+            "missing_description": "Write the exercise this candidate will solve during the call.",
+            "write": "Write exercise",
+            "edit": "Edit exercise",
+            "show_more": "Show full statement",
+            "show_less": "Collapse statement"
+        },
+        "exercise_modal": {
+            "title_write": "Write exercise",
+            "title_edit": "Edit exercise",
+            "description": "The candidate reads the statement before the call and solves it live, during the call. They are only notified on the first publication — later corrections are silent.",
+            "statement": "Statement",
+            "statement_placeholder": "Describe the problem the candidate will solve during the call",
+            "programming_language": "Language",
+            "programming_language_placeholder": "E.g.: TypeScript",
+            "programming_language_description": "Optional. With no language set, the candidate solves it in whichever they prefer."
         }
     },
     "vacancies": {
@@ -1187,5 +1389,127 @@
             "empty_title": "No answers available",
             "empty_description": "The answers show up here as soon as the candidate submits the questionnaire."
         }
+    },
+    "technical_challenge": {
+        "title": "Technical challenge",
+        "create_title": "Create technical challenge",
+        "create_description": "Write the challenge candidates receive in this vacancy's technical challenge stage.",
+        "edit_title": "Edit technical challenge",
+        "edit_description": "Changed texts go back to the translation queue when you save.",
+        "edit": "Edit challenge",
+        "sent_count_one": "{{count}} candidate has already received this challenge",
+        "sent_count_other": "{{count}} candidates have already received this challenge",
+        "locked_title": "Challenge locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed. The guide document can still be replaced.",
+        "delete_confirm_title": "Remove this challenge?",
+        "delete_confirm_description": "The challenge and the guide document are removed along with it. This action cannot be undone.",
+        "due_date": "Delivery deadline",
+        "accepts_zip": "Accepts zipped project",
+        "guide": {
+            "title": "Guide document",
+            "description": "File with the full challenge (pdf, doc, docx, md, txt or zip, up to 10MB). A new upload replaces the previous one.",
+            "attach": "Attach document",
+            "replace": "Replace document",
+            "too_large": "The guide document can be at most 10MB"
+        },
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: Order management API",
+            "description": "Challenge",
+            "description_placeholder": "Describe what the candidate needs to implement",
+            "rules": "Rules",
+            "rules_placeholder": "E.g.: any framework is allowed, modeling, tests and code organization will be evaluated",
+            "rules_description": "What can be used, what will be evaluated and the limits of the submission.",
+            "due_date": "Delivery deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Every application entering this stage inherits this deadline. Late submissions are not blocked by the API.",
+            "accepts_zip_submission": "Accept zipped project",
+            "accepts_zip_submission_description": "Allows sending a .zip in addition to the repository link.",
+            "guide_document": "Guide document",
+            "attach_guide": "Attach document",
+            "guide_document_description": "Optional. Accepts pdf, doc, docx, md, txt or zip, up to 10MB."
+        }
+    },
+    "language_assessment": {
+        "title": "Language assessment",
+        "create_title": "Create language assessment",
+        "create_description": "Build the assessment candidates answer in this vacancy's language assessment stage. It has an answer key and is graded automatically on submission.",
+        "edit_title": "Edit language assessment",
+        "edit_description": "Questions and options removed from the list are deleted when you save.",
+        "edit": "Edit assessment",
+        "sent_count_one": "{{count}} candidate has already received this assessment",
+        "sent_count_other": "{{count}} candidates have already received this assessment",
+        "locked_title": "Assessment locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed: changing the answer key would invalidate the assessments already graded.",
+        "delete_confirm_title": "Remove this assessment?",
+        "delete_confirm_description": "The questions, options and answer key are removed along with it. This action cannot be undone.",
+        "language": "Language",
+        "due_date": "Answer deadline",
+        "passing_score": "Passing score",
+        "no_passing_score": "No passing score: the assessment only scores, without passing or failing anyone.",
+        "max_score": "Maximum score",
+        "points_one": "{{count}} point",
+        "points_other": "{{count}} points",
+        "correct_option": "Correct answer",
+        "expected_answers": "Accepted answers",
+        "text_hint": "Written answer question, graded against the list of accepted answers.",
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: English assessment",
+            "description": "Description",
+            "description_placeholder": "Explain to the candidate what the assessment evaluates",
+            "language": "Assessed language",
+            "language_placeholder": "E.g.: English",
+            "language_description": "The assessment content is not translated: write the questions and options in the assessed language.",
+            "passing_score": "Passing score",
+            "passing_score_placeholder": "No passing score",
+            "passing_score_description": "Optional. Without it the assessment scores, but does not pass or fail anyone. It cannot exceed the maximum score.",
+            "max_score": "Maximum score: {{count}}",
+            "due_date": "Answer deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Every candidate who receives the assessment inherits this deadline. Late submissions are not blocked by the API.",
+            "questions": "Questions",
+            "add_question": "Add question",
+            "question": "Question",
+            "question_placeholder": "Write the question in the assessed language",
+            "type": "Type",
+            "weight": "Weight",
+            "options": "Options",
+            "options_single_description": "Mark the correct option.",
+            "options_multiple_description": "Mark every correct option. The candidate only scores by marking exactly these.",
+            "option_placeholder": "Write the option",
+            "add_option": "Add option",
+            "mark_correct": "Mark as correct",
+            "expected_answers": "Accepted answers",
+            "expected_answers_description": "The candidate's answer must match one of these. The comparison ignores case and repeated spaces, but not accents.",
+            "expected_answer_placeholder": "Write an accepted answer",
+            "add_expected_answer": "Add accepted answer",
+            "move_up": "Move up",
+            "move_down": "Move down"
+        },
+        "answers": {
+            "title": "Assessment grading",
+            "description_company": "{{name}}'s answers in the language assessment, already graded.",
+            "description_dev": "These are your answers, already graded.",
+            "submitted_at": "Submitted at",
+            "not_answered": "Not answered",
+            "correct": "Correct",
+            "wrong": "Wrong",
+            "earned": "{{earned}} of {{weight}} pts",
+            "answer_key": "Answer key",
+            "empty_title": "No answers available",
+            "empty_description": "The grading shows up here as soon as the candidate submits the assessment."
+        }
+    },
+    "chat": {
+        "title": "Messages",
+        "empty_title": "No conversations yet",
+        "empty_description": "Open someone’s profile and click \"Send message\" to start a conversation.",
+        "no_messages_yet": "No messages yet",
+        "start_conversation": "Send the first message to start the conversation.",
+        "message_placeholder": "Write a message...",
+        "send": "Send",
+        "send_message": "Send message",
+        "unknown_participant": "User without a profile"
     }
 }

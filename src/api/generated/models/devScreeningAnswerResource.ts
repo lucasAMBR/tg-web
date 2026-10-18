@@ -5,10 +5,7 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { ScreeningQuestionResource } from './screeningQuestionResource';
-import type { DevScreeningAnswerResourceResponse } from './devScreeningAnswerResourceResponse';
 import type { ScreeningQuestionOptionResource } from './screeningQuestionOptionResource';
-import type { DevScreeningAnswerResourceCreatedAt } from './devScreeningAnswerResourceCreatedAt';
-import type { DevScreeningAnswerResourceUpdatedAt } from './devScreeningAnswerResourceUpdatedAt';
 
 export interface DevScreeningAnswerResource {
   id: string;
@@ -16,9 +13,9 @@ export interface DevScreeningAnswerResource {
   screening_question_id: string;
   question?: ScreeningQuestionResource;
   /** Texto da resposta, preenchido só nas perguntas dissertativas */
-  response: DevScreeningAnswerResourceResponse;
+  response: string;
   /** Alternativas marcadas, preenchidas só nas perguntas de escolha */
   options?: ScreeningQuestionOptionResource[];
-  created_at: DevScreeningAnswerResourceCreatedAt;
-  updated_at: DevScreeningAnswerResourceUpdatedAt;
+  created_at: string;
+  updated_at: string;
 }

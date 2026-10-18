@@ -35,8 +35,10 @@ import { Route as privatehomeMyVacanciesIdIndexRouteImport } from './routes/(pri
 import { Route as privatehomeDevsIdIndexRouteImport } from './routes/(private)/(home)/devs/$id/index'
 import { Route as privatehomeCompaniesIdIndexRouteImport } from './routes/(private)/(home)/companies/$id/index'
 import { Route as privatehomeClientsIdIndexRouteImport } from './routes/(private)/(home)/clients/$id/index'
+import { Route as privatehomeMyVacanciesIdTechnicalChallengeRouteImport } from './routes/(private)/(home)/my-vacancies/$id/technical-challenge'
 import { Route as privatehomeMyVacanciesIdSelectionProcessRouteImport } from './routes/(private)/(home)/my-vacancies/$id/selection-process'
 import { Route as privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport } from './routes/(private)/(home)/my-vacancies/$id/screening-questionnaire'
+import { Route as privatehomeMyVacanciesIdLanguageAssessmentRouteImport } from './routes/(private)/(home)/my-vacancies/$id/language-assessment'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -179,6 +181,12 @@ const privatehomeClientsIdIndexRoute =
     path: '/clients/$id/',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomeMyVacanciesIdTechnicalChallengeRoute =
+  privatehomeMyVacanciesIdTechnicalChallengeRouteImport.update({
+    id: '/my-vacancies/$id/technical-challenge',
+    path: '/my-vacancies/$id/technical-challenge',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomeMyVacanciesIdSelectionProcessRoute =
   privatehomeMyVacanciesIdSelectionProcessRouteImport.update({
     id: '/my-vacancies/$id/selection-process',
@@ -189,6 +197,12 @@ const privatehomeMyVacanciesIdScreeningQuestionnaireRoute =
   privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport.update({
     id: '/my-vacancies/$id/screening-questionnaire',
     path: '/my-vacancies/$id/screening-questionnaire',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeMyVacanciesIdLanguageAssessmentRoute =
+  privatehomeMyVacanciesIdLanguageAssessmentRouteImport.update({
+    id: '/my-vacancies/$id/language-assessment',
+    path: '/my-vacancies/$id/language-assessment',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
 
@@ -212,8 +226,10 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof privatehomeSettingsIndexRoute
   '/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
   '/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id/': typeof privatehomeDevsIdIndexRoute
@@ -240,8 +256,10 @@ export interface FileRoutesByTo {
   '/settings': typeof privatehomeSettingsIndexRoute
   '/admin-land/company': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs': typeof privateAdminLandDevsIndexRoute
+  '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
   '/clients/$id': typeof privatehomeClientsIdIndexRoute
   '/companies/$id': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id': typeof privatehomeDevsIdIndexRoute
@@ -271,8 +289,10 @@ export interface FileRoutesById {
   '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
   '/(private)/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/(private)/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/(private)/(home)/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/(private)/(home)/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/(private)/(home)/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/(private)/(home)/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
   '/(private)/(home)/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/(private)/(home)/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/(private)/(home)/devs/$id/': typeof privatehomeDevsIdIndexRoute
@@ -301,8 +321,10 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/admin-land/company/'
     | '/admin-land/devs/'
+    | '/my-vacancies/$id/language-assessment'
     | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
+    | '/my-vacancies/$id/technical-challenge'
     | '/clients/$id/'
     | '/companies/$id/'
     | '/devs/$id/'
@@ -329,8 +351,10 @@ export interface FileRouteTypes {
     | '/settings'
     | '/admin-land/company'
     | '/admin-land/devs'
+    | '/my-vacancies/$id/language-assessment'
     | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
+    | '/my-vacancies/$id/technical-challenge'
     | '/clients/$id'
     | '/companies/$id'
     | '/devs/$id'
@@ -359,8 +383,10 @@ export interface FileRouteTypes {
     | '/(private)/(home)/settings/'
     | '/(private)/admin-land/company/'
     | '/(private)/admin-land/devs/'
+    | '/(private)/(home)/my-vacancies/$id/language-assessment'
     | '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
     | '/(private)/(home)/my-vacancies/$id/selection-process'
+    | '/(private)/(home)/my-vacancies/$id/technical-challenge'
     | '/(private)/(home)/clients/$id/'
     | '/(private)/(home)/companies/$id/'
     | '/(private)/(home)/devs/$id/'
@@ -564,6 +590,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeClientsIdIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/my-vacancies/$id/technical-challenge': {
+      id: '/(private)/(home)/my-vacancies/$id/technical-challenge'
+      path: '/my-vacancies/$id/technical-challenge'
+      fullPath: '/my-vacancies/$id/technical-challenge'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdTechnicalChallengeRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/(home)/my-vacancies/$id/selection-process': {
       id: '/(private)/(home)/my-vacancies/$id/selection-process'
       path: '/my-vacancies/$id/selection-process'
@@ -576,6 +609,13 @@ declare module '@tanstack/react-router' {
       path: '/my-vacancies/$id/screening-questionnaire'
       fullPath: '/my-vacancies/$id/screening-questionnaire'
       preLoaderRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/language-assessment': {
+      id: '/(private)/(home)/my-vacancies/$id/language-assessment'
+      path: '/my-vacancies/$id/language-assessment'
+      fullPath: '/my-vacancies/$id/language-assessment'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
   }
@@ -604,8 +644,10 @@ interface privatehomeLayoutRouteChildren {
   privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
   privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
   privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
+  privatehomeMyVacanciesIdLanguageAssessmentRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   privatehomeMyVacanciesIdScreeningQuestionnaireRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   privatehomeMyVacanciesIdSelectionProcessRoute: typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  privatehomeMyVacanciesIdTechnicalChallengeRoute: typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
   privatehomeClientsIdIndexRoute: typeof privatehomeClientsIdIndexRoute
   privatehomeCompaniesIdIndexRoute: typeof privatehomeCompaniesIdIndexRoute
   privatehomeDevsIdIndexRoute: typeof privatehomeDevsIdIndexRoute
@@ -620,10 +662,14 @@ const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
   privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
   privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,
+  privatehomeMyVacanciesIdLanguageAssessmentRoute:
+    privatehomeMyVacanciesIdLanguageAssessmentRoute,
   privatehomeMyVacanciesIdScreeningQuestionnaireRoute:
     privatehomeMyVacanciesIdScreeningQuestionnaireRoute,
   privatehomeMyVacanciesIdSelectionProcessRoute:
     privatehomeMyVacanciesIdSelectionProcessRoute,
+  privatehomeMyVacanciesIdTechnicalChallengeRoute:
+    privatehomeMyVacanciesIdTechnicalChallengeRoute,
   privatehomeClientsIdIndexRoute: privatehomeClientsIdIndexRoute,
   privatehomeCompaniesIdIndexRoute: privatehomeCompaniesIdIndexRoute,
   privatehomeDevsIdIndexRoute: privatehomeDevsIdIndexRoute,

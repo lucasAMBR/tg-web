@@ -22,7 +22,9 @@
         "vacancy_details": "Detalhes da Vaga",
         "selection_process": "Processo Seletivo",
         "my_applies": "Minhas Vagas",
-        "screening_questionnaire": "Questionário de Triagem"
+        "screening_questionnaire": "Questionário de Triagem",
+        "technical_challenge": "Desafio Técnico",
+        "language_assessment": "Prova de Idioma"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -73,7 +75,8 @@
         "translation_in_progress": "Tradução pendente.",
         "no_results": "Nenhum resultado encontrado",
         "visit": "Visitar",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "close": "Fechar"
     },
     "toast": {
         "success": {
@@ -131,7 +134,23 @@
             "screening_questionnaire_created": "Questionário de triagem criado com sucesso",
             "screening_questionnaire_updated": "Questionário de triagem atualizado com sucesso",
             "screening_questionnaire_deleted": "Questionário de triagem removido com sucesso",
-            "screening_questionnaire_answered": "Respostas enviadas com sucesso"
+            "screening_questionnaire_answered": "Respostas enviadas com sucesso",
+            "technical_challenge_created": "Desafio técnico criado com sucesso",
+            "technical_challenge_updated": "Desafio técnico atualizado com sucesso",
+            "technical_challenge_deleted": "Desafio técnico removido com sucesso",
+            "technical_challenge_delivered": "Desafio técnico entregue com sucesso",
+            "guide_document_saved": "Documento guia salvo com sucesso",
+            "guide_document_removed": "Documento guia removido com sucesso",
+            "live_coding_schedule_set": "Horário do live coding definido com sucesso",
+            "live_coding_schedule_proposed": "Novo horário proposto com sucesso",
+            "live_coding_schedule_accepted": "Horário do live coding confirmado com sucesso",
+            "live_coding_cancelled": "Live coding cancelado com sucesso",
+            "live_coding_exercise_saved": "Exercício do live coding salvo com sucesso",
+            "language_assessment_created": "Prova de idioma criada com sucesso",
+            "language_assessment_updated": "Prova de idioma atualizada com sucesso",
+            "language_assessment_deleted": "Prova de idioma removida com sucesso",
+            "language_assessment_answered": "Prova entregue com sucesso",
+            "read_receipts_updated": "Confirmação de leitura atualizada com sucesso!"
         }
     },
     "role": {
@@ -473,6 +492,12 @@
                 "description": "Aviso: Se você deletar sua conta, todos os seus dados serão deletados permanentemente e não será possível recuperar",
                 "delete_account_confirmation": "Esta ação é permanente e MUITO DESTRUTIVA! Deletando sua conta, todos os seus dados serão deletados permanentemente e não será possível recuperar",
                 "yes_delete_my_account": "Sim, deletar minha conta"
+            },
+            "read_receipts": {
+                "title": "Confirmação de leitura",
+                "description": "Com ela ligada, quem te manda mensagem fica sabendo quando você leu. Desligada, ninguém vê a sua leitura — e você também deixa de ver quando as suas mensagens são lidas.",
+                "enabled": "Confirmação de leitura ligada",
+                "disabled": "Confirmação de leitura desligada"
             }
         },
         "profile": {
@@ -791,6 +816,16 @@
                 "rejected": "Rejeitada"
             }
         },
+        "dev_job_vacancy_live_coding": {
+            "status": {
+                "awaiting_schedule": "Aguardando horário",
+                "awaiting_dev_confirmation": "Aguardando confirmação do dev",
+                "awaiting_company_confirmation": "Aguardando confirmação da empresa",
+                "approved": "Horário confirmado",
+                "cancelled": "Cancelado",
+                "rejected": "Rejeitado"
+            }
+        },
         "screening_question_type": {
             "essay": "Dissertativa",
             "single_choice": "Escolha única",
@@ -800,6 +835,25 @@
             "status": {
                 "pending": "Questionário pendente",
                 "answered": "Questionário respondido"
+            }
+        },
+        "dev_technical_challenge": {
+            "status": {
+                "pending": "Aguardando entrega",
+                "delivered": "Entregue"
+            }
+        },
+        "language_assessment_question": {
+            "type": {
+                "single_choice": "Escolha única",
+                "multiple_choice": "Múltipla escolha",
+                "text": "Resposta escrita"
+            }
+        },
+        "dev_language_assessment": {
+            "status": {
+                "pending": "Aguardando resposta",
+                "answered": "Prova respondida"
             }
         }
     },
@@ -999,6 +1053,39 @@
                 "not_sent": "Este candidato ainda não recebeu o questionário de triagem.",
                 "awaiting_answers": "O candidato ainda não enviou as respostas.",
                 "view_answers": "Ver respostas"
+            },
+            "technical_challenge": {
+                "missing_title": "Desafio técnico não cadastrado",
+                "missing_description": "Monte o enunciado desta etapa para que ele seja enviado aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem o desafio depois que o enunciado for cadastrado.",
+                "create_challenge": "Criar desafio",
+                "manage_challenge": "Gerenciar desafio",
+                "not_sent": "Este candidato ainda não recebeu o desafio técnico.",
+                "awaiting_delivery": "O candidato ainda não entregou a solução.",
+                "submitted_at": "Entregue em",
+                "view_submission": "Baixar entrega"
+            },
+            "live_coding": {
+                "awaiting_title": "Processo parado aguardando os exercícios",
+                "awaiting_description_one": "O live coding só começa quando todos os candidatos tiverem o exercício publicado. Falta {{count}} exercício para a etapa começar.",
+                "awaiting_description_other": "O live coding só começa quando todos os candidatos tiverem o exercício publicado. Faltam {{count}} exercícios para a etapa começar.",
+                "awaiting_ready": "Todos os exercícios foram publicados. A etapa começa assim que a página for atualizada.",
+                "not_created": "O live coding deste candidato ainda não foi criado."
+            },
+            "language_assessment": {
+                "missing_title": "Prova de idioma não cadastrada",
+                "missing_description": "Monte a prova desta etapa para que ela seja enviada aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem a prova depois que ela for cadastrada.",
+                "create_assessment": "Criar prova",
+                "manage_assessment": "Gerenciar prova",
+                "not_sent": "Este candidato ainda não recebeu a prova de idioma.",
+                "awaiting_answers": "O candidato ainda não entregou a prova.",
+                "submitted_at": "Entregue em",
+                "view_answers": "Ver correção",
+                "score": "Nota",
+                "passed": "Aprovado",
+                "failed": "Reprovado",
+                "no_verdict": "Sem nota de corte"
             }
         },
         "actions": {
@@ -1042,6 +1129,52 @@
             "response_placeholder": "Escreva a sua resposta",
             "submit": "Enviar respostas",
             "view_answers": "Ver minhas respostas"
+        },
+        "technical_challenge": {
+            "not_received": "A empresa ainda não enviou o desafio técnico desta etapa.",
+            "due_date": "Prazo de entrega",
+            "submitted_at": "Entregue em",
+            "pending_description": "A empresa enviou um desafio técnico. Entregue a solução para seguir no processo seletivo.",
+            "delivered_description": "Sua entrega foi enviada. Agora é só aguardar a avaliação da empresa.",
+            "submit": "Entregar desafio",
+            "submit_description": "Informe o repositório com a solução do desafio. A entrega não pode ser alterada depois do envio.",
+            "repository_url": "Repositório da solução",
+            "zip_optional": "Projeto compactado (opcional)",
+            "attach_zip": "Anexar .zip",
+            "download_guide": "Baixar documento guia",
+            "view_submission": "Baixar arquivo enviado"
+        },
+        "live_coding": {
+            "awaiting_exercise": "A empresa ainda está preparando o exercício do live coding. Você será notificado assim que ele for publicado.",
+            "not_received": "O live coding desta etapa ainda não foi criado.",
+            "statement": "Exercício",
+            "programming_language": "Linguagem esperada",
+            "description": "Leia o exercício antes da call: você vai resolvê-lo ao vivo, durante a chamada com a empresa."
+        },
+        "language_assessment": {
+            "not_received": "A empresa ainda não enviou a prova de idioma desta etapa.",
+            "awaiting_assessment": "A empresa ainda está preparando a prova de idioma desta etapa.",
+            "due_date": "Prazo de resposta",
+            "submitted_at": "Entregue em",
+            "language": "Idioma",
+            "pending_description": "A empresa enviou uma prova de idioma. Responda para seguir no processo seletivo.",
+            "answered_description": "Sua prova foi entregue e corrigida automaticamente. Agora é só aguardar a avaliação da empresa.",
+            "answer": "Responder prova",
+            "answer_description": "Responda as perguntas abaixo. Perguntas em branco valem zero.",
+            "response_placeholder": "Escreva a sua resposta",
+            "submit": "Entregar prova",
+            "single_submit_warning": "A prova só pode ser entregue uma vez. Confira as respostas antes de enviar.",
+            "all_or_nothing_warning": "Nas perguntas de múltipla escolha só pontua quem marcar exatamente todas as alternativas certas: não há acerto parcial.",
+            "confirm_title": "Entregar a prova?",
+            "confirm_description": "A prova é corrigida na hora e não pode ser respondida de novo.",
+            "blank_questions_one": "Você deixou {{count}} pergunta em branco, que vale zero.",
+            "blank_questions_other": "Você deixou {{count}} perguntas em branco, que valem zero.",
+            "view_answers": "Ver correção",
+            "score": "Nota",
+            "passing_score": "Nota de corte",
+            "max_score": "Nota máxima",
+            "passed": "Aprovado",
+            "failed": "Reprovado"
         }
     },
     "interview": {
@@ -1063,7 +1196,7 @@
         "propose_schedule": "Propor outro horário",
         "accept_schedule": "Aceitar horário",
         "join_call": "Entrar na entrevista",
-        "cancel_interview": "Cancelar entrevista",
+        "cancel": "Cancelar entrevista",
         "cancel_confirm_title": "Cancelar esta entrevista?",
         "cancel_confirm_description": "A outra parte será notificada e a entrevista não poderá ser reagendada. Esta ação não pode ser desfeita.",
         "modal": {
@@ -1090,6 +1223,75 @@
             "camera_off": "Desativar câmera",
             "camera_on": "Ativar câmera",
             "hang_up": "Encerrar"
+        }
+    },
+    "live_coding": {
+        "not_created": "O live coding desta candidatura ainda não foi criado.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "Nenhum horário foi proposto ainda. Defina a data, o horário e a duração do live coding com este candidato.",
+        "no_schedule_dev": "A empresa ainda não propôs um horário para o seu live coding.",
+        "awaiting_dev": "Horário proposto. Aguardando a confirmação do desenvolvedor.",
+        "awaiting_company": "Horário proposto. Aguardando a confirmação da empresa.",
+        "proposed_by_company": "A empresa propôs este horário. Aceite ou proponha outro.",
+        "proposed_by_dev": "O desenvolvedor propôs este horário. Aceite ou proponha outro.",
+        "cancelled_description": "Este live coding foi cancelado e não pode mais ser reagendado.",
+        "rejected_description": "Este live coding foi rejeitado.",
+        "call_open": "A sala está aberta. Entre no live coding quando estiver pronto.",
+        "call_too_early": "A sala abre {{minutes}} minutos antes do horário marcado.",
+        "call_closed": "A janela para entrar neste live coding foi encerrada.",
+        "call_finished": "Live coding realizado em {{date}}.",
+        "set_schedule": "Definir horário",
+        "propose_schedule": "Propor outro horário",
+        "accept_schedule": "Aceitar horário",
+        "join_call": "Entrar no live coding",
+        "cancel": "Cancelar live coding",
+        "cancel_confirm_title": "Cancelar este live coding?",
+        "cancel_confirm_description": "A outra parte será notificada e o live coding não poderá ser reagendado. Esta ação não pode ser desfeita.",
+        "modal": {
+            "title_set": "Definir horário do live coding",
+            "title_propose": "Propor outro horário",
+            "description": "A outra parte é notificada e pode aceitar ou propor um novo horário.",
+            "date": "Data",
+            "date_placeholder": "Escolha uma data",
+            "time": "Horário",
+            "duration": "Duração"
+        },
+        "call": {
+            "connecting": "Preparando a sala...",
+            "waiting": "Aguardando a outra pessoa entrar...",
+            "connected": "Conectado",
+            "ended": "Chamada encerrada",
+            "counterpart": "Participante",
+            "you": "Você",
+            "media_error": "Não foi possível acessar sua câmera ou microfone. Verifique as permissões do navegador e tente novamente.",
+            "join_error": "Não foi possível entrar na sala. Confira se o horário confirmado já chegou.",
+            "connection_error": "A conexão com a outra pessoa falhou. Tente entrar na sala novamente.",
+            "mute": "Desativar microfone",
+            "unmute": "Ativar microfone",
+            "camera_off": "Desativar câmera",
+            "camera_on": "Ativar câmera",
+            "hang_up": "Encerrar"
+        },
+        "exercise": {
+            "statement": "Enunciado",
+            "programming_language": "Linguagem",
+            "published": "Exercício publicado",
+            "missing": "Exercício não publicado",
+            "missing_description": "Escreva o exercício que este candidato vai resolver na call.",
+            "write": "Escrever exercício",
+            "edit": "Editar exercício",
+            "show_more": "Ver enunciado completo",
+            "show_less": "Recolher enunciado"
+        },
+        "exercise_modal": {
+            "title_write": "Escrever exercício",
+            "title_edit": "Editar exercício",
+            "description": "O candidato lê o enunciado antes da call e o resolve ao vivo, durante a chamada. Ele é notificado só na primeira publicação — as correções seguintes são silenciosas.",
+            "statement": "Enunciado",
+            "statement_placeholder": "Descreva o problema que o candidato vai resolver durante a call",
+            "programming_language": "Linguagem",
+            "programming_language_placeholder": "Ex.: TypeScript",
+            "programming_language_description": "Opcional. Sem linguagem definida o candidato resolve na que preferir."
         }
     },
     "vacancies": {
@@ -1180,5 +1382,127 @@
             "empty_title": "Nenhuma resposta disponível",
             "empty_description": "As respostas aparecem aqui assim que o candidato enviar o questionário."
         }
+    },
+    "technical_challenge": {
+        "title": "Desafio técnico",
+        "create_title": "Criar desafio técnico",
+        "create_description": "Monte o enunciado que os candidatos recebem na etapa de desafio técnico desta vaga.",
+        "edit_title": "Editar desafio técnico",
+        "edit_description": "Os textos alterados voltam para a fila de tradução ao salvar.",
+        "edit": "Editar desafio",
+        "sent_count_one": "{{count}} candidato já recebeu este desafio",
+        "sent_count_other": "{{count}} candidatos já receberam este desafio",
+        "locked_title": "Desafio bloqueado para edição",
+        "locked_description": "Ele já foi enviado aos candidatos e não pode mais ser alterado ou removido. O documento guia continua podendo ser trocado.",
+        "delete_confirm_title": "Remover este desafio?",
+        "delete_confirm_description": "O enunciado e o documento guia são removidos junto. Esta ação não pode ser desfeita.",
+        "due_date": "Prazo de entrega",
+        "accepts_zip": "Aceita projeto compactado",
+        "guide": {
+            "title": "Documento guia",
+            "description": "Arquivo com o enunciado completo (pdf, doc, docx, md, txt ou zip, até 10MB). Um novo envio substitui o anterior.",
+            "attach": "Anexar documento",
+            "replace": "Substituir documento",
+            "too_large": "O documento guia pode ter no máximo 10MB"
+        },
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: API de gestão de pedidos",
+            "description": "Enunciado",
+            "description_placeholder": "Descreva o que o candidato precisa implementar",
+            "rules": "Regras",
+            "rules_placeholder": "Ex.: pode usar qualquer framework, serão avaliados modelagem, testes e organização do código",
+            "rules_description": "O que pode ser usado, o que será avaliado e os limites da entrega.",
+            "due_date": "Prazo de entrega",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Cada candidatura que entra na etapa herda este prazo. A entrega atrasada não é bloqueada pela API.",
+            "accepts_zip_submission": "Aceitar projeto compactado",
+            "accepts_zip_submission_description": "Libera o envio de um .zip além do link do repositório.",
+            "guide_document": "Documento guia",
+            "attach_guide": "Anexar documento",
+            "guide_document_description": "Opcional. Aceita pdf, doc, docx, md, txt ou zip, com até 10MB."
+        }
+    },
+    "language_assessment": {
+        "title": "Prova de idioma",
+        "create_title": "Criar prova de idioma",
+        "create_description": "Monte a prova que os candidatos respondem na etapa de avaliação de idioma desta vaga. Ela tem gabarito e é corrigida automaticamente na entrega.",
+        "edit_title": "Editar prova de idioma",
+        "edit_description": "As perguntas e alternativas removidas da lista são apagadas ao salvar.",
+        "edit": "Editar prova",
+        "sent_count_one": "{{count}} candidato já recebeu esta prova",
+        "sent_count_other": "{{count}} candidatos já receberam esta prova",
+        "locked_title": "Prova bloqueada para edição",
+        "locked_description": "Ela já foi enviada aos candidatos e não pode mais ser alterada ou removida: mudar o gabarito invalidaria as provas já corrigidas.",
+        "delete_confirm_title": "Remover esta prova?",
+        "delete_confirm_description": "As perguntas, as alternativas e o gabarito são removidos junto. Esta ação não pode ser desfeita.",
+        "language": "Idioma",
+        "due_date": "Prazo de resposta",
+        "passing_score": "Nota de corte",
+        "no_passing_score": "Sem nota de corte: a prova só pontua, sem aprovar ou reprovar.",
+        "max_score": "Nota máxima",
+        "points_one": "{{count}} ponto",
+        "points_other": "{{count}} pontos",
+        "correct_option": "Resposta certa",
+        "expected_answers": "Respostas aceitas",
+        "text_hint": "Pergunta de resposta escrita, corrigida pela lista de respostas aceitas.",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Prova de inglês",
+            "description": "Descrição",
+            "description_placeholder": "Explique para o candidato o que a prova avalia",
+            "language": "Idioma avaliado",
+            "language_placeholder": "Ex.: Inglês",
+            "language_description": "O conteúdo da prova não é traduzido: escreva as perguntas e as alternativas no idioma avaliado.",
+            "passing_score": "Nota de corte",
+            "passing_score_placeholder": "Sem nota de corte",
+            "passing_score_description": "Opcional. Sem ela a prova pontua, mas não aprova nem reprova. Não pode passar da nota máxima.",
+            "max_score": "Nota máxima: {{count}}",
+            "due_date": "Prazo de resposta",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Cada candidato que recebe a prova herda este prazo. A entrega atrasada não é bloqueada pela API.",
+            "questions": "Perguntas",
+            "add_question": "Adicionar pergunta",
+            "question": "Pergunta",
+            "question_placeholder": "Escreva a pergunta no idioma avaliado",
+            "type": "Tipo",
+            "weight": "Peso",
+            "options": "Alternativas",
+            "options_single_description": "Marque a alternativa certa.",
+            "options_multiple_description": "Marque todas as alternativas certas. O candidato só pontua se marcar exatamente essas.",
+            "option_placeholder": "Escreva a alternativa",
+            "add_option": "Adicionar alternativa",
+            "mark_correct": "Marcar como certa",
+            "expected_answers": "Respostas aceitas",
+            "expected_answers_description": "A resposta do candidato precisa bater com uma destas. A comparação ignora maiúsculas e espaços repetidos, mas não ignora acentos.",
+            "expected_answer_placeholder": "Escreva uma resposta aceita",
+            "add_expected_answer": "Adicionar resposta aceita",
+            "move_up": "Mover para cima",
+            "move_down": "Mover para baixo"
+        },
+        "answers": {
+            "title": "Correção da prova",
+            "description_company": "Respostas de {{name}} na prova de idioma, já corrigidas.",
+            "description_dev": "Estas foram as suas respostas, já corrigidas.",
+            "submitted_at": "Entregue em",
+            "not_answered": "Não respondida",
+            "correct": "Certa",
+            "wrong": "Errada",
+            "earned": "{{earned}} de {{weight}} pts",
+            "answer_key": "Gabarito",
+            "empty_title": "Nenhuma resposta disponível",
+            "empty_description": "A correção aparece aqui assim que o candidato entregar a prova."
+        }
+    },
+    "chat": {
+        "title": "Mensagens",
+        "empty_title": "Nenhuma conversa ainda",
+        "empty_description": "Abra o perfil de alguém e clique em \"Enviar mensagem\" para começar uma conversa.",
+        "no_messages_yet": "Nenhuma mensagem ainda",
+        "start_conversation": "Mande a primeira mensagem para começar a conversa.",
+        "message_placeholder": "Escreva uma mensagem...",
+        "send": "Enviar",
+        "send_message": "Enviar mensagem",
+        "unknown_participant": "Usuário sem perfil"
     }
 }

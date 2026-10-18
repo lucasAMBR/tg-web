@@ -3,6 +3,7 @@ import ClientProfileBody from '@/components/profile/variants/client-profile-body
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import StartChatButton from '@/components/chat/start-chat-button';
 import i18n from '@/i18n';
 import { useBreadcrumbLabel } from '@/hooks/use-breadcrumbs';
 import { createFileRoute } from '@tanstack/react-router'
@@ -100,6 +101,9 @@ function RouteComponent() {
               : (clientData?.bio_en ?? "—")
             }
           </p>
+          <div className="flex gap-2">
+            <StartChatButton userId={clientData?.user_id} />
+          </div>
         </div>
       </Card>
       <ClientProfileBody profileId={clientData?.id as string} />

@@ -1,3 +1,5 @@
+import ChatPanel from "@/components/chat/chat-panel";
+import { ChatToggleButton } from "@/components/chat/chat-toggle-button";
 import { LanguagePicker } from "@/components/global/language-change-button";
 import { Notification } from "@/components/global/notification";
 import Sidebar from "@/components/global/sidebar";
@@ -21,13 +23,15 @@ function RouteComponent() {
 					<Breadcrumbs className="shrink-0" />
 					<div className="flex gap-2">
 						<LanguagePicker />
-						<Notification />	
+						<Notification />
+						<ChatToggleButton />
 					</div>
 				</div>
 				<div className="flex flex-col flex-1 min-h-0 overflow-auto [scrollbar-gutter:stable]">
 					<Outlet />
 				</div>
 			</div>
+			<ChatPanel />
 		</div>
 	);
 }

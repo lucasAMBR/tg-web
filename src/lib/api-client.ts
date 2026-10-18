@@ -10,6 +10,7 @@ import {
 	removeStoredToken,
 	updateStoredToken,
 } from "@/lib/auth";
+import { getSocketId } from "@/lib/echo";
 import { env } from "@/utils/env";
 
 const baseURL = env.API_BASE_URL;
@@ -60,6 +61,19 @@ axiosInstance.interceptors.request.use(
 		if (token && config.headers) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}
+
+		// O chat usa `toOthers()` nos eventos: com o socket da aba no header, quem
+		// enviou a mensagem (ou leu a conversa) não recebe o próprio eco, mas as
+		// outras abas do usuário continuam recebendo. Só nas rotas do chat, porque
+		// nos outros eventos o remetente da ação também precisa ser avisado
+		if (config.url?.startsWith("/chat") && config.headers) {
+			const socketId = getSocketId();
+
+			if (socketId) {
+				config.headers["X-Socket-ID"] = socketId;
+			}
+		}
+
 		return config;
 	},
 	(error) => {

@@ -1,5 +1,6 @@
 import { useShowDevProfile } from '@/api/generated/profile/profile';
 import DevProfileContent from '@/components/profile/variants/dev-profile-body';
+import StartChatButton from '@/components/chat/start-chat-button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -102,6 +103,9 @@ function RouteComponent() {
                 : (devData?.bio_en ?? "—")
               }
             </p>
+        <div className="flex gap-2">
+          <StartChatButton userId={devData?.user_id} />
+        </div>
       </div>
     </Card >
     <DevProfileContent profileId={devData?.id as string}/>	

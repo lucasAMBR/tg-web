@@ -10,6 +10,7 @@ import CustomStackRecommendation from '@/components/settings/custom-stack-recomm
 import ClientUpdateProfileForm from '@/components/settings/client-update-profile-form';
 import DevUpdateProfileForm from '@/components/settings/dev-update-profile-form';
 import PasswordChange from '@/components/settings/password-change';
+import ReadReceiptsToggle from '@/components/settings/read-receipts-toggle';
 import { ToggleTheme } from '@/components/settings/theme-toggle';
 import UpdateAddressForm from '@/components/settings/update-address-form';
 import UpdateEmailForm from '@/components/settings/update-email-form';
@@ -137,6 +138,16 @@ function RouteComponent() {
                       </div>
                       <div className='flex-2 min-w-0'>
                         <PasswordChange />
+                      </div>
+                    </div>
+                    <Separator className='my-6'/>
+                    <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
+                      <div className='flex-1'>
+                        <h3 className='text-xl font-medium'>{t("settings.account.read_receipts.title")}</h3>
+                        <p className='text-sm text-muted-foreground'>{t("settings.account.read_receipts.description")}</p>
+                      </div>
+                      <div className='flex-2 min-w-0'>
+                        <ReadReceiptsToggle />
                       </div>
                     </div>
                     <Separator className='my-6'/>

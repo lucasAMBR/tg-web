@@ -4,8 +4,12 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { FreelanceJobVacancyResourceJobType } from './freelanceJobVacancyResourceJobType';
 import type { FreelanceJobVacancyResourceJobTypeLabel } from './freelanceJobVacancyResourceJobTypeLabel';
+import type { FreelanceJobVacancyResourceRequiresStack } from './freelanceJobVacancyResourceRequiresStack';
+import type { FreelanceJobVacancyResourceSalaryType } from './freelanceJobVacancyResourceSalaryType';
 import type { FreelanceJobVacancyResourceSalaryTypeLabel } from './freelanceJobVacancyResourceSalaryTypeLabel';
+import type { FreelanceJobVacancyResourceSeniorityLevel } from './freelanceJobVacancyResourceSeniorityLevel';
 import type { FreelanceJobVacancyResourceSeniorityLevelLabel } from './freelanceJobVacancyResourceSeniorityLevelLabel';
 import type { FreelanceJobVacancyLanguageResource } from './freelanceJobVacancyLanguageResource';
 import type { ClientProfileResource } from './clientProfileResource';
@@ -16,15 +20,15 @@ export interface FreelanceJobVacancyResource {
   id: string;
   title: string;
   description: string;
-  job_type: string;
+  job_type: FreelanceJobVacancyResourceJobType;
   job_type_label: FreelanceJobVacancyResourceJobTypeLabel;
-  requires_stack: boolean;
-  salary_type: string;
+  requires_stack: FreelanceJobVacancyResourceRequiresStack;
+  salary_type: FreelanceJobVacancyResourceSalaryType;
   salary_type_label: FreelanceJobVacancyResourceSalaryTypeLabel;
   estimated_salary: string;
-  seniority_level: string;
+  seniority_level: FreelanceJobVacancyResourceSeniorityLevel;
   seniority_level_label: FreelanceJobVacancyResourceSeniorityLevelLabel;
-  specialties: unknown[];
+  specialties: string;
   languages?: FreelanceJobVacancyLanguageResource[];
   client_profile_id: string;
   profile?: ClientProfileResource;

@@ -5,11 +5,4 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type DevScreeningQuestionnaireResourceStatusLabel = typeof DevScreeningQuestionnaireResourceStatusLabel[keyof typeof DevScreeningQuestionnaireResourceStatusLabel];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const DevScreeningQuestionnaireResourceStatusLabel = {
-  Aguardando_resposta: 'Aguardando resposta',
-  Respondido: 'Respondido',
-} as const;
+export type DevScreeningQuestionnaireResourceStatusLabel = string | null;

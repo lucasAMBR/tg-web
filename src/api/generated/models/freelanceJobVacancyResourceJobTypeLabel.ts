@@ -5,23 +5,4 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type FreelanceJobVacancyResourceJobTypeLabel = typeof FreelanceJobVacancyResourceJobTypeLabel[keyof typeof FreelanceJobVacancyResourceJobTypeLabel];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const FreelanceJobVacancyResourceJobTypeLabel = {
-  Development: 'Development',
-  Maintenance: 'Maintenance',
-  Support: 'Support',
-  QA: 'QA',
-  Design: 'Design',
-  DevOps: 'DevOps',
-  Database: 'Database',
-  Consulting: 'Consulting',
-  Documentation: 'Documentation',
-  Automation: 'Automation',
-  Integration: 'Integration',
-  Migration: 'Migration',
-  Training: 'Training',
-  Other: 'Other',
-} as const;
+export type FreelanceJobVacancyResourceJobTypeLabel = string | null;

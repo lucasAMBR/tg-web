@@ -3,6 +3,7 @@ import CompanyProfileBody from '@/components/profile/variants/company-profile-bo
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
+import StartChatButton from '@/components/chat/start-chat-button';
 import i18n from '@/i18n';
 import { useBreadcrumbLabel } from '@/hooks/use-breadcrumbs';
 import { createFileRoute } from '@tanstack/react-router'
@@ -101,6 +102,9 @@ function RouteComponent() {
               : (companyData?.bio_en ?? "—")
             }
           </p>
+          <div className="flex gap-2">
+            <StartChatButton userId={companyData?.user_id} />
+          </div>
         </div>
       </Card>
       <CompanyProfileBody profileId={companyData?.id as string} />

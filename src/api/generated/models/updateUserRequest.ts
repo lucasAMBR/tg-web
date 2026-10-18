@@ -16,4 +16,6 @@ export interface UpdateUserRequest {
   old_password?: string;
   /** Maximum file size: 10000 kilobytes. */
   profile_pic?: Blob;
+  /** Confirmação de leitura do chat (ver ChatMessage::readAtFor) */
+  read_receipts_enabled?: boolean;
 }

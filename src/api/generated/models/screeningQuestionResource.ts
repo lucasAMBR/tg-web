@@ -4,10 +4,7 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { ScreeningQuestionResourceQuestionPt } from './screeningQuestionResourceQuestionPt';
-import type { ScreeningQuestionResourceQuestionEn } from './screeningQuestionResourceQuestionEn';
 import type { ScreeningQuestionResourceTranslationStatusLabel } from './screeningQuestionResourceTranslationStatusLabel';
-import type { ScreeningQuestionTypeEnum } from './screeningQuestionTypeEnum';
 import type { ScreeningQuestionResourceTypeLabel } from './screeningQuestionResourceTypeLabel';
 import type { ScreeningQuestionOptionResource } from './screeningQuestionOptionResource';
 
@@ -15,16 +12,16 @@ export interface ScreeningQuestionResource {
   id: string;
   screening_questionnaire_id: string;
   question: string;
-  question_pt: ScreeningQuestionResourceQuestionPt;
-  question_en: ScreeningQuestionResourceQuestionEn;
+  question_pt: string;
+  question_en: string;
   translation_status: string;
   translation_status_label: ScreeningQuestionResourceTranslationStatusLabel;
   /** `essay` (dissertativa), `single_choice` (escolha única) ou
 `multiple_choice` (múltipla escolha) */
-  type: ScreeningQuestionTypeEnum;
+  type: string;
   type_label: ScreeningQuestionResourceTypeLabel;
   is_required: boolean;
-  order: number;
+  order: string;
   /** Alternativas da pergunta, vazia nas dissertativas */
   options?: ScreeningQuestionOptionResource[];
 }

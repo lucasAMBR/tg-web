@@ -4,33 +4,26 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { DevJobVacancyInterviewResourceScheduledAt } from './devJobVacancyInterviewResourceScheduledAt';
-import type { DevJobVacancyInterviewResourceDurationInMinutes } from './devJobVacancyInterviewResourceDurationInMinutes';
-import type { DevJobVacancyInterviewStatusEnum } from './devJobVacancyInterviewStatusEnum';
 import type { DevJobVacancyInterviewResourceStatusLabel } from './devJobVacancyInterviewResourceStatusLabel';
-import type { DevJobVacancyInterviewResourceStartedAt } from './devJobVacancyInterviewResourceStartedAt';
-import type { DevJobVacancyInterviewResourceEndedAt } from './devJobVacancyInterviewResourceEndedAt';
 import type { JobVacancyResource } from './jobVacancyResource';
 import type { DevJobVacancyResource } from './devJobVacancyResource';
-import type { DevJobVacancyInterviewResourceCreatedAt } from './devJobVacancyInterviewResourceCreatedAt';
-import type { DevJobVacancyInterviewResourceUpdatedAt } from './devJobVacancyInterviewResourceUpdatedAt';
 
 export interface DevJobVacancyInterviewResource {
   id: string;
   title: string;
-  scheduled_at: DevJobVacancyInterviewResourceScheduledAt;
-  duration_in_minutes: DevJobVacancyInterviewResourceDurationInMinutes;
-  status: DevJobVacancyInterviewStatusEnum;
+  scheduled_at: string;
+  duration_in_minutes: string;
+  status: string;
   status_label: DevJobVacancyInterviewResourceStatusLabel;
   /** Preenchidos quando os participantes entram/saem da call, indicando
 se ela já começou e/ou terminou de fato */
-  started_at: DevJobVacancyInterviewResourceStartedAt;
-  ended_at: DevJobVacancyInterviewResourceEndedAt;
+  started_at: string;
+  ended_at: string;
   job_vacancy_id: string;
   vacancy?: JobVacancyResource;
   dev_job_vacancy_id: string;
   /** Candidatura, com o perfil do dev carregado */
   apply?: DevJobVacancyResource;
-  created_at: DevJobVacancyInterviewResourceCreatedAt;
-  updated_at: DevJobVacancyInterviewResourceUpdatedAt;
+  created_at: string;
+  updated_at: string;
 }

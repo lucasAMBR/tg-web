@@ -6,7 +6,8 @@ import {
 	type DevJobVacancyResource,
 	SelectionProcessStageEnum,
 } from "@/api/generated/models";
-import InterviewNegotiation from "@/components/interview/interview-negotiation";
+import { INTERVIEW_CALL } from "@/components/scheduled-call/call-kinds";
+import CallNegotiation from "@/components/scheduled-call/call-negotiation";
 import { getInterview } from "@/types/dev-job-vacancy-interview";
 import StepAppliesList from "./step-applies-list";
 import type { SelectionProcessStepProps } from "./step-props";
@@ -41,8 +42,9 @@ function ApplyInterview({
 			onClick={(event) => event.stopPropagation()}
 			onKeyDown={(event) => event.stopPropagation()}
 		>
-			<InterviewNegotiation
-				interview={interview}
+			<CallNegotiation
+				call={interview}
+				kind={INTERVIEW_CALL}
 				party="company"
 				counterpartName={apply.profile?.name}
 				onUpdated={onUpdated}

@@ -23,6 +23,9 @@ export interface UserResource {
   role: string[];
   admin_active_profile: UserResourceAdminActiveProfile;
   is_blocked: boolean;
+  /** Confirmação de leitura do chat. Desligada, quem mandou a mensagem não fica
+sabendo que o usuário leu, e o usuário também deixa de ver a leitura dos outros */
+  read_receipts_enabled: boolean;
   created_at: UserResourceCreatedAt;
   updated_at: UserResourceUpdatedAt;
 }

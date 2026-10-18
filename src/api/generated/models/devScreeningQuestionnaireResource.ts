@@ -4,25 +4,20 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { DevScreeningQuestionnaireStatusEnum } from './devScreeningQuestionnaireStatusEnum';
 import type { DevScreeningQuestionnaireResourceStatusLabel } from './devScreeningQuestionnaireResourceStatusLabel';
-import type { DevScreeningQuestionnaireResourceDueDate } from './devScreeningQuestionnaireResourceDueDate';
-import type { DevScreeningQuestionnaireResourceSubmittedAt } from './devScreeningQuestionnaireResourceSubmittedAt';
 import type { ScreeningQuestionnaireResource } from './screeningQuestionnaireResource';
 import type { DevJobVacancyResource } from './devJobVacancyResource';
 import type { DevProfileResource } from './devProfileResource';
 import type { DevScreeningAnswerResource } from './devScreeningAnswerResource';
-import type { DevScreeningQuestionnaireResourceCreatedAt } from './devScreeningQuestionnaireResourceCreatedAt';
-import type { DevScreeningQuestionnaireResourceUpdatedAt } from './devScreeningQuestionnaireResourceUpdatedAt';
 
 export interface DevScreeningQuestionnaireResource {
   id: string;
   /** `pending` enquanto o dev não envia as respostas, `answered` depois do envio */
-  status: DevScreeningQuestionnaireStatusEnum;
+  status: string;
   status_label: DevScreeningQuestionnaireResourceStatusLabel;
   /** Prazo dado pela empresa para o dev responder o questionário */
-  due_date: DevScreeningQuestionnaireResourceDueDate;
-  submitted_at: DevScreeningQuestionnaireResourceSubmittedAt;
+  due_date: string;
+  submitted_at: string;
   screening_questionnaire_id: string;
   /** Questionário a responder, com as perguntas e as alternativas */
   questionnaire?: ScreeningQuestionnaireResource;
@@ -33,6 +28,6 @@ export interface DevScreeningQuestionnaireResource {
   profile?: DevProfileResource;
   /** Respostas enviadas pelo dev, uma por pergunta respondida */
   answers?: DevScreeningAnswerResource[];
-  created_at: DevScreeningQuestionnaireResourceCreatedAt;
-  updated_at: DevScreeningQuestionnaireResourceUpdatedAt;
+  created_at: string;
+  updated_at: string;
 }

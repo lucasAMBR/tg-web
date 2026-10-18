@@ -283,7 +283,8 @@ export default function QuestionnaireForm({
 					questions: getOrderedQuestions(questionnaire).map((question) => ({
 						id: question.id,
 						question: question.question,
-						type: question.type,
+						// O contrato gerado tipa `type` como string, mas o valor é do enum
+						type: question.type as ScreeningQuestionTypeEnum,
 						is_required: question.is_required,
 						options: getOrderedOptions(question).map((option) => ({
 							id: option.id,

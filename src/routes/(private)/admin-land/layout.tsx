@@ -1,6 +1,8 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { Bell, Shield } from 'lucide-react'
 import { Breadcrumbs } from '@/components/global/breadcrumbs'
+import ChatPanel from '@/components/chat/chat-panel'
+import { ChatToggleButton } from '@/components/chat/chat-toggle-button'
 import { Button } from '@/components/ui/button'
 import { LanguagePicker } from '@/components/global/language-change-button'
 import Sidebar from '@/components/global/sidebar'
@@ -32,12 +34,14 @@ function RouteComponent() {
 						<Button  variant={"default"} size={"icon"}>
 							<Bell />
 						</Button>
+						<ChatToggleButton />
 					</div>
 				</div>
 				<div className="flex flex-col flex-1 min-h-0 overflow-auto [scrollbar-gutter:stable]">
 					<Outlet />
 				</div>
 			</div>
+			<ChatPanel />
 		</div>
   )
 }
