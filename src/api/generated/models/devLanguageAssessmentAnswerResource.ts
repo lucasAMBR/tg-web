@@ -4,22 +4,25 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { DevLanguageAssessmentAnswerResourceResponse } from './devLanguageAssessmentAnswerResourceResponse';
 import type { LanguageAssessmentQuestionResource } from './languageAssessmentQuestionResource';
 import type { LanguageAssessmentQuestionOptionResource } from './languageAssessmentQuestionOptionResource';
+import type { DevLanguageAssessmentAnswerResourceCreatedAt } from './devLanguageAssessmentAnswerResourceCreatedAt';
+import type { DevLanguageAssessmentAnswerResourceUpdatedAt } from './devLanguageAssessmentAnswerResourceUpdatedAt';
 
 export interface DevLanguageAssessmentAnswerResource {
   id: string;
   /** Texto escrito pelo dev. `null` nas perguntas de escolha */
-  response: string;
+  response: DevLanguageAssessmentAnswerResourceResponse;
   /** Resultado da correção automática desta resposta */
-  is_correct: string;
-  earned_score: string;
+  is_correct: boolean;
+  earned_score: number;
   language_assessment_question_id: string;
   /** A resposta só existe depois da entrega, então o gabarito da pergunta
 pode vir junto */
   question?: LanguageAssessmentQuestionResource;
   /** Alternativas marcadas pelo dev. Sempre vazia nas perguntas escritas */
   options?: LanguageAssessmentQuestionOptionResource[];
-  created_at: string;
-  updated_at: string;
+  created_at: DevLanguageAssessmentAnswerResourceCreatedAt;
+  updated_at: DevLanguageAssessmentAnswerResourceUpdatedAt;
 }

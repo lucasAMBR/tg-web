@@ -4,35 +4,44 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { TechnicalChallengeResourceTitlePt } from './technicalChallengeResourceTitlePt';
+import type { TechnicalChallengeResourceTitleEn } from './technicalChallengeResourceTitleEn';
+import type { TechnicalChallengeResourceDescriptionPt } from './technicalChallengeResourceDescriptionPt';
+import type { TechnicalChallengeResourceDescriptionEn } from './technicalChallengeResourceDescriptionEn';
+import type { TechnicalChallengeResourceRules } from './technicalChallengeResourceRules';
+import type { TechnicalChallengeResourceRulesPt } from './technicalChallengeResourceRulesPt';
+import type { TechnicalChallengeResourceRulesEn } from './technicalChallengeResourceRulesEn';
 import type { TechnicalChallengeResourceTranslationStatusLabel } from './technicalChallengeResourceTranslationStatusLabel';
 import type { TechnicalChallengeResourceGuideDocument } from './technicalChallengeResourceGuideDocument';
 import type { JobVacancyResource } from './jobVacancyResource';
+import type { TechnicalChallengeResourceCreatedAt } from './technicalChallengeResourceCreatedAt';
+import type { TechnicalChallengeResourceUpdatedAt } from './technicalChallengeResourceUpdatedAt';
 
 export interface TechnicalChallengeResource {
   id: string;
   title: string;
-  title_pt: string;
-  title_en: string;
+  title_pt: TechnicalChallengeResourceTitlePt;
+  title_en: TechnicalChallengeResourceTitleEn;
   description: string;
-  description_pt: string;
-  description_en: string;
+  description_pt: TechnicalChallengeResourceDescriptionPt;
+  description_en: TechnicalChallengeResourceDescriptionEn;
   /** Regras da entrega definidas pela empresa */
-  rules: string;
-  rules_pt: string;
-  rules_en: string;
+  rules: TechnicalChallengeResourceRules;
+  rules_pt: TechnicalChallengeResourceRulesPt;
+  rules_en: TechnicalChallengeResourceRulesEn;
   translation_status: string;
   translation_status_label: TechnicalChallengeResourceTranslationStatusLabel;
   /** Prazo de entrega definido pela empresa, herdado por cada candidatura que
 entra na etapa */
   due_date: string;
   /** Indica se o dev pode enviar o projeto compactado além do repositório */
-  accepts_zip_submission: string;
+  accepts_zip_submission: boolean;
   /** Documento guia com o enunciado completo, quando a empresa anexou um */
   guide_document: TechnicalChallengeResourceGuideDocument;
   job_vacancy_id: string;
   vacancy?: JobVacancyResource;
   /** Quantos candidatos já receberam o desafio */
   dev_challenges_count?: number;
-  created_at: string;
-  updated_at: string;
+  created_at: TechnicalChallengeResourceCreatedAt;
+  updated_at: TechnicalChallengeResourceUpdatedAt;
 }

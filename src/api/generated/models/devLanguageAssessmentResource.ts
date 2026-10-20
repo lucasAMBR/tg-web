@@ -4,27 +4,34 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { DevLanguageAssessmentStatusEnum } from './devLanguageAssessmentStatusEnum';
 import type { DevLanguageAssessmentResourceStatusLabel } from './devLanguageAssessmentResourceStatusLabel';
+import type { DevLanguageAssessmentResourceScore } from './devLanguageAssessmentResourceScore';
+import type { DevLanguageAssessmentResourceMaxScore } from './devLanguageAssessmentResourceMaxScore';
+import type { DevLanguageAssessmentResourcePassed } from './devLanguageAssessmentResourcePassed';
+import type { DevLanguageAssessmentResourceSubmittedAt } from './devLanguageAssessmentResourceSubmittedAt';
 import type { LanguageAssessmentResource } from './languageAssessmentResource';
 import type { DevJobVacancyResource } from './devJobVacancyResource';
 import type { DevProfileResource } from './devProfileResource';
 import type { DevLanguageAssessmentAnswerResource } from './devLanguageAssessmentAnswerResource';
+import type { DevLanguageAssessmentResourceCreatedAt } from './devLanguageAssessmentResourceCreatedAt';
+import type { DevLanguageAssessmentResourceUpdatedAt } from './devLanguageAssessmentResourceUpdatedAt';
 
 export interface DevLanguageAssessmentResource {
   id: string;
   /** `pending` enquanto o dev não entrega a prova, `answered` depois da
 entrega — que é quando a correção automática acontece */
-  status: string;
+  status: DevLanguageAssessmentStatusEnum;
   status_label: DevLanguageAssessmentResourceStatusLabel;
   /** Resultado da correção, preenchido na entrega */
-  score: string;
-  max_score: string;
+  score: DevLanguageAssessmentResourceScore;
+  max_score: DevLanguageAssessmentResourceMaxScore;
   /** Veredito contra a nota de corte da prova, congelado na correção. `null`
 quando a empresa não definiu `passing_score` */
-  passed: string;
+  passed: DevLanguageAssessmentResourcePassed;
   /** Prazo dado pela empresa para o dev responder */
   due_date: string;
-  submitted_at: string;
+  submitted_at: DevLanguageAssessmentResourceSubmittedAt;
   language_assessment_id: string;
   /** Prova a responder, com as perguntas e alternativas. O gabarito só vem
 junto depois da entrega */
@@ -36,6 +43,6 @@ junto depois da entrega */
   profile?: DevProfileResource;
   /** Respostas enviadas pelo dev, uma por pergunta respondida, já corrigidas */
   answers?: DevLanguageAssessmentAnswerResource[];
-  created_at: string;
-  updated_at: string;
+  created_at: DevLanguageAssessmentResourceCreatedAt;
+  updated_at: DevLanguageAssessmentResourceUpdatedAt;
 }

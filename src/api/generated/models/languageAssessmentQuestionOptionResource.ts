@@ -4,15 +4,17 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { LanguageAssessmentQuestionOptionResourceCreatedAt } from './languageAssessmentQuestionOptionResourceCreatedAt';
+import type { LanguageAssessmentQuestionOptionResourceUpdatedAt } from './languageAssessmentQuestionOptionResourceUpdatedAt';
 
 export interface LanguageAssessmentQuestionOptionResource {
   id: string;
   option: string;
-  order: string;
+  order: number;
   /** Indica se essa é a alternativa certa. Só vem para a empresa e para o dev
 que já entregou a prova */
-  is_correct?: string;
+  is_correct?: boolean;
   language_assessment_question_id: string;
-  created_at: string;
-  updated_at: string;
+  created_at: LanguageAssessmentQuestionOptionResourceCreatedAt;
+  updated_at: LanguageAssessmentQuestionOptionResourceUpdatedAt;
 }

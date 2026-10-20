@@ -4,20 +4,23 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { LanguageAssessmentQuestionTypeEnum } from './languageAssessmentQuestionTypeEnum';
 import type { LanguageAssessmentQuestionResourceTypeLabel } from './languageAssessmentQuestionResourceTypeLabel';
 import type { LanguageAssessmentQuestionResourceExpectedAnswers } from './languageAssessmentQuestionResourceExpectedAnswers';
 import type { LanguageAssessmentQuestionOptionResource } from './languageAssessmentQuestionOptionResource';
+import type { LanguageAssessmentQuestionResourceCreatedAt } from './languageAssessmentQuestionResourceCreatedAt';
+import type { LanguageAssessmentQuestionResourceUpdatedAt } from './languageAssessmentQuestionResourceUpdatedAt';
 
 export interface LanguageAssessmentQuestionResource {
   id: string;
   question: string;
   /** `single_choice`, `multiple_choice` (respondidas nas alternativas) ou
 `text` (respondida escrevendo) */
-  type: string;
+  type: LanguageAssessmentQuestionTypeEnum;
   type_label: LanguageAssessmentQuestionResourceTypeLabel;
   /** Quanto a pergunta vale na nota final */
-  weight: string;
-  order: string;
+  weight: number;
+  order: number;
   /** Respostas aceitas nas perguntas escritas. Só vem para a empresa e para o
 dev que já entregou a prova */
   expected_answers?: LanguageAssessmentQuestionResourceExpectedAnswers;
@@ -25,6 +28,6 @@ dev que já entregou a prova */
   /** Alternativas da pergunta, na ordem definida pela empresa. Sempre vazia
 nas perguntas escritas */
   options?: LanguageAssessmentQuestionOptionResource[];
-  created_at: string;
-  updated_at: string;
+  created_at: LanguageAssessmentQuestionResourceCreatedAt;
+  updated_at: LanguageAssessmentQuestionResourceUpdatedAt;
 }

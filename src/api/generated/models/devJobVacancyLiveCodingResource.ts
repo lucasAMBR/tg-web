@@ -4,31 +4,40 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { DevJobVacancyLiveCodingResourceStatement } from './devJobVacancyLiveCodingResourceStatement';
+import type { DevJobVacancyLiveCodingResourceProgrammingLanguage } from './devJobVacancyLiveCodingResourceProgrammingLanguage';
+import type { DevJobVacancyLiveCodingResourceScheduledAt } from './devJobVacancyLiveCodingResourceScheduledAt';
+import type { DevJobVacancyLiveCodingResourceDurationInMinutes } from './devJobVacancyLiveCodingResourceDurationInMinutes';
+import type { DevJobVacancyLiveCodingStatusEnum } from './devJobVacancyLiveCodingStatusEnum';
 import type { DevJobVacancyLiveCodingResourceStatusLabel } from './devJobVacancyLiveCodingResourceStatusLabel';
+import type { DevJobVacancyLiveCodingResourceStartedAt } from './devJobVacancyLiveCodingResourceStartedAt';
+import type { DevJobVacancyLiveCodingResourceEndedAt } from './devJobVacancyLiveCodingResourceEndedAt';
 import type { JobVacancyResource } from './jobVacancyResource';
 import type { DevJobVacancyResource } from './devJobVacancyResource';
+import type { DevJobVacancyLiveCodingResourceCreatedAt } from './devJobVacancyLiveCodingResourceCreatedAt';
+import type { DevJobVacancyLiveCodingResourceUpdatedAt } from './devJobVacancyLiveCodingResourceUpdatedAt';
 
 export interface DevJobVacancyLiveCodingResource {
   id: string;
   title: string;
   /** Enunciado do exercício, escrito pela empresa. Vem `null` enquanto ela
 não publica o exercício */
-  statement: string;
+  statement: DevJobVacancyLiveCodingResourceStatement;
   /** Linguagem/stack esperada na resolução, quando a empresa define uma */
-  programming_language: string;
-  scheduled_at: string;
-  duration_in_minutes: string;
-  status: string;
+  programming_language: DevJobVacancyLiveCodingResourceProgrammingLanguage;
+  scheduled_at: DevJobVacancyLiveCodingResourceScheduledAt;
+  duration_in_minutes: DevJobVacancyLiveCodingResourceDurationInMinutes;
+  status: DevJobVacancyLiveCodingStatusEnum;
   status_label: DevJobVacancyLiveCodingResourceStatusLabel;
   /** Preenchidos quando os participantes entram/saem da call, indicando
 se ela já começou e/ou terminou de fato */
-  started_at: string;
-  ended_at: string;
+  started_at: DevJobVacancyLiveCodingResourceStartedAt;
+  ended_at: DevJobVacancyLiveCodingResourceEndedAt;
   job_vacancy_id: string;
   vacancy?: JobVacancyResource;
   dev_job_vacancy_id: string;
   /** Candidatura, com o perfil do dev carregado */
   apply?: DevJobVacancyResource;
-  created_at: string;
-  updated_at: string;
+  created_at: DevJobVacancyLiveCodingResourceCreatedAt;
+  updated_at: DevJobVacancyLiveCodingResourceUpdatedAt;
 }

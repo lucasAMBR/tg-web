@@ -107,7 +107,7 @@ function RouteComponent() {
           </div>
         </div>
       </Card>
-      <CompanyProfileBody profileId={companyData?.id as string} />
+      <CompanyProfileBody profileId={companyData?.id as string} userId={companyData?.user_id} />
     </div>
   );
 }

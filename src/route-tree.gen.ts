@@ -25,12 +25,14 @@ import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/
 import { Route as privatehomeMyVacanciesIndexRouteImport } from './routes/(private)/(home)/my-vacancies/index'
 import { Route as privatehomeJobsIndexRouteImport } from './routes/(private)/(home)/jobs/index'
 import { Route as privatehomeFeedIndexRouteImport } from './routes/(private)/(home)/feed/index'
+import { Route as privatehomeFavoritesIndexRouteImport } from './routes/(private)/(home)/favorites/index'
 import { Route as privateProficiencyTestIdTestRouteImport } from './routes/(private)/proficiency-test/$id/test'
 import { Route as privateProficiencyTestIdStartRouteImport } from './routes/(private)/proficiency-test/$id/start'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
 import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
 import { Route as privatehomeVacanciesIdIndexRouteImport } from './routes/(private)/(home)/vacancies/$id/index'
+import { Route as privatehomePostsIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/index'
 import { Route as privatehomeMyVacanciesIdIndexRouteImport } from './routes/(private)/(home)/my-vacancies/$id/index'
 import { Route as privatehomeDevsIdIndexRouteImport } from './routes/(private)/(home)/devs/$id/index'
 import { Route as privatehomeCompaniesIdIndexRouteImport } from './routes/(private)/(home)/companies/$id/index'
@@ -39,6 +41,7 @@ import { Route as privatehomeMyVacanciesIdTechnicalChallengeRouteImport } from '
 import { Route as privatehomeMyVacanciesIdSelectionProcessRouteImport } from './routes/(private)/(home)/my-vacancies/$id/selection-process'
 import { Route as privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport } from './routes/(private)/(home)/my-vacancies/$id/screening-questionnaire'
 import { Route as privatehomeMyVacanciesIdLanguageAssessmentRouteImport } from './routes/(private)/(home)/my-vacancies/$id/language-assessment'
+import { Route as privatehomePostsIdThreadCommentIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/thread/$commentId/index'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -123,6 +126,12 @@ const privatehomeFeedIndexRoute = privatehomeFeedIndexRouteImport.update({
   path: '/feed/',
   getParentRoute: () => privatehomeLayoutRoute,
 } as any)
+const privatehomeFavoritesIndexRoute =
+  privatehomeFavoritesIndexRouteImport.update({
+    id: '/favorites/',
+    path: '/favorites/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privateProficiencyTestIdTestRoute =
   privateProficiencyTestIdTestRouteImport.update({
     id: '/(private)/proficiency-test/$id/test',
@@ -158,6 +167,11 @@ const privatehomeVacanciesIdIndexRoute =
     path: '/vacancies/$id/',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomePostsIdIndexRoute = privatehomePostsIdIndexRouteImport.update({
+  id: '/posts/$id/',
+  path: '/posts/$id/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
 const privatehomeMyVacanciesIdIndexRoute =
   privatehomeMyVacanciesIdIndexRouteImport.update({
     id: '/my-vacancies/$id/',
@@ -205,6 +219,12 @@ const privatehomeMyVacanciesIdLanguageAssessmentRoute =
     path: '/my-vacancies/$id/language-assessment',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomePostsIdThreadCommentIdIndexRoute =
+  privatehomePostsIdThreadCommentIdIndexRouteImport.update({
+    id: '/posts/$id/thread/$commentId/',
+    path: '/posts/$id/thread/$commentId/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
@@ -218,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/create/profile/dev': typeof privateCreateProfileDevRoute
   '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/favorites/': typeof privatehomeFavoritesIndexRoute
   '/feed/': typeof privatehomeFeedIndexRoute
   '/jobs/': typeof privatehomeJobsIndexRoute
   '/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
@@ -234,7 +255,9 @@ export interface FileRoutesByFullPath {
   '/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id/': typeof privatehomeDevsIdIndexRoute
   '/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
+  '/posts/$id/': typeof privatehomePostsIdIndexRoute
   '/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
+  '/posts/$id/thread/$commentId/': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
@@ -248,6 +271,7 @@ export interface FileRoutesByTo {
   '/create/profile/dev': typeof privateCreateProfileDevRoute
   '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/favorites': typeof privatehomeFavoritesIndexRoute
   '/feed': typeof privatehomeFeedIndexRoute
   '/jobs': typeof privatehomeJobsIndexRoute
   '/my-vacancies': typeof privatehomeMyVacanciesIndexRoute
@@ -264,7 +288,9 @@ export interface FileRoutesByTo {
   '/companies/$id': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id': typeof privatehomeDevsIdIndexRoute
   '/my-vacancies/$id': typeof privatehomeMyVacanciesIdIndexRoute
+  '/posts/$id': typeof privatehomePostsIdIndexRoute
   '/vacancies/$id': typeof privatehomeVacanciesIdIndexRoute
+  '/posts/$id/thread/$commentId': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -281,6 +307,7 @@ export interface FileRoutesById {
   '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
   '/(private)/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/(private)/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/(private)/(home)/favorites/': typeof privatehomeFavoritesIndexRoute
   '/(private)/(home)/feed/': typeof privatehomeFeedIndexRoute
   '/(private)/(home)/jobs/': typeof privatehomeJobsIndexRoute
   '/(private)/(home)/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
@@ -297,7 +324,9 @@ export interface FileRoutesById {
   '/(private)/(home)/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/(private)/(home)/devs/$id/': typeof privatehomeDevsIdIndexRoute
   '/(private)/(home)/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
+  '/(private)/(home)/posts/$id/': typeof privatehomePostsIdIndexRoute
   '/(private)/(home)/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
+  '/(private)/(home)/posts/$id/thread/$commentId/': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -313,6 +342,7 @@ export interface FileRouteTypes {
     | '/create/profile/dev'
     | '/proficiency-test/$id/start'
     | '/proficiency-test/$id/test'
+    | '/favorites/'
     | '/feed/'
     | '/jobs/'
     | '/my-vacancies/'
@@ -329,7 +359,9 @@ export interface FileRouteTypes {
     | '/companies/$id/'
     | '/devs/$id/'
     | '/my-vacancies/$id/'
+    | '/posts/$id/'
     | '/vacancies/$id/'
+    | '/posts/$id/thread/$commentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin-land'
@@ -343,6 +375,7 @@ export interface FileRouteTypes {
     | '/create/profile/dev'
     | '/proficiency-test/$id/start'
     | '/proficiency-test/$id/test'
+    | '/favorites'
     | '/feed'
     | '/jobs'
     | '/my-vacancies'
@@ -359,7 +392,9 @@ export interface FileRouteTypes {
     | '/companies/$id'
     | '/devs/$id'
     | '/my-vacancies/$id'
+    | '/posts/$id'
     | '/vacancies/$id'
+    | '/posts/$id/thread/$commentId'
   id:
     | '__root__'
     | '/(public)'
@@ -375,6 +410,7 @@ export interface FileRouteTypes {
     | '/(private)/create/profile/dev'
     | '/(private)/proficiency-test/$id/start'
     | '/(private)/proficiency-test/$id/test'
+    | '/(private)/(home)/favorites/'
     | '/(private)/(home)/feed/'
     | '/(private)/(home)/jobs/'
     | '/(private)/(home)/my-vacancies/'
@@ -391,7 +427,9 @@ export interface FileRouteTypes {
     | '/(private)/(home)/companies/$id/'
     | '/(private)/(home)/devs/$id/'
     | '/(private)/(home)/my-vacancies/$id/'
+    | '/(private)/(home)/posts/$id/'
     | '/(private)/(home)/vacancies/$id/'
+    | '/(private)/(home)/posts/$id/thread/$commentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -520,6 +558,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeFeedIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/favorites/': {
+      id: '/(private)/(home)/favorites/'
+      path: '/favorites'
+      fullPath: '/favorites/'
+      preLoaderRoute: typeof privatehomeFavoritesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/proficiency-test/$id/test': {
       id: '/(private)/proficiency-test/$id/test'
       path: '/proficiency-test/$id/test'
@@ -560,6 +605,13 @@ declare module '@tanstack/react-router' {
       path: '/vacancies/$id'
       fullPath: '/vacancies/$id/'
       preLoaderRoute: typeof privatehomeVacanciesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/posts/$id/': {
+      id: '/(private)/(home)/posts/$id/'
+      path: '/posts/$id'
+      fullPath: '/posts/$id/'
+      preLoaderRoute: typeof privatehomePostsIdIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
     '/(private)/(home)/my-vacancies/$id/': {
@@ -618,6 +670,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/posts/$id/thread/$commentId/': {
+      id: '/(private)/(home)/posts/$id/thread/$commentId/'
+      path: '/posts/$id/thread/$commentId'
+      fullPath: '/posts/$id/thread/$commentId/'
+      preLoaderRoute: typeof privatehomePostsIdThreadCommentIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
   }
 }
 
@@ -638,6 +697,7 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 )
 
 interface privatehomeLayoutRouteChildren {
+  privatehomeFavoritesIndexRoute: typeof privatehomeFavoritesIndexRoute
   privatehomeFeedIndexRoute: typeof privatehomeFeedIndexRoute
   privatehomeJobsIndexRoute: typeof privatehomeJobsIndexRoute
   privatehomeMyVacanciesIndexRoute: typeof privatehomeMyVacanciesIndexRoute
@@ -652,10 +712,13 @@ interface privatehomeLayoutRouteChildren {
   privatehomeCompaniesIdIndexRoute: typeof privatehomeCompaniesIdIndexRoute
   privatehomeDevsIdIndexRoute: typeof privatehomeDevsIdIndexRoute
   privatehomeMyVacanciesIdIndexRoute: typeof privatehomeMyVacanciesIdIndexRoute
+  privatehomePostsIdIndexRoute: typeof privatehomePostsIdIndexRoute
   privatehomeVacanciesIdIndexRoute: typeof privatehomeVacanciesIdIndexRoute
+  privatehomePostsIdThreadCommentIdIndexRoute: typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 
 const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
+  privatehomeFavoritesIndexRoute: privatehomeFavoritesIndexRoute,
   privatehomeFeedIndexRoute: privatehomeFeedIndexRoute,
   privatehomeJobsIndexRoute: privatehomeJobsIndexRoute,
   privatehomeMyVacanciesIndexRoute: privatehomeMyVacanciesIndexRoute,
@@ -674,7 +737,10 @@ const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeCompaniesIdIndexRoute: privatehomeCompaniesIdIndexRoute,
   privatehomeDevsIdIndexRoute: privatehomeDevsIdIndexRoute,
   privatehomeMyVacanciesIdIndexRoute: privatehomeMyVacanciesIdIndexRoute,
+  privatehomePostsIdIndexRoute: privatehomePostsIdIndexRoute,
   privatehomeVacanciesIdIndexRoute: privatehomeVacanciesIdIndexRoute,
+  privatehomePostsIdThreadCommentIdIndexRoute:
+    privatehomePostsIdThreadCommentIdIndexRoute,
 }
 
 const privatehomeLayoutRouteWithChildren =

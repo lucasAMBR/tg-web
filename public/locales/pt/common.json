@@ -24,7 +24,10 @@
         "my_applies": "Minhas Vagas",
         "screening_questionnaire": "Questionário de Triagem",
         "technical_challenge": "Desafio Técnico",
-        "language_assessment": "Prova de Idioma"
+        "language_assessment": "Prova de Idioma",
+        "post": "Publicação",
+        "thread": "Thread",
+        "favorites": "Favoritos"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -150,13 +153,18 @@
             "language_assessment_updated": "Prova de idioma atualizada com sucesso",
             "language_assessment_deleted": "Prova de idioma removida com sucesso",
             "language_assessment_answered": "Prova entregue com sucesso",
-            "read_receipts_updated": "Confirmação de leitura atualizada com sucesso!"
+            "read_receipts_updated": "Confirmação de leitura atualizada com sucesso!",
+            "post_created": "Publicação criada com sucesso!",
+            "post_updated": "Publicação atualizada com sucesso!",
+            "post_deleted": "Publicação removida com sucesso!",
+            "comment_deleted": "Comentário removido com sucesso!"
         }
     },
     "role": {
         "dev": "Desenvolvedor",
         "company": "Empresa",
-        "client": "Cliente"
+        "client": "Cliente",
+        "admin": "Administrador"
     },
     "landing_page": {
         "app_name": "Brew!",
@@ -313,7 +321,8 @@
             "clients": "Clientes",
             "questions": "Questões",
             "admins": "Adminstradores",
-            "search": "Buscar"
+            "search": "Buscar",
+            "favorites": "Favoritos"
         },
         "options": {
             "profile": "Perfil",
@@ -1504,5 +1513,82 @@
         "send": "Enviar",
         "send_message": "Enviar mensagem",
         "unknown_participant": "Usuário sem perfil"
+    },
+    "social": {
+        "feed": {
+            "popular": "Populares",
+            "recent": "Recentes",
+            "search_placeholder": "Buscar nas publicações",
+            "empty_title": "Nenhuma publicação por aqui",
+            "empty_description": "Seja o primeiro a publicar algo para a comunidade.",
+            "back_to_feed": "Voltar para o feed"
+        },
+        "post": {
+            "edited": "editado",
+            "open": "Abrir publicação",
+            "open_image": "Ampliar imagem",
+            "image_alt": "Imagem {{index}} da publicação",
+            "previous_image": "Imagem anterior",
+            "next_image": "Próxima imagem",
+            "like": "Curtir",
+            "comments": "Comentários",
+            "favorite": "Favoritar",
+            "publish": "Publicar",
+            "add_images": "Imagens",
+            "create_placeholder": "O que você quer compartilhar?",
+            "content_label": "Texto da publicação",
+            "images_label": "Imagens ({{current}}/{{max}})",
+            "edit_title": "Editar publicação",
+            "delete_description": "A publicação, os comentários e as curtidas dela deixam de ficar disponíveis. Não é possível desfazer."
+        },
+        "comment": {
+            "section_title_one": "{{count}} comentário",
+            "section_title_other": "{{count}} comentários",
+            "removed": "Comentário removido",
+            "reply": "Responder",
+            "reply_placeholder": "Escreva uma resposta",
+            "send_reply": "Responder",
+            "send": "Comentar",
+            "create_placeholder": "Escreva um comentário",
+            "edit_placeholder": "Edite seu comentário",
+            "like": "Curtir comentário",
+            "empty": "Nenhum comentário ainda",
+            "load_more": "Carregar mais comentários",
+            "see_more_replies_one": "Ver mais {{count}} resposta",
+            "see_more_replies_other": "Ver mais {{count}} respostas",
+            "continue_thread": "Continuar esta thread",
+            "back_to_post": "Voltar para a conversa"
+        },
+        "likes": {
+            "title": "Quem curtiu",
+            "empty": "Ninguém curtiu ainda",
+            "see_who_liked": "Quem curtiu"
+        },
+        "author": {
+            "unknown": "Usuário"
+        },
+        "favorites": {
+            "search_placeholder": "Buscar nos favoritos",
+            "empty_title": "Nenhuma publicação favoritada",
+            "empty_description": "As publicações que você favoritar aparecem aqui."
+        },
+        "profile_posts": {
+            "empty_title": "Nenhuma publicação",
+            "empty_description": "Este perfil ainda não publicou nada.",
+            "empty_description_own": "Você ainda não publicou nada. Comece agora."
+        },
+        "errors": {
+            "post_unavailable": "Esta publicação não está mais disponível.",
+            "thread_unavailable": "Esta conversa não está mais disponível.",
+            "unavailable_description": "O conteúdo pode ter sido removido por quem publicou.",
+            "comment_removed": "Este comentário foi removido.",
+            "too_many_images": "Um post pode ter no máximo {{max}} imagens.",
+            "invalid_image_type": "Envie imagens em JPEG, PNG ou WebP.",
+            "image_too_large": "Cada imagem precisa ter no máximo 10 MB.",
+            "not_owner": "Você só pode alterar o que publicou.",
+            "image_not_found": "Esta imagem não faz parte da publicação.",
+            "content_required": "Escreva algo antes de enviar.",
+            "unexpected": "Não foi possível concluir. Tente de novo."
+        }
     }
 }

@@ -14,6 +14,9 @@ export default defineConfig({
 	api: {
 		input: {
 			target: API_SWAGGER_URL,
+			override: {
+				transformer: "./orval/transformer.cjs",
+			},
 		},
 		output: {
 			mode: "tags-split",
@@ -26,6 +29,11 @@ export default defineConfig({
 					path: "./src/lib/api-client.ts",
 					name: "apiClient",
 					default: true,
+				},
+				formData: {
+					// O Laravel só enxerga um campo multipart como array quando a chave
+					// vem com colchetes (`images[]`)
+					arrayHandling: "serialize-with-brackets",
 				},
 				query: {
 					useQuery: true,

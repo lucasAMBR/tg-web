@@ -4,15 +4,17 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { ScreeningQuestionOptionResourceOptionPt } from './screeningQuestionOptionResourceOptionPt';
+import type { ScreeningQuestionOptionResourceOptionEn } from './screeningQuestionOptionResourceOptionEn';
 import type { ScreeningQuestionOptionResourceTranslationStatusLabel } from './screeningQuestionOptionResourceTranslationStatusLabel';
 
 export interface ScreeningQuestionOptionResource {
   id: string;
   screening_question_id: string;
   option: string;
-  option_pt: string;
-  option_en: string;
+  option_pt: ScreeningQuestionOptionResourceOptionPt;
+  option_en: ScreeningQuestionOptionResourceOptionEn;
   translation_status: string;
   translation_status_label: ScreeningQuestionOptionResourceTranslationStatusLabel;
-  order: string;
+  order: number;
 }

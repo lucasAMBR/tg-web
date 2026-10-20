@@ -118,7 +118,7 @@ function RouteComponent() {
 						</p>
 					</div>
 				</Card>	
-				<DevProfileContent profileId={user?.dev_profile?.id as string}/>
+				<DevProfileContent profileId={user?.dev_profile?.id as string} userId={user?.id}/>
 				<ThemeToggle />	
 			</div>
 		)
@@ -159,7 +159,7 @@ function RouteComponent() {
 						</p>
 					</div>
 				</Card>
-				<CompanyProfileBody profileId={user?.company_profile?.id as string}/>
+				<CompanyProfileBody profileId={user?.company_profile?.id as string} userId={user?.id}/>
 			</div>
 		)
 	}
@@ -199,7 +199,7 @@ function RouteComponent() {
 						</p>
 					</div>
 				</Card>
-				<ClientProfileBody profileId={user?.client_profile?.id as string}/>
+				<ClientProfileBody profileId={user?.client_profile?.id as string} userId={user?.id}/>
 			</div>
 		)
 	}

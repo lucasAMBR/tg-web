@@ -442,7 +442,7 @@ export const storeProjectHistoryImages = (
 ) => {
       
       const formData = new FormData();
-saveImagesToProjectRequest.images.forEach(value => formData.append(`images`, value));
+saveImagesToProjectRequest.images.forEach(value => formData.append(`images[]`, value));
 
       return apiClient<StoreProjectHistoryImages200>(
       {url: `/project-history/${id}/gallery`, method: 'POST',

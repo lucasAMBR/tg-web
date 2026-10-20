@@ -5,4 +5,12 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type FreelanceJobVacancyResourceSalaryTypeLabel = string | null;
+export type FreelanceJobVacancyResourceSalaryTypeLabel = typeof FreelanceJobVacancyResourceSalaryTypeLabel[keyof typeof FreelanceJobVacancyResourceSalaryTypeLabel];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const FreelanceJobVacancyResourceSalaryTypeLabel = {
+  Per_day: 'Per day',
+  Per_week: 'Per week',
+  Per_month: 'Per month',
+} as const;

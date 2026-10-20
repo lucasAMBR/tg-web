@@ -108,7 +108,7 @@ function RouteComponent() {
         </div>
       </div>
     </Card >
-    <DevProfileContent profileId={devData?.id as string}/>	
+    <DevProfileContent profileId={devData?.id as string} userId={devData?.user_id}/>	
     </div>
   );
 }

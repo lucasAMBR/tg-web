@@ -1,4 +1,4 @@
-import UnderConstruction from "@/components/global/under-construction"
+import ProfilePostsTab from "@/components/social/profile-posts-tab"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CertificationsTab from "../certifications/certifications-tab"
 import ProjectHistoryTab from "../project-history/project-history-tab"
@@ -16,9 +16,11 @@ import ProficiencyTestTab from "../proficiency-test/proficiency-test-tab"
 
 interface DevProfileContentProps{
     profileId: string
+    /** Id do usuário dono do perfil — a aba de publicações filtra o feed por ele. */
+    userId: string | undefined
 }
 
-export default function DevProfileContent({ profileId }: DevProfileContentProps){
+export default function DevProfileContent({ profileId, userId }: DevProfileContentProps){
 
     const { t } = useTranslation();
 
@@ -70,7 +72,7 @@ export default function DevProfileContent({ profileId }: DevProfileContentProps)
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
-                        <UnderConstruction />
+                        <ProfilePostsTab userId={userId} />
                     </TabsContent>
                     <TabsContent value="certifications" className="mt-2">
                         <CertificationsTab profileId={profileId} />

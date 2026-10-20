@@ -26,7 +26,10 @@ type PageTitleKey =
 	| "selection_process"
 	| "screening_questionnaire"
 	| "technical_challenge"
-	| "language_assessment";
+	| "language_assessment"
+	| "post"
+	| "thread"
+	| "favorites";
 
 /**
  * Monta o `<title>` traduzido das rotas.

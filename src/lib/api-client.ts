@@ -97,8 +97,13 @@ axiosInstance.interceptors.response.use(
 			return Promise.reject(error);
 		}
 
+		// Sem token ou com token expirado, a API não responde 401: cai no handler
+		// genérico dela, que devolve 400 com `data: "Unauthenticated."`
+		const isUnauthenticated =
+			status === 400 && error.response?.data?.data === "Unauthenticated.";
+
 		if (
-			(status === 401 || status === 403) &&
+			(status === 401 || status === 403 || isUnauthenticated) &&
 			originalRequest &&
 			!originalRequest._retry
 		) {

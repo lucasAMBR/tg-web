@@ -5,4 +5,12 @@
  * OpenAPI spec version: 0.0.1
  */
 
-export type LanguageAssessmentQuestionResourceTypeLabel = string | null;
+export type LanguageAssessmentQuestionResourceTypeLabel = typeof LanguageAssessmentQuestionResourceTypeLabel[keyof typeof LanguageAssessmentQuestionResourceTypeLabel];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const LanguageAssessmentQuestionResourceTypeLabel = {
+  Escolha_única: 'Escolha única',
+  Múltipla_escolha: 'Múltipla escolha',
+  Resposta_escrita: 'Resposta escrita',
+} as const;

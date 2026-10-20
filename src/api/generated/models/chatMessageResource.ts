@@ -5,6 +5,8 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { ChatMessageResourceReadAt } from './chatMessageResourceReadAt';
+import type { ChatMessageResourceCreatedAt } from './chatMessageResourceCreatedAt';
+import type { ChatMessageResourceUpdatedAt } from './chatMessageResourceUpdatedAt';
 
 export interface ChatMessageResource {
   id: string;
@@ -14,6 +16,6 @@ export interface ChatMessageResource {
   /** Quando o destinatário leu a mensagem. Para quem enviou, só vem preenchido
 quando a confirmação de leitura está ligada para os dois participantes */
   read_at: ChatMessageResourceReadAt;
-  created_at: string;
-  updated_at: string;
+  created_at: ChatMessageResourceCreatedAt;
+  updated_at: ChatMessageResourceUpdatedAt;
 }

@@ -4,18 +4,25 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { ScreeningQuestionnaireResourceTitlePt } from './screeningQuestionnaireResourceTitlePt';
+import type { ScreeningQuestionnaireResourceTitleEn } from './screeningQuestionnaireResourceTitleEn';
+import type { ScreeningQuestionnaireResourceDescription } from './screeningQuestionnaireResourceDescription';
+import type { ScreeningQuestionnaireResourceDescriptionPt } from './screeningQuestionnaireResourceDescriptionPt';
+import type { ScreeningQuestionnaireResourceDescriptionEn } from './screeningQuestionnaireResourceDescriptionEn';
 import type { ScreeningQuestionnaireResourceTranslationStatusLabel } from './screeningQuestionnaireResourceTranslationStatusLabel';
 import type { JobVacancyResource } from './jobVacancyResource';
 import type { ScreeningQuestionResource } from './screeningQuestionResource';
+import type { ScreeningQuestionnaireResourceCreatedAt } from './screeningQuestionnaireResourceCreatedAt';
+import type { ScreeningQuestionnaireResourceUpdatedAt } from './screeningQuestionnaireResourceUpdatedAt';
 
 export interface ScreeningQuestionnaireResource {
   id: string;
   title: string;
-  title_pt: string;
-  title_en: string;
-  description: string;
-  description_pt: string;
-  description_en: string;
+  title_pt: ScreeningQuestionnaireResourceTitlePt;
+  title_en: ScreeningQuestionnaireResourceTitleEn;
+  description: ScreeningQuestionnaireResourceDescription;
+  description_pt: ScreeningQuestionnaireResourceDescriptionPt;
+  description_en: ScreeningQuestionnaireResourceDescriptionEn;
   translation_status: string;
   translation_status_label: ScreeningQuestionnaireResourceTranslationStatusLabel;
   job_vacancy_id: string;
@@ -23,6 +30,6 @@ export interface ScreeningQuestionnaireResource {
   questions?: ScreeningQuestionResource[];
   /** Quantos candidatos já responderam o questionário */
   dev_questionnaires_count?: number;
-  created_at: string;
-  updated_at: string;
+  created_at: ScreeningQuestionnaireResourceCreatedAt;
+  updated_at: ScreeningQuestionnaireResourceUpdatedAt;
 }

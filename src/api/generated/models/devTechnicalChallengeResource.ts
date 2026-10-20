@@ -4,24 +4,29 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { DevTechnicalChallengeStatusEnum } from './devTechnicalChallengeStatusEnum';
 import type { DevTechnicalChallengeResourceStatusLabel } from './devTechnicalChallengeResourceStatusLabel';
+import type { DevTechnicalChallengeResourceRepositoryUrl } from './devTechnicalChallengeResourceRepositoryUrl';
 import type { DevTechnicalChallengeResourceSubmissionFile } from './devTechnicalChallengeResourceSubmissionFile';
+import type { DevTechnicalChallengeResourceSubmittedAt } from './devTechnicalChallengeResourceSubmittedAt';
 import type { TechnicalChallengeResource } from './technicalChallengeResource';
 import type { DevJobVacancyResource } from './devJobVacancyResource';
 import type { DevProfileResource } from './devProfileResource';
+import type { DevTechnicalChallengeResourceCreatedAt } from './devTechnicalChallengeResourceCreatedAt';
+import type { DevTechnicalChallengeResourceUpdatedAt } from './devTechnicalChallengeResourceUpdatedAt';
 
 export interface DevTechnicalChallengeResource {
   id: string;
   /** `pending` enquanto o dev não entrega a solução, `delivered` depois do envio */
-  status: string;
+  status: DevTechnicalChallengeStatusEnum;
   status_label: DevTechnicalChallengeResourceStatusLabel;
   /** Repositório com a solução, enviado pelo dev */
-  repository_url: string;
+  repository_url: DevTechnicalChallengeResourceRepositoryUrl;
   /** Projeto compactado enviado pelo dev, quando o desafio aceita o zip */
   submission_file: DevTechnicalChallengeResourceSubmissionFile;
   /** Prazo dado pela empresa para o dev entregar o desafio */
   due_date: string;
-  submitted_at: string;
+  submitted_at: DevTechnicalChallengeResourceSubmittedAt;
   technical_challenge_id: string;
   /** Desafio a entregar, com o enunciado, as regras e o documento guia */
   challenge?: TechnicalChallengeResource;
@@ -30,6 +35,6 @@ export interface DevTechnicalChallengeResource {
   apply?: DevJobVacancyResource;
   dev_profile_id: string;
   profile?: DevProfileResource;
-  created_at: string;
-  updated_at: string;
+  created_at: DevTechnicalChallengeResourceCreatedAt;
+  updated_at: DevTechnicalChallengeResourceUpdatedAt;
 }

@@ -4,19 +4,23 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { LanguageAssessmentResourceDescription } from './languageAssessmentResourceDescription';
+import type { LanguageAssessmentResourcePassingScore } from './languageAssessmentResourcePassingScore';
 import type { JobVacancyResource } from './jobVacancyResource';
 import type { LanguageAssessmentQuestionResource } from './languageAssessmentQuestionResource';
+import type { LanguageAssessmentResourceCreatedAt } from './languageAssessmentResourceCreatedAt';
+import type { LanguageAssessmentResourceUpdatedAt } from './languageAssessmentResourceUpdatedAt';
 
 export interface LanguageAssessmentResource {
   id: string;
   title: string;
-  description: string;
+  description: LanguageAssessmentResourceDescription;
   /** Idioma avaliado, escrito pela empresa (ex.: "Inglês", "Español"). O
 conteúdo da prova não é traduzido: ela é escrita no idioma avaliado */
   language: string;
   /** Nota mínima de aprovação. `null` quando a empresa não definiu corte — a
 prova pontua, mas não dá veredito */
-  passing_score: string;
+  passing_score: LanguageAssessmentResourcePassingScore;
   /** Nota máxima possível: a soma do peso de todas as perguntas */
   max_score?: number;
   /** Prazo dado pela empresa para os candidatos responderem */
@@ -26,6 +30,6 @@ prova pontua, mas não dá veredito */
   questions?: LanguageAssessmentQuestionResource[];
   /** Quantos candidatos já receberam a prova */
   dev_assessments_count?: number;
-  created_at: string;
-  updated_at: string;
+  created_at: LanguageAssessmentResourceCreatedAt;
+  updated_at: LanguageAssessmentResourceUpdatedAt;
 }

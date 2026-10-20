@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+	Bookmark,
 	Building,
 	Calendar,
 	Cog,
@@ -98,6 +99,7 @@ export default function Sidebar() {
 					{role === "dev" && (
 						<>
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
@@ -107,6 +109,7 @@ export default function Sidebar() {
 					{role === "company" && (
 						<>
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
 							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-vacancies" />
@@ -116,6 +119,7 @@ export default function Sidebar() {
 					{role === "client" && (
 						<>
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.freelancers")} icon={User} url="/freelancers" />
 						</>
@@ -123,6 +127,8 @@ export default function Sidebar() {
 
 					{role === "admin" && (
 						<>
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />

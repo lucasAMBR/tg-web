@@ -5,6 +5,8 @@ import type {
 	ChatParticipantResource,
 } from "@/api/generated/models";
 
+export { dedupeById } from "@/utils/dedupe-by-id";
+
 /** Limite do `body` no `StoreChatMessageRequest`. */
 export const CHAT_MESSAGE_MAX_LENGTH = 2000;
 
@@ -61,19 +63,6 @@ export function getParticipantProfileHref(
 	}
 
 	return undefined;
-}
-
-/** Mantém só a primeira ocorrência de cada id, preservando a ordem recebida. */
-export function dedupeById<T extends { id: string }>(items: T[]): T[] {
-	const seen = new Set<string>();
-
-	return items.filter((item) => {
-		if (seen.has(item.id)) return false;
-
-		seen.add(item.id);
-
-		return true;
-	});
 }
 
 /** Da mensagem mais recente para a mais antiga, como a API devolve a listagem. */

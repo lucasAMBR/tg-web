@@ -6,6 +6,9 @@
  */
 import type { ChatParticipantResource } from './chatParticipantResource';
 import type { ChatMessageResource } from './chatMessageResource';
+import type { ChatConversationResourceLastMessageAt } from './chatConversationResourceLastMessageAt';
+import type { ChatConversationResourceCreatedAt } from './chatConversationResourceCreatedAt';
+import type { ChatConversationResourceUpdatedAt } from './chatConversationResourceUpdatedAt';
 
 export interface ChatConversationResource {
   id: string;
@@ -15,7 +18,7 @@ export interface ChatConversationResource {
   last_message?: ChatMessageResource;
   /** Mensagens recebidas pelo usuário autenticado que ele ainda não leu */
   unread_count: number;
-  last_message_at: string;
-  created_at: string;
-  updated_at: string;
+  last_message_at: ChatConversationResourceLastMessageAt;
+  created_at: ChatConversationResourceCreatedAt;
+  updated_at: ChatConversationResourceUpdatedAt;
 }

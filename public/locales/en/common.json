@@ -24,7 +24,10 @@
         "my_applies": "My Vacancies",
         "screening_questionnaire": "Screening Questionnaire",
         "technical_challenge": "Technical Challenge",
-        "language_assessment": "Language Assessment"
+        "language_assessment": "Language Assessment",
+        "post": "Post",
+        "thread": "Thread",
+        "favorites": "Favorites"
     },
     "breadcrumb": {
         "admin": "Administration",
@@ -150,13 +153,18 @@
             "language_assessment_updated": "Language assessment updated successfully",
             "language_assessment_deleted": "Language assessment removed successfully",
             "language_assessment_answered": "Assessment submitted successfully",
-            "read_receipts_updated": "Read receipts updated successfully!"
+            "read_receipts_updated": "Read receipts updated successfully!",
+            "post_created": "Post created successfully!",
+            "post_updated": "Post updated successfully!",
+            "post_deleted": "Post removed successfully!",
+            "comment_deleted": "Comment removed successfully!"
         }
     },
     "role": {
         "dev": "Developer",
         "company": "Company",
-        "client": "Client"
+        "client": "Client",
+        "admin": "Admin"
     },
     "landing_page": {
         "app_name": "Brew!",
@@ -547,7 +555,8 @@
             "clients": "Clients",
             "questions": "Questions",
             "admins": "Admins",
-            "search": "Search"
+            "search": "Search",
+            "favorites": "Favorites"
         },
         "options": {
             "profile": "Profile",
@@ -1511,5 +1520,82 @@
         "send": "Send",
         "send_message": "Send message",
         "unknown_participant": "User without a profile"
+    },
+    "social": {
+        "feed": {
+            "popular": "Popular",
+            "recent": "Recent",
+            "search_placeholder": "Search posts",
+            "empty_title": "No posts here yet",
+            "empty_description": "Be the first to share something with the community.",
+            "back_to_feed": "Back to feed"
+        },
+        "post": {
+            "edited": "edited",
+            "open": "Open post",
+            "open_image": "Expand image",
+            "image_alt": "Post image {{index}}",
+            "previous_image": "Previous image",
+            "next_image": "Next image",
+            "like": "Like",
+            "comments": "Comments",
+            "favorite": "Favorite",
+            "publish": "Publish",
+            "add_images": "Images",
+            "create_placeholder": "What do you want to share?",
+            "content_label": "Post text",
+            "images_label": "Images ({{current}}/{{max}})",
+            "edit_title": "Edit post",
+            "delete_description": "The post, along with its comments and likes, stops being available. This cannot be undone."
+        },
+        "comment": {
+            "section_title_one": "{{count}} comment",
+            "section_title_other": "{{count}} comments",
+            "removed": "Comment removed",
+            "reply": "Reply",
+            "reply_placeholder": "Write a reply",
+            "send_reply": "Reply",
+            "send": "Comment",
+            "create_placeholder": "Write a comment",
+            "edit_placeholder": "Edit your comment",
+            "like": "Like comment",
+            "empty": "No comments yet",
+            "load_more": "Load more comments",
+            "see_more_replies_one": "See {{count}} more reply",
+            "see_more_replies_other": "See {{count}} more replies",
+            "continue_thread": "Continue this thread",
+            "back_to_post": "Back to the conversation"
+        },
+        "likes": {
+            "title": "Liked by",
+            "empty": "No likes yet",
+            "see_who_liked": "Liked by"
+        },
+        "author": {
+            "unknown": "User"
+        },
+        "favorites": {
+            "search_placeholder": "Search favorites",
+            "empty_title": "No favorite posts",
+            "empty_description": "Posts you favorite show up here."
+        },
+        "profile_posts": {
+            "empty_title": "No posts",
+            "empty_description": "This profile hasn't posted anything yet.",
+            "empty_description_own": "You haven't posted anything yet. Start now."
+        },
+        "errors": {
+            "post_unavailable": "This post is no longer available.",
+            "thread_unavailable": "This conversation is no longer available.",
+            "unavailable_description": "The content may have been removed by its author.",
+            "comment_removed": "This comment was removed.",
+            "too_many_images": "A post can have at most {{max}} images.",
+            "invalid_image_type": "Upload images in JPEG, PNG or WebP.",
+            "image_too_large": "Each image must be at most 10 MB.",
+            "not_owner": "You can only change what you posted.",
+            "image_not_found": "This image is not part of the post.",
+            "content_required": "Write something before sending.",
+            "unexpected": "Could not complete. Please try again."
+        }
     }
 }
