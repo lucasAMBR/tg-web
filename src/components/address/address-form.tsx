@@ -10,9 +10,9 @@ import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import Required from "../global/required-field";
 import { Button } from "../ui/button";
-import { useStoreAddress } from "@/api/generated/addresses-doc/addresses-doc";
+import { useStoreAddress } from "@/api/generated/address/address";
 import { CustomToaster } from "@/utils/custom-toaster";
-import { redirect, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import type { UserRole } from "@/types/AuthenticatedUser";
 import { useAuthStore } from "@/stores/auth-store";
 import type { AxiosError } from "axios";
@@ -32,7 +32,7 @@ export default function AddressForm() {
 		state: "",
 	});
 
-	const { mutate: registerAddress, isPending } = useStoreAddress();
+	const { mutate: registerAddress } = useStoreAddress();
 
 	const form = useForm<IRegisterAddressSchema>({
 		resolver: zodResolver(RegisterAddressSchema),
@@ -78,9 +78,10 @@ export default function AddressForm() {
 						const role = user.role[0] as UserRole;
 
 						const homeRoutes: Record<UserRole, string> = {
-							dev: "/home/dev",
-							company: "/home/company",
-							client: "/home/client",
+							dev: "/feed",
+							company: "/feed",
+							client: "/feed",
+							admin: "/admin-land/dashboard",
 						};
 
 						hydrateUser();

@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import Required from "../global/required-field";
 import { Spinner } from "../ui/spinner";
-import { useUpdateClientProfile } from "@/api/generated/profiles-doc/profiles-doc";
-import type { UpdateClientProfileBody } from "@/api/generated/models/updateClientProfileBody";
+import { useUpdateClientProfile } from "@/api/generated/profile/profile";
+import type { UpdateClientProfileRequest } from "@/api/generated/models/updateClientProfileRequest";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useEffect } from "react";
 import { onError } from "@/utils/on-error";
@@ -50,7 +50,7 @@ const UpdateClientProfileSchema = z.object({
 
 type IUpdateClientProfileSchema = z.infer<typeof UpdateClientProfileSchema>;
 
-function toUpdateBody(data: IUpdateClientProfileSchema): UpdateClientProfileBody {
+function toUpdateBody(data: IUpdateClientProfileSchema): UpdateClientProfileRequest {
 	const cpfDigits = digitsOnlyCpf(data.cpf);
 	return {
 		name: data.name,
@@ -94,7 +94,7 @@ export default function ClientUpdateProfileForm() {
 		if (!id) return;
 
 		updateProfile(
-			{ client: id, data: toUpdateBody(data) },
+			{ id, data: toUpdateBody(data) },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.profile_client_updated"));

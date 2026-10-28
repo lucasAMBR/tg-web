@@ -1,4 +1,4 @@
-import UnderConstruction from "@/components/global/under-construction"
+import ProfilePostsTab from "@/components/social/profile-posts-tab"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CertificationsTab from "../certifications/certifications-tab"
 import ProjectHistoryTab from "../project-history/project-history-tab"
@@ -9,15 +9,18 @@ import HardSkillList from "../hard-skill/hard-skill-list"
 import SoftSkillList from "../soft-skill/soft-skill-list"
 import { useEffect, useState } from "react"
 import { useQueryClient } from "@tanstack/react-query"
-import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history-doc/project-history-doc"
-import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history-doc/employment-history-doc"
+import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history/project-history"
+import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history/employment-history"
 import { useTranslation } from "react-i18next"
+import ProficiencyTestTab from "../proficiency-test/proficiency-test-tab"
 
 interface DevProfileContentProps{
     profileId: string
+    /** Id do usuário dono do perfil — a aba de publicações filtra o feed por ele. */
+    userId: string | undefined
 }
 
-export default function DevProfileContent({ profileId }: DevProfileContentProps){
+export default function DevProfileContent({ profileId, userId }: DevProfileContentProps){
 
     const { t } = useTranslation();
 
@@ -61,9 +64,15 @@ export default function DevProfileContent({ profileId }: DevProfileContentProps)
                         >
                             {t("dev_profile.tabs.certifications")}
                         </TabsTrigger>
+                        <TabsTrigger
+                            className="text-xl cursor-pointer"
+                            value="proficiency-test"
+                        >
+                            {t("dev_profile.tabs.proficiency_test")}
+                        </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
-                        <UnderConstruction />
+                        <ProfilePostsTab userId={userId} />
                     </TabsContent>
                     <TabsContent value="certifications" className="mt-2">
                         <CertificationsTab profileId={profileId} />
@@ -73,6 +82,9 @@ export default function DevProfileContent({ profileId }: DevProfileContentProps)
                     </TabsContent>
                     <TabsContent value="job_history" className="mt-2">
                         <JobHistoryTab profileId={profileId} />
+                    </TabsContent>
+                    <TabsContent value="proficiency-test">
+                        <ProficiencyTestTab profileId={profileId}/>
                     </TabsContent>
                 </Tabs>
             </div>

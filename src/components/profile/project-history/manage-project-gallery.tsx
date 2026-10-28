@@ -4,7 +4,7 @@ import {
 	useDeleteProjectHistoryImage,
 	useShowProjectHistory,
 	useStoreProjectHistoryImages,
-} from "@/api/generated/project-history-doc/project-history-doc";
+} from "@/api/generated/project-history/project-history";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -21,7 +21,7 @@ import { env } from "@/utils/env";
 import { onError } from "@/utils/on-error";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { Loader2, Plus, Save, XIcon } from "lucide-react";
+import { Loader2, Plus, XIcon } from "lucide-react";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -34,7 +34,6 @@ interface ManageProjectModalProps {
 
 export default function ManageProjectGallery({
 	projectId,
-	profileId,
 	open,
 	onOpenChange,
 }: ManageProjectModalProps) {
@@ -50,8 +49,7 @@ export default function ManageProjectGallery({
 
 	const { mutateAsync, isPending } = useStoreProjectHistoryImages();
 
-	const { mutate: deleteImage, isPending: deleteIsPending } =
-		useDeleteProjectHistoryImage();
+	const { mutate: deleteImage } = useDeleteProjectHistoryImage();
 
 	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
@@ -93,7 +91,7 @@ export default function ManageProjectGallery({
 		}
 	};
 
-	const handleDeleteImage = (imageId: number) => {
+	const handleDeleteImage = (imageId: string) => {
 		deleteImage(
 			{ id: projectId, imageId: imageId },
 			{
@@ -145,7 +143,7 @@ export default function ManageProjectGallery({
 							{currentImages.map((gallery) => (
 								<div key={gallery.id} className="relative">
 									<div
-										onClick={() => handleDeleteImage(gallery.id)}
+										onClick={() => handleDeleteImage(String(gallery.id))}
 										className="bg-white cursor-pointer text-red-600 border border-red-600 rounded-full p-1 absolute top-0 right-0 m-1"
 									>
 										<XIcon className="size-4" />

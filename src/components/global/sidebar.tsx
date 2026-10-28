@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+	Bookmark,
 	Building,
 	Calendar,
 	Cog,
@@ -9,9 +10,11 @@ import {
 	LayoutDashboard,
 	List,
 	LogOut,
+	MessageCircle,
+	Search,
 	User,
 } from "lucide-react";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAuthStore } from "@/stores/auth-store";
 import {
 	DropdownMenu,
@@ -26,7 +29,11 @@ import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
-import { getNameFromProfile, getUserMainRole } from "@/utils/role-helper";
+import {
+	getNameFromProfile,
+	getProfilePic,
+	getUserMainRole,
+} from "@/utils/role-helper";
 import { Logo } from "./Logo";
 import { useTranslation } from "react-i18next";
 
@@ -38,6 +45,7 @@ export default function Sidebar() {
 	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
 
 	const role = getUserMainRole(user);
+	const profilePic = getProfilePic(user);
 	const logoutDialogText = t("sidebar.logout_dialog.description");
 
 	function SidebarItem({
@@ -51,7 +59,7 @@ export default function Sidebar() {
 		url?: string;
 		onClick?: () => void;
 	}) {
-		const active = url ? location.pathname === url : false;
+		const active = url ? location.pathname.startsWith(url) : false;
 
 		return (
 			<div
@@ -84,12 +92,15 @@ export default function Sidebar() {
 			<div className="flex flex-col gap-4 flex-1 p-4">
 				{/* SECTIONS */}
 				<div className="w-full">
-					<p className="text-xs text-muted-foreground mb-2">Sections</p>
+					<p className="text-xs text-muted-foreground mb-2">
+						{t("sidebar.sections_title")}
+					</p>
 
 					{role === "dev" && (
 						<>
-							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/home" />
-							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/companies" />
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
+							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
@@ -97,30 +108,50 @@ export default function Sidebar() {
 
 					{role === "company" && (
 						<>
-							<SidebarItem title="Feed" icon={List} url="/home" />
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
+							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
 							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
-							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-jobs" />
+							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-vacancies" />
 						</>
 					)}
 
 					{role === "client" && (
 						<>
-							<SidebarItem title="Feed" icon={List} url="/home" />
-							<SidebarItem title="Freelancers" icon={User} url="/freelancers" />
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
+							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
+						</>
+					)}
+
+					{role === "admin" && (
+						<>
+							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
+							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
+							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
+							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
+							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/company" />
+							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />
+							<SidebarItem title={t("sidebar.sections.admins")} icon={Folder} url="/admin-land/admins" />
+							<SidebarItem title={t("sidebar.sections.questions")} icon={MessageCircle} url="/admin-land/questions" />
 						</>
 					)}
 				</div>
 
 				{/* OPTIONS */}
 				<div className="w-full">
-					<p className="text-xs text-muted-foreground mb-2">Options</p>
+					<p className="text-xs text-muted-foreground mb-2">
+						{t("sidebar.options_title")}
+					</p>
 
 					{role === "company" ? (
-						<SidebarItem title={t("sidebar.options.profile")} icon={Building} url="/home/profile" />
+						<SidebarItem title={t("sidebar.options.profile")} icon={Building} url="/profile" />
 					) : (
-						<SidebarItem title={t("sidebar.options.profile")} icon={User} url="/home/profile" />
+						<SidebarItem title={t("sidebar.options.profile")} icon={User} url="/profile" />
 					)}
-					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/home/settings" />
+					<SidebarItem title={t("sidebar.options.settings")} icon={Cog} url="/settings" />
 
 					<LogoutButton text={logoutDialogText}>
 						<div className="w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer hover:bg-muted">
@@ -135,6 +166,13 @@ export default function Sidebar() {
 			<div className="flex items-center border-t border-border p-5 justify-between">
 				<div className="flex gap-4 items-center">
 					<Avatar className="size-10">
+						{profilePic && (
+							<AvatarImage
+								src={profilePic}
+								alt={getNameFromProfile(user) ?? ""}
+								className="object-cover"
+							/>
+						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
 							U
 						</AvatarFallback>
@@ -155,14 +193,14 @@ export default function Sidebar() {
 					</DropdownMenuTrigger>
 					<DropdownMenuContent side="top">
 						<DropdownMenuGroup>
-							<DropdownMenuLabel>Me</DropdownMenuLabel>
+							<DropdownMenuLabel>{t("sidebar.account.me")}</DropdownMenuLabel>
 							<DropdownMenuItem>
-								<User /> Profile
+								<User /> {t("sidebar.options.profile")}
 							</DropdownMenuItem>
 							<DropdownMenuSeparator />
-							<DropdownMenuLabel>Actions</DropdownMenuLabel>
+							<DropdownMenuLabel>{t("general.actions")}</DropdownMenuLabel>
 							<DropdownMenuItem>
-								<Edit /> Update account info
+								<Edit /> {t("sidebar.account.update_info")}
 							</DropdownMenuItem>
 							<DropdownMenuItem
 								variant="destructive"

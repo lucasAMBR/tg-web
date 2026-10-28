@@ -1,4 +1,42 @@
 {
+    "page_title": {
+        "home": "Início",
+        "login": "Entrar",
+        "register": "Cadastro",
+        "address": "Endereço",
+        "create_profile": "Criar Perfil",
+        "feed": "Feed",
+        "search": "Buscar",
+        "profile": "Perfil",
+        "settings": "Configurações",
+        "dashboard": "Painel",
+        "devs": "Devs",
+        "dev_details": "Detalhes do Dev",
+        "companies": "Empresas",
+        "company_details": "Detalhes da Empresa",
+        "clients": "Clientes",
+        "client_details": "Detalhes do Cliente",
+        "proficiency_test": "Teste de Proficiência",
+        "my_vacancies": "Minhas Vagas",
+        "vacancies": "Vagas",
+        "vacancy_details": "Detalhes da Vaga",
+        "selection_process": "Processo Seletivo",
+        "my_applies": "Minhas Vagas",
+        "screening_questionnaire": "Questionário de Triagem",
+        "technical_challenge": "Desafio Técnico",
+        "language_assessment": "Prova de Idioma",
+        "post": "Publicação",
+        "thread": "Thread",
+        "favorites": "Favoritos",
+        "freelances": "Meus Freelances",
+        "freelance_details": "Detalhes do Freela",
+        "freelance_feed": "Feed do Freela",
+        "freelance_search": "Freelas"
+    },
+    "breadcrumb": {
+        "admin": "Administração",
+        "test_in_progress": "Realizando teste"
+    },
     "general": {
         "back": "Voltar",
         "sing_out": "Sair",
@@ -16,17 +54,42 @@
         "change": "Alterar",
         "remove": "Remover",
         "add": "Adicionar",
+        "request": "Solicitar",
         "save": "Salvar",
         "verified": "Verificado",
         "are_you_sure": "Tem certeza?",
         "light": "Claro",
         "dark": "Escuro",
-        "system": "Sistema"
+        "system": "Sistema",
+        "open_link": "Abrir link",
+        "display_original_content": "Exibir conteúdo original",
+        "display_translated_content": "Exibir conteúdo traduzido",
+        "showing_original_content": "Exibindo conteúdo original",
+        "showing_translated_content": "Exibindo conteúdo traduzido",
+        "filters": "Filtros",
+        "view_profile": "Visualizar perfil",
+        "edit_profile": "Editar perfil",
+        "profile": "Perfil",
+        "block_access": "Bloquear acesso",
+        "unblock_access": "Desbloquear acesso",
+        "address": "Endereço",
+        "location": "Localização",
+        "blocked": "Bloqueado",
+        "active": "Ativo",
+        "status": "Status",
+        "translation_pending": "Tradução pendente.",
+        "translation_error": "Tradução indisponivel.",
+        "translation_in_progress": "Tradução pendente.",
+        "no_results": "Nenhum resultado encontrado",
+        "visit": "Visitar",
+        "confirm": "Confirmar",
+        "close": "Fechar"
     },
     "toast": {
         "success": {
             "login": "Login realizado com sucesso",
             "register": "Conta criada com sucesso",
+            "proficiency_test_requested": "Teste de proficiência solicitado com sucesso",
             "address_created": "Endereço salvo com sucesso",
             "address_updated": "Endereço atualizado com sucesso",
             "profile_dev_created": "Perfil de desenvolvedor criado com sucesso",
@@ -62,13 +125,62 @@
             "dev_soft_skill_registered": "Habilidades pessoais registradas com sucesso",
             "dev_soft_skill_updated": "Habilidades pessoais atualizadas com sucesso",
             "recommendation_preferences_updated": "Preferências de recomendação atualizadas com sucesso",
-            "recommendation_preferences_restored": "Configuração padrão restaurada"
+            "recommendation_preferences_restored": "Configuração padrão restaurada",
+            "access_blocked": "Acesso bloqueado com sucesso",
+            "access_unblocked": "Acesso desbloqueado com sucesso",
+            "profile_pic_updated": "Foto de perfil atualizada com sucesso",
+            "job_vacancy_created": "Vaga criada com sucesso",
+            "job_vacancy_updated": "Vaga atualizada com sucesso",
+            "job_vacancy_inscriptions_closed": "Inscrições encerradas com sucesso",
+            "vacancy_applied": "Candidatura enviada com sucesso",
+            "step_advanced": "Etapa encerrada e candidaturas avançadas com sucesso",
+            "interview_schedule_set": "Horário da entrevista definido com sucesso",
+            "interview_schedule_proposed": "Novo horário proposto com sucesso",
+            "interview_schedule_accepted": "Horário da entrevista confirmado com sucesso",
+            "interview_cancelled": "Entrevista cancelada com sucesso",
+            "screening_questionnaire_created": "Questionário de triagem criado com sucesso",
+            "screening_questionnaire_updated": "Questionário de triagem atualizado com sucesso",
+            "screening_questionnaire_deleted": "Questionário de triagem removido com sucesso",
+            "screening_questionnaire_answered": "Respostas enviadas com sucesso",
+            "technical_challenge_created": "Desafio técnico criado com sucesso",
+            "technical_challenge_updated": "Desafio técnico atualizado com sucesso",
+            "technical_challenge_deleted": "Desafio técnico removido com sucesso",
+            "technical_challenge_delivered": "Desafio técnico entregue com sucesso",
+            "guide_document_saved": "Documento guia salvo com sucesso",
+            "guide_document_removed": "Documento guia removido com sucesso",
+            "live_coding_schedule_set": "Horário do live coding definido com sucesso",
+            "live_coding_schedule_proposed": "Novo horário proposto com sucesso",
+            "live_coding_schedule_accepted": "Horário do live coding confirmado com sucesso",
+            "live_coding_cancelled": "Live coding cancelado com sucesso",
+            "live_coding_exercise_saved": "Exercício do live coding salvo com sucesso",
+            "language_assessment_created": "Prova de idioma criada com sucesso",
+            "language_assessment_updated": "Prova de idioma atualizada com sucesso",
+            "language_assessment_deleted": "Prova de idioma removida com sucesso",
+            "language_assessment_answered": "Prova entregue com sucesso",
+            "read_receipts_updated": "Confirmação de leitura atualizada com sucesso!",
+            "post_created": "Publicação criada com sucesso!",
+            "post_updated": "Publicação atualizada com sucesso!",
+            "post_deleted": "Publicação removida com sucesso!",
+            "comment_deleted": "Comentário removido com sucesso!",
+            "freelance_vacancy_created": "Freela publicado com sucesso",
+            "freelance_vacancy_updated": "Freela atualizado com sucesso",
+            "freelance_vacancy_deleted": "Freela removido com sucesso",
+            "freelance_vacancy_completed": "Freela concluído",
+            "freelance_proposal_sent": "Orçamento enviado",
+            "freelance_proposal_updated": "Orçamento atualizado",
+            "freelance_proposal_withdrawn": "Orçamento retirado",
+            "freelance_proposal_accepted": "Contrato fechado",
+            "freelance_invitation_sent": "Convite enviado",
+            "freelance_feed_post_created": "Postagem publicada",
+            "freelance_feed_post_deleted": "Postagem removida",
+            "freelance_review_sent": "Review enviada"
         }
     },
     "role": {
         "dev": "Desenvolvedor",
         "company": "Empresa",
-        "client": "Cliente"
+        "client": "Cliente",
+        "admin": "Administrador"
     },
     "landing_page": {
         "app_name": "Brew!",
@@ -184,22 +296,57 @@
         "description_company": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores para sua empresa e garantir uma correspondência precisa.",
         "description_client": "Preencha suas informações de endereço para que possamos melhorar a recomendação de desenvolvedores freelancers para seus projetos freelancer e garantir uma correspondência precisa."
     },
+    "admin_land": {
+        "devs": {
+            "title": "Desenvolvedores",
+            "description": "Visualize todos os desenvolvedores no sistema",
+            "table": {
+                "name": "Nome",
+                "specialty": "Especialidade",
+                "seniority_level": "Nível de senioridade",
+                "created_at": "Criado em"
+            }
+        },
+        "companies": {
+            "title": "Empresas",
+            "description": "Visualize todas as empresas no sistema",
+            "table": {
+                "name": "Nome",
+                "operational_segment": "Segmento de atuação",
+                "cnpj": "CNPJ",
+                "created_at": "Criado em"
+            }
+        }
+    },
     "under_construction": {
         "title": "Esta funcionalidade está atualmente em construção!",
         "description": "Por favor, volte mais tarde"
     },
     "sidebar": {
+        "sections_title": "Seções",
+        "options_title": "Opções",
         "sections": {
             "feed": "Feed",
             "companies": "Empresas",
-            "job_vacancies": "Vagas de Emprego",
-            "freelances": "Freelances",
+            "job_vacancies": "Minhas Vagas",
+            "freelances": "Meus Freelances",
+            "freelancers": "Freelancers",
             "my_jobs": "Minhas Vagas",
-            "dashboard": "Dashboard"
+            "dashboard": "Dashboard",
+            "devs": "Desenvolvedores",
+            "clients": "Clientes",
+            "questions": "Questões",
+            "admins": "Adminstradores",
+            "search": "Buscar",
+            "favorites": "Favoritos"
         },
         "options": {
             "profile": "Perfil",
             "settings": "Configurações"
+        },
+        "account": {
+            "me": "Eu",
+            "update_info": "Atualizar informações da conta"
         },
         "logout_dialog": {
             "description": "Você está prestes a sair da sua conta. Será necessário entrar novamente para acessar seus dados e continuar usando a plataforma."
@@ -210,7 +357,8 @@
             "posts": "Posts",
             "projects": "Projetos",
             "job_history": "Histórico de emprego",
-            "certifications": "Certificações"
+            "certifications": "Certificações",
+            "proficiency_test": "Testes de Proficiência"
         },
         "projects": {
             "create_project": "Criar novo projeto",
@@ -270,6 +418,42 @@
             "new_academic_background": "Adicionar nova formação acadêmica",
             "update_academic_background": "Atualizar formação acadêmica",
             "update_warning": "Se você não quer alterar o certificado, basta ignorar este campo"
+        },
+        "proficiency_test": {
+            "solicitation_title": "Solicitar novo teste de proficiência",
+            "solicitation_description": "Faça um teste de proficiência para validar suas habilidades e melhorar suas recomendações.",
+            "solicitation_dialog_title": "Solicitar teste de proficiência",
+            "solicitation_dialog_description": "Escolha as categorias que vão compor o seu teste.",
+            "frontend_category": "Categoria de frontend",
+            "backend_category": "Categoria de backend",
+            "category_placeholder": "Selecione uma categoria",
+            "score": "Pontuação: ",
+            "start_test": "Iniciar teste",
+            "await_responses": "Aguardar respostas",
+            "view_results": "Ver resultados",
+            "previous_page": "Voltar",
+            "next_page": "Avançar",
+            "finish": "Finalizar teste",
+            "all_questions_required": "Responda todas as questões antes de finalizar",
+            "submit_success": "Teste enviado com sucesso",
+            "page_indicator": "Página {{current}} de {{total}}",
+            "no_questions": "Nenhuma questão disponível para este teste",
+            "review": {
+                "correct_response": "Resposta correta",
+                "dev_response": "Resposta do desenvolvedor"
+            },
+            "start": {
+                "error": "Erro",
+                "not_your_test": "Este teste não é seu",
+                "greeting": "Olá {{name}}!",
+                "welcome": "Bem-vindo ao seu teste de proficiência!",
+                "rules": "Regras:",
+                "rule_time": "O tempo gasto em cada questão é registrado: respostas rápidas demais podem ser suspeitas, e lentas demais podem indicar dificuldade técnica.",
+                "rule_focus": "Cada perda de foco da janela é contabilizada. Existe um limite aceitável, mas saídas frequentes podem sinalizar auxílio externo.",
+                "rule_open_close": "Toda abertura e fechamento do teste é registrado, para impedir que as questões sejam consultadas previamente e gerem vantagem injusta.",
+                "rule_consistency": "A consistência das respostas é avaliada: acertar questões difíceis e errar questões fáceis não é vantajoso.",
+                "score_warning": "Esteja ciente de que todos esses fatores podem afetar a sua pontuação final!"
+            }
         }
     },
     "company_profile": {
@@ -333,6 +517,12 @@
                 "description": "Aviso: Se você deletar sua conta, todos os seus dados serão deletados permanentemente e não será possível recuperar",
                 "delete_account_confirmation": "Esta ação é permanente e MUITO DESTRUTIVA! Deletando sua conta, todos os seus dados serão deletados permanentemente e não será possível recuperar",
                 "yes_delete_my_account": "Sim, deletar minha conta"
+            },
+            "read_receipts": {
+                "title": "Confirmação de leitura",
+                "description": "Com ela ligada, quem te manda mensagem fica sabendo quando você leu. Desligada, ninguém vê a sua leitura — e você também deixa de ver quando as suas mensagens são lidas.",
+                "enabled": "Confirmação de leitura ligada",
+                "disabled": "Confirmação de leitura desligada"
             }
         },
         "profile": {
@@ -343,6 +533,10 @@
             "location_informations": {
                 "title": "Informações de localização",
                 "description": "Gerencie as informações sobre sua localização, endereço, país, isso nos ajudará a saber onde você mora para te recomendar as melhores vagas de emprego"
+            },
+            "profile_pic": {
+                "title": "Foto de perfil",
+                "description": "Atualize a foto exibida no seu perfil e nas recomendações"
             }
         },
         "theme": {
@@ -384,6 +578,12 @@
                 "description": "Personalize as linguagens e frameworks de flexibilidade no nosso sistema de recomendação, sua vontade de aprender uma nova tecnologia, tecnologias que você não quer ser relacionado",
                 "recommendation_flexibility_title": "Flexibilidade de recomendação",
                 "recommendation_flexibility_description": "Habilite isso para descobrir cargos além da sua stack exata. O algoritmo expandirá suas recomendações para incluir vagas onde suas habilidades principais são transferíveis, mesmo se as linguagens ou frameworks específicos diferirem."
+            },
+            "min_remuneration": {
+                "title": "Remuneração mínima",
+                "description": "Defina o valor mínimo que você aceita receber. O algoritmo deixará de recomendar oportunidades abaixo desse valor.",
+                "enable_title": "Definir remuneração mínima",
+                "enable_description": "Ative para filtrar as recomendações pelo valor mínimo desejado"
             }
         }
     },
@@ -394,6 +594,7 @@
         "phone": "Telefone",
         "birthdate": "Data de nascimento",
         "seniority_level": "Nível de senioridade",
+        "specialty": "Especialidade",
         "open_to_work": "Aberto a oportunidades",
         "open_to_relocation": "Disponível para mudar de cidade",
         "cep": "CEP",
@@ -406,6 +607,8 @@
         "title": "Titulo",
         "language_framework": "Linguagens / Frameworks",
         "description": "Descrição",
+        "prod_url": "URL de produção",
+        "github_url": "URL do GitHub",
         "project_gallery": "Galeria do projejeto",
         "position_name": "Cargo",
         "company_name": "Nome da empresa",
@@ -430,7 +633,15 @@
         "old_password": "Senha atual",
         "new_password": "Nova senha",
         "new_password_confirmation": "Confirmação da nova senha",
-        "stack_blacklist": "Blacklist de stacks"
+        "stack_blacklist": "Blacklist de stacks",
+        "profile_pic": "Foto de perfil",
+        "min_remuneration": "Remuneração mínima",
+        "benefits": "Benefícios",
+        "estimated_salary": "Salário estimado",
+        "required_languages": "Linguagens / frameworks obrigatórios",
+        "desirable_languages": "Linguagens / frameworks desejáveis",
+        "soft_skills": "Habilidades pessoais",
+        "process_steps": "Etapas do processo seletivo"
     },
     "tooltip": {
         "open_to_work": "Diga ao nosso algoritmo que você está disponível para oportunidades de emprego; sem esta informação, nosso algoritmo inteligente não recomendará você para posições.",
@@ -442,6 +653,9 @@
         "phone": "Seu telefone",
         "birthdate": "Sua data de nascimento",
         "seniority_level": "Escolha seu nível de senioridade",
+        "filter_seniority_level": "Selecione um nível de senioridade",
+        "specialty": "Escolha sua especialidade",
+        "filter_specialty": "Selecione uma especialidade",
         "cep": "Digite seu CEP",
         "number": "Número",
         "complement": "Complemento",
@@ -452,6 +666,8 @@
         "project_search": "Busque por um projeto específico, linguagem, framework ou descrição",
         "project_title": "Título do projeto",
         "project_description": "Descreva as funcionalidades, arquitetura e principais escolhas do seu projeto",
+        "project_prod_url": "https://meuapp.com",
+        "project_github_url": "https://github.com/usuario/repositorio",
         "project_language_framework": "Selecione as linguagens / frameworks do projeto",
         "project_language_search": "Busque por uma linguagem...",
         "employment_search": "Busque por uma empresa, nível de senioridade e modalidade de trabalho",
@@ -479,15 +695,62 @@
         "old_password": "Senha atual",
         "new_password": "Nova senha",
         "new_password_confirmation": "Confirmação da nova senha",
-        "stack_blacklist": "Selecione uma linguagem / framework para evitar"
+        "stack_blacklist": "Selecione uma linguagem / framework para evitar",
+        "dev_search": "Busque por um desenvolvedor, nível de senioridade, especialidade e disponível para trabalhar e mudar de cidade",
+        "company_search": "Busque por uma empresa ou segmento de atuação",
+        "filter_operational_segment": "Selecione um segmento de atuação",
+        "email": "Digite seu e-mail",
+        "min_remuneration": "Informe o valor mínimo",
+        "job_vacancy_title": "Desenvolvedor frontend sênior",
+        "job_vacancy_description": "Descreva a vaga, responsabilidades e expectativas",
+        "benefit": "Plano de saúde, vale refeição...",
+        "estimated_salary": "5000.00",
+        "soft_skills": "Selecione as habilidades valorizadas",
+        "soft_skill_search": "Buscar habilidade...",
+        "process_step": "Selecione uma etapa"
+    },
+    "filters": {
+        "all": "Todos",
+        "yes": "Sim",
+        "no": "Não"
     },
     "enum": {
+        "question_category": {
+            "backend_c_sharp_asp": "Backend C# ASP.NET",
+            "backend_data_handling": "Backend Manipulação de Dados",
+            "backend_java_spring": "Backend Java Spring",
+            "backend_php_laravel": "Backend PHP Laravel",
+            "backend_python_fast_api": "Backend Python FastAPI",
+            "backend_typescript": "Backend TypeScript",
+            "clean_code": "Clean Code",
+            "devops": "DevOps",
+            "frontend_angular": "Frontend Angular",
+            "frontend_fundamentals": "Fundamentos de Frontend",
+            "frontend_react": "Frontend React",
+            "programming_logic": "Lógica de Programação",
+            "security_backend": "Segurança Backend",
+            "security_frontend": "Segurança Frontend"
+        },
+        "proficiency_test_status": {
+            "pending": "Pendente",
+            "generated": "Gerado",
+            "awaiting_score": "Aguardando pontuação",
+            "completed": "Concluído",
+            "generation_failed": "Falha na geração do teste"
+        },
         "seniority_level": {
             "intern": "Estagiário",
             "junior": "Júnior",
             "mid_level": "Pleno",
             "senior": "Sênior",
             "staff": "Staff"
+        },
+        "dev_specialty": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "fullstack": "Fullstack",
+            "mobile": "Mobile",
+            "devops": "DevOps"
         },
         "employment_type": {
             "on_site": "Presencial",
@@ -530,6 +793,132 @@
             "software_house": "Software House",
             "retail": "Varejo",
             "banking": "Banco"
+        },
+        "selection_process_stage": {
+            "awaiting_resume_screening": "Aguardando triagem de currículos",
+            "resume_screening": "Triagem de currículo",
+            "awaiting_screening_questions": "Aguardando perguntas de triagem",
+            "screening_questions": "Perguntas de triagem",
+            "awaiting_interview": "Aguardando entrevista",
+            "interview": "Entrevista",
+            "awaiting_technical_challenge": "Aguardando desafio técnico",
+            "technical_challenge": "Desafio técnico",
+            "awaiting_live_coding": "Aguardando live coding",
+            "live_coding": "Live coding",
+            "awaiting_language_assessment": "Aguardando avaliação de idioma",
+            "language_assessment": "Avaliação de idioma",
+            "awaiting_portfolio_review": "Aguardando análise de portfólio",
+            "portfolio_review": "Análise de portfólio"
+        },
+        "job_vacancy_status": {
+            "open_inscriptions": "Inscrições abertas",
+            "closed_inscriptions": "Inscrições encerradas",
+            "canceled": "Cancelada",
+            "concluded": "Concluída"
+        },
+        "dev_job_vacancy_status": {
+            "in_progress": "Em andamento",
+            "approved": "Aprovado",
+            "rejected": "Recusado"
+        },
+        "portfolio_solicitation": {
+            "status": {
+                "pending": "Portfólio pendente",
+                "sent": "Portfólio enviado"
+            },
+            "type": {
+                "repository": "Repositório",
+                "production": "Projeto em produção"
+            }
+        },
+        "dev_job_vacancy_interview": {
+            "status": {
+                "awaiting_schedule": "Aguardando horário",
+                "awaiting_dev_confirmation": "Aguardando confirmação do dev",
+                "awaiting_company_confirmation": "Aguardando confirmação da empresa",
+                "approved": "Horário confirmado",
+                "cancelled": "Cancelada",
+                "rejected": "Rejeitada"
+            }
+        },
+        "dev_job_vacancy_live_coding": {
+            "status": {
+                "awaiting_schedule": "Aguardando horário",
+                "awaiting_dev_confirmation": "Aguardando confirmação do dev",
+                "awaiting_company_confirmation": "Aguardando confirmação da empresa",
+                "approved": "Horário confirmado",
+                "cancelled": "Cancelado",
+                "rejected": "Rejeitado"
+            }
+        },
+        "screening_question_type": {
+            "essay": "Dissertativa",
+            "single_choice": "Escolha única",
+            "multiple_choice": "Múltipla escolha"
+        },
+        "screening_questionnaire": {
+            "status": {
+                "pending": "Questionário pendente",
+                "answered": "Questionário respondido"
+            }
+        },
+        "dev_technical_challenge": {
+            "status": {
+                "pending": "Aguardando entrega",
+                "delivered": "Entregue"
+            }
+        },
+        "language_assessment_question": {
+            "type": {
+                "single_choice": "Escolha única",
+                "multiple_choice": "Múltipla escolha",
+                "text": "Resposta escrita"
+            }
+        },
+        "dev_language_assessment": {
+            "status": {
+                "pending": "Aguardando resposta",
+                "answered": "Prova respondida"
+            }
+        },
+        "job_type": {
+            "development": "Desenvolvimento",
+            "maintenance": "Manutenção",
+            "support": "Suporte",
+            "qa": "QA / Testes",
+            "design": "Design",
+            "devops": "DevOps",
+            "database": "Banco de dados",
+            "consulting": "Consultoria",
+            "documentation": "Documentação",
+            "automation": "Automação",
+            "integration": "Integração",
+            "migration": "Migração",
+            "training": "Treinamento",
+            "other": "Outro"
+        },
+        "freelance_job_vacancy_status": {
+            "open": "Aberto",
+            "in_progress": "Em andamento",
+            "completed": "Concluído"
+        },
+        "freelance_proposal_status": {
+            "pending": "Aguardando",
+            "accepted": "Aceito",
+            "rejected": "Recusado"
+        },
+        "freelance_proposal_pricing_type": {
+            "fixed": "Preço fechado",
+            "hourly": "Por hora"
+        },
+        "freelance_feed_post_type": {
+            "update": "Atualização",
+            "deliverable": "Entrega",
+            "review": "Review"
+        },
+        "freelance_review_status": {
+            "approved": "Aprovada",
+            "changes_requested": "Ajustes solicitados"
         }
     },
     "pagination": {
@@ -537,6 +926,15 @@
         "displaying": "Exibindo",
         "of": "de",
         "page": "Página"
+    },
+    "notification": {
+        "title": "Notificações",
+        "all": "Todas",
+        "unread": "Não lidas",
+        "read": "Lidas",
+        "empty": "Nenhuma notificação por aqui.",
+        "open_link": "Clique aqui",
+        "mark_all_as_read": "Marcar todas como lidas"
     },
     "no_data": {
         "no_languages": "Nenhuma linguagem encontrada"
@@ -664,5 +1062,914 @@
         "accountability_advanced_description": "Demonstra de forma consistente propriedade, confiabilidade e responsabilidade pelos resultados.",
         "accountability_expert": "Especialista",
         "accountability_expert_description": "Lidera pelo exemplo em responsabilidade e incentiva uma cultura de propriedade na equipe."
+    },
+    "my_vacancies": {
+        "title": "Minhas Vagas",
+        "description": "Gerencie as vagas de emprego publicadas pela sua empresa e acompanhe seus candidatos",
+        "popular_title": "Vagas com mais candidaturas",
+        "candidates": "Candidatos",
+        "estimated_salary": "Salário estimado",
+        "search_placeholder": "Busque por uma das suas vagas",
+        "empty_title": "Nenhuma vaga encontrada",
+        "empty_description": "Publique uma vaga ou altere o termo da busca para ver resultados aqui.",
+        "create_title": "Criar nova vaga",
+        "add_process_step": "Adicionar etapa",
+        "applies": {
+            "title": "Inscrições",
+            "table": {
+                "dev": "Desenvolvedor",
+                "specialty": "Especialidade",
+                "seniority_level": "Nível de senioridade",
+                "status": "Status",
+                "applied_at": "Inscrito em",
+                "process_step": "Etapa atual"
+            }
+        },
+        "current_step": "Etapa atual",
+        "selection_process": {
+            "title": "Processo seletivo",
+            "approve_selected": "Aprovar selecionados",
+            "select_all": "Selecionar todos",
+            "advance_confirm": "Avançar as candidaturas selecionadas?",
+            "advance_confirm_description": "{{approved}} candidatura(s) selecionada(s) avançam para a próxima etapa e {{rejected}} candidatura(s) não selecionada(s) são automaticamente eliminadas deste processo seletivo. Esta ação não pode ser desfeita.",
+            "upcoming_title": "Etapa ainda não alcançada",
+            "upcoming_description": "As candidaturas serão exibidas aqui quando o processo seletivo chegar nesta etapa.",
+            "portfolio_review": {
+                "not_requested": "Nenhum portfólio foi solicitado para este candidato.",
+                "awaiting_link": "O candidato ainda não enviou o link do portfólio."
+            },
+            "empty_applies_title": "Nenhuma candidatura nesta etapa",
+            "empty_applies_description": "Nenhum desenvolvedor está aguardando avaliação nesta etapa do processo seletivo.",
+            "results": {
+                "approved_title": "Aprovados",
+                "rejected_title": "Recusados nesta etapa"
+            },
+            "resume_screening": {
+                "awaiting_title": "Triagem de currículos ainda não liberada",
+                "awaiting_description": "A seleção dos currículos para a próxima etapa só fica disponível após o encerramento do período de inscrições."
+            },
+            "screening_questions": {
+                "missing_title": "Questionário de triagem não cadastrado",
+                "missing_description": "Monte o formulário desta etapa para que ele seja enviado aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem as perguntas depois que o formulário for cadastrado.",
+                "create_questionnaire": "Criar questionário",
+                "manage_questionnaire": "Gerenciar questionário",
+                "not_sent": "Este candidato ainda não recebeu o questionário de triagem.",
+                "awaiting_answers": "O candidato ainda não enviou as respostas.",
+                "view_answers": "Ver respostas"
+            },
+            "technical_challenge": {
+                "missing_title": "Desafio técnico não cadastrado",
+                "missing_description": "Monte o enunciado desta etapa para que ele seja enviado aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem o desafio depois que o enunciado for cadastrado.",
+                "create_challenge": "Criar desafio",
+                "manage_challenge": "Gerenciar desafio",
+                "not_sent": "Este candidato ainda não recebeu o desafio técnico.",
+                "awaiting_delivery": "O candidato ainda não entregou a solução.",
+                "submitted_at": "Entregue em",
+                "view_submission": "Baixar entrega"
+            },
+            "live_coding": {
+                "awaiting_title": "Processo parado aguardando os exercícios",
+                "awaiting_description_one": "O live coding só começa quando todos os candidatos tiverem o exercício publicado. Falta {{count}} exercício para a etapa começar.",
+                "awaiting_description_other": "O live coding só começa quando todos os candidatos tiverem o exercício publicado. Faltam {{count}} exercícios para a etapa começar.",
+                "awaiting_ready": "Todos os exercícios foram publicados. A etapa começa assim que a página for atualizada.",
+                "not_created": "O live coding deste candidato ainda não foi criado."
+            },
+            "language_assessment": {
+                "missing_title": "Prova de idioma não cadastrada",
+                "missing_description": "Monte a prova desta etapa para que ela seja enviada aos candidatos quando o processo seletivo chegar aqui.",
+                "missing_blocking_description": "O processo seletivo está parado nesta etapa: as candidaturas só recebem a prova depois que ela for cadastrada.",
+                "create_assessment": "Criar prova",
+                "manage_assessment": "Gerenciar prova",
+                "not_sent": "Este candidato ainda não recebeu a prova de idioma.",
+                "awaiting_answers": "O candidato ainda não entregou a prova.",
+                "submitted_at": "Entregue em",
+                "view_answers": "Ver correção",
+                "score": "Nota",
+                "passed": "Aprovado",
+                "failed": "Reprovado",
+                "no_verdict": "Sem nota de corte"
+            }
+        },
+        "actions": {
+            "title": "Ações",
+            "update_vacancy": "Atualizar dados da vaga",
+            "view_selection_process": "Visualizar processo seletivo",
+            "update_vacancy_description": "Altere as informações da vaga. Título, descrição e benefícios serão traduzidos novamente após a atualização.",
+            "close_inscriptions": "Encerrar inscrições",
+            "close_inscriptions_description": "A vaga deixará de aceitar novas candidaturas, o processo passa para a triagem de currículos e todos os desenvolvedores inscritos são notificados. Esta ação não pode ser desfeita.",
+            "no_applies_title": "Esta vaga não tem candidaturas",
+            "no_applies_description": "Ninguém se candidatou a esta vaga ainda, então encerrar as inscrições agora significa que não haverá processo seletivo."
+        },
+        "devs_section_title": "Desenvolvedores",
+        "recommended": {
+            "title": "Recomendados",
+            "table": {
+                "similarity": "Compatibilidade"
+            }
+        }
+    },
+    "my_applies": {
+        "title": "Minhas Vagas",
+        "description": "Acompanhe o andamento das suas candidaturas em cada processo seletivo",
+        "search_placeholder": "Busque por uma vaga ou empresa",
+        "empty_title": "Nenhuma candidatura encontrada",
+        "empty_description": "Candidate-se a uma vaga ou altere o termo da busca para ver resultados aqui.",
+        "feedback": "Feedback da empresa",
+        "portfolio": {
+            "due_date": "Prazo de envio",
+            "send": "Enviar portfólio",
+            "send_description": "A empresa solicitou o seu portfólio nesta etapa. Envie o link para seguir no processo seletivo.",
+            "url_placeholder": "https://github.com/seu-usuario/seu-projeto"
+        },
+        "screening": {
+            "not_received": "A empresa ainda não enviou o questionário de triagem desta etapa.",
+            "due_date": "Prazo de resposta",
+            "pending_description": "A empresa enviou um questionário de triagem. Responda para seguir no processo seletivo.",
+            "answered_description": "Suas respostas foram enviadas. Agora é só aguardar a avaliação da empresa.",
+            "answer": "Responder questionário",
+            "answer_description": "Responda as perguntas abaixo. As marcadas como obrigatórias precisam ser preenchidas.",
+            "response_placeholder": "Escreva a sua resposta",
+            "submit": "Enviar respostas",
+            "view_answers": "Ver minhas respostas"
+        },
+        "technical_challenge": {
+            "not_received": "A empresa ainda não enviou o desafio técnico desta etapa.",
+            "due_date": "Prazo de entrega",
+            "submitted_at": "Entregue em",
+            "pending_description": "A empresa enviou um desafio técnico. Entregue a solução para seguir no processo seletivo.",
+            "delivered_description": "Sua entrega foi enviada. Agora é só aguardar a avaliação da empresa.",
+            "submit": "Entregar desafio",
+            "submit_description": "Informe o repositório com a solução do desafio. A entrega não pode ser alterada depois do envio.",
+            "repository_url": "Repositório da solução",
+            "zip_optional": "Projeto compactado (opcional)",
+            "attach_zip": "Anexar .zip",
+            "download_guide": "Baixar documento guia",
+            "view_submission": "Baixar arquivo enviado"
+        },
+        "live_coding": {
+            "awaiting_exercise": "A empresa ainda está preparando o exercício do live coding. Você será notificado assim que ele for publicado.",
+            "not_received": "O live coding desta etapa ainda não foi criado.",
+            "statement": "Exercício",
+            "programming_language": "Linguagem esperada",
+            "description": "Leia o exercício antes da call: você vai resolvê-lo ao vivo, durante a chamada com a empresa."
+        },
+        "language_assessment": {
+            "not_received": "A empresa ainda não enviou a prova de idioma desta etapa.",
+            "awaiting_assessment": "A empresa ainda está preparando a prova de idioma desta etapa.",
+            "due_date": "Prazo de resposta",
+            "submitted_at": "Entregue em",
+            "language": "Idioma",
+            "pending_description": "A empresa enviou uma prova de idioma. Responda para seguir no processo seletivo.",
+            "answered_description": "Sua prova foi entregue e corrigida automaticamente. Agora é só aguardar a avaliação da empresa.",
+            "answer": "Responder prova",
+            "answer_description": "Responda as perguntas abaixo. Perguntas em branco valem zero.",
+            "response_placeholder": "Escreva a sua resposta",
+            "submit": "Entregar prova",
+            "single_submit_warning": "A prova só pode ser entregue uma vez. Confira as respostas antes de enviar.",
+            "all_or_nothing_warning": "Nas perguntas de múltipla escolha só pontua quem marcar exatamente todas as alternativas certas: não há acerto parcial.",
+            "confirm_title": "Entregar a prova?",
+            "confirm_description": "A prova é corrigida na hora e não pode ser respondida de novo.",
+            "blank_questions_one": "Você deixou {{count}} pergunta em branco, que vale zero.",
+            "blank_questions_other": "Você deixou {{count}} perguntas em branco, que valem zero.",
+            "view_answers": "Ver correção",
+            "score": "Nota",
+            "passing_score": "Nota de corte",
+            "max_score": "Nota máxima",
+            "passed": "Aprovado",
+            "failed": "Reprovado"
+        }
+    },
+    "interview": {
+        "not_created": "A entrevista desta candidatura ainda não foi criada.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "Nenhum horário foi proposto ainda. Defina a data, o horário e a duração da entrevista com este candidato.",
+        "no_schedule_dev": "A empresa ainda não propôs um horário para a sua entrevista.",
+        "awaiting_dev": "Horário proposto. Aguardando a confirmação do desenvolvedor.",
+        "awaiting_company": "Horário proposto. Aguardando a confirmação da empresa.",
+        "proposed_by_company": "A empresa propôs este horário. Aceite ou proponha outro.",
+        "proposed_by_dev": "O desenvolvedor propôs este horário. Aceite ou proponha outro.",
+        "cancelled_description": "Esta entrevista foi cancelada e não pode mais ser reagendada.",
+        "rejected_description": "Esta entrevista foi rejeitada.",
+        "call_open": "A sala está aberta. Entre na entrevista quando estiver pronto.",
+        "call_too_early": "A sala abre {{minutes}} minutos antes do horário marcado.",
+        "call_closed": "A janela para entrar nesta entrevista foi encerrada.",
+        "call_finished": "Entrevista realizada em {{date}}.",
+        "set_schedule": "Definir horário",
+        "propose_schedule": "Propor outro horário",
+        "accept_schedule": "Aceitar horário",
+        "join_call": "Entrar na entrevista",
+        "cancel": "Cancelar entrevista",
+        "cancel_confirm_title": "Cancelar esta entrevista?",
+        "cancel_confirm_description": "A outra parte será notificada e a entrevista não poderá ser reagendada. Esta ação não pode ser desfeita.",
+        "modal": {
+            "title_set": "Definir horário da entrevista",
+            "title_propose": "Propor outro horário",
+            "description": "A outra parte é notificada e pode aceitar ou propor um novo horário.",
+            "date": "Data",
+            "date_placeholder": "Escolha uma data",
+            "time": "Horário",
+            "duration": "Duração"
+        },
+        "call": {
+            "connecting": "Preparando a sala...",
+            "waiting": "Aguardando a outra pessoa entrar...",
+            "connected": "Conectado",
+            "ended": "Chamada encerrada",
+            "counterpart": "Participante",
+            "you": "Você",
+            "media_error": "Não foi possível acessar sua câmera ou microfone. Verifique as permissões do navegador e tente novamente.",
+            "join_error": "Não foi possível entrar na sala. Confira se o horário confirmado já chegou.",
+            "connection_error": "A conexão com a outra pessoa falhou. Tente entrar na sala novamente.",
+            "mute": "Desativar microfone",
+            "unmute": "Ativar microfone",
+            "camera_off": "Desativar câmera",
+            "camera_on": "Ativar câmera",
+            "hang_up": "Encerrar"
+        }
+    },
+    "live_coding": {
+        "not_created": "O live coding desta candidatura ainda não foi criado.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "Nenhum horário foi proposto ainda. Defina a data, o horário e a duração do live coding com este candidato.",
+        "no_schedule_dev": "A empresa ainda não propôs um horário para o seu live coding.",
+        "awaiting_dev": "Horário proposto. Aguardando a confirmação do desenvolvedor.",
+        "awaiting_company": "Horário proposto. Aguardando a confirmação da empresa.",
+        "proposed_by_company": "A empresa propôs este horário. Aceite ou proponha outro.",
+        "proposed_by_dev": "O desenvolvedor propôs este horário. Aceite ou proponha outro.",
+        "cancelled_description": "Este live coding foi cancelado e não pode mais ser reagendado.",
+        "rejected_description": "Este live coding foi rejeitado.",
+        "call_open": "A sala está aberta. Entre no live coding quando estiver pronto.",
+        "call_too_early": "A sala abre {{minutes}} minutos antes do horário marcado.",
+        "call_closed": "A janela para entrar neste live coding foi encerrada.",
+        "call_finished": "Live coding realizado em {{date}}.",
+        "set_schedule": "Definir horário",
+        "propose_schedule": "Propor outro horário",
+        "accept_schedule": "Aceitar horário",
+        "join_call": "Entrar no live coding",
+        "cancel": "Cancelar live coding",
+        "cancel_confirm_title": "Cancelar este live coding?",
+        "cancel_confirm_description": "A outra parte será notificada e o live coding não poderá ser reagendado. Esta ação não pode ser desfeita.",
+        "modal": {
+            "title_set": "Definir horário do live coding",
+            "title_propose": "Propor outro horário",
+            "description": "A outra parte é notificada e pode aceitar ou propor um novo horário.",
+            "date": "Data",
+            "date_placeholder": "Escolha uma data",
+            "time": "Horário",
+            "duration": "Duração"
+        },
+        "call": {
+            "connecting": "Preparando a sala...",
+            "waiting": "Aguardando a outra pessoa entrar...",
+            "connected": "Conectado",
+            "ended": "Chamada encerrada",
+            "counterpart": "Participante",
+            "you": "Você",
+            "media_error": "Não foi possível acessar sua câmera ou microfone. Verifique as permissões do navegador e tente novamente.",
+            "join_error": "Não foi possível entrar na sala. Confira se o horário confirmado já chegou.",
+            "connection_error": "A conexão com a outra pessoa falhou. Tente entrar na sala novamente.",
+            "mute": "Desativar microfone",
+            "unmute": "Ativar microfone",
+            "camera_off": "Desativar câmera",
+            "camera_on": "Ativar câmera",
+            "hang_up": "Encerrar"
+        },
+        "exercise": {
+            "statement": "Enunciado",
+            "programming_language": "Linguagem",
+            "published": "Exercício publicado",
+            "missing": "Exercício não publicado",
+            "missing_description": "Escreva o exercício que este candidato vai resolver na call.",
+            "write": "Escrever exercício",
+            "edit": "Editar exercício",
+            "show_more": "Ver enunciado completo",
+            "show_less": "Recolher enunciado"
+        },
+        "exercise_modal": {
+            "title_write": "Escrever exercício",
+            "title_edit": "Editar exercício",
+            "description": "O candidato lê o enunciado antes da call e o resolve ao vivo, durante a chamada. Ele é notificado só na primeira publicação — as correções seguintes são silenciosas.",
+            "statement": "Enunciado",
+            "statement_placeholder": "Descreva o problema que o candidato vai resolver durante a call",
+            "programming_language": "Linguagem",
+            "programming_language_placeholder": "Ex.: TypeScript",
+            "programming_language_description": "Opcional. Sem linguagem definida o candidato resolve na que preferir."
+        }
+    },
+    "vacancies": {
+        "apply": "Candidatar-se",
+        "applied": "Candidatura enviada",
+        "apply_confirm": "Participar deste processo seletivo?",
+        "apply_confirm_description": "Sua candidatura será enviada à empresa e o seu perfil ficará visível para ela. Assim que as inscrições forem encerradas, você receberá uma notificação avisando o início da triagem de currículos."
+    },
+    "search": {
+        "title": "Buscar",
+        "description": "Encontre desenvolvedores, empresas e clientes cadastrados na plataforma",
+        "placeholder": "Busque por qualquer desenvolvedor, empresa, cliente ou vaga...",
+        "see_more": "Ver mais",
+        "score": "Pontuação",
+        "group": {
+            "all": "Todos",
+            "developers": "Desenvolvedores",
+            "companies": "Empresas",
+            "clients": "Clientes",
+            "vacancies": "Vagas",
+            "freelances": "Freelas"
+        },
+        "empty": {
+            "developers_title": "Nenhum desenvolvedor encontrado",
+            "developers_description": "Busque por um termo para ver os desenvolvedores correspondentes aqui.",
+            "companies_title": "Nenhuma empresa encontrada",
+            "companies_description": "Busque por um termo para ver as empresas correspondentes aqui.",
+            "clients_title": "Nenhum cliente encontrado",
+            "clients_description": "Busque por um termo para ver os clientes correspondentes aqui.",
+            "vacancies_title": "Nenhuma vaga encontrada",
+            "vacancies_description": "Busque por um termo para ver as vagas correspondentes aqui.",
+            "freelances_title": "Nenhum freela encontrado",
+            "freelances_description": "Busque por um termo ou troque os filtros para ver os freelas aqui."
+        },
+        "popular": {
+            "best_scored_devs": "Desenvolvedores mais bem pontuados",
+            "best_scored_companies": "Empresas mais bem pontuadas",
+            "best_scored_clients": "Clientes mais bem pontuados"
+        }
+    },
+    "profile_pic": {
+        "select": "Selecionar foto",
+        "change": "Alterar foto",
+        "hint": "PNG, JPG ou WEBP de até {{size}}MB",
+        "invalid_type": "Formato de imagem inválido",
+        "too_large": "A imagem deve ter no máximo {{size}}MB"
+    },
+    "screening_questionnaire": {
+        "title": "Questionário de triagem",
+        "create_title": "Criar questionário de triagem",
+        "create_description": "Monte o formulário que os candidatos respondem na etapa de perguntas de triagem desta vaga.",
+        "edit_title": "Editar questionário de triagem",
+        "edit_description": "As perguntas e alternativas removidas da lista são apagadas ao salvar.",
+        "edit": "Editar questionário",
+        "sent_count_one": "{{count}} candidato já recebeu este questionário",
+        "sent_count_other": "{{count}} candidatos já receberam este questionário",
+        "locked_title": "Questionário bloqueado para edição",
+        "locked_description": "Ele já foi enviado aos candidatos e não pode mais ser alterado ou removido.",
+        "empty_questions_title": "Nenhuma pergunta cadastrada",
+        "empty_questions_description": "Adicione as perguntas que os candidatos precisam responder nesta etapa.",
+        "delete_confirm_title": "Remover este questionário?",
+        "delete_confirm_description": "As perguntas e as alternativas são removidas junto. Esta ação não pode ser desfeita.",
+        "required": "Obrigatória",
+        "essay_hint": "Pergunta dissertativa, respondida com um texto livre.",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Triagem inicial",
+            "description": "Descrição",
+            "description_placeholder": "Explique para o candidato o objetivo deste questionário",
+            "due_date": "Prazo de resposta",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Usado quando a vaga já está aguardando esta etapa. Sem prazo informado, a API usa 7 dias.",
+            "questions": "Perguntas",
+            "add_question": "Adicionar pergunta",
+            "question": "Pergunta",
+            "question_placeholder": "Escreva a pergunta que o candidato precisa responder",
+            "type": "Tipo",
+            "is_required": "Obrigatória",
+            "options": "Alternativas",
+            "option_placeholder": "Escreva a alternativa",
+            "add_option": "Adicionar alternativa",
+            "move_up": "Mover para cima",
+            "move_down": "Mover para baixo"
+        },
+        "answers": {
+            "title": "Respostas do questionário",
+            "description_company": "Respostas enviadas por {{name}} no questionário de triagem.",
+            "description_dev": "Estas foram as respostas que você enviou nesta etapa.",
+            "submitted_at": "Enviado em",
+            "not_answered": "Não respondida",
+            "empty_title": "Nenhuma resposta disponível",
+            "empty_description": "As respostas aparecem aqui assim que o candidato enviar o questionário."
+        }
+    },
+    "technical_challenge": {
+        "title": "Desafio técnico",
+        "create_title": "Criar desafio técnico",
+        "create_description": "Monte o enunciado que os candidatos recebem na etapa de desafio técnico desta vaga.",
+        "edit_title": "Editar desafio técnico",
+        "edit_description": "Os textos alterados voltam para a fila de tradução ao salvar.",
+        "edit": "Editar desafio",
+        "sent_count_one": "{{count}} candidato já recebeu este desafio",
+        "sent_count_other": "{{count}} candidatos já receberam este desafio",
+        "locked_title": "Desafio bloqueado para edição",
+        "locked_description": "Ele já foi enviado aos candidatos e não pode mais ser alterado ou removido. O documento guia continua podendo ser trocado.",
+        "delete_confirm_title": "Remover este desafio?",
+        "delete_confirm_description": "O enunciado e o documento guia são removidos junto. Esta ação não pode ser desfeita.",
+        "due_date": "Prazo de entrega",
+        "accepts_zip": "Aceita projeto compactado",
+        "guide": {
+            "title": "Documento guia",
+            "description": "Arquivo com o enunciado completo (pdf, doc, docx, md, txt ou zip, até 10MB). Um novo envio substitui o anterior.",
+            "attach": "Anexar documento",
+            "replace": "Substituir documento",
+            "too_large": "O documento guia pode ter no máximo 10MB"
+        },
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: API de gestão de pedidos",
+            "description": "Enunciado",
+            "description_placeholder": "Descreva o que o candidato precisa implementar",
+            "rules": "Regras",
+            "rules_placeholder": "Ex.: pode usar qualquer framework, serão avaliados modelagem, testes e organização do código",
+            "rules_description": "O que pode ser usado, o que será avaliado e os limites da entrega.",
+            "due_date": "Prazo de entrega",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Cada candidatura que entra na etapa herda este prazo. A entrega atrasada não é bloqueada pela API.",
+            "accepts_zip_submission": "Aceitar projeto compactado",
+            "accepts_zip_submission_description": "Libera o envio de um .zip além do link do repositório.",
+            "guide_document": "Documento guia",
+            "attach_guide": "Anexar documento",
+            "guide_document_description": "Opcional. Aceita pdf, doc, docx, md, txt ou zip, com até 10MB."
+        }
+    },
+    "language_assessment": {
+        "title": "Prova de idioma",
+        "create_title": "Criar prova de idioma",
+        "create_description": "Monte a prova que os candidatos respondem na etapa de avaliação de idioma desta vaga. Ela tem gabarito e é corrigida automaticamente na entrega.",
+        "edit_title": "Editar prova de idioma",
+        "edit_description": "As perguntas e alternativas removidas da lista são apagadas ao salvar.",
+        "edit": "Editar prova",
+        "sent_count_one": "{{count}} candidato já recebeu esta prova",
+        "sent_count_other": "{{count}} candidatos já receberam esta prova",
+        "locked_title": "Prova bloqueada para edição",
+        "locked_description": "Ela já foi enviada aos candidatos e não pode mais ser alterada ou removida: mudar o gabarito invalidaria as provas já corrigidas.",
+        "delete_confirm_title": "Remover esta prova?",
+        "delete_confirm_description": "As perguntas, as alternativas e o gabarito são removidos junto. Esta ação não pode ser desfeita.",
+        "language": "Idioma",
+        "due_date": "Prazo de resposta",
+        "passing_score": "Nota de corte",
+        "no_passing_score": "Sem nota de corte: a prova só pontua, sem aprovar ou reprovar.",
+        "max_score": "Nota máxima",
+        "points_one": "{{count}} ponto",
+        "points_other": "{{count}} pontos",
+        "correct_option": "Resposta certa",
+        "expected_answers": "Respostas aceitas",
+        "text_hint": "Pergunta de resposta escrita, corrigida pela lista de respostas aceitas.",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Prova de inglês",
+            "description": "Descrição",
+            "description_placeholder": "Explique para o candidato o que a prova avalia",
+            "language": "Idioma avaliado",
+            "language_placeholder": "Ex.: Inglês",
+            "language_description": "O conteúdo da prova não é traduzido: escreva as perguntas e as alternativas no idioma avaliado.",
+            "passing_score": "Nota de corte",
+            "passing_score_placeholder": "Sem nota de corte",
+            "passing_score_description": "Opcional. Sem ela a prova pontua, mas não aprova nem reprova. Não pode passar da nota máxima.",
+            "max_score": "Nota máxima: {{count}}",
+            "due_date": "Prazo de resposta",
+            "due_date_placeholder": "Escolha uma data",
+            "due_date_description": "Cada candidato que recebe a prova herda este prazo. A entrega atrasada não é bloqueada pela API.",
+            "questions": "Perguntas",
+            "add_question": "Adicionar pergunta",
+            "question": "Pergunta",
+            "question_placeholder": "Escreva a pergunta no idioma avaliado",
+            "type": "Tipo",
+            "weight": "Peso",
+            "options": "Alternativas",
+            "options_single_description": "Marque a alternativa certa.",
+            "options_multiple_description": "Marque todas as alternativas certas. O candidato só pontua se marcar exatamente essas.",
+            "option_placeholder": "Escreva a alternativa",
+            "add_option": "Adicionar alternativa",
+            "mark_correct": "Marcar como certa",
+            "expected_answers": "Respostas aceitas",
+            "expected_answers_description": "A resposta do candidato precisa bater com uma destas. A comparação ignora maiúsculas e espaços repetidos, mas não ignora acentos.",
+            "expected_answer_placeholder": "Escreva uma resposta aceita",
+            "add_expected_answer": "Adicionar resposta aceita",
+            "move_up": "Mover para cima",
+            "move_down": "Mover para baixo"
+        },
+        "answers": {
+            "title": "Correção da prova",
+            "description_company": "Respostas de {{name}} na prova de idioma, já corrigidas.",
+            "description_dev": "Estas foram as suas respostas, já corrigidas.",
+            "submitted_at": "Entregue em",
+            "not_answered": "Não respondida",
+            "correct": "Certa",
+            "wrong": "Errada",
+            "earned": "{{earned}} de {{weight}} pts",
+            "answer_key": "Gabarito",
+            "empty_title": "Nenhuma resposta disponível",
+            "empty_description": "A correção aparece aqui assim que o candidato entregar a prova."
+        }
+    },
+    "chat": {
+        "title": "Mensagens",
+        "empty_title": "Nenhuma conversa ainda",
+        "empty_description": "Abra o perfil de alguém e clique em \"Enviar mensagem\" para começar uma conversa.",
+        "no_messages_yet": "Nenhuma mensagem ainda",
+        "start_conversation": "Mande a primeira mensagem para começar a conversa.",
+        "message_placeholder": "Escreva uma mensagem...",
+        "send": "Enviar",
+        "send_message": "Enviar mensagem",
+        "unknown_participant": "Usuário sem perfil"
+    },
+    "social": {
+        "feed": {
+            "popular": "Populares",
+            "recent": "Mais recentes",
+            "search_placeholder": "Buscar nas publicações",
+            "empty_title": "Nenhuma publicação por aqui",
+            "empty_description": "Seja o primeiro a publicar algo para a comunidade.",
+            "back_to_feed": "Voltar para o feed",
+            "all": "Todos",
+            "following": "Seguindo",
+            "sort_label": "Ordenação do feed",
+            "following_empty_title": "Você ainda não segue ninguém",
+            "following_empty_description": "Siga perfis para ver as publicações deles aqui.",
+            "find_profiles": "Encontrar perfis",
+            "following_no_posts_title": "Ninguém que você segue publicou ainda."
+        },
+        "post": {
+            "edited": "editado",
+            "open": "Abrir publicação",
+            "open_image": "Ampliar imagem",
+            "image_alt": "Imagem {{index}} da publicação",
+            "previous_image": "Imagem anterior",
+            "next_image": "Próxima imagem",
+            "like": "Curtir",
+            "comments": "Comentários",
+            "favorite": "Favoritar",
+            "publish": "Publicar",
+            "add_images": "Imagens",
+            "create_placeholder": "O que você quer compartilhar?",
+            "content_label": "Texto da publicação",
+            "images_label": "Imagens ({{current}}/{{max}})",
+            "edit_title": "Editar publicação",
+            "delete_description": "A publicação, os comentários e as curtidas dela deixam de ficar disponíveis. Não é possível desfazer."
+        },
+        "comment": {
+            "section_title_one": "{{count}} comentário",
+            "section_title_other": "{{count}} comentários",
+            "removed": "Comentário removido",
+            "reply": "Responder",
+            "reply_placeholder": "Escreva uma resposta",
+            "send_reply": "Responder",
+            "send": "Comentar",
+            "create_placeholder": "Escreva um comentário",
+            "edit_placeholder": "Edite seu comentário",
+            "like": "Curtir comentário",
+            "empty": "Nenhum comentário ainda",
+            "load_more": "Carregar mais comentários",
+            "see_more_replies_one": "Ver mais {{count}} resposta",
+            "see_more_replies_other": "Ver mais {{count}} respostas",
+            "continue_thread": "Continuar esta thread",
+            "back_to_post": "Voltar para a conversa"
+        },
+        "likes": {
+            "title": "Quem curtiu",
+            "empty": "Ninguém curtiu ainda",
+            "see_who_liked": "Quem curtiu"
+        },
+        "follow": {
+            "follow": "Seguir",
+            "follow_back": "Seguir de volta",
+            "following": "Seguindo",
+            "unfollow": "Deixar de seguir",
+            "unfollow_confirm": "Deixar de seguir {{name}}?",
+            "unfollow_confirm_description": "As publicações dessa pessoa deixam de aparecer na sua aba \"Seguindo\".",
+            "follows_you": "Segue você",
+            "followers_label_zero": "seguidores",
+            "followers_label_one": "seguidor",
+            "followers_label_other": "seguidores",
+            "following_label": "seguindo",
+            "followers_tab": "Seguidores",
+            "following_tab": "Seguindo",
+            "empty_followers": "Ninguém segue {{name}} ainda.",
+            "empty_following": "{{name}} ainda não segue ninguém.",
+            "empty_followers_own": "Você ainda não tem seguidores.",
+            "empty_following_own": "Você ainda não segue ninguém."
+        },
+        "popular": {
+            "title": "Quem seguir",
+            "empty": "Ainda não há usuários para mostrar.",
+            "show_more": "Mostrar mais",
+            "score_zero": "{{score}} pontos",
+            "score_one": "{{score}} ponto",
+            "score_other": "{{score}} pontos",
+            "received_likes_zero": "{{count}} curtidas recebidas",
+            "received_likes_one": "{{count}} curtida recebida",
+            "received_likes_other": "{{count}} curtidas recebidas",
+            "received_comments_zero": "{{count}} comentários recebidos",
+            "received_comments_one": "{{count}} comentário recebido",
+            "received_comments_other": "{{count}} comentários recebidos",
+            "received_favorites_zero": "{{count}} favoritos recebidos",
+            "received_favorites_one": "{{count}} favorito recebido",
+            "received_favorites_other": "{{count}} favoritos recebidos"
+        },
+        "participants": {
+            "title": "Participantes da conversa",
+            "empty_title": "Ninguém comentou ainda",
+            "empty_description": "Quem comentar nesta publicação aparece aqui.",
+            "post_author": "Autor",
+            "comments_one": "{{count}} comentário",
+            "comments_other": "{{count}} comentários",
+            "commented": "Comentou {{time}}",
+            "first_commented": "Primeiro comentário {{time}}",
+            "last_commented": "Último comentário {{time}}",
+            "show_more": "Mostrar mais"
+        },
+        "author": {
+            "unknown": "Usuário"
+        },
+        "favorites": {
+            "search_placeholder": "Buscar nos favoritos",
+            "empty_title": "Nenhuma publicação favoritada",
+            "empty_description": "As publicações que você favoritar aparecem aqui."
+        },
+        "profile_posts": {
+            "empty_title": "Nenhuma publicação",
+            "empty_description": "Este perfil ainda não publicou nada.",
+            "empty_description_own": "Você ainda não publicou nada. Comece agora."
+        },
+        "errors": {
+            "post_unavailable": "Esta publicação não está mais disponível.",
+            "thread_unavailable": "Esta conversa não está mais disponível.",
+            "unavailable_description": "O conteúdo pode ter sido removido por quem publicou.",
+            "comment_removed": "Este comentário foi removido.",
+            "too_many_images": "Um post pode ter no máximo {{max}} imagens.",
+            "invalid_image_type": "Envie imagens em JPEG, PNG ou WebP.",
+            "image_too_large": "Cada imagem precisa ter no máximo 10 MB.",
+            "not_owner": "Você só pode alterar o que publicou.",
+            "image_not_found": "Esta imagem não faz parte da publicação.",
+            "content_required": "Escreva algo antes de enviar.",
+            "unexpected": "Não foi possível concluir. Tente de novo.",
+            "user_unavailable": "Este usuário não está mais disponível."
+        }
+    },
+    "freelance": {
+        "count_one": "{{count}} freela",
+        "count_other": "{{count}} freelas",
+        "posted_at": "Publicado em {{date}}",
+        "search_placeholder": "Buscar por título, tipo ou linguagem",
+        "filter_job_type": "Tipo",
+        "filter_seniority_level": "Senioridade",
+        "filter_status": "Status",
+        "all_job_types": "Todos os tipos",
+        "all_seniority_levels": "Todas as senioridades",
+        "all_statuses": "Todos os status",
+        "load_error": "Não foi possível carregar os freelas.",
+        "load_more_error": "Não foi possível carregar mais itens.",
+        "retry": "Tentar novamente",
+        "badges": {
+            "invited": "Você foi convidado",
+            "proposal_sent": "Orçamento enviado"
+        },
+        "unavailable_title": "Este freela não está mais disponível.",
+        "unavailable_description": "Ele pode ter sido removido pelo cliente.",
+        "back_to_search": "Voltar para a busca",
+        "back_to_my_freelances": "Voltar para Meus Freelances",
+        "my": {
+            "title": "Meus Freelances",
+            "client_description": "Publique freelas, compare os orçamentos recebidos e acompanhe as entregas.",
+            "dev_description": "Acompanhe seus contratos, orçamentos, convites e os freelas recomendados para você.",
+            "tabs": {
+                "all": "Todos",
+                "open": "Abertos",
+                "in_progress": "Em andamento",
+                "completed": "Concluídos",
+                "contracts": "Contratos",
+                "proposals": "Orçamentos",
+                "invitations": "Convites",
+                "recommended": "Recomendados para você"
+            },
+            "publish": "Publicar freela",
+            "publish_title": "Publicar um freela",
+            "client_empty_title": "Você ainda não publicou freelas.",
+            "client_empty_description": "Publique um freela para começar a receber orçamentos.",
+            "status_empty_title": "Nenhum freela nesta aba.",
+            "proposals_count_one": "{{count}} orçamento",
+            "proposals_count_other": "{{count}} orçamentos",
+            "no_proposals": "Nenhum orçamento ainda"
+        },
+        "contracts": {
+            "empty_title": "Você ainda não tem contratos.",
+            "empty_description": "Quando um cliente aceitar um orçamento seu, o contrato aparece aqui.",
+            "status_empty_title": "Nenhum contrato com este status."
+        },
+        "invitations": {
+            "empty_title": "Nenhum cliente te convidou ainda.",
+            "empty_description": "Quando um cliente te convidar para orçar, o freela aparece aqui."
+        },
+        "dev_proposals": {
+            "empty_title": "Você ainda não enviou orçamentos.",
+            "empty_description": "Encontre freelas na pesquisa e envie o seu orçamento.",
+            "status_empty_title": "Nenhum orçamento com este status.",
+            "vacancy_unavailable": "Freela indisponível"
+        },
+        "recommended": {
+            "description": "Freelas abertos mais parecidos com o seu perfil.",
+            "match": "{{percentage}}% de aderência",
+            "empty_title": "Nenhum freela compatível com o seu perfil agora.",
+            "empty_description": "Volte mais tarde ou procure freelas na pesquisa.",
+            "analyzing_title": "Estamos analisando seu perfil.",
+            "analyzing_description": "Volte em alguns minutos."
+        },
+        "details": {
+            "description": "Descrição",
+            "job_type": "Tipo",
+            "seniority_level": "Senioridade",
+            "specialties": "Especialidades",
+            "languages": "Linguagens e stacks",
+            "no_languages": "Este freela não exige uma linguagem específica.",
+            "client": "Cliente",
+            "client_unavailable": "O cliente deste freela não está mais disponível.",
+            "view_client_profile": "Ver perfil do cliente",
+            "talk_to_client": "Conversar com o cliente",
+            "budget": "Orçamento previsto",
+            "budget_hint": "Só você vê este valor.",
+            "hired_notice": "Este freela já foi contratado.",
+            "owner_actions": "Gerenciar freela",
+            "edit": "Editar",
+            "remove": "Remover",
+            "complete": "Concluir freela",
+            "open_feed": "Abrir o feed",
+            "tabs": {
+                "proposals": "Orçamentos",
+                "recommended_devs": "Devs recomendados"
+            }
+        },
+        "contract": {
+            "title": "Contrato",
+            "value": "Valor fechado",
+            "contracted_at": "Contratado em {{date}}",
+            "completed_at": "Concluído em {{date}}",
+            "dev": "Dev contratado",
+            "client": "Cliente"
+        },
+        "remove_title": "Remover freela?",
+        "remove_description": "O freela \"{{title}}\" será removido e deixará de aparecer para os devs. Essa ação não pode ser desfeita.",
+        "complete_title": "Marcar como concluído?",
+        "complete_description": "O feed fica só para consulta.",
+        "edit_title": "Editar freela",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Landing page em Next.js",
+            "description": "Descrição",
+            "description_placeholder": "Descreva o projeto, as entregas e o prazo esperado",
+            "job_type": "Tipo",
+            "job_type_placeholder": "Selecione o tipo",
+            "budget": "Orçamento previsto (R$)",
+            "budget_placeholder": "Ex.: 10000",
+            "budget_hint": "Só você vê este valor. Ele serve para compararmos os orçamentos que você receber.",
+            "seniority_level": "Senioridade",
+            "seniority_level_placeholder": "Selecione a senioridade",
+            "specialties": "Especialidades",
+            "languages": "Linguagens e stacks",
+            "languages_required_hint": "Obrigatório para o tipo selecionado.",
+            "languages_optional_hint": "Opcional para o tipo selecionado.",
+            "language_placeholder": "Adicionar linguagem ou stack",
+            "language_search": "Buscar linguagem...",
+            "level_placeholder": "Nível",
+            "publish": "Publicar",
+            "save": "Salvar",
+            "errors": {
+                "title_required": "Informe o título",
+                "title_max": "O título pode ter no máximo 255 caracteres",
+                "description_required": "Informe a descrição",
+                "job_type_required": "Selecione o tipo",
+                "budget_required": "Informe o orçamento previsto",
+                "budget_min": "O orçamento previsto deve ser maior que zero",
+                "budget_max": "O orçamento previsto pode ser no máximo R$ 99.999.999,99",
+                "seniority_level_required": "Selecione a senioridade",
+                "specialties_required": "Selecione ao menos uma especialidade",
+                "languages_required": "Freelas do tipo selecionado exigem ao menos uma linguagem ou stack.",
+                "language_duplicated": "Essa linguagem já foi adicionada",
+                "language_level_required": "Selecione o nível"
+            }
+        },
+        "proposal": {
+            "form_title": "Enviar orçamento",
+            "edit_title": "Editar orçamento",
+            "form_description": "O cliente compara os orçamentos pela aderência do seu perfil e pelo preço.",
+            "pricing_type": "Forma de cobrança",
+            "fixed": "Preço fechado",
+            "hourly": "Por hora",
+            "total_price": "Valor total (R$)",
+            "hourly_rate": "Valor da hora (R$)",
+            "estimated_hours": "Horas estimadas",
+            "total_preview": "Total: {{total}}",
+            "message": "Mensagem (opcional)",
+            "message_placeholder": "Apresente-se e explique o que você entrega.",
+            "send": "Enviar orçamento",
+            "save": "Salvar orçamento",
+            "yours": "Seu orçamento",
+            "edit": "Editar",
+            "withdraw": "Retirar",
+            "withdraw_title": "Retirar orçamento?",
+            "withdraw_description": "O cliente deixa de ver este orçamento. Você pode enviar outro enquanto o freela estiver aberto.",
+            "fixed_suffix": "preço fechado",
+            "sent_at": "Enviado em {{date}}",
+            "open_vacancy": "Ver freela",
+            "errors": {
+                "total_price_required": "Informe o valor total",
+                "total_price_min": "O valor deve ser maior que zero",
+                "total_price_max": "O valor pode ser no máximo R$ 99.999.999,99",
+                "hourly_rate_required": "Informe o valor da hora",
+                "hourly_rate_min": "O valor da hora deve ser maior que zero",
+                "hourly_rate_max": "O valor da hora pode ser no máximo R$ 9.999,99",
+                "estimated_hours_required": "Informe as horas estimadas",
+                "estimated_hours_integer": "Use um número inteiro de horas",
+                "estimated_hours_min": "Informe ao menos 1 hora",
+                "estimated_hours_max": "Informe no máximo 9999 horas",
+                "message_max": "A mensagem pode ter no máximo 5000 caracteres"
+            }
+        },
+        "proposals": {
+            "view_ranked": "Mais compatíveis",
+            "view_all": "Todos",
+            "score": "{{percentage}}% compatível",
+            "score_breakdown": "Aderência do perfil: {{similarity}} · Proximidade do preço: {{price}}%",
+            "profile_not_analyzed": "perfil ainda não analisado",
+            "above_budget": "{{percentage}}% acima do seu orçamento",
+            "below_budget": "{{percentage}}% abaixo do seu orçamento",
+            "equal_budget": "Igual ao seu orçamento",
+            "accept": "Aceitar orçamento",
+            "accept_title": "Fechar o contrato?",
+            "accept_description": "Fechar o contrato com {{name}} por {{price}}? Os outros orçamentos serão recusados.",
+            "empty_title": "Nenhum orçamento ainda.",
+            "empty_description": "Convide os devs recomendados para orçar.",
+            "ranking_empty_title": "Nenhum orçamento aguardando decisão.",
+            "status_empty_title": "Nenhum orçamento com este status.",
+            "dev_unavailable": "Dev indisponível"
+        },
+        "recommended_devs": {
+            "description": "Os perfis mais parecidos com o seu freela, segundo a nossa IA.",
+            "match": "{{percentage}}% de aderência",
+            "has_proposal": "Já orçou",
+            "view_proposal": "Ver orçamento",
+            "invited": "Convidado",
+            "invite": "Convidar para orçar",
+            "empty_title": "Nenhum dev compatível ainda.",
+            "empty_description": "Assim que novos devs se cadastrarem, eles podem aparecer aqui."
+        },
+        "analysis": {
+            "vacancy_title": "Estamos analisando seu freela…",
+            "vacancy_description": "As recomendações e o ranking ficam prontos cerca de 1 minuto depois de publicar ou editar o freela. Vamos tentar de novo automaticamente.",
+            "retrying": "Tentando novamente automaticamente…"
+        },
+        "feed": {
+            "title": "Feed do freela",
+            "description": "Atualizações, entregas e reviews do contrato. Para a conversa do dia a dia, use o chat.",
+            "empty_title": "Nenhuma postagem ainda.",
+            "empty_description": "As atualizações e entregas do contrato aparecem aqui.",
+            "read_only": "Freela concluído: o feed fica disponível só para consulta.",
+            "unavailable": "O feed fica disponível depois que o contrato é fechado.",
+            "content_placeholder": "Escreva uma atualização...",
+            "deliverable_placeholder": "Descreva a entrega...",
+            "post_type": "Tipo da postagem",
+            "attach": "Anexar arquivos",
+            "attachments_count": "{{count}}/{{max}} arquivos",
+            "accepted_files": "PDF, Office, CSV, TXT, MD, ZIP e imagens. Até 10 MB por arquivo e 12 MB por envio.",
+            "remove_attachment": "Remover anexo",
+            "publish": "Publicar",
+            "removed_author": "Usuário removido",
+            "review_pending": "Aguardando review",
+            "approve": "Aprovar",
+            "request_changes": "Pedir ajustes",
+            "review_title_approved": "Aprovar entrega",
+            "review_title_changes_requested": "Pedir ajustes na entrega",
+            "review_placeholder": "Comente a entrega...",
+            "review_about": "sobre a entrega de {{date}}",
+            "send_review": "Enviar review",
+            "delete": "Remover postagem",
+            "delete_title": "Remover postagem?",
+            "delete_description": "A postagem e os anexos dela saem do feed.",
+            "link_expired_hint": "Os links dos anexos expiram 30 minutos depois de carregar o feed. Se um link não abrir, recarregue.",
+            "reload": "Recarregar feed",
+            "errors": {
+                "content_required": "Escreva algo ou anexe um arquivo.",
+                "content_max": "O texto pode ter no máximo 5000 caracteres.",
+                "too_many_files": "Envie no máximo {{max}} arquivos.",
+                "file_too_large": "\"{{name}}\" passa de 10 MB.",
+                "total_too_large": "Os arquivos somam mais de 12 MB.",
+                "invalid_extension": "\"{{name}}\" não é de um tipo aceito."
+            },
+            "review_about_older": "sobre uma entrega anterior",
+            "back_to_details": "Voltar para o freela"
+        },
+        "chat_draft": {
+            "dev": "Olá! Vi seu freela \"{{title}}\" e tenho interesse.",
+            "client": "Olá! Vi seu perfil e queria conversar sobre meu freela \"{{title}}\"."
+        },
+        "errors": {
+            "unavailable": "Este freela não está mais disponível.",
+            "forbidden": "Você não tem permissão para esta ação.",
+            "not_open": "Este freela não está mais aberto. Atualizamos a tela.",
+            "not_in_progress": "Este freela não está em andamento. Atualizamos a tela.",
+            "proposal_conflict": "Este freela mudou enquanto você estava na tela. Atualizamos as informações.",
+            "accept_conflict": "Este freela já tem contrato ou o orçamento não está mais pendente. Atualizamos a tela.",
+            "invite_conflict": "Este dev já foi convidado, já orçou ou o freela não está mais aberto. Atualizamos a lista.",
+            "feed_closed": "O feed deste freela não aceita mais alterações. Atualizamos a tela.",
+            "unexpected": "Não foi possível concluir. Tente de novo."
+        }
     }
 }

@@ -1,3 +1,4 @@
+import type { UpdateCompanyProfileRequest } from "@/api/generated/models";
 import { CreateCompanyProfileSchema, type ICreateCompanyProfileSchema } from "@/schemas/profile/CreateCompanyProfileSchema";
 import { useAuthStore } from "@/stores/auth-store";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,19 +17,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Spinner } from "../ui/spinner";
 import { cn } from "@/lib/utils";
 import { formatDateOnly, parseLocalDateFromIso } from "@/utils/date-only";
-import { useEnumOperationalSegments } from "@/api/generated/enums/enums";
-import { useUpdateCompanyProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useEnumOperationalSegments } from "@/api/generated/enum/enum";
+import { useUpdateCompanyProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import type { CompanyProfileResource } from "@/api/generated/models";
 
-export default function CompanyUpdateProfileForm() {
+type CompanyUpdateProfileFormProps = {
+	profile?: Pick<
+		CompanyProfileResource,
+		"id" | "name" | "bio" | "phone" | "cnpj" | "fouding_date" | "operational_segment"
+	>;
+	onSuccess?: () => void;
+};
+
+export default function CompanyUpdateProfileForm({
+	profile: profileProp,
+	onSuccess,
+}: CompanyUpdateProfileFormProps = {}) {
 	const { t } = useTranslation();
 
 	const { user, hydrateUser } = useAuthStore();
+	const profile = profileProp ?? user?.company_profile;
 
 	const { data: operationalSegments, isLoading } = useEnumOperationalSegments();
 
@@ -37,37 +51,38 @@ export default function CompanyUpdateProfileForm() {
 	const form = useForm<ICreateCompanyProfileSchema>({
 		resolver: zodResolver(CreateCompanyProfileSchema),
 		defaultValues: {
-			name: user?.company_profile?.name ?? "",
-			bio: user?.company_profile?.bio ?? "",
-			phone: user?.company_profile?.phone ?? "",
-			cnpj: user?.company_profile?.cnpj ?? "",
-			founding_date: user?.company_profile?.fouding_date ?? "",
-			operational_segment: user?.company_profile?.operational_segment ?? "",
+			name: profile?.name ?? "",
+			bio: profile?.bio ?? "",
+			phone: profile?.phone ?? "",
+			cnpj: profile?.cnpj ?? "",
+			founding_date: profile?.fouding_date ?? "",
+			operational_segment: profile?.operational_segment ?? "",
 		},
 	});
 
 	useEffect(() => {
-		if (user?.company_profile && !form.formState.isDirty) {
+		if (profile && !form.formState.isDirty) {
 			form.reset({
-				name: user.company_profile.name ?? "",
-				bio: user.company_profile.bio ?? "",
-				phone: user.company_profile.phone ?? "",
-				cnpj: user.company_profile.cnpj ?? "",
-				founding_date: user.company_profile.fouding_date ?? "",
-				operational_segment: user.company_profile.operational_segment ?? "",
+				name: profile.name ?? "",
+				bio: profile.bio ?? "",
+				phone: profile.phone ?? "",
+				cnpj: profile.cnpj ?? "",
+				founding_date: profile.fouding_date ?? "",
+				operational_segment: profile.operational_segment ?? "",
 			});
 		}
-	}, [user, form]);
+	}, [profile, form]);
 
 	const { mutate: updateProfile, isPending } = useUpdateCompanyProfile();
 
 	const update = (data: ICreateCompanyProfileSchema) => {
 		updateProfile(
-			{ company: user?.company_profile?.id as string, data },
+			{ id: profile?.id as string, data: data as UpdateCompanyProfileRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.profile_company_updated"));
-					hydrateUser();
+					onSuccess?.();
+					if (!profileProp) hydrateUser();
 				},
 				onError: (error) => {
 					onError(error as AxiosError<ApiError>);
@@ -76,7 +91,7 @@ export default function CompanyUpdateProfileForm() {
 		);
 	};
 
-	if (!user || !user.company_profile) return null;
+	if (!profile) return null;
 
 	return (
 		<form onSubmit={form.handleSubmit(update)} className="w-full max-w-[700px] flex flex-col gap-4">

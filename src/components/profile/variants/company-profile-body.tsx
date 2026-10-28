@@ -1,7 +1,7 @@
 import UnderConstruction from "@/components/global/under-construction";
+import ProfilePostsTab from "@/components/social/profile-posts-tab";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CompanyProjectTab from "../company-project/company-project-tab";
 import CompanyStackList from "../company-stack/company-stack-list";
@@ -10,9 +10,11 @@ import { useTranslation } from "react-i18next";
 
 interface CompanyProfileBodyProps{
     profileId: string
+    /** Id do usuário dono do perfil — a aba de publicações filtra o feed por ele. */
+    userId: string | undefined
 }
 
-export default function CompanyProfileBody({profileId}: CompanyProfileBodyProps) {
+export default function CompanyProfileBody({profileId, userId}: CompanyProfileBodyProps) {
     
     const { t } = useTranslation();
 
@@ -34,7 +36,7 @@ export default function CompanyProfileBody({profileId}: CompanyProfileBodyProps)
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
-                        <UnderConstruction />
+                        <ProfilePostsTab userId={userId} />
                     </TabsContent>
                     <TabsContent value="projects" className="mt-2">
                         <CompanyProjectTab profileId={profileId}/>

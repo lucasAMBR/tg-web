@@ -1,3 +1,4 @@
+import type { UpdateDevProfileRequest } from "@/api/generated/models";
 import { Controller, useForm } from "react-hook-form";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import Required from "../global/required-field";
@@ -15,27 +16,50 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Spinner } from "../ui/spinner";
 import { Switch } from "../ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enum/enum";
 import { CreateDevProfileSchema, type ICreateDevProfileSchema } from "@/schemas/profile/CreateDevProfileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/stores/auth-store";
-import { useUpdateDevProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useUpdateDevProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useEffect } from "react";
 import { onError } from "@/utils/on-error";
 import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import { useTranslation } from "react-i18next";
+import type { DevProfileResource } from "@/api/generated/models";
 
-export default function DevUpdateProfileForm(){
+type DevUpdateProfileFormProps = {
+    profile?: Pick<
+        DevProfileResource,
+        | "id"
+        | "name"
+        | "cpf"
+        | "phone"
+        | "birthdate"
+        | "bio"
+        | "seniority_level"
+        | "specialty"
+        | "open_to_work"
+        | "open_to_relocation"
+    >;
+    onSuccess?: () => void;
+};
 
+export default function DevUpdateProfileForm({
+    profile: profileProp,
+    onSuccess,
+}: DevUpdateProfileFormProps = {}) {
     const { t } = useTranslation();
-    
-    const { user, hydrateUser } = useAuthStore();
 
-    const { data: seniorityLevels, isLoading } = useEnumSeniority();
+    const { user, hydrateUser } = useAuthStore();
+    const profile = profileProp ?? user?.dev_profile;
+
+    const { data: seniorityLevels, isLoading: isSeniorityLoading } = useEnumSeniority();
+    const { data: devSpecialties, isLoading: isSpecialtyLoading } = useEnumDevSpecialty();
 
     const seniorityList = seniorityLevels?.data ?? [];
+    const specialtyList = devSpecialties?.data ?? [];
 
     const {
         mutate: updateProfile,
@@ -45,40 +69,41 @@ export default function DevUpdateProfileForm(){
     const form = useForm<ICreateDevProfileSchema>({
         resolver: zodResolver(CreateDevProfileSchema),
         defaultValues: {
-            name: user?.dev_profile?.name ?? "",
-            cpf: user?.dev_profile?.cpf ?? "",
-            phone: user?.dev_profile?.phone ?? "",
-            birthdate: user?.dev_profile?.birthdate ?? "",
-            bio: user?.dev_profile?.bio ?? "",
-            seniority_level: user?.dev_profile?.seniority_level ?? "",
-            open_to_work: user?.dev_profile?.open_to_work ?? false,
-            open_to_relocation: user?.dev_profile?.open_to_relocation ?? false
-        }
-    })
+            name: profile?.name ?? "",
+            cpf: profile?.cpf ?? "",
+            phone: profile?.phone ?? "",
+            birthdate: profile?.birthdate ?? "",
+            bio: profile?.bio ?? "",
+            seniority_level: profile?.seniority_level ?? "",
+            specialty: profile?.specialty ?? "",
+            open_to_work: profile?.open_to_work ?? false,
+            open_to_relocation: profile?.open_to_relocation ?? false,
+        },
+    });
 
     useEffect(() => {
-    // Se o formulário ainda não foi alterado pelo usuário (dirty) 
-    // e o usuário acabou de ser carregado, aí sim resetamos.
-        if (user?.dev_profile && !form.formState.isDirty) {
+        if (profile && !form.formState.isDirty) {
             form.reset({
-                name: user.dev_profile.name ?? "",
-                cpf: user.dev_profile.cpf ?? "",
-                phone: user.dev_profile.phone ?? "",
-                birthdate: user.dev_profile.birthdate ?? "",
-                bio: user.dev_profile.bio ?? "",
-                seniority_level: user.dev_profile.seniority_level ?? "",
-                open_to_work: user.dev_profile.open_to_work ?? false,
-                open_to_relocation: user.dev_profile.open_to_relocation ?? false
+                name: profile.name ?? "",
+                cpf: profile.cpf ?? "",
+                phone: profile.phone ?? "",
+                birthdate: profile.birthdate ?? "",
+                bio: profile.bio ?? "",
+                seniority_level: profile.seniority_level ?? "",
+                specialty: profile.specialty ?? "",
+                open_to_work: profile.open_to_work ?? false,
+                open_to_relocation: profile.open_to_relocation ?? false,
             });
         }
-    }, [user, form]);
+    }, [profile, form]);
 
     const create = (data: ICreateDevProfileSchema) => {
-        updateProfile({ dev: user?.dev_profile?.id as string, data }, {
+        updateProfile({ id: profile?.id as string, data: data as UpdateDevProfileRequest }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.profile_dev_updated"));
-                
-                hydrateUser();
+
+                onSuccess?.();
+                if (!profileProp) hydrateUser();
             },
             onError: (error) => {
                 onError(error as AxiosError<ApiError>);
@@ -86,7 +111,7 @@ export default function DevUpdateProfileForm(){
         })
     }
 
-    if (!user || !user.dev_profile) return null;
+    if (!profile) return null;
 
     return(
         <form
@@ -235,11 +260,40 @@ export default function DevUpdateProfileForm(){
                                     <SelectValue placeholder={t("placeholder.seniority_level")} />
                                 </SelectTrigger>
                                 <SelectContent position="popper">
-                                    {isLoading && <Spinner />}
-                                    {!isLoading &&
+                                    {isSeniorityLoading && <Spinner />}
+                                    {!isSeniorityLoading &&
                                         seniorityList.length > 0 &&
                                         seniorityList.map((item) => (
-                                            <SelectItem value={item.value}>{t(item.i18nKey)}</SelectItem>
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {t(item.i18nKey)}
+                                            </SelectItem>
+                                        ))}
+                                </SelectContent>
+                            </Select>
+                            <FieldError errors={[fieldState.error]} />
+                        </Field>
+                    )}
+                />
+                <Controller
+                    control={form.control}
+                    name="specialty"
+                    render={({ field, fieldState }) => (
+                        <Field className="flex-1">
+                            <FieldLabel htmlFor="specialty">
+                                {t("input.specialty")} <Required />
+                            </FieldLabel>
+                            <Select value={field.value} onValueChange={field.onChange}>
+                                <SelectTrigger>
+                                    <SelectValue placeholder={t("placeholder.specialty")} />
+                                </SelectTrigger>
+                                <SelectContent position="popper">
+                                    {isSpecialtyLoading && <Spinner />}
+                                    {!isSpecialtyLoading &&
+                                        specialtyList.length > 0 &&
+                                        specialtyList.map((item) => (
+                                            <SelectItem key={item.value} value={item.value}>
+                                                {t(item.i18nKey)}
+                                            </SelectItem>
                                         ))}
                                 </SelectContent>
                             </Select>

@@ -1,14 +1,16 @@
 import UnderConstruction from "@/components/global/under-construction";
+import ProfilePostsTab from "@/components/social/profile-posts-tab";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus } from "lucide-react";
 import { useState } from "react";
 
 interface ClientProfileBodyProps{
     profileId: string
+    /** Id do usuário dono do perfil — a aba de publicações filtra o feed por ele. */
+    userId: string | undefined
 }
 
-export default function ClientProfileBody({profileId}: ClientProfileBodyProps) {
+export default function ClientProfileBody({ userId }: ClientProfileBodyProps) {
 
     const [tab, setTab] = useState("posts");
 
@@ -25,7 +27,7 @@ export default function ClientProfileBody({profileId}: ClientProfileBodyProps) {
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
-                        <UnderConstruction />
+                        <ProfilePostsTab userId={userId} />
                     </TabsContent>
                     <TabsContent value="open_jobs" className="mt-2">
                         <UnderConstruction />

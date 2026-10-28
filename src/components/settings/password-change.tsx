@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import z from "zod/v3";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpdateUser } from "@/api/generated/user/user";
+import { useUserUserUpdate0 } from "@/api/generated/user/user";
 import { useAuthStore } from "@/stores/auth-store";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { onError } from "@/utils/on-error";
@@ -60,10 +60,10 @@ export default function PasswordChange(){
     const {
         mutate,
         isPending
-    } = useUpdateUser();
+    } = useUserUserUpdate0();
 
     const handleChange = (data: IPasswordChangeSchema) => {
-        mutate({ user: user?.id as string, data }, {
+        mutate({ id: user?.id as string, data }, {
             onSuccess: () => {
                 CustomToaster.successToast(t("toast.success.password_updated"));
                 form.reset();
@@ -79,7 +79,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="old_password"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.old_password")}</FieldLabel>
                         <Input
@@ -94,7 +94,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="new_password"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.new_password")}</FieldLabel>
                         <Input
@@ -109,7 +109,7 @@ export default function PasswordChange(){
             <Controller 
                 control={form.control}
                 name="new_password_confirmation"
-                render={({ field, fieldState }) => (
+                render={({ field }) => (
                     <Field>
                         <FieldLabel>{t("input.new_password_confirmation")}</FieldLabel>
                         <Input

@@ -1,10 +1,48 @@
 {
+    "page_title": {
+        "home": "Home",
+        "login": "Login",
+        "register": "Register",
+        "address": "Address",
+        "create_profile": "Create Profile",
+        "feed": "Feed",
+        "search": "Search",
+        "profile": "Profile",
+        "settings": "Settings",
+        "dashboard": "Dashboard",
+        "devs": "Devs",
+        "dev_details": "Developer Details",
+        "companies": "Companies",
+        "company_details": "Company Details",
+        "clients": "Clients",
+        "client_details": "Client Details",
+        "proficiency_test": "Proficiency Test",
+        "my_vacancies": "My Vacancies",
+        "vacancies": "Vacancies",
+        "vacancy_details": "Vacancy Details",
+        "selection_process": "Selection Process",
+        "my_applies": "My Vacancies",
+        "screening_questionnaire": "Screening Questionnaire",
+        "technical_challenge": "Technical Challenge",
+        "language_assessment": "Language Assessment",
+        "post": "Post",
+        "thread": "Thread",
+        "favorites": "Favorites",
+        "freelances": "My Freelances",
+        "freelance_details": "Freelance Job Details",
+        "freelance_feed": "Job Feed",
+        "freelance_search": "Freelance Jobs"
+    },
+    "breadcrumb": {
+        "admin": "Administration",
+        "test_in_progress": "Test in progress"
+    },
     "general": {
         "back": "Back",
         "sing_out": "Sing out",
-        "create": "Criar",
-        "register": "Registrar",
-        "skip": "Pular",
+        "create": "Create",
+        "register": "Register",
+        "skip": "Skip",
         "logout": "Logout",
         "clear": "Clear",
         "reset": "Reset",
@@ -16,17 +54,42 @@
         "change": "Change",
         "remove": "Remove",
         "add": "Add",
+        "request": "Request",
         "save": "Save",
         "verified": "Verified",
         "are_you_sure": "Are you sure?",
         "light": "Light",
         "dark": "Dark",
-        "system": "System"
+        "system": "System",
+        "open_link": "Open link",
+        "display_original_content": "Display original content",
+        "display_translated_content": "Display translated content",
+        "showing_original_content": "Showing original content",
+        "showing_translated_content": "Showing translated content",
+        "filters": "Filters",
+        "view_profile": "View profile",
+        "edit_profile": "Edit profile",
+        "profile": "Profile",
+        "block_access": "Block access",
+        "unblock_access": "Unblock access",
+        "address": "Address",
+        "location": "Location",
+        "blocked": "Blocked",
+        "active": "Active",
+        "status": "Status",
+        "translation_pending": "Translation pending.",
+        "translation_error": "Translation unavailable.",
+        "translation_in_progress": "Translation pending.",
+        "no_results": "No results found",
+        "visit": "Visit",
+        "confirm": "Confirm",
+        "close": "Close"
     },
     "toast": {
         "success": {
             "login": "Signed in successfully",
             "register": "Account created successfully",
+            "proficiency_test_requested": "Proficiency test requested successfully",
             "address_created": "Address saved successfully",
             "address_updated": "Address updated successfully",
             "profile_dev_created": "Developer profile created successfully",
@@ -62,13 +125,62 @@
             "dev_soft_skill_registered": "Soft skills registered successfully",
             "dev_soft_skill_updated": "Soft skills updated successfully",
             "recommendation_preferences_updated": "Recommendation preferences updated successfully",
-            "recommendation_preferences_restored": "Default configuration restored"
+            "recommendation_preferences_restored": "Default configuration restored",
+            "access_blocked": "Access blocked successfully",
+            "access_unblocked": "Access unblocked successfully",
+            "profile_pic_updated": "Profile picture updated successfully",
+            "job_vacancy_created": "Job vacancy created successfully",
+            "job_vacancy_updated": "Job vacancy updated successfully",
+            "job_vacancy_inscriptions_closed": "Inscriptions closed successfully",
+            "vacancy_applied": "Application sent successfully",
+            "step_advanced": "Stage closed and applications advanced successfully",
+            "interview_schedule_set": "Interview schedule set successfully",
+            "interview_schedule_proposed": "New time proposed successfully",
+            "interview_schedule_accepted": "Interview schedule confirmed successfully",
+            "interview_cancelled": "Interview cancelled successfully",
+            "screening_questionnaire_created": "Screening questionnaire created successfully",
+            "screening_questionnaire_updated": "Screening questionnaire updated successfully",
+            "screening_questionnaire_deleted": "Screening questionnaire deleted successfully",
+            "screening_questionnaire_answered": "Answers submitted successfully",
+            "technical_challenge_created": "Technical challenge created successfully",
+            "technical_challenge_updated": "Technical challenge updated successfully",
+            "technical_challenge_deleted": "Technical challenge deleted successfully",
+            "technical_challenge_delivered": "Technical challenge delivered successfully",
+            "guide_document_saved": "Guide document saved successfully",
+            "guide_document_removed": "Guide document removed successfully",
+            "live_coding_schedule_set": "Live coding schedule set successfully",
+            "live_coding_schedule_proposed": "New time proposed successfully",
+            "live_coding_schedule_accepted": "Live coding schedule confirmed successfully",
+            "live_coding_cancelled": "Live coding cancelled successfully",
+            "live_coding_exercise_saved": "Live coding exercise saved successfully",
+            "language_assessment_created": "Language assessment created successfully",
+            "language_assessment_updated": "Language assessment updated successfully",
+            "language_assessment_deleted": "Language assessment removed successfully",
+            "language_assessment_answered": "Assessment submitted successfully",
+            "read_receipts_updated": "Read receipts updated successfully!",
+            "post_created": "Post created successfully!",
+            "post_updated": "Post updated successfully!",
+            "post_deleted": "Post removed successfully!",
+            "comment_deleted": "Comment removed successfully!",
+            "freelance_vacancy_created": "Freelance job posted successfully",
+            "freelance_vacancy_updated": "Freelance job updated successfully",
+            "freelance_vacancy_deleted": "Freelance job removed successfully",
+            "freelance_vacancy_completed": "Freelance job completed",
+            "freelance_proposal_sent": "Proposal sent",
+            "freelance_proposal_updated": "Proposal updated",
+            "freelance_proposal_withdrawn": "Proposal withdrawn",
+            "freelance_proposal_accepted": "Contract closed",
+            "freelance_invitation_sent": "Invitation sent",
+            "freelance_feed_post_created": "Post published",
+            "freelance_feed_post_deleted": "Post removed",
+            "freelance_review_sent": "Review sent"
         }
     },
     "role": {
         "dev": "Developer",
         "company": "Company",
-        "client": "Client"
+        "client": "Client",
+        "admin": "Admin"
     },
     "landing_page": {
         "app_name": "Brew!",
@@ -189,7 +301,8 @@
             "posts": "Posts",
             "projects": "Projects",
             "job_history": "Job History",
-            "certifications": "Certifications"
+            "certifications": "Certifications",
+            "proficiency_test": "Proficiency tests"
         },
         "projects": {
             "create_project": "Create Project",
@@ -248,6 +361,42 @@
             "new_academic_background": "Add new academic background",
             "update_academic_background": "Update academic background",
             "update_warning": "If you don't wanna change the certificate, just ignore this field"
+        },
+        "proficiency_test": {
+            "solicitation_title": "Request new proficiency test",
+            "solicitation_description": "Take a proficiency test to validate your skills and improve your recommendations.",
+            "solicitation_dialog_title": "Request proficiency test",
+            "solicitation_dialog_description": "Choose the categories that will compose your test.",
+            "frontend_category": "Frontend category",
+            "backend_category": "Backend category",
+            "category_placeholder": "Select a category",
+            "score": "Test score: ",
+            "start_test": "Start test",
+            "await_responses": "Await for responses",
+            "view_results": "View Results",
+            "previous_page": "Previous",
+            "next_page": "Next",
+            "finish": "Finish test",
+            "all_questions_required": "Answer all questions before finishing",
+            "submit_success": "Test submitted successfully",
+            "page_indicator": "Page {{current}} of {{total}}",
+            "no_questions": "No questions available for this test",
+            "review": {
+                "correct_response": "Correct answer",
+                "dev_response": "Developer's answer"
+            },
+            "start": {
+                "error": "Error",
+                "not_your_test": "This is not your test",
+                "greeting": "Hello {{name}}!",
+                "welcome": "Welcome to your proficiency test!",
+                "rules": "Rules:",
+                "rule_time": "The time spent on each question is tracked: answering too fast may look suspicious, and too slow may indicate technical difficulty.",
+                "rule_focus": "Every time the window loses focus is counted. There is an acceptable limit, but frequent exits may signal external help.",
+                "rule_open_close": "Every time the test is opened and closed is logged, to prevent questions from being reviewed in advance and creating an unfair advantage.",
+                "rule_consistency": "Answer consistency is evaluated: getting hard questions right while missing easy ones is not advantageous.",
+                "score_warning": "Be aware that all of these factors can affect your final score!"
+            }
         }
     },
     "company_profile": {
@@ -289,7 +438,7 @@
             "recommendation": "Recommendation"
         },
         "account": {
-            "email_verification": { 
+            "email_verification": {
                 "title": "E-mail verification",
                 "description": "This will help us to send you the best oportunities, even out of our platform, and help to let your account more secure with access report and access code sending!",
                 "your_email_is_already_verified": "Your e-email is already verified yet",
@@ -309,18 +458,32 @@
             "delete_account": {
                 "title": "Delete account",
                 "description": "Warning: If you delete your account, all your data will be deleted permanently and will not be possible to recover",
-                "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",    
+                "delete_account_confirmation": "This action is permanent and HIGHLY DESTRUCTIVE! Deleting your account, all your data will be deleted permanently and will not be possible to recover",
                 "yes_delete_my_account": "Yes, delete my account"
+            },
+            "read_receipts": {
+                "title": "Read receipts",
+                "description": "When enabled, whoever messages you knows when you have read it. When disabled, nobody sees your reads — and you also stop seeing when your own messages are read.",
+                "enabled": "Read receipts on",
+                "disabled": "Read receipts off"
             }
         },
         "profile": {
             "update_profile": {
                 "title": "Update your profile",
                 "description": "Update your profile information, this will help us to know you better and recommend you the best"
+            },
+            "location_informations": {
+                "title": "Location information",
+                "description": "Manage your location and address information, this helps us know where you live to recommend the best job opportunities"
+            },
+            "profile_pic": {
+                "title": "Profile picture",
+                "description": "Update the picture shown on your profile and in recommendations"
             }
         },
         "theme": {
-            "change_theme": {   
+            "change_theme": {
                 "title": "Change theme",
                 "description": "Change the platform color scheme between light, dark or matching with your operational system default configuration"
             },
@@ -358,6 +521,34 @@
                 "description": "Custom the languages and frameworks the flexibility on our recommendation system, your will to learn a new technology, techologies that  you don't wanna be related",
                 "recommendation_flexibility_title": "Recommendation Flexibility",
                 "recommendation_flexibility_description": "Enable this to discover roles beyond your exact tech stack. The algorithm will broaden your recommendations to include jobs where your core skills are transferable, even if the specific languages or frameworks differ."
+            },
+            "min_remuneration": {
+                "title": "Minimum remuneration",
+                "description": "Set the minimum amount you are willing to receive. The algorithm will stop recommending opportunities below this value.",
+                "enable_title": "Set a minimum remuneration",
+                "enable_description": "Enable to filter recommendations by your desired minimum amount"
+            }
+        }
+    },
+    "admin_land": {
+        "devs": {
+            "title": "Developers",
+            "description": "View all developers in the system",
+            "table": {
+                "name": "Name",
+                "specialty": "Specialty",
+                "seniority_level": "Seniority Level",
+                "created_at": "Created at"
+            }
+        },
+        "companies": {
+            "title": "Companies",
+            "description": "View all companies in the system",
+            "table": {
+                "name": "Name",
+                "operational_segment": "Operational segment",
+                "cnpj": "CNPJ",
+                "created_at": "Created at"
             }
         }
     },
@@ -366,17 +557,30 @@
         "description": "Please comeback later"
     },
     "sidebar": {
+        "sections_title": "Sections",
+        "options_title": "Options",
         "sections": {
             "feed": "Feed",
             "companies": "Companies",
-            "job_vacancies": "Job Vacancies",
-            "freelances": "Freelances",
+            "job_vacancies": "My Vacancies",
+            "freelances": "My Freelances",
+            "freelancers": "Freelancers",
             "my_jobs": "My Vacancies",
-            "dashboard": "Dashboard"
+            "dashboard": "Dashboard",
+            "devs": "Devs",
+            "clients": "Clients",
+            "questions": "Questions",
+            "admins": "Admins",
+            "search": "Search",
+            "favorites": "Favorites"
         },
         "options": {
             "profile": "Profile",
             "settings": "Settings"
+        },
+        "account": {
+            "me": "Me",
+            "update_info": "Update account info"
         },
         "logout_dialog": {
             "description": "You're about to log out of your account. You'll need to sign in again to access your data and continue using the platform."
@@ -397,6 +601,7 @@
         "phone": "Phone",
         "birthdate": "Birthdate",
         "seniority_level": "Seniority Level",
+        "specialty": "Specialty",
         "open_to_work": "Open to work",
         "open_to_relocation": "Open to relocation",
         "cep": "Zipcode",
@@ -409,6 +614,8 @@
         "title": "Title",
         "language_framework": "Languages / Frameworks",
         "description": "Description",
+        "prod_url": "Production URL",
+        "github_url": "GitHub URL",
         "project_gallery": "Project gallery",
         "position_name": "Position name",
         "company_name": "Company name",
@@ -433,7 +640,15 @@
         "old_password": "Actual password",
         "new_password": "New password",
         "new_password_confirmation": "New password confirmation",
-        "stack_blacklist": "Stack blacklist"
+        "stack_blacklist": "Stack blacklist",
+        "profile_pic": "Profile picture",
+        "min_remuneration": "Minimum remuneration",
+        "benefits": "Benefits",
+        "estimated_salary": "Estimated salary",
+        "required_languages": "Required languages / frameworks",
+        "desirable_languages": "Desirable languages / frameworks",
+        "soft_skills": "Soft skills",
+        "process_steps": "Selection process steps"
     },
     "tooltip": {
         "open_to_work": "Tell our algorithm that you are available for job openings; without this information, our intelligent algorithm will not recommend you for positions.",
@@ -445,6 +660,9 @@
         "phone": "Your phone",
         "birthdate": "Your birthdate",
         "seniority_level": "Pick your seniority level",
+        "filter_seniority_level": "Select a seniority level",
+        "specialty": "Pick your specialty",
+        "filter_specialty": "Select a specialty",
         "cep": "Insert your zipcode",
         "number": "Number",
         "complement": "Complement",
@@ -456,6 +674,8 @@
         "project_title": "Project title",
         "project_language_framework": "Select project languages / frameworks",
         "project_description": "Describe your project features, archtecture and choices",
+        "project_prod_url": "https://myapp.com",
+        "project_github_url": "https://github.com/user/repo",
         "project_language_search": "Search language...",
         "employment_search": "Search for an especific company, seniority and work modality",
         "position_name": "Frontend developer, Devops engineer",
@@ -482,15 +702,62 @@
         "old_password": "Actual password",
         "new_password": "New password",
         "new_password_confirmation": "New password confirmation",
-        "stack_blacklist": "Select a language / framework to avoid"
+        "stack_blacklist": "Select a language / framework to avoid",
+        "dev_search": "Search for a developer, seniority, specialty and open to work and relocation",
+        "company_search": "Search for a company or operational segment",
+        "filter_operational_segment": "Select an operational segment",
+        "email": "Enter your email",
+        "min_remuneration": "Enter the minimum amount",
+        "job_vacancy_title": "Senior frontend developer",
+        "job_vacancy_description": "Describe the role, responsibilities and expectations",
+        "benefit": "Health insurance, meal voucher...",
+        "estimated_salary": "5000.00",
+        "soft_skills": "Select the valued soft skills",
+        "soft_skill_search": "Search soft skill...",
+        "process_step": "Select a step"
+    },
+    "filters": {
+        "all": "All",
+        "yes": "Yes",
+        "no": "No"
     },
     "enum": {
+        "question_category": {
+            "backend_c_sharp_asp": "Backend C# ASP.NET",
+            "backend_data_handling": "Backend Data Handling",
+            "backend_java_spring": "Backend Java Spring",
+            "backend_php_laravel": "Backend PHP Laravel",
+            "backend_python_fast_api": "Backend Python FastAPI",
+            "backend_typescript": "Backend TypeScript",
+            "clean_code": "Clean Code",
+            "devops": "DevOps",
+            "frontend_angular": "Frontend Angular",
+            "frontend_fundamentals": "Frontend Fundamentals",
+            "frontend_react": "Frontend React",
+            "programming_logic": "Programming Logic",
+            "security_backend": "Security Backend",
+            "security_frontend": "Security Frontend"
+        },
+        "proficiency_test_status": {
+            "pending": "Pending",
+            "generated": "Generated",
+            "awaiting_score": "Awaiting score",
+            "completed": "Completed",
+            "generation_failed": "Test generation failed"
+        },
         "seniority_level": {
             "intern": "Intern",
             "junior": "Junior",
             "mid_level": "Mid Level",
             "senior": "Senior",
             "staff": "Staff"
+        },
+        "dev_specialty": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "fullstack": "Fullstack",
+            "mobile": "Mobile",
+            "devops": "DevOps"
         },
         "employment_type": {
             "on_site": "On-site",
@@ -533,6 +800,132 @@
             "software_house": "Software House",
             "retail": "Retail",
             "banking": "Banking"
+        },
+        "selection_process_stage": {
+            "awaiting_resume_screening": "Awaiting resume screening",
+            "resume_screening": "Resume screening",
+            "awaiting_screening_questions": "Awaiting screening questions",
+            "screening_questions": "Screening questions",
+            "awaiting_interview": "Awaiting interview",
+            "interview": "Interview",
+            "awaiting_technical_challenge": "Awaiting technical challenge",
+            "technical_challenge": "Technical challenge",
+            "awaiting_live_coding": "Awaiting live coding",
+            "live_coding": "Live coding",
+            "awaiting_language_assessment": "Awaiting language assessment",
+            "language_assessment": "Language assessment",
+            "awaiting_portfolio_review": "Awaiting portfolio review",
+            "portfolio_review": "Portfolio review"
+        },
+        "job_vacancy_status": {
+            "open_inscriptions": "Open inscriptions",
+            "closed_inscriptions": "Closed inscriptions",
+            "canceled": "Canceled",
+            "concluded": "Concluded"
+        },
+        "dev_job_vacancy_status": {
+            "in_progress": "In progress",
+            "approved": "Approved",
+            "rejected": "Rejected"
+        },
+        "portfolio_solicitation": {
+            "status": {
+                "pending": "Portfolio pending",
+                "sent": "Portfolio sent"
+            },
+            "type": {
+                "repository": "Repository",
+                "production": "Live project"
+            }
+        },
+        "dev_job_vacancy_interview": {
+            "status": {
+                "awaiting_schedule": "Awaiting schedule",
+                "awaiting_dev_confirmation": "Awaiting developer confirmation",
+                "awaiting_company_confirmation": "Awaiting company confirmation",
+                "approved": "Schedule confirmed",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
+        },
+        "dev_job_vacancy_live_coding": {
+            "status": {
+                "awaiting_schedule": "Awaiting schedule",
+                "awaiting_dev_confirmation": "Awaiting developer confirmation",
+                "awaiting_company_confirmation": "Awaiting company confirmation",
+                "approved": "Schedule confirmed",
+                "cancelled": "Cancelled",
+                "rejected": "Rejected"
+            }
+        },
+        "screening_question_type": {
+            "essay": "Essay",
+            "single_choice": "Single choice",
+            "multiple_choice": "Multiple choice"
+        },
+        "screening_questionnaire": {
+            "status": {
+                "pending": "Questionnaire pending",
+                "answered": "Questionnaire answered"
+            }
+        },
+        "dev_technical_challenge": {
+            "status": {
+                "pending": "Awaiting delivery",
+                "delivered": "Delivered"
+            }
+        },
+        "language_assessment_question": {
+            "type": {
+                "single_choice": "Single choice",
+                "multiple_choice": "Multiple choice",
+                "text": "Written answer"
+            }
+        },
+        "dev_language_assessment": {
+            "status": {
+                "pending": "Awaiting answer",
+                "answered": "Assessment answered"
+            }
+        },
+        "job_type": {
+            "development": "Development",
+            "maintenance": "Maintenance",
+            "support": "Support",
+            "qa": "QA / Testing",
+            "design": "Design",
+            "devops": "DevOps",
+            "database": "Database",
+            "consulting": "Consulting",
+            "documentation": "Documentation",
+            "automation": "Automation",
+            "integration": "Integration",
+            "migration": "Migration",
+            "training": "Training",
+            "other": "Other"
+        },
+        "freelance_job_vacancy_status": {
+            "open": "Open",
+            "in_progress": "In progress",
+            "completed": "Completed"
+        },
+        "freelance_proposal_status": {
+            "pending": "Pending",
+            "accepted": "Accepted",
+            "rejected": "Rejected"
+        },
+        "freelance_proposal_pricing_type": {
+            "fixed": "Fixed price",
+            "hourly": "Hourly"
+        },
+        "freelance_feed_post_type": {
+            "update": "Update",
+            "deliverable": "Delivery",
+            "review": "Review"
+        },
+        "freelance_review_status": {
+            "approved": "Approved",
+            "changes_requested": "Changes requested"
         }
     },
     "pagination": {
@@ -540,6 +933,15 @@
         "displaying": "Displaying",
         "of": "of",
         "page": "Page"
+    },
+    "notification": {
+        "title": "Notifications",
+        "all": "All",
+        "unread": "Unread",
+        "read": "Read",
+        "empty": "No notifications here.",
+        "open_link": "Click here",
+        "mark_all_as_read": "Mark all as read"
     },
     "no_data": {
         "no_languages": "No languages found"
@@ -667,5 +1069,914 @@
         "accountability_advanced_description": "Consistently demonstrates ownership, reliability, and responsibility for outcomes.",
         "accountability_expert": "Expert",
         "accountability_expert_description": "Leads by example in accountability and encourages a culture of ownership within the team."
+    },
+    "my_vacancies": {
+        "title": "My Vacancies",
+        "description": "Manage the job vacancies published by your company and follow their candidates",
+        "popular_title": "Most applied vacancies",
+        "candidates": "Candidates",
+        "estimated_salary": "Estimated salary",
+        "search_placeholder": "Search for one of your job vacancies",
+        "empty_title": "No job vacancies found",
+        "empty_description": "Publish a job vacancy or change the search term to see results here.",
+        "create_title": "Create new job vacancy",
+        "add_process_step": "Add step",
+        "applies": {
+            "title": "Applications",
+            "table": {
+                "dev": "Developer",
+                "specialty": "Specialty",
+                "seniority_level": "Seniority Level",
+                "status": "Status",
+                "applied_at": "Applied at",
+                "process_step": "Current step"
+            }
+        },
+        "current_step": "Current step",
+        "selection_process": {
+            "title": "Selection process",
+            "approve_selected": "Approve selected",
+            "select_all": "Select all",
+            "advance_confirm": "Advance the selected applications?",
+            "advance_confirm_description": "{{approved}} selected application(s) advance to the next stage and {{rejected}} unselected application(s) are automatically eliminated from this selection process. This action cannot be undone.",
+            "upcoming_title": "Stage not reached yet",
+            "upcoming_description": "The applications will be shown here when the selection process reaches this stage.",
+            "portfolio_review": {
+                "not_requested": "No portfolio was requested for this candidate.",
+                "awaiting_link": "The candidate has not sent the portfolio link yet."
+            },
+            "empty_applies_title": "No applications in this stage",
+            "empty_applies_description": "No developer is waiting for evaluation in this stage of the selection process.",
+            "results": {
+                "approved_title": "Approved",
+                "rejected_title": "Rejected in this stage"
+            },
+            "resume_screening": {
+                "awaiting_title": "Resume screening not available yet",
+                "awaiting_description": "Selecting resumes for the next stage only becomes available after the inscription period is closed."
+            },
+            "screening_questions": {
+                "missing_title": "Screening questionnaire not created",
+                "missing_description": "Build this stage's form so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the questions after the form is created.",
+                "create_questionnaire": "Create questionnaire",
+                "manage_questionnaire": "Manage questionnaire",
+                "not_sent": "This candidate has not received the screening questionnaire yet.",
+                "awaiting_answers": "The candidate has not submitted the answers yet.",
+                "view_answers": "View answers"
+            },
+            "technical_challenge": {
+                "missing_title": "Technical challenge not created",
+                "missing_description": "Write this stage's challenge so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the challenge after it is created.",
+                "create_challenge": "Create challenge",
+                "manage_challenge": "Manage challenge",
+                "not_sent": "This candidate has not received the technical challenge yet.",
+                "awaiting_delivery": "The candidate has not delivered the solution yet.",
+                "submitted_at": "Delivered at",
+                "view_submission": "Download submission"
+            },
+            "live_coding": {
+                "awaiting_title": "Process on hold waiting for the exercises",
+                "awaiting_description_one": "The live coding only starts once every candidate has their exercise published. {{count}} exercise is missing for the stage to start.",
+                "awaiting_description_other": "The live coding only starts once every candidate has their exercise published. {{count}} exercises are missing for the stage to start.",
+                "awaiting_ready": "All exercises were published. The stage starts as soon as the page is refreshed.",
+                "not_created": "This candidate's live coding has not been created yet."
+            },
+            "language_assessment": {
+                "missing_title": "Language assessment not created",
+                "missing_description": "Build this stage's assessment so it is sent to the candidates once the selection process reaches this step.",
+                "missing_blocking_description": "The selection process is on hold at this stage: candidates only receive the assessment after it is created.",
+                "create_assessment": "Create assessment",
+                "manage_assessment": "Manage assessment",
+                "not_sent": "This candidate has not received the language assessment yet.",
+                "awaiting_answers": "The candidate has not submitted the assessment yet.",
+                "submitted_at": "Submitted at",
+                "view_answers": "View grading",
+                "score": "Score",
+                "passed": "Passed",
+                "failed": "Failed",
+                "no_verdict": "No passing score"
+            }
+        },
+        "actions": {
+            "title": "Actions",
+            "update_vacancy": "Update vacancy data",
+            "view_selection_process": "View selection process",
+            "update_vacancy_description": "Change the vacancy information. Title, description and benefits are translated again after the update.",
+            "close_inscriptions": "Close inscriptions",
+            "close_inscriptions_description": "The vacancy will stop accepting new applications, the process moves to resume screening and every applied developer is notified. This action cannot be undone.",
+            "no_applies_title": "This vacancy has no applications",
+            "no_applies_description": "Nobody has applied to this vacancy yet, so closing the inscriptions now means there will be no selection process."
+        },
+        "devs_section_title": "Developers",
+        "recommended": {
+            "title": "Recommended",
+            "table": {
+                "similarity": "Match"
+            }
+        }
+    },
+    "my_applies": {
+        "title": "My Vacancies",
+        "description": "Follow the progress of your applications in each selection process",
+        "search_placeholder": "Search for a vacancy or company",
+        "empty_title": "No application found",
+        "empty_description": "Apply to a vacancy or change the search term to see results here.",
+        "feedback": "Company feedback",
+        "portfolio": {
+            "due_date": "Submission deadline",
+            "send": "Send portfolio",
+            "send_description": "The company requested your portfolio in this stage. Send the link to move forward in the selection process.",
+            "url_placeholder": "https://github.com/your-user/your-project"
+        },
+        "screening": {
+            "not_received": "The company has not sent this stage's screening questionnaire yet.",
+            "due_date": "Answer deadline",
+            "pending_description": "The company sent a screening questionnaire. Answer it to move forward in the selection process.",
+            "answered_description": "Your answers were submitted. Now just wait for the company's evaluation.",
+            "answer": "Answer questionnaire",
+            "answer_description": "Answer the questions below. The ones marked as required must be filled in.",
+            "response_placeholder": "Write your answer",
+            "submit": "Submit answers",
+            "view_answers": "View my answers"
+        },
+        "technical_challenge": {
+            "not_received": "The company has not sent this stage's technical challenge yet.",
+            "due_date": "Delivery deadline",
+            "submitted_at": "Delivered at",
+            "pending_description": "The company sent a technical challenge. Deliver your solution to move forward in the selection process.",
+            "delivered_description": "Your submission was sent. Now just wait for the company's evaluation.",
+            "submit": "Deliver challenge",
+            "submit_description": "Inform the repository with the challenge solution. The submission cannot be changed after it is sent.",
+            "repository_url": "Solution repository",
+            "zip_optional": "Zipped project (optional)",
+            "attach_zip": "Attach .zip",
+            "download_guide": "Download guide document",
+            "view_submission": "Download submitted file"
+        },
+        "live_coding": {
+            "awaiting_exercise": "The company is still preparing the live coding exercise. You will be notified as soon as it is published.",
+            "not_received": "This stage's live coding has not been created yet.",
+            "statement": "Exercise",
+            "programming_language": "Expected language",
+            "description": "Read the exercise before the call: you will solve it live, during the call with the company."
+        },
+        "language_assessment": {
+            "not_received": "The company has not sent this stage's language assessment yet.",
+            "awaiting_assessment": "The company is still preparing this stage's language assessment.",
+            "due_date": "Answer deadline",
+            "submitted_at": "Submitted at",
+            "language": "Language",
+            "pending_description": "The company sent a language assessment. Answer it to move forward in the selection process.",
+            "answered_description": "Your assessment was submitted and graded automatically. Now just wait for the company's evaluation.",
+            "answer": "Answer assessment",
+            "answer_description": "Answer the questions below. Blank questions are worth zero.",
+            "response_placeholder": "Write your answer",
+            "submit": "Submit assessment",
+            "single_submit_warning": "The assessment can only be submitted once. Review your answers before sending.",
+            "all_or_nothing_warning": "In multiple choice questions you only score by marking exactly every correct option: there is no partial credit.",
+            "confirm_title": "Submit the assessment?",
+            "confirm_description": "The assessment is graded right away and cannot be answered again.",
+            "blank_questions_one": "You left {{count}} question blank, which is worth zero.",
+            "blank_questions_other": "You left {{count}} questions blank, which are worth zero.",
+            "view_answers": "View grading",
+            "score": "Score",
+            "passing_score": "Passing score",
+            "max_score": "Maximum score",
+            "passed": "Passed",
+            "failed": "Failed"
+        }
+    },
+    "interview": {
+        "not_created": "The interview for this application has not been created yet.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "No schedule has been proposed yet. Set the date, time and duration of the interview with this candidate.",
+        "no_schedule_dev": "The company has not proposed a schedule for your interview yet.",
+        "awaiting_dev": "Schedule proposed. Awaiting the developer's confirmation.",
+        "awaiting_company": "Schedule proposed. Awaiting the company's confirmation.",
+        "proposed_by_company": "The company proposed this schedule. Accept it or propose another one.",
+        "proposed_by_dev": "The developer proposed this schedule. Accept it or propose another one.",
+        "cancelled_description": "This interview was cancelled and can no longer be rescheduled.",
+        "rejected_description": "This interview was rejected.",
+        "call_open": "The room is open. Join the interview whenever you are ready.",
+        "call_too_early": "The room opens {{minutes}} minutes before the scheduled time.",
+        "call_closed": "The window to join this interview has closed.",
+        "call_finished": "Interview held on {{date}}.",
+        "set_schedule": "Set schedule",
+        "propose_schedule": "Propose another time",
+        "accept_schedule": "Accept schedule",
+        "join_call": "Join interview",
+        "cancel": "Cancel interview",
+        "cancel_confirm_title": "Cancel this interview?",
+        "cancel_confirm_description": "The other party will be notified and the interview cannot be rescheduled. This action cannot be undone.",
+        "modal": {
+            "title_set": "Set the interview schedule",
+            "title_propose": "Propose another time",
+            "description": "The other party is notified and can accept it or propose a new time.",
+            "date": "Date",
+            "date_placeholder": "Pick a date",
+            "time": "Time",
+            "duration": "Duration"
+        },
+        "call": {
+            "connecting": "Preparing the room...",
+            "waiting": "Waiting for the other person to join...",
+            "connected": "Connected",
+            "ended": "Call ended",
+            "counterpart": "Participant",
+            "you": "You",
+            "media_error": "We could not access your camera or microphone. Check your browser permissions and try again.",
+            "join_error": "We could not join the room. Check whether the confirmed time has already arrived.",
+            "connection_error": "The connection with the other person failed. Try joining the room again.",
+            "mute": "Mute microphone",
+            "unmute": "Unmute microphone",
+            "camera_off": "Turn camera off",
+            "camera_on": "Turn camera on",
+            "hang_up": "Hang up"
+        }
+    },
+    "live_coding": {
+        "not_created": "The live coding for this application has not been created yet.",
+        "duration_minutes": "{{count}} min",
+        "no_schedule_company": "No schedule has been proposed yet. Set the date, time and duration of the live coding with this candidate.",
+        "no_schedule_dev": "The company has not proposed a schedule for your live coding yet.",
+        "awaiting_dev": "Schedule proposed. Awaiting the developer's confirmation.",
+        "awaiting_company": "Schedule proposed. Awaiting the company's confirmation.",
+        "proposed_by_company": "The company proposed this schedule. Accept it or propose another one.",
+        "proposed_by_dev": "The developer proposed this schedule. Accept it or propose another one.",
+        "cancelled_description": "This live coding was cancelled and can no longer be rescheduled.",
+        "rejected_description": "This live coding was rejected.",
+        "call_open": "The room is open. Join the live coding whenever you are ready.",
+        "call_too_early": "The room opens {{minutes}} minutes before the scheduled time.",
+        "call_closed": "The window to join this live coding has closed.",
+        "call_finished": "Live coding held on {{date}}.",
+        "set_schedule": "Set schedule",
+        "propose_schedule": "Propose another time",
+        "accept_schedule": "Accept schedule",
+        "join_call": "Join live coding",
+        "cancel": "Cancel live coding",
+        "cancel_confirm_title": "Cancel this live coding?",
+        "cancel_confirm_description": "The other party will be notified and the live coding cannot be rescheduled. This action cannot be undone.",
+        "modal": {
+            "title_set": "Set the live coding schedule",
+            "title_propose": "Propose another time",
+            "description": "The other party is notified and can accept it or propose a new time.",
+            "date": "Date",
+            "date_placeholder": "Pick a date",
+            "time": "Time",
+            "duration": "Duration"
+        },
+        "call": {
+            "connecting": "Preparing the room...",
+            "waiting": "Waiting for the other person to join...",
+            "connected": "Connected",
+            "ended": "Call ended",
+            "counterpart": "Participant",
+            "you": "You",
+            "media_error": "We could not access your camera or microphone. Check your browser permissions and try again.",
+            "join_error": "We could not join the room. Check whether the confirmed time has already arrived.",
+            "connection_error": "The connection with the other person failed. Try joining the room again.",
+            "mute": "Mute microphone",
+            "unmute": "Unmute microphone",
+            "camera_off": "Turn camera off",
+            "camera_on": "Turn camera on",
+            "hang_up": "Hang up"
+        },
+        "exercise": {
+            "statement": "Statement",
+            "programming_language": "Language",
+            "published": "Exercise published",
+            "missing": "Exercise not published",
+            "missing_description": "Write the exercise this candidate will solve during the call.",
+            "write": "Write exercise",
+            "edit": "Edit exercise",
+            "show_more": "Show full statement",
+            "show_less": "Collapse statement"
+        },
+        "exercise_modal": {
+            "title_write": "Write exercise",
+            "title_edit": "Edit exercise",
+            "description": "The candidate reads the statement before the call and solves it live, during the call. They are only notified on the first publication — later corrections are silent.",
+            "statement": "Statement",
+            "statement_placeholder": "Describe the problem the candidate will solve during the call",
+            "programming_language": "Language",
+            "programming_language_placeholder": "E.g.: TypeScript",
+            "programming_language_description": "Optional. With no language set, the candidate solves it in whichever they prefer."
+        }
+    },
+    "vacancies": {
+        "apply": "Apply",
+        "applied": "Application sent",
+        "apply_confirm": "Join this selection process?",
+        "apply_confirm_description": "Your application will be sent to the company and your profile will be visible to it. As soon as the inscriptions are closed, you will receive a notification about the start of the resume screening."
+    },
+    "search": {
+        "title": "Search",
+        "description": "Find developers, companies and clients registered on the platform",
+        "placeholder": "Search for any developer, company, client or vacancy...",
+        "see_more": "See more",
+        "score": "Score",
+        "group": {
+            "all": "All",
+            "developers": "Developers",
+            "companies": "Companies",
+            "clients": "Clients",
+            "vacancies": "Job Vacancies",
+            "freelances": "Freelance jobs"
+        },
+        "empty": {
+            "developers_title": "No developers found",
+            "developers_description": "Search for a term to see matching developers here.",
+            "companies_title": "No companies found",
+            "companies_description": "Search for a term to see matching companies here.",
+            "clients_title": "No clients found",
+            "clients_description": "Search for a term to see matching clients here.",
+            "vacancies_title": "No job vacancies found",
+            "vacancies_description": "Search for a term to see matching job vacancies here.",
+            "freelances_title": "No freelance jobs found",
+            "freelances_description": "Search for a term or change the filters to see freelance jobs here."
+        },
+        "popular": {
+            "best_scored_devs": "Best scored devs",
+            "best_scored_companies": "Best scored companies",
+            "best_scored_clients": "Best scored clients"
+        }
+    },
+    "profile_pic": {
+        "select": "Select picture",
+        "change": "Change picture",
+        "hint": "PNG, JPG or WEBP up to {{size}}MB",
+        "invalid_type": "Invalid image format",
+        "too_large": "The image must be at most {{size}}MB"
+    },
+    "screening_questionnaire": {
+        "title": "Screening questionnaire",
+        "create_title": "Create screening questionnaire",
+        "create_description": "Build the form candidates answer in this vacancy's screening questions stage.",
+        "edit_title": "Edit screening questionnaire",
+        "edit_description": "Questions and options removed from the list are deleted when you save.",
+        "edit": "Edit questionnaire",
+        "sent_count_one": "{{count}} candidate has already received this questionnaire",
+        "sent_count_other": "{{count}} candidates have already received this questionnaire",
+        "locked_title": "Questionnaire locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed.",
+        "empty_questions_title": "No questions created",
+        "empty_questions_description": "Add the questions candidates need to answer in this stage.",
+        "delete_confirm_title": "Remove this questionnaire?",
+        "delete_confirm_description": "The questions and options are removed along with it. This action cannot be undone.",
+        "required": "Required",
+        "essay_hint": "Essay question, answered with free text.",
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: Initial screening",
+            "description": "Description",
+            "description_placeholder": "Explain to the candidate the purpose of this questionnaire",
+            "due_date": "Answer deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Used when the vacancy is already waiting for this stage. With no deadline, the API uses 7 days.",
+            "questions": "Questions",
+            "add_question": "Add question",
+            "question": "Question",
+            "question_placeholder": "Write the question the candidate needs to answer",
+            "type": "Type",
+            "is_required": "Required",
+            "options": "Options",
+            "option_placeholder": "Write the option",
+            "add_option": "Add option",
+            "move_up": "Move up",
+            "move_down": "Move down"
+        },
+        "answers": {
+            "title": "Questionnaire answers",
+            "description_company": "Answers submitted by {{name}} in the screening questionnaire.",
+            "description_dev": "These are the answers you submitted in this stage.",
+            "submitted_at": "Submitted at",
+            "not_answered": "Not answered",
+            "empty_title": "No answers available",
+            "empty_description": "The answers show up here as soon as the candidate submits the questionnaire."
+        }
+    },
+    "technical_challenge": {
+        "title": "Technical challenge",
+        "create_title": "Create technical challenge",
+        "create_description": "Write the challenge candidates receive in this vacancy's technical challenge stage.",
+        "edit_title": "Edit technical challenge",
+        "edit_description": "Changed texts go back to the translation queue when you save.",
+        "edit": "Edit challenge",
+        "sent_count_one": "{{count}} candidate has already received this challenge",
+        "sent_count_other": "{{count}} candidates have already received this challenge",
+        "locked_title": "Challenge locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed. The guide document can still be replaced.",
+        "delete_confirm_title": "Remove this challenge?",
+        "delete_confirm_description": "The challenge and the guide document are removed along with it. This action cannot be undone.",
+        "due_date": "Delivery deadline",
+        "accepts_zip": "Accepts zipped project",
+        "guide": {
+            "title": "Guide document",
+            "description": "File with the full challenge (pdf, doc, docx, md, txt or zip, up to 10MB). A new upload replaces the previous one.",
+            "attach": "Attach document",
+            "replace": "Replace document",
+            "too_large": "The guide document can be at most 10MB"
+        },
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: Order management API",
+            "description": "Challenge",
+            "description_placeholder": "Describe what the candidate needs to implement",
+            "rules": "Rules",
+            "rules_placeholder": "E.g.: any framework is allowed, modeling, tests and code organization will be evaluated",
+            "rules_description": "What can be used, what will be evaluated and the limits of the submission.",
+            "due_date": "Delivery deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Every application entering this stage inherits this deadline. Late submissions are not blocked by the API.",
+            "accepts_zip_submission": "Accept zipped project",
+            "accepts_zip_submission_description": "Allows sending a .zip in addition to the repository link.",
+            "guide_document": "Guide document",
+            "attach_guide": "Attach document",
+            "guide_document_description": "Optional. Accepts pdf, doc, docx, md, txt or zip, up to 10MB."
+        }
+    },
+    "language_assessment": {
+        "title": "Language assessment",
+        "create_title": "Create language assessment",
+        "create_description": "Build the assessment candidates answer in this vacancy's language assessment stage. It has an answer key and is graded automatically on submission.",
+        "edit_title": "Edit language assessment",
+        "edit_description": "Questions and options removed from the list are deleted when you save.",
+        "edit": "Edit assessment",
+        "sent_count_one": "{{count}} candidate has already received this assessment",
+        "sent_count_other": "{{count}} candidates have already received this assessment",
+        "locked_title": "Assessment locked for editing",
+        "locked_description": "It was already sent to the candidates and can no longer be changed or removed: changing the answer key would invalidate the assessments already graded.",
+        "delete_confirm_title": "Remove this assessment?",
+        "delete_confirm_description": "The questions, options and answer key are removed along with it. This action cannot be undone.",
+        "language": "Language",
+        "due_date": "Answer deadline",
+        "passing_score": "Passing score",
+        "no_passing_score": "No passing score: the assessment only scores, without passing or failing anyone.",
+        "max_score": "Maximum score",
+        "points_one": "{{count}} point",
+        "points_other": "{{count}} points",
+        "correct_option": "Correct answer",
+        "expected_answers": "Accepted answers",
+        "text_hint": "Written answer question, graded against the list of accepted answers.",
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: English assessment",
+            "description": "Description",
+            "description_placeholder": "Explain to the candidate what the assessment evaluates",
+            "language": "Assessed language",
+            "language_placeholder": "E.g.: English",
+            "language_description": "The assessment content is not translated: write the questions and options in the assessed language.",
+            "passing_score": "Passing score",
+            "passing_score_placeholder": "No passing score",
+            "passing_score_description": "Optional. Without it the assessment scores, but does not pass or fail anyone. It cannot exceed the maximum score.",
+            "max_score": "Maximum score: {{count}}",
+            "due_date": "Answer deadline",
+            "due_date_placeholder": "Pick a date",
+            "due_date_description": "Every candidate who receives the assessment inherits this deadline. Late submissions are not blocked by the API.",
+            "questions": "Questions",
+            "add_question": "Add question",
+            "question": "Question",
+            "question_placeholder": "Write the question in the assessed language",
+            "type": "Type",
+            "weight": "Weight",
+            "options": "Options",
+            "options_single_description": "Mark the correct option.",
+            "options_multiple_description": "Mark every correct option. The candidate only scores by marking exactly these.",
+            "option_placeholder": "Write the option",
+            "add_option": "Add option",
+            "mark_correct": "Mark as correct",
+            "expected_answers": "Accepted answers",
+            "expected_answers_description": "The candidate's answer must match one of these. The comparison ignores case and repeated spaces, but not accents.",
+            "expected_answer_placeholder": "Write an accepted answer",
+            "add_expected_answer": "Add accepted answer",
+            "move_up": "Move up",
+            "move_down": "Move down"
+        },
+        "answers": {
+            "title": "Assessment grading",
+            "description_company": "{{name}}'s answers in the language assessment, already graded.",
+            "description_dev": "These are your answers, already graded.",
+            "submitted_at": "Submitted at",
+            "not_answered": "Not answered",
+            "correct": "Correct",
+            "wrong": "Wrong",
+            "earned": "{{earned}} of {{weight}} pts",
+            "answer_key": "Answer key",
+            "empty_title": "No answers available",
+            "empty_description": "The grading shows up here as soon as the candidate submits the assessment."
+        }
+    },
+    "chat": {
+        "title": "Messages",
+        "empty_title": "No conversations yet",
+        "empty_description": "Open someone’s profile and click \"Send message\" to start a conversation.",
+        "no_messages_yet": "No messages yet",
+        "start_conversation": "Send the first message to start the conversation.",
+        "message_placeholder": "Write a message...",
+        "send": "Send",
+        "send_message": "Send message",
+        "unknown_participant": "User without a profile"
+    },
+    "social": {
+        "feed": {
+            "popular": "Popular",
+            "recent": "Most recent",
+            "search_placeholder": "Search posts",
+            "empty_title": "No posts here yet",
+            "empty_description": "Be the first to share something with the community.",
+            "back_to_feed": "Back to feed",
+            "all": "All",
+            "following": "Following",
+            "sort_label": "Feed order",
+            "following_empty_title": "You don't follow anyone yet",
+            "following_empty_description": "Follow profiles to see their posts here.",
+            "find_profiles": "Find profiles",
+            "following_no_posts_title": "No one you follow has posted yet."
+        },
+        "post": {
+            "edited": "edited",
+            "open": "Open post",
+            "open_image": "Expand image",
+            "image_alt": "Post image {{index}}",
+            "previous_image": "Previous image",
+            "next_image": "Next image",
+            "like": "Like",
+            "comments": "Comments",
+            "favorite": "Favorite",
+            "publish": "Publish",
+            "add_images": "Images",
+            "create_placeholder": "What do you want to share?",
+            "content_label": "Post text",
+            "images_label": "Images ({{current}}/{{max}})",
+            "edit_title": "Edit post",
+            "delete_description": "The post, along with its comments and likes, stops being available. This cannot be undone."
+        },
+        "comment": {
+            "section_title_one": "{{count}} comment",
+            "section_title_other": "{{count}} comments",
+            "removed": "Comment removed",
+            "reply": "Reply",
+            "reply_placeholder": "Write a reply",
+            "send_reply": "Reply",
+            "send": "Comment",
+            "create_placeholder": "Write a comment",
+            "edit_placeholder": "Edit your comment",
+            "like": "Like comment",
+            "empty": "No comments yet",
+            "load_more": "Load more comments",
+            "see_more_replies_one": "See {{count}} more reply",
+            "see_more_replies_other": "See {{count}} more replies",
+            "continue_thread": "Continue this thread",
+            "back_to_post": "Back to the conversation"
+        },
+        "likes": {
+            "title": "Liked by",
+            "empty": "No likes yet",
+            "see_who_liked": "Liked by"
+        },
+        "follow": {
+            "follow": "Follow",
+            "follow_back": "Follow back",
+            "following": "Following",
+            "unfollow": "Unfollow",
+            "unfollow_confirm": "Unfollow {{name}}?",
+            "unfollow_confirm_description": "Their posts will no longer show up in your \"Following\" tab.",
+            "follows_you": "Follows you",
+            "followers_label_zero": "followers",
+            "followers_label_one": "follower",
+            "followers_label_other": "followers",
+            "following_label": "following",
+            "followers_tab": "Followers",
+            "following_tab": "Following",
+            "empty_followers": "No one follows {{name}} yet.",
+            "empty_following": "{{name}} doesn't follow anyone yet.",
+            "empty_followers_own": "You don't have any followers yet.",
+            "empty_following_own": "You don't follow anyone yet."
+        },
+        "popular": {
+            "title": "Who to follow",
+            "empty": "There are no users to show yet.",
+            "show_more": "Show more",
+            "score_zero": "{{score}} points",
+            "score_one": "{{score}} point",
+            "score_other": "{{score}} points",
+            "received_likes_zero": "{{count}} likes received",
+            "received_likes_one": "{{count}} like received",
+            "received_likes_other": "{{count}} likes received",
+            "received_comments_zero": "{{count}} comments received",
+            "received_comments_one": "{{count}} comment received",
+            "received_comments_other": "{{count}} comments received",
+            "received_favorites_zero": "{{count}} favorites received",
+            "received_favorites_one": "{{count}} favorite received",
+            "received_favorites_other": "{{count}} favorites received"
+        },
+        "participants": {
+            "title": "Conversation participants",
+            "empty_title": "No one has commented yet",
+            "empty_description": "People who comment on this post show up here.",
+            "post_author": "Author",
+            "comments_one": "{{count}} comment",
+            "comments_other": "{{count}} comments",
+            "commented": "Commented {{time}}",
+            "first_commented": "First comment {{time}}",
+            "last_commented": "Last comment {{time}}",
+            "show_more": "Show more"
+        },
+        "author": {
+            "unknown": "User"
+        },
+        "favorites": {
+            "search_placeholder": "Search favorites",
+            "empty_title": "No favorite posts",
+            "empty_description": "Posts you favorite show up here."
+        },
+        "profile_posts": {
+            "empty_title": "No posts",
+            "empty_description": "This profile hasn't posted anything yet.",
+            "empty_description_own": "You haven't posted anything yet. Start now."
+        },
+        "errors": {
+            "post_unavailable": "This post is no longer available.",
+            "thread_unavailable": "This conversation is no longer available.",
+            "unavailable_description": "The content may have been removed by its author.",
+            "comment_removed": "This comment was removed.",
+            "too_many_images": "A post can have at most {{max}} images.",
+            "invalid_image_type": "Upload images in JPEG, PNG or WebP.",
+            "image_too_large": "Each image must be at most 10 MB.",
+            "not_owner": "You can only change what you posted.",
+            "image_not_found": "This image is not part of the post.",
+            "content_required": "Write something before sending.",
+            "unexpected": "Could not complete. Please try again.",
+            "user_unavailable": "This user is no longer available."
+        }
+    },
+    "freelance": {
+        "count_one": "{{count}} freelance job",
+        "count_other": "{{count}} freelance jobs",
+        "posted_at": "Posted on {{date}}",
+        "search_placeholder": "Search by title, type or language",
+        "filter_job_type": "Type",
+        "filter_seniority_level": "Seniority",
+        "filter_status": "Status",
+        "all_job_types": "All types",
+        "all_seniority_levels": "All seniority levels",
+        "all_statuses": "All statuses",
+        "load_error": "We couldn't load the freelance jobs.",
+        "load_more_error": "We couldn't load more items.",
+        "retry": "Try again",
+        "badges": {
+            "invited": "You were invited",
+            "proposal_sent": "Proposal sent"
+        },
+        "unavailable_title": "This freelance job is no longer available.",
+        "unavailable_description": "The client may have removed it.",
+        "back_to_search": "Back to search",
+        "back_to_my_freelances": "Back to My Freelances",
+        "my": {
+            "title": "My Freelances",
+            "client_description": "Post freelance jobs, compare the proposals you receive and follow the deliveries.",
+            "dev_description": "Follow your contracts, proposals, invitations and the freelance jobs recommended for you.",
+            "tabs": {
+                "all": "All",
+                "open": "Open",
+                "in_progress": "In progress",
+                "completed": "Completed",
+                "contracts": "Contracts",
+                "proposals": "Proposals",
+                "invitations": "Invitations",
+                "recommended": "Recommended for you"
+            },
+            "publish": "Post freelance job",
+            "publish_title": "Post a freelance job",
+            "client_empty_title": "You haven't posted any freelance jobs yet.",
+            "client_empty_description": "Post a freelance job to start receiving proposals.",
+            "status_empty_title": "No freelance jobs in this tab.",
+            "proposals_count_one": "{{count}} proposal",
+            "proposals_count_other": "{{count}} proposals",
+            "no_proposals": "No proposals yet"
+        },
+        "contracts": {
+            "empty_title": "You don't have any contracts yet.",
+            "empty_description": "When a client accepts one of your proposals, the contract shows up here.",
+            "status_empty_title": "No contracts with this status."
+        },
+        "invitations": {
+            "empty_title": "No client has invited you yet.",
+            "empty_description": "When a client invites you to send a proposal, the job shows up here."
+        },
+        "dev_proposals": {
+            "empty_title": "You haven't sent any proposals yet.",
+            "empty_description": "Find freelance jobs in the search and send your proposal.",
+            "status_empty_title": "No proposals with this status.",
+            "vacancy_unavailable": "Job unavailable"
+        },
+        "recommended": {
+            "description": "Open freelance jobs that best match your profile.",
+            "match": "{{percentage}}% match",
+            "empty_title": "No freelance jobs match your profile right now.",
+            "empty_description": "Come back later or look for jobs in the search.",
+            "analyzing_title": "We're analyzing your profile.",
+            "analyzing_description": "Come back in a few minutes."
+        },
+        "details": {
+            "description": "Description",
+            "job_type": "Type",
+            "seniority_level": "Seniority",
+            "specialties": "Specialties",
+            "languages": "Languages and stacks",
+            "no_languages": "This job doesn't require a specific language.",
+            "client": "Client",
+            "client_unavailable": "The client of this job is no longer available.",
+            "view_client_profile": "View client profile",
+            "talk_to_client": "Talk to the client",
+            "budget": "Expected budget",
+            "budget_hint": "Only you can see this amount.",
+            "hired_notice": "This freelance job has already been contracted.",
+            "owner_actions": "Manage job",
+            "edit": "Edit",
+            "remove": "Remove",
+            "complete": "Complete job",
+            "open_feed": "Open the feed",
+            "tabs": {
+                "proposals": "Proposals",
+                "recommended_devs": "Recommended devs"
+            }
+        },
+        "contract": {
+            "title": "Contract",
+            "value": "Agreed amount",
+            "contracted_at": "Contracted on {{date}}",
+            "completed_at": "Completed on {{date}}",
+            "dev": "Contracted dev",
+            "client": "Client"
+        },
+        "remove_title": "Remove job?",
+        "remove_description": "The job \"{{title}}\" will be removed and devs won't see it anymore. This can't be undone.",
+        "complete_title": "Mark as completed?",
+        "complete_description": "The feed becomes read-only.",
+        "edit_title": "Edit freelance job",
+        "form": {
+            "title": "Title",
+            "title_placeholder": "E.g.: Next.js landing page",
+            "description": "Description",
+            "description_placeholder": "Describe the project, the deliverables and the expected deadline",
+            "job_type": "Type",
+            "job_type_placeholder": "Select the type",
+            "budget": "Expected budget (R$)",
+            "budget_placeholder": "E.g.: 10000",
+            "budget_hint": "Only you can see this amount. We use it to compare the proposals you receive.",
+            "seniority_level": "Seniority",
+            "seniority_level_placeholder": "Select the seniority",
+            "specialties": "Specialties",
+            "languages": "Languages and stacks",
+            "languages_required_hint": "Required for the selected type.",
+            "languages_optional_hint": "Optional for the selected type.",
+            "language_placeholder": "Add a language or stack",
+            "language_search": "Search language...",
+            "level_placeholder": "Level",
+            "publish": "Post",
+            "save": "Save",
+            "errors": {
+                "title_required": "Enter the title",
+                "title_max": "The title can have at most 255 characters",
+                "description_required": "Enter the description",
+                "job_type_required": "Select the type",
+                "budget_required": "Enter the expected budget",
+                "budget_min": "The expected budget must be greater than zero",
+                "budget_max": "The expected budget can be at most R$ 99,999,999.99",
+                "seniority_level_required": "Select the seniority",
+                "specialties_required": "Select at least one specialty",
+                "languages_required": "Jobs of the selected type require at least one language or stack.",
+                "language_duplicated": "This language was already added",
+                "language_level_required": "Select the level"
+            }
+        },
+        "proposal": {
+            "form_title": "Send proposal",
+            "edit_title": "Edit proposal",
+            "form_description": "The client compares proposals by how well your profile matches and by price.",
+            "pricing_type": "Pricing",
+            "fixed": "Fixed price",
+            "hourly": "Hourly",
+            "total_price": "Total amount (R$)",
+            "hourly_rate": "Hourly rate (R$)",
+            "estimated_hours": "Estimated hours",
+            "total_preview": "Total: {{total}}",
+            "message": "Message (optional)",
+            "message_placeholder": "Introduce yourself and explain what you deliver.",
+            "send": "Send proposal",
+            "save": "Save proposal",
+            "yours": "Your proposal",
+            "edit": "Edit",
+            "withdraw": "Withdraw",
+            "withdraw_title": "Withdraw proposal?",
+            "withdraw_description": "The client won't see this proposal anymore. You can send another one while the job is open.",
+            "fixed_suffix": "fixed price",
+            "sent_at": "Sent on {{date}}",
+            "open_vacancy": "View job",
+            "errors": {
+                "total_price_required": "Enter the total amount",
+                "total_price_min": "The amount must be greater than zero",
+                "total_price_max": "The amount can be at most R$ 99,999,999.99",
+                "hourly_rate_required": "Enter the hourly rate",
+                "hourly_rate_min": "The hourly rate must be greater than zero",
+                "hourly_rate_max": "The hourly rate can be at most R$ 9,999.99",
+                "estimated_hours_required": "Enter the estimated hours",
+                "estimated_hours_integer": "Use a whole number of hours",
+                "estimated_hours_min": "Enter at least 1 hour",
+                "estimated_hours_max": "Enter at most 9999 hours",
+                "message_max": "The message can have at most 5000 characters"
+            }
+        },
+        "proposals": {
+            "view_ranked": "Best matches",
+            "view_all": "All",
+            "score": "{{percentage}}% match",
+            "score_breakdown": "Profile match: {{similarity}} · Price closeness: {{price}}%",
+            "profile_not_analyzed": "profile not analyzed yet",
+            "above_budget": "{{percentage}}% above your budget",
+            "below_budget": "{{percentage}}% below your budget",
+            "equal_budget": "Equal to your budget",
+            "accept": "Accept proposal",
+            "accept_title": "Close the contract?",
+            "accept_description": "Close the contract with {{name}} for {{price}}? The other proposals will be rejected.",
+            "empty_title": "No proposals yet.",
+            "empty_description": "Invite the recommended devs to send a proposal.",
+            "ranking_empty_title": "No proposals waiting for a decision.",
+            "status_empty_title": "No proposals with this status.",
+            "dev_unavailable": "Dev unavailable"
+        },
+        "recommended_devs": {
+            "description": "The profiles that best match your job, according to our AI.",
+            "match": "{{percentage}}% match",
+            "has_proposal": "Already sent a proposal",
+            "view_proposal": "View proposal",
+            "invited": "Invited",
+            "invite": "Invite to send a proposal",
+            "empty_title": "No matching devs yet.",
+            "empty_description": "As new devs sign up, they may show up here."
+        },
+        "analysis": {
+            "vacancy_title": "We're analyzing your freelance job…",
+            "vacancy_description": "Recommendations and the ranking are ready about 1 minute after you post or edit the job. We'll try again automatically.",
+            "retrying": "Retrying automatically…"
+        },
+        "feed": {
+            "title": "Job feed",
+            "description": "Updates, deliveries and reviews of the contract. For day-to-day conversation, use the chat.",
+            "empty_title": "No posts yet.",
+            "empty_description": "The contract's updates and deliveries show up here.",
+            "read_only": "Job completed: the feed is now read-only.",
+            "unavailable": "The feed is available after the contract is closed.",
+            "content_placeholder": "Write an update...",
+            "deliverable_placeholder": "Describe the delivery...",
+            "post_type": "Post type",
+            "attach": "Attach files",
+            "attachments_count": "{{count}}/{{max}} files",
+            "accepted_files": "PDF, Office, CSV, TXT, MD, ZIP and images. Up to 10 MB per file and 12 MB per post.",
+            "remove_attachment": "Remove attachment",
+            "publish": "Post",
+            "removed_author": "Removed user",
+            "review_pending": "Waiting for review",
+            "approve": "Approve",
+            "request_changes": "Request changes",
+            "review_title_approved": "Approve delivery",
+            "review_title_changes_requested": "Request changes to the delivery",
+            "review_placeholder": "Comment on the delivery...",
+            "review_about": "about the delivery from {{date}}",
+            "send_review": "Send review",
+            "delete": "Remove post",
+            "delete_title": "Remove post?",
+            "delete_description": "The post and its attachments leave the feed.",
+            "link_expired_hint": "Attachment links expire 30 minutes after the feed loads. If a link doesn't open, reload.",
+            "reload": "Reload feed",
+            "errors": {
+                "content_required": "Write something or attach a file.",
+                "content_max": "The text can have at most 5000 characters.",
+                "too_many_files": "Send at most {{max}} files.",
+                "file_too_large": "\"{{name}}\" is larger than 10 MB.",
+                "total_too_large": "The files add up to more than 12 MB.",
+                "invalid_extension": "\"{{name}}\" is not an accepted file type."
+            },
+            "review_about_older": "about an earlier delivery",
+            "back_to_details": "Back to the job"
+        },
+        "chat_draft": {
+            "dev": "Hi! I saw your freelance job \"{{title}}\" and I'm interested.",
+            "client": "Hi! I saw your profile and would like to talk about my freelance job \"{{title}}\"."
+        },
+        "errors": {
+            "unavailable": "This freelance job is no longer available.",
+            "forbidden": "You don't have permission to do this.",
+            "not_open": "This job is no longer open. We updated the screen.",
+            "not_in_progress": "This job is not in progress. We updated the screen.",
+            "proposal_conflict": "This job changed while you were on the screen. We updated the information.",
+            "accept_conflict": "This job already has a contract or the proposal is no longer pending. We updated the screen.",
+            "invite_conflict": "This dev was already invited, already sent a proposal or the job is no longer open. We updated the list.",
+            "feed_closed": "This job's feed no longer accepts changes. We updated the screen.",
+            "unexpected": "We couldn't finish this. Please try again."
+        }
     }
 }

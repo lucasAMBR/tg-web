@@ -2,13 +2,11 @@ import {
 	getIndexHardSkillQueryKey,
 	useDeleteHardSkill,
 	useIndexHardSkill,
-} from "@/api/generated/hard-skill-doc/hard-skill-doc";
+} from "@/api/generated/hard-skill/hard-skill";
 import { Spinner } from "../../ui/spinner";
 import HardSkillCard from "./hard-skill-card";
 import {
 	Empty,
-	EmptyContent,
-	EmptyDescription,
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
@@ -18,7 +16,7 @@ import { Button } from "../../ui/button";
 import { Card } from "../../ui/card";
 import CreateHardSkillModal from "./create_hard-skill-dialog";
 import { useState } from "react";
-import type { HardSkillModel } from "@/api/generated/models";
+import type { HardSkillResource } from "@/api/generated/models";
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -35,22 +33,24 @@ import type { AxiosError } from "axios";
 import type { ApiError } from "@/utils/api-error";
 import UpdateHardskillModal from "./update_hard_skill_dialog";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface HardSkillListPorps {
 	profileId: string;
 }
 
 export default function HardSkillList({ profileId }: HardSkillListPorps) {
+	const { user } = useAuthStore();
 	const { t } = useTranslation();
 	const queryClient = useQueryClient();
 
 	const [selectedHardSkill, setSelectedhardSkill] =
-		useState<HardSkillModel | null>(null);
+		useState<HardSkillResource | null>(null);
 
 	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
 	const [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
 
-	const openDeleteModal = (hardSkill: HardSkillModel) => {
+	const openDeleteModal = (hardSkill: HardSkillResource) => {
 		setSelectedhardSkill(hardSkill);
 		setDeleteModalIsOpen(true);
 	};
@@ -60,14 +60,9 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 		setDeleteModalIsOpen(false);
 	};
 
-	const openUpdateModal = (hardSkill: HardSkillModel) => {
+	const openUpdateModal = (hardSkill: HardSkillResource) => {
 		setSelectedhardSkill(hardSkill);
 		setUpdateModalIsOpen(true);
-	};
-
-	const closeUpdateModal = () => {
-		setSelectedhardSkill(null);
-		setUpdateModalIsOpen(false);
 	};
 
 	const { mutate: deleteHardSkill, isPending: deleteIsPending } =
@@ -104,7 +99,8 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 		<div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("dev_profile.hard_skills.title")}</span>
-				<CreateHardSkillModal
+				{user?.dev_profile?.id === profileId && (
+					<CreateHardSkillModal
 					existingHardSkills={hardSkillList}
 					profileId={profileId}
 				>
@@ -112,6 +108,7 @@ export default function HardSkillList({ profileId }: HardSkillListPorps) {
 						<Plus /> {t("general.add")}
 					</Button>
 				</CreateHardSkillModal>
+				)}
 			</h2>
 			<div className="flex flex-col gap-2">
 				{isLoading && (

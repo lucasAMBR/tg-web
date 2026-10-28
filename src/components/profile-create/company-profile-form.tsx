@@ -1,3 +1,4 @@
+import type { StoreCompanyProfileRequest } from "@/api/generated/models";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { Field, FieldError, FieldLabel } from "../ui/field";
@@ -17,10 +18,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
-import { useEnumOperationalSegments } from "@/api/generated/enums/enums";
+import { useEnumOperationalSegments } from "@/api/generated/enum/enum";
 import Required from "../global/required-field";
 import { Spinner } from "../ui/spinner";
-import { useStoreCompanyProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useStoreCompanyProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useState } from "react";
 import {
@@ -42,15 +43,18 @@ import { useAuthStore } from "@/stores/auth-store";
 import { CreateCompanyProfileSchema, type ICreateCompanyProfileSchema } from "@/schemas/profile/CreateCompanyProfileSchema";
 import { CnpjInput } from "../global/inputs/cnpj-inputs";
 import { useTranslation } from "react-i18next";
+import { useUserUserUpdate1 } from "@/api/generated/user/user";
+import { ProfilePicInput } from "../global/inputs/profile-pic-input";
 
 export default function CompanyProfileForm() {
     const { t } = useTranslation();
 
     const navigate = useNavigate();
 
-    const { hydrateUser } = useAuthStore();
+    const { user, hydrateUser } = useAuthStore();
 
     const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
+    const [profilePic, setProfilePic] = useState<File | null>(null);
 
     const { data: operationalSegments, isLoading } = useEnumOperationalSegments();
 
@@ -69,15 +73,28 @@ export default function CompanyProfileForm() {
     });
 
     const { mutate: createProfile, isPending } = useStoreCompanyProfile();
+    const { mutateAsync: updateUser, isPending: isUploadingProfilePic } =
+        useUserUserUpdate1();
 
     const create = async (data: ICreateCompanyProfileSchema) => {
         createProfile(
-            { data },
+            { data: data as StoreCompanyProfileRequest },
             {
-                onSuccess: () => {
+                onSuccess: async () => {
                     CustomToaster.successToast(t("toast.success.profile_company_created"));
 
-                    hydrateUser();
+                    if (profilePic) {
+                        await updateUser(
+                            { id: user?.id as string, data: { profile_pic: profilePic } },
+                            {
+                                onError: (error) => {
+                                    onError(error as AxiosError<ApiError>);
+                                },
+                            },
+                        ).catch(() => null);
+                    }
+
+                    await hydrateUser();
 
                     setAddressAlertModal(true);
                 },
@@ -93,6 +110,10 @@ export default function CompanyProfileForm() {
             onSubmit={form.handleSubmit(create)}
             className="w-full max-w-[700px] flex flex-col gap-4"
         >
+            <Field className="mb-4">
+                <FieldLabel>{t("input.profile_pic")}</FieldLabel>
+                <ProfilePicInput value={profilePic} onChange={setProfilePic} />
+            </Field>
             <div className="flex gap-2">
                 <Controller
                     control={form.control}
@@ -129,7 +150,7 @@ export default function CompanyProfileForm() {
                                 value={value}
                                 format="##.###.###/####-##"
                                 onValueChange={(values) => {
-                                    onChange(values.value ? `+${values.value}` : "");
+                                    onChange(values.value ?? "");
                                 }}
                             />
                             <FieldError errors={[fieldState.error]} />
@@ -249,8 +270,8 @@ export default function CompanyProfileForm() {
                     </Field>
                 )}
             />
-            <Button disabled={isPending}>
-                {isPending ? <Spinner /> : t("general.create")}
+            <Button disabled={isPending || isUploadingProfilePic}>
+                {isPending || isUploadingProfilePic ? <Spinner /> : t("general.create")}
             </Button>
             <AlertDialog open={addresAlertModal} onOpenChange={setAddressAlertModal}>
                 <AlertDialogContent>
@@ -263,7 +284,7 @@ export default function CompanyProfileForm() {
                         <p>{t("profile_create.address_modal.description")}</p>
                     </AlertDialogDescription>
                     <AlertDialogFooter>
-                        <AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
+                        <AlertDialogCancel onClick={() => navigate({ to: "/feed" })}>
                             {t("general.skip")}
                         </AlertDialogCancel>
                         <AlertDialogAction

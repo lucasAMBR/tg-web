@@ -10,6 +10,7 @@ import {
 	removeStoredToken,
 	updateStoredToken,
 } from "@/lib/auth";
+import { getSocketId } from "@/lib/echo";
 import { env } from "@/utils/env";
 
 const baseURL = env.API_BASE_URL;
@@ -60,6 +61,19 @@ axiosInstance.interceptors.request.use(
 		if (token && config.headers) {
 			config.headers.Authorization = `Bearer ${token}`;
 		}
+
+		// O chat usa `toOthers()` nos eventos: com o socket da aba no header, quem
+		// enviou a mensagem (ou leu a conversa) não recebe o próprio eco, mas as
+		// outras abas do usuário continuam recebendo. Só nas rotas do chat, porque
+		// nos outros eventos o remetente da ação também precisa ser avisado
+		if (config.url?.startsWith("/chat") && config.headers) {
+			const socketId = getSocketId();
+
+			if (socketId) {
+				config.headers["X-Socket-ID"] = socketId;
+			}
+		}
+
 		return config;
 	},
 	(error) => {
@@ -83,8 +97,13 @@ axiosInstance.interceptors.response.use(
 			return Promise.reject(error);
 		}
 
+		// Sem token ou com token expirado, a API não responde 401: cai no handler
+		// genérico dela, que devolve 400 com `data: "Unauthenticated."`
+		const isUnauthenticated =
+			status === 400 && error.response?.data?.data === "Unauthenticated.";
+
 		if (
-			(status === 401 || status === 403) &&
+			(status === 401 || status === 403 || isUnauthenticated) &&
 			originalRequest &&
 			!originalRequest._retry
 		) {

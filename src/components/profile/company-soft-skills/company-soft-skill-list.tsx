@@ -1,12 +1,13 @@
-import { useIndexCompanySoftSkills } from "@/api/generated/soft-skill-doc/soft-skill-doc";
+import { useIndexCompanySoftSkills } from "@/api/generated/soft-skill/soft-skill";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Spinner } from "@/components/ui/spinner";
 import { Brackets, Edit, Plus } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AddCompanySoftSkillDialog from "./add-company-soft-skill-dialog";
+import { useAuthStore } from "@/stores/auth-store";
 
 interface CompanySoftSkillListProps {
 	profileId: string;
@@ -14,6 +15,8 @@ interface CompanySoftSkillListProps {
 
 export default function CompanySoftSkillList({ profileId }: CompanySoftSkillListProps) {
 	const { t } = useTranslation();
+
+	const { user } = useAuthStore();
 
 	const { data: softSkills, isLoading } = useIndexCompanySoftSkills(profileId);
 
@@ -25,6 +28,8 @@ export default function CompanySoftSkillList({ profileId }: CompanySoftSkillList
 		<div className="w-full flex flex-col gap-4">
 			<h2 className="text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("company_profile.soft_skills.title")}</span>
+				{user?.company_profile?.id === profileId || user?.role.includes("admin") &&
+				<>
 				{softSkillList.length > 0 ? (
 					<Button onClick={() => setOpen(true)} variant={"accent"}>
 						<Edit /> {t("general.change")}
@@ -34,6 +39,8 @@ export default function CompanySoftSkillList({ profileId }: CompanySoftSkillList
 						<Plus /> {t("general.create")}
 					</Button>
 				)}
+				</>
+				}
 			</h2>
 			<div className="flex flex-col gap-2">
 				{isLoading && (
@@ -59,7 +66,7 @@ export default function CompanySoftSkillList({ profileId }: CompanySoftSkillList
 				{!isLoading &&
 					softSkillList.map((skill) => (
 						<Card key={skill.id} className="p-4">
-							<p className="font-bold">{t(skill.soft_skill.i18n_name_key)}</p>
+							<p className="font-bold">{t(skill.soft_skill.i18n_name_key ?? "")}</p>
 						</Card>
 					))}
 			</div>

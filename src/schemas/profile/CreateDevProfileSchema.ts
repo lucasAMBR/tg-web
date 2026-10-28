@@ -25,6 +25,7 @@ export const CreateDevProfileSchema = z.object({
 	birthdate: isoDateOnlyField(),
 
 	seniority_level: z.string(),
+	specialty: z.string(),
 });
 
 export type ICreateDevProfileSchema = z.infer<typeof CreateDevProfileSchema>;

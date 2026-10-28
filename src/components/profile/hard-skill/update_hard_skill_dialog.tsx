@@ -1,10 +1,11 @@
-import { useEnumHardSkillLevel } from "@/api/generated/enums/enums";
+import type { UpdateHardSkillRequest } from "@/api/generated/models";
+import { useEnumHardSkillLevel } from "@/api/generated/enum/enum";
 import {
 	getIndexHardSkillQueryKey,
 	useUpdateHardSkill,
-} from "@/api/generated/hard-skill-doc/hard-skill-doc";
-import { useIndexLanguage } from "@/api/generated/languages-doc/languages-doc";
-import type { HardSkillModel } from "@/api/generated/models";
+} from "@/api/generated/hard-skill/hard-skill";
+import { useIndexLanguage } from "@/api/generated/language/language";
+import type { HardSkillResource } from "@/api/generated/models";
 import useDebounce from "@/hooks/use-debounce";
 import {
 	RegisterHardSkillSchema,
@@ -16,7 +17,7 @@ import { onError } from "@/utils/on-error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { useEffect, useMemo, useState, type PropsWithChildren } from "react";
+import { useEffect, useMemo, useState, } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
 	Dialog,
@@ -25,7 +26,6 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
 } from "../../ui/dialog";
 import { Card } from "../../ui/card";
 import { Field, FieldLabel } from "../../ui/field";
@@ -52,9 +52,9 @@ import {
 import { useTranslation } from "react-i18next";
 
 interface UpdateHardSkillModalProps {
-	hardSkill: HardSkillModel;
+	hardSkill: HardSkillResource;
 	profileId: string;
-	existingHardSkills: HardSkillModel[];
+	existingHardSkills: HardSkillResource[];
 	dialogIsOpen: boolean;
 	setDialogOpen: (open: boolean) => void;
 }
@@ -117,7 +117,7 @@ export default function UpdateHardskillModal({
 
 	const register = (data: IRegisterHardSkillSchema) => {
 		registerHardSkill(
-			{ id: hardSkill.id, data },
+			{ id: hardSkill.id, data: data as UpdateHardSkillRequest },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.hard_skill_updated"));

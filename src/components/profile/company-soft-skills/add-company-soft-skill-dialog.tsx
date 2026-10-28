@@ -1,5 +1,5 @@
-import { getIndexCompanySoftSkillsQueryKey, useIndexSoftSkill, useStoreCompanySoftSkill } from "@/api/generated/soft-skill-doc/soft-skill-doc";
-import type { CompanySoftSkillModel } from "@/api/generated/models";
+import { getIndexCompanySoftSkillsQueryKey, useIndexSoftSkill, useStoreCompanySoftSkill } from "@/api/generated/soft-skill/soft-skill";
+import type { CompanySoftSkillResource } from "@/api/generated/models";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 interface AddCompanySoftSkillDialogProps {
 	profileId: string;
 	open: boolean;
-	initialData?: CompanySoftSkillModel[];
+	initialData?: CompanySoftSkillResource[];
 	openChange: (open: boolean) => void;
 }
 
@@ -60,7 +60,7 @@ export default function AddCompanySoftSkillDialog({
 			setSelectedSoftSkills(
 				initialData.map((skill) => ({
 					id: skill.soft_skill_id,
-					i18nKey: skill.soft_skill.i18n_name_key,
+					i18nKey: skill.soft_skill.i18n_name_key ?? "",
 				})),
 			);
 			return;
@@ -76,7 +76,7 @@ export default function AddCompanySoftSkillDialog({
 
 	const handleSubmit = (data: ICreateCompanySoftSkillSchema) => {
 		storeCompanySoftSkill(
-			{ company: profileId, data },
+			{ companyProfileId: profileId, data },
 			{
 				onSuccess: () => {
 					CustomToaster.successToast(t("toast.success.company_soft_skill_added"));
@@ -94,7 +94,7 @@ export default function AddCompanySoftSkillDialog({
 
 	const getSoftSkillLabel = (id: string) => {
 		const fromList = softSkillsList.find((skill) => skill.id === id);
-		if (fromList) return t(fromList.i18n_name_key);
+		if (fromList) return t(fromList.i18n_name_key ?? "");
 		const selected = selectedSoftSkills.find((skill) => skill.id === id);
 		if (selected) return t(selected.i18nKey);
 		return id;
@@ -118,7 +118,7 @@ export default function AddCompanySoftSkillDialog({
 							render={({ field }) => {
 								const currentIds = field.value || [];
 								const filteredSkills = softSkillsList.filter((skill) =>
-									t(skill.i18n_name_key).toLowerCase().includes(softSkillSearchTerm.toLowerCase()),
+									t(skill.i18n_name_key ?? "").toLowerCase().includes(softSkillSearchTerm.toLowerCase()),
 								);
 
 								const toggleSelection = (id: string, i18nKey: string) => {
@@ -194,9 +194,9 @@ export default function AddCompanySoftSkillDialog({
 																<CommandItem
 																	key={skill.id}
 																	value={skill.id}
-																	onSelect={() => toggleSelection(skill.id, skill.i18n_name_key)}
+																	onSelect={() => toggleSelection(skill.id, skill.i18n_name_key ?? "")}
 																>
-																	{t(skill.i18n_name_key)}
+																	{t(skill.i18n_name_key ?? "")}
 																	{currentIds.includes(skill.id) && (
 																		<CheckIcon className="ml-auto size-4" />
 																	)}

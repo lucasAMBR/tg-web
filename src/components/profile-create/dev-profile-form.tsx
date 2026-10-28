@@ -1,3 +1,4 @@
+import type { StoreDevProfileRequest } from "@/api/generated/models";
 import {
 	CreateDevProfileSchema,
 	type ICreateDevProfileSchema,
@@ -22,11 +23,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
-import { useEnumSeniority } from "@/api/generated/enums/enums";
+import { useEnumDevSpecialty, useEnumSeniority } from "@/api/generated/enum/enum";
 import Required from "../global/required-field";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Spinner } from "../ui/spinner";
-import { useStoreDevProfile } from "@/api/generated/profiles-doc/profiles-doc";
+import { useStoreDevProfile } from "@/api/generated/profile/profile";
 import { CustomToaster } from "@/utils/custom-toaster";
 import { useState } from "react";
 import {
@@ -47,19 +48,24 @@ import { PhoneInput } from "../global/inputs/phone-input";
 import { CpfInput } from "../global/inputs/cpf-input";
 import { useAuthStore } from "@/stores/auth-store";
 import { useTranslation } from "react-i18next";
+import { useUserUserUpdate1 } from "@/api/generated/user/user";
+import { ProfilePicInput } from "../global/inputs/profile-pic-input";
 
 export default function DevProfileForm() {
 	const { t } = useTranslation();
 
 	const navigate = useNavigate();
 
-	const { hydrateUser } = useAuthStore();
+	const { user, hydrateUser } = useAuthStore();
 
 	const [addresAlertModal, setAddressAlertModal] = useState<boolean>(false);
+	const [profilePic, setProfilePic] = useState<File | null>(null);
 
-	const { data: seniorityLevels, isLoading } = useEnumSeniority();
+	const { data: seniorityLevels, isLoading: isSeniorityLoading } = useEnumSeniority();
+	const { data: devSpecialties, isLoading: isSpecialtyLoading } = useEnumDevSpecialty();
 
 	const seniorityList = seniorityLevels?.data ?? [];
+	const specialtyList = devSpecialties?.data ?? [];
 
 	const form = useForm<ICreateDevProfileSchema>({
 		resolver: zodResolver(CreateDevProfileSchema),
@@ -72,19 +78,33 @@ export default function DevProfileForm() {
 			open_to_work: true,
 			birthdate: new Date().toString(),
 			seniority_level: "",
+			specialty: "",
 		},
 	});
 
 	const { mutateAsync: createProfile, isPending } = useStoreDevProfile();
+	const { mutateAsync: updateUser, isPending: isUploadingProfilePic } =
+		useUserUserUpdate1();
 
 	const create = async (data: ICreateDevProfileSchema) => {
 		await createProfile(
-			{ data },
+			{ data: data as StoreDevProfileRequest },
 			{
-				onSuccess: () => {
+				onSuccess: async () => {
 					CustomToaster.successToast(t("toast.success.profile_dev_created"));
 
-					hydrateUser();
+					if (profilePic) {
+						await updateUser(
+							{ id: user?.id as string, data: { profile_pic: profilePic } },
+							{
+								onError: (error) => {
+									onError(error as AxiosError<ApiError>);
+								},
+							},
+						).catch(() => null);
+					}
+
+					await hydrateUser();
 
 					setAddressAlertModal(true);
 				},
@@ -100,6 +120,10 @@ export default function DevProfileForm() {
 			onSubmit={form.handleSubmit(create)}
 			className="w-full max-w-[700px] flex flex-col gap-4"
 		>
+			<Field className="mb-4">
+				<FieldLabel>{t("input.profile_pic")}</FieldLabel>
+				<ProfilePicInput value={profilePic} onChange={setProfilePic} />
+			</Field>
 			<div className="flex gap-2">
 				<Controller
 					control={form.control}
@@ -242,11 +266,40 @@ export default function DevProfileForm() {
 								<SelectValue placeholder={t("placeholder.seniority_level")} />
 							</SelectTrigger>
 							<SelectContent>
-								{isLoading && <Spinner />}
-								{!isLoading &&
+								{isSeniorityLoading && <Spinner />}
+								{!isSeniorityLoading &&
 									seniorityList.length > 0 &&
 									seniorityList.map((item) => (
-										<SelectItem value={item.value}>{t(item.i18nKey)}</SelectItem>
+										<SelectItem key={item.value} value={item.value}>
+											{t(item.i18nKey)}
+										</SelectItem>
+									))}
+							</SelectContent>
+						</Select>
+						<FieldError errors={[fieldState.error]} />
+					</Field>
+				)}
+			/>
+			<Controller
+				control={form.control}
+				name="specialty"
+				render={({ field, fieldState }) => (
+					<Field className="flex-1">
+						<FieldLabel htmlFor="specialty">
+							{t("input.specialty")} <Required />
+						</FieldLabel>
+						<Select value={field.value} onValueChange={field.onChange}>
+							<SelectTrigger>
+								<SelectValue placeholder={t("placeholder.specialty")} />
+							</SelectTrigger>
+							<SelectContent>
+								{isSpecialtyLoading && <Spinner />}
+								{!isSpecialtyLoading &&
+									specialtyList.length > 0 &&
+									specialtyList.map((item) => (
+										<SelectItem key={item.value} value={item.value}>
+											{t(item.i18nKey)}
+										</SelectItem>
 									))}
 							</SelectContent>
 						</Select>
@@ -310,7 +363,9 @@ export default function DevProfileForm() {
 					)}
 				/>
 			</div>
-			<Button disabled={isPending}>{isPending ? <Spinner /> : t("general.create")}</Button>
+			<Button disabled={isPending || isUploadingProfilePic}>
+				{isPending || isUploadingProfilePic ? <Spinner /> : t("general.create")}
+			</Button>
 			<AlertDialog open={addresAlertModal} onOpenChange={setAddressAlertModal}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
@@ -320,7 +375,7 @@ export default function DevProfileForm() {
 						<p>{t("profile_create.address_modal.description")}</p>
 					</AlertDialogDescription>
 					<AlertDialogFooter>
-						<AlertDialogCancel onClick={() => navigate({ to: "/home" })}>
+						<AlertDialogCancel onClick={() => navigate({ to: "/feed" })}>
 							{t("general.skip")}
 						</AlertDialogCancel>
 						<AlertDialogAction

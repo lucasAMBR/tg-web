@@ -11,16 +11,41 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as publicLayoutRouteImport } from './routes/(public)/layout'
 import { Route as publicIndexRouteImport } from './routes/(public)/index'
-import { Route as privateHomeLayoutRouteImport } from './routes/(private)/home/layout'
-import { Route as privateHomeIndexRouteImport } from './routes/(private)/home/index'
+import { Route as privateAdminLandLayoutRouteImport } from './routes/(private)/admin-land/layout'
+import { Route as privatehomeLayoutRouteImport } from './routes/(private)/(home)/layout'
 import { Route as publicAuthRegisterRouteImport } from './routes/(public)/auth/register'
 import { Route as publicAuthLoginRouteImport } from './routes/(public)/auth/login'
-import { Route as privateHomeSettingsRouteImport } from './routes/(private)/home/settings'
-import { Route as privateHomeProfileRouteImport } from './routes/(private)/home/profile'
 import { Route as privateCreateAddressRouteImport } from './routes/(private)/create/address'
+import { Route as privateAdminLandDashboardRouteImport } from './routes/(private)/admin-land/dashboard'
+import { Route as privateAdminLandDevsIndexRouteImport } from './routes/(private)/admin-land/devs/index'
+import { Route as privateAdminLandCompanyIndexRouteImport } from './routes/(private)/admin-land/company/index'
+import { Route as privatehomeSettingsIndexRouteImport } from './routes/(private)/(home)/settings/index'
+import { Route as privatehomeSearchIndexRouteImport } from './routes/(private)/(home)/search/index'
+import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/(home)/profile/index'
+import { Route as privatehomeMyVacanciesIndexRouteImport } from './routes/(private)/(home)/my-vacancies/index'
+import { Route as privatehomeJobsIndexRouteImport } from './routes/(private)/(home)/jobs/index'
+import { Route as privatehomeFreelancesIndexRouteImport } from './routes/(private)/(home)/freelances/index'
+import { Route as privatehomeFeedIndexRouteImport } from './routes/(private)/(home)/feed/index'
+import { Route as privatehomeFavoritesIndexRouteImport } from './routes/(private)/(home)/favorites/index'
+import { Route as privateProficiencyTestIdTestRouteImport } from './routes/(private)/proficiency-test/$id/test'
+import { Route as privateProficiencyTestIdStartRouteImport } from './routes/(private)/proficiency-test/$id/start'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
 import { Route as privateCreateProfileCompanyRouteImport } from './routes/(private)/create/profile/company'
 import { Route as privateCreateProfileClientRouteImport } from './routes/(private)/create/profile/client'
+import { Route as privatehomeVacanciesIdIndexRouteImport } from './routes/(private)/(home)/vacancies/$id/index'
+import { Route as privatehomePostsIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/index'
+import { Route as privatehomeMyVacanciesIdIndexRouteImport } from './routes/(private)/(home)/my-vacancies/$id/index'
+import { Route as privatehomeFreelancesIdIndexRouteImport } from './routes/(private)/(home)/freelances/$id/index'
+import { Route as privatehomeFreelanceVacanciesIdIndexRouteImport } from './routes/(private)/(home)/freelance-vacancies/$id/index'
+import { Route as privatehomeDevsIdIndexRouteImport } from './routes/(private)/(home)/devs/$id/index'
+import { Route as privatehomeCompaniesIdIndexRouteImport } from './routes/(private)/(home)/companies/$id/index'
+import { Route as privatehomeClientsIdIndexRouteImport } from './routes/(private)/(home)/clients/$id/index'
+import { Route as privatehomeMyVacanciesIdTechnicalChallengeRouteImport } from './routes/(private)/(home)/my-vacancies/$id/technical-challenge'
+import { Route as privatehomeMyVacanciesIdSelectionProcessRouteImport } from './routes/(private)/(home)/my-vacancies/$id/selection-process'
+import { Route as privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport } from './routes/(private)/(home)/my-vacancies/$id/screening-questionnaire'
+import { Route as privatehomeMyVacanciesIdLanguageAssessmentRouteImport } from './routes/(private)/(home)/my-vacancies/$id/language-assessment'
+import { Route as privatehomeFreelancesIdFeedRouteImport } from './routes/(private)/(home)/freelances/$id/feed'
+import { Route as privatehomePostsIdThreadCommentIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/thread/$commentId/index'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
   id: '/(public)',
@@ -31,15 +56,14 @@ const publicIndexRoute = publicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => publicLayoutRoute,
 } as any)
-const privateHomeLayoutRoute = privateHomeLayoutRouteImport.update({
-  id: '/(private)/home',
-  path: '/home',
+const privateAdminLandLayoutRoute = privateAdminLandLayoutRouteImport.update({
+  id: '/(private)/admin-land',
+  path: '/admin-land',
   getParentRoute: () => rootRouteImport,
 } as any)
-const privateHomeIndexRoute = privateHomeIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => privateHomeLayoutRoute,
+const privatehomeLayoutRoute = privatehomeLayoutRouteImport.update({
+  id: '/(private)/(home)',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const publicAuthRegisterRoute = publicAuthRegisterRouteImport.update({
   id: '/auth/register',
@@ -51,21 +75,85 @@ const publicAuthLoginRoute = publicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => publicLayoutRoute,
 } as any)
-const privateHomeSettingsRoute = privateHomeSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => privateHomeLayoutRoute,
-} as any)
-const privateHomeProfileRoute = privateHomeProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => privateHomeLayoutRoute,
-} as any)
 const privateCreateAddressRoute = privateCreateAddressRouteImport.update({
   id: '/(private)/create/address',
   path: '/create/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const privateAdminLandDashboardRoute =
+  privateAdminLandDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privateAdminLandDevsIndexRoute =
+  privateAdminLandDevsIndexRouteImport.update({
+    id: '/devs/',
+    path: '/devs/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privateAdminLandCompanyIndexRoute =
+  privateAdminLandCompanyIndexRouteImport.update({
+    id: '/company/',
+    path: '/company/',
+    getParentRoute: () => privateAdminLandLayoutRoute,
+  } as any)
+const privatehomeSettingsIndexRoute =
+  privatehomeSettingsIndexRouteImport.update({
+    id: '/settings/',
+    path: '/settings/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeSearchIndexRoute = privatehomeSearchIndexRouteImport.update({
+  id: '/search/',
+  path: '/search/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeProfileIndexRoute = privatehomeProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeMyVacanciesIndexRoute =
+  privatehomeMyVacanciesIndexRouteImport.update({
+    id: '/my-vacancies/',
+    path: '/my-vacancies/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeJobsIndexRoute = privatehomeJobsIndexRouteImport.update({
+  id: '/jobs/',
+  path: '/jobs/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeFreelancesIndexRoute =
+  privatehomeFreelancesIndexRouteImport.update({
+    id: '/freelances/',
+    path: '/freelances/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeFeedIndexRoute = privatehomeFeedIndexRouteImport.update({
+  id: '/feed/',
+  path: '/feed/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeFavoritesIndexRoute =
+  privatehomeFavoritesIndexRouteImport.update({
+    id: '/favorites/',
+    path: '/favorites/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privateProficiencyTestIdTestRoute =
+  privateProficiencyTestIdTestRouteImport.update({
+    id: '/(private)/proficiency-test/$id/test',
+    path: '/proficiency-test/$id/test',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const privateProficiencyTestIdStartRoute =
+  privateProficiencyTestIdStartRouteImport.update({
+    id: '/(private)/proficiency-test/$id/start',
+    path: '/proficiency-test/$id/start',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const privateCreateProfileDevRoute = privateCreateProfileDevRouteImport.update({
   id: '/(private)/create/profile/dev',
   path: '/create/profile/dev',
@@ -83,96 +171,329 @@ const privateCreateProfileClientRoute =
     path: '/create/profile/client',
     getParentRoute: () => rootRouteImport,
   } as any)
+const privatehomeVacanciesIdIndexRoute =
+  privatehomeVacanciesIdIndexRouteImport.update({
+    id: '/vacancies/$id/',
+    path: '/vacancies/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomePostsIdIndexRoute = privatehomePostsIdIndexRouteImport.update({
+  id: '/posts/$id/',
+  path: '/posts/$id/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeMyVacanciesIdIndexRoute =
+  privatehomeMyVacanciesIdIndexRouteImport.update({
+    id: '/my-vacancies/$id/',
+    path: '/my-vacancies/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeFreelancesIdIndexRoute =
+  privatehomeFreelancesIdIndexRouteImport.update({
+    id: '/freelances/$id/',
+    path: '/freelances/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeFreelanceVacanciesIdIndexRoute =
+  privatehomeFreelanceVacanciesIdIndexRouteImport.update({
+    id: '/freelance-vacancies/$id/',
+    path: '/freelance-vacancies/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeDevsIdIndexRoute = privatehomeDevsIdIndexRouteImport.update({
+  id: '/devs/$id/',
+  path: '/devs/$id/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
+const privatehomeCompaniesIdIndexRoute =
+  privatehomeCompaniesIdIndexRouteImport.update({
+    id: '/companies/$id/',
+    path: '/companies/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeClientsIdIndexRoute =
+  privatehomeClientsIdIndexRouteImport.update({
+    id: '/clients/$id/',
+    path: '/clients/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeMyVacanciesIdTechnicalChallengeRoute =
+  privatehomeMyVacanciesIdTechnicalChallengeRouteImport.update({
+    id: '/my-vacancies/$id/technical-challenge',
+    path: '/my-vacancies/$id/technical-challenge',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeMyVacanciesIdSelectionProcessRoute =
+  privatehomeMyVacanciesIdSelectionProcessRouteImport.update({
+    id: '/my-vacancies/$id/selection-process',
+    path: '/my-vacancies/$id/selection-process',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeMyVacanciesIdScreeningQuestionnaireRoute =
+  privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport.update({
+    id: '/my-vacancies/$id/screening-questionnaire',
+    path: '/my-vacancies/$id/screening-questionnaire',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeMyVacanciesIdLanguageAssessmentRoute =
+  privatehomeMyVacanciesIdLanguageAssessmentRouteImport.update({
+    id: '/my-vacancies/$id/language-assessment',
+    path: '/my-vacancies/$id/language-assessment',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeFreelancesIdFeedRoute =
+  privatehomeFreelancesIdFeedRouteImport.update({
+    id: '/freelances/$id/feed',
+    path: '/freelances/$id/feed',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomePostsIdThreadCommentIdIndexRoute =
+  privatehomePostsIdThreadCommentIdIndexRouteImport.update({
+    id: '/posts/$id/thread/$commentId/',
+    path: '/posts/$id/thread/$commentId/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/home': typeof privateHomeLayoutRouteWithChildren
+  '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/': typeof publicIndexRoute
+  '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/profile': typeof privateHomeProfileRoute
-  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/home/': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/favorites/': typeof privatehomeFavoritesIndexRoute
+  '/feed/': typeof privatehomeFeedIndexRoute
+  '/freelances/': typeof privatehomeFreelancesIndexRoute
+  '/jobs/': typeof privatehomeJobsIndexRoute
+  '/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/profile/': typeof privatehomeProfileIndexRoute
+  '/search/': typeof privatehomeSearchIndexRoute
+  '/settings/': typeof privatehomeSettingsIndexRoute
+  '/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
+  '/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
+  '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
+  '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
+  '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
+  '/clients/$id/': typeof privatehomeClientsIdIndexRoute
+  '/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
+  '/devs/$id/': typeof privatehomeDevsIdIndexRoute
+  '/freelance-vacancies/$id/': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/freelances/$id/': typeof privatehomeFreelancesIdIndexRoute
+  '/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
+  '/posts/$id/': typeof privatehomePostsIdIndexRoute
+  '/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
+  '/posts/$id/thread/$commentId/': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRoutesByTo {
+  '/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/': typeof publicIndexRoute
+  '/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/create/address': typeof privateCreateAddressRoute
-  '/home/profile': typeof privateHomeProfileRoute
-  '/home/settings': typeof privateHomeSettingsRoute
   '/auth/login': typeof publicAuthLoginRoute
   '/auth/register': typeof publicAuthRegisterRoute
-  '/home': typeof privateHomeIndexRoute
   '/create/profile/client': typeof privateCreateProfileClientRoute
   '/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/favorites': typeof privatehomeFavoritesIndexRoute
+  '/feed': typeof privatehomeFeedIndexRoute
+  '/freelances': typeof privatehomeFreelancesIndexRoute
+  '/jobs': typeof privatehomeJobsIndexRoute
+  '/my-vacancies': typeof privatehomeMyVacanciesIndexRoute
+  '/profile': typeof privatehomeProfileIndexRoute
+  '/search': typeof privatehomeSearchIndexRoute
+  '/settings': typeof privatehomeSettingsIndexRoute
+  '/admin-land/company': typeof privateAdminLandCompanyIndexRoute
+  '/admin-land/devs': typeof privateAdminLandDevsIndexRoute
+  '/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
+  '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
+  '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
+  '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
+  '/clients/$id': typeof privatehomeClientsIdIndexRoute
+  '/companies/$id': typeof privatehomeCompaniesIdIndexRoute
+  '/devs/$id': typeof privatehomeDevsIdIndexRoute
+  '/freelance-vacancies/$id': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/freelances/$id': typeof privatehomeFreelancesIdIndexRoute
+  '/my-vacancies/$id': typeof privatehomeMyVacanciesIdIndexRoute
+  '/posts/$id': typeof privatehomePostsIdIndexRoute
+  '/vacancies/$id': typeof privatehomeVacanciesIdIndexRoute
+  '/posts/$id/thread/$commentId': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(public)': typeof publicLayoutRouteWithChildren
-  '/(private)/home': typeof privateHomeLayoutRouteWithChildren
+  '/(private)/(home)': typeof privatehomeLayoutRouteWithChildren
+  '/(private)/admin-land': typeof privateAdminLandLayoutRouteWithChildren
   '/(public)/': typeof publicIndexRoute
+  '/(private)/admin-land/dashboard': typeof privateAdminLandDashboardRoute
   '/(private)/create/address': typeof privateCreateAddressRoute
-  '/(private)/home/profile': typeof privateHomeProfileRoute
-  '/(private)/home/settings': typeof privateHomeSettingsRoute
   '/(public)/auth/login': typeof publicAuthLoginRoute
   '/(public)/auth/register': typeof publicAuthRegisterRoute
-  '/(private)/home/': typeof privateHomeIndexRoute
   '/(private)/create/profile/client': typeof privateCreateProfileClientRoute
   '/(private)/create/profile/company': typeof privateCreateProfileCompanyRoute
   '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
+  '/(private)/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
+  '/(private)/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/(private)/(home)/favorites/': typeof privatehomeFavoritesIndexRoute
+  '/(private)/(home)/feed/': typeof privatehomeFeedIndexRoute
+  '/(private)/(home)/freelances/': typeof privatehomeFreelancesIndexRoute
+  '/(private)/(home)/jobs/': typeof privatehomeJobsIndexRoute
+  '/(private)/(home)/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/(private)/(home)/profile/': typeof privatehomeProfileIndexRoute
+  '/(private)/(home)/search/': typeof privatehomeSearchIndexRoute
+  '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
+  '/(private)/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
+  '/(private)/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/(private)/(home)/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
+  '/(private)/(home)/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
+  '/(private)/(home)/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
+  '/(private)/(home)/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  '/(private)/(home)/my-vacancies/$id/technical-challenge': typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
+  '/(private)/(home)/clients/$id/': typeof privatehomeClientsIdIndexRoute
+  '/(private)/(home)/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
+  '/(private)/(home)/devs/$id/': typeof privatehomeDevsIdIndexRoute
+  '/(private)/(home)/freelance-vacancies/$id/': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/(private)/(home)/freelances/$id/': typeof privatehomeFreelancesIdIndexRoute
+  '/(private)/(home)/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
+  '/(private)/(home)/posts/$id/': typeof privatehomePostsIdIndexRoute
+  '/(private)/(home)/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
+  '/(private)/(home)/posts/$id/thread/$commentId/': typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/home'
+    | '/admin-land'
     | '/'
+    | '/admin-land/dashboard'
     | '/create/address'
-    | '/home/profile'
-    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
-    | '/home/'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
+    | '/proficiency-test/$id/start'
+    | '/proficiency-test/$id/test'
+    | '/favorites/'
+    | '/feed/'
+    | '/freelances/'
+    | '/jobs/'
+    | '/my-vacancies/'
+    | '/profile/'
+    | '/search/'
+    | '/settings/'
+    | '/admin-land/company/'
+    | '/admin-land/devs/'
+    | '/freelances/$id/feed'
+    | '/my-vacancies/$id/language-assessment'
+    | '/my-vacancies/$id/screening-questionnaire'
+    | '/my-vacancies/$id/selection-process'
+    | '/my-vacancies/$id/technical-challenge'
+    | '/clients/$id/'
+    | '/companies/$id/'
+    | '/devs/$id/'
+    | '/freelance-vacancies/$id/'
+    | '/freelances/$id/'
+    | '/my-vacancies/$id/'
+    | '/posts/$id/'
+    | '/vacancies/$id/'
+    | '/posts/$id/thread/$commentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/admin-land'
     | '/'
+    | '/admin-land/dashboard'
     | '/create/address'
-    | '/home/profile'
-    | '/home/settings'
     | '/auth/login'
     | '/auth/register'
-    | '/home'
     | '/create/profile/client'
     | '/create/profile/company'
     | '/create/profile/dev'
+    | '/proficiency-test/$id/start'
+    | '/proficiency-test/$id/test'
+    | '/favorites'
+    | '/feed'
+    | '/freelances'
+    | '/jobs'
+    | '/my-vacancies'
+    | '/profile'
+    | '/search'
+    | '/settings'
+    | '/admin-land/company'
+    | '/admin-land/devs'
+    | '/freelances/$id/feed'
+    | '/my-vacancies/$id/language-assessment'
+    | '/my-vacancies/$id/screening-questionnaire'
+    | '/my-vacancies/$id/selection-process'
+    | '/my-vacancies/$id/technical-challenge'
+    | '/clients/$id'
+    | '/companies/$id'
+    | '/devs/$id'
+    | '/freelance-vacancies/$id'
+    | '/freelances/$id'
+    | '/my-vacancies/$id'
+    | '/posts/$id'
+    | '/vacancies/$id'
+    | '/posts/$id/thread/$commentId'
   id:
     | '__root__'
     | '/(public)'
-    | '/(private)/home'
+    | '/(private)/(home)'
+    | '/(private)/admin-land'
     | '/(public)/'
+    | '/(private)/admin-land/dashboard'
     | '/(private)/create/address'
-    | '/(private)/home/profile'
-    | '/(private)/home/settings'
     | '/(public)/auth/login'
     | '/(public)/auth/register'
-    | '/(private)/home/'
     | '/(private)/create/profile/client'
     | '/(private)/create/profile/company'
     | '/(private)/create/profile/dev'
+    | '/(private)/proficiency-test/$id/start'
+    | '/(private)/proficiency-test/$id/test'
+    | '/(private)/(home)/favorites/'
+    | '/(private)/(home)/feed/'
+    | '/(private)/(home)/freelances/'
+    | '/(private)/(home)/jobs/'
+    | '/(private)/(home)/my-vacancies/'
+    | '/(private)/(home)/profile/'
+    | '/(private)/(home)/search/'
+    | '/(private)/(home)/settings/'
+    | '/(private)/admin-land/company/'
+    | '/(private)/admin-land/devs/'
+    | '/(private)/(home)/freelances/$id/feed'
+    | '/(private)/(home)/my-vacancies/$id/language-assessment'
+    | '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
+    | '/(private)/(home)/my-vacancies/$id/selection-process'
+    | '/(private)/(home)/my-vacancies/$id/technical-challenge'
+    | '/(private)/(home)/clients/$id/'
+    | '/(private)/(home)/companies/$id/'
+    | '/(private)/(home)/devs/$id/'
+    | '/(private)/(home)/freelance-vacancies/$id/'
+    | '/(private)/(home)/freelances/$id/'
+    | '/(private)/(home)/my-vacancies/$id/'
+    | '/(private)/(home)/posts/$id/'
+    | '/(private)/(home)/vacancies/$id/'
+    | '/(private)/(home)/posts/$id/thread/$commentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   publicLayoutRoute: typeof publicLayoutRouteWithChildren
-  privateHomeLayoutRoute: typeof privateHomeLayoutRouteWithChildren
+  privatehomeLayoutRoute: typeof privatehomeLayoutRouteWithChildren
+  privateAdminLandLayoutRoute: typeof privateAdminLandLayoutRouteWithChildren
   privateCreateAddressRoute: typeof privateCreateAddressRoute
   privateCreateProfileClientRoute: typeof privateCreateProfileClientRoute
   privateCreateProfileCompanyRoute: typeof privateCreateProfileCompanyRoute
   privateCreateProfileDevRoute: typeof privateCreateProfileDevRoute
+  privateProficiencyTestIdStartRoute: typeof privateProficiencyTestIdStartRoute
+  privateProficiencyTestIdTestRoute: typeof privateProficiencyTestIdTestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,19 +512,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicIndexRouteImport
       parentRoute: typeof publicLayoutRoute
     }
-    '/(private)/home': {
-      id: '/(private)/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof privateHomeLayoutRouteImport
+    '/(private)/admin-land': {
+      id: '/(private)/admin-land'
+      path: '/admin-land'
+      fullPath: '/admin-land'
+      preLoaderRoute: typeof privateAdminLandLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(private)/home/': {
-      id: '/(private)/home/'
-      path: '/'
-      fullPath: '/home/'
-      preLoaderRoute: typeof privateHomeIndexRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
+    '/(private)/(home)': {
+      id: '/(private)/(home)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof privatehomeLayoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(public)/auth/register': {
       id: '/(public)/auth/register'
@@ -219,25 +540,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicAuthLoginRouteImport
       parentRoute: typeof publicLayoutRoute
     }
-    '/(private)/home/settings': {
-      id: '/(private)/home/settings'
-      path: '/settings'
-      fullPath: '/home/settings'
-      preLoaderRoute: typeof privateHomeSettingsRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
-    }
-    '/(private)/home/profile': {
-      id: '/(private)/home/profile'
-      path: '/profile'
-      fullPath: '/home/profile'
-      preLoaderRoute: typeof privateHomeProfileRouteImport
-      parentRoute: typeof privateHomeLayoutRoute
-    }
     '/(private)/create/address': {
       id: '/(private)/create/address'
       path: '/create/address'
       fullPath: '/create/address'
       preLoaderRoute: typeof privateCreateAddressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/admin-land/dashboard': {
+      id: '/(private)/admin-land/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin-land/dashboard'
+      preLoaderRoute: typeof privateAdminLandDashboardRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/admin-land/devs/': {
+      id: '/(private)/admin-land/devs/'
+      path: '/devs'
+      fullPath: '/admin-land/devs/'
+      preLoaderRoute: typeof privateAdminLandDevsIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/admin-land/company/': {
+      id: '/(private)/admin-land/company/'
+      path: '/company'
+      fullPath: '/admin-land/company/'
+      preLoaderRoute: typeof privateAdminLandCompanyIndexRouteImport
+      parentRoute: typeof privateAdminLandLayoutRoute
+    }
+    '/(private)/(home)/settings/': {
+      id: '/(private)/(home)/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof privatehomeSettingsIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/search/': {
+      id: '/(private)/(home)/search/'
+      path: '/search'
+      fullPath: '/search/'
+      preLoaderRoute: typeof privatehomeSearchIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/profile/': {
+      id: '/(private)/(home)/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof privatehomeProfileIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/': {
+      id: '/(private)/(home)/my-vacancies/'
+      path: '/my-vacancies'
+      fullPath: '/my-vacancies/'
+      preLoaderRoute: typeof privatehomeMyVacanciesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/jobs/': {
+      id: '/(private)/(home)/jobs/'
+      path: '/jobs'
+      fullPath: '/jobs/'
+      preLoaderRoute: typeof privatehomeJobsIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/freelances/': {
+      id: '/(private)/(home)/freelances/'
+      path: '/freelances'
+      fullPath: '/freelances/'
+      preLoaderRoute: typeof privatehomeFreelancesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/feed/': {
+      id: '/(private)/(home)/feed/'
+      path: '/feed'
+      fullPath: '/feed/'
+      preLoaderRoute: typeof privatehomeFeedIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/favorites/': {
+      id: '/(private)/(home)/favorites/'
+      path: '/favorites'
+      fullPath: '/favorites/'
+      preLoaderRoute: typeof privatehomeFavoritesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/proficiency-test/$id/test': {
+      id: '/(private)/proficiency-test/$id/test'
+      path: '/proficiency-test/$id/test'
+      fullPath: '/proficiency-test/$id/test'
+      preLoaderRoute: typeof privateProficiencyTestIdTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(private)/proficiency-test/$id/start': {
+      id: '/(private)/proficiency-test/$id/start'
+      path: '/proficiency-test/$id/start'
+      fullPath: '/proficiency-test/$id/start'
+      preLoaderRoute: typeof privateProficiencyTestIdStartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(private)/create/profile/dev': {
@@ -261,6 +659,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privateCreateProfileClientRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(private)/(home)/vacancies/$id/': {
+      id: '/(private)/(home)/vacancies/$id/'
+      path: '/vacancies/$id'
+      fullPath: '/vacancies/$id/'
+      preLoaderRoute: typeof privatehomeVacanciesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/posts/$id/': {
+      id: '/(private)/(home)/posts/$id/'
+      path: '/posts/$id'
+      fullPath: '/posts/$id/'
+      preLoaderRoute: typeof privatehomePostsIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/': {
+      id: '/(private)/(home)/my-vacancies/$id/'
+      path: '/my-vacancies/$id'
+      fullPath: '/my-vacancies/$id/'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/freelances/$id/': {
+      id: '/(private)/(home)/freelances/$id/'
+      path: '/freelances/$id'
+      fullPath: '/freelances/$id/'
+      preLoaderRoute: typeof privatehomeFreelancesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/freelance-vacancies/$id/': {
+      id: '/(private)/(home)/freelance-vacancies/$id/'
+      path: '/freelance-vacancies/$id'
+      fullPath: '/freelance-vacancies/$id/'
+      preLoaderRoute: typeof privatehomeFreelanceVacanciesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/devs/$id/': {
+      id: '/(private)/(home)/devs/$id/'
+      path: '/devs/$id'
+      fullPath: '/devs/$id/'
+      preLoaderRoute: typeof privatehomeDevsIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/companies/$id/': {
+      id: '/(private)/(home)/companies/$id/'
+      path: '/companies/$id'
+      fullPath: '/companies/$id/'
+      preLoaderRoute: typeof privatehomeCompaniesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/clients/$id/': {
+      id: '/(private)/(home)/clients/$id/'
+      path: '/clients/$id'
+      fullPath: '/clients/$id/'
+      preLoaderRoute: typeof privatehomeClientsIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/technical-challenge': {
+      id: '/(private)/(home)/my-vacancies/$id/technical-challenge'
+      path: '/my-vacancies/$id/technical-challenge'
+      fullPath: '/my-vacancies/$id/technical-challenge'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdTechnicalChallengeRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/selection-process': {
+      id: '/(private)/(home)/my-vacancies/$id/selection-process'
+      path: '/my-vacancies/$id/selection-process'
+      fullPath: '/my-vacancies/$id/selection-process'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdSelectionProcessRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/screening-questionnaire': {
+      id: '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
+      path: '/my-vacancies/$id/screening-questionnaire'
+      fullPath: '/my-vacancies/$id/screening-questionnaire'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/my-vacancies/$id/language-assessment': {
+      id: '/(private)/(home)/my-vacancies/$id/language-assessment'
+      path: '/my-vacancies/$id/language-assessment'
+      fullPath: '/my-vacancies/$id/language-assessment'
+      preLoaderRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/freelances/$id/feed': {
+      id: '/(private)/(home)/freelances/$id/feed'
+      path: '/freelances/$id/feed'
+      fullPath: '/freelances/$id/feed'
+      preLoaderRoute: typeof privatehomeFreelancesIdFeedRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/posts/$id/thread/$commentId/': {
+      id: '/(private)/(home)/posts/$id/thread/$commentId/'
+      path: '/posts/$id/thread/$commentId'
+      fullPath: '/posts/$id/thread/$commentId/'
+      preLoaderRoute: typeof privatehomePostsIdThreadCommentIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
   }
 }
 
@@ -280,28 +776,93 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
   publicLayoutRouteChildren,
 )
 
-interface privateHomeLayoutRouteChildren {
-  privateHomeProfileRoute: typeof privateHomeProfileRoute
-  privateHomeSettingsRoute: typeof privateHomeSettingsRoute
-  privateHomeIndexRoute: typeof privateHomeIndexRoute
+interface privatehomeLayoutRouteChildren {
+  privatehomeFavoritesIndexRoute: typeof privatehomeFavoritesIndexRoute
+  privatehomeFeedIndexRoute: typeof privatehomeFeedIndexRoute
+  privatehomeFreelancesIndexRoute: typeof privatehomeFreelancesIndexRoute
+  privatehomeJobsIndexRoute: typeof privatehomeJobsIndexRoute
+  privatehomeMyVacanciesIndexRoute: typeof privatehomeMyVacanciesIndexRoute
+  privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
+  privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
+  privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
+  privatehomeFreelancesIdFeedRoute: typeof privatehomeFreelancesIdFeedRoute
+  privatehomeMyVacanciesIdLanguageAssessmentRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
+  privatehomeMyVacanciesIdScreeningQuestionnaireRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
+  privatehomeMyVacanciesIdSelectionProcessRoute: typeof privatehomeMyVacanciesIdSelectionProcessRoute
+  privatehomeMyVacanciesIdTechnicalChallengeRoute: typeof privatehomeMyVacanciesIdTechnicalChallengeRoute
+  privatehomeClientsIdIndexRoute: typeof privatehomeClientsIdIndexRoute
+  privatehomeCompaniesIdIndexRoute: typeof privatehomeCompaniesIdIndexRoute
+  privatehomeDevsIdIndexRoute: typeof privatehomeDevsIdIndexRoute
+  privatehomeFreelanceVacanciesIdIndexRoute: typeof privatehomeFreelanceVacanciesIdIndexRoute
+  privatehomeFreelancesIdIndexRoute: typeof privatehomeFreelancesIdIndexRoute
+  privatehomeMyVacanciesIdIndexRoute: typeof privatehomeMyVacanciesIdIndexRoute
+  privatehomePostsIdIndexRoute: typeof privatehomePostsIdIndexRoute
+  privatehomeVacanciesIdIndexRoute: typeof privatehomeVacanciesIdIndexRoute
+  privatehomePostsIdThreadCommentIdIndexRoute: typeof privatehomePostsIdThreadCommentIdIndexRoute
 }
 
-const privateHomeLayoutRouteChildren: privateHomeLayoutRouteChildren = {
-  privateHomeProfileRoute: privateHomeProfileRoute,
-  privateHomeSettingsRoute: privateHomeSettingsRoute,
-  privateHomeIndexRoute: privateHomeIndexRoute,
+const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
+  privatehomeFavoritesIndexRoute: privatehomeFavoritesIndexRoute,
+  privatehomeFeedIndexRoute: privatehomeFeedIndexRoute,
+  privatehomeFreelancesIndexRoute: privatehomeFreelancesIndexRoute,
+  privatehomeJobsIndexRoute: privatehomeJobsIndexRoute,
+  privatehomeMyVacanciesIndexRoute: privatehomeMyVacanciesIndexRoute,
+  privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
+  privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
+  privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,
+  privatehomeFreelancesIdFeedRoute: privatehomeFreelancesIdFeedRoute,
+  privatehomeMyVacanciesIdLanguageAssessmentRoute:
+    privatehomeMyVacanciesIdLanguageAssessmentRoute,
+  privatehomeMyVacanciesIdScreeningQuestionnaireRoute:
+    privatehomeMyVacanciesIdScreeningQuestionnaireRoute,
+  privatehomeMyVacanciesIdSelectionProcessRoute:
+    privatehomeMyVacanciesIdSelectionProcessRoute,
+  privatehomeMyVacanciesIdTechnicalChallengeRoute:
+    privatehomeMyVacanciesIdTechnicalChallengeRoute,
+  privatehomeClientsIdIndexRoute: privatehomeClientsIdIndexRoute,
+  privatehomeCompaniesIdIndexRoute: privatehomeCompaniesIdIndexRoute,
+  privatehomeDevsIdIndexRoute: privatehomeDevsIdIndexRoute,
+  privatehomeFreelanceVacanciesIdIndexRoute:
+    privatehomeFreelanceVacanciesIdIndexRoute,
+  privatehomeFreelancesIdIndexRoute: privatehomeFreelancesIdIndexRoute,
+  privatehomeMyVacanciesIdIndexRoute: privatehomeMyVacanciesIdIndexRoute,
+  privatehomePostsIdIndexRoute: privatehomePostsIdIndexRoute,
+  privatehomeVacanciesIdIndexRoute: privatehomeVacanciesIdIndexRoute,
+  privatehomePostsIdThreadCommentIdIndexRoute:
+    privatehomePostsIdThreadCommentIdIndexRoute,
 }
 
-const privateHomeLayoutRouteWithChildren =
-  privateHomeLayoutRoute._addFileChildren(privateHomeLayoutRouteChildren)
+const privatehomeLayoutRouteWithChildren =
+  privatehomeLayoutRoute._addFileChildren(privatehomeLayoutRouteChildren)
+
+interface privateAdminLandLayoutRouteChildren {
+  privateAdminLandDashboardRoute: typeof privateAdminLandDashboardRoute
+  privateAdminLandCompanyIndexRoute: typeof privateAdminLandCompanyIndexRoute
+  privateAdminLandDevsIndexRoute: typeof privateAdminLandDevsIndexRoute
+}
+
+const privateAdminLandLayoutRouteChildren: privateAdminLandLayoutRouteChildren =
+  {
+    privateAdminLandDashboardRoute: privateAdminLandDashboardRoute,
+    privateAdminLandCompanyIndexRoute: privateAdminLandCompanyIndexRoute,
+    privateAdminLandDevsIndexRoute: privateAdminLandDevsIndexRoute,
+  }
+
+const privateAdminLandLayoutRouteWithChildren =
+  privateAdminLandLayoutRoute._addFileChildren(
+    privateAdminLandLayoutRouteChildren,
+  )
 
 const rootRouteChildren: RootRouteChildren = {
   publicLayoutRoute: publicLayoutRouteWithChildren,
-  privateHomeLayoutRoute: privateHomeLayoutRouteWithChildren,
+  privatehomeLayoutRoute: privatehomeLayoutRouteWithChildren,
+  privateAdminLandLayoutRoute: privateAdminLandLayoutRouteWithChildren,
   privateCreateAddressRoute: privateCreateAddressRoute,
   privateCreateProfileClientRoute: privateCreateProfileClientRoute,
   privateCreateProfileCompanyRoute: privateCreateProfileCompanyRoute,
   privateCreateProfileDevRoute: privateCreateProfileDevRoute,
+  privateProficiencyTestIdStartRoute: privateProficiencyTestIdStartRoute,
+  privateProficiencyTestIdTestRoute: privateProficiencyTestIdTestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

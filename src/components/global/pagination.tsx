@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label";
 import {
 	Pagination,
 	PaginationContent,
-	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
 } from "@/components/ui/pagination";
@@ -21,7 +20,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import type { IndexProjectHistory200DataPagination } from "@/api/generated/models";
 import { useTranslation } from "react-i18next";
 
 export type GenericPagination = {

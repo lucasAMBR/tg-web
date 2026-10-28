@@ -122,7 +122,8 @@ export default function RegisterSteps() {
 					CustomToaster.successToast(t("toast.success.register"));
 				},
 				onError: (error) => {
-					const apiError = error as AxiosError<ApiError>;
+					// O orval tipa TError como o body da resposta, mas o axios lança um AxiosError.
+					const apiError = error as unknown as AxiosError<ApiError>;
 
 					CustomToaster.errorToast(
 						apiError.response?.data.message ?? "Something goes wrong!",
@@ -150,13 +151,13 @@ export default function RegisterSteps() {
 			}
 
 			const homeRoutes = {
-				dev: "/home",
-				company: "/home",
-				client: "/home",
+				dev: "/feed",
+				company: "/feed",
+				client: "/feed",
 			};
 
 			navigate({ to: homeRoutes[role] || "/dashboard" });
-		} catch (error) {}
+		} catch {}
 	};
 
 	const redirectToLogin = () => {

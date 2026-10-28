@@ -1,25 +1,26 @@
-import type { AdditionalCourseModel } from "@/api/generated/models";
+import type { AdditionalCourseResource } from "@/api/generated/models";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useAuthStore } from "@/stores/auth-store";
 import { Edit, EllipsisVertical, School, Trash } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface CertificationCardProps {
     profileId: string,
-    certificate: AdditionalCourseModel,
-    openUpdate: (cert: AdditionalCourseModel) => void,
-    openDelete: (cert: AdditionalCourseModel) => void
+    certificate: AdditionalCourseResource,
+    openUpdate: (cert: AdditionalCourseResource) => void,
+    openDelete: (cert: AdditionalCourseResource) => void
 }
 
 export default function CertificationCard({
-    profileId, 
     certificate, 
     openDelete, 
     openUpdate
 }: CertificationCardProps){
 
-	const { t } = useTranslation()	;
+	const { t } = useTranslation();
+	const { user } = useAuthStore();
 
     return(
     <Card className="p-4">
@@ -36,6 +37,7 @@ export default function CertificationCard({
 							</span>
 						</CardDescription>
 					</div>
+					{user?.dev_profile?.id === certificate.dev_profile_id || user?.role.includes("admin") && (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button size={"icon"} variant={"ghost"}>
@@ -57,6 +59,7 @@ export default function CertificationCard({
 							</DropdownMenuGroup>
 						</DropdownMenuContent>
 					</DropdownMenu>
+					)}
 				</div>
 			</CardHeader>
 		</Card>

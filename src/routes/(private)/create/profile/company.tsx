@@ -12,12 +12,15 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { pageTitle } from "@/utils/page-title";
 
 const staticData = {
 	requiredPermissions: ["company_profile.create"],
 };
 
 export const Route = createFileRoute("/(private)/create/profile/company")({
+	head: () => ({ meta: [{ title: pageTitle("create_profile") }] }),
+	staticData: { breadcrumb: { labelKey: "page_title.create_profile" } },
 	component: RouteComponent,
 	beforeLoad: async () => {
 		await ensureAuthenticated();
@@ -33,25 +36,27 @@ function RouteComponent() {
 				<div className="w-full h-full"></div>
 			</div>
 			<LanguagePicker />
-			<div className="flex-1 relative m-4 flex flex-col items-center justify-center">
-				<LogoutButton text={t("profile_create.logout_dialog.description")}>
-					<Button variant={"ghost"} className="absolute top-0 left-0">
-						<LogOut /> {t("general.logout")}
-					</Button>
-				</LogoutButton>
-				<div className="flex flex-col justify-center items-center mb-6">
-					<Logo className="w-12 fill-primary" />
-					<p className="font-[Agbalumo] text-primary text-5xl">
-						{env.APP_NAME}
+			<div className="flex-1 overflow-y-auto">
+				<div className="relative min-h-full flex flex-col items-center justify-center p-4 py-12">
+					<LogoutButton text={t("profile_create.logout_dialog.description")}>
+						<Button variant={"ghost"} className="absolute top-4 left-4">
+							<LogOut /> {t("general.logout")}
+						</Button>
+					</LogoutButton>
+					<div className="flex flex-col justify-center items-center mb-6">
+						<Logo className="w-12 fill-primary" />
+						<p className="font-[Agbalumo] text-primary text-5xl">
+							{env.APP_NAME}
+						</p>
+					</div>
+					<h2 className="font-[Anta] text-primary text-3xl mb-6">
+						{t("profile_create.company.title")}
+					</h2>
+					<p className="max-w-[700px] text-center mb-6">
+						{t("profile_create.company.description")}
 					</p>
+					<CompanyProfileForm />
 				</div>
-				<h2 className="font-[Anta] text-primary text-3xl mb-6">
-					{t("profile_create.company.title")}
-				</h2>
-				<p className="max-w-[700px] text-center mb-6">
-					{t("profile_create.company.description")}
-				</p>
-				<CompanyProfileForm />
 			</div>
 			<ThemeToggle />
 		</div>

@@ -46,6 +46,22 @@ export async function ensureProfileCreated(): Promise<void> {
 	}
 }
 
+/**
+ * Barra a rota para quem não tem uma das roles. Serve para telas cujo menu fica
+ * escondido para a role, mas que ainda podem ser abertas pela URL.
+ */
+export async function ensureRole(allowedRoles: UserRole[]): Promise<void> {
+	await useAuthStore.getState().initialize();
+
+	const { user } = useAuthStore.getState();
+
+	const role = user?.role[0] as UserRole | undefined;
+
+	if (!role || !allowedRoles.includes(role)) {
+		throw redirect({ to: "/feed" });
+	}
+}
+
 export async function redirectIfAuthenticated(): Promise<void> {
 	const token = getStoredToken();
 	if (!token) return;
@@ -57,6 +73,10 @@ export async function redirectIfAuthenticated(): Promise<void> {
 	if (isAuthenticated && user) {
 		const role = user.role[0] as UserRole;
 
+		if (role === "admin") {
+			throw redirect({ to: "/admin-land/dashboard" });
+		}
+
 		const hasProfile =
 			(role === "dev" && user.dev_profile) ||
 			(role === "company" && user.company_profile) ||
@@ -67,9 +87,10 @@ export async function redirectIfAuthenticated(): Promise<void> {
 		}
 
 		const homeRoutes: Record<UserRole, string> = {
-			dev: "/home",
-			company: "/home",
-			client: "/home",
+			dev: "/feed",
+			company: "/feed",
+			client: "/feed",
+			admin: "/admin-land/dashboard",
 		};
 
 		throw redirect({ to: homeRoutes[role] || "/dashboard" });
