@@ -17,6 +17,9 @@ export const COMMENTS_PER_PAGE = 10;
 /** Respostas por página em `GET /comment/{id}/replies`. */
 export const REPLIES_PER_PAGE = 10;
 
+/** Participantes por página em `GET /post/{id}/participants`, ao lado do post. */
+export const POST_PARTICIPANTS_PER_PAGE = 5;
+
 /** Limite do `content` no `StorePostRequest`. */
 export const POST_CONTENT_MAX_LENGTH = 5000;
 

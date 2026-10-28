@@ -7,14 +7,18 @@ import SearchAllResults from "./search-all-results";
 import SearchClientResults from "./search-client-results";
 import SearchCompanyResults from "./search-company-results";
 import SearchDevResults from "./search-dev-results";
+import SearchFreelanceResults from "./search-freelance-results";
 import SearchVacancyResults from "./search-vacancy-results";
 import { useGlobalSearchParams } from "@/hooks/filters/use-global-search-params";
+import { useAuthStore } from "@/stores/auth-store";
+import { FREELANCE_BROWSER_ROLES } from "@/types/freelance";
+import { getUserMainRole } from "@/utils/role-helper";
 import { useQueryClient } from "@tanstack/react-query";
 import { getSearchQueryKey } from "@/api/generated/search/search";
 import { Search } from "lucide-react";
 
 export type SearchGroup =
-  "all" | "developers" | "companies" | "client" | "vacancies";
+  "all" | "developers" | "companies" | "client" | "vacancies" | "freelances";
 
 export default function SearchTab() {
   const { t } = useTranslation();
@@ -22,6 +26,10 @@ export default function SearchTab() {
   const queryClient = useQueryClient();
 
   const { setFilterParams } = useGlobalSearchParams();
+
+  // Empresa não acessa vagas freelance: a listagem responde 403
+  const role = getUserMainRole(useAuthStore((state) => state.user));
+  const canSeeFreelances = !!role && FREELANCE_BROWSER_ROLES.includes(role);
 
   const [term, setTerm] = useState<string>("");
   const [group, setGroup] = useState<SearchGroup>("all");
@@ -77,13 +85,21 @@ export default function SearchTab() {
         <ToggleGroupItem value="vacancies">
           {t("search.group.vacancies")}
         </ToggleGroupItem>
+        {canSeeFreelances && (
+          <ToggleGroupItem value="freelances">
+            {t("search.group.freelances")}
+          </ToggleGroupItem>
+        )}
       </ToggleGroup>
       <div>
-        {group === "all" && <SearchAllResults setTab={setGroup} />}
+        {group === "all" && (
+          <SearchAllResults setTab={setGroup} showFreelances={canSeeFreelances} />
+        )}
         {group === "developers" && <SearchDevResults />}
         {group === "companies" && <SearchCompanyResults />}
         {group === "client" && <SearchClientResults />}
         {group === "vacancies" && <SearchVacancyResults />}
+        {group === "freelances" && canSeeFreelances && <SearchFreelanceResults />}
       </div>
     </div>
   );

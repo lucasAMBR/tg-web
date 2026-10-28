@@ -17,12 +17,18 @@ import SearchCompanyCard from "./search-company-card";
 import SearchDevCard from "./search-dev-card";
 import SearchResultSkeleton from "./search-result-skeleton";
 import SearchVacancyCard from "./search-vacancy-card";
+import FreelanceVacancyCard from "@/components/freelance/freelance-vacancy-card";
 
 interface SearchAllResultsProps {
   setTab: (tab: SearchGroup) => void;
+  /** Empresa não acessa freelas: o grupo nem aparece. */
+  showFreelances?: boolean;
 }
 
-export default function SearchAllResults({ setTab }: SearchAllResultsProps) {
+export default function SearchAllResults({
+  setTab,
+  showFreelances = false,
+}: SearchAllResultsProps) {
   const { t } = useTranslation();
 
   const { page, search } = useGlobalSearchParams();
@@ -46,6 +52,10 @@ export default function SearchAllResults({ setTab }: SearchAllResultsProps) {
 
   const vacancyList = globalData?.data.job_vacancies.data ?? [];
   const vacancyCount = globalData?.data.job_vacancies.pagination.total ?? 0;
+
+  const freelanceList = globalData?.data.freelance_job_vacancies.data ?? [];
+  const freelanceCount =
+    globalData?.data.freelance_job_vacancies.pagination.total ?? 0;
 
   return (
     <div className="w-full flex flex-col gap-6">
@@ -215,6 +225,50 @@ export default function SearchAllResults({ setTab }: SearchAllResultsProps) {
           </Empty>
         )}
       </div>
+
+      {showFreelances && (
+        <div className="w-full flex flex-col gap-2">
+          <h3 className="text-lg font-medium flex flex-row gap-2">
+            {t("search.group.freelances")}
+            {freelanceCount > 3 ? (
+              <Badge variant={"secondary"}>
+                {freelanceCount}
+              </Badge>)
+              : null
+            }
+          </h3>
+          {isLoading && <SearchResultSkeleton />}
+          {!isLoading && freelanceList.length > 0 && (
+            <div className="w-full flex flex-col gap-2">
+              {freelanceList.map((freelance) => (
+                <FreelanceVacancyCard key={freelance.id} vacancy={freelance} />
+              ))}
+              {freelanceCount > 3 && (
+                <Button
+                  className="w-full"
+                  variant={"outline"}
+                  onClick={() => setTab("freelances")}
+                >
+                  <Eye /> {t("search.see_more")}
+                </Button>
+              )}
+            </div>
+          )}
+          {!isLoading && freelanceList.length === 0 && (
+            <Empty className="border">
+              <EmptyHeader>
+                <EmptyMedia variant={"icon"}>
+                  <Briefcase />
+                </EmptyMedia>
+                <EmptyTitle>{t("search.empty.freelances_title")}</EmptyTitle>
+                <EmptyDescription>
+                  {t("search.empty.freelances_description")}
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
+          )}
+        </div>
+      )}
     </div>
   );
 }

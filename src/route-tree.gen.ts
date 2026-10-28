@@ -24,6 +24,7 @@ import { Route as privatehomeSearchIndexRouteImport } from './routes/(private)/(
 import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/(home)/profile/index'
 import { Route as privatehomeMyVacanciesIndexRouteImport } from './routes/(private)/(home)/my-vacancies/index'
 import { Route as privatehomeJobsIndexRouteImport } from './routes/(private)/(home)/jobs/index'
+import { Route as privatehomeFreelancesIndexRouteImport } from './routes/(private)/(home)/freelances/index'
 import { Route as privatehomeFeedIndexRouteImport } from './routes/(private)/(home)/feed/index'
 import { Route as privatehomeFavoritesIndexRouteImport } from './routes/(private)/(home)/favorites/index'
 import { Route as privateProficiencyTestIdTestRouteImport } from './routes/(private)/proficiency-test/$id/test'
@@ -34,6 +35,8 @@ import { Route as privateCreateProfileClientRouteImport } from './routes/(privat
 import { Route as privatehomeVacanciesIdIndexRouteImport } from './routes/(private)/(home)/vacancies/$id/index'
 import { Route as privatehomePostsIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/index'
 import { Route as privatehomeMyVacanciesIdIndexRouteImport } from './routes/(private)/(home)/my-vacancies/$id/index'
+import { Route as privatehomeFreelancesIdIndexRouteImport } from './routes/(private)/(home)/freelances/$id/index'
+import { Route as privatehomeFreelanceVacanciesIdIndexRouteImport } from './routes/(private)/(home)/freelance-vacancies/$id/index'
 import { Route as privatehomeDevsIdIndexRouteImport } from './routes/(private)/(home)/devs/$id/index'
 import { Route as privatehomeCompaniesIdIndexRouteImport } from './routes/(private)/(home)/companies/$id/index'
 import { Route as privatehomeClientsIdIndexRouteImport } from './routes/(private)/(home)/clients/$id/index'
@@ -41,6 +44,7 @@ import { Route as privatehomeMyVacanciesIdTechnicalChallengeRouteImport } from '
 import { Route as privatehomeMyVacanciesIdSelectionProcessRouteImport } from './routes/(private)/(home)/my-vacancies/$id/selection-process'
 import { Route as privatehomeMyVacanciesIdScreeningQuestionnaireRouteImport } from './routes/(private)/(home)/my-vacancies/$id/screening-questionnaire'
 import { Route as privatehomeMyVacanciesIdLanguageAssessmentRouteImport } from './routes/(private)/(home)/my-vacancies/$id/language-assessment'
+import { Route as privatehomeFreelancesIdFeedRouteImport } from './routes/(private)/(home)/freelances/$id/feed'
 import { Route as privatehomePostsIdThreadCommentIdIndexRouteImport } from './routes/(private)/(home)/posts/$id/thread/$commentId/index'
 
 const publicLayoutRoute = publicLayoutRouteImport.update({
@@ -121,6 +125,12 @@ const privatehomeJobsIndexRoute = privatehomeJobsIndexRouteImport.update({
   path: '/jobs/',
   getParentRoute: () => privatehomeLayoutRoute,
 } as any)
+const privatehomeFreelancesIndexRoute =
+  privatehomeFreelancesIndexRouteImport.update({
+    id: '/freelances/',
+    path: '/freelances/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomeFeedIndexRoute = privatehomeFeedIndexRouteImport.update({
   id: '/feed/',
   path: '/feed/',
@@ -178,6 +188,18 @@ const privatehomeMyVacanciesIdIndexRoute =
     path: '/my-vacancies/$id/',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomeFreelancesIdIndexRoute =
+  privatehomeFreelancesIdIndexRouteImport.update({
+    id: '/freelances/$id/',
+    path: '/freelances/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeFreelanceVacanciesIdIndexRoute =
+  privatehomeFreelanceVacanciesIdIndexRouteImport.update({
+    id: '/freelance-vacancies/$id/',
+    path: '/freelance-vacancies/$id/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomeDevsIdIndexRoute = privatehomeDevsIdIndexRouteImport.update({
   id: '/devs/$id/',
   path: '/devs/$id/',
@@ -219,6 +241,12 @@ const privatehomeMyVacanciesIdLanguageAssessmentRoute =
     path: '/my-vacancies/$id/language-assessment',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomeFreelancesIdFeedRoute =
+  privatehomeFreelancesIdFeedRouteImport.update({
+    id: '/freelances/$id/feed',
+    path: '/freelances/$id/feed',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomePostsIdThreadCommentIdIndexRoute =
   privatehomePostsIdThreadCommentIdIndexRouteImport.update({
     id: '/posts/$id/thread/$commentId/',
@@ -240,6 +268,7 @@ export interface FileRoutesByFullPath {
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
   '/favorites/': typeof privatehomeFavoritesIndexRoute
   '/feed/': typeof privatehomeFeedIndexRoute
+  '/freelances/': typeof privatehomeFreelancesIndexRoute
   '/jobs/': typeof privatehomeJobsIndexRoute
   '/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
   '/profile/': typeof privatehomeProfileIndexRoute
@@ -247,6 +276,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof privatehomeSettingsIndexRoute
   '/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
   '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
@@ -254,6 +284,8 @@ export interface FileRoutesByFullPath {
   '/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id/': typeof privatehomeDevsIdIndexRoute
+  '/freelance-vacancies/$id/': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/freelances/$id/': typeof privatehomeFreelancesIdIndexRoute
   '/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
   '/posts/$id/': typeof privatehomePostsIdIndexRoute
   '/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
@@ -273,6 +305,7 @@ export interface FileRoutesByTo {
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
   '/favorites': typeof privatehomeFavoritesIndexRoute
   '/feed': typeof privatehomeFeedIndexRoute
+  '/freelances': typeof privatehomeFreelancesIndexRoute
   '/jobs': typeof privatehomeJobsIndexRoute
   '/my-vacancies': typeof privatehomeMyVacanciesIndexRoute
   '/profile': typeof privatehomeProfileIndexRoute
@@ -280,6 +313,7 @@ export interface FileRoutesByTo {
   '/settings': typeof privatehomeSettingsIndexRoute
   '/admin-land/company': typeof privateAdminLandCompanyIndexRoute
   '/admin-land/devs': typeof privateAdminLandDevsIndexRoute
+  '/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
   '/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
@@ -287,6 +321,8 @@ export interface FileRoutesByTo {
   '/clients/$id': typeof privatehomeClientsIdIndexRoute
   '/companies/$id': typeof privatehomeCompaniesIdIndexRoute
   '/devs/$id': typeof privatehomeDevsIdIndexRoute
+  '/freelance-vacancies/$id': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/freelances/$id': typeof privatehomeFreelancesIdIndexRoute
   '/my-vacancies/$id': typeof privatehomeMyVacanciesIdIndexRoute
   '/posts/$id': typeof privatehomePostsIdIndexRoute
   '/vacancies/$id': typeof privatehomeVacanciesIdIndexRoute
@@ -309,6 +345,7 @@ export interface FileRoutesById {
   '/(private)/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
   '/(private)/(home)/favorites/': typeof privatehomeFavoritesIndexRoute
   '/(private)/(home)/feed/': typeof privatehomeFeedIndexRoute
+  '/(private)/(home)/freelances/': typeof privatehomeFreelancesIndexRoute
   '/(private)/(home)/jobs/': typeof privatehomeJobsIndexRoute
   '/(private)/(home)/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
   '/(private)/(home)/profile/': typeof privatehomeProfileIndexRoute
@@ -316,6 +353,7 @@ export interface FileRoutesById {
   '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
   '/(private)/admin-land/company/': typeof privateAdminLandCompanyIndexRoute
   '/(private)/admin-land/devs/': typeof privateAdminLandDevsIndexRoute
+  '/(private)/(home)/freelances/$id/feed': typeof privatehomeFreelancesIdFeedRoute
   '/(private)/(home)/my-vacancies/$id/language-assessment': typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   '/(private)/(home)/my-vacancies/$id/screening-questionnaire': typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   '/(private)/(home)/my-vacancies/$id/selection-process': typeof privatehomeMyVacanciesIdSelectionProcessRoute
@@ -323,6 +361,8 @@ export interface FileRoutesById {
   '/(private)/(home)/clients/$id/': typeof privatehomeClientsIdIndexRoute
   '/(private)/(home)/companies/$id/': typeof privatehomeCompaniesIdIndexRoute
   '/(private)/(home)/devs/$id/': typeof privatehomeDevsIdIndexRoute
+  '/(private)/(home)/freelance-vacancies/$id/': typeof privatehomeFreelanceVacanciesIdIndexRoute
+  '/(private)/(home)/freelances/$id/': typeof privatehomeFreelancesIdIndexRoute
   '/(private)/(home)/my-vacancies/$id/': typeof privatehomeMyVacanciesIdIndexRoute
   '/(private)/(home)/posts/$id/': typeof privatehomePostsIdIndexRoute
   '/(private)/(home)/vacancies/$id/': typeof privatehomeVacanciesIdIndexRoute
@@ -344,6 +384,7 @@ export interface FileRouteTypes {
     | '/proficiency-test/$id/test'
     | '/favorites/'
     | '/feed/'
+    | '/freelances/'
     | '/jobs/'
     | '/my-vacancies/'
     | '/profile/'
@@ -351,6 +392,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/admin-land/company/'
     | '/admin-land/devs/'
+    | '/freelances/$id/feed'
     | '/my-vacancies/$id/language-assessment'
     | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
@@ -358,6 +400,8 @@ export interface FileRouteTypes {
     | '/clients/$id/'
     | '/companies/$id/'
     | '/devs/$id/'
+    | '/freelance-vacancies/$id/'
+    | '/freelances/$id/'
     | '/my-vacancies/$id/'
     | '/posts/$id/'
     | '/vacancies/$id/'
@@ -377,6 +421,7 @@ export interface FileRouteTypes {
     | '/proficiency-test/$id/test'
     | '/favorites'
     | '/feed'
+    | '/freelances'
     | '/jobs'
     | '/my-vacancies'
     | '/profile'
@@ -384,6 +429,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/admin-land/company'
     | '/admin-land/devs'
+    | '/freelances/$id/feed'
     | '/my-vacancies/$id/language-assessment'
     | '/my-vacancies/$id/screening-questionnaire'
     | '/my-vacancies/$id/selection-process'
@@ -391,6 +437,8 @@ export interface FileRouteTypes {
     | '/clients/$id'
     | '/companies/$id'
     | '/devs/$id'
+    | '/freelance-vacancies/$id'
+    | '/freelances/$id'
     | '/my-vacancies/$id'
     | '/posts/$id'
     | '/vacancies/$id'
@@ -412,6 +460,7 @@ export interface FileRouteTypes {
     | '/(private)/proficiency-test/$id/test'
     | '/(private)/(home)/favorites/'
     | '/(private)/(home)/feed/'
+    | '/(private)/(home)/freelances/'
     | '/(private)/(home)/jobs/'
     | '/(private)/(home)/my-vacancies/'
     | '/(private)/(home)/profile/'
@@ -419,6 +468,7 @@ export interface FileRouteTypes {
     | '/(private)/(home)/settings/'
     | '/(private)/admin-land/company/'
     | '/(private)/admin-land/devs/'
+    | '/(private)/(home)/freelances/$id/feed'
     | '/(private)/(home)/my-vacancies/$id/language-assessment'
     | '/(private)/(home)/my-vacancies/$id/screening-questionnaire'
     | '/(private)/(home)/my-vacancies/$id/selection-process'
@@ -426,6 +476,8 @@ export interface FileRouteTypes {
     | '/(private)/(home)/clients/$id/'
     | '/(private)/(home)/companies/$id/'
     | '/(private)/(home)/devs/$id/'
+    | '/(private)/(home)/freelance-vacancies/$id/'
+    | '/(private)/(home)/freelances/$id/'
     | '/(private)/(home)/my-vacancies/$id/'
     | '/(private)/(home)/posts/$id/'
     | '/(private)/(home)/vacancies/$id/'
@@ -551,6 +603,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeJobsIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/freelances/': {
+      id: '/(private)/(home)/freelances/'
+      path: '/freelances'
+      fullPath: '/freelances/'
+      preLoaderRoute: typeof privatehomeFreelancesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/(home)/feed/': {
       id: '/(private)/(home)/feed/'
       path: '/feed'
@@ -621,6 +680,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeMyVacanciesIdIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/freelances/$id/': {
+      id: '/(private)/(home)/freelances/$id/'
+      path: '/freelances/$id'
+      fullPath: '/freelances/$id/'
+      preLoaderRoute: typeof privatehomeFreelancesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/freelance-vacancies/$id/': {
+      id: '/(private)/(home)/freelance-vacancies/$id/'
+      path: '/freelance-vacancies/$id'
+      fullPath: '/freelance-vacancies/$id/'
+      preLoaderRoute: typeof privatehomeFreelanceVacanciesIdIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/(home)/devs/$id/': {
       id: '/(private)/(home)/devs/$id/'
       path: '/devs/$id'
@@ -670,6 +743,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/freelances/$id/feed': {
+      id: '/(private)/(home)/freelances/$id/feed'
+      path: '/freelances/$id/feed'
+      fullPath: '/freelances/$id/feed'
+      preLoaderRoute: typeof privatehomeFreelancesIdFeedRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/(home)/posts/$id/thread/$commentId/': {
       id: '/(private)/(home)/posts/$id/thread/$commentId/'
       path: '/posts/$id/thread/$commentId'
@@ -699,11 +779,13 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 interface privatehomeLayoutRouteChildren {
   privatehomeFavoritesIndexRoute: typeof privatehomeFavoritesIndexRoute
   privatehomeFeedIndexRoute: typeof privatehomeFeedIndexRoute
+  privatehomeFreelancesIndexRoute: typeof privatehomeFreelancesIndexRoute
   privatehomeJobsIndexRoute: typeof privatehomeJobsIndexRoute
   privatehomeMyVacanciesIndexRoute: typeof privatehomeMyVacanciesIndexRoute
   privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
   privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
   privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
+  privatehomeFreelancesIdFeedRoute: typeof privatehomeFreelancesIdFeedRoute
   privatehomeMyVacanciesIdLanguageAssessmentRoute: typeof privatehomeMyVacanciesIdLanguageAssessmentRoute
   privatehomeMyVacanciesIdScreeningQuestionnaireRoute: typeof privatehomeMyVacanciesIdScreeningQuestionnaireRoute
   privatehomeMyVacanciesIdSelectionProcessRoute: typeof privatehomeMyVacanciesIdSelectionProcessRoute
@@ -711,6 +793,8 @@ interface privatehomeLayoutRouteChildren {
   privatehomeClientsIdIndexRoute: typeof privatehomeClientsIdIndexRoute
   privatehomeCompaniesIdIndexRoute: typeof privatehomeCompaniesIdIndexRoute
   privatehomeDevsIdIndexRoute: typeof privatehomeDevsIdIndexRoute
+  privatehomeFreelanceVacanciesIdIndexRoute: typeof privatehomeFreelanceVacanciesIdIndexRoute
+  privatehomeFreelancesIdIndexRoute: typeof privatehomeFreelancesIdIndexRoute
   privatehomeMyVacanciesIdIndexRoute: typeof privatehomeMyVacanciesIdIndexRoute
   privatehomePostsIdIndexRoute: typeof privatehomePostsIdIndexRoute
   privatehomeVacanciesIdIndexRoute: typeof privatehomeVacanciesIdIndexRoute
@@ -720,11 +804,13 @@ interface privatehomeLayoutRouteChildren {
 const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeFavoritesIndexRoute: privatehomeFavoritesIndexRoute,
   privatehomeFeedIndexRoute: privatehomeFeedIndexRoute,
+  privatehomeFreelancesIndexRoute: privatehomeFreelancesIndexRoute,
   privatehomeJobsIndexRoute: privatehomeJobsIndexRoute,
   privatehomeMyVacanciesIndexRoute: privatehomeMyVacanciesIndexRoute,
   privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
   privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
   privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,
+  privatehomeFreelancesIdFeedRoute: privatehomeFreelancesIdFeedRoute,
   privatehomeMyVacanciesIdLanguageAssessmentRoute:
     privatehomeMyVacanciesIdLanguageAssessmentRoute,
   privatehomeMyVacanciesIdScreeningQuestionnaireRoute:
@@ -736,6 +822,9 @@ const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeClientsIdIndexRoute: privatehomeClientsIdIndexRoute,
   privatehomeCompaniesIdIndexRoute: privatehomeCompaniesIdIndexRoute,
   privatehomeDevsIdIndexRoute: privatehomeDevsIdIndexRoute,
+  privatehomeFreelanceVacanciesIdIndexRoute:
+    privatehomeFreelanceVacanciesIdIndexRoute,
+  privatehomeFreelancesIdIndexRoute: privatehomeFreelancesIdIndexRoute,
   privatehomeMyVacanciesIdIndexRoute: privatehomeMyVacanciesIdIndexRoute,
   privatehomePostsIdIndexRoute: privatehomePostsIdIndexRoute,
   privatehomeVacanciesIdIndexRoute: privatehomeVacanciesIdIndexRoute,

@@ -121,7 +121,7 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
-							<SidebarItem title={t("sidebar.sections.freelancers")} icon={User} url="/freelancers" />
+							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
 					)}
 

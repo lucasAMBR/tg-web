@@ -5,18 +5,19 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { FreelanceJobTypeEnum } from './freelanceJobTypeEnum';
-import type { SalaryTypeEnum } from './salaryTypeEnum';
+import type { DevSpecialtyEnum } from './devSpecialtyEnum';
 import type { SeniorityLevelEnum } from './seniorityLevelEnum';
 import type { UpdateFreelanceJobVacancyRequestLanguagesItem } from './updateFreelanceJobVacancyRequestLanguagesItem';
 
 export interface UpdateFreelanceJobVacancyRequest {
+  /** @maxLength 255 */
   title?: string;
   description?: string;
   job_type?: FreelanceJobTypeEnum;
-  salary_type?: SalaryTypeEnum;
-  /** @minimum 0 */
-  estimated_salary?: number;
-  specialties?: string[];
+  /** @maximum 99999999.99 */
+  budget?: number;
+  /** @minItems 1 */
+  specialties?: DevSpecialtyEnum[];
   seniority_level?: SeniorityLevelEnum;
   /** Quando enviado, o array substitui por completo as linguagens da vaga (sync). */
   languages?: UpdateFreelanceJobVacancyRequestLanguagesItem[];

@@ -9,6 +9,7 @@ import { useToggleCommentLike } from "@/api/generated/like/like";
 import type { CommentResource } from "@/api/generated/models";
 import type { CommentTreeState } from "@/hooks/use-comment-tree";
 import { patchCachedPost } from "@/hooks/use-post-feed";
+import { invalidatePostParticipants } from "@/hooks/use-post-participants";
 import { asRemovedComment } from "@/types/social";
 import { CustomToaster } from "@/utils/custom-toaster";
 import {
@@ -108,6 +109,7 @@ export function useCommentActions({
 				onSuccess: (response) => {
 					tree.addReply(comment.id, response.data);
 					bumpPostComments(1);
+					invalidatePostParticipants(queryClient, postId);
 
 					callbacks.onSuccess();
 				},
@@ -166,8 +168,10 @@ export function useCommentActions({
 			{
 				onSuccess: () => {
 					// Remoção lógica: o nó continua na árvore com as respostas dele e
-					// nenhum contador diminui, nem o do post.
+					// nenhum contador diminui, nem o do post. Já entre os participantes
+					// o comentário removido deixa de contar.
 					tree.markCommentRemoved(comment.id);
+					invalidatePostParticipants(queryClient, postId);
 
 					CustomToaster.successToast(t("toast.success.comment_deleted"));
 

@@ -4,10 +4,10 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { IndexFreelanceJobVacancy200DataItem } from './indexFreelanceJobVacancy200DataItem';
+import type { FreelanceJobVacancyCollection } from './freelanceJobVacancyCollection';
 
 export type IndexFreelanceJobVacancy200 = {
   error: boolean;
   message: 'Freelance job vacancies indexed with success!';
-  data: IndexFreelanceJobVacancy200DataItem[];
+  data: FreelanceJobVacancyCollection;
 };

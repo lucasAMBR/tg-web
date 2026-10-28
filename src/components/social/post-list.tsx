@@ -1,7 +1,8 @@
 import { Newspaper } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import {
 	Empty,
+	EmptyContent,
 	EmptyDescription,
 	EmptyHeader,
 	EmptyMedia,
@@ -20,6 +21,8 @@ interface PostListProps {
 	onReachEnd: () => void;
 	emptyTitle: string;
 	emptyDescription?: string;
+	/** Atalho mostrado embaixo da mensagem de lista vazia. */
+	emptyAction?: ReactNode;
 	/** Tela de favoritos: desfavoritar tira o card da lista. */
 	removeOnUnfavorite?: boolean;
 }
@@ -33,6 +36,7 @@ export default function PostList({
 	onReachEnd,
 	emptyTitle,
 	emptyDescription,
+	emptyAction,
 	removeOnUnfavorite = false,
 }: PostListProps) {
 	const sentinelRef = useRef<HTMLDivElement>(null);
@@ -73,6 +77,7 @@ export default function PostList({
 						<EmptyDescription>{emptyDescription}</EmptyDescription>
 					)}
 				</EmptyHeader>
+				{emptyAction && <EmptyContent>{emptyAction}</EmptyContent>}
 			</Empty>
 		);
 	}

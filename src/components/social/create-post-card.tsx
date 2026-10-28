@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
-import { invalidatePostFeeds } from "@/hooks/use-post-feed";
+import { prependCachedPost } from "@/hooks/use-post-feed";
 import {
 	chunkImagesByRequestSize,
 	POST_CONTENT_MAX_LENGTH,
 	POST_IMAGE_ACCEPTED_TYPES,
 	POST_MAX_IMAGES,
+	type Post,
 	validatePostImages,
 } from "@/types/social";
 import { CustomToaster } from "@/utils/custom-toaster";
@@ -28,7 +29,9 @@ interface SelectedImage {
  * Publicação de postagem. O texto é obrigatório — não existe post só com
  * imagem — e as imagens são validadas aqui com as mesmas regras da API antes de
  * subir. Quando o total passa do limite de corpo da requisição, o primeiro lote
- * vai junto do `POST /post` e o resto em `POST /post/{id}/images`.
+ * vai junto do `POST /post` e o resto em `POST /post/{id}/images`. O post novo
+ * entra no topo das listas "recentes"; nas "populares" ele só aparece quando a
+ * lista for recarregada.
  */
 export default function CreatePostCard() {
 	const { t } = useTranslation();
@@ -109,11 +112,19 @@ export default function CreatePostCard() {
 				images: firstBatch ?? [],
 			});
 
+			// Cada lote devolve a postagem com as imagens que já tem, então o card
+			// entra no feed com todas elas
+			let post: Post = created.data;
+
 			for (const batch of nextBatches) {
-				await storePostImages(created.data.id, { images: batch });
+				const response = await storePostImages(created.data.id, {
+					images: batch,
+				});
+
+				post = response.data;
 			}
 
-			invalidatePostFeeds(queryClient);
+			prependCachedPost(queryClient, post);
 
 			CustomToaster.successToast(t("toast.success.post_created"));
 

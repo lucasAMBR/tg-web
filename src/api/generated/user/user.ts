@@ -5,13 +5,22 @@
  * OpenAPI spec version: 0.0.1
  */
 import {
-  useMutation
+  useMutation,
+  useQuery
 } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
-  UseMutationResult
+  UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult
 } from '@tanstack/react-query';
 
 import type {
@@ -19,6 +28,9 @@ import type {
   AuthorizationExceptionResponse,
   DeleteUser200,
   DeleteUser400,
+  IndexPopularUsers200,
+  IndexPopularUsers400,
+  IndexPopularUsersParams,
   ModelNotFoundExceptionResponse,
   UpdateUserRequest,
   UserBlockAccess200,
@@ -33,6 +45,100 @@ import type {
 } from '.././models';
 
 import apiClient from '../../../lib/api-client';
+
+
+
+
+/**
+ * **operationId:** `indexPopularUsers` — Ranking paginado dos usuários com perfil de dev, empresa ou cliente, do mais popular para o menos. A pontuação (`popularity_score`) é a soma das curtidas, comentários (com as respostas) e favoritos que os posts do usuário receberam de outras pessoas, mais o número de seguidores; o engajamento do próprio autor, comentários removidos e posts excluídos não contam, e usuários bloqueados ficam de fora. Filtro opcional por `profile_type` (`dev`, `company` ou `client`). Em **200**, `data.data[]` segue o schema **Popular User Resource** (`App\Http\Resources\User\PopularUserResource`), com a composição da pontuação e `is_followed`/`follows_you` em relação ao usuário autenticado, e `data.pagination` traz os metadados de paginação.
+ * @summary Listar usuários mais populares
+ */
+export const indexPopularUsers = (
+    params?: IndexPopularUsersParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexPopularUsers200>(
+      {url: `/user/popular`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexPopularUsersQueryKey = (params?: IndexPopularUsersParams,) => {
+    return [
+    `/user/popular`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexPopularUsersQueryOptions = <TData = Awaited<ReturnType<typeof indexPopularUsers>>, TError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(params?: IndexPopularUsersParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexPopularUsersQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexPopularUsers>>> = ({ signal }) => indexPopularUsers(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexPopularUsersQueryResult = NonNullable<Awaited<ReturnType<typeof indexPopularUsers>>>
+export type IndexPopularUsersQueryError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse
+
+
+export function useIndexPopularUsers<TData = Awaited<ReturnType<typeof indexPopularUsers>>, TError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params: undefined |  IndexPopularUsersParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexPopularUsers>>,
+          TError,
+          Awaited<ReturnType<typeof indexPopularUsers>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexPopularUsers<TData = Awaited<ReturnType<typeof indexPopularUsers>>, TError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexPopularUsersParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexPopularUsers>>,
+          TError,
+          Awaited<ReturnType<typeof indexPopularUsers>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexPopularUsers<TData = Awaited<ReturnType<typeof indexPopularUsers>>, TError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexPopularUsersParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar usuários mais populares
+ */
+
+export function useIndexPopularUsers<TData = Awaited<ReturnType<typeof indexPopularUsers>>, TError = IndexPopularUsers400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexPopularUsersParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPopularUsers>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexPopularUsersQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
 
 
 

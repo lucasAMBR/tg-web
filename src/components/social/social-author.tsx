@@ -22,6 +22,8 @@ interface SocialAuthorProps {
 	removed?: boolean;
 	size?: "sm" | "md";
 	className?: string;
+	/** Nome mostrado quando a conta foi excluída (`author` null). */
+	deletedAuthorLabel?: string;
 }
 
 /**
@@ -37,6 +39,7 @@ export default function SocialAuthor({
 	removed = false,
 	size = "md",
 	className,
+	deletedAuthorLabel,
 }: SocialAuthorProps) {
 	const { t, i18n } = useTranslation();
 
@@ -73,7 +76,10 @@ export default function SocialAuthor({
 	const profileHref = getAuthorProfileHref(author);
 	const roleLabelKey = getAuthorRoleLabelKey(author);
 
-	const name = author?.name ?? t("social.author.unknown");
+	const name =
+		author?.name ??
+		(author ? undefined : deletedAuthorLabel) ??
+		t("social.author.unknown");
 
 	const avatar = (
 		<Avatar className={cn(avatarSize, "shrink-0")}>

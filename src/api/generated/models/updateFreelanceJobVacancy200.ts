@@ -4,10 +4,10 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { FreelanceJobVacancyResource } from './freelanceJobVacancyResource';
+import type { UpdateFreelanceJobVacancy200Data } from './updateFreelanceJobVacancy200Data';
 
 export type UpdateFreelanceJobVacancy200 = {
   error: boolean;
   message: 'Freelance job vacancy updated with success!';
-  data: FreelanceJobVacancyResource;
+  data: UpdateFreelanceJobVacancy200Data;
 };

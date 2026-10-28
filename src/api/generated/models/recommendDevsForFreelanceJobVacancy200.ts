@@ -4,10 +4,10 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
-import type { RecommendedDevResource } from './recommendedDevResource';
+import type { RecommendedFreelanceDevResource } from './recommendedFreelanceDevResource';
 
 export type RecommendDevsForFreelanceJobVacancy200 = {
   error: boolean;
   message: 'Recommended developers retrieved with success!';
-  data: RecommendedDevResource[];
+  data: RecommendedFreelanceDevResource[];
 };

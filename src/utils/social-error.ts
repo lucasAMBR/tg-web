@@ -15,7 +15,7 @@ interface SocialErrorBody {
  * tela, e o doc da feature manda decidir pelo status mais o contexto — nunca
  * pelo texto de `message`, que está em inglês e pode mudar.
  */
-export type SocialErrorContext = "post" | "comment" | "post-images";
+export type SocialErrorContext = "post" | "comment" | "post-images" | "follow";
 
 /** Campos que identificam o recurso da rota, não algo que o usuário digitou. */
 const RESOURCE_FIELDS = ["id", "post_id", "parent_id", "image_id"];
@@ -57,7 +57,9 @@ export function socialFieldErrors(
 
 /**
  * O recurso da rota não existe mais: a postagem foi excluída (ou a postagem do
- * comentário foi). A API responde 422 apontando o erro no campo de id.
+ * comentário foi), ou o usuário a seguir não existe. A API responde 422
+ * apontando o erro no campo de id. No follow, isso também acontece quando o id
+ * passado é o do perfil em vez do id do usuário.
  */
 export function isResourceUnavailable(error: unknown): boolean {
 	const response = asAxiosError(error)?.response;
@@ -71,16 +73,26 @@ export function isResourceUnavailable(error: unknown): boolean {
 	return Object.keys(data).some((field) => RESOURCE_FIELDS.includes(field));
 }
 
-/**
- * Ação negada em comentário já removido (responder, curtir, editar, remover).
- * Vem como 422 de regra de negócio, sem erros por campo.
- */
-export function isRemovedCommentError(error: unknown): boolean {
+/** 422 de regra de negócio: sem erros por campo e sem apontar o recurso da rota. */
+function isBusinessRuleError(error: unknown): boolean {
 	const response = asAxiosError(error)?.response;
 
 	if (response?.status !== 422) return false;
 
 	return socialFieldErrors(error) === null && !isResourceUnavailable(error);
+}
+
+/** Ação negada em comentário já removido (responder, curtir, editar, remover). */
+export function isRemovedCommentError(error: unknown): boolean {
+	return isBusinessRuleError(error);
+}
+
+/**
+ * Tentativa de seguir a si mesmo: 422 de regra de negócio, sem erros por campo.
+ * O botão fica escondido no próprio perfil, então isso não deveria acontecer.
+ */
+export function isSelfFollowError(error: unknown): boolean {
+	return isBusinessRuleError(error);
 }
 
 /** O usuário tentou alterar algo que não é dele. */
@@ -111,9 +123,10 @@ export function socialErrorMessageKey(
 	const status = socialErrorStatus(error);
 
 	if (isResourceUnavailable(error)) {
-		return context === "comment"
-			? "social.errors.thread_unavailable"
-			: "social.errors.post_unavailable";
+		if (context === "comment") return "social.errors.thread_unavailable";
+		if (context === "follow") return "social.errors.user_unavailable";
+
+		return "social.errors.post_unavailable";
 	}
 
 	if (status === 422) {

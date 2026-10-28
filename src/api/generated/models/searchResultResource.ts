@@ -8,6 +8,7 @@ import type { SearchResultResourceDevProfiles } from './searchResultResourceDevP
 import type { SearchResultResourceCompanyProfiles } from './searchResultResourceCompanyProfiles';
 import type { SearchResultResourceClientProfiles } from './searchResultResourceClientProfiles';
 import type { SearchResultResourceJobVacancies } from './searchResultResourceJobVacancies';
+import type { SearchResultResourceFreelanceJobVacancies } from './searchResultResourceFreelanceJobVacancies';
 import type { SearchResultResourcePagination } from './searchResultResourcePagination';
 
 export interface SearchResultResource {
@@ -15,5 +16,7 @@ export interface SearchResultResource {
   company_profiles: SearchResultResourceCompanyProfiles;
   client_profiles: SearchResultResourceClientProfiles;
   job_vacancies: SearchResultResourceJobVacancies;
+  /** Só os abertos, sem o budget para quem não é o dono (o resource decide) */
+  freelance_job_vacancies: SearchResultResourceFreelanceJobVacancies;
   pagination: SearchResultResourcePagination;
 }

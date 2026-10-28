@@ -26,11 +26,19 @@ import type {
 import type {
   AuthenticationExceptionResponse,
   AuthorizationExceptionResponse,
+  CompleteFreelanceJobVacancy200,
+  CompleteFreelanceJobVacancy400,
   DeleteFreelanceJobVacancy200,
   DeleteFreelanceJobVacancy400,
   IndexFreelanceJobVacancy200,
   IndexFreelanceJobVacancy400,
   IndexFreelanceJobVacancyParams,
+  IndexMyFreelanceContracts200,
+  IndexMyFreelanceContracts400,
+  IndexMyFreelanceContractsParams,
+  IndexMyFreelanceJobVacancies200,
+  IndexMyFreelanceJobVacancies400,
+  IndexMyFreelanceJobVacanciesParams,
   ShowFreelanceJobVacancy200,
   ShowFreelanceJobVacancy400,
   StoreFreelanceJobVacancy201,
@@ -48,7 +56,7 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
- * **operationId:** `indexFreelanceJobVacancy` — Lista paginada das vagas freelance publicadas por clientes, com `languages` e `clientProfile` carregados. Aceita os filtros opcionais `search` (busca em `title`, `job_type`, `seniority_level` e nos nomes das linguagens vinculadas), `job_type`, `seniority_level` e `only_mine` (restringe às vagas do cliente autenticado). Em **200**, `data[]` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
+ * **operationId:** `indexFreelanceJobVacancy` — Vitrine paginada dos freelas **abertos** (que ainda recebem orçamento), do mais recente para o mais antigo, com `languages` e o perfil público do cliente. Aceita os filtros opcionais `search` (busca em `title`, `job_type`, `seniority_level` e nos nomes das linguagens vinculadas), `job_type`, `seniority_level` e `invited` (só para dev: restringe aos freelas para os quais ele foi convidado). Para o dev, cada vaga traz `my_proposal` e `is_invited`. Em **200**, `data.data[]` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`) e `data.pagination` traz os metadados de paginação.
  * @summary Listar vagas freelance
  */
 export const indexFreelanceJobVacancy = (
@@ -142,7 +150,7 @@ export function useIndexFreelanceJobVacancy<TData = Awaited<ReturnType<typeof in
 
 
 /**
- * **operationId:** `storeFreelanceJobVacancy` — Cadastra uma vaga freelance para o perfil de cliente autenticado (exige role `client` e perfil ativo), vinculando as linguagens com o respectivo nível. O campo `languages` só é obrigatório quando o `job_type` escolhido depende de uma stack (desenvolvimento, manutenção, QA, devops, banco de dados, automação, integração e migração); nos demais tipos ele é opcional. Em **201**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`), com as relações carregadas.
+ * **operationId:** `storeFreelanceJobVacancy` — Cadastra uma vaga freelance aberta para o perfil de cliente autenticado (exige role `client` e perfil criado), vinculando as linguagens com o respectivo nível. O `budget` é quanto o cliente pretende pagar pelo serviço inteiro: só ele vê, e é a referência de preço do ranking de orçamentos. O campo `languages` só é obrigatório quando o `job_type` escolhido depende de uma stack (desenvolvimento, manutenção, QA, devops, banco de dados, automação, integração e migração); nos demais tipos ele é opcional. Em **201**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`), com as relações carregadas.
  * @summary Cadastrar vaga freelance
  */
 export const storeFreelanceJobVacancy = (
@@ -207,7 +215,195 @@ export const useStoreFreelanceJobVacancy = <TError = StoreFreelanceJobVacancy400
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * **operationId:** `showFreelanceJobVacancy` — Retorna uma vaga freelance específica pelo identificador na rota, com `languages` e `clientProfile` carregados. Em **200**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
+ * **operationId:** `indexMyFreelanceJobVacancies` — Lista paginada dos freelas publicados pelo cliente autenticado (exige role `client`), em qualquer status, do mais recente para o mais antigo. Cada vaga traz `status`, `budget`, `proposals_count` e, depois do contrato fechado, o `contract` (o orçamento escolhido, com o dev). Aceita os filtros opcionais `status` (`open`, `in_progress`, `completed`) e `search`. Em **200**, `data.data[]` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`) e `data.pagination` traz os metadados de paginação.
+ * @summary Listar meus freelas publicados
+ */
+export const indexMyFreelanceJobVacancies = (
+    params?: IndexMyFreelanceJobVacanciesParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexMyFreelanceJobVacancies200>(
+      {url: `/freelance-job-vacancy/my-vacancies`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexMyFreelanceJobVacanciesQueryKey = (params?: IndexMyFreelanceJobVacanciesParams,) => {
+    return [
+    `/freelance-job-vacancy/my-vacancies`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexMyFreelanceJobVacanciesQueryOptions = <TData = Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(params?: IndexMyFreelanceJobVacanciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexMyFreelanceJobVacanciesQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>> = ({ signal }) => indexMyFreelanceJobVacancies(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexMyFreelanceJobVacanciesQueryResult = NonNullable<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>>
+export type IndexMyFreelanceJobVacanciesQueryError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse
+
+
+export function useIndexMyFreelanceJobVacancies<TData = Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params: undefined |  IndexMyFreelanceJobVacanciesParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>,
+          TError,
+          Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexMyFreelanceJobVacancies<TData = Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceJobVacanciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>,
+          TError,
+          Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexMyFreelanceJobVacancies<TData = Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceJobVacanciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar meus freelas publicados
+ */
+
+export function useIndexMyFreelanceJobVacancies<TData = Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError = IndexMyFreelanceJobVacancies400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceJobVacanciesParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceJobVacancies>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexMyFreelanceJobVacanciesQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `indexMyFreelanceContracts` — Lista paginada dos freelas em que o dev autenticado foi contratado (exige role `dev`): os em andamento primeiro, depois os concluídos, cada grupo do contrato mais recente para o mais antigo. Cada vaga traz o `contract` com o orçamento aceito. Aceita os filtros opcionais `status` (`in_progress` ou `completed`) e `search`. Em **200**, `data.data[]` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`) e `data.pagination` traz os metadados de paginação.
+ * @summary Listar meus freelas contratados
+ */
+export const indexMyFreelanceContracts = (
+    params?: IndexMyFreelanceContractsParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexMyFreelanceContracts200>(
+      {url: `/freelance-job-vacancy/my-contracts`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexMyFreelanceContractsQueryKey = (params?: IndexMyFreelanceContractsParams,) => {
+    return [
+    `/freelance-job-vacancy/my-contracts`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexMyFreelanceContractsQueryOptions = <TData = Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(params?: IndexMyFreelanceContractsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexMyFreelanceContractsQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexMyFreelanceContracts>>> = ({ signal }) => indexMyFreelanceContracts(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexMyFreelanceContractsQueryResult = NonNullable<Awaited<ReturnType<typeof indexMyFreelanceContracts>>>
+export type IndexMyFreelanceContractsQueryError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse
+
+
+export function useIndexMyFreelanceContracts<TData = Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params: undefined |  IndexMyFreelanceContractsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexMyFreelanceContracts>>,
+          TError,
+          Awaited<ReturnType<typeof indexMyFreelanceContracts>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexMyFreelanceContracts<TData = Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceContractsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexMyFreelanceContracts>>,
+          TError,
+          Awaited<ReturnType<typeof indexMyFreelanceContracts>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexMyFreelanceContracts<TData = Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceContractsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar meus freelas contratados
+ */
+
+export function useIndexMyFreelanceContracts<TData = Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError = IndexMyFreelanceContracts400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ params?: IndexMyFreelanceContractsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexMyFreelanceContracts>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexMyFreelanceContractsQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `showFreelanceJobVacancy` — Retorna uma vaga freelance específica, em qualquer status, com `languages` e o perfil público do cliente. O cliente dono vê também `budget`, `proposals_count` e `contract`; o dev vê `my_proposal` e `is_invited`, e o `contract` quando é o contratado. Em **200**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
  * @summary Consultar vaga freelance
  */
 export const showFreelanceJobVacancy = (
@@ -300,7 +496,7 @@ export function useShowFreelanceJobVacancy<TData = Awaited<ReturnType<typeof sho
 
 
 /**
- * **operationId:** `updateFreelanceJobVacancy` — Atualiza os dados da vaga freelance do cliente autenticado. Quando `languages` é enviado, o array substitui por completo os vínculos atuais. A validação recusa o payload que deixaria a vaga sem stack em um `job_type` que a exige. Em **200**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
+ * **operationId:** `updateFreelanceJobVacancy` — Atualiza os dados da vaga freelance do cliente autenticado, enquanto ela está aberta (depois do contrato fechado, o escopo não muda mais). Quando `languages` é enviado, o array substitui por completo os vínculos atuais. A validação recusa o payload que deixaria a vaga sem stack em um `job_type` que a exige. Em **200**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
  * @summary Atualizar vaga freelance
  */
 export const updateFreelanceJobVacancy = (
@@ -365,7 +561,7 @@ export const useUpdateFreelanceJobVacancy = <TError = UpdateFreelanceJobVacancy4
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * **operationId:** `deleteFreelanceJobVacancy` — Remove a vaga freelance do cliente autenticado e desfaz os vínculos com as linguagens. Em **200**, `data` é `null`.
+ * **operationId:** `deleteFreelanceJobVacancy` — Remove a vaga freelance do cliente autenticado e desfaz os vínculos com as linguagens. Só vale para a vaga aberta: depois do contrato fechado, ela guarda o histórico do trabalho no feed. Em **200**, `data` é `null`.
  * @summary Remover vaga freelance
  */
 export const deleteFreelanceJobVacancy = (
@@ -423,6 +619,68 @@ export const useDeleteFreelanceJobVacancy = <TError = DeleteFreelanceJobVacancy4
       > => {
 
       const mutationOptions = getDeleteFreelanceJobVacancyMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
+ * **operationId:** `completeFreelanceJobVacancy` — O cliente dono marca como concluído o freela em andamento (`in_progress` → `completed`) e o dev contratado é notificado. O feed continua disponível, só para consulta. Em **200**, `data` segue o schema **Freelance Job Vacancy Resource** (`App\Http\Resources\FreelanceJobVacancy\FreelanceJobVacancyResource`).
+ * @summary Concluir freela
+ */
+export const completeFreelanceJobVacancy = (
+    id: string,
+ ) => {
+      
+      
+      return apiClient<CompleteFreelanceJobVacancy200>(
+      {url: `/freelance-job-vacancy/${id}/complete`, method: 'PATCH'
+    },
+      );
+    }
+  
+
+
+export const getCompleteFreelanceJobVacancyMutationOptions = <TError = CompleteFreelanceJobVacancy400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof completeFreelanceJobVacancy>>, TError,{id: string}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof completeFreelanceJobVacancy>>, TError,{id: string}, TContext> => {
+
+const mutationKey = ['completeFreelanceJobVacancy'];
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof completeFreelanceJobVacancy>>, {id: string}> = (props) => {
+          const {id} = props ?? {};
+
+          return  completeFreelanceJobVacancy(id,)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CompleteFreelanceJobVacancyMutationResult = NonNullable<Awaited<ReturnType<typeof completeFreelanceJobVacancy>>>
+    
+    export type CompleteFreelanceJobVacancyMutationError = CompleteFreelanceJobVacancy400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse
+
+    /**
+ * @summary Concluir freela
+ */
+export const useCompleteFreelanceJobVacancy = <TError = CompleteFreelanceJobVacancy400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof completeFreelanceJobVacancy>>, TError,{id: string}, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof completeFreelanceJobVacancy>>,
+        TError,
+        {id: string},
+        TContext
+      > => {
+
+      const mutationOptions = getCompleteFreelanceJobVacancyMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

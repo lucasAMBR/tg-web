@@ -36,6 +36,9 @@ import type {
   IndexPost200,
   IndexPost400,
   IndexPostParams,
+  IndexPostParticipants200,
+  IndexPostParticipants400,
+  IndexPostParticipantsParams,
   SavePostImagesRequest,
   ShowPost200,
   ShowPost400,
@@ -58,7 +61,7 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
- * **operationId:** `indexPost` — Feed paginado de postagens, com autor, imagens, contadores de curtidas/comentários/favoritos e se o usuário autenticado curtiu/favoritou. Filtros opcionais por `user_id` e `search` (busca no conteúdo). O parâmetro `sort` define a ordenação: `recent` (padrão) traz das mais recentes para as mais antigas e `popular` traz das com mais engajamento para as com menos, pontuando cada postagem por comentários (peso 3), favoritos (peso 2) e curtidas (peso 1), com a data mais recente como critério de desempate. Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
+ * **operationId:** `indexPost` — Feed paginado de postagens, com autor, imagens, contadores de curtidas/comentários/favoritos e se o usuário autenticado curtiu/favoritou. Filtros opcionais por `user_id` e `search` (busca no conteúdo). O parâmetro `feed` escolhe a origem: `all` (padrão) traz todas as postagens e `following` traz só as de quem o usuário autenticado segue, mais as dele mesmo. O parâmetro `sort` define a ordenação: `recent` (padrão) traz das mais recentes para as mais antigas e `popular` traz das com mais engajamento para as com menos, pontuando cada postagem por comentários (peso 3), favoritos (peso 2) e curtidas (peso 1), com a data mais recente como critério de desempate. Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
  * @summary Listar feed de postagens
  */
 export const indexPost = (
@@ -599,6 +602,107 @@ export const useToggleFavoritePost = <TError = ToggleFavoritePost400 | Authentic
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * **operationId:** `indexPostParticipants` — Lista paginada dos usuários que participam da conversa nos comentários da postagem `{id}`: quem escreveu comentários ou respostas, cada um uma vez, do mais ativo para o menos (a participação mais recente desempata). Comentários removidos não contam, já que a árvore não expõe mais quem os escreveu, e comentários de contas excluídas ficam de fora. O autor da postagem só aparece se tiver comentado, com `is_post_author` true. Postagem excluída ou inexistente retorna **422**. Em **200**, `data.data[]` segue o schema **Post Participant Resource** (`App\Http\Resources\Post\PostParticipantResource`), com `comments_count`, as datas da primeira e da última participação e `is_followed`/`follows_you` em relação ao usuário autenticado, e `data.pagination` traz os metadados de paginação.
+ * @summary Listar participantes da conversa da postagem
+ */
+export const indexPostParticipants = (
+    id: string,
+    params?: IndexPostParticipantsParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<IndexPostParticipants200>(
+      {url: `/post/${id}/participants`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getIndexPostParticipantsQueryKey = (id?: string,
+    params?: IndexPostParticipantsParams,) => {
+    return [
+    `/post/${id}/participants`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getIndexPostParticipantsQueryOptions = <TData = Awaited<ReturnType<typeof indexPostParticipants>>, TError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(id: string,
+    params?: IndexPostParticipantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getIndexPostParticipantsQueryKey(id,params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof indexPostParticipants>>> = ({ signal }) => indexPostParticipants(id,params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type IndexPostParticipantsQueryResult = NonNullable<Awaited<ReturnType<typeof indexPostParticipants>>>
+export type IndexPostParticipantsQueryError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse
+
+
+export function useIndexPostParticipants<TData = Awaited<ReturnType<typeof indexPostParticipants>>, TError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ id: string,
+    params: undefined |  IndexPostParticipantsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexPostParticipants>>,
+          TError,
+          Awaited<ReturnType<typeof indexPostParticipants>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexPostParticipants<TData = Awaited<ReturnType<typeof indexPostParticipants>>, TError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ id: string,
+    params?: IndexPostParticipantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof indexPostParticipants>>,
+          TError,
+          Awaited<ReturnType<typeof indexPostParticipants>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useIndexPostParticipants<TData = Awaited<ReturnType<typeof indexPostParticipants>>, TError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ id: string,
+    params?: IndexPostParticipantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar participantes da conversa da postagem
+ */
+
+export function useIndexPostParticipants<TData = Awaited<ReturnType<typeof indexPostParticipants>>, TError = IndexPostParticipants400 | AuthenticationExceptionResponse | AuthorizationExceptionResponse | ValidationExceptionResponse>(
+ id: string,
+    params?: IndexPostParticipantsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof indexPostParticipants>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getIndexPostParticipantsQueryOptions(id,params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * **operationId:** `storePostImages` — Anexa as imagens enviadas em `images[]` à postagem, respeitando o limite de 10 por postagem. Apenas o autor (`PostPolicy::update`). Em **200**, `data` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`).
  * @summary Adicionar imagens à postagem
  */

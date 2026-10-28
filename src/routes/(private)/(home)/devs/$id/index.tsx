@@ -1,6 +1,9 @@
 import { useShowDevProfile } from '@/api/generated/profile/profile';
 import DevProfileContent from '@/components/profile/variants/dev-profile-body';
 import StartChatButton from '@/components/chat/start-chat-button';
+import FollowButton from '@/components/social/follow-button';
+import FollowStats from '@/components/social/follow-stats';
+import FollowsYouBadge from '@/components/social/follows-you-badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -11,6 +14,7 @@ import { AlertCircle, Eye, Hourglass, User } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { pageTitle } from "@/utils/page-title";
+import { getFollowStats } from '@/types/follow';
 import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 
 export const Route = createFileRoute('/(private)/(home)/devs/$id/')({
@@ -39,6 +43,8 @@ function RouteComponent() {
 
   useBreadcrumbLabel(devData?.name);
 
+  const followStats = getFollowStats(devData?.user);
+
   const hasTranslation = devData?.translation_status === 'translated';
   const translationIsPending = devData?.translation_status === 'pending';
   const translationIsError = devData?.translation_status === 'error';
@@ -62,9 +68,12 @@ function RouteComponent() {
         </AvatarFallback>
       </Avatar>
       <div className="flex flex-col gap-2">
-        <h2 className="text-4xl font-bold font-[Anta]">
-          {devData?.name ?? "—"}
-        </h2>
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 className="text-4xl font-bold font-[Anta]">
+            {devData?.name ?? "—"}
+          </h2>
+          {followStats?.follows_you && <FollowsYouBadge />}
+        </div>
         <div className="flex gap-2">
           <Badge variant={"default"}>{t(`role.dev`)}</Badge>
           <Badge variant={"secondary"}>{t(`enum.dev_specialty.${devData?.specialty}`)}</Badge>
@@ -73,6 +82,15 @@ function RouteComponent() {
              {"Score: " + (devData?.score ?? "—")}
           </Badge>
         </div>
+        {devData && followStats && (
+          <FollowStats
+            key={devData.user_id}
+            userId={devData.user_id}
+            name={devData.name}
+            followersCount={followStats.followers_count}
+            followingCount={followStats.following_count}
+          />
+        )}
         {hasTranslation && (
           <p className="text-sm text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}>
             <Eye className="size-3.5" />
@@ -104,6 +122,12 @@ function RouteComponent() {
               }
             </p>
         <div className="flex gap-2">
+          <FollowButton
+            userId={devData?.user_id}
+            name={devData?.name}
+            isFollowed={followStats?.is_followed ?? false}
+            followsYou={followStats?.follows_you ?? false}
+          />
           <StartChatButton userId={devData?.user_id} />
         </div>
       </div>

@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useBreadcrumbLabel } from "@/hooks/use-breadcrumbs";
 import { useCommentTree } from "@/hooks/use-comment-tree";
 import { patchCachedPost } from "@/hooks/use-post-feed";
+import { invalidatePostParticipants } from "@/hooks/use-post-participants";
 import { useSocialPermissions } from "@/hooks/use-social-permissions";
 import { CustomToaster } from "@/utils/custom-toaster";
 import {
@@ -93,6 +94,7 @@ export default function PostDetail({ postId }: PostDetailProps) {
 						...current,
 						comments_count: current.comments_count + 1,
 					}));
+					invalidatePostParticipants(queryClient, postId);
 
 					callbacks.onSuccess();
 				},

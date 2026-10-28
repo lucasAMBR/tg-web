@@ -18,9 +18,23 @@ import { dedupeById, POSTS_PER_PAGE, type Post } from "@/types/social";
 
 export type PostFeedSort = NonNullable<IndexPostParams["sort"]>;
 
+/** `following` traz as postagens de quem o usuário segue, mais as dele mesmo. */
+export type PostFeedSource = NonNullable<IndexPostParams["feed"]>;
+
+export const POST_FEED_SORTS = [
+	"popular",
+	"recent",
+] as const satisfies readonly PostFeedSort[];
+export const POST_FEED_SOURCES = [
+	"all",
+	"following",
+] as const satisfies readonly PostFeedSource[];
+
 export interface PostFeedFilters {
 	/** `popular` ordena por engajamento; `recent`, por data. */
 	sort?: PostFeedSort;
+	/** Aba do feed: todas as postagens ou só as de quem o usuário segue. */
+	feed?: PostFeedSource;
 	search?: string;
 	/** Filtra pelo autor — é assim que a aba de publicações do perfil funciona. */
 	userId?: string;
@@ -40,6 +54,7 @@ export const getPostFeedQueryKey = (filters: PostFeedFilters) =>
 		filters.sort ?? "recent",
 		filters.search ?? "",
 		filters.userId ?? "",
+		filters.feed ?? "all",
 	] as const;
 
 export const getFavoritePostsQueryKey = (filters: FavoritePostsFilters) =>
@@ -132,13 +147,64 @@ export function removeCachedPost(
 }
 
 /**
- * Refaz as listagens de postagens já carregadas. Usado depois de publicar: o
- * lugar do post novo depende da ordenação de cada feed, então quem decide onde
- * ele entra é a API, não o cliente.
+ * Coloca a postagem recém-publicada no topo das listas "recentes" que ela
+ * integra: as do feed (abas "Todos" e "Seguindo", que inclui as do próprio
+ * usuário) e a do perfil do autor. As listas "populares" ficam como estão — o
+ * post aparece na posição dele quando a lista for recarregada — e as com busca
+ * também, porque o texto pode não casar com o termo buscado.
  */
-export function invalidatePostFeeds(queryClient: QueryClient): void {
-	queryClient.invalidateQueries({
-		predicate: (query) => isPostFeedKey(query.queryKey),
+export function prependCachedPost(queryClient: QueryClient, post: Post): void {
+	queryClient.setQueriesData<PostFeedCache>(
+		{
+			predicate: ({ queryKey }) => {
+				if (queryKey[0] !== "/post" || queryKey[1] !== "infinite") return false;
+
+				const [, , sort, search, userId] = queryKey;
+
+				return (
+					sort === "recent" &&
+					search === "" &&
+					(userId === "" || userId === post.user_id)
+				);
+			},
+		},
+		(current) => {
+			if (!current?.pages.length) return current;
+
+			const [first, ...rest] = current.pages;
+
+			return {
+				...current,
+				pages: [
+					{
+						...first,
+						data: {
+							...first.data,
+							data: [post, ...first.data.data],
+							pagination: {
+								...first.data.pagination,
+								total: first.data.pagination.total + 1,
+							},
+						},
+					},
+					...rest,
+				],
+			};
+		},
+	);
+}
+
+/**
+ * Seguir ou deixar de seguir alguém deixa a aba "Seguindo" desatualizada. O
+ * reset descarta as páginas carregadas, então ela recomeça da página 1 na
+ * próxima vez que for aberta (ou na hora, se estiver na tela).
+ */
+export function resetFollowingFeeds(queryClient: QueryClient): void {
+	queryClient.resetQueries({
+		predicate: ({ queryKey }) =>
+			queryKey[0] === "/post" &&
+			queryKey[1] === "infinite" &&
+			queryKey[5] === "following",
 	});
 }
 
@@ -158,6 +224,7 @@ export function usePostFeed(filters: PostFeedFilters) {
 					search: filters.search || undefined,
 					user_id: filters.userId || undefined,
 					sort: filters.sort,
+					feed: filters.feed,
 				},
 				signal,
 			),

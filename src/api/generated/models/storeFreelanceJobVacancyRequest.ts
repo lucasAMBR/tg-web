@@ -5,19 +5,22 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { FreelanceJobTypeEnum } from './freelanceJobTypeEnum';
-import type { SalaryTypeEnum } from './salaryTypeEnum';
+import type { DevSpecialtyEnum } from './devSpecialtyEnum';
 import type { SeniorityLevelEnum } from './seniorityLevelEnum';
 import type { StoreFreelanceJobVacancyRequestLanguagesItem } from './storeFreelanceJobVacancyRequestLanguagesItem';
 
 export interface StoreFreelanceJobVacancyRequest {
+  /** @maxLength 255 */
   title: string;
   description: string;
   job_type: FreelanceJobTypeEnum;
-  salary_type: SalaryTypeEnum;
-  /** @minimum 0 */
-  estimated_salary: number;
+  /**
+   * Quanto o cliente pretende pagar pelo serviço inteiro; só ele vê
+   * @maximum 99999999.99
+   */
+  budget: number;
   /** @minItems 1 */
-  specialties: string[];
+  specialties: DevSpecialtyEnum[];
   seniority_level: SeniorityLevelEnum;
   languages?: StoreFreelanceJobVacancyRequestLanguagesItem[];
 }

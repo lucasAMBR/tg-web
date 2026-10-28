@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import {
 	useMarkChatConversationAsRead,
@@ -35,6 +35,13 @@ export default function ConversationView({
 	const userId = useAuthStore((state) => state.user?.id);
 	const readAt = useChatStore((state) => state.readAt[conversationId]);
 	const pushLiveMessage = useChatStore((state) => state.pushLiveMessage);
+	const draft = useChatStore((state) => state.drafts[conversationId]);
+	const clearDraft = useChatStore((state) => state.clearDraft);
+
+	const handleDraftApplied = useCallback(
+		() => clearDraft(conversationId),
+		[clearDraft, conversationId],
+	);
 
 	const {
 		messages,
@@ -170,7 +177,12 @@ export default function ConversationView({
 					)}
 				</div>
 			)}
-			<MessageComposer isSending={isSending} onSend={handleSend} />
+			<MessageComposer
+				isSending={isSending}
+				onSend={handleSend}
+				draft={draft}
+				onDraftApplied={handleDraftApplied}
+			/>
 		</>
 	);
 }

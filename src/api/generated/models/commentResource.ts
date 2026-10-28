@@ -4,6 +4,7 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { CommentResourceParentId } from './commentResourceParentId';
 import type { CommentResourceRemovedAt } from './commentResourceRemovedAt';
 import type { CommentResourceAuthor } from './commentResourceAuthor';
 import type { CommentResourceCreatedAt } from './commentResourceCreatedAt';
@@ -12,7 +13,7 @@ import type { CommentResourceUpdatedAt } from './commentResourceUpdatedAt';
 export interface CommentResource {
   id: string;
   post_id: string;
-  parent_id: string;
+  parent_id: CommentResourceParentId;
   content: string;
   is_removed: boolean;
   removed_at: CommentResourceRemovedAt;

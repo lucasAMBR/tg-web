@@ -2,10 +2,12 @@ import ThemeToggle from "@/components/global/theme-toggle-button";
 import ClientProfileBody from "@/components/profile/variants/client-profile-body";
 import CompanyProfileBody from "@/components/profile/variants/company-profile-body";
 import DevProfileContent from "@/components/profile/variants/dev-profile-body";
+import FollowStats from "@/components/social/follow-stats";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { useAuthStore } from "@/stores/auth-store";
+import { getFollowStats } from "@/types/follow";
 import {
 	getNameFromProfile,
 	getProfileBio,
@@ -51,6 +53,19 @@ function RouteComponent() {
 	const translationInProgress = translationStatus === 'translating';
 
 	const [displayOriginalBioContent, setDisplayOriginalBioContent] = useState<boolean>(hasTranslation ? false : true);
+
+	// Os números vêm do `/auth/profile`; o "seguindo" é ajustado na hora quando
+	// o usuário segue ou deixa de seguir alguém
+	const followStats = getFollowStats(user);
+
+	const followStatsBar = user && followStats && (
+		<FollowStats
+			userId={user.id}
+			name={getNameFromProfile(user)}
+			followersCount={followStats.followers_count}
+			followingCount={followStats.following_count}
+		/>
+	);
 
 	const translationBar = (
 		<>
@@ -109,6 +124,7 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
+						{followStatsBar}
 						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
@@ -150,6 +166,7 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
+						{followStatsBar}
 						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 
@@ -190,6 +207,7 @@ function RouteComponent() {
 								{"Score: " + getProfileScore(user)}
 							</Badge>
 						</div>
+						{followStatsBar}
 						{translationBar}
 						<p>
 							{displayOriginalBioContent ? (getProfileBio(user) as string) : i18n.language === "pt" 

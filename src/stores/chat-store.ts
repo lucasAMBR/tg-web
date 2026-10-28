@@ -18,18 +18,26 @@ interface ChatState {
 	 * tinham vindo da API com `read_at: null`.
 	 */
 	readAt: Record<string, string>;
+	/**
+	 * Texto para deixar no campo de mensagem ao abrir a conversa, sem enviar. A
+	 * conversa existe por par de usuários e não guarda de onde veio, então quem
+	 * abre (a vaga freelance, por exemplo) deixa o contexto aqui.
+	 */
+	drafts: Record<string, string>;
 }
 
 interface ChatActions {
 	open: () => void;
 	close: () => void;
 	toggle: () => void;
-	/** Abre o painel já dentro de uma conversa. */
-	openConversation: (conversationId: string) => void;
+	/** Abre o painel já dentro de uma conversa, opcionalmente com um rascunho. */
+	openConversation: (conversationId: string, draft?: string) => void;
 	/** Volta para a lista de conversas sem fechar o painel. */
 	closeConversation: () => void;
 	pushLiveMessage: (message: ChatMessageResource) => void;
 	setReadAt: (conversationId: string, readAt: string) => void;
+	/** O campo de mensagem já recebeu o rascunho. */
+	clearDraft: (conversationId: string) => void;
 }
 
 type ChatStore = ChatState & ChatActions;
@@ -39,6 +47,7 @@ const chatStoreCreator: StateCreator<ChatStore> = (set) => ({
 	activeConversationId: null,
 	liveMessages: {},
 	readAt: {},
+	drafts: {},
 
 	open: () => set({ isOpen: true }),
 
@@ -46,8 +55,15 @@ const chatStoreCreator: StateCreator<ChatStore> = (set) => ({
 
 	toggle: () => set((state) => ({ isOpen: !state.isOpen })),
 
-	openConversation: (conversationId) =>
-		set({ isOpen: true, activeConversationId: conversationId }),
+	openConversation: (conversationId, draft) =>
+		set((state) => ({
+			isOpen: true,
+			activeConversationId: conversationId,
+			drafts:
+				draft === undefined
+					? state.drafts
+					: { ...state.drafts, [conversationId]: draft },
+		})),
 
 	closeConversation: () => set({ activeConversationId: null }),
 
@@ -71,6 +87,15 @@ const chatStoreCreator: StateCreator<ChatStore> = (set) => ({
 		set((state) => ({
 			readAt: { ...state.readAt, [conversationId]: readAt },
 		})),
+
+	clearDraft: (conversationId) =>
+		set((state) => {
+			if (!(conversationId in state.drafts)) return state;
+
+			const { [conversationId]: _, ...drafts } = state.drafts;
+
+			return { drafts };
+		}),
 });
 
 export const useChatStore = create<ChatStore>(chatStoreCreator);

@@ -4,6 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import StartChatButton from '@/components/chat/start-chat-button';
+import FollowButton from '@/components/social/follow-button';
+import FollowStats from '@/components/social/follow-stats';
+import FollowsYouBadge from '@/components/social/follows-you-badge';
 import i18n from '@/i18n';
 import { useBreadcrumbLabel } from '@/hooks/use-breadcrumbs';
 import { createFileRoute } from '@tanstack/react-router'
@@ -11,6 +14,7 @@ import { AlertCircle, Building, Eye, Hourglass } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { pageTitle } from "@/utils/page-title";
+import { getFollowStats } from '@/types/follow';
 import { ensureAuthenticated, ensureProfileCreated } from '@/utils/route-guards';
 
 export const Route = createFileRoute('/(private)/(home)/companies/$id/')({
@@ -39,6 +43,8 @@ function RouteComponent() {
 
   useBreadcrumbLabel(companyData?.name);
 
+  const followStats = getFollowStats(companyData?.user);
+
   const hasTranslation = companyData?.translation_status === 'translated';
   const translationIsPending = companyData?.translation_status === 'pending';
   const translationIsError = companyData?.translation_status === 'error';
@@ -62,9 +68,12 @@ function RouteComponent() {
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col gap-2">
-          <h2 className="text-4xl font-bold font-[Anta]">
-            {companyData?.name ?? "—"}
-          </h2>
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 className="text-4xl font-bold font-[Anta]">
+              {companyData?.name ?? "—"}
+            </h2>
+            {followStats?.follows_you && <FollowsYouBadge />}
+          </div>
           <div className="flex gap-2">
             <Badge variant={"default"}>{t("role.company")}</Badge>
             <Badge variant={"secondary"}>{t(`enum.operational_segment.${companyData?.operational_segment}`)}</Badge>
@@ -72,6 +81,15 @@ function RouteComponent() {
               {"Score: " + (companyData?.score ?? "—")}
             </Badge>
           </div>
+          {companyData && followStats && (
+            <FollowStats
+              key={companyData.user_id}
+              userId={companyData.user_id}
+              name={companyData.name}
+              followersCount={followStats.followers_count}
+              followingCount={followStats.following_count}
+            />
+          )}
           {hasTranslation && (
             <p className="text-sm text-primary cursor-pointer flex items-center gap-1" onClick={() => setDisplayOriginalBioContent(!displayOriginalBioContent)}>
               <Eye className="size-3.5" />
@@ -103,6 +121,12 @@ function RouteComponent() {
             }
           </p>
           <div className="flex gap-2">
+            <FollowButton
+              userId={companyData?.user_id}
+              name={companyData?.name}
+              isFollowed={followStats?.is_followed ?? false}
+              followsYou={followStats?.follows_you ?? false}
+            />
             <StartChatButton userId={companyData?.user_id} />
           </div>
         </div>

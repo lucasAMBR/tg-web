@@ -15,7 +15,10 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
+import { useNavigate } from "@tanstack/react-router"
 import { useAuthStore } from "@/stores/auth-store"
+import type { UserRole } from "@/types/AuthenticatedUser"
+import { resolveNotificationRoute } from "@/utils/notification-link"
 import { getProfileId, getRole } from "@/utils/role-helper"
 import { useNotifications } from "@/hooks/use-notifications"
 import type { NotificationResource } from "@/api/generated/models"
@@ -28,9 +31,12 @@ interface NotificationListProps {
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
     onReachEnd: () => void;
+    role: UserRole | undefined;
+    /** Abre a tela da notificação e fecha o popover. */
+    onOpenRoute: (route: string) => void;
 }
 
-function NotificationList({ items, hasNextPage, isFetchingNextPage, onReachEnd }: NotificationListProps) {
+function NotificationList({ items, hasNextPage, isFetchingNextPage, onReachEnd, role, onOpenRoute }: NotificationListProps) {
     const { t, i18n } = useTranslation();
 
     const scrollRef = React.useRef<HTMLDivElement>(null);
@@ -83,18 +89,38 @@ function NotificationList({ items, hasNextPage, isFetchingNextPage, onReachEnd }
             {items.map((n, index) => {
                 const { title, message } = getContent(n);
 
-                return (
-                    <div key={n.id} className={`p-4 flex gap-3 items-center ${index === items.length - 1 ? "" : "border-b-2 border-b-accent"}`}>
+                const route = resolveNotificationRoute(n.link, n.type, role);
+
+                const content = (
+                    <>
                         <div className="max-w-12 max-h-12 min-w-12 min-h-12 bg-accent rounded-full flex items-center justify-center">
                             <BookA />
                         </div>
                         <div>
                             <span className="font-bold">{title}</span>
                             <p className="text-xs">{message}</p>
-                            {n.link ? (
+                            {route ? (
                                 <span className="text-xs text-primary underline">{t("notification.open_link")}</span>
                             ) : (null)}
                         </div>
+                    </>
+                );
+
+                const className = `p-4 flex gap-3 items-center text-left w-full ${index === items.length - 1 ? "" : "border-b-2 border-b-accent"}`;
+
+                // Com link, a notificação inteira leva para a tela dela
+                return route ? (
+                    <button
+                        key={n.id}
+                        type="button"
+                        className={`${className} cursor-pointer transition-colors hover:bg-accent/50`}
+                        onClick={() => onOpenRoute(route)}
+                    >
+                        {content}
+                    </button>
+                ) : (
+                    <div key={n.id} className={className}>
+                        {content}
                     </div>
                 );
             })}
@@ -113,6 +139,8 @@ export function Notification() {
 
     const { t } = useTranslation();
 
+    const navigate = useNavigate();
+
     const user = useAuthStore((state) => state.user);
     const role = getRole(user);
     const profileId = getProfileId(user);
@@ -126,6 +154,11 @@ export function Notification() {
         hasNextPage: notifications.hasNextPage,
         isFetchingNextPage: notifications.isFetchingNextPage,
         onReachEnd: notifications.fetchNextPage,
+        role,
+        onOpenRoute: (route: string) => {
+            setOpen(false);
+            navigate({ to: route });
+        },
     };
 
     return (

@@ -27,7 +27,11 @@
         "language_assessment": "Prova de Idioma",
         "post": "Publicação",
         "thread": "Thread",
-        "favorites": "Favoritos"
+        "favorites": "Favoritos",
+        "freelances": "Meus Freelances",
+        "freelance_details": "Detalhes do Freela",
+        "freelance_feed": "Feed do Freela",
+        "freelance_search": "Freelas"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -157,7 +161,19 @@
             "post_created": "Publicação criada com sucesso!",
             "post_updated": "Publicação atualizada com sucesso!",
             "post_deleted": "Publicação removida com sucesso!",
-            "comment_deleted": "Comentário removido com sucesso!"
+            "comment_deleted": "Comentário removido com sucesso!",
+            "freelance_vacancy_created": "Freela publicado com sucesso",
+            "freelance_vacancy_updated": "Freela atualizado com sucesso",
+            "freelance_vacancy_deleted": "Freela removido com sucesso",
+            "freelance_vacancy_completed": "Freela concluído",
+            "freelance_proposal_sent": "Orçamento enviado",
+            "freelance_proposal_updated": "Orçamento atualizado",
+            "freelance_proposal_withdrawn": "Orçamento retirado",
+            "freelance_proposal_accepted": "Contrato fechado",
+            "freelance_invitation_sent": "Convite enviado",
+            "freelance_feed_post_created": "Postagem publicada",
+            "freelance_feed_post_deleted": "Postagem removida",
+            "freelance_review_sent": "Review enviada"
         }
     },
     "role": {
@@ -864,6 +880,45 @@
                 "pending": "Aguardando resposta",
                 "answered": "Prova respondida"
             }
+        },
+        "job_type": {
+            "development": "Desenvolvimento",
+            "maintenance": "Manutenção",
+            "support": "Suporte",
+            "qa": "QA / Testes",
+            "design": "Design",
+            "devops": "DevOps",
+            "database": "Banco de dados",
+            "consulting": "Consultoria",
+            "documentation": "Documentação",
+            "automation": "Automação",
+            "integration": "Integração",
+            "migration": "Migração",
+            "training": "Treinamento",
+            "other": "Outro"
+        },
+        "freelance_job_vacancy_status": {
+            "open": "Aberto",
+            "in_progress": "Em andamento",
+            "completed": "Concluído"
+        },
+        "freelance_proposal_status": {
+            "pending": "Aguardando",
+            "accepted": "Aceito",
+            "rejected": "Recusado"
+        },
+        "freelance_proposal_pricing_type": {
+            "fixed": "Preço fechado",
+            "hourly": "Por hora"
+        },
+        "freelance_feed_post_type": {
+            "update": "Atualização",
+            "deliverable": "Entrega",
+            "review": "Review"
+        },
+        "freelance_review_status": {
+            "approved": "Aprovada",
+            "changes_requested": "Ajustes solicitados"
         }
     },
     "pagination": {
@@ -1320,7 +1375,8 @@
             "developers": "Desenvolvedores",
             "companies": "Empresas",
             "clients": "Clientes",
-            "vacancies": "Vagas"
+            "vacancies": "Vagas",
+            "freelances": "Freelas"
         },
         "empty": {
             "developers_title": "Nenhum desenvolvedor encontrado",
@@ -1330,7 +1386,9 @@
             "clients_title": "Nenhum cliente encontrado",
             "clients_description": "Busque por um termo para ver os clientes correspondentes aqui.",
             "vacancies_title": "Nenhuma vaga encontrada",
-            "vacancies_description": "Busque por um termo para ver as vagas correspondentes aqui."
+            "vacancies_description": "Busque por um termo para ver as vagas correspondentes aqui.",
+            "freelances_title": "Nenhum freela encontrado",
+            "freelances_description": "Busque por um termo ou troque os filtros para ver os freelas aqui."
         },
         "popular": {
             "best_scored_devs": "Desenvolvedores mais bem pontuados",
@@ -1517,11 +1575,18 @@
     "social": {
         "feed": {
             "popular": "Populares",
-            "recent": "Recentes",
+            "recent": "Mais recentes",
             "search_placeholder": "Buscar nas publicações",
             "empty_title": "Nenhuma publicação por aqui",
             "empty_description": "Seja o primeiro a publicar algo para a comunidade.",
-            "back_to_feed": "Voltar para o feed"
+            "back_to_feed": "Voltar para o feed",
+            "all": "Todos",
+            "following": "Seguindo",
+            "sort_label": "Ordenação do feed",
+            "following_empty_title": "Você ainda não segue ninguém",
+            "following_empty_description": "Siga perfis para ver as publicações deles aqui.",
+            "find_profiles": "Encontrar perfis",
+            "following_no_posts_title": "Ninguém que você segue publicou ainda."
         },
         "post": {
             "edited": "editado",
@@ -1564,6 +1629,54 @@
             "empty": "Ninguém curtiu ainda",
             "see_who_liked": "Quem curtiu"
         },
+        "follow": {
+            "follow": "Seguir",
+            "follow_back": "Seguir de volta",
+            "following": "Seguindo",
+            "unfollow": "Deixar de seguir",
+            "unfollow_confirm": "Deixar de seguir {{name}}?",
+            "unfollow_confirm_description": "As publicações dessa pessoa deixam de aparecer na sua aba \"Seguindo\".",
+            "follows_you": "Segue você",
+            "followers_label_zero": "seguidores",
+            "followers_label_one": "seguidor",
+            "followers_label_other": "seguidores",
+            "following_label": "seguindo",
+            "followers_tab": "Seguidores",
+            "following_tab": "Seguindo",
+            "empty_followers": "Ninguém segue {{name}} ainda.",
+            "empty_following": "{{name}} ainda não segue ninguém.",
+            "empty_followers_own": "Você ainda não tem seguidores.",
+            "empty_following_own": "Você ainda não segue ninguém."
+        },
+        "popular": {
+            "title": "Quem seguir",
+            "empty": "Ainda não há usuários para mostrar.",
+            "show_more": "Mostrar mais",
+            "score_zero": "{{score}} pontos",
+            "score_one": "{{score}} ponto",
+            "score_other": "{{score}} pontos",
+            "received_likes_zero": "{{count}} curtidas recebidas",
+            "received_likes_one": "{{count}} curtida recebida",
+            "received_likes_other": "{{count}} curtidas recebidas",
+            "received_comments_zero": "{{count}} comentários recebidos",
+            "received_comments_one": "{{count}} comentário recebido",
+            "received_comments_other": "{{count}} comentários recebidos",
+            "received_favorites_zero": "{{count}} favoritos recebidos",
+            "received_favorites_one": "{{count}} favorito recebido",
+            "received_favorites_other": "{{count}} favoritos recebidos"
+        },
+        "participants": {
+            "title": "Participantes da conversa",
+            "empty_title": "Ninguém comentou ainda",
+            "empty_description": "Quem comentar nesta publicação aparece aqui.",
+            "post_author": "Autor",
+            "comments_one": "{{count}} comentário",
+            "comments_other": "{{count}} comentários",
+            "commented": "Comentou {{time}}",
+            "first_commented": "Primeiro comentário {{time}}",
+            "last_commented": "Último comentário {{time}}",
+            "show_more": "Mostrar mais"
+        },
         "author": {
             "unknown": "Usuário"
         },
@@ -1588,6 +1701,274 @@
             "not_owner": "Você só pode alterar o que publicou.",
             "image_not_found": "Esta imagem não faz parte da publicação.",
             "content_required": "Escreva algo antes de enviar.",
+            "unexpected": "Não foi possível concluir. Tente de novo.",
+            "user_unavailable": "Este usuário não está mais disponível."
+        }
+    },
+    "freelance": {
+        "count_one": "{{count}} freela",
+        "count_other": "{{count}} freelas",
+        "posted_at": "Publicado em {{date}}",
+        "search_placeholder": "Buscar por título, tipo ou linguagem",
+        "filter_job_type": "Tipo",
+        "filter_seniority_level": "Senioridade",
+        "filter_status": "Status",
+        "all_job_types": "Todos os tipos",
+        "all_seniority_levels": "Todas as senioridades",
+        "all_statuses": "Todos os status",
+        "load_error": "Não foi possível carregar os freelas.",
+        "load_more_error": "Não foi possível carregar mais itens.",
+        "retry": "Tentar novamente",
+        "badges": {
+            "invited": "Você foi convidado",
+            "proposal_sent": "Orçamento enviado"
+        },
+        "unavailable_title": "Este freela não está mais disponível.",
+        "unavailable_description": "Ele pode ter sido removido pelo cliente.",
+        "back_to_search": "Voltar para a busca",
+        "back_to_my_freelances": "Voltar para Meus Freelances",
+        "my": {
+            "title": "Meus Freelances",
+            "client_description": "Publique freelas, compare os orçamentos recebidos e acompanhe as entregas.",
+            "dev_description": "Acompanhe seus contratos, orçamentos, convites e os freelas recomendados para você.",
+            "tabs": {
+                "all": "Todos",
+                "open": "Abertos",
+                "in_progress": "Em andamento",
+                "completed": "Concluídos",
+                "contracts": "Contratos",
+                "proposals": "Orçamentos",
+                "invitations": "Convites",
+                "recommended": "Recomendados para você"
+            },
+            "publish": "Publicar freela",
+            "publish_title": "Publicar um freela",
+            "client_empty_title": "Você ainda não publicou freelas.",
+            "client_empty_description": "Publique um freela para começar a receber orçamentos.",
+            "status_empty_title": "Nenhum freela nesta aba.",
+            "proposals_count_one": "{{count}} orçamento",
+            "proposals_count_other": "{{count}} orçamentos",
+            "no_proposals": "Nenhum orçamento ainda"
+        },
+        "contracts": {
+            "empty_title": "Você ainda não tem contratos.",
+            "empty_description": "Quando um cliente aceitar um orçamento seu, o contrato aparece aqui.",
+            "status_empty_title": "Nenhum contrato com este status."
+        },
+        "invitations": {
+            "empty_title": "Nenhum cliente te convidou ainda.",
+            "empty_description": "Quando um cliente te convidar para orçar, o freela aparece aqui."
+        },
+        "dev_proposals": {
+            "empty_title": "Você ainda não enviou orçamentos.",
+            "empty_description": "Encontre freelas na pesquisa e envie o seu orçamento.",
+            "status_empty_title": "Nenhum orçamento com este status.",
+            "vacancy_unavailable": "Freela indisponível"
+        },
+        "recommended": {
+            "description": "Freelas abertos mais parecidos com o seu perfil.",
+            "match": "{{percentage}}% de aderência",
+            "empty_title": "Nenhum freela compatível com o seu perfil agora.",
+            "empty_description": "Volte mais tarde ou procure freelas na pesquisa.",
+            "analyzing_title": "Estamos analisando seu perfil.",
+            "analyzing_description": "Volte em alguns minutos."
+        },
+        "details": {
+            "description": "Descrição",
+            "job_type": "Tipo",
+            "seniority_level": "Senioridade",
+            "specialties": "Especialidades",
+            "languages": "Linguagens e stacks",
+            "no_languages": "Este freela não exige uma linguagem específica.",
+            "client": "Cliente",
+            "client_unavailable": "O cliente deste freela não está mais disponível.",
+            "view_client_profile": "Ver perfil do cliente",
+            "talk_to_client": "Conversar com o cliente",
+            "budget": "Orçamento previsto",
+            "budget_hint": "Só você vê este valor.",
+            "hired_notice": "Este freela já foi contratado.",
+            "owner_actions": "Gerenciar freela",
+            "edit": "Editar",
+            "remove": "Remover",
+            "complete": "Concluir freela",
+            "open_feed": "Abrir o feed",
+            "tabs": {
+                "proposals": "Orçamentos",
+                "recommended_devs": "Devs recomendados"
+            }
+        },
+        "contract": {
+            "title": "Contrato",
+            "value": "Valor fechado",
+            "contracted_at": "Contratado em {{date}}",
+            "completed_at": "Concluído em {{date}}",
+            "dev": "Dev contratado",
+            "client": "Cliente"
+        },
+        "remove_title": "Remover freela?",
+        "remove_description": "O freela \"{{title}}\" será removido e deixará de aparecer para os devs. Essa ação não pode ser desfeita.",
+        "complete_title": "Marcar como concluído?",
+        "complete_description": "O feed fica só para consulta.",
+        "edit_title": "Editar freela",
+        "form": {
+            "title": "Título",
+            "title_placeholder": "Ex.: Landing page em Next.js",
+            "description": "Descrição",
+            "description_placeholder": "Descreva o projeto, as entregas e o prazo esperado",
+            "job_type": "Tipo",
+            "job_type_placeholder": "Selecione o tipo",
+            "budget": "Orçamento previsto (R$)",
+            "budget_placeholder": "Ex.: 10000",
+            "budget_hint": "Só você vê este valor. Ele serve para compararmos os orçamentos que você receber.",
+            "seniority_level": "Senioridade",
+            "seniority_level_placeholder": "Selecione a senioridade",
+            "specialties": "Especialidades",
+            "languages": "Linguagens e stacks",
+            "languages_required_hint": "Obrigatório para o tipo selecionado.",
+            "languages_optional_hint": "Opcional para o tipo selecionado.",
+            "language_placeholder": "Adicionar linguagem ou stack",
+            "language_search": "Buscar linguagem...",
+            "level_placeholder": "Nível",
+            "publish": "Publicar",
+            "save": "Salvar",
+            "errors": {
+                "title_required": "Informe o título",
+                "title_max": "O título pode ter no máximo 255 caracteres",
+                "description_required": "Informe a descrição",
+                "job_type_required": "Selecione o tipo",
+                "budget_required": "Informe o orçamento previsto",
+                "budget_min": "O orçamento previsto deve ser maior que zero",
+                "budget_max": "O orçamento previsto pode ser no máximo R$ 99.999.999,99",
+                "seniority_level_required": "Selecione a senioridade",
+                "specialties_required": "Selecione ao menos uma especialidade",
+                "languages_required": "Freelas do tipo selecionado exigem ao menos uma linguagem ou stack.",
+                "language_duplicated": "Essa linguagem já foi adicionada",
+                "language_level_required": "Selecione o nível"
+            }
+        },
+        "proposal": {
+            "form_title": "Enviar orçamento",
+            "edit_title": "Editar orçamento",
+            "form_description": "O cliente compara os orçamentos pela aderência do seu perfil e pelo preço.",
+            "pricing_type": "Forma de cobrança",
+            "fixed": "Preço fechado",
+            "hourly": "Por hora",
+            "total_price": "Valor total (R$)",
+            "hourly_rate": "Valor da hora (R$)",
+            "estimated_hours": "Horas estimadas",
+            "total_preview": "Total: {{total}}",
+            "message": "Mensagem (opcional)",
+            "message_placeholder": "Apresente-se e explique o que você entrega.",
+            "send": "Enviar orçamento",
+            "save": "Salvar orçamento",
+            "yours": "Seu orçamento",
+            "edit": "Editar",
+            "withdraw": "Retirar",
+            "withdraw_title": "Retirar orçamento?",
+            "withdraw_description": "O cliente deixa de ver este orçamento. Você pode enviar outro enquanto o freela estiver aberto.",
+            "fixed_suffix": "preço fechado",
+            "sent_at": "Enviado em {{date}}",
+            "open_vacancy": "Ver freela",
+            "errors": {
+                "total_price_required": "Informe o valor total",
+                "total_price_min": "O valor deve ser maior que zero",
+                "total_price_max": "O valor pode ser no máximo R$ 99.999.999,99",
+                "hourly_rate_required": "Informe o valor da hora",
+                "hourly_rate_min": "O valor da hora deve ser maior que zero",
+                "hourly_rate_max": "O valor da hora pode ser no máximo R$ 9.999,99",
+                "estimated_hours_required": "Informe as horas estimadas",
+                "estimated_hours_integer": "Use um número inteiro de horas",
+                "estimated_hours_min": "Informe ao menos 1 hora",
+                "estimated_hours_max": "Informe no máximo 9999 horas",
+                "message_max": "A mensagem pode ter no máximo 5000 caracteres"
+            }
+        },
+        "proposals": {
+            "view_ranked": "Mais compatíveis",
+            "view_all": "Todos",
+            "score": "{{percentage}}% compatível",
+            "score_breakdown": "Aderência do perfil: {{similarity}} · Proximidade do preço: {{price}}%",
+            "profile_not_analyzed": "perfil ainda não analisado",
+            "above_budget": "{{percentage}}% acima do seu orçamento",
+            "below_budget": "{{percentage}}% abaixo do seu orçamento",
+            "equal_budget": "Igual ao seu orçamento",
+            "accept": "Aceitar orçamento",
+            "accept_title": "Fechar o contrato?",
+            "accept_description": "Fechar o contrato com {{name}} por {{price}}? Os outros orçamentos serão recusados.",
+            "empty_title": "Nenhum orçamento ainda.",
+            "empty_description": "Convide os devs recomendados para orçar.",
+            "ranking_empty_title": "Nenhum orçamento aguardando decisão.",
+            "status_empty_title": "Nenhum orçamento com este status.",
+            "dev_unavailable": "Dev indisponível"
+        },
+        "recommended_devs": {
+            "description": "Os perfis mais parecidos com o seu freela, segundo a nossa IA.",
+            "match": "{{percentage}}% de aderência",
+            "has_proposal": "Já orçou",
+            "view_proposal": "Ver orçamento",
+            "invited": "Convidado",
+            "invite": "Convidar para orçar",
+            "empty_title": "Nenhum dev compatível ainda.",
+            "empty_description": "Assim que novos devs se cadastrarem, eles podem aparecer aqui."
+        },
+        "analysis": {
+            "vacancy_title": "Estamos analisando seu freela…",
+            "vacancy_description": "As recomendações e o ranking ficam prontos cerca de 1 minuto depois de publicar ou editar o freela. Vamos tentar de novo automaticamente.",
+            "retrying": "Tentando novamente automaticamente…"
+        },
+        "feed": {
+            "title": "Feed do freela",
+            "description": "Atualizações, entregas e reviews do contrato. Para a conversa do dia a dia, use o chat.",
+            "empty_title": "Nenhuma postagem ainda.",
+            "empty_description": "As atualizações e entregas do contrato aparecem aqui.",
+            "read_only": "Freela concluído: o feed fica disponível só para consulta.",
+            "unavailable": "O feed fica disponível depois que o contrato é fechado.",
+            "content_placeholder": "Escreva uma atualização...",
+            "deliverable_placeholder": "Descreva a entrega...",
+            "post_type": "Tipo da postagem",
+            "attach": "Anexar arquivos",
+            "attachments_count": "{{count}}/{{max}} arquivos",
+            "accepted_files": "PDF, Office, CSV, TXT, MD, ZIP e imagens. Até 10 MB por arquivo e 12 MB por envio.",
+            "remove_attachment": "Remover anexo",
+            "publish": "Publicar",
+            "removed_author": "Usuário removido",
+            "review_pending": "Aguardando review",
+            "approve": "Aprovar",
+            "request_changes": "Pedir ajustes",
+            "review_title_approved": "Aprovar entrega",
+            "review_title_changes_requested": "Pedir ajustes na entrega",
+            "review_placeholder": "Comente a entrega...",
+            "review_about": "sobre a entrega de {{date}}",
+            "send_review": "Enviar review",
+            "delete": "Remover postagem",
+            "delete_title": "Remover postagem?",
+            "delete_description": "A postagem e os anexos dela saem do feed.",
+            "link_expired_hint": "Os links dos anexos expiram 30 minutos depois de carregar o feed. Se um link não abrir, recarregue.",
+            "reload": "Recarregar feed",
+            "errors": {
+                "content_required": "Escreva algo ou anexe um arquivo.",
+                "content_max": "O texto pode ter no máximo 5000 caracteres.",
+                "too_many_files": "Envie no máximo {{max}} arquivos.",
+                "file_too_large": "\"{{name}}\" passa de 10 MB.",
+                "total_too_large": "Os arquivos somam mais de 12 MB.",
+                "invalid_extension": "\"{{name}}\" não é de um tipo aceito."
+            },
+            "review_about_older": "sobre uma entrega anterior",
+            "back_to_details": "Voltar para o freela"
+        },
+        "chat_draft": {
+            "dev": "Olá! Vi seu freela \"{{title}}\" e tenho interesse.",
+            "client": "Olá! Vi seu perfil e queria conversar sobre meu freela \"{{title}}\"."
+        },
+        "errors": {
+            "unavailable": "Este freela não está mais disponível.",
+            "forbidden": "Você não tem permissão para esta ação.",
+            "not_open": "Este freela não está mais aberto. Atualizamos a tela.",
+            "not_in_progress": "Este freela não está em andamento. Atualizamos a tela.",
+            "proposal_conflict": "Este freela mudou enquanto você estava na tela. Atualizamos as informações.",
+            "accept_conflict": "Este freela já tem contrato ou o orçamento não está mais pendente. Atualizamos a tela.",
+            "invite_conflict": "Este dev já foi convidado, já orçou ou o freela não está mais aberto. Atualizamos a lista.",
+            "feed_closed": "O feed deste freela não aceita mais alterações. Atualizamos a tela.",
             "unexpected": "Não foi possível concluir. Tente de novo."
         }
     }

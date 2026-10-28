@@ -5,10 +5,14 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { FreelanceJobVacancyResourceJobTypeLabel } from './freelanceJobVacancyResourceJobTypeLabel';
-import type { FreelanceJobVacancyResourceSalaryTypeLabel } from './freelanceJobVacancyResourceSalaryTypeLabel';
 import type { FreelanceJobVacancyResourceSeniorityLevelLabel } from './freelanceJobVacancyResourceSeniorityLevelLabel';
+import type { FreelanceJobVacancyResourceStatusLabel } from './freelanceJobVacancyResourceStatusLabel';
 import type { FreelanceJobVacancyLanguageResource } from './freelanceJobVacancyLanguageResource';
-import type { ClientProfileResource } from './clientProfileResource';
+import type { FreelanceJobVacancyResourceProfile } from './freelanceJobVacancyResourceProfile';
+import type { FreelanceJobVacancyResourceContract } from './freelanceJobVacancyResourceContract';
+import type { FreelanceJobVacancyResourceMyProposal } from './freelanceJobVacancyResourceMyProposal';
+import type { FreelanceJobVacancyResourceContractedAt } from './freelanceJobVacancyResourceContractedAt';
+import type { FreelanceJobVacancyResourceCompletedAt } from './freelanceJobVacancyResourceCompletedAt';
 import type { FreelanceJobVacancyResourceCreatedAt } from './freelanceJobVacancyResourceCreatedAt';
 import type { FreelanceJobVacancyResourceUpdatedAt } from './freelanceJobVacancyResourceUpdatedAt';
 
@@ -19,15 +23,25 @@ export interface FreelanceJobVacancyResource {
   job_type: string;
   job_type_label: FreelanceJobVacancyResourceJobTypeLabel;
   requires_stack: boolean;
-  salary_type: string;
-  salary_type_label: FreelanceJobVacancyResourceSalaryTypeLabel;
-  estimated_salary: string;
   seniority_level: string;
   seniority_level_label: FreelanceJobVacancyResourceSeniorityLevelLabel;
   specialties: unknown[];
+  status: string;
+  status_label: FreelanceJobVacancyResourceStatusLabel;
+  /** Quanto o cliente pretende pagar pelo serviço inteiro. Só o dono vê: é a
+referência de preço do ranking de orçamentos */
+  budget?: string;
   languages?: FreelanceJobVacancyLanguageResource[];
   client_profile_id: string;
-  profile?: ClientProfileResource;
+  profile?: FreelanceJobVacancyResourceProfile;
+  /** Quantos orçamentos a vaga recebeu. Só o dono vê */
+  proposals_count?: number;
+  contract?: FreelanceJobVacancyResourceContract;
+  my_proposal?: FreelanceJobVacancyResourceMyProposal;
+  /** Se o cliente convidou o dev autenticado para orçar a vaga */
+  is_invited?: boolean;
+  contracted_at: FreelanceJobVacancyResourceContractedAt;
+  completed_at: FreelanceJobVacancyResourceCompletedAt;
   created_at: FreelanceJobVacancyResourceCreatedAt;
   updated_at: FreelanceJobVacancyResourceUpdatedAt;
 }

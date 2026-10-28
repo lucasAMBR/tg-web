@@ -1,12 +1,19 @@
-/** Mantém só a primeira ocorrência de cada id, preservando a ordem recebida. */
-export function dedupeById<T extends { id: string }>(items: T[]): T[] {
+/** Mantém só a primeira ocorrência de cada chave, preservando a ordem recebida. */
+export function dedupeBy<T>(items: T[], getKey: (item: T) => string): T[] {
 	const seen = new Set<string>();
 
 	return items.filter((item) => {
-		if (seen.has(item.id)) return false;
+		const key = getKey(item);
 
-		seen.add(item.id);
+		if (seen.has(key)) return false;
+
+		seen.add(key);
 
 		return true;
 	});
+}
+
+/** Mantém só a primeira ocorrência de cada id, preservando a ordem recebida. */
+export function dedupeById<T extends { id: string }>(items: T[]): T[] {
+	return dedupeBy(items, (item) => item.id);
 }

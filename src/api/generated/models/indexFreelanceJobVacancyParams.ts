@@ -19,5 +19,8 @@ per_page?: number | null;
 search?: string | null;
 job_type?: FreelanceJobTypeEnum | null;
 seniority_level?: SeniorityLevelEnum | null;
-only_mine?: boolean | null;
+/**
+ * Só os freelas para os quais o dev autenticado foi convidado
+ */
+invited?: boolean | null;
 };

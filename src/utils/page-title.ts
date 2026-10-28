@@ -29,7 +29,10 @@ type PageTitleKey =
 	| "language_assessment"
 	| "post"
 	| "thread"
-	| "favorites";
+	| "favorites"
+	| "freelances"
+	| "freelance_details"
+	| "freelance_feed";
 
 /**
  * Monta o `<title>` traduzido das rotas.

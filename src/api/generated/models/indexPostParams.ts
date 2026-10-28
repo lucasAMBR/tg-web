@@ -17,4 +17,5 @@ per_page?: number | null;
 search?: string | null;
 user_id?: string | null;
 sort?: 'recent' | 'popular' | null;
+feed?: 'all' | 'following' | null;
 };

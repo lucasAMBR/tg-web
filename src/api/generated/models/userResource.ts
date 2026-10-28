@@ -26,6 +26,12 @@ export interface UserResource {
   /** Confirmação de leitura do chat. Desligada, quem mandou a mensagem não fica
 sabendo que o usuário leu, e o usuário também deixa de ver a leitura dos outros */
   read_receipts_enabled: boolean;
+  /** Só nas rotas que carregam os contadores (exibição de perfil e /auth/profile). */
+  followers_count?: number;
+  following_count?: number;
+  /** Só nas rotas que carregam o scope withFollowState, em relação ao usuário autenticado. */
+  is_followed?: boolean;
+  follows_you?: boolean;
   created_at: UserResourceCreatedAt;
   updated_at: UserResourceUpdatedAt;
 }

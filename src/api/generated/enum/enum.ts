@@ -29,8 +29,18 @@ import type {
   EnumDevSpecialty400,
   EnumEmploymentType200,
   EnumEmploymentType400,
+  EnumFreelanceFeedPostType200,
+  EnumFreelanceFeedPostType400,
   EnumFreelanceJobType200,
   EnumFreelanceJobType400,
+  EnumFreelanceJobVacancyStatus200,
+  EnumFreelanceJobVacancyStatus400,
+  EnumFreelanceProposalPricingType200,
+  EnumFreelanceProposalPricingType400,
+  EnumFreelanceProposalStatus200,
+  EnumFreelanceProposalStatus400,
+  EnumFreelanceReviewStatus200,
+  EnumFreelanceReviewStatus400,
   EnumHardSkillLevel200,
   EnumHardSkillLevel400,
   EnumOperationalSegments200,
@@ -38,8 +48,6 @@ import type {
   EnumQuestionStackBySpecialty200,
   EnumQuestionStackBySpecialty400,
   EnumQuestionStackBySpecialty404,
-  EnumSalaryType200,
-  EnumSalaryType400,
   EnumScreeningQuestionType200,
   EnumScreeningQuestionType400,
   EnumSeniority200,
@@ -796,17 +804,17 @@ export function useEnumFreelanceJobType<TData = Awaited<ReturnType<typeof enumFr
 
 
 /**
- * **operationId:** `enumSalaryType` — Lista os casos do enum `SalaryTypeEnum`, usados na periodicidade do pagamento das vagas freelance. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
- * @summary Listar tipos de remuneração
+ * **operationId:** `enumFreelanceJobVacancyStatus` — Lista os casos do enum `FreelanceJobVacancyStatusEnum`, usados no ciclo da vaga freelance: aberta para orçamentos, em andamento depois do contrato fechado e concluída. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar status de vaga freelance
  */
-export const enumSalaryType = (
+export const enumFreelanceJobVacancyStatus = (
     
  signal?: AbortSignal
 ) => {
       
       
-      return apiClient<EnumSalaryType200>(
-      {url: `/enum/salary-type`, method: 'GET', signal
+      return apiClient<EnumFreelanceJobVacancyStatus200>(
+      {url: `/enum/freelance-job-vacancy-status`, method: 'GET', signal
     },
       );
     }
@@ -814,69 +822,441 @@ export const enumSalaryType = (
 
 
 
-export const getEnumSalaryTypeQueryKey = () => {
+export const getEnumFreelanceJobVacancyStatusQueryKey = () => {
     return [
-    `/enum/salary-type`
+    `/enum/freelance-job-vacancy-status`
     ] as const;
     }
 
     
-export const getEnumSalaryTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumSalaryType>>, TError = EnumSalaryType400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData>>, }
+export const getEnumFreelanceJobVacancyStatusQueryOptions = <TData = Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError = EnumFreelanceJobVacancyStatus400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getEnumSalaryTypeQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getEnumFreelanceJobVacancyStatusQueryKey();
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumSalaryType>>> = ({ signal }) => enumSalaryType(signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>> = ({ signal }) => enumFreelanceJobVacancyStatus(signal);
 
       
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type EnumSalaryTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumSalaryType>>>
-export type EnumSalaryTypeQueryError = EnumSalaryType400
+export type EnumFreelanceJobVacancyStatusQueryResult = NonNullable<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>>
+export type EnumFreelanceJobVacancyStatusQueryError = EnumFreelanceJobVacancyStatus400
 
 
-export function useEnumSalaryType<TData = Awaited<ReturnType<typeof enumSalaryType>>, TError = EnumSalaryType400>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData>> & Pick<
+export function useEnumFreelanceJobVacancyStatus<TData = Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError = EnumFreelanceJobVacancyStatus400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof enumSalaryType>>,
+          Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>,
           TError,
-          Awaited<ReturnType<typeof enumSalaryType>>
+          Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>
         > , 'initialData'
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useEnumSalaryType<TData = Awaited<ReturnType<typeof enumSalaryType>>, TError = EnumSalaryType400>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData>> & Pick<
+export function useEnumFreelanceJobVacancyStatus<TData = Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError = EnumFreelanceJobVacancyStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof enumSalaryType>>,
+          Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>,
           TError,
-          Awaited<ReturnType<typeof enumSalaryType>>
+          Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>
         > , 'initialData'
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useEnumSalaryType<TData = Awaited<ReturnType<typeof enumSalaryType>>, TError = EnumSalaryType400>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData>>, }
+export function useEnumFreelanceJobVacancyStatus<TData = Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError = EnumFreelanceJobVacancyStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary Listar tipos de remuneração
+ * @summary Listar status de vaga freelance
  */
 
-export function useEnumSalaryType<TData = Awaited<ReturnType<typeof enumSalaryType>>, TError = EnumSalaryType400>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumSalaryType>>, TError, TData>>, }
+export function useEnumFreelanceJobVacancyStatus<TData = Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError = EnumFreelanceJobVacancyStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceJobVacancyStatus>>, TError, TData>>, }
  , queryClient?: QueryClient 
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getEnumSalaryTypeQueryOptions(options)
+  const queryOptions = getEnumFreelanceJobVacancyStatusQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `enumFreelanceProposalStatus` — Lista os casos do enum `FreelanceProposalStatusEnum`, usados na situação do orçamento de um dev para um freela. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar status de orçamento freelance
+ */
+export const enumFreelanceProposalStatus = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumFreelanceProposalStatus200>(
+      {url: `/enum/freelance-proposal-status`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumFreelanceProposalStatusQueryKey = () => {
+    return [
+    `/enum/freelance-proposal-status`
+    ] as const;
+    }
+
+    
+export const getEnumFreelanceProposalStatusQueryOptions = <TData = Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError = EnumFreelanceProposalStatus400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumFreelanceProposalStatusQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>> = ({ signal }) => enumFreelanceProposalStatus(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumFreelanceProposalStatusQueryResult = NonNullable<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>>
+export type EnumFreelanceProposalStatusQueryError = EnumFreelanceProposalStatus400
+
+
+export function useEnumFreelanceProposalStatus<TData = Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError = EnumFreelanceProposalStatus400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceProposalStatus>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceProposalStatus>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceProposalStatus<TData = Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError = EnumFreelanceProposalStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceProposalStatus>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceProposalStatus>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceProposalStatus<TData = Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError = EnumFreelanceProposalStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar status de orçamento freelance
+ */
+
+export function useEnumFreelanceProposalStatus<TData = Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError = EnumFreelanceProposalStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalStatus>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumFreelanceProposalStatusQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `enumFreelanceProposalPricingType` — Lista os casos do enum `FreelanceProposalPricingTypeEnum`, que indicam como o dev cobra no orçamento: preço fechado ou valor por hora com as horas estimadas. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar formas de cobrança de orçamento freelance
+ */
+export const enumFreelanceProposalPricingType = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumFreelanceProposalPricingType200>(
+      {url: `/enum/freelance-proposal-pricing-type`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumFreelanceProposalPricingTypeQueryKey = () => {
+    return [
+    `/enum/freelance-proposal-pricing-type`
+    ] as const;
+    }
+
+    
+export const getEnumFreelanceProposalPricingTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError = EnumFreelanceProposalPricingType400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumFreelanceProposalPricingTypeQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>> = ({ signal }) => enumFreelanceProposalPricingType(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumFreelanceProposalPricingTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>>
+export type EnumFreelanceProposalPricingTypeQueryError = EnumFreelanceProposalPricingType400
+
+
+export function useEnumFreelanceProposalPricingType<TData = Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError = EnumFreelanceProposalPricingType400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceProposalPricingType<TData = Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError = EnumFreelanceProposalPricingType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceProposalPricingType<TData = Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError = EnumFreelanceProposalPricingType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar formas de cobrança de orçamento freelance
+ */
+
+export function useEnumFreelanceProposalPricingType<TData = Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError = EnumFreelanceProposalPricingType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceProposalPricingType>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumFreelanceProposalPricingTypeQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `enumFreelanceFeedPostType` — Lista os casos do enum `FreelanceFeedPostTypeEnum`, usados nos tipos de postagem do feed do freela: atualização, entrega e review. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar tipos de postagem do feed freelance
+ */
+export const enumFreelanceFeedPostType = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumFreelanceFeedPostType200>(
+      {url: `/enum/freelance-feed-post-type`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumFreelanceFeedPostTypeQueryKey = () => {
+    return [
+    `/enum/freelance-feed-post-type`
+    ] as const;
+    }
+
+    
+export const getEnumFreelanceFeedPostTypeQueryOptions = <TData = Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError = EnumFreelanceFeedPostType400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumFreelanceFeedPostTypeQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>> = ({ signal }) => enumFreelanceFeedPostType(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumFreelanceFeedPostTypeQueryResult = NonNullable<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>>
+export type EnumFreelanceFeedPostTypeQueryError = EnumFreelanceFeedPostType400
+
+
+export function useEnumFreelanceFeedPostType<TData = Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError = EnumFreelanceFeedPostType400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceFeedPostType>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceFeedPostType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceFeedPostType<TData = Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError = EnumFreelanceFeedPostType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceFeedPostType>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceFeedPostType>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceFeedPostType<TData = Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError = EnumFreelanceFeedPostType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar tipos de postagem do feed freelance
+ */
+
+export function useEnumFreelanceFeedPostType<TData = Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError = EnumFreelanceFeedPostType400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceFeedPostType>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumFreelanceFeedPostTypeQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `enumFreelanceReviewStatus` — Lista os casos do enum `FreelanceReviewStatusEnum`, usados no veredito do cliente na review de uma entrega do feed. Em **200**, `data[]` segue o schema **Enum Resource** (`App\Http\Resources\Enum\EnumResource`), com os campos `value`, `label` e `i18nKey`.
+ * @summary Listar resultados de review freelance
+ */
+export const enumFreelanceReviewStatus = (
+    
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<EnumFreelanceReviewStatus200>(
+      {url: `/enum/freelance-review-status`, method: 'GET', signal
+    },
+      );
+    }
+  
+
+
+
+export const getEnumFreelanceReviewStatusQueryKey = () => {
+    return [
+    `/enum/freelance-review-status`
+    ] as const;
+    }
+
+    
+export const getEnumFreelanceReviewStatusQueryOptions = <TData = Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError = EnumFreelanceReviewStatus400>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getEnumFreelanceReviewStatusQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>> = ({ signal }) => enumFreelanceReviewStatus(signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type EnumFreelanceReviewStatusQueryResult = NonNullable<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>>
+export type EnumFreelanceReviewStatusQueryError = EnumFreelanceReviewStatus400
+
+
+export function useEnumFreelanceReviewStatus<TData = Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError = EnumFreelanceReviewStatus400>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceReviewStatus>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceReviewStatus>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceReviewStatus<TData = Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError = EnumFreelanceReviewStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof enumFreelanceReviewStatus>>,
+          TError,
+          Awaited<ReturnType<typeof enumFreelanceReviewStatus>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useEnumFreelanceReviewStatus<TData = Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError = EnumFreelanceReviewStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Listar resultados de review freelance
+ */
+
+export function useEnumFreelanceReviewStatus<TData = Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError = EnumFreelanceReviewStatus400>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof enumFreelanceReviewStatus>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getEnumFreelanceReviewStatusQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

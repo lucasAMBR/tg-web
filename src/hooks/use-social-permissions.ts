@@ -41,5 +41,14 @@ export function useSocialPermissions() {
 		canReplyComment: (comment: CommentResource) =>
 			!comment.is_removed && hasPermission("comment.create"),
 		canLikeComment: (comment: CommentResource) => !comment.is_removed,
+		/** Botão de seguir. Nunca aparece para o próprio usuário. */
+		canToggleFollow: (targetUserId: string | null | undefined) =>
+			Boolean(targetUserId) &&
+			!isMine(targetUserId) &&
+			hasPermission("follow.toggle"),
+		/** Sem ela, os contadores aparecem sem link para as listas. */
+		canViewFollows: hasPermission("follow.view"),
+		/** Os participantes saem dos comentários, então pedem a mesma permissão. */
+		canViewPostParticipants: hasPermission("comment.view"),
 	};
 }
