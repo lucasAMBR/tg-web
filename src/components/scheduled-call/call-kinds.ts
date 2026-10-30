@@ -39,10 +39,14 @@ export const INTERVIEW_CALL: ScheduledCallKind = {
 	},
 };
 
-/** Mesma negociação e mesma call da entrevista, em outro prefixo e outro canal. */
+/**
+ * Mesma negociação e mesma call da entrevista, em outro prefixo e outro canal —
+ * com o compartilhamento de tela, para o código ser acompanhado ao vivo.
+ */
 export const LIVE_CODING_CALL: ScheduledCallKind = {
 	i18nPrefix: "live_coding",
 	statusI18nPrefix: "enum.dev_job_vacancy_live_coding.status",
+	screenShare: true,
 	api: {
 		basePath: "/dev-vacancy-live-coding",
 		setSchedule: setInitialScheduleDevJobVacancyLiveCoding,

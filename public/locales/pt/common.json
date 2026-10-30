@@ -1335,7 +1335,10 @@
             "unmute": "Ativar microfone",
             "camera_off": "Desativar câmera",
             "camera_on": "Ativar câmera",
-            "hang_up": "Encerrar"
+            "hang_up": "Encerrar",
+            "share_screen": "Compartilhar tela",
+            "stop_screen_share": "Parar de compartilhar a tela",
+            "your_screen": "Sua tela"
         },
         "exercise": {
             "statement": "Enunciado",

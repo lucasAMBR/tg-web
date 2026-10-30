@@ -2,12 +2,14 @@ import {
 	Mic,
 	MicOff,
 	PhoneOff,
+	ScreenShare,
+	ScreenShareOff,
 	User,
 	Video,
 	VideoOff,
 	WifiOff,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +20,10 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { Spinner } from "@/components/ui/spinner";
-import { useScheduledCall } from "@/hooks/use-scheduled-call";
+import {
+	screenShareSupported,
+	useScheduledCall,
+} from "@/hooks/use-scheduled-call";
 import { cn } from "@/lib/utils";
 import type { ScheduledCall, ScheduledCallKind } from "@/types/scheduled-call";
 
@@ -28,6 +33,8 @@ interface VideoTileProps {
 	muted?: boolean;
 	label: string;
 	placeholder: React.ReactNode;
+	/** `contain` mostra o quadro inteiro, necessário para ler uma tela compartilhada. */
+	fit?: "cover" | "contain";
 	className?: string;
 }
 
@@ -36,9 +43,12 @@ function VideoTile({
 	muted,
 	label,
 	placeholder,
+	fit = "cover",
 	className,
 }: VideoTileProps) {
 	const videoRef = useRef<HTMLVideoElement>(null);
+
+	const [, refresh] = useReducer((count: number) => count + 1, 0);
 
 	// `srcObject` não é um atributo do elemento, só dá para atribuir via ref
 	useEffect(() => {
@@ -48,7 +58,14 @@ function VideoTile({
 
 		video.srcObject = stream;
 
+		// Um track que entra ou sai no meio da call (a tela de quem está sem câmera)
+		// não troca a referência do stream, então o tile precisa se reavaliar sozinho
+		stream?.addEventListener("addtrack", refresh);
+		stream?.addEventListener("removetrack", refresh);
+
 		return () => {
+			stream?.removeEventListener("addtrack", refresh);
+			stream?.removeEventListener("removetrack", refresh);
 			video.srcObject = null;
 		};
 	}, [stream]);
@@ -69,7 +86,11 @@ function VideoTile({
 				autoPlay
 				playsInline
 				muted={muted}
-				className={cn("size-full object-cover", !hasVideo && "invisible")}
+				className={cn(
+					"size-full",
+					fit === "contain" ? "object-contain" : "object-cover",
+					!hasVideo && "invisible",
+				)}
 			>
 				<track kind="captions" />
 			</video>
@@ -113,10 +134,12 @@ export default function CallDialog({
 		error,
 		localStream,
 		remoteStream,
+		screenStream,
 		micEnabled,
 		cameraEnabled,
 		toggleMic,
 		toggleCamera,
+		toggleScreenShare,
 		hangUp,
 	} = useScheduledCall({
 		callId: call.id,
@@ -124,6 +147,10 @@ export default function CallDialog({
 		enabled: open,
 		onEnded,
 	});
+
+	const canShareScreen = kind.screenShare && screenShareSupported;
+
+	const isSharingScreen = screenStream !== null;
 
 	const handleHangUp = async () => {
 		onOpenChange(false);
@@ -181,6 +208,9 @@ export default function CallDialog({
 						<VideoTile
 							stream={remoteStream}
 							label={counterpartName ?? t(`${prefix}.call.counterpart`)}
+							// Não dá para saber se o outro lado mandou câmera ou tela, então
+							// onde existe compartilhamento o quadro nunca é cortado
+							fit={kind.screenShare ? "contain" : "cover"}
 							className="size-full"
 							placeholder={
 								isLoading || phase === "waiting" ? (
@@ -194,9 +224,14 @@ export default function CallDialog({
 							}
 						/>
 						<VideoTile
-							stream={localStream}
+							stream={screenStream ?? localStream}
 							muted
-							label={t(`${prefix}.call.you`)}
+							label={
+								isSharingScreen
+									? t(`${prefix}.call.your_screen`)
+									: t(`${prefix}.call.you`)
+							}
+							fit={isSharingScreen ? "contain" : "cover"}
 							className="absolute bottom-3 right-3 aspect-video w-32 border-2 border-background shadow-lg sm:w-44"
 							placeholder={<VideoOff className="size-6" />}
 						/>
@@ -230,6 +265,23 @@ export default function CallDialog({
 					>
 						{cameraEnabled ? <Video /> : <VideoOff />}
 					</Button>
+					{canShareScreen && (
+						<Button
+							type="button"
+							variant={isSharingScreen ? "accent" : "secondary"}
+							size={"icon"}
+							// O sender só existe depois do `join`, quando a sala já está montada
+							disabled={phase !== "waiting" && phase !== "connected"}
+							onClick={toggleScreenShare}
+							aria-label={
+								isSharingScreen
+									? t(`${prefix}.call.stop_screen_share`)
+									: t(`${prefix}.call.share_screen`)
+							}
+						>
+							{isSharingScreen ? <ScreenShareOff /> : <ScreenShare />}
+						</Button>
+					)}
 					<Button type="button" variant={"destructive"} onClick={handleHangUp}>
 						<PhoneOff />
 						{t(`${prefix}.call.hang_up`)}
