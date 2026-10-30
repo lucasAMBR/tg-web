@@ -38,6 +38,11 @@ const RESEND_INTERVAL_MS = 5_000;
  */
 const NEGOTIATION_TIMEOUT_MS = 25_000;
 
+/** Navegadores mobile não implementam a captura de tela. */
+export const screenShareSupported =
+	typeof navigator !== "undefined" &&
+	typeof navigator.mediaDevices?.getDisplayMedia === "function";
+
 interface SignalEvent {
 	from: string;
 	type: string;
@@ -71,6 +76,11 @@ export function useScheduledCall({
 	const remoteStreamRef = useRef<MediaStream | null>(null);
 	const [localStream, setLocalStream] = useState<MediaStream | null>(null);
 	const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
+
+	const screenStreamRef = useRef<MediaStream | null>(null);
+	const [screenStream, setScreenStream] = useState<MediaStream | null>(null);
+	/** Sender que está transmitindo a tela, para devolver a câmera ao parar. */
+	const screenSenderRef = useRef<RTCRtpSender | null>(null);
 
 	const peerRef = useRef<RTCPeerConnection | null>(null);
 	const channelNameRef = useRef<string | null>(null);
@@ -131,10 +141,17 @@ export function useScheduledCall({
 			track.stop();
 		}
 
+		for (const track of screenStreamRef.current?.getTracks() ?? []) {
+			track.stop();
+		}
+
 		localStreamRef.current = null;
 		remoteStreamRef.current = null;
+		screenStreamRef.current = null;
+		screenSenderRef.current = null;
 		setLocalStream(null);
 		setRemoteStream(null);
+		setScreenStream(null);
 
 		if (channelNameRef.current) {
 			getEcho(getToken).leaveChannel(`private-${channelNameRef.current}`);
@@ -182,6 +199,111 @@ export function useScheduledCall({
 			return next;
 		});
 	}, []);
+
+	const stopScreenShare = useCallback(async () => {
+		const screen = screenStreamRef.current;
+
+		if (!screen) return;
+
+		const sender = screenSenderRef.current;
+
+		screenStreamRef.current = null;
+		screenSenderRef.current = null;
+		setScreenStream(null);
+
+		for (const track of screen.getTracks()) track.stop();
+
+		const peer = peerRef.current;
+
+		if (!peer || !sender || peer.signalingState === "closed") return;
+
+		const [cameraTrack] = localStreamRef.current?.getVideoTracks() ?? [];
+
+		try {
+			// Com câmera a tela só tinha ocupado o lugar dela no mesmo sender. Sem
+			// câmera o sender existia só para a tela e sai da conexão (renegociando)
+			if (cameraTrack) {
+				await sender.replaceTrack(cameraTrack);
+			} else {
+				peer.removeTrack(sender);
+			}
+		} catch (error) {
+			console.error("[call] falha ao devolver a câmera", error);
+		}
+	}, []);
+
+	const startScreenShare = useCallback(async () => {
+		const peer = peerRef.current;
+
+		if (!peer || screenStreamRef.current) return;
+
+		let screen: MediaStream;
+
+		try {
+			screen = await navigator.mediaDevices.getDisplayMedia({
+				video: true,
+				audio: false,
+			});
+		} catch {
+			// Fechar o seletor de tela sem escolher nada também cai aqui
+			return;
+		}
+
+		const [screenTrack] = screen.getVideoTracks();
+
+		// A call pode ter acabado enquanto o seletor estava aberto
+		if (
+			!screenTrack ||
+			peerRef.current !== peer ||
+			peer.signalingState === "closed"
+		) {
+			for (const track of screen.getTracks()) track.stop();
+			return;
+		}
+
+		// Prioriza a nitidez sobre a fluidez, para o código continuar legível
+		screenTrack.contentHint = "detail";
+
+		// Parar pela barra nativa do navegador também precisa devolver a câmera
+		screenTrack.addEventListener("ended", () => {
+			stopScreenShare();
+		});
+
+		const videoSender = peer
+			.getSenders()
+			.find((sender) => sender.track?.kind === "video");
+
+		try {
+			// Trocar o track no sender da câmera não exige renegociação. Sem câmera
+			// não há esse sender, então a tela entra como track nova
+			if (videoSender) {
+				await videoSender.replaceTrack(screenTrack);
+				screenSenderRef.current = videoSender;
+			} else {
+				screenSenderRef.current = peer.addTrack(
+					screenTrack,
+					localStreamRef.current ?? screen,
+				);
+			}
+		} catch (error) {
+			console.error("[call] falha ao compartilhar a tela", error);
+
+			for (const track of screen.getTracks()) track.stop();
+			return;
+		}
+
+		screenStreamRef.current = screen;
+		setScreenStream(screen);
+	}, [stopScreenShare]);
+
+	const toggleScreenShare = useCallback(() => {
+		if (screenStreamRef.current) {
+			stopScreenShare();
+			return;
+		}
+
+		startScreenShare();
+	}, [startScreenShare, stopScreenShare]);
 
 	useEffect(() => {
 		if (!enabled) return;
@@ -466,10 +588,12 @@ export function useScheduledCall({
 		role,
 		localStream,
 		remoteStream,
+		screenStream,
 		micEnabled,
 		cameraEnabled,
 		toggleMic,
 		toggleCamera,
+		toggleScreenShare,
 		hangUp,
 	};
 }

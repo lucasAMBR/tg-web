@@ -1342,7 +1342,10 @@
             "unmute": "Unmute microphone",
             "camera_off": "Turn camera off",
             "camera_on": "Turn camera on",
-            "hang_up": "Hang up"
+            "hang_up": "Hang up",
+            "share_screen": "Share screen",
+            "stop_screen_share": "Stop sharing screen",
+            "your_screen": "Your screen"
         },
         "exercise": {
             "statement": "Statement",

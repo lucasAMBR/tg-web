@@ -71,6 +71,8 @@ export interface ScheduledCallKind {
 	i18nPrefix: string;
 	/** Prefixo das traduções do status, ex.: `enum.dev_job_vacancy_interview.status`. */
 	statusI18nPrefix: string;
+	/** Libera o compartilhamento de tela na sala (as traduções ficam em `{i18nPrefix}.call`). */
+	screenShare?: boolean;
 }
 
 /**
