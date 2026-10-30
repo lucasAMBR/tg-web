@@ -1,9 +1,13 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import type { AxiosError } from "axios";
 import { Briefcase, ExternalLink, Eye, PencilLine, Upload } from "lucide-react";
 import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import type { DevJobVacancyResource } from "@/api/generated/models";
+import { useUpdatePortfolioSolicitation } from "@/api/generated/portfolio-solicitation/portfolio-solicitation";
 import { useShowDevTechnicalChallenge } from "@/api/generated/technical-challenge/technical-challenge";
 import AnswerLanguageAssessmentModal from "@/components/language-assessment/answer-language-assessment-modal";
 import AssessmentScore from "@/components/language-assessment/assessment-score";
@@ -24,7 +28,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Field, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
+import {
+	type ISendPortfolioSchema,
+	SendPortfolioSchema,
+} from "@/schemas/portfolio-solicitation/SendPortfolioSchema";
 import { getInterview } from "@/types/dev-job-vacancy-interview";
 import {
 	getLiveCoding,
@@ -52,8 +62,11 @@ import {
 	getGuideDocument,
 	getSubmissionFile,
 } from "@/types/technical-challenge";
+import type { ApiError } from "@/utils/api-error";
+import { CustomToaster } from "@/utils/custom-toaster";
 import { apiDateOnly, formatIsoDateOnlyBr } from "@/utils/date-only";
 import { formatDateTime } from "@/utils/formatter";
+import { onError } from "@/utils/on-error";
 import SubmitTechnicalChallengeModal from "./submit-technical-challenge-modal";
 
 interface MyApplyCardProps {
@@ -67,13 +80,35 @@ const MY_APPLIES_QUERY_KEY = ["/dev-vacancy/my-applies"];
 function PortfolioSolicitationBlock({ apply }: MyApplyCardProps) {
 	const { t, i18n } = useTranslation();
 
+	const queryClient = useQueryClient();
+
 	const dateLocale = i18n.language === "en" ? "en" : "pt";
 
 	const solicitation = getPortfolioSolicitation(apply);
 
+	const form = useForm<ISendPortfolioSchema>({
+		resolver: zodResolver(SendPortfolioSchema),
+		defaultValues: { portfolio_url: "" },
+	});
+
+	const { mutateAsync: sendPortfolio, isPending } =
+		useUpdatePortfolioSolicitation();
+
 	if (!solicitation) return null;
 
 	const wasSent = portfolioWasSent(solicitation);
+
+	const submit = async (data: ISendPortfolioSchema) => {
+		try {
+			await sendPortfolio({ id: solicitation.id, data });
+
+			CustomToaster.successToast(t("toast.success.portfolio_sent"));
+
+			queryClient.invalidateQueries({ queryKey: MY_APPLIES_QUERY_KEY });
+		} catch (error) {
+			onError(error as AxiosError<ApiError>);
+		}
+	};
 
 	return (
 		<div className="flex flex-col gap-2 border-t pt-3">
@@ -113,22 +148,42 @@ function PortfolioSolicitationBlock({ apply }: MyApplyCardProps) {
 					{solicitation.portfolio_url}
 				</a>
 			) : (
-				<div className="flex flex-col gap-2">
+				<form
+					className="flex flex-col gap-2"
+					onSubmit={form.handleSubmit(submit)}
+				>
 					<p className="text-sm text-muted-foreground">
 						{t("my_applies.portfolio.send_description")}
 					</p>
-					<div className="flex flex-col gap-2 sm:flex-row">
-						<Input
-							type="url"
-							placeholder={t("my_applies.portfolio.url_placeholder")}
-							className="sm:flex-1"
-						/>
-						<Button variant={"accent"} className="w-fit">
-							<Upload />
-							{t("my_applies.portfolio.send")}
-						</Button>
-					</div>
-				</div>
+					<Controller
+						control={form.control}
+						name="portfolio_url"
+						render={({ field, fieldState }) => (
+							<Field>
+								<div className="flex flex-col gap-2 sm:flex-row">
+									{/* `inputMode` no lugar de `type="url"` para a validação ficar só no zod */}
+									<Input
+										{...field}
+										inputMode="url"
+										placeholder={t("my_applies.portfolio.url_placeholder")}
+										className="sm:flex-1"
+										aria-invalid={fieldState.invalid}
+									/>
+									<Button
+										type="submit"
+										variant={"accent"}
+										className="w-fit"
+										disabled={isPending}
+									>
+										{isPending ? <Spinner /> : <Upload />}
+										{t("my_applies.portfolio.send")}
+									</Button>
+								</div>
+								<FieldError errors={[fieldState.error]} />
+							</Field>
+						)}
+					/>
+				</form>
 			)}
 		</div>
 	);

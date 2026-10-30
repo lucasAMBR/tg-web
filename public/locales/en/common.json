@@ -146,6 +146,7 @@
             "technical_challenge_updated": "Technical challenge updated successfully",
             "technical_challenge_deleted": "Technical challenge deleted successfully",
             "technical_challenge_delivered": "Technical challenge delivered successfully",
+            "portfolio_sent": "Portfolio sent successfully",
             "guide_document_saved": "Guide document saved successfully",
             "guide_document_removed": "Guide document removed successfully",
             "live_coding_schedule_set": "Live coding schedule set successfully",
