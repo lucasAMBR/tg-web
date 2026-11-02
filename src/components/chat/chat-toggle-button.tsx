@@ -4,14 +4,20 @@ import { Button } from "@/components/ui/button";
 import { useChatConversations } from "@/hooks/use-chat-conversations";
 import { useChatStore } from "@/stores/chat-store";
 
-/** Abre e fecha o painel do chat. Fica no header, ao lado das notificações. */
+/**
+ * Abre e fecha o painel do chat. Fica no header, ao lado das notificações, e some
+ * na tela de mensagens, onde o painel não aparece.
+ */
 export function ChatToggleButton() {
 	const { t } = useTranslation();
 
 	const isOpen = useChatStore((state) => state.isOpen);
 	const toggle = useChatStore((state) => state.toggle);
+	const isPageOpen = useChatStore((state) => state.isPageOpen);
 
 	const { unreadCount } = useChatConversations();
+
+	if (isPageOpen) return null;
 
 	return (
 		<Button

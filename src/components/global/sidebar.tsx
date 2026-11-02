@@ -11,11 +11,13 @@ import {
 	List,
 	LogOut,
 	MessageCircle,
+	MessageSquare,
 	Search,
 	User,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAuthStore } from "@/stores/auth-store";
+import { usePermissionStore } from "@/stores/permission-store";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -27,6 +29,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useChatConversations } from "@/hooks/use-chat-conversations";
 import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -43,6 +46,8 @@ export default function Sidebar() {
 	const location = useLocation();
 	const { user } = useAuthStore();
 	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+	const { unreadCount } = useChatConversations();
+	const permissions = usePermissionStore((state) => state.permissions);
 
 	const role = getUserMainRole(user);
 	const profilePic = getProfilePic(user);
@@ -53,11 +58,13 @@ export default function Sidebar() {
 		icon: Icon,
 		url,
 		onClick,
+		badge,
 	}: {
 		title: string;
 		icon: LucideIcon;
 		url?: string;
 		onClick?: () => void;
+		badge?: number;
 	}) {
 		const active = url ? location.pathname.startsWith(url) : false;
 
@@ -74,6 +81,11 @@ export default function Sidebar() {
 			>
 				<Icon className="size-4" />
 				{title}
+				{!!badge && (
+					<span className="ml-auto flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-white">
+						{badge > 99 ? "99+" : badge}
+					</span>
+				)}
 			</div>
 		);
 	}
@@ -101,6 +113,7 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
@@ -111,7 +124,10 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
-							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
+							{permissions.has("company.dashboard") && (
+								<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							)}
 							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-vacancies" />
 						</>
 					)}
@@ -121,6 +137,7 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
 					)}
@@ -129,8 +146,11 @@ export default function Sidebar() {
 						<>
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
-							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
+							{permissions.has("administration.dashboard") && (
+								<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
+							)}
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
 							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/company" />
 							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />

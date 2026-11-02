@@ -147,7 +147,7 @@ export function useIndexJobVacancy<TData = Awaited<ReturnType<typeof indexJobVac
 
 
 /**
- * **operationId:** `storeJobVacancy` — Cadastra uma vaga para o perfil de empresa autenticado (exige role `company` e perfil ativo), vinculando linguagens com nível, soft skills, linguagens desejáveis e as etapas do processo seletivo. Dispara a geração do embedding da vaga e a tradução do conteúdo. Em **201**, `data` segue o schema **Job Vacancy Resource** (`App\Http\Resources\JobVacancy\JobVacancyResource`), com as relações carregadas.
+ * **operationId:** `storeJobVacancy` — Cadastra uma vaga para o perfil de empresa autenticado (exige role `company` e perfil ativo), vinculando linguagens com nível, soft skills, linguagens desejáveis e as etapas do processo seletivo. A etapa `resume_screening` é sempre adicionada como a primeira (`order` 1) e as etapas enviadas seguem depois dela, na ordem informada; se `resume_screening` vier no payload, ela é ignorada para não duplicar. Dispara a geração do embedding da vaga e a tradução do conteúdo. Em **201**, `data` segue o schema **Job Vacancy Resource** (`App\Http\Resources\JobVacancy\JobVacancyResource`), com as relações carregadas.
  * @summary Cadastrar vaga
  */
 export const storeJobVacancy = (
