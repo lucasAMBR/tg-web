@@ -30,9 +30,9 @@ function RouteComponent() {
 	const role = getUserMainRole(useAuthStore((state) => state.user));
 
 	return (
-		<div className="flex flex-1 flex-col p-8">
+		<div className="flex flex-1 flex-col p-4 md:p-8">
 			<div className="mb-5 flex flex-col gap-1">
-				<h2 className="text-3xl font-bold">{t("freelance.my.title")}</h2>
+				<h2 className="text-2xl md:text-3xl font-bold">{t("freelance.my.title")}</h2>
 				<p className="text-sm text-muted-foreground">
 					{role === "client"
 						? t("freelance.my.client_description")

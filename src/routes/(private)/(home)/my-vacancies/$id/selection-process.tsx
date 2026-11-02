@@ -27,7 +27,7 @@ function RouteComponent() {
 	const { id } = Route.useParams();
 
 	return (
-		<div className="flex flex-1 flex-col gap-4 p-8">
+		<div className="flex flex-1 flex-col gap-4 p-4 md:p-8">
 			<SelectionProcessTabs vacancyId={id} />
 		</div>
 	);

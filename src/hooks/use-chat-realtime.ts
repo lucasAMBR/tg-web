@@ -29,14 +29,15 @@ export function useChatRealtime() {
 		const channelName = `chat.${userId}`;
 
 		const handleMessageSent = (message: ChatMessageResource) => {
-			const { isOpen, activeConversationId, pushLiveMessage } =
+			const { isOpen, isPageOpen, activeConversationId, pushLiveMessage } =
 				useChatStore.getState();
 
 			const isMine = message.sender_id === userId;
-			// Conversa aberta e visível: a própria tela marca como lida, então nem
-			// chega a contar como não lida
+			// Conversa aberta e visível (no painel ou na tela de mensagens): a própria
+			// tela marca como lida, então nem chega a contar como não lida
 			const isVisible =
-				isOpen && activeConversationId === message.conversation_id;
+				(isOpen || isPageOpen) &&
+				activeConversationId === message.conversation_id;
 
 			pushLiveMessage(message);
 

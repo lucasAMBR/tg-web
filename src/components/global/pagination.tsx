@@ -62,7 +62,7 @@ const DataTablePagination = ({
 	};
 
 	return (
-		<div className="flex w-full flex-row items-center justify-between gap-6 flex-nowrap">
+		<div className="flex w-full flex-row flex-wrap items-center justify-between gap-3 md:flex-nowrap md:gap-6">
 			{/* Rows per page - O Orval reage ao setPerPage automaticamente */}
 			<div className="flex shrink-0 items-center gap-3">
 				<Label

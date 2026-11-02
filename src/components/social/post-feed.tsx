@@ -117,7 +117,8 @@ export default function PostFeed() {
 					</TabsList>
 				</Tabs>
 
-				<div className="flex flex-wrap items-center gap-2">
+				{/* No celular a busca desce para uma linha só dela */}
+				<div className="flex flex-wrap items-center gap-2 max-md:contents">
 					<Select
 						value={sort}
 						onValueChange={(value) =>
@@ -138,7 +139,7 @@ export default function PostFeed() {
 						</SelectContent>
 					</Select>
 
-					<form className="flex flex-row gap-2" onSubmit={handleSearch}>
+					<form className="flex flex-row gap-2 max-md:w-full" onSubmit={handleSearch}>
 						<Input
 							placeholder={t("social.feed.search_placeholder")}
 							value={searchTerm}

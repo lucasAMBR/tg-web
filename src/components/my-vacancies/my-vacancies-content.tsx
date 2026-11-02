@@ -24,8 +24,9 @@ export default function MyVacanciesContent() {
 	}
 
 	return (
-		<div className="flex flex-1 flex-row gap-8">
-      <div className="flex-3 flex flex-col gap-4">
+		// No celular as vagas populares descem para depois da lista
+		<div className="flex flex-1 flex-col gap-8 md:flex-row">
+      <div className="md:flex-3 flex flex-col gap-4">
         <CreateVacancyCard
 					creationIsOpen={creationIsOpen}
 					onToggle={() => setCreationIsOpen(!creationIsOpen)}
@@ -51,8 +52,8 @@ export default function MyVacanciesContent() {
 					<MyVacanciesList search={appliedSearch} />
 				)}
 			</div>
-			<Separator orientation="vertical" />
-			<div className="flex-1">
+			<Separator orientation="vertical" className="max-md:hidden" />
+			<div className="md:flex-1">
 				<PopularVacancies />
 			</div>
 		</div>

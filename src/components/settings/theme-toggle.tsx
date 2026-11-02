@@ -24,7 +24,7 @@ export function ToggleTheme() {
 
 	return (
         <Card className="p-4 flex flex-col justify-between gap-12">
-			<div className="flex flex-row justify-between gap-12">
+			<div className="flex flex-col gap-4 md:flex-row md:justify-between md:gap-12">
 			<div className='flex-1'>
 				<h3 className='text-xl font-medium'>{t("settings.theme.change_theme.title")}</h3>
 				<p className='text-sm text-muted-foreground'>{t("settings.theme.change_theme.description")}</p>
@@ -38,7 +38,7 @@ export function ToggleTheme() {
 				}
 			>
 				{items.map((item) => (
-					<label key={`${id}-${item.value}`}>
+					<label key={`${id}-${item.value}`} className="max-md:min-w-0 max-md:flex-1">
 						<RadioGroupItem
 							id={`${id}-${item.value}`}
 							value={item.value}
@@ -49,7 +49,7 @@ export function ToggleTheme() {
 							alt={item.label}
 							width={200}
 							height={182}
-							className="border-input peer-focus-visible:ring-ring/50 peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent relative cursor-pointer overflow-hidden rounded-md border shadow-xs transition-[color,box-shadow] outline-none peer-focus-visible:ring-[3px] peer-data-disabled:cursor-not-allowed peer-data-disabled:opacity-50"
+							className="max-md:h-auto max-md:w-full border-input peer-focus-visible:ring-ring/50 peer-data-[state=checked]:border-ring peer-data-[state=checked]:bg-accent relative cursor-pointer overflow-hidden rounded-md border shadow-xs transition-[color,box-shadow] outline-none peer-focus-visible:ring-[3px] peer-data-disabled:cursor-not-allowed peer-data-disabled:opacity-50"
 						/>
 						<span className="group peer-data-[state=unchecked]:text-muted-foreground/70 mt-2 flex items-center gap-1">
 							<CheckIcon
@@ -70,7 +70,7 @@ export function ToggleTheme() {
 		</fieldset>
 		</div>
 		<Separator />
-		<div className="flex flex-row justify-between gap-12">
+		<div className="flex flex-col gap-4 md:flex-row md:justify-between md:gap-12">
 			<div className="flex-1">
 				<h3 className='text-xl font-medium'>{t("settings.theme.theme.title")}</h3>
 				<p className='text-sm text-muted-foreground'>{t("settings.theme.theme.description")}</p>

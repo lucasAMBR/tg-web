@@ -88,7 +88,7 @@ export default function UpdateCertificationModal({profileId, certificate, open, 
                 </DialogHeader>
                 <form onSubmit={form.handleSubmit(handleUpdate)} className="flex flex-col gap-3">
                     <Card className="p-4">
-                    <div className="flex gap-4">
+                    <div className="flex flex-col gap-4 md:flex-row">
                         <Controller 
                             control={form.control}
                             name="name"

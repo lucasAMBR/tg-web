@@ -1,6 +1,5 @@
 import type { RecommendationPreferenceResource } from '@/api/generated/models';
 import { useGetDevRecommendationPreference } from '@/api/generated/recommendation-preference/recommendation-preference';
-import ThemeToggle from '@/components/global/theme-toggle-button';
 import CompanyUpdateProfileForm from '@/components/settings/company-update-profile-form';
 import CustomRecommendationDistances from '@/components/settings/custom-recommendation-distances';
 import CustomRecommendationJobModality from '@/components/settings/custom-recommendation-job-modality';
@@ -56,9 +55,9 @@ function RouteComponent() {
     console.log(preferences);
 
     return (
-      <div className='flex flex-col p-8'>
+      <div className='flex flex-col p-4 md:p-8'>
         <div className='flex flex-col gap-1'>
-          <h2 className='text-3xl font-bold'>{t("settings.title")}</h2>
+          <h2 className='text-2xl md:text-3xl font-bold'>{t("settings.title")}</h2>
           <p className='text-sm text-muted-foreground'>{t("settings.description")}</p>
         </div>
         <div className='mt-5 flex-1 w-full'>
@@ -100,13 +99,13 @@ function RouteComponent() {
                 </TabsList>
                 <TabsContent key={"account"} value={"account"} className='flex-1 min-w-0 m-0'>
                   <Card className='p-6 w-full flex flex-col'>
-                     <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
+                     <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12 md:items-center md:justify-center'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.account.email_verification.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.account.email_verification.description")}</p>
                       </div>
                       <div className='flex-2 min-w-0'>
-                        <Card className='p-4 flex flex-row items-center justify-between'>
+                        <Card className='p-4 flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between md:gap-6'>
                           {verification ? (
                               <div className='flex items-center gap-2'>
                                 <Check className='size-5'/> <p>{t("settings.account.email_verification.your_email_is_already_verified")}</p>
@@ -121,7 +120,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6'/>
-                    <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12 md:items-center md:justify-center'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.account.change_associated_email.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.account.change_associated_email.description")}</p>
@@ -131,7 +130,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6' />
-                     <div className='flex-1 flex flex-row gap-12'>
+                     <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.account.password_change.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.account.password_change.description")}</p>
@@ -141,7 +140,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6'/>
-                    <div className='flex-1 flex flex-row gap-12 items-center justify-center'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12 md:items-center md:justify-center'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.account.read_receipts.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.account.read_receipts.description")}</p>
@@ -151,7 +150,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6'/>
-                     <Card className='flex-1 flex flex-row gap-12 p-4 bg-red-900/2 items-center'>
+                     <Card className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12 p-4 bg-red-900/2 md:items-center'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium text-red-800'>{t("settings.account.delete_account.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.account.delete_account.description")}</p>
@@ -180,7 +179,7 @@ function RouteComponent() {
                 </TabsContent>
                 <TabsContent key={"profile"} value={"profile"} className='flex-1 min-w-0 m-0'>
                   <Card className='p-6 w-full flex flex-col'>
-                     <div className='flex-1 flex flex-row gap-12'>
+                     <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.profile.profile_pic.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.profile.profile_pic.description")}</p>
@@ -190,7 +189,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6'/>
-                     <div className='flex-1 flex flex-row gap-12'>
+                     <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.profile.update_profile.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.profile.update_profile.description")}</p>
@@ -202,7 +201,7 @@ function RouteComponent() {
                       </div>
                     </div>
                     <Separator className='my-6'/> 
-                     <div className='flex-1 flex flex-row gap-12'>
+                     <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.profile.location_informations.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.profile.location_informations.description")}</p>
@@ -224,7 +223,7 @@ function RouteComponent() {
                         {t("settings.recommendation.warning.description")}
                       </AlertDescription>
                     </Alert>
-                    <div className='flex-1 flex flex-row gap-12'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.recommendation.contract_type.title")}</h3>
                         <p className='text-sm text-muted-foreground'>
@@ -239,7 +238,7 @@ function RouteComponent() {
 
                     <Separator className='my-6'/>
 
-                    <div className='flex-1 flex flex-row gap-12'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.recommendation.job_modality.title")}</h3>
                         <p className='text-sm text-muted-foreground'>
@@ -252,7 +251,7 @@ function RouteComponent() {
                       />
                     </div>
                     <Separator className='my-6'/>
-                    <div className='flex-1 flex flex-row gap-12'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.recommendation.recommendation_radius.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.recommendation.recommendation_radius.description")}</p>
@@ -265,7 +264,7 @@ function RouteComponent() {
                       />
                     </div>
                     <Separator className='my-6'/>
-                    <div className='flex-1 flex flex-row gap-12'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                         <h3 className='text-xl font-medium'>{t("settings.recommendation.min_remuneration.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.recommendation.min_remuneration.description")}</p>
@@ -276,7 +275,7 @@ function RouteComponent() {
                       />
                     </div>
                     <Separator className='my-6'/>
-                    <div className='flex-1 flex flex-row gap-12'>
+                    <div className='flex-1 flex flex-col gap-4 md:flex-row md:gap-12'>
                       <div className='flex-1'>
                           <h3 className='text-xl font-medium'>{t("settings.recommendation.algorithm_flexibility.title")}</h3>
                         <p className='text-sm text-muted-foreground'>{t("settings.recommendation.algorithm_flexibility.description")}</p>
@@ -290,7 +289,6 @@ function RouteComponent() {
                 </TabsContent>
               </Tabs>
         </div>
-        <ThemeToggle />
       </div>
     )
 }

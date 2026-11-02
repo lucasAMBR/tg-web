@@ -5,4 +5,8 @@
  * OpenAPI spec version: 0.0.1
  */
 
+/**
+ * @minimum 0
+ * @maximum 10000
+ */
 export type UpdateRecommendationPreferenceMinRemuneration = number | null;

@@ -16,6 +16,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import type { BreadcrumbEntry } from "@/types/breadcrumb";
 
@@ -30,8 +31,16 @@ function CrumbContent({ entry }: { entry: BreadcrumbEntry }) {
 
 	return (
 		<>
-			{Icon && <Icon className="size-4" />}
-			{entry.label}
+			{Icon && <Icon className="size-4 shrink-0" />}
+			{/* No celular quem tem ícone (o início) fica só com ele, e a tela atual trunca */}
+			<span
+				className={cn(
+					"max-md:truncate",
+					Icon && !entry.isCurrent && "max-md:sr-only",
+				)}
+			>
+				{entry.label}
+			</span>
 		</>
 	);
 }
@@ -40,7 +49,10 @@ function Crumb({ entry }: { entry: BreadcrumbEntry }) {
 	if (!entry.href) {
 		return (
 			<BreadcrumbPage
-				className={cn(!entry.isCurrent && "text-muted-foreground font-normal")}
+				className={cn(
+					"max-md:min-w-0",
+					!entry.isCurrent && "text-muted-foreground font-normal",
+				)}
 			>
 				<CrumbContent entry={entry} />
 			</BreadcrumbPage>
@@ -58,13 +70,15 @@ function Crumb({ entry }: { entry: BreadcrumbEntry }) {
 
 export function Breadcrumbs({ className, maxItems = 4 }: BreadcrumbsProps) {
 	const entries = useBreadcrumbs();
+	const isMobile = useIsMobile();
 
 	if (entries.length === 0) return null;
 
-	// Abaixo de 3 não sobra espaço para "primeiro + ... + atual".
-	const limit = Math.max(maxItems, 3);
+	// Abaixo de 3 não sobra espaço para "primeiro + ... + atual". No celular só
+	// cabem esses três, então qualquer coisa no meio já vai para o "...".
+	const limit = isMobile ? 2 : Math.max(maxItems, 3);
 	const shouldCollapse = entries.length > limit;
-	const tailSize = limit - 2;
+	const tailSize = isMobile ? 1 : limit - 2;
 
 	const first = entries[0];
 	const collapsed = shouldCollapse ? entries.slice(1, -tailSize) : [];
@@ -72,7 +86,7 @@ export function Breadcrumbs({ className, maxItems = 4 }: BreadcrumbsProps) {
 
 	return (
 		<Breadcrumb className={cn("flex items-center", className)}>
-			<BreadcrumbList className="text-base">
+			<BreadcrumbList className="text-base max-md:min-w-0 max-md:flex-nowrap">
 				<BreadcrumbItem>
 					<Crumb entry={first} />
 				</BreadcrumbItem>
@@ -107,7 +121,7 @@ export function Breadcrumbs({ className, maxItems = 4 }: BreadcrumbsProps) {
 				{visible.map((entry) => (
 					<Fragment key={entry.key}>
 						<BreadcrumbSeparator className="[&>svg]:size-4" />
-						<BreadcrumbItem>
+						<BreadcrumbItem className="max-md:min-w-0">
 							<Crumb entry={entry} />
 						</BreadcrumbItem>
 					</Fragment>

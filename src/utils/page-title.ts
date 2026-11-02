@@ -32,7 +32,9 @@ type PageTitleKey =
 	| "favorites"
 	| "freelances"
 	| "freelance_details"
-	| "freelance_feed";
+	| "freelance_feed"
+	| "chat"
+	| "notifications";
 
 /**
  * Monta o `<title>` traduzido das rotas.

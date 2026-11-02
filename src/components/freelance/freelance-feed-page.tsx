@@ -85,9 +85,9 @@ export default function FreelanceFeedPage({
 
 	return (
 		<>
-			<Card className="w-full flex-row flex-wrap items-center justify-between gap-3 p-6">
+			<Card className="w-full flex-row flex-wrap items-center justify-between gap-3 p-4 md:p-6">
 				<div className="flex min-w-0 flex-col gap-2">
-					<h2 className="wrap-break-word font-[Anta] text-3xl font-bold">
+					<h2 className="wrap-break-word font-[Anta] text-2xl font-bold md:text-3xl">
 						{vacancy.title}
 					</h2>
 					<div className="flex flex-row flex-wrap items-center gap-2">

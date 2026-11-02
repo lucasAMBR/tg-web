@@ -31,7 +31,9 @@
         "freelances": "Meus Freelances",
         "freelance_details": "Detalhes do Freela",
         "freelance_feed": "Feed do Freela",
-        "freelance_search": "Freelas"
+        "freelance_search": "Freelas",
+        "chat": "Mensagens",
+        "notifications": "Notificações"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -326,6 +328,7 @@
     "sidebar": {
         "sections_title": "Seções",
         "options_title": "Opções",
+        "open_menu": "Abrir menu",
         "sections": {
             "feed": "Feed",
             "companies": "Empresas",
@@ -339,7 +342,8 @@
             "questions": "Questões",
             "admins": "Adminstradores",
             "search": "Buscar",
-            "favorites": "Favoritos"
+            "favorites": "Favoritos",
+            "chat": "Mensagens"
         },
         "options": {
             "profile": "Perfil",
@@ -359,7 +363,8 @@
             "projects": "Projetos",
             "job_history": "Histórico de emprego",
             "certifications": "Certificações",
-            "proficiency_test": "Testes de Proficiência"
+            "proficiency_test": "Testes de Proficiência",
+            "about": "Sobre"
         },
         "projects": {
             "create_project": "Criar novo projeto",
@@ -461,7 +466,8 @@
         "tabs": {
             "posts": "Posts",
             "projects": "Projetos",
-            "open_jobs": "Vagas"
+            "open_jobs": "Vagas",
+            "about": "Sobre"
         },
         "projects": {
             "create_project": "Criar novo projeto",
@@ -1338,7 +1344,8 @@
             "hang_up": "Encerrar",
             "share_screen": "Compartilhar tela",
             "stop_screen_share": "Parar de compartilhar a tela",
-            "your_screen": "Sua tela"
+            "your_screen": "Sua tela",
+            "screen_share_unsupported": "Seu navegador não permite compartilhar a tela. Para compartilhar, entre na sala pelo navegador de um computador."
         },
         "exercise": {
             "statement": "Enunciado",
@@ -1574,7 +1581,9 @@
         "message_placeholder": "Escreva uma mensagem...",
         "send": "Enviar",
         "send_message": "Enviar mensagem",
-        "unknown_participant": "Usuário sem perfil"
+        "unknown_participant": "Usuário sem perfil",
+        "select_title": "Nenhuma conversa selecionada",
+        "select_description": "Escolha uma conversa na lista para ver as mensagens."
     },
     "social": {
         "feed": {
@@ -1974,6 +1983,123 @@
             "invite_conflict": "Este dev já foi convidado, já orçou ou o freela não está mais aberto. Atualizamos a lista.",
             "feed_closed": "O feed deste freela não aceita mais alterações. Atualizamos a tela.",
             "unexpected": "Não foi possível concluir. Tente de novo."
+        }
+    },
+    "dashboard": {
+        "total": "total",
+        "empty": "Ainda não há dados.",
+        "period": {
+            "last_months": "Últimos {{count}} meses"
+        },
+        "errors": {
+            "forbidden": "Você não tem acesso a esta dashboard.",
+            "switch_to_company": "Troque para o perfil de empresa para ver esta dashboard.",
+            "missing_profile": "Complete o perfil da empresa para ver a dashboard",
+            "complete_profile": "Completar perfil",
+            "unexpected": "Não foi possível carregar a dashboard.",
+            "retry": "Tentar de novo"
+        },
+        "charts": {
+            "timeline": "Evolução mensal"
+        },
+        "series": {
+            "vacancies": "Vagas",
+            "vacancies_created": "Vagas criadas",
+            "applications": "Candidaturas",
+            "applications_received": "Candidaturas recebidas",
+            "applicants": "Candidatos",
+            "devs": "Devs",
+            "companies": "Empresas",
+            "signups": "Cadastros"
+        },
+        "company": {
+            "title": "Dashboard",
+            "description": "Acompanhe o andamento das suas vagas e dos processos seletivos.",
+            "awaiting_you": "{{count}} aguardando você",
+            "empty": {
+                "no_vacancies": "Você ainda não publicou vagas.",
+                "create_vacancy": "Criar vaga",
+                "no_applications": "Suas vagas ainda não receberam candidaturas.",
+                "no_vacancies_in_process": "Nenhuma vaga em processo seletivo agora."
+            },
+            "summary": {
+                "vacancies_active": "Vagas ativas",
+                "vacancies_total": "de {{total}} no total",
+                "applications": "Candidaturas",
+                "applications_in_progress": "{{total}} em andamento",
+                "applications_last_30_days": "Últimos 30 dias",
+                "hired": "Contratados",
+                "hire_rate": "Taxa de contratação",
+                "average_per_vacancy": "Média por vaga"
+            },
+            "agenda": {
+                "title": "Agenda",
+                "upcoming_interviews": "Entrevistas marcadas",
+                "upcoming_live_codings": "Live codings marcados",
+                "interviews_awaiting": "Entrevistas aguardando sua confirmação",
+                "live_codings_awaiting": "Live codings aguardando sua confirmação"
+            },
+            "charts": {
+                "vacancies_by_status": "Vagas por status",
+                "applications_by_status": "Candidaturas por status",
+                "applications_by_vacancy": "Candidaturas por vaga",
+                "applications_by_vacancy_hint": "As 10 vagas com mais candidaturas. Clique no título para abrir a vaga.",
+                "funnel": "Funil do processo seletivo",
+                "funnel_hint": "Candidaturas em andamento e recusadas em cada etapa.",
+                "vacancies_by_process_step": "Vagas em processo seletivo",
+                "vacancies_by_process_step_hint": "Em que etapa está cada vaga com inscrições encerradas.",
+                "applicants_by_specialty": "Candidatos por especialidade",
+                "applicants_by_seniority": "Candidatos por senioridade",
+                "timeline_hint": "Vagas criadas e candidaturas recebidas por mês."
+            }
+        },
+        "admin": {
+            "title": "Dashboard",
+            "description": "Os números da plataforma inteira.",
+            "summary": {
+                "users": "Usuários",
+                "new_users": "{{total}} novos nos últimos 30 dias",
+                "devs": "Devs",
+                "devs_open_to_work": "{{total}} abertos a oportunidades",
+                "companies": "Empresas",
+                "clients": "Clientes",
+                "open_vacancies": "Vagas abertas",
+                "vacancies_total": "de {{total}} no total",
+                "applications": "Candidaturas",
+                "hired": "Contratados",
+                "freelance_volume": "Volume contratado em freelas",
+                "freelance_totals": "Freelas: {{vacancies}} · Orçamentos: {{proposals}}",
+                "footnote": "Bloqueados: {{blocked}} · Admins: {{admins}} · Devs com a senioridade validada: {{tested}}"
+            },
+            "charts": {
+                "users_by_profile": "Usuários por tipo de perfil",
+                "specialties": "Especialidades",
+                "specialties_hint": "Devs, vagas e candidaturas em cada especialidade, para comparar oferta e demanda.",
+                "devs_by_seniority": "Devs por senioridade",
+                "companies_by_segment": "Empresas por segmento",
+                "job_vacancies_by_status": "Vagas",
+                "applications_by_status": "Candidaturas",
+                "freelance_vacancies_by_status": "Freelas",
+                "freelance_proposals_by_status": "Orçamentos de freelas",
+                "top_dev_languages": "Linguagens mais comuns entre os devs",
+                "top_vacancy_languages": "Linguagens mais exigidas nas vagas",
+                "timeline_platform": "Cadastros e candidaturas",
+                "timeline_platform_hint": "Novos usuários e candidaturas por mês.",
+                "timeline_social": "Rede social",
+                "timeline_social_hint": "Posts, comentários e curtidas por mês."
+            },
+            "social": {
+                "title": "Rede social",
+                "interactions": "Interações",
+                "interactions_hint": "Curtidas, comentários, favoritos e follows",
+                "posts": "Posts",
+                "comments": "Comentários",
+                "likes": "Curtidas",
+                "favorites": "Favoritos",
+                "follows": "Follows",
+                "chat": "Mensagens no chat",
+                "chat_conversations": "em {{total}} conversas"
+            }
         }
     }
 }

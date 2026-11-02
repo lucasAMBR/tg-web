@@ -18,6 +18,10 @@ export interface UpdateRecommendationPreference {
   /** @minimum 10 */
   hybrid_jobs_radius?: number;
   allow_stack_flexibility?: boolean;
+  /**
+   * @minimum 0
+   * @maximum 10000
+   */
   min_remuneration?: UpdateRecommendationPreferenceMinRemuneration;
   languages_blacklist?: string[];
 }

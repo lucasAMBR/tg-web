@@ -13,6 +13,7 @@ import { getIndexProjectHistoryQueryKey } from "@/api/generated/project-history/
 import { getIndexEmploymentHistoryQueryKey } from "@/api/generated/employment-history/employment-history"
 import { useTranslation } from "react-i18next"
 import ProficiencyTestTab from "../proficiency-test/proficiency-test-tab"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 interface DevProfileContentProps{
     profileId: string
@@ -27,6 +28,18 @@ export default function DevProfileContent({ profileId, userId }: DevProfileConte
     const queryClient = useQueryClient();
 
     const [tab, setTab] = useState("posts");
+
+    // No celular a coluna lateral não cabe ao lado das abas e vira a aba "Sobre"
+    const isMobile = useIsMobile();
+    const activeTab = !isMobile && tab === "about" ? "posts" : tab;
+
+    const aside = (
+        <>
+            <AcademicBackgroundList profileId={profileId} />
+            <HardSkillList profileId={profileId} />
+            <SoftSkillList profileId={profileId} />
+        </>
+    );
     
     useEffect(() => {
         if (tab === "projects") {
@@ -43,33 +56,38 @@ export default function DevProfileContent({ profileId, userId }: DevProfileConte
 
     return(
         <div className="flex-1 flex gap-4 mt-3">
-            <div className="flex-2">
-                <Tabs defaultValue={tab} onValueChange={setTab}>
+            <div className="flex-2 max-md:min-w-0">
+                <Tabs value={activeTab} onValueChange={setTab}>
                     <TabsList variant={"line"}>
-                        <TabsTrigger className="text-xl cursor-pointer" value="posts">
+                        <TabsTrigger className="text-base md:text-xl cursor-pointer" value="posts">
                             {t("dev_profile.tabs.posts")}
                         </TabsTrigger>
-                        <TabsTrigger className="text-xl cursor-pointer" value="projects">
+                        <TabsTrigger className="text-base md:text-xl cursor-pointer" value="projects">
                             {t("dev_profile.tabs.projects")}
                         </TabsTrigger>
                         <TabsTrigger
-                            className="text-xl cursor-pointer"
+                            className="text-base md:text-xl cursor-pointer"
                             value="job_history"
                         >
                             {t("dev_profile.tabs.job_history")}
                         </TabsTrigger>
                         <TabsTrigger
-                            className="text-xl cursor-pointer"
+                            className="text-base md:text-xl cursor-pointer"
                             value="certifications"
                         >
                             {t("dev_profile.tabs.certifications")}
                         </TabsTrigger>
                         <TabsTrigger
-                            className="text-xl cursor-pointer"
+                            className="text-base md:text-xl cursor-pointer"
                             value="proficiency-test"
                         >
                             {t("dev_profile.tabs.proficiency_test")}
                         </TabsTrigger>
+                        {isMobile && (
+                            <TabsTrigger className="text-base md:text-xl cursor-pointer" value="about">
+                                {t("dev_profile.tabs.about")}
+                            </TabsTrigger>
+                        )}
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
                         <ProfilePostsTab userId={userId} />
@@ -86,14 +104,21 @@ export default function DevProfileContent({ profileId, userId }: DevProfileConte
                     <TabsContent value="proficiency-test">
                         <ProficiencyTestTab profileId={profileId}/>
                     </TabsContent>
+                    {isMobile && (
+                        <TabsContent value="about" className="mt-2 flex flex-col gap-6">
+                            {aside}
+                        </TabsContent>
+                    )}
                 </Tabs>
             </div>
-            <Separator orientation="vertical" />
-            <div className="flex-1 flex flex-col gap-6">
-                <AcademicBackgroundList profileId={profileId} />
-                <HardSkillList profileId={profileId} />
-                <SoftSkillList profileId={profileId} />
-            </div>
+            {!isMobile && (
+                <>
+                    <Separator orientation="vertical" />
+                    <div className="flex-1 flex flex-col gap-6">
+                        {aside}
+                    </div>
+                </>
+            )}
         </div>
     )
 }

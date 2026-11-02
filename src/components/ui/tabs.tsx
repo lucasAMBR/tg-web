@@ -29,7 +29,9 @@ const tabsListVariants = cva(
 		variants: {
 			variant: {
 				default: "bg-muted",
-				line: "gap-1 bg-transparent",
+				// No celular as abas que não cabem rolam na horizontal; o respiro embaixo
+				// é para a barra da aba ativa (5px abaixo do botão) não ser cortada
+				line: "gap-1 bg-transparent max-md:h-auto! max-md:max-w-full max-md:justify-start max-md:overflow-x-auto max-md:pb-2 max-md:[scrollbar-width:none]",
 			},
 		},
 		defaultVariants: {

@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import { useChatStore } from "@/stores/chat-store";
 import { formatConversationTime, getParticipantProfilePic } from "@/types/chat";
 
 interface ConversationListProps {
@@ -21,6 +20,9 @@ interface ConversationListProps {
 	hasNextPage: boolean;
 	isFetchingNextPage: boolean;
 	onReachEnd: () => void;
+	/** Conversa selecionada, destacada na lista. */
+	activeConversationId?: string | null;
+	onSelect: (conversationId: string) => void;
 }
 
 /** Conversas do usuário, da que recebeu mensagem mais recentemente para a mais antiga. */
@@ -30,10 +32,10 @@ export default function ConversationList({
 	hasNextPage,
 	isFetchingNextPage,
 	onReachEnd,
+	activeConversationId,
+	onSelect,
 }: ConversationListProps) {
 	const { t, i18n } = useTranslation();
-
-	const openConversation = useChatStore((state) => state.openConversation);
 
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const sentinelRef = useRef<HTMLDivElement>(null);
@@ -87,13 +89,17 @@ export default function ConversationList({
 				const { participant } = conversation;
 				const profilePic = getParticipantProfilePic(participant);
 				const hasUnread = conversation.unread_count > 0;
+				const isActive = conversation.id === activeConversationId;
 
 				return (
 					<button
 						key={conversation.id}
 						type="button"
-						onClick={() => openConversation(conversation.id)}
-						className="flex w-full items-center gap-3 border-b border-border p-3 text-left transition-colors hover:bg-muted"
+						aria-current={isActive || undefined}
+						onClick={() => onSelect(conversation.id)}
+						className={`flex w-full items-center gap-3 border-b border-border p-3 text-left transition-colors hover:bg-muted ${
+							isActive ? "bg-muted" : ""
+						}`}
 					>
 						<Avatar className="size-11 shrink-0">
 							{profilePic && (

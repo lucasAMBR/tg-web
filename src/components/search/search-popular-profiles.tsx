@@ -77,7 +77,7 @@ export default function PopularProfiles() {
                     <div className="flex flex-col gap-2">
                         {devList.map((dev) => (
                             <Card key={dev.id} className="p-4 flex-row justify-between items-center">
-                                 <div className="flex flex-row gap-4">
+                                 <div className="flex min-w-0 flex-row gap-4">
                                     <Avatar className="size-14">
                                         {dev.profile_pic && (
                                             <AvatarImage
@@ -90,9 +90,9 @@ export default function PopularProfiles() {
                                             <User className="size-7" />
                                         </AvatarFallback>
                                     </Avatar>
-                                    <div className="flex flex-col gap-2">
-                                        <span className="flex flex-row gap-4 text-md font-semibold">{dev.name}<Badge variant={"destructive"}>{t("search.score")}: {dev.score}</Badge></span>
-                                        <div className="flex flex-row gap-2">
+                                    <div className="flex min-w-0 flex-col gap-2">
+                                        <span className="flex flex-row flex-wrap gap-x-4 gap-y-1 text-md font-semibold">{dev.name}<Badge variant={"destructive"}>{t("search.score")}: {dev.score}</Badge></span>
+                                        <div className="flex flex-row flex-wrap gap-2">
                                             <Badge variant={"secondary"}>{t(dev.specialty_label)}</Badge>
                                             <Badge variant={"default"}>{t(`enum.seniority_level.${dev.seniority_level}`)}</Badge>
                                         </div>
@@ -126,7 +126,7 @@ export default function PopularProfiles() {
                     <div className="flex flex-col gap-2">
                         {companiesList.map((company) => (
                             <Card key={company.id} className="p-4 flex-row justify-between items-center">
-                                 <div className="flex flex-row gap-4">
+                                 <div className="flex min-w-0 flex-row gap-4">
                                     <Avatar className="size-14">
                                         {company.profile_pic && (
                                             <AvatarImage
@@ -139,9 +139,9 @@ export default function PopularProfiles() {
                                             <User className="size-7" />
                                         </AvatarFallback>
                                     </Avatar>
-                                    <div className="flex flex-col gap-2">
-                                        <span className="flex flex-row gap-4 text-md font-semibold"><p className="truncate">{company.name}</p><Badge variant={"destructive"}>{t("search.score")}: {company.score}</Badge></span>
-                                        <div className="flex flex-row gap-2">
+                                    <div className="flex min-w-0 flex-col gap-2">
+                                        <span className="flex flex-row flex-wrap gap-x-4 gap-y-1 text-md font-semibold"><p className="truncate">{company.name}</p><Badge variant={"destructive"}>{t("search.score")}: {company.score}</Badge></span>
+                                        <div className="flex flex-row flex-wrap gap-2">
                                             <Badge variant={"default"}>
                                                 {t(`enum.operational_segment.${company.operational_segment}`)}
                                             </Badge>
@@ -176,7 +176,7 @@ export default function PopularProfiles() {
                     <div className="flex flex-col gap-2">
                         {clientList.map((client) => (
                             <Card key={client.id} className="p-4 flex-row justify-between items-center">
-                                 <div className="flex flex-row gap-4">
+                                 <div className="flex min-w-0 flex-row gap-4">
                                     <Avatar className="size-14">
                                         {client.profile_pic && (
                                             <AvatarImage
@@ -189,9 +189,9 @@ export default function PopularProfiles() {
                                             <User className="size-7" />
                                         </AvatarFallback>
                                     </Avatar>
-                                    <div className="flex flex-col gap-2">
-                                        <span className="flex flex-row gap-4 text-md font-semibold"><p className="truncate">{client.name}</p> <Badge variant={"destructive"}>{t("search.score")}: {client.score}</Badge></span>
-                                        <div className="flex flex-row gap-2">
+                                    <div className="flex min-w-0 flex-col gap-2">
+                                        <span className="flex flex-row flex-wrap gap-x-4 gap-y-1 text-md font-semibold"><p className="truncate">{client.name}</p> <Badge variant={"destructive"}>{t("search.score")}: {client.score}</Badge></span>
+                                        <div className="flex flex-row flex-wrap gap-2">
                                             <Badge variant={"secondary"}>{t("role.client")}</Badge>
                                         </div>
                                     </div>

@@ -124,7 +124,7 @@ export default function DevProfileForm() {
 				<FieldLabel>{t("input.profile_pic")}</FieldLabel>
 				<ProfilePicInput value={profilePic} onChange={setProfilePic} />
 			</Field>
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-4 md:flex-row md:gap-2">
 				<Controller
 					control={form.control}
 					name="name"
@@ -168,7 +168,7 @@ export default function DevProfileForm() {
 					)}
 				/>
 			</div>
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-4 md:flex-row md:gap-2">
 				<Controller
 					control={form.control}
 					name="phone"
@@ -206,7 +206,7 @@ export default function DevProfileForm() {
 									<Button
 										variant="outline"
 										className={cn(
-											"w-[212px] justify-between text-left font-normal",
+											"w-full md:w-[212px] justify-between text-left font-normal",
 											!field.value && "text-muted-foreground",
 										)}
 									>

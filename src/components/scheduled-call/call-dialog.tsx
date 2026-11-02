@@ -26,6 +26,7 @@ import {
 } from "@/hooks/use-scheduled-call";
 import { cn } from "@/lib/utils";
 import type { ScheduledCall, ScheduledCallKind } from "@/types/scheduled-call";
+import { CustomToaster } from "@/utils/custom-toaster";
 
 interface VideoTileProps {
 	stream: MediaStream | null;
@@ -148,9 +149,18 @@ export default function CallDialog({
 		onEnded,
 	});
 
-	const canShareScreen = kind.screenShare && screenShareSupported;
-
 	const isSharingScreen = screenStream !== null;
+
+	// Sem captura de tela (navegadores mobile) o botão continua visível para os
+	// dois lados e explica o motivo, em vez de sumir só para quem não pode usar
+	const handleScreenShare = () => {
+		if (!screenShareSupported) {
+			CustomToaster.warningToast(t(`${prefix}.call.screen_share_unsupported`));
+			return;
+		}
+
+		toggleScreenShare();
+	};
 
 	const handleHangUp = async () => {
 		onOpenChange(false);
@@ -265,14 +275,14 @@ export default function CallDialog({
 					>
 						{cameraEnabled ? <Video /> : <VideoOff />}
 					</Button>
-					{canShareScreen && (
+					{kind.screenShare && (
 						<Button
 							type="button"
 							variant={isSharingScreen ? "accent" : "secondary"}
 							size={"icon"}
 							// O sender só existe depois do `join`, quando a sala já está montada
 							disabled={phase !== "waiting" && phase !== "connected"}
-							onClick={toggleScreenShare}
+							onClick={handleScreenShare}
 							aria-label={
 								isSharingScreen
 									? t(`${prefix}.call.stop_screen_share`)

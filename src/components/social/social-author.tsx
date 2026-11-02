@@ -3,7 +3,6 @@ import { User } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { UserSimpleResource } from "@/api/generated/models";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import {
 	formatFullDateTime,
@@ -105,13 +104,13 @@ export default function SocialAuthor({
 			) : (
 				avatar
 			)}
-			<div className="flex min-w-0 flex-wrap items-center gap-x-2">
+			<div className="flex min-w-0 flex-col items-start">
 				{profileHref ? (
 					<button
 						type="button"
 						onClick={() => navigate({ to: profileHref })}
 						className={cn(
-							"cursor-pointer font-medium hover:text-primary",
+							"cursor-pointer text-left font-medium hover:text-primary",
 							size === "sm" && "text-sm",
 						)}
 					>
@@ -122,12 +121,13 @@ export default function SocialAuthor({
 						{name}
 					</span>
 				)}
-				{roleLabelKey && (
-					<Badge variant={"secondary"} className="text-xs">
-						{t(roleLabelKey)}
-					</Badge>
+				{(roleLabelKey || timestamp) && (
+					<div className="flex flex-wrap items-center gap-x-1 text-xs text-muted-foreground">
+						{roleLabelKey && <span>{t(roleLabelKey)}</span>}
+						{roleLabelKey && timestamp && <span aria-hidden>·</span>}
+						{timestamp}
+					</div>
 				)}
-				{timestamp}
 			</div>
 		</div>
 	);

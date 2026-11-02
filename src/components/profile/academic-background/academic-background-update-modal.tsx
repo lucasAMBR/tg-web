@@ -152,7 +152,7 @@ function UpdateAcademicBackgroundModalContent({
 						onSubmit={form.handleSubmit(submit)}
 						className="flex flex-col gap-4"
 					>
-						<div className="flex gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="degree"

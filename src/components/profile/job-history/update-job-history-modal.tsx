@@ -164,7 +164,7 @@ export default function UpdateJobHistoryModal({
 					onSubmit={form.handleSubmit(submit)}
 				>
 					<Card className="p-4">
-						<div className="flex flex-row gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="position_name"
@@ -208,7 +208,7 @@ export default function UpdateJobHistoryModal({
 								)}
 							/>
 						</div>
-						<div className="flex flex-row gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="company_name"
@@ -240,7 +240,7 @@ export default function UpdateJobHistoryModal({
 								)}
 							/>
 						</div>
-						<div className="flex flex-row gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="employment_type"
@@ -297,7 +297,7 @@ export default function UpdateJobHistoryModal({
 								)}
 							/>
 						</div>
-						<div className="flex flex-row gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="start_date"
@@ -311,7 +311,7 @@ export default function UpdateJobHistoryModal({
 												<Button
 													variant="outline"
 													className={cn(
-														"w-[212px] justify-between text-left font-normal",
+														"w-full md:w-[212px] justify-between text-left font-normal",
 														!field.value && "text-muted-foreground",
 													)}
 												>
@@ -355,7 +355,7 @@ export default function UpdateJobHistoryModal({
 													variant="outline"
 													disabled={isCurrentJob}
 													className={cn(
-														"w-[212px] justify-between text-left font-normal",
+														"w-full md:w-[212px] justify-between text-left font-normal",
 														!field.value && "text-muted-foreground",
 													)}
 												>

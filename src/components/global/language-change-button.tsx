@@ -39,16 +39,18 @@ export function LanguagePicker() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[150px] justify-between"
+          aria-label={currentLanguage?.label || "Idioma"}
+          // No celular fica só o ícone, para caber no header
+          className="w-[150px] justify-between max-md:w-9 max-md:justify-center max-md:px-0"
         >
           <div className="flex items-center gap-2">
             <Languages className="h-4 w-4 shrink-0 opacity-50" />
-            {currentLanguage?.label || "Idioma"}
+            <span className="max-md:hidden">{currentLanguage?.label || "Idioma"}</span>
           </div>
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 max-md:hidden" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[150px] p-0 z-9999">
+      <PopoverContent className="w-[150px] p-0 z-9999" align="end">
         <Command>
           <CommandInput placeholder="Buscar idioma..." />
           <CommandList>

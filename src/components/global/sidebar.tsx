@@ -10,12 +10,15 @@ import {
 	LayoutDashboard,
 	List,
 	LogOut,
+	Menu,
 	MessageCircle,
+	MessageSquare,
 	Search,
 	User,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAuthStore } from "@/stores/auth-store";
+import { usePermissionStore } from "@/stores/permission-store";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -26,7 +29,9 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useChatConversations } from "@/hooks/use-chat-conversations";
 import LogoutButton from "./logout-button";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -37,12 +42,19 @@ import {
 import { Logo } from "./Logo";
 import { useTranslation } from "react-i18next";
 
-export default function Sidebar() {
+interface SidebarContentProps {
+	/** Chamado ao navegar por um item — o drawer do celular fecha. */
+	onNavigate?: () => void;
+}
+
+function SidebarContent({ onNavigate }: SidebarContentProps) {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { user } = useAuthStore();
 	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+	const { unreadCount } = useChatConversations();
+	const permissions = usePermissionStore((state) => state.permissions);
 
 	const role = getUserMainRole(user);
 	const profilePic = getProfilePic(user);
@@ -53,11 +65,13 @@ export default function Sidebar() {
 		icon: Icon,
 		url,
 		onClick,
+		badge,
 	}: {
 		title: string;
 		icon: LucideIcon;
 		url?: string;
 		onClick?: () => void;
+		badge?: number;
 	}) {
 		const active = url ? location.pathname.startsWith(url) : false;
 
@@ -65,7 +79,10 @@ export default function Sidebar() {
 			<div
 				onClick={() => {
 					if (onClick) return onClick();
-					if (url) navigate({ to: url });
+					if (url) {
+						navigate({ to: url });
+						onNavigate?.();
+					}
 				}}
 				className={`
         w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer transition-colors
@@ -74,12 +91,17 @@ export default function Sidebar() {
 			>
 				<Icon className="size-4" />
 				{title}
+				{!!badge && (
+					<span className="ml-auto flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-white">
+						{badge > 99 ? "99+" : badge}
+					</span>
+				)}
 			</div>
 		);
 	}
 
 	return (
-		<div className="w-[350px] flex flex-col h-screen border-r border-border">
+		<>
 			{/* HEADER */}
 			<div className="flex flex-row gap-1.5 items-end justify-center p-4 border-b border-border h-18">
 					<Logo className="w-11 fill-primary" />
@@ -89,7 +111,7 @@ export default function Sidebar() {
 			</div>
 
 			{/* CONTENT */}
-			<div className="flex flex-col gap-4 flex-1 p-4">
+			<div className="flex flex-col gap-4 flex-1 min-h-0 overflow-y-auto p-4">
 				{/* SECTIONS */}
 				<div className="w-full">
 					<p className="text-xs text-muted-foreground mb-2">
@@ -101,6 +123,7 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.job_vacancies")} icon={Folder} url="/jobs" />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
@@ -111,7 +134,10 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
-							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
+							{permissions.has("company.dashboard") && (
+								<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/dashboard" />
+							)}
 							<SidebarItem title={t("sidebar.sections.my_jobs")} icon={Folder} url="/my-vacancies" />
 						</>
 					)}
@@ -121,6 +147,7 @@ export default function Sidebar() {
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.freelances")} icon={Calendar} url="/freelances" />
 						</>
 					)}
@@ -129,8 +156,11 @@ export default function Sidebar() {
 						<>
 							<SidebarItem title={t("sidebar.sections.feed")} icon={List} url="/feed" />
 							<SidebarItem title={t("sidebar.sections.favorites")} icon={Bookmark} url="/favorites" />
-							<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
+							{permissions.has("administration.dashboard") && (
+								<SidebarItem title={t("sidebar.sections.dashboard")} icon={LayoutDashboard} url="/admin-land/dashboard" />
+							)}
 							<SidebarItem title={t("sidebar.sections.search")} icon={Search} url="/search" />
+							<SidebarItem title={t("sidebar.sections.chat")} icon={MessageSquare} url="/chat" badge={unreadCount} />
 							<SidebarItem title={t("sidebar.sections.devs")} icon={User} url="/admin-land/devs" />
 							<SidebarItem title={t("sidebar.sections.companies")} icon={Building} url="/admin-land/company" />
 							<SidebarItem title={t("sidebar.sections.clients")} icon={User} url="/admin-land/clients" />
@@ -221,6 +251,43 @@ export default function Sidebar() {
 					onOpenChange={setLogoutDialogOpen}
 				/>
 			</div>
+		</>
+	);
+}
+
+export default function Sidebar() {
+	return (
+		<div className="w-[350px] hidden md:flex flex-col h-screen border-r border-border">
+			<SidebarContent />
 		</div>
+	);
+}
+
+/** No celular a sidebar não cabe ao lado do conteúdo: um botão no header abre ela num drawer. */
+export function MobileSidebarTrigger() {
+	const { t } = useTranslation();
+	const [open, setOpen] = useState(false);
+
+	return (
+		<Sheet open={open} onOpenChange={setOpen}>
+			<SheetTrigger asChild>
+				<Button
+					variant={"ghost"}
+					size={"icon"}
+					className="md:hidden self-center"
+					aria-label={t("sidebar.open_menu")}
+				>
+					<Menu />
+				</Button>
+			</SheetTrigger>
+			<SheetContent
+				side="left"
+				className="w-[85vw] max-w-[350px] sm:max-w-[350px] gap-0 p-0"
+				aria-describedby={undefined}
+			>
+				<SheetTitle className="sr-only">{t("sidebar.sections_title")}</SheetTitle>
+				<SidebarContent onNavigate={() => setOpen(false)} />
+			</SheetContent>
+		</Sheet>
 	);
 }

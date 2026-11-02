@@ -4,7 +4,16 @@ import type { ChatMessageResource } from "@/api/generated/models";
 interface ChatState {
 	/** Painel do chat aberto na lateral direita. */
 	isOpen: boolean;
-	/** Conversa aberta dentro do painel (`null` = lista de conversas). */
+	/**
+	 * A tela de mensagens (`/chat`) está montada. Ela ocupa o lugar do painel, que
+	 * fica escondido enquanto isso.
+	 */
+	isPageOpen: boolean;
+	/**
+	 * Conversa aberta no painel ou selecionada na tela de mensagens (`null` = só a
+	 * lista de conversas). As duas compartilham a seleção, então quem troca de uma
+	 * para a outra continua na mesma conversa.
+	 */
 	activeConversationId: string | null;
 	/**
 	 * Mensagens que chegaram pelo Reverb, por conversa. Ficam aqui em vez de no
@@ -34,6 +43,11 @@ interface ChatActions {
 	openConversation: (conversationId: string, draft?: string) => void;
 	/** Volta para a lista de conversas sem fechar o painel. */
 	closeConversation: () => void;
+	/** Troca a conversa selecionada sem abrir o painel — usado pela tela de mensagens. */
+	selectConversation: (conversationId: string) => void;
+	/** A tela de mensagens entrou: o painel fecha para não duplicar a conversa. */
+	openPage: () => void;
+	closePage: () => void;
 	pushLiveMessage: (message: ChatMessageResource) => void;
 	setReadAt: (conversationId: string, readAt: string) => void;
 	/** O campo de mensagem já recebeu o rascunho. */
@@ -44,6 +58,7 @@ type ChatStore = ChatState & ChatActions;
 
 const chatStoreCreator: StateCreator<ChatStore> = (set) => ({
 	isOpen: false,
+	isPageOpen: false,
 	activeConversationId: null,
 	liveMessages: {},
 	readAt: {},
@@ -66,6 +81,13 @@ const chatStoreCreator: StateCreator<ChatStore> = (set) => ({
 		})),
 
 	closeConversation: () => set({ activeConversationId: null }),
+
+	selectConversation: (conversationId) =>
+		set({ activeConversationId: conversationId }),
+
+	openPage: () => set({ isPageOpen: true, isOpen: false }),
+
+	closePage: () => set({ isPageOpen: false }),
 
 	pushLiveMessage: (message) =>
 		set((state) => {

@@ -1,6 +1,5 @@
 import LogoutButton from "@/components/global/logout-button";
 import ClientProfileForm from "@/components/profile-create/client-profile-form";
-import ThemeToggle from "@/components/global/theme-toggle-button";
 import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
 import {
@@ -31,8 +30,8 @@ function RouteComponent() {
 	const { t } = useTranslation();
 
 	return (
-		<div className="w-screen h-screen flex">
-			<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
+		<div className="w-screen h-dvh flex">
+			<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50 max-md:hidden">
 				<div className="w-full h-full"></div>
 			</div>
 			<div className="flex-1 overflow-y-auto">
@@ -44,11 +43,11 @@ function RouteComponent() {
 					</LogoutButton>
 					<div className="flex flex-col justify-center items-center mb-6">
 						<Logo className="w-12 fill-primary" />
-						<p className="font-[Agbalumo] text-primary text-5xl">
+						<p className="font-[Agbalumo] text-primary text-4xl md:text-5xl">
 							{env.APP_NAME}
 						</p>
 					</div>
-					<h2 className="font-[Anta] text-primary text-3xl mb-6">
+					<h2 className="font-[Anta] text-primary text-2xl md:text-3xl text-center mb-6">
 						{t("profile_create.client.title")}
 					</h2>
 					<p className="max-w-[700px] text-center mb-6">
@@ -57,7 +56,6 @@ function RouteComponent() {
 					<ClientProfileForm />
 				</div>
 			</div>
-			<ThemeToggle />
 		</div>
 	);
 }

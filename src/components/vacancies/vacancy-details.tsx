@@ -22,10 +22,10 @@ interface VacancyDetailsProps {
 function VacancyDetailsSkeleton() {
 	return (
 		<div className="flex flex-col gap-4">
-			<Card className="w-full flex-row items-center gap-4 px-12 py-8">
-				<Skeleton className="size-32 rounded-full" />
+			<Card className="w-full flex-col items-start gap-4 px-4 py-6 md:flex-row md:items-center md:px-12 md:py-8">
+				<Skeleton className="size-20 rounded-full md:size-32" />
 				<div className="flex flex-1 flex-col gap-3">
-					<Skeleton className="h-9 w-80" />
+					<Skeleton className="h-9 w-full max-w-80" />
 					<div className="flex flex-row gap-2">
 						<Skeleton className="h-6 w-24" />
 						<Skeleton className="h-6 w-24" />
@@ -34,7 +34,7 @@ function VacancyDetailsSkeleton() {
 					<Skeleton className="h-5 w-56" />
 				</div>
 			</Card>
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<Skeleton className="h-6 w-40" />
 				<Skeleton className="h-4 w-full" />
 				<Skeleton className="h-4 w-3/4" />
@@ -103,9 +103,9 @@ export default function VacancyDetails({
 
 	return (
 		<>
-			<Card className="w-full gap-4 px-12 py-8">
-				<div className="flex flex-row items-center gap-4">
-					<Avatar className="size-32">
+			<Card className="w-full gap-4 px-4 py-6 md:px-12 md:py-8">
+				<div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+					<Avatar className="size-20 md:size-32">
 						{vacancyData?.profile?.profile_pic && (
 							<AvatarImage
 								src={vacancyData.profile.profile_pic}
@@ -114,11 +114,11 @@ export default function VacancyDetails({
 							/>
 						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
-							<Briefcase className="size-22" />
+							<Briefcase className="size-12 md:size-22" />
 						</AvatarFallback>
 					</Avatar>
 					<div className="flex min-w-0 flex-1 flex-col gap-2">
-						<h2 className="text-4xl font-bold font-[Anta]">{title}</h2>
+						<h2 className="text-2xl font-bold font-[Anta] break-words md:text-4xl">{title}</h2>
 						{vacancyData?.profile?.name && (
 							<p className="text-muted-foreground">
 								{vacancyData.profile.name}
@@ -220,7 +220,7 @@ export default function VacancyDetails({
 				)}
 			</Card>
 			{ownerView && (
-				<Card className="w-full gap-3 p-8">
+				<Card className="w-full gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">
 						{t("my_vacancies.actions.title")}
 					</h3>
@@ -231,11 +231,11 @@ export default function VacancyDetails({
 					/>
 				</Card>
 			)}
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<h3 className="text-lg font-bold">{t("input.description")}</h3>
 				<p className="whitespace-pre-line text-sm">{description}</p>
 			</Card>
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<h3 className="text-lg font-bold">{t("input.benefits")}</h3>
 				{benefits.length > 0 ? (
 					<div className="flex flex-row flex-wrap gap-2">
@@ -252,7 +252,7 @@ export default function VacancyDetails({
 				)}
 			</Card>
 			<div className="flex flex-col gap-4 lg:flex-row">
-				<Card className="flex-1 gap-3 p-8">
+				<Card className="flex-1 gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">{t("input.required_languages")}</h3>
 					{requiredLanguages.length > 0 ? (
 						<div className="flex flex-col gap-2">
@@ -276,7 +276,7 @@ export default function VacancyDetails({
 						</p>
 					)}
 				</Card>
-				<Card className="flex-1 gap-3 p-8">
+				<Card className="flex-1 gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">
 						{t("input.desirable_languages")}
 					</h3>
@@ -294,7 +294,7 @@ export default function VacancyDetails({
 						</p>
 					)}
 				</Card>
-				<Card className="flex-1 gap-3 p-8">
+				<Card className="flex-1 gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">{t("input.soft_skills")}</h3>
 					{softSkills.length > 0 ? (
 						<div className="flex flex-row flex-wrap gap-2">
@@ -313,7 +313,7 @@ export default function VacancyDetails({
 					)}
 				</Card>
 			</div>
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<h3 className="text-lg font-bold">{t("input.process_steps")}</h3>
 				{processSteps.length > 0 ? (
 					<div className="flex flex-col gap-2">
@@ -353,7 +353,7 @@ export default function VacancyDetails({
 				)}
 			</Card>
 			{ownerView && (
-				<Card className="w-full gap-3 p-8">
+				<Card className="w-full gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">
 						{t("my_vacancies.devs_section_title")}
 					</h3>

@@ -1,4 +1,11 @@
-import { formatDistanceToNow, isValid, parseISO } from "date-fns";
+import {
+	formatDistanceToNow,
+	isThisYear,
+	isToday,
+	isValid,
+	isYesterday,
+	parseISO,
+} from "date-fns";
 import { enUS, ptBR } from "date-fns/locale";
 import type {
 	CommentResource,
@@ -128,6 +135,25 @@ export function wasEdited(item: {
 	return item.created_at !== item.updated_at;
 }
 
+/**
+ * Texto do post ou do comentário no idioma da interface. Enquanto a tradução
+ * não termina, `content_pt` e `content_en` podem vir `null`, então vale o
+ * texto como o autor escreveu.
+ */
+export function getSocialContent(
+	item: Pick<
+		PostResource | CommentResource,
+		"content" | "content_pt" | "content_en" | "translation_status"
+	>,
+	language: string,
+): string {
+	if (item.translation_status !== "translated") return item.content;
+
+	return (
+		(language === "en" ? item.content_en : item.content_pt) ?? item.content
+	);
+}
+
 /** O que mostrar abaixo de um comentário, segundo a prévia que veio. */
 export type CommentNodeAction = "none" | "load-more" | "continue-thread";
 
@@ -206,6 +232,8 @@ export function asRemovedComment(comment: CommentResource): CommentResource {
 	return {
 		...comment,
 		content: "[removed]",
+		content_pt: "[removed]",
+		content_en: "[removed]",
 		is_removed: true,
 		removed_at: new Date().toISOString(),
 		author: null,
@@ -274,7 +302,10 @@ export function chunkImagesByRequestSize(files: File[]): File[][] {
 	return batches;
 }
 
-/** "há 2 horas" / "2 hours ago", com o horário absoluto no `title`. */
+/**
+ * Hoje fica relativo ("há 2 horas"), ontem vira "ontem" e o que for mais
+ * antigo mostra a data ("12 de out."), com o horário absoluto no `title`.
+ */
 export function formatRelativeTime(
 	value: string | null | undefined,
 	locale: "pt" | "en",
@@ -285,9 +316,26 @@ export function formatRelativeTime(
 
 	if (!isValid(date)) return "";
 
-	return formatDistanceToNow(date, {
-		addSuffix: true,
-		locale: locale === "en" ? enUS : ptBR,
+	const intlLocale = locale === "en" ? "en-US" : "pt-BR";
+
+	if (isToday(date)) {
+		return formatDistanceToNow(date, {
+			addSuffix: true,
+			locale: locale === "en" ? enUS : ptBR,
+		});
+	}
+
+	if (isYesterday(date)) {
+		return new Intl.RelativeTimeFormat(intlLocale, { numeric: "auto" }).format(
+			-1,
+			"day",
+		);
+	}
+
+	return date.toLocaleDateString(intlLocale, {
+		day: "numeric",
+		month: "short",
+		year: isThisYear(date) ? undefined : "numeric",
 	});
 }
 

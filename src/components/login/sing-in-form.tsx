@@ -67,10 +67,10 @@ export function SingInForm() {
 
 	return (
 		<form
-			className="flex flex-col items-center justify-center w-[500px]"
+			className="flex flex-col items-center justify-center w-full md:w-[500px]"
 			onSubmit={form.handleSubmit(login)}
 		>
-			<h1 className="text-4xl font-[Anta] text-primary">{t("auth.login.title")}</h1>
+			<h1 className="text-3xl md:text-4xl text-center font-[Anta] text-primary">{t("auth.login.title")}</h1>
 			<p className="max-w-120 font-[Anta] text-center text-sm text-accent-foreground/70 mt-2">
 				{t("auth.login.description")}
 			</p>

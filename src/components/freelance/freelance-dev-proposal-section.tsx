@@ -38,7 +38,7 @@ function MyProposalCard({ vacancy, proposal }: MyProposalCardProps) {
 	const canWithdraw = canWithdrawProposal(vacancy, proposal);
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<div className="flex flex-row flex-wrap items-center justify-between gap-2">
 				<h3 className="text-lg font-bold">
 					{isEditing
@@ -123,7 +123,7 @@ export default function FreelanceDevProposalSection({
 	if (!canPropose(vacancy)) return null;
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<div className="flex flex-col gap-1">
 				<h3 className="text-lg font-bold">
 					{t("freelance.proposal.form_title")}

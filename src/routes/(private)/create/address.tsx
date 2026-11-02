@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import LogoutButton from "@/components/global/logout-button";
-import ThemeToggle from "@/components/global/theme-toggle-button";
 import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
 import {
@@ -39,23 +38,23 @@ function RouteComponent() {
 	const userRole = getUserMainRole(user);
 
 	return (
-		<div className="w-screen h-screen flex">
+		<div className="w-screen h-dvh flex max-md:overflow-y-auto">
 			{userRole === "dev" && (
-				<div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50">
+				<div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50 max-md:hidden">
 					<div className="w-full h-full"></div>
 				</div>
 			)}
 			{userRole === "company" && (
-				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
+				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50 max-md:hidden">
 					<div className="w-full h-full"></div>
 				</div>
 			)}
 			{userRole === "client" && (
-				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50">
+				<div className="flex-1 bg-[url('/images/create_company_profile_banner.jpg')] bg-cover bg-center brightness-50 max-md:hidden">
 					<div className="w-full h-full"></div>
 				</div>
 			)}
-			<div className="flex-1 relative m-4 flex flex-col items-center justify-center">
+			<div className="flex-1 relative m-4 flex flex-col items-center justify-center-safe max-md:pt-12">
 				<LogoutButton text="You will be leaving without finishing your profile creation, you will not be able to be reached by our algorithm!">
 					<Button variant={"ghost"} className="absolute top-0 left-0">
 						<LogOut /> Logout
@@ -63,11 +62,11 @@ function RouteComponent() {
 				</LogoutButton>
 				<div className="flex flex-col justify-center items-center mb-6">
 					<Logo className="w-12 fill-primary" />
-					<p className="font-[Agbalumo] text-primary text-5xl">
+					<p className="font-[Agbalumo] text-primary text-4xl md:text-5xl">
 						{env.APP_NAME}
 					</p>
 				</div>
-				<h2 className="font-[Anta] text-primary text-3xl mb-6">
+				<h2 className="font-[Anta] text-primary text-2xl md:text-3xl text-center mb-6">
 					{t("address_create.title")}
 				</h2>
 				<p className="max-w-[700px] text-center mb-6">
@@ -77,7 +76,6 @@ function RouteComponent() {
 				</p>
 				<AddressForm />
 			</div>
-			<ThemeToggle />
 		</div>
 	);
 }

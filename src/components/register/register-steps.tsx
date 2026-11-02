@@ -165,11 +165,11 @@ export default function RegisterSteps() {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center">
+		<div className="flex flex-col items-center justify-center max-md:w-full">
 			<form
 				id="login-form"
 				onSubmit={form.handleSubmit(register)}
-				className="flex flex-col items-center justify-center w-[500px]"
+				className="flex flex-col items-center justify-center w-full md:w-[500px]"
 			>
 				{step === "role" ? (
 					<>

@@ -136,7 +136,7 @@ export default function CreateJobHistoryCard() {
 					className="flex flex-col gap-4"
 					onSubmit={form.handleSubmit(submit)}
 				>
-					<div className="flex flex-row gap-4">
+					<div className="flex flex-col gap-4 md:flex-row">
 						<Controller
 							control={form.control}
 							name="position_name"
@@ -180,7 +180,7 @@ export default function CreateJobHistoryCard() {
 							)}
 						/>
 					</div>
-					<div className="flex flex-row gap-4">
+					<div className="flex flex-col gap-4 md:flex-row">
 						<Controller
 							control={form.control}
 							name="company_name"
@@ -212,7 +212,7 @@ export default function CreateJobHistoryCard() {
 							)}
 						/>
 					</div>
-					<div className="flex flex-row gap-4">
+					<div className="flex flex-col gap-4 md:flex-row">
 						<Controller
 							control={form.control}
 							name="employment_type"
@@ -269,7 +269,7 @@ export default function CreateJobHistoryCard() {
 							)}
 						/>
 					</div>
-					<div className="flex flex-row gap-4">
+					<div className="flex flex-col gap-4 md:flex-row">
 						<Controller
 							control={form.control}
 							name="start_date"
@@ -283,7 +283,7 @@ export default function CreateJobHistoryCard() {
 											<Button
 												variant="outline"
 												className={cn(
-													"w-[212px] justify-between text-left font-normal",
+													"w-full md:w-[212px] justify-between text-left font-normal",
 													!field.value && "text-muted-foreground",
 												)}
 											>
@@ -325,7 +325,7 @@ export default function CreateJobHistoryCard() {
 												variant="outline"
 												disabled={isCurrentJob}
 												className={cn(
-													"w-[212px] justify-between text-left font-normal",
+													"w-full md:w-[212px] justify-between text-left font-normal",
 													!field.value && "text-muted-foreground",
 												)}
 											>

@@ -1,4 +1,3 @@
-import ThemeToggle from "@/components/global/theme-toggle-button";
 import ClientProfileBody from "@/components/profile/variants/client-profile-body";
 import CompanyProfileBody from "@/components/profile/variants/company-profile-body";
 import DevProfileContent from "@/components/profile/variants/dev-profile-body";
@@ -98,9 +97,9 @@ function RouteComponent() {
 
 	if (getRole(user) === "dev") {
 		return (
-			<div className="flex-1 p-8 flex flex-col gap-4">
-				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
-					<Avatar className="size-32">
+			<div className="flex-1 p-4 md:p-8 flex flex-col gap-4">
+				<Card className="w-full flex flex-col items-start px-4 py-6 gap-4 md:flex-row md:items-center md:px-12 md:py-8">
+					<Avatar className="size-20 md:size-32">
 						{profilePic && (
 							<AvatarImage
 								src={profilePic}
@@ -109,14 +108,14 @@ function RouteComponent() {
 							/>
 						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
-							<User className="size-22" />
+							<User className="size-12 md:size-22" />
 						</AvatarFallback>
 					</Avatar>
-					<div className="flex flex-col gap-2">
-						<h2 className="text-4xl font-bold font-[Anta]">
+					<div className="flex min-w-0 flex-col gap-2">
+						<h2 className="text-2xl md:text-4xl font-bold font-[Anta] break-words">
 							{getNameFromProfile(user)}
 						</h2>
-						<div className="flex gap-2">
+						<div className="flex flex-wrap gap-2">
 							<Badge variant={"default"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"secondary"}>{t(user?.dev_profile?.specialty_label as string)}</Badge>
 							<Badge className="bg-accent text-accent-foreground">{t(`enum.seniority_level.${user?.dev_profile?.seniority_level}`)} {user?.dev_profile?.seniority_tested ? <BadgeCheck /> : null}</Badge>
@@ -135,16 +134,15 @@ function RouteComponent() {
 					</div>
 				</Card>	
 				<DevProfileContent profileId={user?.dev_profile?.id as string} userId={user?.id}/>
-				<ThemeToggle />	
 			</div>
 		)
 	}
 
 	if (getRole(user) === "company") {
 		return (
-			<div className="flex-1 p-8 flex flex-col gap-4">
-				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
-					<Avatar className="size-32">
+			<div className="flex-1 p-4 md:p-8 flex flex-col gap-4">
+				<Card className="w-full flex flex-col items-start px-4 py-6 gap-4 md:flex-row md:items-center md:px-12 md:py-8">
+					<Avatar className="size-20 md:size-32">
 						{profilePic && (
 							<AvatarImage
 								src={profilePic}
@@ -153,14 +151,14 @@ function RouteComponent() {
 							/>
 						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
-							<User className="size-22" />
+							<User className="size-12 md:size-22" />
 						</AvatarFallback>
 					</Avatar>
-					<div className="flex flex-col gap-2">
-						<h2 className="text-4xl font-bold font-[Anta]">
+					<div className="flex min-w-0 flex-col gap-2">
+						<h2 className="text-2xl md:text-4xl font-bold font-[Anta] break-words">
 							{getNameFromProfile(user)}
 						</h2>
-						<div className="flex gap-2">
+						<div className="flex flex-wrap gap-2">
 							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}
@@ -183,9 +181,9 @@ function RouteComponent() {
 
 	if (getRole(user) === "client") {
 		return (
-			<div className="flex-1 p-8 flex flex-col gap-4">
-				<Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
-					<Avatar className="size-32">
+			<div className="flex-1 p-4 md:p-8 flex flex-col gap-4">
+				<Card className="w-full flex flex-col items-start px-4 py-6 gap-4 md:flex-row md:items-center md:px-12 md:py-8">
+					<Avatar className="size-20 md:size-32">
 						{profilePic && (
 							<AvatarImage
 								src={profilePic}
@@ -194,14 +192,14 @@ function RouteComponent() {
 							/>
 						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
-							<User className="size-22" />
+							<User className="size-12 md:size-22" />
 						</AvatarFallback>
 					</Avatar>
-					<div className="flex flex-col gap-2">
-						<h2 className="text-4xl font-bold font-[Anta]">
+					<div className="flex min-w-0 flex-col gap-2">
+						<h2 className="text-2xl md:text-4xl font-bold font-[Anta] break-words">
 							{getNameFromProfile(user)}
 						</h2>
-						<div className="flex gap-2">
+						<div className="flex flex-wrap gap-2">
 							<Badge variant={"secondary"}>{t(getRoleLabel(user) as string)}</Badge>
 							<Badge variant={"destructive"}>
 								{"Score: " + getProfileScore(user)}

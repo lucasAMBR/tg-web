@@ -211,7 +211,11 @@ export default function TestPage({ testId }: TestPageProps) {
 					onClick={() => goToPage(pageIndex - 1)}
 					className={isFirstPage ? "invisible" : ""}
 				>
-					<ChevronLeft /> {t("dev_profile.proficiency_test.previous_page")}
+					<ChevronLeft />
+					{/* No celular fica só o ícone, para caber com o indicador de página */}
+					<span className="max-md:sr-only">
+						{t("dev_profile.proficiency_test.previous_page")}
+					</span>
 				</Button>
 
 				<p className="text-sm text-muted-foreground">
@@ -227,8 +231,10 @@ export default function TestPage({ testId }: TestPageProps) {
 					</Button>
 				) : (
 					<Button type="button" onClick={() => goToPage(pageIndex + 1)}>
-
-						{t("dev_profile.proficiency_test.next_page")} <ChevronRight />
+						<span className="max-md:sr-only">
+							{t("dev_profile.proficiency_test.next_page")}
+						</span>
+						<ChevronRight />
 					</Button>
 				)}
 			</div>

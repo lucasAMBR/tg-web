@@ -32,7 +32,7 @@ export default function Banner() {
 				<Logo 
 					className="w-24 fill-primary"
 				/>
-				<h1 className="text-9xl font-[Anta] tracking-tight text-primary sm:text-6xl text-center">
+				<h1 className="text-4xl font-[Anta] tracking-tight text-primary sm:text-6xl text-center">
 					{t("landing_page.title")} <span className="font-[Agbalumo]">{t("landing_page.app_name")}</span>
 				</h1>
 				<h2 className="mb-6 text-xl font-[Anta] font-medium text-foreground">
@@ -41,7 +41,7 @@ export default function Banner() {
 				<p className="max-w-prose dark:text-foreground/70 text-foreground/90 text-center text-lg font-medium">
 					{t("landing_page.subdescription")}
 				</p>
-				<div className="flex gap-3 mt-6">
+				<div className="flex flex-wrap justify-center gap-3 mt-6">
 					<Button
 						size={"lg"}
 						variant={"secondary"}

@@ -5,6 +5,9 @@
  * OpenAPI spec version: 0.0.1
  */
 import type { CommentResourceParentId } from './commentResourceParentId';
+import type { CommentResourceContentPt } from './commentResourceContentPt';
+import type { CommentResourceContentEn } from './commentResourceContentEn';
+import type { CommentResourceTranslationStatusLabel } from './commentResourceTranslationStatusLabel';
 import type { CommentResourceRemovedAt } from './commentResourceRemovedAt';
 import type { CommentResourceAuthor } from './commentResourceAuthor';
 import type { CommentResourceCreatedAt } from './commentResourceCreatedAt';
@@ -15,6 +18,10 @@ export interface CommentResource {
   post_id: string;
   parent_id: CommentResourceParentId;
   content: string;
+  content_pt: CommentResourceContentPt;
+  content_en: CommentResourceContentEn;
+  translation_status: string;
+  translation_status_label: CommentResourceTranslationStatusLabel;
   is_removed: boolean;
   removed_at: CommentResourceRemovedAt;
   author?: CommentResourceAuthor;

@@ -22,11 +22,14 @@ import { Route as privateAdminLandCompanyIndexRouteImport } from './routes/(priv
 import { Route as privatehomeSettingsIndexRouteImport } from './routes/(private)/(home)/settings/index'
 import { Route as privatehomeSearchIndexRouteImport } from './routes/(private)/(home)/search/index'
 import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/(home)/profile/index'
+import { Route as privatehomeNotificationsIndexRouteImport } from './routes/(private)/(home)/notifications/index'
 import { Route as privatehomeMyVacanciesIndexRouteImport } from './routes/(private)/(home)/my-vacancies/index'
 import { Route as privatehomeJobsIndexRouteImport } from './routes/(private)/(home)/jobs/index'
 import { Route as privatehomeFreelancesIndexRouteImport } from './routes/(private)/(home)/freelances/index'
 import { Route as privatehomeFeedIndexRouteImport } from './routes/(private)/(home)/feed/index'
 import { Route as privatehomeFavoritesIndexRouteImport } from './routes/(private)/(home)/favorites/index'
+import { Route as privatehomeDashboardIndexRouteImport } from './routes/(private)/(home)/dashboard/index'
+import { Route as privatehomeChatIndexRouteImport } from './routes/(private)/(home)/chat/index'
 import { Route as privateProficiencyTestIdTestRouteImport } from './routes/(private)/proficiency-test/$id/test'
 import { Route as privateProficiencyTestIdStartRouteImport } from './routes/(private)/proficiency-test/$id/start'
 import { Route as privateCreateProfileDevRouteImport } from './routes/(private)/create/profile/dev'
@@ -114,6 +117,12 @@ const privatehomeProfileIndexRoute = privatehomeProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => privatehomeLayoutRoute,
 } as any)
+const privatehomeNotificationsIndexRoute =
+  privatehomeNotificationsIndexRouteImport.update({
+    id: '/notifications/',
+    path: '/notifications/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomeMyVacanciesIndexRoute =
   privatehomeMyVacanciesIndexRouteImport.update({
     id: '/my-vacancies/',
@@ -142,6 +151,17 @@ const privatehomeFavoritesIndexRoute =
     path: '/favorites/',
     getParentRoute: () => privatehomeLayoutRoute,
   } as any)
+const privatehomeDashboardIndexRoute =
+  privatehomeDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
+const privatehomeChatIndexRoute = privatehomeChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => privatehomeLayoutRoute,
+} as any)
 const privateProficiencyTestIdTestRoute =
   privateProficiencyTestIdTestRouteImport.update({
     id: '/(private)/proficiency-test/$id/test',
@@ -266,11 +286,14 @@ export interface FileRoutesByFullPath {
   '/create/profile/dev': typeof privateCreateProfileDevRoute
   '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/chat/': typeof privatehomeChatIndexRoute
+  '/dashboard/': typeof privatehomeDashboardIndexRoute
   '/favorites/': typeof privatehomeFavoritesIndexRoute
   '/feed/': typeof privatehomeFeedIndexRoute
   '/freelances/': typeof privatehomeFreelancesIndexRoute
   '/jobs/': typeof privatehomeJobsIndexRoute
   '/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/notifications/': typeof privatehomeNotificationsIndexRoute
   '/profile/': typeof privatehomeProfileIndexRoute
   '/search/': typeof privatehomeSearchIndexRoute
   '/settings/': typeof privatehomeSettingsIndexRoute
@@ -303,11 +326,14 @@ export interface FileRoutesByTo {
   '/create/profile/dev': typeof privateCreateProfileDevRoute
   '/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/chat': typeof privatehomeChatIndexRoute
+  '/dashboard': typeof privatehomeDashboardIndexRoute
   '/favorites': typeof privatehomeFavoritesIndexRoute
   '/feed': typeof privatehomeFeedIndexRoute
   '/freelances': typeof privatehomeFreelancesIndexRoute
   '/jobs': typeof privatehomeJobsIndexRoute
   '/my-vacancies': typeof privatehomeMyVacanciesIndexRoute
+  '/notifications': typeof privatehomeNotificationsIndexRoute
   '/profile': typeof privatehomeProfileIndexRoute
   '/search': typeof privatehomeSearchIndexRoute
   '/settings': typeof privatehomeSettingsIndexRoute
@@ -343,11 +369,14 @@ export interface FileRoutesById {
   '/(private)/create/profile/dev': typeof privateCreateProfileDevRoute
   '/(private)/proficiency-test/$id/start': typeof privateProficiencyTestIdStartRoute
   '/(private)/proficiency-test/$id/test': typeof privateProficiencyTestIdTestRoute
+  '/(private)/(home)/chat/': typeof privatehomeChatIndexRoute
+  '/(private)/(home)/dashboard/': typeof privatehomeDashboardIndexRoute
   '/(private)/(home)/favorites/': typeof privatehomeFavoritesIndexRoute
   '/(private)/(home)/feed/': typeof privatehomeFeedIndexRoute
   '/(private)/(home)/freelances/': typeof privatehomeFreelancesIndexRoute
   '/(private)/(home)/jobs/': typeof privatehomeJobsIndexRoute
   '/(private)/(home)/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/(private)/(home)/notifications/': typeof privatehomeNotificationsIndexRoute
   '/(private)/(home)/profile/': typeof privatehomeProfileIndexRoute
   '/(private)/(home)/search/': typeof privatehomeSearchIndexRoute
   '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
@@ -382,11 +411,14 @@ export interface FileRouteTypes {
     | '/create/profile/dev'
     | '/proficiency-test/$id/start'
     | '/proficiency-test/$id/test'
+    | '/chat/'
+    | '/dashboard/'
     | '/favorites/'
     | '/feed/'
     | '/freelances/'
     | '/jobs/'
     | '/my-vacancies/'
+    | '/notifications/'
     | '/profile/'
     | '/search/'
     | '/settings/'
@@ -419,11 +451,14 @@ export interface FileRouteTypes {
     | '/create/profile/dev'
     | '/proficiency-test/$id/start'
     | '/proficiency-test/$id/test'
+    | '/chat'
+    | '/dashboard'
     | '/favorites'
     | '/feed'
     | '/freelances'
     | '/jobs'
     | '/my-vacancies'
+    | '/notifications'
     | '/profile'
     | '/search'
     | '/settings'
@@ -458,11 +493,14 @@ export interface FileRouteTypes {
     | '/(private)/create/profile/dev'
     | '/(private)/proficiency-test/$id/start'
     | '/(private)/proficiency-test/$id/test'
+    | '/(private)/(home)/chat/'
+    | '/(private)/(home)/dashboard/'
     | '/(private)/(home)/favorites/'
     | '/(private)/(home)/feed/'
     | '/(private)/(home)/freelances/'
     | '/(private)/(home)/jobs/'
     | '/(private)/(home)/my-vacancies/'
+    | '/(private)/(home)/notifications/'
     | '/(private)/(home)/profile/'
     | '/(private)/(home)/search/'
     | '/(private)/(home)/settings/'
@@ -589,6 +627,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof privatehomeProfileIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
+    '/(private)/(home)/notifications/': {
+      id: '/(private)/(home)/notifications/'
+      path: '/notifications'
+      fullPath: '/notifications/'
+      preLoaderRoute: typeof privatehomeNotificationsIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
     '/(private)/(home)/my-vacancies/': {
       id: '/(private)/(home)/my-vacancies/'
       path: '/my-vacancies'
@@ -622,6 +667,20 @@ declare module '@tanstack/react-router' {
       path: '/favorites'
       fullPath: '/favorites/'
       preLoaderRoute: typeof privatehomeFavoritesIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/dashboard/': {
+      id: '/(private)/(home)/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof privatehomeDashboardIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/chat/': {
+      id: '/(private)/(home)/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof privatehomeChatIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
     '/(private)/proficiency-test/$id/test': {
@@ -777,11 +836,14 @@ const publicLayoutRouteWithChildren = publicLayoutRoute._addFileChildren(
 )
 
 interface privatehomeLayoutRouteChildren {
+  privatehomeChatIndexRoute: typeof privatehomeChatIndexRoute
+  privatehomeDashboardIndexRoute: typeof privatehomeDashboardIndexRoute
   privatehomeFavoritesIndexRoute: typeof privatehomeFavoritesIndexRoute
   privatehomeFeedIndexRoute: typeof privatehomeFeedIndexRoute
   privatehomeFreelancesIndexRoute: typeof privatehomeFreelancesIndexRoute
   privatehomeJobsIndexRoute: typeof privatehomeJobsIndexRoute
   privatehomeMyVacanciesIndexRoute: typeof privatehomeMyVacanciesIndexRoute
+  privatehomeNotificationsIndexRoute: typeof privatehomeNotificationsIndexRoute
   privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
   privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
   privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
@@ -802,11 +864,14 @@ interface privatehomeLayoutRouteChildren {
 }
 
 const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
+  privatehomeChatIndexRoute: privatehomeChatIndexRoute,
+  privatehomeDashboardIndexRoute: privatehomeDashboardIndexRoute,
   privatehomeFavoritesIndexRoute: privatehomeFavoritesIndexRoute,
   privatehomeFeedIndexRoute: privatehomeFeedIndexRoute,
   privatehomeFreelancesIndexRoute: privatehomeFreelancesIndexRoute,
   privatehomeJobsIndexRoute: privatehomeJobsIndexRoute,
   privatehomeMyVacanciesIndexRoute: privatehomeMyVacanciesIndexRoute,
+  privatehomeNotificationsIndexRoute: privatehomeNotificationsIndexRoute,
   privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
   privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
   privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,

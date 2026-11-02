@@ -118,7 +118,7 @@ export default function DevUpdateProfileForm({
                 onSubmit={form.handleSubmit(create)}
                 className="w-full flex flex-col gap-4"
             >
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-4 md:flex-row md:gap-2">
                     <Controller
                         control={form.control}
                         name="name"
@@ -162,7 +162,7 @@ export default function DevUpdateProfileForm({
                         )}
                     />
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-4 md:flex-row md:gap-2">
                     <Controller
                         control={form.control}
                         name="phone"
@@ -200,7 +200,7 @@ export default function DevUpdateProfileForm({
                                         <Button
                                             variant="outline"
                                             className={cn(
-                                                "w-[212px] justify-between text-left font-normal",
+                                                "w-full md:w-[212px] justify-between text-left font-normal",
                                                 !field.value && "text-muted-foreground",
                                             )}
                                         >

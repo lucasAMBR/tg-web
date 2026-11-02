@@ -152,7 +152,7 @@ export default function CreateProjectCard({
 					onSubmit={form.handleSubmit(create)}
 					className="flex flex-col gap-3"
 				>
-					<div className="flex gap-3">
+					<div className="flex flex-col gap-3 md:flex-row">
 						<Controller
 							control={form.control}
 							name="title"

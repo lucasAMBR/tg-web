@@ -31,7 +31,9 @@
         "freelances": "My Freelances",
         "freelance_details": "Freelance Job Details",
         "freelance_feed": "Job Feed",
-        "freelance_search": "Freelance Jobs"
+        "freelance_search": "Freelance Jobs",
+        "chat": "Messages",
+        "notifications": "Notifications"
     },
     "breadcrumb": {
         "admin": "Administration",
@@ -303,7 +305,8 @@
             "projects": "Projects",
             "job_history": "Job History",
             "certifications": "Certifications",
-            "proficiency_test": "Proficiency tests"
+            "proficiency_test": "Proficiency tests",
+            "about": "About"
         },
         "projects": {
             "create_project": "Create Project",
@@ -404,7 +407,8 @@
         "tabs": {
             "posts": "Posts",
             "projects": "Projects",
-            "open_jobs": "Vacancies"
+            "open_jobs": "Vacancies",
+            "about": "About"
         },
         "projects": {
             "create_project": "Create new project",
@@ -560,6 +564,7 @@
     "sidebar": {
         "sections_title": "Sections",
         "options_title": "Options",
+        "open_menu": "Open menu",
         "sections": {
             "feed": "Feed",
             "companies": "Companies",
@@ -573,7 +578,8 @@
             "questions": "Questions",
             "admins": "Admins",
             "search": "Search",
-            "favorites": "Favorites"
+            "favorites": "Favorites",
+            "chat": "Messages"
         },
         "options": {
             "profile": "Profile",
@@ -1345,7 +1351,8 @@
             "hang_up": "Hang up",
             "share_screen": "Share screen",
             "stop_screen_share": "Stop sharing screen",
-            "your_screen": "Your screen"
+            "your_screen": "Your screen",
+            "screen_share_unsupported": "Your browser does not support screen sharing. To share your screen, join the room from a desktop browser."
         },
         "exercise": {
             "statement": "Statement",
@@ -1581,7 +1588,9 @@
         "message_placeholder": "Write a message...",
         "send": "Send",
         "send_message": "Send message",
-        "unknown_participant": "User without a profile"
+        "unknown_participant": "User without a profile",
+        "select_title": "No conversation selected",
+        "select_description": "Pick a conversation from the list to see its messages."
     },
     "social": {
         "feed": {
@@ -1981,6 +1990,123 @@
             "invite_conflict": "This dev was already invited, already sent a proposal or the job is no longer open. We updated the list.",
             "feed_closed": "This job's feed no longer accepts changes. We updated the screen.",
             "unexpected": "We couldn't finish this. Please try again."
+        }
+    },
+    "dashboard": {
+        "total": "total",
+        "empty": "No data yet.",
+        "period": {
+            "last_months": "Last {{count}} months"
+        },
+        "errors": {
+            "forbidden": "You don't have access to this dashboard.",
+            "switch_to_company": "Switch to your company profile to see this dashboard.",
+            "missing_profile": "Complete your company profile to see the dashboard",
+            "complete_profile": "Complete profile",
+            "unexpected": "We couldn't load the dashboard.",
+            "retry": "Try again"
+        },
+        "charts": {
+            "timeline": "Monthly trend"
+        },
+        "series": {
+            "vacancies": "Vacancies",
+            "vacancies_created": "Vacancies created",
+            "applications": "Applications",
+            "applications_received": "Applications received",
+            "applicants": "Applicants",
+            "devs": "Devs",
+            "companies": "Companies",
+            "signups": "Sign-ups"
+        },
+        "company": {
+            "title": "Dashboard",
+            "description": "Follow how your vacancies and selection processes are going.",
+            "awaiting_you": "{{count}} waiting on you",
+            "empty": {
+                "no_vacancies": "You haven't published any vacancies yet.",
+                "create_vacancy": "Create vacancy",
+                "no_applications": "Your vacancies haven't received any applications yet.",
+                "no_vacancies_in_process": "No vacancies in a selection process right now."
+            },
+            "summary": {
+                "vacancies_active": "Active vacancies",
+                "vacancies_total": "of {{total}} in total",
+                "applications": "Applications",
+                "applications_in_progress": "{{total}} in progress",
+                "applications_last_30_days": "Last 30 days",
+                "hired": "Hired",
+                "hire_rate": "Hire rate",
+                "average_per_vacancy": "Average per vacancy"
+            },
+            "agenda": {
+                "title": "Schedule",
+                "upcoming_interviews": "Scheduled interviews",
+                "upcoming_live_codings": "Scheduled live codings",
+                "interviews_awaiting": "Interviews awaiting your confirmation",
+                "live_codings_awaiting": "Live codings awaiting your confirmation"
+            },
+            "charts": {
+                "vacancies_by_status": "Vacancies by status",
+                "applications_by_status": "Applications by status",
+                "applications_by_vacancy": "Applications by vacancy",
+                "applications_by_vacancy_hint": "The 10 vacancies with the most applications. Click a title to open the vacancy.",
+                "funnel": "Selection process funnel",
+                "funnel_hint": "Applications in progress and rejected at each stage.",
+                "vacancies_by_process_step": "Vacancies in a selection process",
+                "vacancies_by_process_step_hint": "Which stage each vacancy with closed inscriptions is at.",
+                "applicants_by_specialty": "Applicants by specialty",
+                "applicants_by_seniority": "Applicants by seniority",
+                "timeline_hint": "Vacancies created and applications received per month."
+            }
+        },
+        "admin": {
+            "title": "Dashboard",
+            "description": "Numbers for the whole platform.",
+            "summary": {
+                "users": "Users",
+                "new_users": "{{total}} new in the last 30 days",
+                "devs": "Devs",
+                "devs_open_to_work": "{{total}} open to work",
+                "companies": "Companies",
+                "clients": "Clients",
+                "open_vacancies": "Open vacancies",
+                "vacancies_total": "of {{total}} in total",
+                "applications": "Applications",
+                "hired": "Hired",
+                "freelance_volume": "Freelance contracted volume",
+                "freelance_totals": "Freelances: {{vacancies}} · Proposals: {{proposals}}",
+                "footnote": "Blocked: {{blocked}} · Admins: {{admins}} · Devs with validated seniority: {{tested}}"
+            },
+            "charts": {
+                "users_by_profile": "Users by profile type",
+                "specialties": "Specialties",
+                "specialties_hint": "Devs, vacancies and applications in each specialty, to compare supply and demand.",
+                "devs_by_seniority": "Devs by seniority",
+                "companies_by_segment": "Companies by segment",
+                "job_vacancies_by_status": "Vacancies",
+                "applications_by_status": "Applications",
+                "freelance_vacancies_by_status": "Freelances",
+                "freelance_proposals_by_status": "Freelance proposals",
+                "top_dev_languages": "Most common languages among devs",
+                "top_vacancy_languages": "Most required languages in vacancies",
+                "timeline_platform": "Sign-ups and applications",
+                "timeline_platform_hint": "New users and applications per month.",
+                "timeline_social": "Social network",
+                "timeline_social_hint": "Posts, comments and likes per month."
+            },
+            "social": {
+                "title": "Social network",
+                "interactions": "Interactions",
+                "interactions_hint": "Likes, comments, favorites and follows",
+                "posts": "Posts",
+                "comments": "Comments",
+                "likes": "Likes",
+                "favorites": "Favorites",
+                "follows": "Follows",
+                "chat": "Chat messages",
+                "chat_conversations": "in {{total}} conversations"
+            }
         }
     }
 }

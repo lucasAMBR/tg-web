@@ -40,7 +40,7 @@ export default function FreelanceContractCard({
 			: vacancy.profile?.user_id;
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<h3 className="flex items-center gap-2 text-lg font-bold">
 				<Handshake className="size-5" />
 				{t("freelance.contract.title")}

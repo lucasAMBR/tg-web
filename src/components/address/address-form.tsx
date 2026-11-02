@@ -105,7 +105,7 @@ export default function AddressForm() {
 			onSubmit={form.handleSubmit(createAddress)}
 			className="w-full max-w-[700px] flex flex-col gap-4"
 		>
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-4 md:flex-row md:gap-2">
 				<Controller
 					control={form.control}
 					name="cep"
@@ -135,7 +135,7 @@ export default function AddressForm() {
 					/>
 				</Field>
 			</div>
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-4 md:flex-row md:gap-2">
 				<Field className="flex-4">
 					<FieldLabel>{t("input.district")}</FieldLabel>
 					<Input
@@ -167,7 +167,7 @@ export default function AddressForm() {
 					/>
 				</Field>
 			</div>
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-4 md:flex-row md:gap-2">
 				<Controller
 					control={form.control}
 					name="number"
