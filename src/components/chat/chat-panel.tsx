@@ -12,7 +12,8 @@ import ConversationView from "./conversation-view";
 /**
  * Painel do chat, fixo na lateral direita de todas as telas autenticadas. Fica
  * sempre montado — mesmo fechado — porque é ele que mantém a inscrição no canal
- * pessoal do chat, que alimenta o badge de não lidas do botão no header.
+ * pessoal do chat, que alimenta o badge de não lidas do botão no header. No
+ * celular ele não aparece: lá o chat é só a tela de mensagens.
  */
 export default function ChatPanel() {
 	const { t } = useTranslation();
@@ -47,7 +48,7 @@ export default function ChatPanel() {
 	if (!isOpen || isPageOpen) return null;
 
 	return (
-		<aside className="flex h-screen w-[380px] shrink-0 flex-col border-l border-border">
+		<aside className="hidden h-screen w-[380px] shrink-0 flex-col border-l border-border md:flex">
 			<div className="flex h-18 shrink-0 items-center gap-2 border-b border-border px-4">
 				{activeConversationId ? (
 					<>

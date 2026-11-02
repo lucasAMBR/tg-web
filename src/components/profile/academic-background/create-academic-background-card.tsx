@@ -112,7 +112,7 @@ export default function CreateAcademicBackgroundCard({
 					<Plus /> {t("general.register")}
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="min-w-fit">
+			<DialogContent className="md:min-w-fit">
 				<DialogHeader>
 					<DialogTitle>{t("dev_profile.academic_background.new_academic_background")}</DialogTitle>
 				</DialogHeader>
@@ -121,7 +121,7 @@ export default function CreateAcademicBackgroundCard({
 						onSubmit={form.handleSubmit(submit)}
 						className="flex flex-col gap-4"
 					>
-						<div className="flex gap-4">
+						<div className="flex flex-col gap-4 md:flex-row">
 							<Controller
 								control={form.control}
 								name="degree"

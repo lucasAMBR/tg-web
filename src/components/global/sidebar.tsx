@@ -10,6 +10,7 @@ import {
 	LayoutDashboard,
 	List,
 	LogOut,
+	Menu,
 	MessageCircle,
 	MessageSquare,
 	Search,
@@ -28,6 +29,7 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useChatConversations } from "@/hooks/use-chat-conversations";
 import LogoutButton from "./logout-button";
@@ -40,7 +42,12 @@ import {
 import { Logo } from "./Logo";
 import { useTranslation } from "react-i18next";
 
-export default function Sidebar() {
+interface SidebarContentProps {
+	/** Chamado ao navegar por um item — o drawer do celular fecha. */
+	onNavigate?: () => void;
+}
+
+function SidebarContent({ onNavigate }: SidebarContentProps) {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -72,7 +79,10 @@ export default function Sidebar() {
 			<div
 				onClick={() => {
 					if (onClick) return onClick();
-					if (url) navigate({ to: url });
+					if (url) {
+						navigate({ to: url });
+						onNavigate?.();
+					}
 				}}
 				className={`
         w-full flex gap-2 items-center p-0.5 rounded-md px-2 mb-1 cursor-pointer transition-colors
@@ -91,7 +101,7 @@ export default function Sidebar() {
 	}
 
 	return (
-		<div className="w-[350px] flex flex-col h-screen border-r border-border">
+		<>
 			{/* HEADER */}
 			<div className="flex flex-row gap-1.5 items-end justify-center p-4 border-b border-border h-18">
 					<Logo className="w-11 fill-primary" />
@@ -101,7 +111,7 @@ export default function Sidebar() {
 			</div>
 
 			{/* CONTENT */}
-			<div className="flex flex-col gap-4 flex-1 p-4">
+			<div className="flex flex-col gap-4 flex-1 min-h-0 overflow-y-auto p-4">
 				{/* SECTIONS */}
 				<div className="w-full">
 					<p className="text-xs text-muted-foreground mb-2">
@@ -241,6 +251,43 @@ export default function Sidebar() {
 					onOpenChange={setLogoutDialogOpen}
 				/>
 			</div>
+		</>
+	);
+}
+
+export default function Sidebar() {
+	return (
+		<div className="w-[350px] hidden md:flex flex-col h-screen border-r border-border">
+			<SidebarContent />
 		</div>
+	);
+}
+
+/** No celular a sidebar não cabe ao lado do conteúdo: um botão no header abre ela num drawer. */
+export function MobileSidebarTrigger() {
+	const { t } = useTranslation();
+	const [open, setOpen] = useState(false);
+
+	return (
+		<Sheet open={open} onOpenChange={setOpen}>
+			<SheetTrigger asChild>
+				<Button
+					variant={"ghost"}
+					size={"icon"}
+					className="md:hidden self-center"
+					aria-label={t("sidebar.open_menu")}
+				>
+					<Menu />
+				</Button>
+			</SheetTrigger>
+			<SheetContent
+				side="left"
+				className="w-[85vw] max-w-[350px] sm:max-w-[350px] gap-0 p-0"
+				aria-describedby={undefined}
+			>
+				<SheetTitle className="sr-only">{t("sidebar.sections_title")}</SheetTitle>
+				<SidebarContent onNavigate={() => setOpen(false)} />
+			</SheetContent>
+		</Sheet>
 	);
 }

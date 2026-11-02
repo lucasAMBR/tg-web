@@ -3,6 +3,7 @@ import ProfilePostsTab from "@/components/social/profile-posts-tab";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ClientProfileBodyProps{
     profileId: string
@@ -14,17 +15,26 @@ export default function ClientProfileBody({ userId }: ClientProfileBodyProps) {
 
     const [tab, setTab] = useState("posts");
 
+    // No celular a coluna de reviews não cabe ao lado das abas e vira mais uma aba
+    const isMobile = useIsMobile();
+    const activeTab = !isMobile && tab === "reviews" ? "posts" : tab;
+
 	return (
 		<div className="flex-1 flex gap-4 mt-3">
-            <div className="flex-2">
-                <Tabs defaultValue={tab} onValueChange={setTab}>
+            <div className="flex-2 max-md:min-w-0">
+                <Tabs value={activeTab} onValueChange={setTab}>
                     <TabsList variant={"line"}>
-                        <TabsTrigger className="text-xl cursor-pointer" value="posts">
+                        <TabsTrigger className="text-base md:text-xl cursor-pointer" value="posts">
                             Posts
                         </TabsTrigger>
-                        <TabsTrigger className="text-xl cursor-pointer" value="open_jobs">
+                        <TabsTrigger className="text-base md:text-xl cursor-pointer" value="open_jobs">
                             Freelance
                         </TabsTrigger>
+                        {isMobile && (
+                            <TabsTrigger className="text-base md:text-xl cursor-pointer" value="reviews">
+                                Reviews
+                            </TabsTrigger>
+                        )}
                     </TabsList>
                     <TabsContent value="posts" className="mt-2">
                         <ProfilePostsTab userId={userId} />
@@ -32,12 +42,19 @@ export default function ClientProfileBody({ userId }: ClientProfileBodyProps) {
                     <TabsContent value="open_jobs" className="mt-2">
                         <UnderConstruction />
                     </TabsContent>
+                    {isMobile && (
+                        <TabsContent value="reviews" className="mt-2">
+                            <UnderConstruction />
+                        </TabsContent>
+                    )}
                 </Tabs>
             </div>
+            {!isMobile && (
+            <>
             <Separator orientation="vertical" />
             <div className="flex-1 flex flex-col gap-6">
             <div className="w-full flex flex-col gap-4">
-			<h2 className="text-3xl flex justify-between">
+			<h2 className="text-2xl md:text-3xl flex justify-between">
 				<span className="font-[Anta]">Reviews</span>
 			</h2>
 			<div className="flex flex-col gap-2">
@@ -45,6 +62,8 @@ export default function ClientProfileBody({ userId }: ClientProfileBodyProps) {
 			</div>
             </div>
             </div>
+            </>
+            )}
         </div>
 	)
 }

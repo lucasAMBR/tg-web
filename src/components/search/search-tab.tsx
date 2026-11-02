@@ -65,6 +65,7 @@ export default function SearchTab() {
       <ToggleGroup
         variant={"outline"}
         spacing={2}
+        className="max-md:flex-wrap"
         type="single"
         value={group}
         onValueChange={(value) => {

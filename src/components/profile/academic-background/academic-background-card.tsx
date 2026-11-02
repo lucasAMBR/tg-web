@@ -78,7 +78,7 @@ export default function AcademicBackgroundCard({
 			<div className="p-4 bg-card rounded-xl">
 			<CardHeader className="p-0">
 				<div className="flex justify-between">
-					<div className="flex flex-col gap-2">
+					<div className="flex min-w-0 flex-col gap-2">
 						<CardTitle className="flex items-center gap-2">
 							{showOriginalContent
 							? background.degree
@@ -91,7 +91,7 @@ export default function AcademicBackgroundCard({
 								</Badge>
 							)}
 						</CardTitle>
-						<CardDescription className="flex gap-4">
+						<CardDescription className="flex flex-wrap gap-x-4 gap-y-1">
 							<span className="text-md font-normal text-muted-foreground flex items-start center gap-1">
 								<School className="size-5" />
 								{background.institution}

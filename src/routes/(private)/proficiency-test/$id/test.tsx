@@ -1,7 +1,6 @@
 import { useShowProficiencyTest, useVisualizeTest } from '@/api/generated/proficiency-test/proficiency-test';
 import { LanguagePicker } from '@/components/global/language-change-button';
 import { Logo } from '@/components/global/Logo';
-import ThemeToggle from '@/components/global/theme-toggle-button';
 import TestPage from '@/components/proficiency-test/test-page';
 import { getStoredToken } from '@/lib/auth';
 import { useAuthStore } from '@/stores/auth-store';
@@ -109,14 +108,14 @@ function RouteComponent() {
   }
 
   return (
-    <div className="w-screen h-screen flex">
-      <div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50">
+    <div className="w-screen h-dvh flex">
+      <div className="flex-1 bg-[url('/images/create_dev_profile_banner.jpg')] bg-cover bg-center brightness-50 max-md:hidden">
         <div className="w-full h-full"></div>
       </div>
       <div className="flex-1 relative m-4 flex flex-col items-center overflow-y-auto py-8">
         <div className="flex flex-col justify-center items-center mb-6">
           <Logo className="w-12 fill-primary" />
-          <p className="font-[Agbalumo] text-primary text-5xl">
+          <p className="font-[Agbalumo] text-primary text-4xl md:text-5xl">
             {env.APP_NAME}
           </p>
         </div>
@@ -125,7 +124,6 @@ function RouteComponent() {
           <TestPage testId={id} />
         </div>
       </div>
-      <ThemeToggle />
     </div>
   );
 }

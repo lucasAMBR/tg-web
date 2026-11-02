@@ -53,9 +53,9 @@ function RouteComponent() {
   const [displayOriginalBioContent, setDisplayOriginalBioContent] = useState<boolean>(hasTranslation ? false : true);
 
   return (
-    <div className="flex-1 p-8 flex flex-col gap-4">
-      <Card className="w-full flex flex-row px-12 py-8 gap-4 items-center">
-        <Avatar className="size-32">
+    <div className="flex-1 p-4 md:p-8 flex flex-col gap-4">
+      <Card className="w-full flex flex-col items-start px-4 py-6 gap-4 md:flex-row md:items-center md:px-12 md:py-8">
+        <Avatar className="size-20 md:size-32">
           {clientData?.profile_pic && (
             <AvatarImage
               src={clientData.profile_pic}
@@ -64,17 +64,17 @@ function RouteComponent() {
             />
           )}
           <AvatarFallback className="bg-primary text-primary-foreground">
-            <Users className="size-22" />
+            <Users className="size-12 md:size-22" />
           </AvatarFallback>
         </Avatar>
-        <div className="flex flex-col gap-2">
+        <div className="flex min-w-0 flex-col gap-2">
           <div className="flex flex-wrap items-center gap-3">
-            <h2 className="text-4xl font-bold font-[Anta]">
+            <h2 className="text-2xl md:text-4xl font-bold font-[Anta] break-words">
               {clientData?.name ?? "—"}
             </h2>
             {followStats?.follows_you && <FollowsYouBadge />}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Badge variant={"default"}>{t("role.client")}</Badge>
             <Badge variant={"destructive"}>
               {"Score: " + (clientData?.score ?? "—")}
@@ -119,7 +119,7 @@ function RouteComponent() {
               : (clientData?.bio_en ?? "—")
             }
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <FollowButton
               userId={clientData?.user_id}
               name={clientData?.name}

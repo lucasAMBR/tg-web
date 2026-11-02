@@ -29,8 +29,8 @@ export default function SelectionProcessTabs({
 
 	if (isLoading) {
 		return (
-			<Card className="w-full gap-4 p-8">
-				<Skeleton className="h-9 w-96" />
+			<Card className="w-full gap-4 p-4 md:p-8">
+				<Skeleton className="h-9 w-full max-w-96" />
 				<Skeleton className="h-40 w-full" />
 			</Card>
 		);
@@ -38,7 +38,7 @@ export default function SelectionProcessTabs({
 
 	if (steps.length === 0) {
 		return (
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<h3 className="text-lg font-bold">
 					{t("my_vacancies.selection_process.title")}
 				</h3>
@@ -50,7 +50,7 @@ export default function SelectionProcessTabs({
 	}
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<Tabs defaultValue={steps[0].step}>
 				<TabsList variant={"line"}>
 					{steps.map((processStep) => (

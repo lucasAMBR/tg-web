@@ -4,6 +4,9 @@
  * Brew
  * OpenAPI spec version: 0.0.1
  */
+import type { PostResourceContentPt } from './postResourceContentPt';
+import type { PostResourceContentEn } from './postResourceContentEn';
+import type { PostResourceTranslationStatusLabel } from './postResourceTranslationStatusLabel';
 import type { UserSimpleResource } from './userSimpleResource';
 import type { PostResourceImagesItem } from './postResourceImagesItem';
 import type { PostResourceCreatedAt } from './postResourceCreatedAt';
@@ -12,6 +15,10 @@ import type { PostResourceUpdatedAt } from './postResourceUpdatedAt';
 export interface PostResource {
   id: string;
   content: string;
+  content_pt: PostResourceContentPt;
+  content_en: PostResourceContentEn;
+  translation_status: string;
+  translation_status_label: PostResourceTranslationStatusLabel;
   user_id: string;
   author?: UserSimpleResource;
   images: PostResourceImagesItem[];

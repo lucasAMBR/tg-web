@@ -11,7 +11,6 @@ import {
 } from "../ui/navigation-menu";
 import { Link, useNavigate } from "@tanstack/react-router";
 import ListItem from "../ui/list-item";
-import ThemeToggle from "../global/theme-toggle-button";
 import { Logo } from "../global/Logo";
 import { useTranslation } from "react-i18next";
 import { LanguagePicker } from "../global/language-change-button";
@@ -42,18 +41,18 @@ function Navbar() {
 
 	return (
 		<div className="flex bg-background justify-center items-center w-full z-150 border-b border-muted-foreground/20">
-			<div className="grid grid-cols-[1fr_auto_1fr] items-center p-4 w-full md:max-w-5/6">
+			<div className="grid grid-cols-[1fr_auto_1fr] items-center p-4 max-md:flex max-md:justify-between max-md:px-3 w-full md:max-w-5/6">
 
 				{/* LEFT */}
 				<div className="flex flex-row gap-1.5 items-end justify-self-start">
 					<Logo className="w-9 fill-primary" />
-					<p className="text-primary text-2xl font-bold font-['Agbalumo']">
+					<p className="text-primary text-xl md:text-2xl font-bold font-['Agbalumo']">
 						{import.meta.env.VITE_APP_NAME}
 					</p>
 				</div>
 
-				{/* CENTER */}
-				<nav className="justify-self-center">
+				{/* CENTER — no celular não cabe ao lado dos botões */}
+				<nav className="justify-self-center max-md:hidden">
 					<NavigationMenu>
 						<NavigationMenuList>
 							<NavigationMenuItem className="bg-transparent">
@@ -135,17 +134,18 @@ function Navbar() {
 					<Button
 						onClick={() => navigate({ to: "/auth/login" })}
 						variant={"outline"}
+						className="max-md:px-3"
 					>
 						{t("navbar.button.sign_in")}
 					</Button>
 					<Button
 						onClick={() => navigate({ to: "/auth/register" })}
 						variant={"default"}
+						className="max-md:px-3"
 					>
 						{t("navbar.button.sign_up")}
 					</Button>
 					<LanguagePicker />
-					<ThemeToggle />
 				</div>
 			</div>
 		</div>

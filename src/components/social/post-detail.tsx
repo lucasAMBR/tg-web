@@ -1,5 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreComment } from "@/api/generated/comment/comment";
 import { useShowPost } from "@/api/generated/post/post";
@@ -24,10 +25,15 @@ import PostUnavailable from "./post-unavailable";
 
 interface PostDetailProps {
 	postId: string;
+	/** Entre o post e os comentários; só aparece com o post carregado. */
+	beforeComments?: ReactNode;
 }
 
 /** Tela da postagem: o post inteiro e os comentários raiz com a árvore. */
-export default function PostDetail({ postId }: PostDetailProps) {
+export default function PostDetail({
+	postId,
+	beforeComments,
+}: PostDetailProps) {
 	const { t } = useTranslation();
 
 	const navigate = useNavigate();
@@ -119,6 +125,8 @@ export default function PostDetail({ postId }: PostDetailProps) {
 				variant="detail"
 				onDeleted={() => navigate({ to: "/feed" })}
 			/>
+
+			{beforeComments}
 
 			<Card className="gap-4 p-4">
 				<h2 className="font-bold text-lg">

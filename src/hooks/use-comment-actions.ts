@@ -138,11 +138,17 @@ export function useCommentActions({
 			{ id: comment.id, data: { content } },
 			{
 				onSuccess: (response) => {
-					// Só o texto e a data mudam: manter o resto preserva as respostas
-					// que já estavam carregadas abaixo deste nó.
+					// Só o texto, as traduções e a data mudam: manter o resto preserva
+					// as respostas que já estavam carregadas abaixo deste nó. Editar
+					// volta a tradução para `pending`, então a tela mostra o original
+					// até a nova chegar.
 					tree.patchComment(comment.id, (current) => ({
 						...current,
 						content: response.data.content,
+						content_pt: response.data.content_pt,
+						content_en: response.data.content_en,
+						translation_status: response.data.translation_status,
+						translation_status_label: response.data.translation_status_label,
 						updated_at: response.data.updated_at,
 					}));
 

@@ -184,7 +184,7 @@ export default function CreatePostCard() {
 				</div>
 			)}
 
-			<div className="flex items-center justify-between gap-2">
+			<div className="flex flex-wrap items-center justify-between gap-2">
 				<div className="flex items-center gap-2">
 					<Button
 						variant={"secondary"}
@@ -199,7 +199,7 @@ export default function CreatePostCard() {
 					</span>
 				</div>
 
-				<div className="flex items-center gap-3">
+				<div className="ml-auto flex items-center gap-3">
 					<span className="text-xs text-muted-foreground">
 						{content.length}/{POST_CONTENT_MAX_LENGTH}
 					</span>

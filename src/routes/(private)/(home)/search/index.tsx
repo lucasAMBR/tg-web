@@ -18,9 +18,9 @@ function RouteComponent() {
   const { t } = useTranslation();
 
   return(
-    <div className='flex flex-1 flex-col p-8'>
+    <div className='flex flex-1 flex-col p-4 md:p-8'>
       <div className='flex flex-col gap-1 mb-5'>
-        <h2 className='text-3xl font-bold'>{t("search.title")}</h2>
+        <h2 className='text-2xl md:text-3xl font-bold'>{t("search.title")}</h2>
         <p className='text-sm text-muted-foreground'>{t("search.description")}</p>
       </div>
 

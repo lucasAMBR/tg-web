@@ -113,8 +113,8 @@ export default function TechnicalChallengeManager({
 
 	if (isLoading) {
 		return (
-			<Card className="w-full gap-4 p-8">
-				<Skeleton className="h-9 w-96" />
+			<Card className="w-full gap-4 p-4 md:p-8">
+				<Skeleton className="h-9 w-full max-w-96" />
 				<Skeleton className="h-40 w-full" />
 			</Card>
 		);
@@ -122,7 +122,7 @@ export default function TechnicalChallengeManager({
 
 	if (isError || !challenge) {
 		return (
-			<Card className="w-full gap-4 p-8">
+			<Card className="w-full gap-4 p-4 md:p-8">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">
 						{t("technical_challenge.create_title")}
@@ -142,7 +142,7 @@ export default function TechnicalChallengeManager({
 
 	if (isEditing) {
 		return (
-			<Card className="w-full gap-4 p-8">
+			<Card className="w-full gap-4 p-4 md:p-8">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">
 						{t("technical_challenge.edit_title")}
@@ -162,7 +162,7 @@ export default function TechnicalChallengeManager({
 	}
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<div className="flex flex-row flex-wrap items-start justify-between gap-4">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">

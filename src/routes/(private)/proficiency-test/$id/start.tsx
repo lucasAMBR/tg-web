@@ -1,6 +1,5 @@
 import { useShowProficiencyTest } from '@/api/generated/proficiency-test/proficiency-test';
 import { Logo } from '@/components/global/Logo';
-import ThemeToggle from '@/components/global/theme-toggle-button';
 import { Button } from '@/components/ui/button';
 import { Card, } from '@/components/ui/card';
 import { useAuthStore } from '@/stores/auth-store';
@@ -61,16 +60,16 @@ function RouteComponent() {
     }
 
     return ( 
-        <div className='flex-1 flex justify-center items-center'>
-            <Card className='p-20 w-full max-w-1/2 flex flex-col items-center justify-center'>
+        <div className='flex-1 flex justify-center items-center-safe max-md:min-h-0 max-md:overflow-y-auto max-md:p-4'>
+            <Card className='p-6 md:p-20 w-full md:max-w-1/2 flex flex-col items-center justify-center'>
                 <div className="flex flex-col justify-center items-center">
                     <Logo className="w-12 fill-primary" />
-                    <p className="font-[Agbalumo] text-primary text-5xl">
+                    <p className="font-[Agbalumo] text-primary text-4xl md:text-5xl">
                         {env.APP_NAME}
                     </p>
                 </div>
                 <div className='flex flex-col items-center gap-2'>
-                    <h2 className='text-3xl font-bold'>{t("dev_profile.proficiency_test.start.greeting", { name: user.dev_profile.name })}</h2>
+                    <h2 className='text-2xl md:text-3xl font-bold text-center'>{t("dev_profile.proficiency_test.start.greeting", { name: user.dev_profile.name })}</h2>
                     <h3 className='text-xl'>{t("dev_profile.proficiency_test.start.welcome")}</h3>
                 </div>
                 <div className='flex flex-col gap-2 text-muted-foreground items-center justify-center'>
@@ -85,7 +84,6 @@ function RouteComponent() {
                 </div>
                 <Button className='w-full' onClick={() => navigate({ to: `/proficiency-test/${id}/test`})}><Play /> {t("dev_profile.proficiency_test.start_test")}</Button>
             </Card>
-            <ThemeToggle />
         </div>
     );
 }

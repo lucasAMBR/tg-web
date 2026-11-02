@@ -22,6 +22,7 @@ import { Route as privateAdminLandCompanyIndexRouteImport } from './routes/(priv
 import { Route as privatehomeSettingsIndexRouteImport } from './routes/(private)/(home)/settings/index'
 import { Route as privatehomeSearchIndexRouteImport } from './routes/(private)/(home)/search/index'
 import { Route as privatehomeProfileIndexRouteImport } from './routes/(private)/(home)/profile/index'
+import { Route as privatehomeNotificationsIndexRouteImport } from './routes/(private)/(home)/notifications/index'
 import { Route as privatehomeMyVacanciesIndexRouteImport } from './routes/(private)/(home)/my-vacancies/index'
 import { Route as privatehomeJobsIndexRouteImport } from './routes/(private)/(home)/jobs/index'
 import { Route as privatehomeFreelancesIndexRouteImport } from './routes/(private)/(home)/freelances/index'
@@ -116,6 +117,12 @@ const privatehomeProfileIndexRoute = privatehomeProfileIndexRouteImport.update({
   path: '/profile/',
   getParentRoute: () => privatehomeLayoutRoute,
 } as any)
+const privatehomeNotificationsIndexRoute =
+  privatehomeNotificationsIndexRouteImport.update({
+    id: '/notifications/',
+    path: '/notifications/',
+    getParentRoute: () => privatehomeLayoutRoute,
+  } as any)
 const privatehomeMyVacanciesIndexRoute =
   privatehomeMyVacanciesIndexRouteImport.update({
     id: '/my-vacancies/',
@@ -286,6 +293,7 @@ export interface FileRoutesByFullPath {
   '/freelances/': typeof privatehomeFreelancesIndexRoute
   '/jobs/': typeof privatehomeJobsIndexRoute
   '/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/notifications/': typeof privatehomeNotificationsIndexRoute
   '/profile/': typeof privatehomeProfileIndexRoute
   '/search/': typeof privatehomeSearchIndexRoute
   '/settings/': typeof privatehomeSettingsIndexRoute
@@ -325,6 +333,7 @@ export interface FileRoutesByTo {
   '/freelances': typeof privatehomeFreelancesIndexRoute
   '/jobs': typeof privatehomeJobsIndexRoute
   '/my-vacancies': typeof privatehomeMyVacanciesIndexRoute
+  '/notifications': typeof privatehomeNotificationsIndexRoute
   '/profile': typeof privatehomeProfileIndexRoute
   '/search': typeof privatehomeSearchIndexRoute
   '/settings': typeof privatehomeSettingsIndexRoute
@@ -367,6 +376,7 @@ export interface FileRoutesById {
   '/(private)/(home)/freelances/': typeof privatehomeFreelancesIndexRoute
   '/(private)/(home)/jobs/': typeof privatehomeJobsIndexRoute
   '/(private)/(home)/my-vacancies/': typeof privatehomeMyVacanciesIndexRoute
+  '/(private)/(home)/notifications/': typeof privatehomeNotificationsIndexRoute
   '/(private)/(home)/profile/': typeof privatehomeProfileIndexRoute
   '/(private)/(home)/search/': typeof privatehomeSearchIndexRoute
   '/(private)/(home)/settings/': typeof privatehomeSettingsIndexRoute
@@ -408,6 +418,7 @@ export interface FileRouteTypes {
     | '/freelances/'
     | '/jobs/'
     | '/my-vacancies/'
+    | '/notifications/'
     | '/profile/'
     | '/search/'
     | '/settings/'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/freelances'
     | '/jobs'
     | '/my-vacancies'
+    | '/notifications'
     | '/profile'
     | '/search'
     | '/settings'
@@ -488,6 +500,7 @@ export interface FileRouteTypes {
     | '/(private)/(home)/freelances/'
     | '/(private)/(home)/jobs/'
     | '/(private)/(home)/my-vacancies/'
+    | '/(private)/(home)/notifications/'
     | '/(private)/(home)/profile/'
     | '/(private)/(home)/search/'
     | '/(private)/(home)/settings/'
@@ -612,6 +625,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile/'
       preLoaderRoute: typeof privatehomeProfileIndexRouteImport
+      parentRoute: typeof privatehomeLayoutRoute
+    }
+    '/(private)/(home)/notifications/': {
+      id: '/(private)/(home)/notifications/'
+      path: '/notifications'
+      fullPath: '/notifications/'
+      preLoaderRoute: typeof privatehomeNotificationsIndexRouteImport
       parentRoute: typeof privatehomeLayoutRoute
     }
     '/(private)/(home)/my-vacancies/': {
@@ -823,6 +843,7 @@ interface privatehomeLayoutRouteChildren {
   privatehomeFreelancesIndexRoute: typeof privatehomeFreelancesIndexRoute
   privatehomeJobsIndexRoute: typeof privatehomeJobsIndexRoute
   privatehomeMyVacanciesIndexRoute: typeof privatehomeMyVacanciesIndexRoute
+  privatehomeNotificationsIndexRoute: typeof privatehomeNotificationsIndexRoute
   privatehomeProfileIndexRoute: typeof privatehomeProfileIndexRoute
   privatehomeSearchIndexRoute: typeof privatehomeSearchIndexRoute
   privatehomeSettingsIndexRoute: typeof privatehomeSettingsIndexRoute
@@ -850,6 +871,7 @@ const privatehomeLayoutRouteChildren: privatehomeLayoutRouteChildren = {
   privatehomeFreelancesIndexRoute: privatehomeFreelancesIndexRoute,
   privatehomeJobsIndexRoute: privatehomeJobsIndexRoute,
   privatehomeMyVacanciesIndexRoute: privatehomeMyVacanciesIndexRoute,
+  privatehomeNotificationsIndexRoute: privatehomeNotificationsIndexRoute,
   privatehomeProfileIndexRoute: privatehomeProfileIndexRoute,
   privatehomeSearchIndexRoute: privatehomeSearchIndexRoute,
   privatehomeSettingsIndexRoute: privatehomeSettingsIndexRoute,

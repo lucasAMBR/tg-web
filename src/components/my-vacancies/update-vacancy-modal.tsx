@@ -566,7 +566,7 @@ export default function UpdateVacancyModal({
 															)
 														}
 													>
-														<SelectTrigger className="w-48">
+														<SelectTrigger className="w-36 md:w-48">
 															<SelectValue
 																placeholder={t("placeholder.skill_level")}
 															/>

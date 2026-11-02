@@ -67,7 +67,7 @@ export default function PopularVacancies() {
 						<Card
 							className="p-4 flex-row justify-between items-center transition-colors hover:bg-accent/50"
 						>
-							<div className="flex flex-row gap-4">
+							<div className="flex min-w-0 flex-row gap-4">
 								<Avatar className="size-14">
 									{vacancy.profile?.profile_pic && (
 										<AvatarImage
@@ -80,7 +80,7 @@ export default function PopularVacancies() {
 										<Briefcase className="size-7" />
 									</AvatarFallback>
 								</Avatar>
-								<div className="flex flex-col gap-2">
+								<div className="flex min-w-0 flex-col gap-2">
 									<span className="flex flex-row gap-4 text-md font-semibold">
 										<p className="truncate">{vacancy.title}</p>
 										<Badge variant={"destructive"}>

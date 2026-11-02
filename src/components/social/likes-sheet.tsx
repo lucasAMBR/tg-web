@@ -4,34 +4,34 @@ import { useEffect, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { indexCommentLikes, indexPostLikes } from "@/api/generated/like/like";
 import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-} from "@/components/ui/dialog";
-import {
 	Empty,
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
 } from "@/components/ui/empty";
+import {
+	Sheet,
+	SheetContent,
+	SheetHeader,
+	SheetTitle,
+} from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { dedupeById, POSTS_PER_PAGE } from "@/types/social";
 import SocialAuthor from "./social-author";
 
-interface LikesDialogProps {
+interface LikesSheetProps {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 	target: { type: "post" | "comment"; id: string };
 }
 
 /** Quem curtiu, das curtidas mais recentes para as mais antigas. */
-export default function LikesDialog({
+export default function LikesSheet({
 	open,
 	onOpenChange,
 	target,
-}: LikesDialogProps) {
+}: LikesSheetProps) {
 	const { t } = useTranslation();
 
 	const sentinelRef = useRef<HTMLDivElement>(null);
@@ -80,13 +80,17 @@ export default function LikesDialog({
 	}, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
 	return (
-		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>{t("social.likes.title")}</DialogTitle>
-				</DialogHeader>
+		<Sheet open={open} onOpenChange={onOpenChange}>
+			<SheetContent
+				side="right"
+				className="w-[90vw] gap-0 sm:max-w-sm"
+				aria-describedby={undefined}
+			>
+				<SheetHeader className="border-b">
+					<SheetTitle>{t("social.likes.title")}</SheetTitle>
+				</SheetHeader>
 
-				<div className="flex max-h-[60vh] flex-col gap-3 overflow-y-auto">
+				<div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-4">
 					{isLoading && (
 						<>
 							<Skeleton className="h-10 w-full" />
@@ -122,7 +126,7 @@ export default function LikesDialog({
 					)}
 					<div ref={sentinelRef} className="h-px w-full shrink-0" />
 				</div>
-			</DialogContent>
-		</Dialog>
+			</SheetContent>
+		</Sheet>
 	);
 }

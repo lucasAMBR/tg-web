@@ -25,7 +25,7 @@ function RouteComponent() {
 		// O espaço que sobra é dividido igualmente antes do feed, entre o feed e o ranking e depois
 		// do ranking (justify-evenly); com o px igual ao gap, as três folgas continuam iguais
 		// mesmo quando não sobra espaço nenhum.
-		<div className="flex flex-1 flex-row justify-evenly gap-8 p-8">
+		<div className="flex flex-1 flex-row justify-evenly gap-8 p-4 md:p-8">
 			<div className="flex w-full min-w-0 max-w-3xl flex-col gap-4">
 				<PostFeed />
 			</div>

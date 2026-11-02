@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import type { AxiosError } from "axios";
 import { MessageSquare } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -5,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useOpenChatConversation } from "@/api/generated/chat/chat";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useAuthStore } from "@/stores/auth-store";
 import { useChatStore } from "@/stores/chat-store";
 import { onError } from "@/utils/on-error";
@@ -26,8 +28,9 @@ interface StartChatButtonProps
 }
 
 /**
- * Abre a conversa com o usuário no painel do chat. `POST /chat` é idempotente,
- * então clicar de novo volta para a mesma conversa.
+ * Abre a conversa com o usuário no painel do chat (no celular, na tela de
+ * mensagens). `POST /chat` é idempotente, então clicar de novo volta para a
+ * mesma conversa.
  */
 export default function StartChatButton({
 	userId,
@@ -38,6 +41,8 @@ export default function StartChatButton({
 	className,
 }: StartChatButtonProps) {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+	const isMobile = useIsMobile();
 
 	const authenticatedUserId = useAuthStore((state) => state.user?.id);
 	const openConversation = useChatStore((state) => state.openConversation);
@@ -57,7 +62,10 @@ export default function StartChatButton({
 				openChat(
 					{ data: { user_id: userId } },
 					{
-						onSuccess: (response) => openConversation(response.data.id, draft),
+						onSuccess: (response) => {
+							openConversation(response.data.id, draft);
+							if (isMobile) navigate({ to: "/chat" });
+						},
 						onError: (error) =>
 							onError(error as AxiosError<{ message: string }>),
 					},

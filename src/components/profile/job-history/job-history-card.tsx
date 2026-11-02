@@ -112,7 +112,7 @@ export default function JobHistoryCard({
 				<CardDescription>
 					{`${t("dev_profile.job_history.at")} ${job.company_name}, ${job.company_location}`} <br />
 				</CardDescription>
-				<div className="flex gap-6">
+				<div className="flex flex-wrap gap-x-6">
 					<p className="text-muted-foreground text-sm font-normal">
 						{`${t("input.start_date")}: ${formatIsoDateOnlyBr(job.start_date)}`}
 					</p>
@@ -122,7 +122,7 @@ export default function JobHistoryCard({
 						</p>
 					)}
 				</div>
-				<div className="flex gap-2">
+				<div className="flex flex-wrap gap-2">
 					<Badge variant={"destructive"}>{t(`enum.seniority_level.${job.seniority_level}`)}</Badge>
 					<Badge variant={"secondary"}>{t(`enum.contract_type.${job.contract_type}`)}</Badge>
 					<Badge>{t(`enum.employment_type.${job.employment_type}`)}</Badge>

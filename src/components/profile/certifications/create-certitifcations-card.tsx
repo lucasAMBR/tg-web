@@ -76,7 +76,7 @@ export default function CreateCertificationCard({ profileId }: CreateCertificati
             </div>
             {creationIsOpen && (
                 <form onSubmit={form.handleSubmit(create)} className="flex flex-col gap-3">
-                    <div className="flex gap-4">
+                    <div className="flex flex-col gap-4 md:flex-row">
                     <Controller 
                         control={form.control}
                         name="name"

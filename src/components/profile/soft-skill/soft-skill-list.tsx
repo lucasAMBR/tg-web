@@ -29,7 +29,7 @@ export default function SoftSkillList({ profileId }: SoftSkillListProps) {
 
 	return (
 		<div className="w-full flex flex-col gap-4">
-			<h2 className="text-3xl flex justify-between">
+			<h2 className="text-2xl md:text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("dev_profile.soft_skills.title")}</span>
 				
 				{user?.dev_profile?.id === profileId && (

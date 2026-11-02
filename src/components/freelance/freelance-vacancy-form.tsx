@@ -588,7 +588,7 @@ export default function FreelanceVacancyForm({
 												>
 													<SelectTrigger
 														ref={field.ref}
-														className="w-48"
+														className="w-36 md:w-48"
 														aria-invalid={fieldState.invalid}
 														aria-label={t("freelance.form.level_placeholder")}
 													>

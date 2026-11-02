@@ -58,10 +58,10 @@ import { FreelanceStatusBadge } from "./freelance-status-badge";
 function FreelanceVacancyDetailsSkeleton() {
 	return (
 		<div className="flex flex-col gap-4">
-			<Card className="w-full flex-row items-center gap-4 px-12 py-8">
-				<Skeleton className="size-32 rounded-full" />
+			<Card className="w-full flex-col items-start gap-4 px-4 py-6 md:flex-row md:items-center md:px-12 md:py-8">
+				<Skeleton className="size-20 rounded-full md:size-32" />
 				<div className="flex flex-1 flex-col gap-3">
-					<Skeleton className="h-9 w-80" />
+					<Skeleton className="h-9 w-full max-w-80" />
 					<div className="flex flex-row gap-2">
 						<Skeleton className="h-6 w-24" />
 						<Skeleton className="h-6 w-24" />
@@ -69,7 +69,7 @@ function FreelanceVacancyDetailsSkeleton() {
 					<Skeleton className="h-5 w-56" />
 				</div>
 			</Card>
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<Skeleton className="h-6 w-40" />
 				<Skeleton className="h-4 w-full" />
 				<Skeleton className="h-4 w-3/4" />
@@ -118,7 +118,7 @@ function OwnerSection({ vacancy }: { vacancy: FreelanceVacancy }) {
 	return (
 		<>
 			{(canEdit || canDelete || canComplete) && (
-				<Card className="w-full gap-3 p-8">
+				<Card className="w-full gap-3 p-4 md:p-8">
 					<h3 className="text-lg font-bold">
 						{t("freelance.details.owner_actions")}
 					</h3>
@@ -173,7 +173,7 @@ function OwnerSection({ vacancy }: { vacancy: FreelanceVacancy }) {
 			<FreelanceContractCard vacancy={vacancy} viewer="owner" />
 
 			{canManageProposals(vacancy) && (
-				<Card className="w-full gap-4 p-8">
+				<Card className="w-full gap-4 p-4 md:p-8">
 					<Tabs value={tab} onValueChange={setTab}>
 						<TabsList variant={"line"}>
 							<TabsTrigger value="proposals" className="cursor-pointer">
@@ -307,9 +307,9 @@ export default function FreelanceVacancyDetails({
 
 	return (
 		<>
-			<Card className="w-full gap-4 px-12 py-8">
-				<div className="flex flex-row items-center gap-4">
-					<Avatar className="size-32">
+			<Card className="w-full gap-4 px-4 py-6 md:px-12 md:py-8">
+				<div className="flex flex-col items-start gap-4 md:flex-row md:items-center">
+					<Avatar className="size-20 md:size-32">
 						{client?.profile_pic && (
 							<AvatarImage
 								src={client.profile_pic}
@@ -318,11 +318,11 @@ export default function FreelanceVacancyDetails({
 							/>
 						)}
 						<AvatarFallback className="bg-primary text-primary-foreground">
-							<Users className="size-22" />
+							<Users className="size-12 md:size-22" />
 						</AvatarFallback>
 					</Avatar>
 					<div className="flex min-w-0 flex-1 flex-col gap-2">
-						<h2 className="wrap-break-word font-[Anta] text-4xl font-bold">
+						<h2 className="wrap-break-word font-[Anta] text-2xl font-bold md:text-4xl">
 							{vacancy.title}
 						</h2>
 						<p className="text-muted-foreground">
@@ -386,7 +386,7 @@ export default function FreelanceVacancyDetails({
 
 			<div className="flex flex-col gap-4 lg:flex-row">
 				<div className="flex flex-2 flex-col gap-4">
-					<Card className="w-full gap-3 p-8">
+					<Card className="w-full gap-3 p-4 md:p-8">
 						<h3 className="text-lg font-bold">
 							{t("freelance.details.description")}
 						</h3>
@@ -394,7 +394,7 @@ export default function FreelanceVacancyDetails({
 							{vacancy.description}
 						</p>
 					</Card>
-					<Card className="w-full gap-3 p-8">
+					<Card className="w-full gap-3 p-4 md:p-8">
 						<h3 className="text-lg font-bold">
 							{t("freelance.details.languages")}
 						</h3>

@@ -73,7 +73,7 @@ export default function AcademicBackgroundList({
 
 	return (
 		<div className="flex flex-col gap-3">
-			<h2 className="text-3xl flex justify-between">
+			<h2 className="text-2xl md:text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("dev_profile.academic_background.title")}</span>
 				{user?.dev_profile?.id === profileId && (
 					<CreateAcademicBackgroundCard profileId={profileId} />

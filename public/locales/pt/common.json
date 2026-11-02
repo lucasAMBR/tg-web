@@ -32,7 +32,8 @@
         "freelance_details": "Detalhes do Freela",
         "freelance_feed": "Feed do Freela",
         "freelance_search": "Freelas",
-        "chat": "Mensagens"
+        "chat": "Mensagens",
+        "notifications": "Notificações"
     },
     "breadcrumb": {
         "admin": "Administração",
@@ -327,6 +328,7 @@
     "sidebar": {
         "sections_title": "Seções",
         "options_title": "Opções",
+        "open_menu": "Abrir menu",
         "sections": {
             "feed": "Feed",
             "companies": "Empresas",
@@ -361,7 +363,8 @@
             "projects": "Projetos",
             "job_history": "Histórico de emprego",
             "certifications": "Certificações",
-            "proficiency_test": "Testes de Proficiência"
+            "proficiency_test": "Testes de Proficiência",
+            "about": "Sobre"
         },
         "projects": {
             "create_project": "Criar novo projeto",
@@ -463,7 +466,8 @@
         "tabs": {
             "posts": "Posts",
             "projects": "Projetos",
-            "open_jobs": "Vagas"
+            "open_jobs": "Vagas",
+            "about": "Sobre"
         },
         "projects": {
             "create_project": "Criar novo projeto",

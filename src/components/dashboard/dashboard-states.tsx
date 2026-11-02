@@ -36,7 +36,7 @@ export function DashboardPage({
 		<div className="flex flex-1 flex-col gap-6 p-4 sm:p-8">
 			<div className="flex flex-wrap items-end justify-between gap-4">
 				<div className="flex flex-col gap-1">
-					<h2 className="text-3xl font-bold">{title}</h2>
+					<h2 className="text-2xl font-bold md:text-3xl">{title}</h2>
 					<p className="text-sm text-muted-foreground">{description}</p>
 				</div>
 				<DashboardPeriodSelect />

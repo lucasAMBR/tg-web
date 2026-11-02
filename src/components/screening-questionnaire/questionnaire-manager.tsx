@@ -110,8 +110,8 @@ export default function QuestionnaireManager({
 
 	if (isLoading) {
 		return (
-			<Card className="w-full gap-4 p-8">
-				<Skeleton className="h-9 w-96" />
+			<Card className="w-full gap-4 p-4 md:p-8">
+				<Skeleton className="h-9 w-full max-w-96" />
 				<Skeleton className="h-40 w-full" />
 			</Card>
 		);
@@ -119,7 +119,7 @@ export default function QuestionnaireManager({
 
 	if (isError || !questionnaire) {
 		return (
-			<Card className="w-full gap-4 p-8">
+			<Card className="w-full gap-4 p-4 md:p-8">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">
 						{t("screening_questionnaire.create_title")}
@@ -139,7 +139,7 @@ export default function QuestionnaireManager({
 
 	if (isEditing) {
 		return (
-			<Card className="w-full gap-4 p-8">
+			<Card className="w-full gap-4 p-4 md:p-8">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">
 						{t("screening_questionnaire.edit_title")}
@@ -159,7 +159,7 @@ export default function QuestionnaireManager({
 	}
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<div className="flex flex-row flex-wrap items-start justify-between gap-4">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-2xl font-bold">

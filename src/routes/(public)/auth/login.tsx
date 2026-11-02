@@ -1,5 +1,4 @@
 import { Logo } from "@/components/global/Logo";
-import ThemeToggle from "@/components/global/theme-toggle-button";
 import { SingInForm } from "@/components/login/sing-in-form";
 import { Button } from "@/components/ui/button";
 import { env } from "@/utils/env";
@@ -23,8 +22,9 @@ function Login() {
 	const navigate = useNavigate();
 
 	return (
-		<div className="w-screen h-screen flex">
-			<div className="flex-1 relative m-4 flex flex-col items-center justify-center">
+		<div className="w-screen h-dvh flex max-md:overflow-y-auto">
+			{/* No celular o banner some e o formulário rola quando não cabe na tela */}
+			<div className="flex-1 relative m-4 flex flex-col items-center justify-center-safe max-md:pt-12">
 				<Button
 					variant={"ghost"}
 					className="absolute rounded-full top-0 left-0"
@@ -42,10 +42,9 @@ function Login() {
 				</div>
 				<SingInForm />
 			</div>
-			<div className="flex-2 bg-[url('/images/auth_banner_2.png')] bg-cover bg-center brightness-70">
+			<div className="flex-2 bg-[url('/images/auth_banner_2.png')] bg-cover bg-center brightness-70 max-md:hidden">
 				<div className="w-full h-full"></div>
 			</div>
-			<ThemeToggle />
 		</div>
 	);
 }

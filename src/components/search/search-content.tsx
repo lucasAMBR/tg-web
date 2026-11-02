@@ -4,12 +4,13 @@ import PopularProfiles from "./search-popular-profiles";
 
 export default function SearchContent() {
 	return (
-		<div className="flex flex-1 flex-row gap-8">
-			<div className="flex-2">
+		// No celular os populares descem para depois da busca
+		<div className="flex flex-1 flex-col gap-8 md:flex-row">
+			<div className="md:flex-2">
 				<SearchTab />
 			</div>
-			<Separator orientation="vertical" />
-			<div className="flex-1">
+			<Separator orientation="vertical" className="max-md:hidden" />
+			<div className="md:flex-1">
 				<PopularProfiles />
 			</div>
 		</div>

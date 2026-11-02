@@ -24,7 +24,7 @@ export default function FreelanceClientCard({
 
 	if (!client) {
 		return (
-			<Card className="w-full gap-3 p-8">
+			<Card className="w-full gap-3 p-4 md:p-8">
 				<h3 className="text-lg font-bold">{t("freelance.details.client")}</h3>
 				<p className="text-sm text-muted-foreground">
 					{t("freelance.details.client_unavailable")}
@@ -36,7 +36,7 @@ export default function FreelanceClientCard({
 	const bio = getFreelanceBio(client, i18n.language);
 
 	return (
-		<Card className="w-full gap-4 p-8">
+		<Card className="w-full gap-4 p-4 md:p-8">
 			<h3 className="text-lg font-bold">{t("freelance.details.client")}</h3>
 			<div className="flex flex-row items-center gap-4">
 				<Avatar className="size-16">

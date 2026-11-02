@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { CommentResource } from "@/api/generated/models";
+import TranslationStatusBar from "@/components/global/translation-status-bar";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useCommentActions } from "@/hooks/use-comment-actions";
@@ -19,11 +20,12 @@ import { cn } from "@/lib/utils";
 import {
 	COMMENT_MAX_INDENT_DEPTH,
 	commentNodeAction,
+	getSocialContent,
 	remainingRepliesCount,
 	wasEdited,
 } from "@/types/social";
 import CommentForm from "./comment-form";
-import LikesDialog from "./likes-dialog";
+import LikesSheet from "./likes-sheet";
 import SocialAuthor from "./social-author";
 
 interface CommentNodeProps {
@@ -46,7 +48,7 @@ export default function CommentNode({
 	depth,
 	isThreadRoot = false,
 }: CommentNodeProps) {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const navigate = useNavigate();
 
@@ -57,6 +59,7 @@ export default function CommentNode({
 	const [isReplying, setIsReplying] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [likesOpen, setLikesOpen] = useState(false);
+	const [showOriginal, setShowOriginal] = useState(false);
 
 	const nodeAction = commentNodeAction(comment);
 	const isLoadingReplies = tree.loadingReplies.includes(comment.id);
@@ -68,106 +71,135 @@ export default function CommentNode({
 
 	return (
 		<div className="flex flex-col gap-2">
-			<SocialAuthor
-				author={comment.author}
-				createdAt={comment.created_at}
-				edited={wasEdited(comment)}
-				removed={comment.is_removed}
-				size="sm"
-			/>
-
-			{!comment.is_removed &&
-				(isEditing ? (
-					<CommentForm
-						initialValue={comment.content}
-						isPending={actions.isSaving}
-						placeholder={t("social.comment.edit_placeholder")}
-						submitLabel={t("general.save")}
-						onCancel={() => setIsEditing(false)}
-						autoFocus
-						onSubmit={(content, callbacks) =>
-							actions.editComment(content, {
-								onSuccess: () => {
-									callbacks.onSuccess();
-									setIsEditing(false);
-								},
-								onFieldError: callbacks.onFieldError,
-							})
-						}
+			{/* Só o corpo do comentário fica na moldura da tradução; as respostas
+			    seguem fora dela. Removido não tem texto para traduzir. */}
+			<div
+				className={cn(
+					!comment.is_removed &&
+						"flex flex-col overflow-hidden rounded-xl border border-accent bg-accent",
+				)}
+			>
+				{!comment.is_removed && (
+					<TranslationStatusBar
+						status={comment.translation_status}
+						showOriginal={showOriginal}
+						onToggle={() => setShowOriginal((current) => !current)}
 					/>
-				) : (
-					<p className="whitespace-pre-wrap break-words text-sm">
-						{comment.content}
-					</p>
-				))}
+				)}
 
-			{!comment.is_removed && !isEditing && (
-				<div className="flex flex-wrap items-center gap-1">
-					{canLike && (
-						<Button
-							variant={"ghost"}
-							size={"sm"}
-							disabled={actions.isTogglingLike}
-							onClick={actions.likeComment}
-							className={cn("gap-1.5", comment.is_liked && "text-primary")}
-							aria-label={t("social.comment.like")}
-						>
-							<Heart
-								className={cn("size-3.5", comment.is_liked && "fill-current")}
+				<div
+					className={cn(
+						"flex flex-col gap-2",
+						!comment.is_removed && "rounded-xl bg-card p-3",
+					)}
+				>
+					<SocialAuthor
+						author={comment.author}
+						createdAt={comment.created_at}
+						edited={wasEdited(comment)}
+						removed={comment.is_removed}
+						size="sm"
+					/>
+
+					{!comment.is_removed &&
+						(isEditing ? (
+							<CommentForm
+								initialValue={comment.content}
+								isPending={actions.isSaving}
+								placeholder={t("social.comment.edit_placeholder")}
+								submitLabel={t("general.save")}
+								onCancel={() => setIsEditing(false)}
+								autoFocus
+								onSubmit={(content, callbacks) =>
+									actions.editComment(content, {
+										onSuccess: () => {
+											callbacks.onSuccess();
+											setIsEditing(false);
+										},
+										onFieldError: callbacks.onFieldError,
+									})
+								}
 							/>
-							{comment.likes_count}
-						</Button>
-					)}
+						) : (
+							<p className="whitespace-pre-wrap break-words text-sm">
+								{showOriginal
+									? comment.content
+									: getSocialContent(comment, i18n.language)}
+							</p>
+						))}
 
-					{canReply && (
-						<Button
-							variant={"ghost"}
-							size={"sm"}
-							onClick={() => setIsReplying((current) => !current)}
-							className="gap-1.5"
-						>
-							<MessageSquare className="size-3.5" />
-							{t("social.comment.reply")}
-						</Button>
-					)}
+					{!comment.is_removed && !isEditing && (
+						<div className="flex flex-wrap items-center gap-1">
+							{canLike && (
+								<Button
+									variant={"ghost"}
+									size={"sm"}
+									disabled={actions.isTogglingLike}
+									onClick={actions.likeComment}
+									className={cn("gap-1.5", comment.is_liked && "text-primary")}
+									aria-label={t("social.comment.like")}
+								>
+									<Heart
+										className={cn(
+											"size-3.5",
+											comment.is_liked && "fill-current",
+										)}
+									/>
+									{comment.likes_count}
+								</Button>
+							)}
 
-					{canEdit && (
-						<Button
-							variant={"ghost"}
-							size={"sm"}
-							onClick={() => setIsEditing(true)}
-							className="gap-1.5"
-						>
-							<Pencil className="size-3.5" />
-							{t("general.update")}
-						</Button>
-					)}
+							{canReply && (
+								<Button
+									variant={"ghost"}
+									size={"sm"}
+									onClick={() => setIsReplying((current) => !current)}
+									className="gap-1.5"
+								>
+									<MessageSquare className="size-3.5" />
+									{t("social.comment.reply")}
+								</Button>
+							)}
 
-					{canDelete && (
-						<Button
-							variant={"ghost"}
-							size={"sm"}
-							disabled={actions.isRemoving}
-							onClick={() => actions.removeComment()}
-							className="gap-1.5 text-destructive"
-						>
-							<Trash2 className="size-3.5" />
-							{t("general.remove")}
-						</Button>
-					)}
+							{canEdit && (
+								<Button
+									variant={"ghost"}
+									size={"sm"}
+									onClick={() => setIsEditing(true)}
+									className="gap-1.5"
+								>
+									<Pencil className="size-3.5" />
+									{t("general.update")}
+								</Button>
+							)}
 
-					{comment.likes_count > 0 && (
-						<Button
-							variant={"link"}
-							size={"sm"}
-							onClick={() => setLikesOpen(true)}
-							className="text-muted-foreground"
-						>
-							{t("social.likes.see_who_liked")}
-						</Button>
+							{canDelete && (
+								<Button
+									variant={"ghost"}
+									size={"sm"}
+									disabled={actions.isRemoving}
+									onClick={() => actions.removeComment()}
+									className="gap-1.5 text-destructive"
+								>
+									<Trash2 className="size-3.5" />
+									{t("general.remove")}
+								</Button>
+							)}
+
+							{comment.likes_count > 0 && (
+								<Button
+									variant={"link"}
+									size={"sm"}
+									onClick={() => setLikesOpen(true)}
+									className="text-muted-foreground"
+								>
+									{t("social.likes.see_who_liked")}
+								</Button>
+							)}
+						</div>
 					)}
 				</div>
-			)}
+			</div>
 
 			{isReplying && canReply && (
 				<CommentForm
@@ -192,7 +224,9 @@ export default function CommentNode({
 				<div
 					className={cn(
 						"flex flex-col gap-4 border-l border-border pt-2",
-						depth < COMMENT_MAX_INDENT_DEPTH ? "ml-2 pl-4" : "pl-4",
+						depth < COMMENT_MAX_INDENT_DEPTH
+							? "ml-1 pl-3 md:ml-2 md:pl-4"
+							: "pl-3 md:pl-4",
 					)}
 				>
 					{comment.replies?.map((reply) => (
@@ -236,7 +270,7 @@ export default function CommentNode({
 				</Button>
 			)}
 
-			<LikesDialog
+			<LikesSheet
 				open={likesOpen}
 				onOpenChange={setLikesOpen}
 				target={{ type: "comment", id: comment.id }}

@@ -32,7 +32,8 @@
         "freelance_details": "Freelance Job Details",
         "freelance_feed": "Job Feed",
         "freelance_search": "Freelance Jobs",
-        "chat": "Messages"
+        "chat": "Messages",
+        "notifications": "Notifications"
     },
     "breadcrumb": {
         "admin": "Administration",
@@ -304,7 +305,8 @@
             "projects": "Projects",
             "job_history": "Job History",
             "certifications": "Certifications",
-            "proficiency_test": "Proficiency tests"
+            "proficiency_test": "Proficiency tests",
+            "about": "About"
         },
         "projects": {
             "create_project": "Create Project",
@@ -405,7 +407,8 @@
         "tabs": {
             "posts": "Posts",
             "projects": "Projects",
-            "open_jobs": "Vacancies"
+            "open_jobs": "Vacancies",
+            "about": "About"
         },
         "projects": {
             "create_project": "Create new project",
@@ -561,6 +564,7 @@
     "sidebar": {
         "sections_title": "Sections",
         "options_title": "Options",
+        "open_menu": "Open menu",
         "sections": {
             "feed": "Feed",
             "companies": "Companies",

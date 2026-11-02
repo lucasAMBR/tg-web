@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 const RootLayout = () => {
 	return (
-		<div className="bg-background w-full h-screen overflow-y-hidden flex flex-col">
+		<div className="bg-background w-full h-dvh overflow-y-hidden flex flex-col">
 			<HeadContent />
 			<TitleI18nSync />
 			<ThemeProvider

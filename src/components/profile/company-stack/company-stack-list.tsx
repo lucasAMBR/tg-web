@@ -29,7 +29,7 @@ export default function CompanyStackList({ profileId }: CompanyStackListProps){
 
     return(
         <div className="w-full flex flex-col gap-4">
-			<h2 className="text-3xl flex justify-between">
+			<h2 className="text-2xl md:text-3xl flex justify-between">
 				<span className="font-[Anta]">{t("company_profile.stack.title")}</span>
                 {user?.company_profile?.id === profileId || user?.role.includes("admin") &&
                 <>
