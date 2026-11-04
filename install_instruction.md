@@ -1,5 +1,8 @@
 # Guia de instalacao
 
+> Para rodar com Docker (recomendado), veja o [README.md](README.md). Este guia é para
+> rodar direto na máquina, sem Docker.
+
 ## Requisitos
 
 * Node: 25.6
