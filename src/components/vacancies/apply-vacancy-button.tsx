@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useStoreDevJobVacancy } from "@/api/generated/dev-job-vacancy/dev-job-vacancy";
 import { getShowJobVacancyQueryKey } from "@/api/generated/job-vacancy/job-vacancy";
 import type { JobVacancyStatusEnum } from "@/api/generated/models";
+import { getRecommendJobVacanciesForDevQueryKey } from "@/api/generated/recommendation/recommendation";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -79,6 +80,10 @@ export default function ApplyVacancyButton({
 			queryClient.invalidateQueries({ queryKey: ["/dev-vacancy/my-applies"] });
 			queryClient.invalidateQueries({
 				queryKey: getShowJobVacancyQueryKey(vacancyId),
+			});
+			// A recomendação tira as vagas em que o dev já se candidatou
+			queryClient.invalidateQueries({
+				queryKey: getRecommendJobVacanciesForDevQueryKey(),
 			});
 
 			setConfirmModalIsOpen(false);

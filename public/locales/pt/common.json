@@ -134,6 +134,7 @@
             "job_vacancy_created": "Vaga criada com sucesso",
             "job_vacancy_updated": "Vaga atualizada com sucesso",
             "job_vacancy_inscriptions_closed": "Inscrições encerradas com sucesso",
+            "job_vacancy_invitation_sent": "Convite enviado para {{name}}",
             "vacancy_applied": "Candidatura enviada com sucesso",
             "step_advanced": "Etapa encerrada e candidaturas avançadas com sucesso",
             "interview_schedule_set": "Horário da entrevista definido com sucesso",
@@ -1174,6 +1175,16 @@
             "title": "Recomendados",
             "table": {
                 "similarity": "Compatibilidade"
+            },
+            "invite": {
+                "action": "Enviar convite",
+                "invited": "Convite enviado",
+                "applied": "Já se candidatou",
+                "this_dev": "este dev",
+                "title": "Convidar {{name}} para o processo seletivo?",
+                "description": "Vamos enviar para {{name}} uma mensagem no chat, em nome da sua empresa, com o convite para participar do processo seletivo desta vaga e o link para se candidatar.",
+                "confirm": "Enviar convite",
+                "conflict": "Não foi possível enviar o convite: o dev já foi convidado, já se candidatou ou as inscrições da vaga foram encerradas."
             }
         }
     },
@@ -1373,7 +1384,15 @@
         "apply": "Candidatar-se",
         "applied": "Candidatura enviada",
         "apply_confirm": "Participar deste processo seletivo?",
-        "apply_confirm_description": "Sua candidatura será enviada à empresa e o seu perfil ficará visível para ela. Assim que as inscrições forem encerradas, você receberá uma notificação avisando o início da triagem de currículos."
+        "apply_confirm_description": "Sua candidatura será enviada à empresa e o seu perfil ficará visível para ela. Assim que as inscrições forem encerradas, você receberá uma notificação avisando o início da triagem de currículos.",
+        "recommended": {
+            "title": "Vagas recomendadas",
+            "match": "{{percentage}}% de compatibilidade",
+            "empty": "Nenhuma vaga compatível com o seu perfil agora.",
+            "load_error": "Não foi possível carregar as vagas recomendadas.",
+            "analyzing_title": "Estamos analisando seu perfil.",
+            "analyzing_description": "Volte em alguns minutos."
+        }
     },
     "search": {
         "title": "Buscar",
@@ -1780,7 +1799,7 @@
         },
         "recommended": {
             "description": "Freelas abertos mais parecidos com o seu perfil.",
-            "match": "{{percentage}}% de aderência",
+            "match": "{{percentage}}% de compatibilidade",
             "empty_title": "Nenhum freela compatível com o seu perfil agora.",
             "empty_description": "Volte mais tarde ou procure freelas na pesquisa.",
             "analyzing_title": "Estamos analisando seu perfil.",
@@ -1862,7 +1881,7 @@
         "proposal": {
             "form_title": "Enviar orçamento",
             "edit_title": "Editar orçamento",
-            "form_description": "O cliente compara os orçamentos pela aderência do seu perfil e pelo preço.",
+            "form_description": "O cliente compara os orçamentos pela compatibilidade do seu perfil e pelo preço.",
             "pricing_type": "Forma de cobrança",
             "fixed": "Preço fechado",
             "hourly": "Por hora",
@@ -1900,7 +1919,7 @@
             "view_ranked": "Mais compatíveis",
             "view_all": "Todos",
             "score": "{{percentage}}% compatível",
-            "score_breakdown": "Aderência do perfil: {{similarity}} · Proximidade do preço: {{price}}%",
+            "score_breakdown": "Compatibilidade do perfil: {{similarity}} · Proximidade do preço: {{price}}%",
             "profile_not_analyzed": "perfil ainda não analisado",
             "above_budget": "{{percentage}}% acima do seu orçamento",
             "below_budget": "{{percentage}}% abaixo do seu orçamento",
@@ -1916,7 +1935,7 @@
         },
         "recommended_devs": {
             "description": "Os perfis mais parecidos com o seu freela, segundo a nossa IA.",
-            "match": "{{percentage}}% de aderência",
+            "match": "{{percentage}}% de compatibilidade",
             "has_proposal": "Já orçou",
             "view_proposal": "Ver orçamento",
             "invited": "Convidado",

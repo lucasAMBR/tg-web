@@ -7,7 +7,7 @@ import {
 	type CompleteTheme,
 	DEFAULT_FONT_FAMILY,
 	DEFAULT_THEME_COLOR,
-	extractHueFromOKLCH,
+	DEFAULT_THEME_NAME,
 	PRESET_FONTS,
 	PRESET_THEMES,
 } from "@/lib/theme-colors";
@@ -76,6 +76,21 @@ function getStoredTheme(storageKey: string, fallback: Theme): Theme {
 	return fallback;
 }
 
+/**
+ * Tema completo salvo. Sem tema e sem cor personalizada (localStorage limpo) → tema padrão,
+ * para que o estado inicial seja idêntico a selecionar o Brew.
+ */
+function getStoredThemeName(): string | null {
+	if (typeof window === "undefined") return DEFAULT_THEME_NAME;
+
+	const stored = window.localStorage.getItem(THEME_NAME_STORAGE_KEY);
+	if (stored) return stored;
+
+	const hasCustomColor =
+		window.localStorage.getItem(THEME_COLOR_STORAGE_KEY) !== null;
+	return hasCustomColor ? null : DEFAULT_THEME_NAME;
+}
+
 function getStoredFontFamily(storageKey: string, fallback: string): string {
 	if (typeof window === "undefined") return fallback;
 
@@ -106,7 +121,7 @@ type ThemeStore = ThemeState & ThemeActions;
 export const useThemeStore = create<ThemeStore>((set, get) => ({
 	theme: DEFAULT_THEME,
 	themeColor: DEFAULT_THEME_COLOR,
-	themeName: null,
+	themeName: DEFAULT_THEME_NAME,
 	fontFamily: DEFAULT_FONT_FAMILY,
 
 	setTheme: (theme) => {
@@ -184,35 +199,14 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
 			DEFAULT_FONT_FAMILY,
 		);
 
-		// Verificar se há um tema completo salvo
-		let themeName: string | null = null;
-		if (typeof window !== "undefined") {
-			const stored = window.localStorage.getItem(THEME_NAME_STORAGE_KEY);
-			if (stored) {
-				themeName = stored;
-			}
-		}
-
-		// Tentar extrair hue das cores CSS existentes se não houver valor salvo
-		let finalThemeColor = themeColor;
-		if (themeColor === DEFAULT_THEME_COLOR && typeof window !== "undefined") {
-			const root = window.document.documentElement;
-			const computedPrimary =
-				getComputedStyle(root).getPropertyValue("--primary");
-			if (computedPrimary) {
-				const extractedHue = extractHueFromOKLCH(computedPrimary);
-				if (extractedHue !== DEFAULT_THEME_COLOR) {
-					finalThemeColor = extractedHue;
-				}
-			}
-		}
+		const themeName = getStoredThemeName();
 
 		if (get().theme !== theme) {
 			set({ theme });
 		}
 
-		if (get().themeColor !== finalThemeColor) {
-			set({ themeColor: finalThemeColor });
+		if (get().themeColor !== themeColor) {
+			set({ themeColor });
 		}
 
 		if (get().themeName !== themeName) {

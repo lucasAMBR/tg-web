@@ -6,10 +6,12 @@ import { RecommendedDevsTable } from "./applies/recommended-devs-table";
 
 interface VacancyDevsTabsProps {
 	jobVacancyId: string;
+	vacancyStatus?: string;
 }
 
 export default function VacancyDevsTabs({
 	jobVacancyId,
+	vacancyStatus,
 }: VacancyDevsTabsProps) {
 	const { t } = useTranslation();
 
@@ -29,7 +31,10 @@ export default function VacancyDevsTabs({
 				<VacancyAppliesTable jobVacancyId={jobVacancyId} />
 			</TabsContent>
 			<TabsContent value="recommended" className="mt-4">
-				<RecommendedDevsTable jobVacancyId={jobVacancyId} />
+				<RecommendedDevsTable
+					jobVacancyId={jobVacancyId}
+					canInvite={vacancyStatus === "open_inscriptions"}
+				/>
 			</TabsContent>
 		</Tabs>
 	);

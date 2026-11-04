@@ -108,6 +108,9 @@ export const PRESET_FONTS: FontFamily[] = [
 
 export const DEFAULT_FONT_FAMILY = "Sistema";
 
+/** Tema aplicado quando não há tema nem cor personalizada no localStorage. Espelha `src/index.css`. */
+export const DEFAULT_THEME_NAME = "Brew (Default)";
+
 const DEFAULT_THEME_PROPERTIES = {
 	fontSans:
 		"ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
@@ -146,7 +149,7 @@ const DEFAULT_FONT_PROPERTIES = {
 
 export const PRESET_THEMES: CompleteTheme[] = [
 	{
-		name: "Brew (Default)",
+		name: DEFAULT_THEME_NAME,
 		light: {
 			background: "oklch(0.9821 0 0)",
 			foreground: "oklch(0.2435 0 0)",
@@ -189,8 +192,8 @@ export const PRESET_THEMES: CompleteTheme[] = [
 			cardForeground: "oklch(0.9491 0 0)",
 			popover: "oklch(0.2134 0 0)",
 			popoverForeground: "oklch(0.9491 0 0)",
-			primary: "oklch(0.4856 0.0641 53.3065)",
-			primaryForeground: "oklch(0.985 0 0)",
+			primary: "oklch(72.037% 0.10143 64.511)",
+			primaryForeground: "oklch(0.2181 0.0041 84.5884)",
 			secondary: "oklch(0.3163 0.0190 63.6992)",
 			secondaryForeground: "oklch(0.9247 0.0524 66.1732)",
 			muted: "oklch(0.2520 0 0)",

@@ -357,7 +357,10 @@ export default function VacancyDetails({
 					<h3 className="text-lg font-bold">
 						{t("my_vacancies.devs_section_title")}
 					</h3>
-					<VacancyDevsTabs jobVacancyId={vacancyId} />
+					<VacancyDevsTabs
+						jobVacancyId={vacancyId}
+						vacancyStatus={vacancyData?.status}
+					/>
 				</Card>
 			)}
 		</>

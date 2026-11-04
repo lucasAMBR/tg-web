@@ -30,6 +30,9 @@ import type {
   RecommendFreelanceJobVacanciesForDev200,
   RecommendFreelanceJobVacanciesForDev400,
   RecommendFreelanceJobVacanciesForDevParams,
+  RecommendJobVacanciesForDev200,
+  RecommendJobVacanciesForDev400,
+  RecommendJobVacanciesForDevParams,
   RecommendProposalsForFreelanceJobVacancy200,
   RecommendProposalsForFreelanceJobVacancy400,
   RecommendProposalsForFreelanceJobVacancyParams,
@@ -42,7 +45,101 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
- * **operationId:** `recommendDevsForJobVacancy` — Retorna os desenvolvedores mais aderentes à vaga, comparando o embedding da vaga com o embedding de cada perfil por similaridade de cosseno. Aceita `limit` (padrão 10) e `min_similarity` como filtros. Só retorna devs cujas **preferências de recomendação** são compatíveis com a vaga: tipo de contrato (`allow_clt`, `allow_contractor`, `allow_internship`), modalidade (`allow_on_site`, `allow_hybrid`, `allow_remote`), `min_remuneration` menor ou igual ao salário estimado, nenhuma das linguagens exigidas na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Distância só é considerada em vagas **presenciais** e **híbridas**: o dev precisa estar dentro de `on_site_job_radius` / `hybrid_jobs_radius` (km) do endereço da empresa — vagas remotas ignoram localização, devs com `open_to_relocation` ignoram o raio, e devs sem endereço cadastrado ficam de fora das vagas que exigem presença. Exige role `company`, que a vaga pertença ao perfil autenticado e que o embedding da vaga já tenha sido gerado. Em **200**, `data[]` segue o schema **Recommended Dev Resource** (`App\Http\Resources\Recommendation\RecommendedDevResource`), com `similarity` (0 a 1) e `dev_profile` no schema **Dev Profile Resource** (`App\Http\Resources\Profiles\DevProfile\DevProfileResource`).
+ * **operationId:** `recommendJobVacanciesForDev` — Retorna as vagas com inscrições abertas mais aderentes ao perfil do dev autenticado, comparando o embedding do perfil com o de cada vaga por similaridade de cosseno. A ordem é pela `ranking_score`: a `similarity` com até 10% a mais pelo `score` de credibilidade da empresa, proporcional ao score (score 100 = `similarity` × 1,1). Saem as vagas em que o dev já se candidatou e as que não batem com as **preferências de recomendação** dele, as mesmas da recomendação de devs para uma vaga: tipo de contrato (`allow_clt`, `allow_contractor`, `allow_internship`), modalidade (`allow_on_site`, `allow_hybrid`, `allow_remote`), `estimated_salary` maior ou igual a `min_remuneration`, nenhuma linguagem exigida na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Vagas **presenciais** e **híbridas** só entram com o endereço da empresa dentro de `on_site_job_radius` / `hybrid_jobs_radius` (km) do endereço do dev: dev com `open_to_relocation` ignora o raio, dev sem endereço só recebe vagas remotas e empresa sem endereço fica de fora das vagas que exigem presença. Aceita `limit` (padrão 10, máximo 50) e `min_similarity` (sobre a `similarity`). Exige role `dev` (senão **403**) e que o perfil já tenha embedding (senão **409**). Em **200**, `data[]` segue o schema **Recommended Job Vacancy Resource** (`App\Http\Resources\Recommendation\RecommendedJobVacancyResource`), com `similarity` (0 a 1), `ranking_score` e a vaga em `job_vacancy` (com a empresa em `job_vacancy.profile`).
+ * @summary Recomendar vagas para o dev
+ */
+export const recommendJobVacanciesForDev = (
+    params?: RecommendJobVacanciesForDevParams,
+ signal?: AbortSignal
+) => {
+      
+      
+      return apiClient<RecommendJobVacanciesForDev200>(
+      {url: `/recommendation/job-vacancy`, method: 'GET',
+        params, signal
+    },
+      );
+    }
+  
+
+
+
+export const getRecommendJobVacanciesForDevQueryKey = (params?: RecommendJobVacanciesForDevParams,) => {
+    return [
+    `/recommendation/job-vacancy`, ...(params ? [params]: [])
+    ] as const;
+    }
+
+    
+export const getRecommendJobVacanciesForDevQueryOptions = <TData = Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(params?: RecommendJobVacanciesForDevParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getRecommendJobVacanciesForDevQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>> = ({ signal }) => recommendJobVacanciesForDev(params, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type RecommendJobVacanciesForDevQueryResult = NonNullable<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>>
+export type RecommendJobVacanciesForDevQueryError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse
+
+
+export function useRecommendJobVacanciesForDev<TData = Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ params: undefined |  RecommendJobVacanciesForDevParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof recommendJobVacanciesForDev>>,
+          TError,
+          Awaited<ReturnType<typeof recommendJobVacanciesForDev>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useRecommendJobVacanciesForDev<TData = Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ params?: RecommendJobVacanciesForDevParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof recommendJobVacanciesForDev>>,
+          TError,
+          Awaited<ReturnType<typeof recommendJobVacanciesForDev>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useRecommendJobVacanciesForDev<TData = Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ params?: RecommendJobVacanciesForDevParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Recomendar vagas para o dev
+ */
+
+export function useRecommendJobVacanciesForDev<TData = Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError = RecommendJobVacanciesForDev400 | AuthenticationExceptionResponse | ValidationExceptionResponse>(
+ params?: RecommendJobVacanciesForDevParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof recommendJobVacanciesForDev>>, TError, TData>>, }
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getRecommendJobVacanciesForDevQueryOptions(params,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * **operationId:** `recommendDevsForJobVacancy` — Retorna os desenvolvedores mais aderentes à vaga, comparando o embedding da vaga com o embedding de cada perfil por similaridade de cosseno. A ordem é pela `ranking_score`: a `similarity` com até 10% a mais pelo `score` de credibilidade do dev, proporcional ao score (score 100 = `similarity` × 1,1). Aceita `limit` (padrão 10) e `min_similarity` como filtros. Só retorna devs cujas **preferências de recomendação** são compatíveis com a vaga: tipo de contrato (`allow_clt`, `allow_contractor`, `allow_internship`), modalidade (`allow_on_site`, `allow_hybrid`, `allow_remote`), `min_remuneration` menor ou igual ao salário estimado, nenhuma das linguagens exigidas na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Distância só é considerada em vagas **presenciais** e **híbridas**: o dev precisa estar dentro de `on_site_job_radius` / `hybrid_jobs_radius` (km) do endereço da empresa — vagas remotas ignoram localização, devs com `open_to_relocation` ignoram o raio, e devs sem endereço cadastrado ficam de fora das vagas que exigem presença. Exige role `company`, que a vaga pertença ao perfil autenticado e que o embedding da vaga já tenha sido gerado. Em **200**, `data[]` segue o schema **Recommended Dev Resource** (`App\Http\Resources\Recommendation\RecommendedDevResource`), com `similarity` (0 a 1), `ranking_score`, `has_applied` (o dev já se candidatou), `is_invited` (a empresa já o convidou pelo `POST /job-vacancy/{id}/invitations`) e `dev_profile` no schema **Dev Profile Resource** (`App\Http\Resources\Profiles\DevProfile\DevProfileResource`).
  * @summary Recomendar desenvolvedores para uma vaga
  */
 export const recommendDevsForJobVacancy = (
@@ -237,7 +334,7 @@ export function useRecommendFreelanceJobVacanciesForDev<TData = Awaited<ReturnTy
 
 
 /**
- * **operationId:** `recommendDevsForFreelanceJobVacancy` — Retorna os desenvolvedores mais aderentes à vaga freelance, comparando o embedding da vaga com o embedding de cada perfil por similaridade de cosseno, tenham eles orçado ou não: cada um vem com `has_proposal` e `is_invited`, para o cliente convidar quem ainda não orçou (`POST /freelance-job-vacancy/{id}/invitations`). Aceita `limit` (padrão 10) e `min_similarity` como filtros. Só retorna devs cujas **preferências de recomendação** são compatíveis com trabalho freelance: `allow_contractor` e `allow_remote` verdadeiros, nenhuma das linguagens exigidas na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Diferente da vaga CLT, `min_remuneration` e distância não são considerados: a vaga freelance não tem modalidade e o preço entra no ranking de orçamentos. Exige role `client`, que a vaga pertença ao perfil autenticado (senão **403**) e que o embedding da vaga já tenha sido gerado (senão **409**). Em **200**, `data[]` segue o schema **Recommended Freelance Dev Resource** (`App\Http\Resources\Recommendation\RecommendedFreelanceDevResource`), com `similarity` (0 a 1) e `dev_profile` no perfil público do dev.
+ * **operationId:** `recommendDevsForFreelanceJobVacancy` — Retorna os desenvolvedores mais aderentes à vaga freelance, comparando o embedding da vaga com o embedding de cada perfil por similaridade de cosseno e ordenando pela `ranking_score` (a `similarity` com até 10% a mais pelo `score` de credibilidade do dev), tenham eles orçado ou não: cada um vem com `has_proposal` e `is_invited`, para o cliente convidar quem ainda não orçou (`POST /freelance-job-vacancy/{id}/invitations`). Aceita `limit` (padrão 10) e `min_similarity` como filtros. Só retorna devs cujas **preferências de recomendação** são compatíveis com trabalho freelance: `allow_contractor` e `allow_remote` verdadeiros, nenhuma das linguagens exigidas na blacklist e, quando `allow_stack_flexibility` é falso, ao menos uma linguagem exigida entre as hard skills do dev. Diferente da vaga CLT, `min_remuneration` e distância não são considerados: a vaga freelance não tem modalidade e o preço entra no ranking de orçamentos. Exige role `client`, que a vaga pertença ao perfil autenticado (senão **403**) e que o embedding da vaga já tenha sido gerado (senão **409**). Em **200**, `data[]` segue o schema **Recommended Freelance Dev Resource** (`App\Http\Resources\Recommendation\RecommendedFreelanceDevResource`), com `similarity` (0 a 1), `ranking_score` e `dev_profile` no perfil público do dev.
  * @summary Recomendar desenvolvedores para uma vaga freelance
  */
 export const recommendDevsForFreelanceJobVacancy = (

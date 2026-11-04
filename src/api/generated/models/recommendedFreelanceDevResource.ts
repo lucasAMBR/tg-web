@@ -8,6 +8,9 @@ import type { DevProfileSummaryResource } from './devProfileSummaryResource';
 
 export interface RecommendedFreelanceDevResource {
   similarity: number;
+  /** Nota que ordena o ranking: a `similarity` com até 10% a mais pelo `score` do dev
+(score 100 = similarity × 1,1) */
+  ranking_score: number;
   has_proposal: boolean;
   is_invited: boolean;
   dev_profile: DevProfileSummaryResource;

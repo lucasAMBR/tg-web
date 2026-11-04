@@ -5,4 +5,8 @@
  * OpenAPI spec version: 0.0.1
  */
 
+/**
+ * Removido não expõe o texto original em nenhum idioma, nem quando a
+tradução que já estava na fila termina depois da remoção.
+ */
 export type CommentResourceContentPt = string | null;

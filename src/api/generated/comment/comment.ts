@@ -145,7 +145,7 @@ export function useIndexComment<TData = Awaited<ReturnType<typeof indexComment>>
 
 
 /**
- * **operationId:** `storeComment` — Cria um comentário na postagem (`post_id`) ou uma resposta a outro comentário (`parent_id`, que precisa ser da mesma postagem). Em **201**, `data` segue o schema **Comment Resource** (`App\Http\Resources\Comment\CommentResource`).
+ * **operationId:** `storeComment` — Cria um comentário na postagem (`post_id`) ou uma resposta a outro comentário (`parent_id`, que precisa ser da mesma postagem). O texto entra na fila de tradução e volta em `content_pt`/`content_en`, com `translation_status` indo de `pending` a `translated` (ou `error`). Em **201**, `data` segue o schema **Comment Resource** (`App\Http\Resources\Comment\CommentResource`).
  * @summary Comentar
  */
 export const storeComment = (
@@ -404,7 +404,7 @@ export function useShowComment<TData = Awaited<ReturnType<typeof showComment>>, 
 
 
 /**
- * **operationId:** `updateComment` — Atualiza o texto de um comentário. Apenas o autor (`CommentPolicy::update`) e o comentário não pode estar removido. Em **200**, `data` segue o schema **Comment Resource** (`App\Http\Resources\Comment\CommentResource`).
+ * **operationId:** `updateComment` — Atualiza o texto de um comentário. Apenas o autor (`CommentPolicy::update`) e o comentário não pode estar removido. Quando o texto muda, as traduções são limpas e ele volta para a fila de tradução (`translation_status` = `pending`). Em **200**, `data` segue o schema **Comment Resource** (`App\Http\Resources\Comment\CommentResource`).
  * @summary Atualizar comentário
  */
 export const updateComment = (
@@ -469,7 +469,7 @@ export const useUpdateComment = <TError = UpdateComment400 | AuthenticationExcep
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * **operationId:** `deleteComment` — Remoção lógica: o comentário continua na árvore (mantendo as respostas), com `is_removed` verdadeiro e o conteúdo substituído por `[removed]`. Permitido ao autor ou a um admin (`CommentPolicy::delete`). Em **200**, `data` é `null`.
+ * **operationId:** `deleteComment` — Remoção lógica: o comentário continua na árvore (mantendo as respostas), com `is_removed` verdadeiro e o conteúdo e as traduções substituídos por `[removed]`. Permitido ao autor ou a um admin (`CommentPolicy::delete`). Em **200**, `data` é `null`.
  * @summary Remover comentário
  */
 export const deleteComment = (

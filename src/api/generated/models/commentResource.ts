@@ -18,6 +18,8 @@ export interface CommentResource {
   post_id: string;
   parent_id: CommentResourceParentId;
   content: string;
+  /** Removido não expõe o texto original em nenhum idioma, nem quando a
+tradução que já estava na fila termina depois da remoção. */
   content_pt: CommentResourceContentPt;
   content_en: CommentResourceContentEn;
   translation_status: string;

@@ -61,7 +61,7 @@ import apiClient from '../../../lib/api-client';
 
 
 /**
- * **operationId:** `indexPost` — Feed paginado de postagens, com autor, imagens, contadores de curtidas/comentários/favoritos e se o usuário autenticado curtiu/favoritou. Filtros opcionais por `user_id` e `search` (busca no conteúdo). O parâmetro `feed` escolhe a origem: `all` (padrão) traz todas as postagens e `following` traz só as de quem o usuário autenticado segue, mais as dele mesmo. O parâmetro `sort` define a ordenação: `recent` (padrão) traz das mais recentes para as mais antigas e `popular` traz das com mais engajamento para as com menos, pontuando cada postagem por comentários (peso 3), favoritos (peso 2) e curtidas (peso 1), com a data mais recente como critério de desempate. Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
+ * **operationId:** `indexPost` — Feed paginado de postagens, com autor, imagens, contadores de curtidas/comentários/favoritos e se o usuário autenticado curtiu/favoritou. Filtros opcionais por `user_id` e `search` (busca no conteúdo e nas traduções `content_pt`/`content_en`). O parâmetro `feed` escolhe a origem: `all` (padrão) traz todas as postagens e `following` traz só as de quem o usuário autenticado segue, mais as dele mesmo. O parâmetro `sort` define a ordenação: `recent` (padrão) traz das mais recentes para as mais antigas e `popular` traz das com mais engajamento para as com menos, pontuando cada postagem por comentários (peso 3), favoritos (peso 2) e curtidas (peso 1), com a data mais recente como critério de desempate. Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
  * @summary Listar feed de postagens
  */
 export const indexPost = (
@@ -155,7 +155,7 @@ export function useIndexPost<TData = Awaited<ReturnType<typeof indexPost>>, TErr
 
 
 /**
- * **operationId:** `storePost` — Publica uma postagem do usuário autenticado (qualquer perfil). Aceita até 10 imagens em `images[]` (multipart). Em **201**, `data` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`).
+ * **operationId:** `storePost` — Publica uma postagem do usuário autenticado (qualquer perfil). Aceita até 10 imagens em `images[]` (multipart). O texto entra na fila de tradução e volta em `content_pt`/`content_en`, com `translation_status` indo de `pending` a `translated` (ou `error`). Em **201**, `data` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`).
  * @summary Publicar postagem
  */
 export const storePost = (
@@ -225,7 +225,7 @@ export const useStorePost = <TError = StorePost400 | AuthenticationExceptionResp
       return useMutation(mutationOptions, queryClient);
     }
     /**
- * **operationId:** `indexFavoritePosts` — Lista paginada das postagens favoritadas pelo usuário autenticado, com filtro opcional por `search`. Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
+ * **operationId:** `indexFavoritePosts` — Lista paginada das postagens favoritadas pelo usuário autenticado, com filtro opcional por `search` (busca no conteúdo e nas traduções). Em **200**, `data.data[]` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`) e `data.pagination` traz os metadados de paginação.
  * @summary Listar postagens favoritas
  */
 export const indexFavoritePosts = (
@@ -412,7 +412,7 @@ export function useShowPost<TData = Awaited<ReturnType<typeof showPost>>, TError
 
 
 /**
- * **operationId:** `updatePost` — Atualiza o texto de uma postagem. Apenas o autor pode editar (`PostPolicy::update`). Em **200**, `data` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`).
+ * **operationId:** `updatePost` — Atualiza o texto de uma postagem. Apenas o autor pode editar (`PostPolicy::update`). Quando o texto muda, as traduções são limpas e ele volta para a fila de tradução (`translation_status` = `pending`). Em **200**, `data` segue o schema **Post Resource** (`App\Http\Resources\Post\PostResource`).
  * @summary Atualizar postagem
  */
 export const updatePost = (

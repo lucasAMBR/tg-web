@@ -134,6 +134,7 @@
             "job_vacancy_created": "Job vacancy created successfully",
             "job_vacancy_updated": "Job vacancy updated successfully",
             "job_vacancy_inscriptions_closed": "Inscriptions closed successfully",
+            "job_vacancy_invitation_sent": "Invitation sent to {{name}}",
             "vacancy_applied": "Application sent successfully",
             "step_advanced": "Stage closed and applications advanced successfully",
             "interview_schedule_set": "Interview schedule set successfully",
@@ -1181,6 +1182,16 @@
             "title": "Recommended",
             "table": {
                 "similarity": "Match"
+            },
+            "invite": {
+                "action": "Send invitation",
+                "invited": "Invitation sent",
+                "applied": "Already applied",
+                "this_dev": "this developer",
+                "title": "Invite {{name}} to the selection process?",
+                "description": "We'll send {{name}} a chat message on behalf of your company, inviting them to join this vacancy's selection process, with a link to apply.",
+                "confirm": "Send invitation",
+                "conflict": "Couldn't send the invitation: the developer was already invited, has already applied, or the vacancy's inscriptions are closed."
             }
         }
     },
@@ -1380,7 +1391,15 @@
         "apply": "Apply",
         "applied": "Application sent",
         "apply_confirm": "Join this selection process?",
-        "apply_confirm_description": "Your application will be sent to the company and your profile will be visible to it. As soon as the inscriptions are closed, you will receive a notification about the start of the resume screening."
+        "apply_confirm_description": "Your application will be sent to the company and your profile will be visible to it. As soon as the inscriptions are closed, you will receive a notification about the start of the resume screening.",
+        "recommended": {
+            "title": "Recommended jobs",
+            "match": "{{percentage}}% match",
+            "empty": "No jobs match your profile right now.",
+            "load_error": "Couldn't load the recommended jobs.",
+            "analyzing_title": "We're analyzing your profile.",
+            "analyzing_description": "Come back in a few minutes."
+        }
     },
     "search": {
         "title": "Search",

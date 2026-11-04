@@ -8,5 +8,13 @@ import type { DevProfileResource } from './devProfileResource';
 
 export interface RecommendedDevResource {
   similarity: number;
+  /** Nota que ordena o ranking: a `similarity` com até 10% a mais pelo `score` do dev
+(score 100 = similarity × 1,1) */
+  ranking_score: number;
+  /** Se o dev já se candidatou à vaga */
+  has_applied: boolean;
+  /** Se a empresa já convidou o dev para o processo seletivo
+(`POST /job-vacancy/{id}/invitations`) */
+  is_invited: boolean;
   dev_profile: DevProfileResource;
 }
