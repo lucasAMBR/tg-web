@@ -46,7 +46,7 @@ Node e pnpm já vêm na imagem do Docker:
    O container instala as dependências e inicia o Vite sozinho. Na primeira subida a
    instalação demora um pouco mais.
 
-3. Acesse **http://localhost:15173**
+3. Acesse **http://localhost:5173**
 
 Para acompanhar:
 
@@ -85,9 +85,9 @@ docker compose restart web
 
 # 🔌 Conflito de portas
 
-A porta do front no PC é a **15173**, e não a 5173 padrão do Vite, para não conflitar
-com algo que já esteja instalado. Se ela estiver em uso, o `docker compose up` falha
-com uma mensagem como `Bind for 0.0.0.0:15173 failed: port is already allocated`.
+A porta do front no PC é a **5173**, a padrão do Vite. Se ela já estiver em uso (por
+outro projeto com Vite aberto, por exemplo), o `docker compose up` falha com uma
+mensagem como `Bind for 0.0.0.0:5173 failed: port is already allocated`.
 
 Para trocar, altere `FORWARD_WEB_PORT` no início do `.env` e rode `docker compose up -d`
 de novo.
@@ -96,7 +96,7 @@ No `docker-compose.yml`, ela aparece no `ports` do serviço `web`:
 
 ```yaml
 ports:
-  - "${FORWARD_WEB_PORT:-15173}:5173"
+  - "${FORWARD_WEB_PORT:-5173}:5173"
 ```
 
 - O lado **esquerdo** é a porta no PC. Ele vem do `.env`; o número depois do `:-` é o
@@ -117,10 +117,10 @@ Para descobrir quem está usando uma porta:
 
 ```bash
 # Linux / macOS
-lsof -i :15173
+lsof -i :5173
 
 # Windows (PowerShell ou cmd)
-netstat -ano | findstr :15173
+netstat -ano | findstr :5173
 ```
 
 ---
