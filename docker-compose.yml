@@ -1,0 +1,38 @@
+# Front em modo de desenvolvimento (Vite).
+#
+#   docker compose up -d    instala as dependências e sobe em http://localhost:15173
+#
+# Quem fala com a API e o Reverb do tg-api é o navegador, pelas portas publicadas no
+# PC (ver o .env), então este compose não precisa estar na mesma rede do backend.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        UID: "${UID:-1000}"
+        GID: "${GID:-1000}"
+    image: tg-web-dev
+    user: "${UID:-1000}:${GID:-1000}"
+    command: sh -c "pnpm install --frozen-lockfile && pnpm dev --host 0.0.0.0 --port 5173 --strictPort"
+    ports:
+      - "${FORWARD_WEB_PORT:-15173}:5173"
+    volumes:
+      - .:/app
+      # O node_modules do container fica separado do host: os binários nativos
+      # (rolldown, biome...) da imagem alpine não servem no seu sistema, e vice-versa
+      - node_modules:/app/node_modules
+      - pnpm_store:/pnpm/store
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:5173/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      # O primeiro `up` ainda instala as dependências antes de o Vite subir
+      start_period: 120s
+    restart: unless-stopped
+
+volumes:
+  node_modules:
+  pnpm_store:

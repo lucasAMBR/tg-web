@@ -1,0 +1,27 @@
+# Imagem de desenvolvimento (Vite com HMR). O código vem montado do host pelo
+# docker-compose; a imagem só traz o Node e o pnpm. Para produção, ver o Dockerfile.
+FROM node:22-alpine
+
+# UID/GID do usuário do host, para que os arquivos gerados dentro do container
+# (route-tree.gen.ts, .tanstack...) pertençam ao seu usuário
+ARG UID=1000
+ARG GID=1000
+
+# Mesma versão do pnpm do Dockerfile de produção
+RUN npm install -g pnpm@11.21.0
+
+# node_modules e o store do pnpm ficam em volumes (ver o docker-compose). As pastas
+# já nascem com o dono certo para o volume herdar na primeira subida
+RUN mkdir -p /app/node_modules /pnpm/store /pnpm/cache \
+    && chown -R "${UID}:${GID}" /app /pnpm
+
+# Funciona com qualquer UID, mesmo sem usuário correspondente no /etc/passwd. O
+# pnpm 11 só lê o pnpm_config_*; sem ele o store cairia em /app/.pnpm-store, dentro
+# da pasta do projeto no host
+ENV pnpm_config_store_dir=/pnpm/store \
+    XDG_CACHE_HOME=/pnpm/cache \
+    HOME=/pnpm
+
+WORKDIR /app
+
+USER ${UID}:${GID}
